@@ -6,7 +6,7 @@
   "homepage": "https://easypost.com",
   "repository": {
     "type": "git",
-    "url": "git://github.com/easypost/easypost-node-beta.git"
+    "url": "git://github.com/easypost/easypost-node.git"
   },
   "main": "lib/main.js",
   "engines": {
