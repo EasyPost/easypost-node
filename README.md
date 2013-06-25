@@ -6,7 +6,7 @@ Installation
 ---------------
 
 ```
-npm install easypost
+npm install node-easypost
 ```
 
 Example
