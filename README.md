@@ -107,7 +107,7 @@ easypost.Shipment.create({
 Documentation
 --------------------
 
-Up-to-date documentation at: https://easypost.com/docs/v2
+Up-to-date documentation at: https://easypost.com/docs
 
 Tests
 --------------------
