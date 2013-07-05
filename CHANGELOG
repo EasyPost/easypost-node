@@ -1,0 +1,5 @@
+=== 2.0.1 2013-07-05
+
+* Added label function to Shipment to request specific label file_formats (pdf, epl2, zpl).
+* Added insure function to Shipment. Add insurance to any shipment in one call!
+* Added create_and_verify function to Address.

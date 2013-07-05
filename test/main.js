@@ -13,43 +13,66 @@ var easypost = require('./../lib/main.js')(apiKey);
 
 vows.describe("EasyPost API").addBatch({
     'Address': {
-        topic: function() {
-            easypost.Address.create({
-            	name: 'Jon Calhoun',
-            	street1: '388 Townsend St.',
-            	city: 'San Francisco',
-            	state: 'CA',
-            	zip: '94107',
-            	country: 'US'}, this.callback);
-        },
-        'should return an address' : function(err, response) {
-            assert.isNull(err);
-            assert.isDefined(response);
-            assert.equal(response.object, 'Address');
-            assert.isDefined(response.id);
-            assert.instanceOf(response, easypost.Address);
-        },
-        'should be retrieveable' : {
-            topic: function(err, response) {
-                easypost.Address.retrieve(response.id, this.callback);
+        'standard create': {
+            topic: function() {
+                easypost.Address.create({
+                	name: 'Jon Calhoun',
+                	street1: '388 Townsend St.',
+                	city: 'San Francisco',
+                	state: 'CA',
+                	zip: '94107',
+                	country: 'US'}, this.callback);
             },
-            'retrieved object is an address': function(err, response) {
+            'should return an address' : function(err, response) {
                 assert.isNull(err);
                 assert.isDefined(response);
                 assert.equal(response.object, 'Address');
                 assert.isDefined(response.id);
                 assert.instanceOf(response, easypost.Address);
+            },
+            'should be retrieveable' : {
+                topic: function(err, response) {
+                    easypost.Address.retrieve(response.id, this.callback);
+                },
+                'retrieved object is an address': function(err, response) {
+                    assert.isNull(err);
+                    assert.isDefined(response);
+                    assert.equal(response.object, 'Address');
+                    assert.isDefined(response.id);
+                    assert.instanceOf(response, easypost.Address);
+                }
+            },
+            'should be verifyable': {
+                topic: function(err, response) {
+                    response.verify(this.callback);
+                },
+                'should return an address and a message': function(err, response) {
+                    assert.isNull(err);
+                    assert.isDefined(response);
+                    assert.isDefined(response.address);
+                    assert.isDefined(response.message);
+                    assert.equal(response.address.object, 'Address');
+                }
             }
         },
-        'should be verifyable': {
-            topic: function(err, response) {
-                response.verify(this.callback);
+        'create and verify': {
+            topic: function() {
+                try {
+                    easypost.Address.create_and_verify({
+                        name: 'Jon Calhoun',
+                        street1: '388 Townsend St.',
+                        city: 'San Francisco',
+                        state: 'CA',
+                        zip: '94107',
+                        country: 'US'}, this.callback);
+                } catch(e) {
+                    console.log(e);
+                }
             },
-            'should return an address and a message': function(err, response) {
+            'should return a verified address with message': function(err, response) {
                 assert.isNull(err);
                 assert.isDefined(response);
-                assert.isDefined(response.address);
-                assert.isDefined(response.message);
+                assert.isDefined(response.message)
                 assert.equal(response.address.object, 'Address');
             }
         }
@@ -75,7 +98,8 @@ vows.describe("EasyPost API").addBatch({
                     city: 'San Francisco',
                     state: 'CA',
                     zip: '94107',
-                    country: 'US'
+                    country: 'US',
+                    phone: '415-456-7890'
                 };
                 var parcel = {
                     width: 16.7,
@@ -111,11 +135,23 @@ vows.describe("EasyPost API").addBatch({
                 }, this.callback);
             },
             'shipment is valid and contains international rates': function(err, response) {
-                console.log(response);
                 assert.isNull(err);
                 assert.isDefined(response);
                 assert.equal(response.object, 'Shipment');
                 assert.instanceOf(response.rates, Array);
+            },
+            'buy shipment with insurance': {
+                topic: function(err, response) {
+                    response.buy({rate: response.lowestRate(), insurance: 249.99}, this.callback);
+                },
+                'purchase with insurance successful': function(err, response) {
+                    assert.isNull(err);
+                    assert.isDefined(response.postage_label);
+                    assert.isDefined(response.postage_label.label_url);
+                    assert.isDefined(response.insurance);
+                    assert.isDefined(response.tracking_code);
+                    assert.equal(response.insurance, '249.99');
+                }
             }
         }
     }
