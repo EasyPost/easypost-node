@@ -154,5 +154,16 @@ vows.describe("EasyPost API").addBatch({
                 }
             }
         }
+    },
+    'Parcel': {
+        'standard list': {
+            topic: function() {
+                easypost.Parcel.all(this.callback);
+            },
+            'should return list of Parcels': function(err, response) {
+                assert.isNull(err);
+                assert.instanceOf(response, Array);
+            }
+        }
     }
 }).export(module, {error: false});
