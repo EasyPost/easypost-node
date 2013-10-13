@@ -1,3 +1,10 @@
+=== 2.0.2 2013-10-13
+
+* Event resource added for webhook consumption.
+* Tracker resource added.
+* Batch.create_scan_form added to request a ScanForm containing all of a Batch's shipments.
+
+
 === 2.0.1 2013-07-05
 
 * Added label function to Shipment to request specific label file_formats (pdf, epl2, zpl).
