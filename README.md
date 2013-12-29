@@ -15,7 +15,7 @@ Example
 
 ```javascript
 var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
-var easypost = require('node-easypost')(apiKey);
+var easypost = require('node-easypost');
 
 var ep = new easypost(apiKey);
 
