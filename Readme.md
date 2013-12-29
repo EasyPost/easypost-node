@@ -1,18 +1,16 @@
-# EasyPost Node Client Library
+# EasyPost Node Client Library [![NPM version](https://badge.fury.io/js/node-easypost.png)](http://badge.fury.io/js/node-easypost)
 
-EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com
+EasyPost is a simple shipping API. You can sign up for an account at: <https://easypost.com>
 
-Installation
----------------
+# Installation
 
-```
+```bash
 npm install node-easypost
 ```
 
-Example
-------------------
+# Example
 
-```javascript
+```js
 var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
 var easypost = require('./lib/main.js')(apiKey);
 
@@ -95,23 +93,22 @@ easypost.Shipment.create({
     parcel: parcel,
     customs_info: customsInfo
 }, function(err, shipment) {
-    // buy postage label with one of the rate objects
+    // buy postage label with the lowest rate
+    // note you can also exclude rates by passing a second parameter to lowestRate prefixed with `!`
+    // e.g. shipment.lowestRate(['USPS'], ['!MediaMail'])
     shipment.buy({rate: shipment.lowestRate(['USPS', 'ups'])}, function(err, response) {
         console.log(response.tracking_code);
         console.log(response.postage_label.label_url);
     });
 });
-
 ```
 
-Documentation
---------------------
+# Documentation
 
-Up-to-date documentation at: https://easypost.com/docs
+Up-to-date documentation at: <https://easypost.com/docs>
 
-Tests
---------------------
+# Tests
 
-```
+```bash
 npm test
 ```
