@@ -6,15 +6,18 @@ Installation
 ---------------
 
 ```
-npm install node-easypost
+npm install node-easypost --save
 ```
+(the --save flag adds node-easypost to your dependencies)
 
 Example
 ------------------
 
 ```javascript
 var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
-var easypost = require('./lib/main.js')(apiKey);
+var easypost = require('node-easypost');
+
+var ep = new easypost(apiKey);
 
 // set addresses
 var toAddress = {
@@ -37,7 +40,7 @@ var fromAddress = {
 };
 
 // verify address
-easypost.Address.create(fromAddress, function(err, fromAddress) {
+ep.Address.create(fromAddress, function(err, fromAddress) {
     fromAddress.verify(function(err, response) {
         if (err) {
             console.log('Address is invalid.');
@@ -51,7 +54,7 @@ easypost.Address.create(fromAddress, function(err, fromAddress) {
 });
 
 // set parcel
-easypost.Parcel.create({
+ep.Parcel.create({
     predefined_package: "InvalidPackageName",
     weight: 21.2
 }, function(err, response) {
@@ -89,7 +92,7 @@ var customsInfo = {
 };
 
 // create shipment
-easypost.Shipment.create({
+ep.Shipment.create({
     to_address: toAddress,
     from_address: fromAddress,
     parcel: parcel,
