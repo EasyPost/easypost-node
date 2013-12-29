@@ -1,3 +1,8 @@
+=== 2.0.4 2013-12-29
+
+* Moved vows module to a devDependancy.
+
+
 === 2.0.3 2013-12-29
 
 * Fixed some bugs and improved Shipment.lowestRate by allowing negative filters.

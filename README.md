@@ -20,20 +20,20 @@ var easypost = require('node-easypost')(apiKey);
 var toAddress = {
     name: "Sawyer Bateman",
     street1: "1A Larkspur Cres.",
-    street2: "",
     city: "St. Albert",
     state: "AB",
     zip: "t8n2m4",
     country: "CA",
-    phone: "780-283-9384"
+    phone: "780-123-4567"
 };
 var fromAddress = {
-    name: "Jon Calhoun",
-    street1: "388 Townsend St",
+    name: "EasyPost",
+    street1: "164 Townsend St",
+    street2: "#1",
     city: "San Francisco",
     state: "CA",
     zip: "94107",
-    phone: "415-456-7890"
+    phone: "415-123-4567"
 };
 
 // verify address
@@ -65,7 +65,6 @@ var parcel = {
     weight: 21.2
 };
 
-
 // create customs_info form for intl shipping
 var customsItem = {
     description: "EasyPost t-shirts",
@@ -96,12 +95,11 @@ easypost.Shipment.create({
     customs_info: customsInfo
 }, function(err, shipment) {
     // buy postage label with one of the rate objects
-    shipment.buy({rate: shipment.lowestRate(['USPS', 'ups'])}, function(err, response) {
-        console.log(response.tracking_code);
-        console.log(response.postage_label.label_url);
+    shipment.buy({rate: shipment.lowestRate(['USPS', 'ups'])}, function(err, shipment) {
+        console.log(shipment.tracking_code);
+        console.log(shipment.postage_label.label_url);
     });
 });
-
 ```
 
 Documentation
