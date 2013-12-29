@@ -14,7 +14,7 @@ Example
 
 ```javascript
 var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
-var easypost = require('./lib/main.js')(apiKey);
+var easypost = require('node-easypost')(apiKey);
 
 // set addresses
 var toAddress = {
@@ -107,7 +107,7 @@ easypost.Shipment.create({
 Documentation
 --------------------
 
-Up-to-date documentation at: https://easypost.com/docs
+Up-to-date documentation at: https://www.easypost.com/docs
 
 Tests
 --------------------
