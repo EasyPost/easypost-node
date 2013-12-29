@@ -1,8 +1,14 @@
 {
   "name": "node-easypost",
   "description": "EasyPost Node Client Library",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Sawyer Bateman <support@easypost.com>",
+  "contributors": [
+    {
+      "name": "Nick Baugh",
+      "email": "niftylettuce@gmail.com"
+    }
+  ],
   "homepage": "https://easypost.com",
   "repository": {
     "type": "git",
@@ -16,7 +22,9 @@
     "test": "node test/main.js"
   },
   "dependencies": {
-    "vows": "~0.7.0"
+    "underscore": "~1.5.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "vows": "~0.7.0"
+  }
 }
