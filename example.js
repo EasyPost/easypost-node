@@ -1,24 +1,25 @@
 var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
-var easypost = require('./lib/main.js')(apiKey);
+var easypost = require('./lib/main.js')(apiKey); // after installing with NPM this can be require('node-easypost')(apiKey);
 
 // set addresses
 var toAddress = {
 	name: "Sawyer Bateman",
 	street1: "1A Larkspur Cres.",
-	street2: "",
 	city: "St. Albert",
 	state: "AB",
 	zip: "t8n2m4",
 	country: "CA",
-	phone: "780-283-9384"
+	phone: "780-123-4567"
 };
+
 var fromAddress = {
-	name: "Jon Calhoun",
-	street1: "388 Townsend St",
+	name: "EasyPost",
+    street1: "164 Townsend St",
+	street2: "#1",
 	city: "San Francisco",
 	state: "CA",
 	zip: "94107",
-	phone: "415-456-7890"
+	phone: "415-123-4567"
 };
 
 // verify address
@@ -44,12 +45,11 @@ easypost.Parcel.create({
 });
 
 var parcel = {
-	length: 10.2,
-	width: 7.8,
-	height: 4.3,
-	weight: 21.2
+	length: 10.2,  // inches
+	width: 7.8,    // inches
+	height: 4.3,   // inches
+	weight: 21.2   // ounces
 };
-
 
 // create customs_info form for intl shipping
 var customsItem = {
@@ -79,15 +79,9 @@ easypost.Shipment.create({
   from_address: fromAddress,
   parcel: parcel,
   customs_info: customsInfo
-}, function(err, response) {
-	// buy postage label with one of the rate objects
-	// shipment.buy(rate = shipment.rates[0])
-	// shipment.buy(rate = shipment.lowest_rate('usps'))
-	var shipment = response;
-	console.log(shipment);
-	// shipment.lowestRate(['USPS', 'ups'], 'priorityMAILInternational');
-	shipment.buy({rate: shipment.lowestRate(['USPS', 'ups'])}, function(err, response) {
-		console.log(response);
-	});
-
+}, function(err, shipment) {
+    // shipment.lowestRate filters by carrier name and service name, and accepts negative filters by preceding the name with an exclamation mark
+    shipment.buy({rate: shipment.lowestRate(['USPS', 'ups'], '!LibraryMail, !mediaMAIL')}, function(err, shipment) {
+		console.log(shipment);
+    });
 });

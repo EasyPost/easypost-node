@@ -1,3 +1,10 @@
+=== 2.0.3 2013-12-29
+
+* Fixed some bugs and improved Shipment.lowestRate by allowing negative filters.
+* Improved handling of the partial shipment response object that Shipment.buy returns.
+* Minor syntax and documentation improvements.
+
+
 === 2.0.2 2013-10-13
 
 * Event resource added for webhook consumption.
