@@ -13,8 +13,9 @@ Example
 ------------------
 
 ```javascript
+var EasyPostApi = require('node-easypost');
 var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
-var easypost = require('./lib/main.js')(apiKey);
+var easypost = new EasyPostApi(apiKey);
 
 // set addresses
 var toAddress = {
