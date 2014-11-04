@@ -148,9 +148,16 @@ vows.describe("EasyPost API").addBatch({
                     assert.isNull(err);
                     assert.isDefined(response.postage_label);
                     assert.isDefined(response.postage_label.label_url);
+
                     assert.isDefined(response.insurance);
-                    assert.isDefined(response.tracking_code);
                     assert.equal(response.insurance, '249.99');
+
+                    assert.isDefined(response.tracking_code);
+                    assert.equal(response.tracking_code, response.tracker.tracking_code)
+
+                    assert.isDefined(response.tracker);
+                    assert.equal(response.tracker.object, "Tracker")
+                    assert.equal(response.tracker.shipment_id, response.id)
                 }
             }
         }
