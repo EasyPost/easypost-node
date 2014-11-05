@@ -1,3 +1,10 @@
+=== 2.0.5 2014-11-4
+
+* Added tracker to shipment buy response
+* Added User-Agent fields to request header
+* Updated tests
+
+
 === 2.0.4 2013-12-29
 
 * Moved vows module to a devDependancy.
