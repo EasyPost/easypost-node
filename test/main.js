@@ -172,5 +172,23 @@ vows.describe("EasyPost API").addBatch({
                 assert.instanceOf(response, Array);
             }
         }
+    },
+    'Tracker': {
+        'create and retrieve': {
+            topic: function() {
+                easypost.Tracker.create({
+                    tracking_code: 'EZ2000000002',
+                    carrier: "USPS"
+                }, this.callback);
+            },
+            'should return a valid Tracker': function(err, response) {
+                assert.isNull(err);
+                assert.equal(response.id.slice(0,3), 'trk')
+                easypost.Tracker.retrieve(response.id, function(errors, retrieved) {
+                    assert.isNull(errors)
+                    assert.equal(retrieved.id, response.id)
+                })
+            }
+        }
     }
 }).export(module, {error: false});
