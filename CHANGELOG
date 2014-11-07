@@ -1,4 +1,4 @@
-=== 2.0.5 2014-11-4
+=== 2.0.5 2014-11-04
 
 * Added tracker to shipment buy response
 * Added User-Agent fields to request header
