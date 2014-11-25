@@ -148,9 +148,16 @@ vows.describe("EasyPost API").addBatch({
                     assert.isNull(err);
                     assert.isDefined(response.postage_label);
                     assert.isDefined(response.postage_label.label_url);
+
                     assert.isDefined(response.insurance);
-                    assert.isDefined(response.tracking_code);
                     assert.equal(response.insurance, '249.99');
+
+                    assert.isDefined(response.tracking_code);
+                    assert.isDefined(response.tracker);
+
+                    assert.equal(response.tracker.object, "Tracker")
+                    assert.equal(response.tracking_code, response.tracker.tracking_code)
+                    assert.equal(response.tracker.shipment_id, response.id)
                 }
             }
         }
@@ -163,6 +170,24 @@ vows.describe("EasyPost API").addBatch({
             'should return list of Parcels': function(err, response) {
                 assert.isNull(err);
                 assert.instanceOf(response, Array);
+            }
+        }
+    },
+    'Tracker': {
+        'create and retrieve': {
+            topic: function() {
+                easypost.Tracker.create({
+                    tracking_code: 'EZ2000000002',
+                    carrier: "USPS"
+                }, this.callback);
+            },
+            'should return a valid Tracker': function(err, response) {
+                assert.isNull(err);
+                assert.equal(response.id.slice(0,3), 'trk')
+                easypost.Tracker.retrieve(response.id, function(errors, retrieved) {
+                    assert.isNull(errors)
+                    assert.equal(retrieved.id, response.id)
+                })
             }
         }
     }
