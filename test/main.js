@@ -2,6 +2,7 @@ var vows = require('vows'),
     assert = require('assert'),
     sys = require('sys');
 
+// var apiKey = 'LKpiBIk6tqKeh0q8GLN3RA';
 var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
 
 if (!apiKey) {
@@ -183,11 +184,123 @@ vows.describe("EasyPost API").addBatch({
             },
             'should return a valid Tracker': function(err, response) {
                 assert.isNull(err);
-                assert.equal(response.id.slice(0,3), 'trk')
+                assert.equal(response.id.slice(0,4), 'trk_')
                 easypost.Tracker.retrieve(response.id, function(errors, retrieved) {
                     assert.isNull(errors)
                     assert.equal(retrieved.id, response.id)
                 })
+            }
+        }
+    },
+    'Pickup': {
+        topic: function() {
+            var toAddress = {
+                name: "Sawyer Bateman",
+                street1: "164 Townsend St",
+                city: "San Francisco",
+                state: "CA",
+                zip: "94107",
+                country: 'US',
+                phone: "415-456-7890"
+            };
+            var fromAddress = {
+                name: 'Jon Calhoun',
+                street1: '388 Townsend St.',
+                city: 'San Francisco',
+                state: 'CA',
+                zip: '94107',
+                country: 'US',
+                phone: '415-456-7890'
+            };
+            var parcel = {
+                width: 16.7,
+                height: 9.9,
+                length: 8.2,
+                weight: 22.9
+            }
+            var customsItem = {
+                description: 'Many, many EasyPost stickers.',
+                hs_tariff_number: '481141',
+                origin_country: 'US',
+                quantity: 1,
+                value: 87.94,
+                weight: 22.1
+            }
+            var customsInfo = {
+                customs_certify: true,
+                customs_signer: "Borat Sagdiyev",
+                contents_type: "merchandise",
+                contents_explanation: "",
+                eel_pfc: "NOEEI 30.37(a)",
+                non_delivery_option: "abandon",
+                restriction_type: "none",
+                restriction_comments: "",
+                customs_items: [customsItem]
+            }
+
+            easypost.Shipment.create({
+                from_address: fromAddress,
+                to_address: toAddress,
+                parcel: parcel,
+                customs_info: customsInfo
+            }, this.callback);
+        },
+        'with shipment' : {
+            topic: function(err, response) {
+                response.buy({rate: response.lowestRate('ups')}, this.callback);
+            },
+            'create and retrieve': {
+                topic: function(err, response) {
+                    var pickupAddress = {
+                        name: "Sawyer Bateman",
+                        street1: "164 Townsend St",
+                        city: "San Francisco",
+                        state: "CA",
+                        zip: "94107",
+                        country: 'US',
+                        phone: "415-456-7890"
+                    };
+
+                    easypost.Pickup.create({
+                        address: pickupAddress,
+                        shipment: response,
+                        reference: "internal_id_1234",
+                        min_datetime: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                        max_datetime: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+                        is_account_address: true,
+                        instructions: "Special pickup instructions"
+                    }, this.callback);
+                },
+                'should return a valid Pickup': function(err, response) {
+                    assert.isNull(err);
+                    assert.equal(response.id.slice(0,7), 'pickup_')
+                    easypost.Pickup.retrieve(response.id, function(errors, retrieved) {
+                        assert.isNull(errors)
+                        assert.equal(retrieved.id, response.id)
+                    })
+                },
+                'buy': {
+                    topic: function(err, response) {
+                        response.buy({
+                            carrier: "UPS",
+                            service: "Same-day Pickup"
+                        }, this.callback);
+                    },
+                    'should buy a valid pickup': function(err, response){
+                        assert.isNull(err);
+                        assert.equal(response.id.slice(0,7), 'pickup_')
+                    },
+                    'and cancel': {
+                        topic: function(err, response) {
+                            response.cancel({
+                                id: response.id
+                            }, this.callback);
+                        },
+                        'should cancel the pickup': function(err, response){
+                            assert.isNull(err);
+                        }
+                    }
+                }
             }
         }
     }
