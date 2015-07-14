@@ -1,3 +1,9 @@
+=== 2.0.7 2015-07-14
+
+* Changed shipment rate request to use GET not POST
+* Fixed some tests
+
+
 === 2.0.6 2015-02-13
 
 * Added ability to buy and cancel pickups

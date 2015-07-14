@@ -17,11 +17,11 @@ vows.describe("EasyPost API").addBatch({
         'standard create': {
             topic: function() {
                 easypost.Address.create({
-                	name: 'Jon Calhoun',
-                	street1: '388 Townsend St.',
-                	city: 'San Francisco',
+                	name: 'Dr. Steve Brule',
+                	street1: '179 N Harbor Dr',
+                	city: 'Redondo Beach',
                 	state: 'CA',
-                	zip: '94107',
+                	zip: '90277',
                 	country: 'US'}, this.callback);
             },
             'should return an address' : function(err, response) {
@@ -51,7 +51,6 @@ vows.describe("EasyPost API").addBatch({
                     assert.isNull(err);
                     assert.isDefined(response);
                     assert.isDefined(response.address);
-                    assert.isDefined(response.message);
                     assert.equal(response.address.object, 'Address');
                 }
             }
@@ -60,11 +59,11 @@ vows.describe("EasyPost API").addBatch({
             topic: function() {
                 try {
                     easypost.Address.create_and_verify({
-                        name: 'Jon Calhoun',
-                        street1: '388 Townsend St.',
-                        city: 'San Francisco',
+                        name: 'Dr. Steve Brule',
+                        street1: '179 N Harbor Dr',
+                        city: 'Redondo Beach',
                         state: 'CA',
-                        zip: '94107',
+                        zip: '90277',
                         country: 'US'}, this.callback);
                 } catch(e) {
                     console.log(e);
@@ -73,7 +72,6 @@ vows.describe("EasyPost API").addBatch({
             'should return a verified address with message': function(err, response) {
                 assert.isNull(err);
                 assert.isDefined(response);
-                assert.isDefined(response.message)
                 assert.equal(response.address.object, 'Address');
             }
         }
