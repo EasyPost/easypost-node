@@ -18,21 +18,21 @@ var easypost = require('node-easypost')(apiKey);
 
 // set addresses
 var toAddress = {
-    name: "Sawyer Bateman",
-    street1: "1A Larkspur Cres.",
-    city: "St. Albert",
-    state: "AB",
-    zip: "t8n2m4",
-    country: "CA",
-    phone: "780-123-4567"
+    name: "Dr. Steve Brule",
+    street1: "179 N Harbor Dr",
+    city: "Redondo Beach",
+    state: "CA",
+    zip: "90277",
+    country: "US",
+    phone: "415-333-1234"
 };
 var fromAddress = {
     name: "EasyPost",
-    street1: "164 Townsend St",
-    street2: "#1",
+    street1: "118 2nd Street",
+    street2: "4th Floor",
     city: "San Francisco",
     state: "CA",
-    zip: "94107",
+    zip: "94105",
     phone: "415-123-4567"
 };
 
