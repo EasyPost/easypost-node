@@ -24,7 +24,7 @@ var toAddress = {
     state: "CA",
     zip: "90277",
     country: "US",
-    phone: "415-333-1234"
+    phone: "310-808-5243"
 };
 var fromAddress = {
     name: "EasyPost",
