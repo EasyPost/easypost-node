@@ -81,7 +81,7 @@ easypost.Shipment.create({
   customs_info: customsInfo
 }, function(err, shipment) {
     // shipment.lowestRate filters by carrier name and service name, and accepts negative filters by preceding the name with an exclamation mark
-    shipment.buy({rate: shipment.lowestRate(['USPS', 'ups'], '!LibraryMail, !mediaMAIL')}, function(err, shipment) {
+    shipment.buy({rate: shipment.lowestRate(['USPS', 'ups'], '!LibraryMail, !mediaMAIL'), insurance: 100.00}, function(err, shipment) {
 		console.log(shipment);
     });
 });

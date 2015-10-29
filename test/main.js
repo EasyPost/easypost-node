@@ -187,6 +187,27 @@ vows.describe("EasyPost API").addBatch({
                     assert.isNull(errors)
                     assert.equal(retrieved.id, response.id)
                 })
+            },
+            'retrieves all shipments with a given tracking code': {
+                topic: function(err, response) {
+                    var callback = this.callback
+                    var tracker_id = response.id
+                    var tracking_code = response.tracking_code
+
+                    easypost.Tracker.all({
+                        tracking_code: response.tracking_code
+                    }, function(err, response){ callback(err, response, tracker_id, tracking_code) });
+                },
+                'should return a list of Trackers': function(err, response, tracker_id, tracking_code) {
+                    assert.isNull(err);
+
+                    assert.equal(response["trackers"].length, 30);
+                    assert.equal(response["has_more"], true);
+                    assert.equal(response["trackers"][0].id, tracker_id);
+                    for (var i = 0; i < response["trackers"].length; i++) {
+                        assert.equal(response["trackers"][i].tracking_code, tracking_code);
+                    }
+                }
             }
         }
     },

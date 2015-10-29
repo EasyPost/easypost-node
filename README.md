@@ -95,7 +95,7 @@ easypost.Shipment.create({
     customs_info: customsInfo
 }, function(err, shipment) {
     // buy postage label with one of the rate objects
-    shipment.buy({rate: shipment.lowestRate(['USPS', 'ups'])}, function(err, shipment) {
+    shipment.buy({rate: shipment.lowestRate(['USPS', 'ups']), insurance: 100.00}, function(err, shipment) {
         console.log(shipment.tracking_code);
         console.log(shipment.postage_label.label_url);
     });
