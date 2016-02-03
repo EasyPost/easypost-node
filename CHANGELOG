@@ -1,3 +1,8 @@
+=== 2.0.9 2016-02-03
+
+* Added "verify" and "verify_strict" options to Address create, and made tests for them.
+
+
 === 2.0.8 2015-11-05
 
 * Updated README and tests

@@ -74,6 +74,68 @@ vows.describe("EasyPost API").addBatch({
                 assert.isDefined(response);
                 assert.equal(response.address.object, 'Address');
             }
+        },
+        'pass verify param': {
+            topic: function() {
+                easypost.Address.create({
+                    verify: ["delivery"],
+                    street1: "118 2 streat",
+                    street2: "FL 4",
+                    city: "San Francisco",
+                    state: "CA",
+                    zip: "94105",
+                    country: "US",
+                    company: "EasyPost",
+                    phone: "415-123-4567"}, this.callback);
+            },
+            'should return a verified address': function(err, response) {
+                assert.isNull(err);
+
+                assert.equal(response.street1, "118 2ND ST FL 4");
+                assert.equal(response.street2, "");
+                assert.equal(response.zip, "94105-3620");
+            }
+        },
+        'pass verify param and fail': {
+            topic: function() {
+                easypost.Address.create({
+                    verify: ["delivery"],
+                    street1: "UNDELIEVRABLE ST",
+                    street2: "FL 4",
+                    city: "San Francisco",
+                    state: "CA",
+                    zip: "94105",
+                    country: "US",
+                    company: "EasyPost",
+                    phone: "415-123-4567"}, this.callback);
+            },
+            'should return an unverified address': function(err, response) {
+                assert.isNull(err);
+
+                assert.equal(response.verifications["delivery"]["success"], false);
+                assert.equal(response.verifications["delivery"]["errors"][0]["code"], "ADDRESS.VERIFY.FAILURE");
+                assert.equal(response.verifications["delivery"]["errors"][0]["message"], "Address not found");
+                assert.isEmpty(response.verifications["delivery"]["errors"][0]["errors"]);
+            }
+        },
+        'pass verify_strict param and fail': {
+            topic: function() {
+                easypost.Address.create({
+                    verify_strict: ["delivery"],
+                    street1: "UNDELIEVRABLE ST",
+                    street2: "FL 4",
+                    city: "San Francisco",
+                    state: "CA",
+                    zip: "94105",
+                    country: "US",
+                    company: "EasyPost",
+                    phone: "415-123-4567"}, this.callback);
+            },
+            'should raise an error': function(err, response) {
+                assert.equal(err.message["code"], "ADDRESS.VERIFY.FAILURE");
+                assert.equal(err.message["message"], "Address not found");
+                assert.isEmpty(err.message["errors"]);
+            }
         }
     },
     'Shipment': {
