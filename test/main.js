@@ -226,11 +226,17 @@ vows.describe("EasyPost API").addBatch({
     'Parcel': {
         'standard list': {
             topic: function() {
-                easypost.Parcel.all(this.callback);
+                easypost.Parcel.all({
+                  length: 12,
+                  width: 10,
+                  height: 5,
+                  weight: 12
+                }, this.callback);
             },
             'should return list of Parcels': function(err, response) {
                 assert.isNull(err);
-                assert.instanceOf(response, Array);
+                assert.isDefined(response);
+                assert.equal(response.object, 'Parcel');
             }
         }
     },
