@@ -1,3 +1,9 @@
+=== 2.0.10 2016-03-24
+
+* Added Orders
+* Fixed some bad tests (Addresses, Shipments, Parcels)
+
+
 === 2.0.9 2016-02-03
 
 * Added "verify" and "verify_strict" options to Address create, and made tests for them.

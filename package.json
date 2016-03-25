@@ -1,7 +1,7 @@
 {
   "name": "node-easypost",
   "description": "EasyPost Node Client Library",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "author": "Sawyer Bateman <support@easypost.com>",
   "homepage": "https://easypost.com",
   "repository": {

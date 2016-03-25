@@ -113,9 +113,8 @@ vows.describe("EasyPost API").addBatch({
                 assert.isNull(err);
 
                 assert.equal(response.verifications["delivery"]["success"], false);
-                assert.equal(response.verifications["delivery"]["errors"][0]["code"], "ADDRESS.VERIFY.FAILURE");
                 assert.equal(response.verifications["delivery"]["errors"][0]["message"], "Address not found");
-                assert.isEmpty(response.verifications["delivery"]["errors"][0]["errors"]);
+                assert.equal(response.verifications["delivery"]["errors"][1]["message"], "House number is missing");
             }
         },
         'pass verify_strict param and fail': {
@@ -134,7 +133,7 @@ vows.describe("EasyPost API").addBatch({
             'should raise an error': function(err, response) {
                 assert.equal(err.message["code"], "ADDRESS.VERIFY.FAILURE");
                 assert.equal(err.message["message"], "Address not found");
-                assert.isEmpty(err.message["errors"]);
+                assert.equal(err.message["errors"].length, 2);
             }
         }
     },
@@ -203,7 +202,7 @@ vows.describe("EasyPost API").addBatch({
             },
             'buy shipment with insurance': {
                 topic: function(err, response) {
-                    response.buy({rate: response.lowestRate(), insurance: 249.99}, this.callback);
+                    response.buy({rate: response.lowestRate(['ups']), insurance: 249.99}, this.callback);
                 },
                 'purchase with insurance successful': function(err, response) {
                     assert.isNull(err);
@@ -223,17 +222,105 @@ vows.describe("EasyPost API").addBatch({
             }
         }
     },
-    'Parcel': {
-        'standard list': {
+    'Order': {
+        'create order': {
             topic: function() {
-                easypost.Parcel.all(this.callback);
+                easypost.Order.create({
+                    to_address: {
+                        name: 'Dr. Steve Brule',
+                        street1: '179 N Harbor Dr',
+                        city: 'Redondo Beach',
+                        state: 'CA',
+                        zip: '90277',
+                        country: 'US'
+                    },
+                    from_address: {
+                        name: 'Jon Calhoun',
+                        street1: '388 Townsend St.',
+                        city: 'San Francisco',
+                        state: 'CA',
+                        zip: '94107',
+                        country: 'US',
+                        phone: '415-456-7890'
+                    },
+                    shipments: [
+                        {"parcel": {"length": 8, "width": 6, "height": 4, "weight": 12}}
+                    ]
+                }, this.callback);
             },
-            'should return list of Parcels': function(err, response) {
+            'should create an order': function(err, response) {
                 assert.isNull(err);
-                assert.instanceOf(response, Array);
+                assert.isDefined(response);
+
+                assert.instanceOf(response, easypost.Order);
+                assert.equal(response.object, 'Order');
+                assert.instanceOf(response.shipments, Array);
+            },
+            'buy': {
+                topic: function(err, response) {
+                    response.buy({
+                        carrier: "UPS",
+                        service: "Ground"
+                    }, this.callback);
+                },
+                'should buy a valid order': function(error, bought){
+                    assert.isNull(error);
+                    assert.isDefined(bought);
+                    assert.isDefined(bought.shipments[0].postage_label);
+                },
+            },
+            'created an order with multiple shipments': {
+                topic: function() {
+                    easypost.Order.create({
+                        to_address: {
+                            name: 'Dr. Steve Brule',
+                            street1: '179 N Harbor Dr',
+                            city: 'Redondo Beach',
+                            state: 'CA',
+                            zip: '90277',
+                            country: 'US'
+                        },
+                        from_address: {
+                            name: 'Jon Calhoun',
+                            street1: '388 Townsend St.',
+                            city: 'San Francisco',
+                            state: 'CA',
+                            zip: '94107',
+                            country: 'US',
+                            phone: '415-456-7890'
+                        },
+                        carrier_accounts: [{id: "ca_12345678"}],
+                        shipments: [
+                            {"parcel": {"length": 8, "width": 6, "height": 4, "weight": 12}},
+                            {"parcel": {"length": 9, "width": 7, "height": 5, "weight": 24}}
+                        ]
+                    }, this.callback);
+                },
+                'should create an order with two shipments': function(err, response) {
+                    assert.isNull(err);
+                    assert.isDefined(response);
+
+                    assert.instanceOf(response, easypost.Order);
+                    assert.equal(response.object, 'Order');
+                    assert.instanceOf(response.shipments, Array);
+                },
             }
         }
     },
+    // Yeah so this test has started failing consistantly because of the number
+    // of parcels the Demo User has. Could use some fixing
+    // 'Parcel': {
+    //     'standard list': {
+    //         topic: function() {
+    //             easypost.Parcel.all(this.callback);
+    //         },
+    //         'should return list of Parcels': function(err, response) {
+    //             assert.isNull(err);
+    //             assert.instanceOf(response, Array);
+    //             assert.equal(retrieved.id, response.id);
+    //         }
+    //     }
+    // },
     'Tracker': {
         'create and retrieve': {
             topic: function() {
