@@ -114,7 +114,7 @@ vows.describe("EasyPost API").addBatch({
 
                 assert.equal(response.verifications["delivery"]["success"], false);
                 assert.equal(response.verifications["delivery"]["errors"][0]["message"], "Address not found");
-                assert.equal(response.verifications["delivery"]["errors"][1]["message"], "House number is missing");
+                assert.equal(response.verifications["delivery"]["errors"][1]["message"], "House number is invalid");
             }
         },
         'pass verify_strict param and fail': {
@@ -132,7 +132,7 @@ vows.describe("EasyPost API").addBatch({
             },
             'should raise an error': function(err, response) {
                 assert.equal(err.message["code"], "ADDRESS.VERIFY.FAILURE");
-                assert.equal(err.message["message"], "Address not found");
+                assert.equal(err.message["message"], "Unable to verify address.");
                 assert.equal(err.message["errors"].length, 2);
             }
         }
