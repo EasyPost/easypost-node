@@ -113,8 +113,12 @@ vows.describe("EasyPost API").addBatch({
                 assert.isNull(err);
 
                 assert.equal(response.verifications["delivery"]["success"], false);
+
+                assert.equal(response.verifications["delivery"]["errors"].length, 4);
                 assert.equal(response.verifications["delivery"]["errors"][0]["message"], "Address not found");
-                assert.equal(response.verifications["delivery"]["errors"][1]["message"], "House number is missing");
+                assert.equal(response.verifications["delivery"]["errors"][1]["message"], "House number is invalid");
+                assert.equal(response.verifications["delivery"]["errors"][2]["message"], "House number is missing");
+                assert.equal(response.verifications["delivery"]["errors"][3]["message"], "Street is invalid");
             }
         },
         'pass verify_strict param and fail': {
@@ -132,8 +136,11 @@ vows.describe("EasyPost API").addBatch({
             },
             'should raise an error': function(err, response) {
                 assert.equal(err.message["code"], "ADDRESS.VERIFY.FAILURE");
-                assert.equal(err.message["message"], "Address not found");
-                assert.equal(err.message["errors"].length, 2);
+                assert.equal(err.message["message"], "Unable to verify address.");
+                assert.equal(err.message["errors"][0]["message"], "Address not found");
+                assert.equal(err.message["errors"][1]["message"], "House number is invalid");
+                assert.equal(err.message["errors"][2]["message"], "House number is missing");
+                assert.equal(err.message["errors"][3]["message"], "Street is invalid");
             }
         }
     },
@@ -218,6 +225,16 @@ vows.describe("EasyPost API").addBatch({
                     assert.equal(response.tracker.object, "Tracker")
                     assert.equal(response.tracking_code, response.tracker.tracking_code)
                     assert.equal(response.tracker.shipment_id, response.id)
+                },
+                "refund shipment": {
+                    topic: function(err, response) {
+                        response.refund(this.callback)
+                    },
+                    'refunds successfully': function(err, response) {
+                        assert.isNull(err);
+
+                        assert.equal(response.refund_status, "refunded")
+                    }
                 }
             }
         }
