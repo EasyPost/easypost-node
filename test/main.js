@@ -1,12 +1,10 @@
 var vows = require('vows'),
-    assert = require('assert'),
-    sys = require('sys');
+    assert = require('assert');
 
-// var apiKey = 'LKpiBIk6tqKeh0q8GLN3RA';
 var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
 
 if (!apiKey) {
-    sys.puts('API key required.');
+    console.error('API key required.');
     process.exit(2);
 }
 
@@ -486,6 +484,25 @@ vows.describe("EasyPost API").addBatch({
                         }
                     }
                 }
+            }
+        }
+    }
+}).addBatch({
+    'Requestor': {
+        'request': {
+            topic: function() {
+                timeoutEasypost = require('./../lib/main.js')(apiKey, {timeout: 1});
+                timeoutEasypost.Address.create({
+                	name: 'Dr. Steve Brule',
+                	street1: '179 N Harbor Dr',
+                	city: 'Redondo Beach',
+                	state: 'CA',
+                	zip: '90277',
+                	country: 'US'}, this.callback)
+            },
+            'should timeout': function(err, response) {
+                assert.equal(err.param, 'ETIMEDOUT');
+                assert.equal(err.message, 'Request has been aborted because it did not respond within the timeout limit of 1ms.');
             }
         }
     }
