@@ -112,11 +112,9 @@ vows.describe("EasyPost API").addBatch({
 
                 assert.equal(response.verifications["delivery"]["success"], false);
 
-                assert.equal(response.verifications["delivery"]["errors"].length, 4);
+                assert.equal(response.verifications["delivery"]["errors"].length, 2);
                 assert.equal(response.verifications["delivery"]["errors"][0]["message"], "Address not found");
-                assert.equal(response.verifications["delivery"]["errors"][1]["message"], "House number is invalid");
-                assert.equal(response.verifications["delivery"]["errors"][2]["message"], "House number is missing");
-                assert.equal(response.verifications["delivery"]["errors"][3]["message"], "Street is invalid");
+                assert.equal(response.verifications["delivery"]["errors"][1]["message"], "House number is missing");
             }
         },
         'pass verify_strict param and fail': {
@@ -136,9 +134,7 @@ vows.describe("EasyPost API").addBatch({
                 assert.equal(err.message["code"], "ADDRESS.VERIFY.FAILURE");
                 assert.equal(err.message["message"], "Unable to verify address.");
                 assert.equal(err.message["errors"][0]["message"], "Address not found");
-                assert.equal(err.message["errors"][1]["message"], "House number is invalid");
-                assert.equal(err.message["errors"][2]["message"], "House number is missing");
-                assert.equal(err.message["errors"][3]["message"], "Street is invalid");
+                assert.equal(err.message["errors"][1]["message"], "House number is missing");
             }
         }
     },
