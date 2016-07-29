@@ -371,6 +371,74 @@ vows.describe("EasyPost API").addBatch({
             }
         }
     },
+    'Insurance': {
+        topic: function() {
+            easypost.Address.create({
+                name: "Dr. Steve Brule",
+                street1: "179 N Harbor Dr",
+                city: "Redondo Beach",
+                state: "CA",
+                zip: "90277",
+                phone: "310-808-5243"
+            }, this.callback);
+        },
+        'create an insurance with an address object': {
+            topic: function(err, response) {
+                var toAddress = response;
+                var fromAddress = {
+                    name: 'Jon Calhoun',
+                    street1: '388 Townsend St.',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    zip: '94107',
+                    country: 'US',
+                    phone: '415-456-7890'
+                };
+
+                var tracking_code = "EZ2000000002"
+                var carrier = "USPS"
+                var amount = 101.00
+
+                easypost.Insurance.create({
+                    from_address: fromAddress,
+                    to_address: toAddress,
+                    tracking_code: tracking_code,
+                    carrier: carrier,
+                    amount: amount
+                }, this.callback);
+            },
+            'shipment is valid and contains international rates': function(err, response) {
+                assert.isNull(err);
+                assert.isDefined(response);
+                assert.equal(response.object, 'Insurance');
+                assert.equal(response.tracking_code, "EZ2000000002");
+                assert.equal(response.amount, "101.00000");
+                assert.isDefined(response.tracker);
+            },
+            'retrieve insurance': {
+                topic: function(err, response) {
+                    var insurance2 = easypost.Insurance.retrieve(response.id, this.callback);
+                },
+                'retrieve insurance successfuly': function(err, response) {
+                    assert.isNull(err);
+                    assert.isDefined(response);
+                    assert.equal(response.object, 'Insurance');
+                    assert.equal(response.tracking_code, "EZ2000000002");
+                    assert.equal(response.amount, "101.00000");
+                    assert.isDefined(response.tracker);
+                },
+                "index insurances": {
+                    topic: function(err, response) {
+                        var insurances = easypost.Insurance.all({page_size: 5}, this.callback);
+                    },
+                    'refunds successfully': function(err, response) {
+                        assert.equal(response.insurances.length, 5);
+                        assert.isTrue(response.has_more);
+                    }
+                }
+            }
+        }
+    },
     'Pickup': {
         topic: function() {
             var toAddress = {
