@@ -37,8 +37,8 @@ var fromAddress = {
 };
 
 // verify address
-easypost.Address.create(fromAddress, function(err, fromAddress) {
-    fromAddress.verify(function(err, response) {
+easypost.Address.create(toAddress, function(err, toAddress) {
+    toAddress.verify(function(err, response) {
         if (err) {
             console.log('Address is invalid.');
         } else if (response.message !== undefined && response.message !== null) {
