@@ -1,6 +1,10 @@
 # EasyPost Node Client Library
 
+## This branch (v3) is a work in progress and should be considered very unstable.
+
 EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com
+
+[![CircleCI](https://circleci.com/gh/EasyPost/easypost-web.svg?style=svg&circle-token=6f1cef70e775021a0e45c9c8bc367943927e9bba)](https://circleci.com/gh/EasyPost/easypost-web)
 
 Installation
 ---------------
@@ -13,103 +17,38 @@ Example
 ------------------
 
 ```javascript
-var apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
-var easypost = require('node-easypost')(apiKey);
+const apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
+const EasyPost = require('node-easypost');
+
+const api = new EasyPost(apiKey);
 
 // set addresses
-var toAddress = {
-    name: "Dr. Steve Brule",
-    street1: "179 N Harbor Dr",
-    city: "Redondo Beach",
-    state: "CA",
-    zip: "90277",
-    country: "US",
-    phone: "310-808-5243"
-};
-var fromAddress = {
-    name: "EasyPost",
-    street1: "118 2nd Street",
-    street2: "4th Floor",
-    city: "San Francisco",
-    state: "CA",
-    zip: "94105",
-    phone: "415-123-4567"
-};
-
-// verify address
-easypost.Address.create(toAddress, function(err, toAddress) {
-    toAddress.verify(function(err, response) {
-        if (err) {
-            console.log('Address is invalid.');
-        } else if (response.message !== undefined && response.message !== null) {
-            console.log('Address is valid but has an issue: ', response.message);
-            var verifiedAddress = response.address;
-        } else {
-            var verifiedAddress = response;
-        }
-    });
+const toAddress = new api.Address({
+  name: 'Dr. Steve Brule',
+  street1: '179 N Harbor Dr',
+  city: 'Redondo Beach',
+  state: 'CA',
+  zip: '90277',
+  country: 'US',
+  phone: '310-808-5243'
 });
 
-// set parcel
-easypost.Parcel.create({
-    predefined_package: "InvalidPackageName",
-    weight: 21.2
-}, function(err, response) {
-    console.log(err);
+const fromAddress = new api.Address({
+  name: 'EasyPost',
+  street1: '118 2nd Street',
+  street2: '4th Floor',
+  city: 'San Francisco',
+  state: 'CA',
+  zip: '94105',
+  phone: '415-123-4567'
 });
 
-var parcel = {
-    length: 10.2,
-    width: 7.8,
-    height: 4.3,
-    weight: 21.2
-};
-
-// create customs_info form for intl shipping
-var customsItem = {
-    description: "EasyPost t-shirts",
-    hs_tariff_number: 123456,
-    origin_country: "US",
-    quantity: 2,
-    value: 96.27,
-    weight: 21.1
-};
-
-var customsInfo = {
-    customs_certify: 1,
-    customs_signer: "Hector Hammerfall",
-    contents_type: "gift",
-    contents_explanation: "",
-    eel_pfc: "NOEEI 30.37(a)",
-    non_delivery_option: "return",
-    restriction_type: "none",
-    restriction_comments: "",
-    customs_items: [customsItem]
-};
-
-// create shipment
-easypost.Shipment.create({
-    to_address: toAddress,
-    from_address: fromAddress,
-    parcel: parcel,
-    customs_info: customsInfo
-}, function(err, shipment) {
-    // buy postage label with one of the rate objects
-    shipment.buy({rate: shipment.lowestRate(['USPS', 'ups']), insurance: 100.00}, function(err, shipment) {
-        console.log(shipment.tracking_code);
-        console.log(shipment.postage_label.label_url);
-    });
+/* es5 with promises: */
+fromAddress.save().then(addr => {
+  console.log(addr.id);
 });
-```
 
-Documentation
---------------------
-
-Up-to-date documentation at: https://www.easypost.com/docs
-
-Tests
---------------------
-
-```
-npm test
+/* es2017 with async/await: */
+await fromAddress.save();
+console.log(fromAddress.id);
 ```

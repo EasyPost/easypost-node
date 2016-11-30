@@ -7,3 +7,7 @@ Icon
 .Trashes
 
 node_modules
+easypost.js
+easypost.js.map
+.nyc_output
+coverage
