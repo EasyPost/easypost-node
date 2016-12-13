@@ -125,7 +125,7 @@ export default (api) => {
       });
 
       const data = this.toJSON();
-      data.is_refund = true;
+      data.is_return = true;
       return this.rpc('', data);
     }
   };
