@@ -21,6 +21,7 @@
     "import/extensions": ["error", "always", {
       "js": "never",
     }],
+    "import/no-named-default": 0,
     "no-underscore-dangle": 0,
     "consistent-return": ["warn"],
     "no-mixed-operators": ["error", {"allowSamePrecedence": true}],

@@ -1,5 +1,3 @@
-/* eslint import/no-named-default: 0 */
-
 import { default as batch, DEFAULT_LABEL_FORMAT } from '../../src/resources/batch';
 import apiStub from '../helpers/apiStub';
 

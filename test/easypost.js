@@ -1,5 +1,3 @@
-/* eslint import/no-named-default: 0 */
-
 import superagent from 'superagent';
 import superagentStub from './helpers/superagentStub';
 

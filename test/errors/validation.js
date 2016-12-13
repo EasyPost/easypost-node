@@ -1,5 +1,3 @@
-/* eslint import/no-named-default: 0 */
-
 import {
   default as ValidationError,
   NAME,

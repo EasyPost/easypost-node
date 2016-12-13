@@ -1,5 +1,3 @@
-/* eslint import/no-named-default: 0 */
-
 import apiStub from '../helpers/apiStub';
 import RequestError from '../../src/errors/request';
 import address from '../../src/resources/address';
