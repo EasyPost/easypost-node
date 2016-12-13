@@ -13,7 +13,7 @@
     "node": ">= v0.10.0"
   },
   "scripts": {
-    "test": "mocha --require ./test/common.js --compilers js:babel-register --recursive ./test",
+    "test": "eslint src && mocha --require ./test/common.js --compilers js:babel-register --recursive ./test",
     "test:coverage": "cross-env NODE_ENV=test nyc mocha --recursive ./test",
     "build": "webpack --config webpack.config.js",
     "lint": "eslint src",
