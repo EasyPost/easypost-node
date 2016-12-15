@@ -30,4 +30,42 @@ describe('ApiKey Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  describe('managing shipments', () => {
+    let ApiKey;
+    let key;
+    let stub;
+
+    beforeEach(() => {
+      stub = apiStub();
+      ApiKey = apiKey(stub);
+      key = new ApiKey({ id: '1' });
+    });
+
+    describe('disabling a key', () => {
+      it('throws if disable is called and key does not have an id', () => {
+        key = new ApiKey();
+        expect(() => key.disable()).to.throw(/requires id/);
+      });
+
+      it('calls api.post when disable is called and key has an id', () => {
+        key.disable();
+        expect(stub.post).to.have.been.called;
+        expect(stub.post).to.have.been.calledWith('api_keys/1/disable');
+      });
+    });
+
+    describe('enabling a key', () => {
+      it('throws if enable is called and key does not have an id', () => {
+        key = new ApiKey();
+        expect(() => key.enable()).to.throw(/requires id/);
+      });
+
+      it('calls api.post when enable is called and key has an id', () => {
+        key.enable();
+        expect(stub.post).to.have.been.called;
+        expect(stub.post).to.have.been.calledWith('api_keys/1/enable');
+      });
+    });
+  });
 });

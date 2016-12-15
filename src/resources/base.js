@@ -124,14 +124,19 @@ export default api => (
       }
     }
 
-    async rpc(path, body) {
+    async rpc(path, body, pathPrefix) {
       const slashPath = path ? `/${path}` : '';
-      const url = `${this.constructor._name.toLowerCase()}/${this.id}${slashPath}`;
+      const prefix = pathPrefix || this.constructor._name.toLowerCase();
+      const url = `${prefix}/${this.id}${slashPath}`;
 
       try {
-        const res = await api.post(url, {
-          body,
-        });
+        let res;
+
+        if (body) {
+          res = await api.post(url, { body });
+        } else {
+          res = await api.post(url);
+        }
 
         this.mapProps(res.body);
         return this;

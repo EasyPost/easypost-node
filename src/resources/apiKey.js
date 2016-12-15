@@ -23,5 +23,21 @@ export default api => (
     async save() {
       return this.constructor.notImplemented('save');
     }
+
+    enable() {
+      this.verifyParameters({
+        this: ['id'],
+      });
+
+      return this.rpc('enable', undefined, this.constructor.url);
+    }
+
+    disable() {
+      this.verifyParameters({
+        this: ['id'],
+      });
+
+      return this.rpc('disable', undefined, this.constructor.url);
+    }
   }
 );
