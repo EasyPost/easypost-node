@@ -331,6 +331,48 @@ describe('Shipment Resource', () => {
     });
   });
 
+  describe('lowest rate', () => {
+    let Shipment;
+    let si;
+
+    beforeEach(() => {
+      Shipment = shipment(apiStub());
+      si = new Shipment({ id: '1' });
+    });
+
+    it('returns undefined if there are no rates', () => {
+      si = new Shipment();
+      expect(si.lowestRate()).to.be.undefined;
+    });
+
+    it('returns the cheapest rate', () => {
+      const lowestRate = { rate: 1 };
+      const middleRate = { rate: 1.5 };
+      const highestRate = { rate: 2 };
+
+      si = new Shipment({ rates: [middleRate, lowestRate, highestRate] });
+      expect(si.lowestRate()).to.equal(lowestRate);
+    });
+
+    it('returns the cheapest rate for specific carriers', () => {
+      const lowestRate = { rate: 1, carrier: 'b' };
+      const middleRate = { rate: 1.5, carrier: 'a' };
+      const highestRate = { rate: 2, carrier: 'a' };
+
+      si = new Shipment({ rates: [middleRate, lowestRate, highestRate] });
+      expect(si.lowestRate(['a'])).to.equal(middleRate);
+    });
+
+    it('returns the cheapest rate for specific carriers and services', () => {
+      const lowestRate = { rate: 1, carrier: 'a', service: 'a' };
+      const middleRate = { rate: 1.5, carrier: 'a', service: 'b' };
+      const highestRate = { rate: 2, carrier: 'a', service: 'b' };
+
+      si = new Shipment({ rates: [middleRate, lowestRate, highestRate] });
+      expect(si.lowestRate(['a'], ['b'])).to.equal(middleRate);
+    });
+  });
+
   describe('json', () => {
     let Shipment;
     let stub;

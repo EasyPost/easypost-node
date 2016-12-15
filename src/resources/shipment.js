@@ -128,5 +128,27 @@ export default (api) => {
       data.is_return = true;
       return this.rpc('', data);
     }
+
+    lowestRate(carriers, services) {
+      let rates = this.rates || [];
+
+      if (carriers) {
+        const carriersLower = carriers.map(c => c.toLowerCase());
+        rates = rates.filter(r => carriersLower.includes(r.carrier.toLowerCase()));
+      }
+
+      if (services) {
+        const servicesLower = services.map(s => s.toLowerCase());
+        rates = rates.filter(r => servicesLower.includes(r.service.toLowerCase()));
+      }
+
+      return rates.reduce((lowest, rate) => {
+        if (rate.rate < lowest.rate) {
+          return rate;
+        }
+
+        return lowest;
+      }, rates[0]);
+    }
   };
 };
