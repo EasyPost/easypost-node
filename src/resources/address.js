@@ -6,10 +6,6 @@ export default api => (
     static _name = 'Address';
     static url = 'addresses';
 
-    static all() {
-      return super.notImplemented();
-    }
-
     static propTypes = {
       id: T.string,
       object: T.string,
@@ -31,6 +27,14 @@ export default api => (
       verify: T.array,
       verify_strict: T.array,
       verifications: T.object,
+    }
+
+    static all() {
+      return this.notImplemented('all');
+    }
+
+    static delete() {
+      return this.notImplemented('delete');
     }
 
     // Object format is { address: { ... }, verify: [ ] }, so we need to pull

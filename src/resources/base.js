@@ -26,6 +26,18 @@ export default api => (
       }
     }
 
+    static async delete(id) {
+      if (!id) {
+        throw new Error(`No id was passed into ${this._name} delete()`);
+      }
+
+      try {
+        return await api.del(`${this.url}/${id}`);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
     static notImplemented(fnName) {
       return Promise.reject(new NotImplementedError(fnName, this.url));
     }
@@ -128,7 +140,7 @@ export default api => (
       }
     }
 
-    async create() {
+    async save() {
       try {
         this.validateProperties();
       } catch (e) {
@@ -137,7 +149,15 @@ export default api => (
 
       try {
         const data = this.constructor.wrapJSON(this.toJSON());
-        const res = await api.post(this.constructor.url, { body: data });
+
+        let res;
+
+        if (this.id) {
+          res = await api.put(this.constructor.url, { body: data });
+        } else {
+          res = await api.post(this.constructor.url, { body: data });
+        }
+
         this.mapProps(res.body);
         return this;
       } catch (e) {

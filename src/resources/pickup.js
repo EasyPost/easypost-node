@@ -11,10 +11,6 @@ export default (api) => {
     static _name = 'Pickup';
     static url = 'pickups';
 
-    static all() {
-      return super.notImplemented();
-    }
-
     static propTypes = {
       id: T.string,
       object: T.string,
@@ -37,6 +33,14 @@ export default (api) => {
       'address',
       'shipment',
     ]
+
+    static all() {
+      return this.notImplemented('all');
+    }
+
+    static delete() {
+      return this.notImplemented('delete');
+    }
 
     async buy(carrier, service) {
       this.verifyParameters({

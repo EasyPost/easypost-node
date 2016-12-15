@@ -53,6 +53,23 @@ describe('Base Resource', () => {
           done();
         }, (err) => { throw new Error(err); });
       });
+
+      it('can delete from the API with an id', (done) => {
+        const id = 'id';
+
+        Base.delete(id).then(() => {
+          expect(stub.del).to.have.been.calledOnce;
+          expect(stub.del).to.have.been.calledWith(`${Base.url}/${id}`);
+          done();
+        }, (err) => { throw new Error(err); });
+      });
+
+      it('throws if delete is called without an id', (done) => {
+        Base.delete().catch((e) => {
+          expect(e.message).to.match(/no id was passed in/i);
+          done();
+        }, (err) => { throw new Error(err); });
+      });
     });
 
     describe('failures', () => {
@@ -71,6 +88,13 @@ describe('Base Resource', () => {
 
       it('can handle failures on all', (done) => {
         Base.all().then(() => {}, (err) => {
+          expect(err).to.be.an.instanceOf(RequestError);
+          done();
+        });
+      });
+
+      it('can handle failures on del', (done) => {
+        Base.delete('id').then(() => {}, (err) => {
           expect(err).to.be.an.instanceOf(RequestError);
           done();
         });
@@ -172,10 +196,10 @@ describe('Base Resource', () => {
     });
   });
 
-  describe('create()', () => {
+  describe('save()', () => {
     let stub;
     let Base;
-    const propTypes = { a: T.string };
+    const propTypes = { a: T.string, id: T.string };
     const name = 'base';
     const data = { a: 'a' };
 
@@ -189,8 +213,18 @@ describe('Base Resource', () => {
 
     it('calls api post when valid', (done) => {
       const bi = new Base(data);
-      bi.create().then(() => {
+      bi.save().then(() => {
         expect(stub.post).to.have.been.calledWith(Base.url, { body: Base.wrapJSON(bi.toJSON()) });
+        done();
+      }, (err) => { throw new Error(err); });
+    });
+
+    it('calls api put when it has an id', (done) => {
+      const bi = new Base(data);
+      bi.id = 'id';
+
+      bi.save().then(() => {
+        expect(stub.put).to.have.been.calledWith(Base.url, { body: Base.wrapJSON(bi.toJSON()) });
         done();
       }, (err) => { throw new Error(err); });
     });
@@ -201,14 +235,14 @@ describe('Base Resource', () => {
       Base._name = name;
       Base.url = name;
 
-      new Base(data).create().then(() => {}, (err) => {
+      new Base(data).save().then(() => {}, (err) => {
         expect(err).to.be.a.instanceOf(RequestError);
         done();
       });
     });
 
     it('rejects when invalid data is passed in', (done) => {
-      new Base({ a: 1 }).create().then(() => {}, (err) => {
+      new Base({ a: 1 }).save().then(() => {}, (err) => {
         expect(err).to.be.a.instanceOf(ValidationError);
         done();
       });

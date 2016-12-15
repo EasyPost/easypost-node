@@ -2,11 +2,19 @@ import apiStub from '../helpers/apiStub';
 import RequestError from '../../src/errors/request';
 import address from '../../src/resources/address';
 import order from '../../src/resources/order';
+import NotImplementedError from '../../src/errors/notImplemented';
 
 describe('Order Resource', () => {
   it('exists', () => {
     expect(order).to.not.be.undefined;
     expect(order).to.be.a('function');
+  });
+
+  it('throws on delete', () => {
+    const Order = order(apiStub());
+    Order.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
   });
 
   describe('buying', () => {

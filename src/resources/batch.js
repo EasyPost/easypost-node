@@ -24,6 +24,10 @@ export default api => (
       updated_at: T.object,
     }
 
+    static delete() {
+      return this.notImplemented('delete');
+    }
+
     static unwrapAll(data) {
       return data.batches;
     }

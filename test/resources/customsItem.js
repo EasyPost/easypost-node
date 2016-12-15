@@ -14,4 +14,11 @@ describe('Customs Item Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('throws on delete', () => {
+    const CustomsItem = customsItem(apiStub());
+    CustomsItem.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 });

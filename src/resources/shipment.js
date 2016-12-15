@@ -58,7 +58,11 @@ export default (api) => {
       'customs_info',
       'insurance',
       'tracker',
-    ];
+    ]
+
+    static delete() {
+      return this.notImplemented('delete');
+    }
 
     async buy(rate, insuranceAmount) {
       this.verifyParameters({

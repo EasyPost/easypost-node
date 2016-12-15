@@ -1,5 +1,6 @@
 import { default as batch, DEFAULT_LABEL_FORMAT } from '../../src/resources/batch';
 import apiStub from '../helpers/apiStub';
+import NotImplementedError from '../../src/errors/notImplemented';
 
 describe('Batch Resource', () => {
   it('exists', () => {
@@ -11,6 +12,13 @@ describe('Batch Resource', () => {
     const Batch = batch(apiStub());
     const data = [new Batch()];
     expect(Batch.unwrapAll({ batches: data })).to.deep.equal(data);
+  });
+
+  it('throws on delete', () => {
+    const Batch = batch(apiStub());
+    Batch.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
   });
 
   describe('managing shipments', () => {

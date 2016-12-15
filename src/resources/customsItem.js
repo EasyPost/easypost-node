@@ -6,10 +6,6 @@ export default api => (
     static _name = 'CustomsItem';
     static url = 'customs_items';
 
-    static all() {
-      return super.notImplemented();
-    }
-
     static propTypes = {
       id: T.string,
       object: T.string,
@@ -24,6 +20,14 @@ export default api => (
       code: T.string,
       origin_country: T.string,
       currency: T.string,
+    }
+
+    static all() {
+      return this.notImplemented('all');
+    }
+
+    static delete() {
+      return this.notImplemented('delete');
     }
   }
 );

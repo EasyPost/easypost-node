@@ -1,5 +1,6 @@
 import apiStub from '../helpers/apiStub';
 import RequestError from '../../src/errors/request';
+import NotImplementedError from '../../src/errors/notImplemented';
 
 import address from '../../src/resources/address';
 import parcel from '../../src/resources/parcel';
@@ -13,6 +14,13 @@ describe('Shipment Resource', () => {
   it('exists', () => {
     expect(shipment).to.not.be.undefined;
     expect(shipment).to.be.a('function');
+  });
+
+  it('throws on delete', () => {
+    const Shipment = shipment(apiStub());
+    Shipment.delete().then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
   });
 
   describe('buying', () => {

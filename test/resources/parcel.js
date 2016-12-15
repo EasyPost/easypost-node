@@ -14,4 +14,11 @@ describe('Parcel Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('throws on delete', () => {
+    const Parcel = parcel(apiStub());
+    Parcel.delete().then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 });

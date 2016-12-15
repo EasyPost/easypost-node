@@ -9,10 +9,6 @@ export default (api) => {
     static _name = 'CustomsInfo';
     static url = 'customs_infos';
 
-    static all() {
-      return super.notImplemented();
-    }
-
     static propTypes = {
       id: T.string,
       object: T.string,
@@ -25,6 +21,14 @@ export default (api) => {
       restriction_type: T.string,
       eel_pfc: T.string,
       customs_items: T.arrayOf(T.shape(CustomsItem.propTypes)),
+    }
+
+    static all() {
+      return super.notImplemented('all');
+    }
+
+    static delete() {
+      return this.notImplemented('delete');
     }
   };
 };

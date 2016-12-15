@@ -6,10 +6,6 @@ export default api => (
     static _name = 'Parcel';
     static url = 'parcels';
 
-    static all() {
-      return super.notImplemented();
-    }
-
     static propTypes = {
       id: T.string,
       object: T.string,
@@ -21,6 +17,14 @@ export default api => (
       weight: T.number,
       created_at: T.object,
       updated_at: T.object,
+    }
+
+    static all() {
+      return this.notImplemented('all');
+    }
+
+    static delete() {
+      return this.notImplemented('delete');
     }
   }
 );

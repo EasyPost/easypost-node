@@ -17,6 +17,12 @@ describe('Pickup Resource', () => {
     });
   });
 
+  it('throws on delete', () => {
+    const Pickup = pickup(apiStub());
+    Pickup.delete().then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 
   describe('buying', () => {
     let Pickup;

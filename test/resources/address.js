@@ -15,6 +15,13 @@ describe('Address Resource', () => {
     });
   });
 
+  it('throws on delete', () => {
+    const Address = address(apiStub());
+    Address.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   it('wraps json in its name', () => {
     const Address = address(apiStub());
     const data = {

@@ -4,7 +4,10 @@ import os from 'os';
 import pkg from '../package.json';
 
 import Address from './resources/address';
+import ApiKey from './resources/apiKey';
 import Batch from './resources/batch';
+import CarrierAccount from './resources/carrierAccount';
+import CarrierType from './resources/carrierType';
 import CustomsInfo from './resources/customsInfo';
 import CustomsItem from './resources/customsItem';
 import Insurance from './resources/insurance';
@@ -13,6 +16,7 @@ import Parcel from './resources/parcel';
 import Pickup from './resources/pickup';
 import Shipment from './resources/shipment';
 import Tracker from './resources/tracker';
+import User from './resources/user';
 
 import RequestError from './errors/request';
 
@@ -48,7 +52,10 @@ export const METHODS = {
 
 export const RESOURCES = {
   Address,
+  ApiKey,
   Batch,
+  CarrierAccount,
+  CarrierType,
   CustomsInfo,
   CustomsItem,
   Insurance,
@@ -57,6 +64,7 @@ export const RESOURCES = {
   Pickup,
   Shipment,
   Tracker,
+  User,
 };
 
 export default class API {

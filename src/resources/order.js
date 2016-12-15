@@ -37,6 +37,10 @@ export default (api) => {
       'buyer_address',
     ]
 
+    static delete() {
+      return this.notImplemented('delete');
+    }
+
     async buy(carrier, service) {
       this.verifyParameters({
         this: ['id'],

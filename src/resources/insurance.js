@@ -29,5 +29,9 @@ export default (api) => {
       fee: T.object,
       messages: T.array,
     }
+
+    static delete() {
+      return this.notImplemented('delete');
+    }
   };
 };
