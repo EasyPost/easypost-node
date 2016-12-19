@@ -13,9 +13,12 @@ import CustomsItem from './resources/customsItem';
 import Insurance from './resources/insurance';
 import Order from './resources/order';
 import Parcel from './resources/parcel';
+import PaymentLogReport from './resources/payment_log_report';
 import Pickup from './resources/pickup';
 import Shipment from './resources/shipment';
+import ShipmentReport from './resources/shipment_report';
 import Tracker from './resources/tracker';
+import TrackerReport from './resources/tracker_report';
 import User from './resources/user';
 
 import RequestError from './errors/request';
@@ -61,9 +64,12 @@ export const RESOURCES = {
   Insurance,
   Order,
   Parcel,
+  PaymentLogReport,
   Pickup,
   Shipment,
+  ShipmentReport,
   Tracker,
+  TrackerReport,
   User,
 };
 
