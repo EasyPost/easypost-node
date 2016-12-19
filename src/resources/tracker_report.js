@@ -1,8 +1,10 @@
 import reportBase from './report_base';
 
-export default api => (
-  class TrackerReport extends reportBase(api) {
+export default (api) => {
+  const Base = reportBase(api);
+
+  return class TrackerReport extends Base {
     static _name = 'TrackerReport';
-    static url = 'reports/tracker';
-  }
-);
+    static url = `${Base.url}tracker`;
+  };
+};
