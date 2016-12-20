@@ -28,9 +28,5 @@ export default api => (
     static delete() {
       return this.notImplemented('delete');
     }
-
-    static unwrapAll(data) {
-      return data.trackers;
-    }
   }
 );

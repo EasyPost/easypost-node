@@ -19,9 +19,5 @@ export default api => (
       created_at: T.object,
       updated_at: T.object,
     }
-
-    static unwrapAll(data) {
-      return data.reports;
-    }
   }
 );

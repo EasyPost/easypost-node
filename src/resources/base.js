@@ -55,7 +55,7 @@ export default api => (
     }
 
     static unwrapAll(data) {
-      return data;
+      return data[this.url];
     }
 
     _validationErrors = null;

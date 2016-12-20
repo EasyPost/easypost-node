@@ -28,10 +28,6 @@ export default api => (
       return this.notImplemented('delete');
     }
 
-    static unwrapAll(data) {
-      return data.batches;
-    }
-
     addShipment(shipmentId) {
       this.verifyParameters({
         this: ['id'],
