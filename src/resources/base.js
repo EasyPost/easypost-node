@@ -170,6 +170,19 @@ export default api => (
       }
     }
 
+    async retrieve() {
+      if (this.id) {
+        const res = await this.constructor.retrieve(this.id);
+        const props = res.toJSON();
+
+        Object.keys(props).forEach((k) => {
+          this[k] = props[k];
+        });
+      } else {
+        throw new Error('Cannot retrieve an object without an id.');
+      }
+    }
+
     toJSON() {
       const idKeys = this.constructor.jsonIdKeys;
 

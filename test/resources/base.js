@@ -1,4 +1,5 @@
 import T from 'proptypes';
+import sinon from 'sinon';
 
 import base from '../../src/resources/base';
 import apiStub from '../helpers/apiStub';
@@ -244,6 +245,44 @@ describe('Base Resource', () => {
     it('rejects when invalid data is passed in', (done) => {
       new Base({ a: 1 }).save().then(() => {}, (err) => {
         expect(err).to.be.a.instanceOf(ValidationError);
+        done();
+      });
+    });
+  });
+
+  describe('retrieve()', () => {
+    let stub;
+    let Base;
+    const propTypes = { a: T.string, id: T.string };
+    const name = 'base';
+    const data = { a: 'a', id: 'id' };
+    const stubRes = { toJSON: () => ({ a: 'b', id: data.id }) };
+
+    beforeEach(() => {
+      stub = apiStub();
+      Base = base(stub);
+      Base.propTypes = propTypes;
+      Base._name = name;
+      Base.url = name;
+    });
+
+    it('calls retrieve with the instance id', (done) => {
+      const bi = new Base(data);
+      const retrieveStub = sinon.stub(Base, 'retrieve').returns(stubRes);
+
+      bi.retrieve().then(() => {
+        expect(retrieveStub).to.have.been.calledWith(bi.id);
+        done();
+      }, (err) => { throw new Error(err); });
+    });
+
+    it('throws if there is no shipment id', (done) => {
+      delete data.id;
+
+      const bi = new Base(data);
+
+      bi.retrieve().catch((e) => {
+        expect(e.message).to.match(/without an id/);
         done();
       });
     });
