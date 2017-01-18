@@ -1,7 +1,7 @@
 {
   "name": "node-easypost",
   "description": "EasyPost Node Client Library",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.3",
   "author": "Easypost Engineering <support@easypost.com>",
   "homepage": "https://easypost.com",
   "repository": {
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "proptypes": "0.14.3",
+    "regenerator-runtime": "^0.10.1",
     "superagent": "3.1.0"
   },
   "devDependencies": {
