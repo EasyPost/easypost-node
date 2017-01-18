@@ -52,3 +52,7 @@ fromAddress.save().then(addr => {
 await fromAddress.save();
 console.log(fromAddress.id);
 ```
+
+Note: if you are using `es6`, you can use `import "node-easypost/easypost"` to
+avoid loading regenerator-runtime twice. We plan on supporting a node6+ version
+at some point as well for native generator support.
