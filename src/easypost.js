@@ -77,10 +77,18 @@ export default class API {
   // Build request headers to be sent by default with each request, combined
   // (or overridden) by any additional headers
   static buildHeaders(additionalHeaders = {}) {
-    return {
+    const headers = {
       ...DEFAULT_HEADERS,
       ...additionalHeaders,
     };
+
+    if (typeof window === 'undefined') {
+      return headers;
+    }
+
+    delete headers['User-Agent'];
+    delete headers['Accept-Encoding'];
+    return headers;
   }
 
   constructor(key, options = {}) {
