@@ -15,6 +15,7 @@ import Order from './resources/order';
 import Parcel from './resources/parcel';
 import PaymentLogReport from './resources/payment_log_report';
 import Pickup from './resources/pickup';
+import ScanForm from './resources/scan_form';
 import Shipment from './resources/shipment';
 import ShipmentReport from './resources/shipment_report';
 import Tracker from './resources/tracker';
@@ -67,6 +68,7 @@ export const RESOURCES = {
   Parcel,
   PaymentLogReport,
   Pickup,
+  ScanForm,
   Shipment,
   ShipmentReport,
   Tracker,
