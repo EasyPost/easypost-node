@@ -20,6 +20,7 @@ import ShipmentReport from './resources/shipment_report';
 import Tracker from './resources/tracker';
 import TrackerReport from './resources/tracker_report';
 import User from './resources/user';
+import Webhook from './resources/webhook';
 
 import RequestError from './errors/request';
 
@@ -71,6 +72,7 @@ export const RESOURCES = {
   Tracker,
   TrackerReport,
   User,
+  Webhook,
 };
 
 export default class API {
