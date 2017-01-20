@@ -127,7 +127,7 @@ export default api => (
 
     async rpc(path, body, pathPrefix) {
       const slashPath = path ? `/${path}` : '';
-      const prefix = pathPrefix || this.constructor._name.toLowerCase();
+      const prefix = pathPrefix || this.constructor.key.toLowerCase();
       const url = `${prefix}/${this.id}${slashPath}`;
 
       try {

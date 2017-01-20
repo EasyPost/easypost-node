@@ -60,7 +60,7 @@ describe('Order Resource', () => {
 
       oi.buy(carrier, service).then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`order/${oi.id}/buy`, {
+        expect(stub.post).to.have.been.calledWith(`orders/${oi.id}/buy`, {
           body: data,
         });
         done();

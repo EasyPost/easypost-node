@@ -19,6 +19,7 @@ describe('Base Resource', () => {
     const Base = base(stub);
     Base.url = url;
     base._name = url;
+    base.key = url;
 
     expect(new Base()).to.not.throw;
     expect(new Base({})).to.not.throw;
@@ -304,6 +305,7 @@ describe('Base Resource', () => {
       Base = base(stub);
       Base.propTypes = propTypes;
       Base._name = name;
+      Base.key = 'bases';
       Base.url = name;
     });
 
@@ -312,7 +314,7 @@ describe('Base Resource', () => {
       const path = 'path';
       const body = { a: 'a' };
 
-      const url = `${name}/${bi.id}/${path}`;
+      const url = `${Base.key}/${bi.id}/${path}`;
 
       bi.rpc(path, body).then(() => {
         expect(stub.post).to.have.been.calledWith(url, { body });
@@ -324,6 +326,7 @@ describe('Base Resource', () => {
       const resData = { b: 'b' };
       Base = base(apiStub(Base.url, false, resData));
       Base._name = 'base';
+      Base.key = 'bases';
 
       const bi = new Base(data);
       const path = 'path';
@@ -340,6 +343,7 @@ describe('Base Resource', () => {
       Base.propTypes = propTypes;
       Base._name = name;
       Base.url = name;
+      Base.key = 'bases';
 
       new Base(data).rpc().then(() => {}, (err) => {
         expect(err).to.be.a.instanceOf(RequestError);
