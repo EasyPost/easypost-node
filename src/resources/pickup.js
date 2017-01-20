@@ -10,6 +10,7 @@ export default (api) => {
   return class Pickup extends base(api) {
     static _name = 'Pickup';
     static url = 'pickups';
+    static key = 'pickups';
 
     static propTypes = {
       id: T.string,
