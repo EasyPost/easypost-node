@@ -48,7 +48,6 @@ describe('Base Resource', () => {
         stub = apiStub(url, false, { base: [{ }] });
         Base = base(stub);
         Base.url = url;
-        Base.key = 'base';
 
         Base.all().then((bs) => {
           expect(stub.get).to.have.been.calledOnce;
@@ -312,7 +311,7 @@ describe('Base Resource', () => {
       const path = 'path';
       const body = { a: 'a' };
 
-      const url = `${name}/${bi.id}/${path}`;
+      const url = `${Base.url}/${bi.id}/${path}`;
 
       bi.rpc(path, body).then(() => {
         expect(stub.post).to.have.been.calledWith(url, { body });

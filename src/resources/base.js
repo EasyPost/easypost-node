@@ -44,7 +44,7 @@ export default api => (
     }
 
     static wrapJSON(json) {
-      return { [this._name.toLowerCase()]: json };
+      return { [this.url]: json };
     }
 
     static create(data) {
@@ -52,11 +52,8 @@ export default api => (
     }
 
     static unwrapAll(data) {
-      if (this.key) {
-        return data[this.key];
-      }
-
-      return data;
+      if (Array.isArray(data)) return data;
+      return data[this.url];
     }
 
     _validationErrors = null;
@@ -127,7 +124,7 @@ export default api => (
 
     async rpc(path, body, pathPrefix) {
       const slashPath = path ? `/${path}` : '';
-      const prefix = pathPrefix || this.constructor._name.toLowerCase();
+      const prefix = pathPrefix || this.constructor.url;
       const url = `${prefix}/${this.id}${slashPath}`;
 
       try {

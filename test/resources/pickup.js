@@ -67,7 +67,7 @@ describe('Pickup Resource', () => {
 
       pi.buy(carrier, service).then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`pickup/${pi.id}/buy`, {
+        expect(stub.post).to.have.been.calledWith(`pickups/${pi.id}/buy`, {
           body: data,
         });
         done();
@@ -111,7 +111,7 @@ describe('Pickup Resource', () => {
     it('calls api.post when cancel is called', (done) => {
       pi.cancel().then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`pickup/${pi.id}/cancel`);
+        expect(stub.post).to.have.been.calledWith(`pickups/${pi.id}/cancel`);
         done();
       });
     });
