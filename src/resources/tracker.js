@@ -5,7 +5,6 @@ export default api => (
   class Tracker extends base(api) {
     static _name = 'Tracker';
     static url = 'trackers';
-    static key = 'trackers';
 
     static propTypes = {
       id: T.string,

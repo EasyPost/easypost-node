@@ -41,7 +41,7 @@ describe('Batch Resource', () => {
       it('calls api.post when addShipment is called with a shipment id', () => {
         bi.addShipment(shipmentId);
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith('batch/1/add_shipments', {
+        expect(stub.post).to.have.been.calledWith('batches/1/add_shipments', {
           body: {
             shipments: [{ id: shipmentId }],
           },
@@ -60,7 +60,7 @@ describe('Batch Resource', () => {
       it('calls api.post when addShipments is called with shipment ids', () => {
         bi.addShipments(shipmentIds);
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith('batch/1/add_shipments', {
+        expect(stub.post).to.have.been.calledWith('batches/1/add_shipments', {
           body: {
             shipments: [{ id: shipmentIds[0] }, { id: shipmentIds[1] }],
           },
@@ -81,7 +81,7 @@ describe('Batch Resource', () => {
       it('calls api.post when removeShipment is called with a shipment id', () => {
         bi.removeShipment(shipmentId);
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith('batch/1/remove_shipments', {
+        expect(stub.post).to.have.been.calledWith('batches/1/remove_shipments', {
           body: {
             shipments: [{ id: shipmentId }],
           },
@@ -100,7 +100,7 @@ describe('Batch Resource', () => {
       it('calls api.post when removeShipments is called with shipment ids', () => {
         bi.removeShipments(shipmentIds);
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith('batch/1/remove_shipments', {
+        expect(stub.post).to.have.been.calledWith('batches/1/remove_shipments', {
           body: {
             shipments: [{ id: shipmentIds[0] }, { id: shipmentIds[1] }],
           },
@@ -128,7 +128,7 @@ describe('Batch Resource', () => {
     it('calls api.post when generateLabel is called, defaulting to pdf', () => {
       bi.generateLabel();
       expect(stub.post).to.have.been.called;
-      expect(stub.post).to.have.been.calledWith('batch/1/label', {
+      expect(stub.post).to.have.been.calledWith('batches/1/label', {
         body: {
           file_format: DEFAULT_LABEL_FORMAT,
         },
@@ -140,7 +140,7 @@ describe('Batch Resource', () => {
 
       bi.generateLabel(format);
       expect(stub.post).to.have.been.called;
-      expect(stub.post).to.have.been.calledWith('batch/1/label', {
+      expect(stub.post).to.have.been.calledWith('batches/1/label', {
         body: {
           file_format: format,
         },
@@ -167,7 +167,7 @@ describe('Batch Resource', () => {
     it('calls api.post when createScanForm is called', () => {
       bi.createScanForm();
       expect(stub.post).to.have.been.called;
-      expect(stub.post).to.have.been.calledWith('batch/1/scan_form');
+      expect(stub.post).to.have.been.calledWith('batches/1/scan_form');
     });
   });
 });
