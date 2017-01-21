@@ -8,6 +8,13 @@ describe('Batch Resource', () => {
     expect(batch).to.be.a('function');
   });
 
+  it('throws on all', () => {
+    const Batch = batch(apiStub());
+    Batch.all().then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   it('throws on delete', () => {
     const Batch = batch(apiStub());
     Batch.delete('id').then(() => {}, (err) => {
