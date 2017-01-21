@@ -22,6 +22,13 @@ describe('ApiKey Resource', () => {
     });
   });
 
+  it('throws on all', () => {
+    const ApiKey = apiKey(apiStub());
+    ApiKey.all().then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   it('throws on save', () => {
     const ApiKey = apiKey(apiStub());
     const cti = new ApiKey();
