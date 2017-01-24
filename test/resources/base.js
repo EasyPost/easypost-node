@@ -230,7 +230,7 @@ describe('Base Resource', () => {
       bi.id = 'id';
 
       bi.save().then(() => {
-        expect(stub.put).to.have.been.calledWith(Base.url, { body: Base.wrapJSON(bi.toJSON()) });
+        expect(stub.put).to.have.been.calledWith(`${Base.url}/${bi.id}`, { body: Base.wrapJSON(bi.toJSON()) });
         done();
       }, (err) => { throw new Error(err); });
     });
