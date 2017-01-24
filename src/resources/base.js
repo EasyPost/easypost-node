@@ -156,7 +156,7 @@ export default api => (
         let res;
 
         if (this.id) {
-          res = await api.put(this.constructor.url, { body: data });
+          res = await api.put(`${this.constructor.url}/${this.id}`, { body: data });
         } else {
           res = await api.post(this.constructor.url, { body: data });
         }
