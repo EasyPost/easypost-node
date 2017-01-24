@@ -122,8 +122,9 @@ describe('Base Resource', () => {
     let stub;
     let Base;
     const name = 'base';
+    const baseKey = 'base_key';
     const json = { a: 'a' };
-    const wrappedJson = { [name]: json };
+    const wrappedJson = { [baseKey]: json };
 
     beforeEach(() => {
       stub = apiStub();
@@ -131,6 +132,7 @@ describe('Base Resource', () => {
       Base.propTypes = { a: T.string };
       Base._name = name;
       Base.url = name;
+      Base.key = baseKey;
     });
 
     it('can wrap json with its name', () => {

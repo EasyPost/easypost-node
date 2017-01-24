@@ -19,6 +19,10 @@ export default api => (
       updated_at: T.object,
     }
 
+    static wrapJSON(json) {
+      return json;
+    }
+
     static all() {
       return this.notImplemented('all');
     }

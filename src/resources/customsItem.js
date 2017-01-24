@@ -5,6 +5,7 @@ export default api => (
   class CustomsItem extends base(api) {
     static _name = 'CustomsItem';
     static url = 'customs_items';
+    static key = 'customs_item';
 
     static propTypes = {
       id: T.string,

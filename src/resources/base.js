@@ -44,7 +44,7 @@ export default api => (
     }
 
     static wrapJSON(json) {
-      return { [this.url]: json };
+      return { [this.key]: json };
     }
 
     static create(data) {

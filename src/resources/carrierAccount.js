@@ -5,6 +5,7 @@ export default api => (
   class CarrierAccount extends base(api) {
     static _name = 'CarrierAccount';
     static url = 'carrier_accounts';
+    static key = 'carrier_account';
 
     static propTypes = {
       id: T.string,

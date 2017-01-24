@@ -20,6 +20,10 @@ export default api => (
       updated_at: T.object,
     }
 
+    static wrapJSON(json) {
+      return json;
+    }
+
     static unwrapAll(data) {
       return data.reports;
     }

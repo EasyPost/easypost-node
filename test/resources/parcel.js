@@ -8,6 +8,22 @@ describe('Parcel Resource', () => {
     expect(parcel).to.be.a('function');
   });
 
+  describe('toJSON', () => {
+    let Parcel;
+    let stub;
+
+    beforeEach(() => {
+      stub = apiStub();
+      Parcel = parcel(stub);
+    });
+
+    it('wrapJSON returns the json', () => {
+      const json = { foo: 'bar' };
+      expect(Parcel.wrapJSON(json)).to.deep.equal(json);
+    });
+  });
+
+
   it('throws on all', () => {
     const Parcel = parcel(apiStub());
     Parcel.all().then(() => {}, (err) => {
