@@ -5,6 +5,7 @@ export default api => (
   class User extends base(api) {
     static _name = 'User';
     static url = 'users';
+    static key = 'user';
 
     static propTypes = {
       id: T.string,

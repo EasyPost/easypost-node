@@ -11,6 +11,7 @@ export default (api) => {
   return class Order extends base(api) {
     static _name = 'Order';
     static url = 'orders';
+    static key = 'order';
 
     static propTypes = {
       id: T.string,

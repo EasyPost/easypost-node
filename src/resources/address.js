@@ -5,6 +5,7 @@ export default api => (
   class Address extends base(api) {
     static _name = 'Address';
     static url = 'addresses';
+    static key = 'address';
 
     static propTypes = {
       id: T.string,
