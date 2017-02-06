@@ -17,11 +17,11 @@ export default api => (
       children: T.array,
 
       // api sends back numbers as strings, even though we want numbers
-      balance: T.any(T.number, T.string),
-      price_per_shipment: T.any(T.number, T.string),
-      recharge_amount: T.any(T.number, T.string),
-      secondary_recharge_amount: T.any(T.number, T.string),
-      recharge_threshold: T.any(T.number, T.string),
+      balance: T.oneOfType([T.object, T.string]),
+      price_per_shipment: T.oneOfType([T.object, T.string]),
+      recharge_amount: T.oneOfType([T.object, T.string]),
+      secondary_recharge_amount: T.oneOfType([T.object, T.string]),
+      recharge_threshold: T.oneOfType([T.object, T.string]),
     }
 
     static all() {

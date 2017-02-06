@@ -18,8 +18,8 @@ export default api => (
       readable: T.string,
       credentials: T.object,
       test_credentials: T.object,
-      created_at: T.any(T.object, T.string),
-      updated_at: T.any(T.object, T.string),
+      created_at: T.oneOfType([T.object, T.string]),
+      updated_at: T.oneOfType([T.object, T.string]),
     }
 
     static retrieve() {
