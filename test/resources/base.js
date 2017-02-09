@@ -124,12 +124,13 @@ describe('Base Resource', () => {
     const name = 'base';
     const baseKey = 'base_key';
     const json = { a: 'a' };
+    const propTypes = { a: T.string, b: T.string, child: T.object };
     const wrappedJson = { [baseKey]: json };
 
     beforeEach(() => {
       stub = apiStub();
       Base = base(stub);
-      Base.propTypes = { a: T.string };
+      Base.propTypes = propTypes;
       Base._name = name;
       Base.url = name;
       Base.key = baseKey;
@@ -146,6 +147,20 @@ describe('Base Resource', () => {
     it('can jsonify itself', () => {
       const bi = new Base(json);
       expect(bi.toJSON()).to.deep.equal(json);
+    });
+
+    it('can jsonify itself and child objects', () => {
+      const childProperties = { b: 'b' };
+
+      const properties = {
+        a: 'a',
+        child: new Base(childProperties),
+      };
+
+      const expectedJSON = { a: 'a', child: { b: 'b' } };
+
+      const bi = new Base(properties);
+      expect(bi.toJSON()).to.deep.equal(expectedJSON);
     });
   });
 
