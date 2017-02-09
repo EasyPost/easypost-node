@@ -19,7 +19,7 @@ describe('Parcel Resource', () => {
 
     it('wrapJSON returns the json', () => {
       const json = { foo: 'bar' };
-      expect(Parcel.wrapJSON(json)).to.deep.equal(json);
+      expect(Parcel.wrapJSON(json)).to.deep.equal({ parcel: json });
     });
   });
 

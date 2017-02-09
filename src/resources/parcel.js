@@ -5,6 +5,7 @@ export default api => (
   class Parcel extends base(api) {
     static _name = 'Parcel';
     static url = 'parcels';
+    static key ='parcel';
 
     static propTypes = {
       id: T.string,
@@ -17,10 +18,6 @@ export default api => (
       weight: T.number,
       created_at: T.object,
       updated_at: T.object,
-    }
-
-    static wrapJSON(json) {
-      return json;
     }
 
     static all() {
