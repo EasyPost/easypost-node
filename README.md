@@ -10,8 +10,26 @@ Installation
 ---------------
 
 ```
-npm install node-easypost
+npm install --save node-easypost
 ```
+
+Note: if you are using a version of Node less than 6.9, you will need to install and
+include a polyfill, such as `babel-polyfill`, and include it in your project:
+
+```
+npm install --save babel-polyfill
+```
+
+In your file:
+
+```
+require('babel-polyfill');
+const EasyPost = require('node-easypost');
+```
+
+You can also clone this repository, `npm install` to install dependencies,
+`npm run build` to build the project, and run `API_KEY=yourkey ./repl.js`
+to try out an interactive CLI.
 
 Example
 ------------------

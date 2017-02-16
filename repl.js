@@ -73,5 +73,6 @@ local.context.badAddress = {
   phone: '415-123-4567',
 };
 
+local.context.API = API;
 local.context.api = api;
 local.context.help = help;
