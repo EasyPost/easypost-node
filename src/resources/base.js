@@ -195,7 +195,7 @@ export default api => (
           }
 
           // unwrap the json if it's an object instance
-          if (this[key].toJSON) {
+          if (this[key] && this[key].toJSON) {
             json[key] = this[key].toJSON();
             return json;
           }
