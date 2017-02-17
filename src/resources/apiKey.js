@@ -16,12 +16,28 @@ export default api => (
       return this.notImplemented('delete');
     }
 
-    static all() {
-      return this.notImplemented('all');
+    static retrieve() {
+      return this.notImplemented('retrieve');
     }
 
     async save() {
       return this.constructor.notImplemented('save');
+    }
+
+    static convertKeyMap(data) {
+      if (!data.keys) { return []; }
+
+      let res = data.keys.map(k => ({ ...k, user_id: data.id }));
+
+      if (data.children && data.children.length) {
+        res = res.concat(data.children.map(d => this.convertKeyMap(d)));
+      }
+
+      return res;
+    }
+
+    static unwrapAll(data) {
+      return this.convertKeyMap(data);
     }
 
     enable() {
