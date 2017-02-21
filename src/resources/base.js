@@ -185,7 +185,7 @@ export default api => (
       const idKeys = this.constructor.jsonIdKeys;
 
       return Object.keys(this.constructor.propTypes).reduce((json, key) => {
-        if (typeof this[key] !== 'undefined') {
+        if (this[key]) {
           if (idKeys.includes(key) && typeof this[key] !== 'object') {
             json[key] = { id: this[key] };
             return json;
@@ -195,7 +195,7 @@ export default api => (
           }
 
           // unwrap the json if it's an object instance
-          if (this[key] && this[key].toJSON) {
+          if (this[key].toJSON) {
             json[key] = this[key].toJSON();
             return json;
           }

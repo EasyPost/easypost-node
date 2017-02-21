@@ -148,7 +148,7 @@ export default (api) => {
       }
 
       return rates.reduce((lowest, rate) => {
-        if (rate.rate < lowest.rate) {
+        if (parseFloat(rate.rate) < parseFloat(lowest.rate)) {
           return rate;
         }
 
