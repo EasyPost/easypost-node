@@ -32,7 +32,18 @@ export default (api) => {
     }
 
     toJSON() {
-      if (this.shipments) return { shipments: this.shipments };
+      if (this.shipments) {
+        return {
+          shipments: this.shipments.map((s) => {
+            if (typeof s === 'string') {
+              return { id: s };
+            }
+
+            return { id: s.id };
+          }),
+        };
+      }
+
       return super.toJSON();
     }
   };
