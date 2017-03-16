@@ -5,8 +5,7 @@ function buildGetStub(baseUrl, fail, data) {
 
   if (fail) {
     const err = new RequestError({ status: 500 }, baseUrl);
-    stub.withArgs(baseUrl, { query: {} }).throws(err);
-    stub.withArgs(`${baseUrl}/id`).throws(err);
+    stub.throws(err);
     return stub;
   }
 

@@ -96,7 +96,7 @@ export default (api) => {
         args: ['format'],
       }, format);
 
-      return this.rpc('label', { file_format: format });
+      return this.rpc('label', { file_format: format }, undefined, 'get');
     }
 
     async regenerateRates() {
@@ -104,7 +104,7 @@ export default (api) => {
         this: ['id'],
       });
 
-      return this.rpc('rates');
+      return this.rpc('rates', undefined, undefined, 'get');
     }
 
     async insure(amount) {

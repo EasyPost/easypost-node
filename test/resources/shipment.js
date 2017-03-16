@@ -175,15 +175,13 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when convertLabelFormat is called, passing in format', (done) => {
+    it('calls api.post when convertLabelFormat is called, passing in format and method', (done) => {
       const format = 'png';
       const data = { file_format: format };
 
       si.convertLabelFormat(format).then(() => {
-        expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/label`, {
-          body: data,
-        });
+        expect(stub.get).to.have.been.called;
+        expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/label`, { query: data });
         done();
       });
     });
@@ -223,8 +221,8 @@ describe('Shipment Resource', () => {
 
     it('calls api.post when regenerateRates is called', (done) => {
       si.regenerateRates().then(() => {
-        expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/rates`);
+        expect(stub.get).to.have.been.called;
+        expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/rates`);
         done();
       });
     });
