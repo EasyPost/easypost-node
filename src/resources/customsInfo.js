@@ -19,6 +19,7 @@ export default (api) => {
       customs_certify: T.bool,
       customs_signer: T.string,
       contents_type: T.string,
+      contents_explanation: T.string,
       restriction_type: T.string,
       eel_pfc: T.string,
       customs_items: T.arrayOf(T.shape(CustomsItem.propTypes)),
