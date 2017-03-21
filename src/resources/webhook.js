@@ -12,7 +12,7 @@ export default api => (
       object: T.string,
       mode: T.string,
       url: T.string,
-      disabled_at: T.object,
+      disabled_at: T.oneOfType([T.object, T.string]),
     }
   }
 );

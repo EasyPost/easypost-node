@@ -21,8 +21,8 @@ export default api => (
       label_url: T.string,
       scan_form: T.object,
       pickup: T.object,
-      created_at: T.object,
-      updated_at: T.object,
+      created_at: T.oneOfType([T.object, T.string]),
+      updated_at: T.oneOfType([T.object, T.string]),
     }
 
     static all() {

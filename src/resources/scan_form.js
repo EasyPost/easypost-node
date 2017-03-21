@@ -19,8 +19,8 @@ export default (api) => {
       form_url: T.string,
       form_file_type: T.string,
       batch_id: T.string,
-      created_at: T.object,
-      updated_at: T.object,
+      created_at: T.oneOfType([T.object, T.string]),
+      updated_at: T.oneOfType([T.object, T.string]),
     }
 
     static delete() {
