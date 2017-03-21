@@ -16,8 +16,8 @@ export default api => (
       height: T.number,
       predefined_package: T.string,
       weight: T.number,
-      created_at: T.object,
-      updated_at: T.object,
+      created_at: T.oneOfType([T.object, T.string]),
+      updated_at: T.oneOfType([T.object, T.string]),
     }
 
     static all() {

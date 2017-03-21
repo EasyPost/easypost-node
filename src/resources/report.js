@@ -13,10 +13,10 @@ export default api => (
       end_date: T.string,
       include_children: T.bool,
       url: T.string,
-      url_expires_at: T.object,
+      url_expires_at: T.oneOfType([T.object, T.string]),
       send_email: T.bool,
-      created_at: T.object,
-      updated_at: T.object,
+      created_at: T.oneOfType([T.object, T.string]),
+      updated_at: T.oneOfType([T.object, T.string]),
     }
 
     constructor(data = {}) {
