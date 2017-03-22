@@ -4,7 +4,7 @@ import base from './base';
 export default api => (
   class CarrierType extends base(api) {
     static _name = 'CarrierType';
-    static url = 'carrier_types';
+    static _url = 'carrier_types';
 
     static propTypes = {
       id: T.string,

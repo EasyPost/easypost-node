@@ -6,7 +6,7 @@ export const DEFAULT_LABEL_FORMAT = 'pdf';
 export default api => (
   class Batch extends base(api) {
     static _name = 'Batch';
-    static url = 'batches';
+    static _url = 'batches';
     static key = 'batch';
 
     static propTypes = {

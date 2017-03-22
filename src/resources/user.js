@@ -4,7 +4,7 @@ import base from './base';
 export default api => (
   class User extends base(api) {
     static _name = 'User';
-    static url = 'users';
+    static _url = 'users';
     static key = 'user';
 
     static propTypes = {
