@@ -4,7 +4,7 @@ import base from './base';
 export default api => (
   class Webhook extends base(api) {
     static _name = 'Webhook';
-    static url = 'webhooks';
+    static _url = 'webhooks';
     static key = 'webhook';
 
     static propTypes = {

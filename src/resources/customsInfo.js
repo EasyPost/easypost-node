@@ -7,7 +7,7 @@ export default (api) => {
 
   return class CustomsInfo extends base(api) {
     static _name = 'CustomsInfo';
-    static url = 'customs_infos';
+    static _url = 'customs_infos';
     static key = 'customs_info';
 
     static propTypes = {

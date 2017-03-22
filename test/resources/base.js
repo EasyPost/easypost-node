@@ -17,7 +17,7 @@ describe('Base Resource', () => {
     const url = 'base';
     const stub = apiStub(url);
     const Base = base(stub);
-    Base.url = url;
+    Base._url = url;
     base._name = url;
 
     expect(new Base()).to.not.throw;
@@ -34,11 +34,11 @@ describe('Base Resource', () => {
       it('can retrieve from the API via url', (done) => {
         stub = apiStub(url, false, { [url]: { } });
         Base = base(stub);
-        Base.url = url;
+        Base._url = url;
 
         Base.retrieve('id').then((b) => {
           expect(stub.get).to.have.been.calledOnce;
-          expect(stub.get).to.have.been.calledWith(`${Base.url}/id`);
+          expect(stub.get).to.have.been.calledWith(`${Base._url}/id`);
           expect(b).to.be.an.instanceOf(Base);
           done();
         }, (err) => { throw new Error(err); });
@@ -47,11 +47,11 @@ describe('Base Resource', () => {
       it('can call all from the API via url', (done) => {
         stub = apiStub(url, false, { base: [{ }] });
         Base = base(stub);
-        Base.url = url;
+        Base._url = url;
 
         Base.all().then((bs) => {
           expect(stub.get).to.have.been.calledOnce;
-          expect(stub.get).to.have.been.calledWith(Base.url, { query: {} });
+          expect(stub.get).to.have.been.calledWith(Base._url, { query: {} });
           bs.map(b => expect(b).to.be.an.instanceOf(Base));
           done();
         }, (err) => { throw new Error(err); });
@@ -60,13 +60,13 @@ describe('Base Resource', () => {
       it('can delete from the API with an id', (done) => {
         stub = apiStub(url);
         Base = base(stub);
-        Base.url = url;
+        Base._url = url;
 
         const id = 'id';
 
         Base.delete(id).then(() => {
           expect(stub.del).to.have.been.calledOnce;
-          expect(stub.del).to.have.been.calledWith(`${Base.url}/${id}`);
+          expect(stub.del).to.have.been.calledWith(`${Base._url}/${id}`);
           done();
         }, (err) => { throw new Error(err); });
       });
@@ -83,7 +83,7 @@ describe('Base Resource', () => {
       beforeEach(() => {
         stub = apiStub(url, true);
         Base = base(stub);
-        Base.url = url;
+        Base._url = url;
       });
 
       it('can handle failures on retrieve', (done) => {
@@ -132,7 +132,7 @@ describe('Base Resource', () => {
       Base = base(stub);
       Base.propTypes = propTypes;
       Base._name = name;
-      Base.url = name;
+      Base._url = name;
       Base.key = baseKey;
     });
 
@@ -229,13 +229,13 @@ describe('Base Resource', () => {
       Base = base(stub);
       Base.propTypes = propTypes;
       Base._name = name;
-      Base.url = name;
+      Base._url = name;
     });
 
     it('calls api post when valid', (done) => {
       const bi = new Base(data);
       bi.save().then(() => {
-        expect(stub.post).to.have.been.calledWith(Base.url, { body: Base.wrapJSON(bi.toJSON()) });
+        expect(stub.post).to.have.been.calledWith(Base._url, { body: Base.wrapJSON(bi.toJSON()) });
         done();
       }, (err) => { throw new Error(err); });
     });
@@ -245,16 +245,16 @@ describe('Base Resource', () => {
       bi.id = 'id';
 
       bi.save().then(() => {
-        expect(stub.put).to.have.been.calledWith(`${Base.url}/${bi.id}`, { body: Base.wrapJSON(bi.toJSON()) });
+        expect(stub.put).to.have.been.calledWith(`${Base._url}/${bi.id}`, { body: Base.wrapJSON(bi.toJSON()) });
         done();
       }, (err) => { throw new Error(err); });
     });
 
     it('rejects on api failure', (done) => {
-      Base = base(apiStub(Base.url, true));
+      Base = base(apiStub(Base._url, true));
       Base.propTypes = propTypes;
       Base._name = name;
-      Base.url = name;
+      Base._url = name;
 
       new Base(data).save().then(() => {}, (err) => {
         expect(err).to.be.a.instanceOf(RequestError);
@@ -283,7 +283,7 @@ describe('Base Resource', () => {
       Base = base(stub);
       Base.propTypes = propTypes;
       Base._name = name;
-      Base.url = name;
+      Base._url = name;
     });
 
     it('calls retrieve with the instance id', (done) => {
@@ -320,7 +320,7 @@ describe('Base Resource', () => {
       Base = base(stub);
       Base.propTypes = propTypes;
       Base._name = name;
-      Base.url = name;
+      Base._url = name;
     });
 
     it('calls api post with path and body', (done) => {
@@ -328,7 +328,7 @@ describe('Base Resource', () => {
       const path = 'path';
       const body = { a: 'a' };
 
-      const url = `${Base.url}/${bi.id}/${path}`;
+      const url = `${Base._url}/${bi.id}/${path}`;
 
       bi.rpc(path, body).then(() => {
         expect(stub.post).to.have.been.calledWith(url, { body });
@@ -338,7 +338,7 @@ describe('Base Resource', () => {
 
     it('maps response props to itself', (done) => {
       const resData = { b: 'b' };
-      Base = base(apiStub(Base.url, false, resData));
+      Base = base(apiStub(Base._url, false, resData));
       Base._name = 'base';
 
       const bi = new Base(data);
@@ -352,10 +352,10 @@ describe('Base Resource', () => {
     });
 
     it('rejects on api failure', (done) => {
-      Base = base(apiStub(Base.url, true));
+      Base = base(apiStub(Base._url, true));
       Base.propTypes = propTypes;
       Base._name = name;
-      Base.url = name;
+      Base._url = name;
 
       new Base(data).rpc().then(() => {}, (err) => {
         expect(err).to.be.a.instanceOf(RequestError);

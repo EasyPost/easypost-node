@@ -4,7 +4,7 @@ import base from './base';
 export default api => (
   class ApiKey extends base(api) {
     static _name = 'ApiKey';
-    static url = 'api_keys';
+    static _url = 'api_keys';
 
     static propTypes = {
       id: T.string,
@@ -45,7 +45,7 @@ export default api => (
         this: ['id'],
       });
 
-      return this.rpc('enable', undefined, this.constructor.url);
+      return this.rpc('enable', undefined, this.constructor._url);
     }
 
     disable() {
@@ -53,7 +53,7 @@ export default api => (
         this: ['id'],
       });
 
-      return this.rpc('disable', undefined, this.constructor.url);
+      return this.rpc('disable', undefined, this.constructor._url);
     }
   }
 );

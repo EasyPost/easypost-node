@@ -3,11 +3,10 @@ import base from './base';
 
 export default api => (
   class Report extends base(api) {
-    static url = 'reports/';
-
     static propTypes = {
       id: T.string,
       object: T.string,
+      type: T.string,
       mode: T.string,
       status: T.string,
       start_date: T.string,
@@ -20,12 +19,33 @@ export default api => (
       updated_at: T.object,
     }
 
+    constructor(data = {}) {
+      super(data);
+      if (data.type) { this._url = this.constructor.constructUrl(data.type); }
+    }
+
+    static constructUrl(type) {
+      return `reports/${type}`;
+    }
+
+    static async retrieve(type, id) {
+      return super.retrieve(id, this.constructUrl(type));
+    }
+
+    static async all(type, query = {}) {
+      return super.all(query, this.constructUrl(type));
+    }
+
     static wrapJSON(json) {
       return json;
     }
 
     static unwrapAll(data) {
       return data.reports;
+    }
+
+    static delete() {
+      return this.notImplemented('delete');
     }
   }
 );

@@ -4,7 +4,7 @@ import base from './base';
 export default api => (
   class Address extends base(api) {
     static _name = 'Address';
-    static url = 'addresses';
+    static _url = 'addresses';
     static key = 'address';
 
     static propTypes = {

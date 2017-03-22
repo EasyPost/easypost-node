@@ -13,13 +13,11 @@ import CustomsItem from './resources/customsItem';
 import Insurance from './resources/insurance';
 import Order from './resources/order';
 import Parcel from './resources/parcel';
-import PaymentLogReport from './resources/payment_log_report';
 import Pickup from './resources/pickup';
+import Report from './resources/report';
 import ScanForm from './resources/scan_form';
 import Shipment from './resources/shipment';
-import ShipmentReport from './resources/shipment_report';
 import Tracker from './resources/tracker';
-import TrackerReport from './resources/tracker_report';
 import User from './resources/user';
 import Webhook from './resources/webhook';
 
@@ -66,13 +64,11 @@ export const RESOURCES = {
   Insurance,
   Order,
   Parcel,
-  PaymentLogReport,
   Pickup,
+  Report,
   ScanForm,
   Shipment,
-  ShipmentReport,
   Tracker,
-  TrackerReport,
   User,
   Webhook,
 };

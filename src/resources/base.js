@@ -3,24 +3,26 @@ import NotImplementedError from '../errors/notImplemented';
 
 export default api => (
   class Base {
-    static url = null;
+    static _url = null;
     static _name = null;
     static key = null;
     static propTypes = {};
     static jsonIdKeys = [];
 
-    static async retrieve(id) {
+    static async retrieve(id, urlPrefix) {
       try {
-        const res = (await api.get(`${this.url}/${id}`));
+        const url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
+        const res = (await api.get(url));
         return this.create(res.body);
       } catch (e) {
         return Promise.reject(e);
       }
     }
 
-    static async all(query = {}) {
+    static async all(query = {}, url) {
       try {
-        const res = await api.get(`${this.url}`, { query });
+        url = url || this._url;
+        const res = await api.get(url, { query });
         return this.unwrapAll(res.body).map(this.create.bind(this));
       } catch (e) {
         return Promise.reject(e);
@@ -33,14 +35,14 @@ export default api => (
       }
 
       try {
-        return await api.del(`${this.url}/${id}`);
+        return await api.del(`${this._url}/${id}`);
       } catch (e) {
         return Promise.reject(e);
       }
     }
 
     static notImplemented(fnName) {
-      return Promise.reject(new NotImplementedError(fnName, this.url));
+      return Promise.reject(new NotImplementedError(fnName, this._url));
     }
 
     static wrapJSON(json) {
@@ -53,7 +55,7 @@ export default api => (
 
     static unwrapAll(data) {
       if (Array.isArray(data)) return data;
-      return data[this.url];
+      return data[this._url];
     }
 
     _validationErrors = null;
@@ -124,7 +126,7 @@ export default api => (
 
     async rpc(path, body, pathPrefix, method = 'post') {
       const slashPath = path ? `/${path}` : '';
-      const prefix = pathPrefix || this.constructor.url;
+      const prefix = pathPrefix || this.constructor._url;
       const url = `${prefix}/${this.id}${slashPath}`;
 
       try {
@@ -158,9 +160,9 @@ export default api => (
         let res;
 
         if (this.id) {
-          res = await api.put(`${this.constructor.url}/${this.id}`, { body: data });
+          res = await api.put(`${this._url || this.constructor._url}/${this.id}`, { body: data });
         } else {
-          res = await api.post(this.constructor.url, { body: data });
+          res = await api.post(this._url || this.constructor._url, { body: data });
         }
 
         this.mapProps(res.body);
