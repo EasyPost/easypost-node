@@ -24,7 +24,7 @@ export default (api) => {
       from_address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
       return_address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
       buyer_address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
-      shipments: T.arrayOf(Shipment.propTypes),
+      shipments: T.arrayOf(T.shape(Shipment.propTypes)),
       rates: T.arrayOf(T.object),
       messages: T.arrayOf(T.object),
       is_return: T.bool,
@@ -49,6 +49,10 @@ export default (api) => {
       }, carrier, service);
 
       return this.rpc('buy', { carrier, service });
+    }
+
+    async getRates() {
+      return this.rpc('rates', undefined, undefined, 'get');
     }
   };
 };
