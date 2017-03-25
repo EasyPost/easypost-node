@@ -33,7 +33,7 @@ export default (api) => {
       scan_form: T.oneOfType([T.string, T.object]),
       forms: T.array,
       insurance: T.oneOfType([T.string, T.shape(Insurance.propTypes)]),
-      rates: T.array,
+      rates: T.arrayOf(T.object),
       selected_rate: T.object,
       postage_label: T.object,
       messages: T.array,
