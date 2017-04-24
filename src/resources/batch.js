@@ -16,7 +16,7 @@ export default api => (
       mode: T.string,
       state: T.string,
       num_shipments: T.number,
-      shipments: T.object,
+      shipments: T.array,
       status: T.object,
       label_url: T.string,
       scan_form: T.object,
