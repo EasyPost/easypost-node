@@ -15,7 +15,7 @@ export default api => (
       object: T.string,
       mode: T.string,
       state: T.string,
-      num_shipments: T.integer,
+      num_shipments: T.number,
       shipments: T.object,
       status: T.object,
       label_url: T.string,
