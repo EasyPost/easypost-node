@@ -10,7 +10,7 @@ Installation
 ---------------
 
 ```
-npm install --save node-easypost
+npm install --save @easypost/api
 ```
 
 Note: if you are using a version of Node less than 6.9, you will need to install and
@@ -24,7 +24,7 @@ In your file:
 
 ```
 require('babel-polyfill');
-const EasyPost = require('node-easypost');
+const EasyPost = require('@easypost/api');
 ```
 
 You can also clone this repository, `npm install` to install dependencies,
@@ -36,7 +36,7 @@ Example
 
 ```javascript
 const apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
-const EasyPost = require('node-easypost');
+const EasyPost = require('@easypost/api');
 
 const api = new EasyPost(apiKey);
 
@@ -71,6 +71,6 @@ await fromAddress.save();
 console.log(fromAddress.id);
 ```
 
-Note: if you are using `es6`, you can use `import "node-easypost/easypost"` to
+Note: if you are using `es6`, you can use `import "@easypost/api/easypost"` to
 avoid loading regenerator-runtime twice. We plan on supporting a node6+ version
 at some point as well for native generator support.
