@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
-'use strict';
+/* eslint import/no-extraneous-dependencies: 0, global-require: 0, import/no-unresolved: 0, no-console: 0, max-len: 0 */
 
 require('source-map-support').install();
 require('babel-polyfill');
+
+const args = require('yargs').argv;
 
 const repl = require('repl');
 
@@ -11,13 +13,20 @@ process.on('unhandledRejection', (err) => {
   console.log(err, err.stack);
 });
 
+let packageInfo;
+let API;
 
-const packageInfo = require('./package.json');
+if (args.local) {
+  packageInfo = require('./package.json');
+  API = require('./index');
+} else {
+  packageInfo = require('@easypost/api/package.json');
+  API = require('@easypost/api');
+}
 
 console.log(`Starting ${packageInfo.name} v${packageInfo.version} repl`);
 console.log('Enter `help()` for information.');
 
-const API = require('./index');
 
 let api;
 
@@ -32,7 +41,7 @@ if (process.env.API_KEY) {
 
 const local = repl.start('$> ');
 
-function help () {
+function help() {
   const helpText = [
     'To try out the API, use the available instance of `api` to make requests.',
     'For example, try writing: `api.Address.all();`',

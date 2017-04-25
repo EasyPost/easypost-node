@@ -1,9 +1,12 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "Easypost Engineering <support@easypost.com>",
   "homepage": "https://easypost.com",
+  "bin": {
+    "easypost": "./repl.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/easypost/easypost-node.git"
@@ -17,7 +20,8 @@
     "test:coverage": "cross-env NODE_ENV=test nyc mocha --recursive ./test",
     "build": "webpack --config webpack.config.js",
     "lint": "eslint src",
-    "watch": "webpack --watch --config webpack.config.js"
+    "watch": "webpack --watch --config webpack.config.js",
+    "repl": "./repl.js --local"
   },
   "dependencies": {
     "proptypes": "0.14.3",
@@ -50,6 +54,7 @@
     "source-map-support": "0.4.6",
     "vows": "~0.7.0",
     "webpack": "2.1.0-beta.27",
-    "webpack-node-externals": "1.5.4"
+    "webpack-node-externals": "1.5.4",
+    "yargs": "^7.1.0"
   }
 }
