@@ -1,7 +1,7 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": "Easypost Engineering <support@easypost.com>",
   "homepage": "https://easypost.com",
   "bin": {
@@ -28,7 +28,8 @@
     "proptypes": "^0.14.3",
     "regenerator-runtime": "^0.10.1",
     "source-map-support": "^0.4.6",
-    "superagent": "^3.5.2"
+    "superagent": "^3.5.2",
+    "yargs": "^7.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -54,7 +55,6 @@
     "sinon-chai": "^2.9.0",
     "vows": "~0.8.1",
     "webpack": "^2.4.1",
-    "webpack-node-externals": "^1.5.4",
-    "yargs": "^7.1.0"
+    "webpack-node-externals": "^1.5.4"
   }
 }
