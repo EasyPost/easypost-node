@@ -177,4 +177,32 @@ describe('Batch Resource', () => {
       expect(stub.post).to.have.been.calledWith('batches/1/scan_form');
     });
   });
+
+  describe('buying', () => {
+    let Batch;
+    let bi;
+    let stub;
+
+    beforeEach(() => {
+      stub = apiStub();
+      Batch = batch(stub);
+      bi = new Batch({ id: '1', shipments: [{ id: 1 }, { id: 2 }] });
+    });
+
+    it('throws if buy is called and batch does not have an id', () => {
+      bi = new Batch();
+      expect(() => bi.buy()).to.throw(/requires id/);
+    });
+
+    it('throws if buy is called and batch does not have shipments', () => {
+      bi = new Batch({ id: 'batch_1' });
+      expect(() => bi.buy()).to.throw(/requires shipments/);
+    });
+
+    it('calls api.post when buy is called', () => {
+      bi.buy();
+      expect(stub.post).to.have.been.called;
+      expect(stub.post).to.have.been.calledWith('batches/1/buy');
+    });
+  });
 });

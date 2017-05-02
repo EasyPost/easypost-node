@@ -85,5 +85,13 @@ export default api => (
 
       return this.rpc('scan_form');
     }
+
+    buy() {
+      this.verifyParameters({
+        this: ['id', 'shipments'],
+      });
+
+      return this.rpc('buy');
+    }
   }
 );
