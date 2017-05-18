@@ -1,11 +1,15 @@
 import T from 'proptypes';
 import base from './base';
 import shipment from './shipment';
+import batch from './batch';
 import address from './address';
+import carrierAccount from './carrierAccount';
 
 export default (api) => {
   const Shipment = shipment(api);
   const Address = address(api);
+  const Batch = batch(api);
+  const CarrierAccount = carrierAccount(api);
 
   return class Pickup extends base(api) {
     static _name = 'Pickup';
@@ -26,13 +30,15 @@ export default (api) => {
       confirmation: T.string,
       address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
       shipment: T.oneOfType([T.string, T.shape(Shipment.propTypes)]),
-      carrier_accounts: T.object,
+      batch: T.oneOfType([T.string, T.shape(Batch.propTypes)]),
+      carrier_accounts: T.arrayOf(T.oneOfType([T.string, T.shape(CarrierAccount.proptypes)])),
       pickup_rates: T.object,
     }
 
     static jsonIdKeys = [
       'address',
       'shipment',
+      'batch',
     ]
 
     static all() {
