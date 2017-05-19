@@ -19,6 +19,7 @@ export default (api) => {
     static propTypes = {
       id: T.string,
       object: T.string,
+      reference: T.string,
       mode: T.string,
       created_at: T.oneOfType([T.object, T.string]),
       updated_at: T.oneOfType([T.object, T.string]),

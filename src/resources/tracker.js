@@ -10,6 +10,7 @@ export default api => (
     static propTypes = {
       id: T.string,
       object: T.string,
+      reference: T.string,
       mode: T.string,
       tracking_code: T.string,
       status: T.string,
