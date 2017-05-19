@@ -3,6 +3,8 @@ import base from './base';
 
 export default api => (
   class Report extends base(api) {
+    static _url = 'reports';
+
     static propTypes = {
       id: T.string,
       object: T.string,
@@ -26,10 +28,6 @@ export default api => (
 
     static constructUrl(type) {
       return `reports/${type}`;
-    }
-
-    static async retrieve(type, id) {
-      return super.retrieve(id, this.constructUrl(type));
     }
 
     static async all(type, query = {}) {
