@@ -28,7 +28,7 @@ const EasyPost = require('@easypost/api');
 To test out the API, you can run `npm install -g @easypost/api` and run
 `easypost`.  you can also clone this repository, `npm install` to install
 dependencies, `npm run build` to build the project, and run
-`API_KEY=yourkey ./repl.js` to try out an interactive CLI.
+`API_KEY=yourkey ./repl.js --local` to try out an interactive CLI.
 
 Example
 ------------------
