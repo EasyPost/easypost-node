@@ -100,9 +100,6 @@ describe('ApiKey Resource', () => {
         }],
       };
 
-      console.log(data);
-      console.log(ApiKey.convertKeyMap(data));
-
       expect(ApiKey.convertKeyMap(data)).to.deep.equal([
         { ...data.keys[0], user_id: data.id },
         { ...data.children[0].keys[0], user_id: data.children[0].id },
