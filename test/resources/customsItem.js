@@ -8,6 +8,23 @@ describe('Customs Item Resource', () => {
     expect(customsItem).to.be.a('function');
   });
 
+  it('converts number `value`s to strings', () => {
+    const CustomsItem = customsItem(apiStub());
+    const ci = new CustomsItem({ value: 20.7 });
+
+    expect(ci.value).to.equal('20.7');
+  });
+
+  it('converts number `value`s to strings on save', () => {
+    const CustomsItem = customsItem(apiStub());
+    const ci = new CustomsItem({ });
+    ci.value = 20.7;
+
+    ci.save();
+
+    expect(ci.value).to.equal('20.7');
+  });
+
   it('throws on all', () => {
     const CustomsItem = customsItem(apiStub());
     CustomsItem.all().then(() => {}, (err) => {
