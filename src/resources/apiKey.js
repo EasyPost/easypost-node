@@ -30,7 +30,7 @@ export default api => (
       let res = data.keys.map(k => ({ ...k, user_id: data.id }));
 
       if (data.children && data.children.length) {
-        res = res.concat(data.children.map(d => this.convertKeyMap(d)));
+        res = res.concat(data.children.reduce((arr, d) => arr.concat(this.convertKeyMap(d)), []));
       }
 
       return res;
