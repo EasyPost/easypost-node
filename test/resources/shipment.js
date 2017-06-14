@@ -18,7 +18,7 @@ describe('Shipment Resource', () => {
 
   it('throws on delete', () => {
     const Shipment = shipment(apiStub());
-    Shipment.delete().then(() => {}, (err) => {
+    return Shipment.delete().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -51,30 +51,28 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when buy is called, passing in rate and insuranceAmount', (done) => {
+    it('calls api.post when buy is called, passing in rate and insuranceAmount', () => {
       const rate = 'rate';
       const insuranceAmount = 100;
       const data = { rate: { id: 'rate' }, insurance: insuranceAmount };
 
-      si.buy(rate, insuranceAmount).then(() => {
+      return si.buy(rate, insuranceAmount).then(() => {
         expect(stub.post).to.have.been.called;
         expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/buy`, {
           body: data,
         });
-        done();
       });
     });
 
-    it('uses rate.id if rate is an object', (done) => {
+    it('uses rate.id if rate is an object', () => {
       const rate = { id: '1' };
       const data = { rate: { id: rate.id } };
 
-      si.buy(rate).then(() => {
+      return si.buy(rate).then(() => {
         expect(stub.post).to.have.been.called;
         expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/buy`, {
           body: data,
         });
-        done();
       });
     });
 
@@ -120,16 +118,15 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when insure is called, passing in amount', (done) => {
+    it('calls api.post when insure is called, passing in amount', () => {
       const amount = 100;
       const data = { amount };
 
-      si.insure(amount).then(() => {
+      return si.insure(amount).then(() => {
         expect(stub.post).to.have.been.called;
         expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/insure`, {
           body: data,
         });
-        done();
       });
     });
 
@@ -175,14 +172,13 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when convertLabelFormat is called, passing in format and method', (done) => {
+    it('calls api.post when convertLabelFormat is called, passing in format and method', () => {
       const format = 'png';
       const data = { file_format: format };
 
-      si.convertLabelFormat(format).then(() => {
+      return si.convertLabelFormat(format).then(() => {
         expect(stub.get).to.have.been.called;
         expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/label`, { query: data });
-        done();
       });
     });
 
@@ -219,11 +215,10 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when regenerateRates is called', (done) => {
-      si.regenerateRates().then(() => {
+    it('calls api.post when regenerateRates is called', () => {
+      return si.regenerateRates().then(() => {
         expect(stub.get).to.have.been.called;
         expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/rates`);
-        done();
       });
     });
 
@@ -258,11 +253,10 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when refund is called', (done) => {
-      si.refund().then(() => {
+    it('calls api.post when refund is called', () => {
+      return si.refund().then(() => {
         expect(stub.post).to.have.been.called;
         expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/refund`);
-        done();
       });
     });
 
@@ -305,7 +299,7 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when return is called', (done) => {
+    it('calls api.post when return is called', () => {
       const Address = address(stub);
       const toAddress = new Address({ id: '1' });
       const fromAddress = new Address({ id: '2' });
@@ -313,10 +307,9 @@ describe('Shipment Resource', () => {
       si.to_address = toAddress;
       si.from_address = fromAddress;
 
-      si.return().then(() => {
+      return si.return().then(() => {
         expect(stub.post).to.have.been.called;
         expect(stub.post).to.have.been.calledWith(`shipments/${si.id}`);
-        done();
       });
     });
 

@@ -17,7 +17,7 @@ describe('Tracker Resource', () => {
 
   it('throws on delete', () => {
     const Tracker = tracker(apiStub());
-    Tracker.delete('id').then(() => {}, (err) => {
+    return Tracker.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

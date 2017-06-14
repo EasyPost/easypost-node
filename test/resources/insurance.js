@@ -10,7 +10,7 @@ describe('Insurance Resource', () => {
 
   it('throws on delete', () => {
     const Insurance = insurance(apiStub());
-    Insurance.delete('id').then(() => {}, (err) => {
+    return Insurance.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

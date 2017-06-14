@@ -17,7 +17,7 @@ describe('ScanForm Resource', () => {
 
   it('throws on delete', () => {
     const ScanForm = scanForm(apiStub());
-    ScanForm.delete('id').then(() => {}, (err) => {
+    return ScanForm.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

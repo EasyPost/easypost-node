@@ -10,14 +10,14 @@ describe('CarrierType Resource', () => {
 
   it('throws on retrieve', () => {
     const CarrierType = carrierType(apiStub());
-    CarrierType.retrieve().then(() => {}, (err) => {
+    return CarrierType.retrieve().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const CarrierType = carrierType(apiStub());
-    CarrierType.delete('id').then(() => {}, (err) => {
+    return CarrierType.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -26,7 +26,7 @@ describe('CarrierType Resource', () => {
     const CarrierType = carrierType(apiStub());
     const cti = new CarrierType();
 
-    cti.save().then(() => {}, (err) => {
+    return cti.save().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

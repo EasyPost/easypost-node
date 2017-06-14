@@ -12,14 +12,14 @@ describe('Pickup Resource', () => {
 
   it('throws on all', () => {
     const Pickup = pickup(apiStub());
-    Pickup.all().then(() => {}, (err) => {
+    return Pickup.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const Pickup = pickup(apiStub());
-    Pickup.delete().then(() => {}, (err) => {
+    return Pickup.delete().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -35,42 +35,38 @@ describe('Pickup Resource', () => {
       pi = new Pickup({ id: '1' });
     });
 
-    it('throws if buy is called and pickup does not have an id', (done) => {
+    it('throws if buy is called and pickup does not have an id', () => {
       pi = new Pickup();
       pi.buy().catch((e) => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
-        done();
       });
     });
 
-    it('throws if buy is called without carrier', (done) => {
+    it('throws if buy is called without carrier', () => {
       pi.buy().catch((e) => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/carrier/);
-        done();
       });
     });
 
-    it('throws if buy is called without service', (done) => {
+    it('throws if buy is called without service', () => {
       pi.buy('carrier').catch((e) => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/service/);
-        done();
       });
     });
 
-    it('calls api.post when buy is called, passing in carrier and service', (done) => {
+    it('calls api.post when buy is called, passing in carrier and service', () => {
       const carrier = 'carrier';
       const service = 'service';
       const data = { carrier, service };
 
-      pi.buy(carrier, service).then(() => {
+      return pi.buy(carrier, service).then(() => {
         expect(stub.post).to.have.been.called;
         expect(stub.post).to.have.been.calledWith(`pickups/${pi.id}/buy`, {
           body: data,
         });
-        done();
       });
     });
 
@@ -108,11 +104,10 @@ describe('Pickup Resource', () => {
       });
     });
 
-    it('calls api.post when cancel is called', (done) => {
-      pi.cancel().then(() => {
+    it('calls api.post when cancel is called', () => {
+      return pi.cancel().then(() => {
         expect(stub.post).to.have.been.called;
         expect(stub.post).to.have.been.calledWith(`pickups/${pi.id}/cancel`);
-        done();
       });
     });
 

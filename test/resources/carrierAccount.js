@@ -10,7 +10,7 @@ describe('CarrierAccount Resource', () => {
 
   it('throws on retrieve', () => {
     const CarrierAccount = carrierAccount(apiStub());
-    CarrierAccount.retrieve().then(() => {}, (err) => {
+    return CarrierAccount.retrieve().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -19,7 +19,7 @@ describe('CarrierAccount Resource', () => {
     const CarrierAccount = carrierAccount(apiStub());
     const cti = new CarrierAccount();
 
-    cti.save().then(() => {}, (err) => {
+    return cti.save().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

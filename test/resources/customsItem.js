@@ -27,14 +27,14 @@ describe('Customs Item Resource', () => {
 
   it('throws on all', () => {
     const CustomsItem = customsItem(apiStub());
-    CustomsItem.all().then(() => {}, (err) => {
+    return CustomsItem.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const CustomsItem = customsItem(apiStub());
-    CustomsItem.delete('id').then(() => {}, (err) => {
+    return CustomsItem.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

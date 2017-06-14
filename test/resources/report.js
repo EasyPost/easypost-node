@@ -25,7 +25,7 @@ describe('Report Resource', () => {
     const stub = apiStub();
     const Report = report(stub);
 
-    Report.retrieve('shipment', 'id_123').then(() => {
+    return Report.retrieve('shipment', 'id_123').then(() => {
       expect(stub.get).to.have.been.calledOnce;
       expect(stub.get).to.have.been.calledWith('reports/shipment/id_123');
     });
@@ -35,7 +35,7 @@ describe('Report Resource', () => {
     const stub = apiStub();
     const Report = report(stub);
 
-    Report.all('shipment').then(() => {
+    return Report.all('shipment').then(() => {
       expect(stub.get).to.have.been.calledOnce;
       expect(stub.get).to.have.been.calledWith('reports/shipment');
     });
@@ -64,7 +64,7 @@ describe('Report Resource', () => {
 
   it('throws on delete', () => {
     const Report = report(apiStub());
-    Report.delete('id').then(() => {}, (err) => {
+    return Report.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
