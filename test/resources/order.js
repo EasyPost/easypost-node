@@ -17,6 +17,16 @@ describe('Order Resource', () => {
     });
   });
 
+  it('regenerates rates', () => {
+    const stub = apiStub();
+    const Order = order(stub);
+    const oi = new Order();
+    return oi.getRates().then(() => {
+      expect(stub.get).to.have.been.called;
+      expect(stub.get).to.have.been.calledWith(`orders/${oi.id}/rates`);
+    });
+  });
+
   describe('buying', () => {
     let Order;
     let oi;
@@ -139,16 +149,6 @@ describe('Order Resource', () => {
       };
 
       expect(oi.toJSON()).to.deep.equal(json);
-    });
-  });
-
-  it('regenerates rates', () => {
-    const stub = apiStub();
-    const Order = order();
-    const oi = new Order();
-    return oi.getRates().then(() => {
-      expect(stub.get).to.have.been.called;
-      expect(stub.get).to.have.been.calledWith(`orders/${oi.id}/rates`);
     });
   });
 });
