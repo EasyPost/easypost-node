@@ -12,7 +12,7 @@ describe('Order Resource', () => {
 
   it('throws on delete', () => {
     const Order = order(apiStub());
-    Order.delete('id').then(() => {}, (err) => {
+    return Order.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -53,17 +53,16 @@ describe('Order Resource', () => {
       });
     });
 
-    it('calls api.post when buy is called, passing in carrier and service', (done) => {
+    it('calls api.post when buy is called, passing in carrier and service', () => {
       const carrier = 'carrier';
       const service = 'service';
       const data = { carrier, service };
 
-      oi.buy(carrier, service).then(() => {
+      return oi.buy(carrier, service).then(() => {
         expect(stub.post).to.have.been.called;
         expect(stub.post).to.have.been.calledWith(`orders/${oi.id}/buy`, {
           body: data,
         });
-        done();
       });
     });
 
@@ -147,10 +146,9 @@ describe('Order Resource', () => {
     const stub = apiStub();
     const Order = order();
     const oi = new Order();
-    oi.getRates().then(() => {
+    return oi.getRates().then(() => {
       expect(stub.get).to.have.been.called;
       expect(stub.get).to.have.been.calledWith(`orders/${oi.id}/rates`);
-      done();
     });
   });
 });

@@ -10,14 +10,14 @@ describe('Address Resource', () => {
 
   it('throws on all', () => {
     const Address = address(apiStub());
-    Address.all().then(() => {}, (err) => {
+    return Address.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const Address = address(apiStub());
-    Address.delete('id').then(() => {}, (err) => {
+    return Address.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

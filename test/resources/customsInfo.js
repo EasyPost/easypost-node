@@ -10,14 +10,14 @@ describe('Customs Info Resource', () => {
 
   it('throws on all', () => {
     const CustomsInfo = customsInfo(apiStub());
-    CustomsInfo.all().then(() => {}, (err) => {
+    return CustomsInfo.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const CustomsInfo = customsInfo(apiStub());
-    CustomsInfo.delete('id').then(() => {}, (err) => {
+    return CustomsInfo.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

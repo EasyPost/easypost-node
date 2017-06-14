@@ -10,14 +10,14 @@ describe('Batch Resource', () => {
 
   it('throws on all', () => {
     const Batch = batch(apiStub());
-    Batch.all().then(() => {}, (err) => {
+    return Batch.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const Batch = batch(apiStub());
-    Batch.delete('id').then(() => {}, (err) => {
+    return Batch.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

@@ -26,14 +26,14 @@ describe('Parcel Resource', () => {
 
   it('throws on all', () => {
     const Parcel = parcel(apiStub());
-    Parcel.all().then(() => {}, (err) => {
+    return Parcel.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const Parcel = parcel(apiStub());
-    Parcel.delete().then(() => {}, (err) => {
+    return Parcel.delete().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

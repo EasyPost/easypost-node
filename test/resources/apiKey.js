@@ -19,19 +19,19 @@ describe('ApiKey Resource', () => {
   });
 
   it('throws on retrieve', () => {
-    ApiKey.retrieve().then(() => {}, (err) => {
+    return ApiKey.retrieve().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
-    ApiKey.delete('id').then(() => {}, (err) => {
+    return ApiKey.delete('id').then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on all', () => {
-    ApiKey.all().then(() => {}, (err) => {
+    return ApiKey.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -39,7 +39,7 @@ describe('ApiKey Resource', () => {
   it('throws on save', () => {
     const cti = new ApiKey();
 
-    cti.save().then(() => {}, (err) => {
+    return cti.save().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

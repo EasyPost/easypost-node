@@ -10,7 +10,7 @@ describe('User Resource', () => {
 
   it('throws on all', () => {
     const User = user(apiStub());
-    User.all().then(() => {}, (err) => {
+    return User.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

@@ -6,7 +6,7 @@ import sinonChai from 'sinon-chai';
 
 process.on('unhandledRejection', (err) => {
   /* eslint no-console: 0 */
-  console.log(err, err.stack);
+  console.error(err, err.stack);
 });
 
 chai.should();
