@@ -25,10 +25,6 @@ export default api => (
       updated_at: T.oneOfType([T.object, T.string]),
     }
 
-    static all() {
-      return this.notImplemented('all');
-    }
-
     static delete() {
       return this.notImplemented('delete');
     }
