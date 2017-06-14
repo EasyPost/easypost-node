@@ -38,10 +38,6 @@ export default api => (
       return json;
     }
 
-    static unwrapAll(data) {
-      return data.reports;
-    }
-
     static delete() {
       return this.notImplemented('delete');
     }

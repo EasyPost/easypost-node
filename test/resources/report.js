@@ -25,14 +25,14 @@ describe('Report Resource', () => {
     const stub = apiStub();
     const Report = report(stub);
 
-    return Report.retrieve('shipment', 'id_123').then(() => {
+    return Report.retrieve('id_123').then(() => {
       expect(stub.get).to.have.been.calledOnce;
-      expect(stub.get).to.have.been.calledWith('reports/shipment/id_123');
+      expect(stub.get).to.have.been.calledWith('reports/id_123');
     });
   });
 
   it('calls all using the type that is passed', () => {
-    const stub = apiStub();
+    const stub = apiStub('', false, { reports: [] });
     const Report = report(stub);
 
     return Report.all('shipment').then(() => {
