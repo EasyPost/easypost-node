@@ -21,13 +21,5 @@ export default api => (
       created_at: T.oneOfType([T.object, T.string]),
       updated_at: T.oneOfType([T.object, T.string]),
     }
-
-    static retrieve() {
-      return super.notImplemented('retrieve');
-    }
-
-    async save() {
-      return this.constructor.notImplemented('save');
-    }
   }
 );
