@@ -14,6 +14,7 @@ import Insurance from './resources/insurance';
 import Order from './resources/order';
 import Parcel from './resources/parcel';
 import Pickup from './resources/pickup';
+import Rating from './resources/rating';
 import Report from './resources/report';
 import ScanForm from './resources/scan_form';
 import Shipment from './resources/shipment';
@@ -65,6 +66,7 @@ export const RESOURCES = {
   Order,
   Parcel,
   Pickup,
+  Rating,
   Report,
   ScanForm,
   Shipment,
@@ -76,6 +78,7 @@ export const RESOURCES = {
 export default class API {
   // Build request headers to be sent by default with each request, combined
   // (or overridden) by any additional headers
+
   static buildHeaders(additionalHeaders = {}) {
     const headers = {
       ...DEFAULT_HEADERS,
@@ -116,17 +119,22 @@ export default class API {
     return this.baseUrl + path;
   }
 
-  async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
+  async request(path = '', method = METHODS.GET, params, headers = {}) {
     const {
       query,
       body,
     } = params;
 
     const req = this.agent[method](this.buildPath(path))
-                  .accept('json')
-                  .set('Content-Type', 'application/json')
-                  .set(API.buildHeaders(headers))
-                  .auth(`${this.key}:`);
+                .accept('json')
+                .set('Content-Type', 'application/json')
+                .set(API.buildHeaders(headers))
+                .auth(`${this.key}:`);
+    if (path === "rating/v1/rates") {
+      req.url =  'https://api.easypost.com/rating/v1/rates';
+      req['_header']['content-type'] = 'application/json';
+      req['header']['Content-Type'] = 'application/json';
+    }
 
     if (body) { req.send(body); }
 
@@ -134,6 +142,8 @@ export default class API {
 
     try {
       const res = await req;
+      console.log("AFTER SUCCESFUL REQ");
+      //console.log(res.text);
       return res;
     } catch (e) {
       if (e.response && e.response.body) {

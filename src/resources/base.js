@@ -101,8 +101,8 @@ export default api => (
     // have cross browser proxy support and do neat getter/setter things. For
     // now, just map it on the instance.
     mapProps(data) {
-      Object.keys(data).forEach((key) => {
-        this[key] = data[key];
+      Object.keys(data).forEach((key) => {       
+          this[key] = data[key];
       });
     }
 
@@ -153,10 +153,8 @@ export default api => (
       } catch (e) {
         return Promise.reject(e);
       }
-
       try {
-        const data = this.constructor.wrapJSON(this.toJSON());
-
+        const data = this.constructor.wrapJSON(this.toJSON());      
         let res;
 
         if (this.id) {
@@ -167,6 +165,35 @@ export default api => (
 
         this.mapProps(res.body);
         return this;
+      } catch (e) {
+        throw (e);
+      }
+    }
+
+    async ratings() { //used exclusively for accessing rating NOT ELEGANT AT ALL
+      //CANT ACCESS CLASS VARIABLES? BC LINE 177 IS THE ONLY THING THAT CHANGES
+       try {
+        this.validateProperties();
+      } catch (e) {
+        return Promise.reject(e);
+      }
+
+      try {
+        let res;
+
+        res = await api.post(this._url || this.constructor._url, { body: JSON.stringify(this)});
+        // console.log(res.text);
+        // console.log(JSON.parse(res.text));
+        // console.log(res.body.ratings[0].rates);
+        // console.log(res.body.ratings.length);
+        //console.log(JSON.parse(res.text));
+        this.mapProps(res.body);
+        // var output = res.body;
+        // for (var x = 0; x < res.body.ratings.length ; x++){
+        //   output.ratings[x].rates = res.body.ratings[x].rates;
+        // }
+        // console.log(output);
+        return res.body;
       } catch (e) {
         throw (e);
       }
@@ -187,7 +214,6 @@ export default api => (
 
     toJSON() {
       const idKeys = this.constructor.jsonIdKeys;
-
       return Object.keys(this.constructor.propTypes).reduce((json, key) => {
         if (this[key]) {
           if (idKeys.includes(key) && typeof this[key] !== 'object') {
