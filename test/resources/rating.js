@@ -22,4 +22,11 @@ describe('Rating Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('throws on retrieve', () => {
+    const Rating = rating(apiStub());
+    return Rating.retrieve().then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 });

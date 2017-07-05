@@ -19,16 +19,16 @@ export default (api) => {
 		from_address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
 		parcels: T.arrayOf(T.oneOfType([T.string, T.shape(Parcel.propTypes)])),
 		carrier_accounts: T.array,
-		//ratings: T.arrayOf(T.arrayOf(T.object)),
-	  	//messages: T.array,
 	}
 
 	static all() {
 	  return this.notImplemented('all');
 	}
-
 	static delete() {
 	  return this.notImplemented('delete');
+	}
+	static retrieve() {
+	  return this.notImplemented('retrieve');
 	}
   }
 }

@@ -130,7 +130,8 @@ export default class API {
                 .set('Content-Type', 'application/json')
                 .set(API.buildHeaders(headers))
                 .auth(`${this.key}:`);
-    if (path === "rating/v1/rates") {
+                
+    if (path === 'rating/v1/rates') {
       req.url =  'https://api.easypost.com/rating/v1/rates';
       req['_header']['content-type'] = 'application/json';
       req['header']['Content-Type'] = 'application/json';
@@ -142,8 +143,6 @@ export default class API {
 
     try {
       const res = await req;
-      console.log("AFTER SUCCESFUL REQ");
-      //console.log(res.text);
       return res;
     } catch (e) {
       if (e.response && e.response.body) {

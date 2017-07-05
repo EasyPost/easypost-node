@@ -160,40 +160,15 @@ export default api => (
         if (this.id) {
           res = await api.put(`${this._url || this.constructor._url}/${this.id}`, { body: data });
         } else {
-          res = await api.post(this._url || this.constructor._url, { body: data });
+            if (this.constructor._name === 'Rating'){
+              res = await api.post(this._url || this.constructor._url, { body: this.toJSON()});
+              return res.body;
+            } else {
+              res = await api.post(this._url || this.constructor._url, { body: data });
+              this.mapProps(res.body);
+              return this;
+            }
         }
-
-        this.mapProps(res.body);
-        return this;
-      } catch (e) {
-        throw (e);
-      }
-    }
-
-    async ratings() { //used exclusively for accessing rating NOT ELEGANT AT ALL
-      //CANT ACCESS CLASS VARIABLES? BC LINE 177 IS THE ONLY THING THAT CHANGES
-       try {
-        this.validateProperties();
-      } catch (e) {
-        return Promise.reject(e);
-      }
-
-      try {
-        let res;
-
-        res = await api.post(this._url || this.constructor._url, { body: JSON.stringify(this)});
-        // console.log(res.text);
-        // console.log(JSON.parse(res.text));
-        // console.log(res.body.ratings[0].rates);
-        // console.log(res.body.ratings.length);
-        //console.log(JSON.parse(res.text));
-        this.mapProps(res.body);
-        // var output = res.body;
-        // for (var x = 0; x < res.body.ratings.length ; x++){
-        //   output.ratings[x].rates = res.body.ratings[x].rates;
-        // }
-        // console.log(output);
-        return res.body;
       } catch (e) {
         throw (e);
       }

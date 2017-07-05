@@ -1,7 +1,7 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "3.0.11",
+  "version": "3.0.12",
   "author": "Easypost Engineering <support@easypost.com>",
   "homepage": "https://easypost.com",
   "bin": {
@@ -45,8 +45,8 @@
     "cross-env": "^4.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
-    "eslint-import-resolver-webpack": "^0.8.1",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-plugin-import": "^2.6.0",
     "json-loader": "^0.5.4",
     "mocha": "^3.3.0",
     "nyc": "^10.2.0",
