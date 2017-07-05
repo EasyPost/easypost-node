@@ -101,8 +101,8 @@ export default api => (
     // have cross browser proxy support and do neat getter/setter things. For
     // now, just map it on the instance.
     mapProps(data) {
-      Object.keys(data).forEach((key) => {       
-          this[key] = data[key];
+      Object.keys(data).forEach((key) => {
+        this[key] = data[key];
       });
     }
 
@@ -154,21 +154,23 @@ export default api => (
         return Promise.reject(e);
       }
       try {
-        const data = this.constructor.wrapJSON(this.toJSON());      
+        const data = this.constructor.wrapJSON(this.toJSON());
+        let output;
         let res;
 
         if (this.id) {
           res = await api.put(`${this._url || this.constructor._url}/${this.id}`, { body: data });
+          output = this;
+        } else if (this.constructor._name === 'Rating') {
+          res = await api.post(this._url || this.constructor._url, { body: this.toJSON() });
+          output = res.body;
         } else {
-            if (this.constructor._name === 'Rating'){
-              res = await api.post(this._url || this.constructor._url, { body: this.toJSON()});
-              return res.body;
-            } else {
-              res = await api.post(this._url || this.constructor._url, { body: data });
-              this.mapProps(res.body);
-              return this;
-            }
+          res = await api.post(this._url || this.constructor._url, { body: data });
+          output = this;
         }
+
+        this.mapProps(res.body);
+        return output;
       } catch (e) {
         throw (e);
       }
