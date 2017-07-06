@@ -1,4 +1,5 @@
 import rating from '../../src/resources/rating';
+import NotImplementedError from '../../src/errors/notImplemented';
 import apiStub from '../helpers/apiStub';
 import RequestError from '../../src/errors/request';
 

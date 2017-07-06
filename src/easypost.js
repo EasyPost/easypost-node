@@ -119,7 +119,7 @@ export default class API {
     return this.baseUrl + path;
   }
 
-  async request(path = '', method = METHODS.GET, params, headers = {}) {
+  async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
     const {
       query,
       body,
@@ -133,8 +133,8 @@ export default class API {
 
     if (path === 'rating/v1/rates') {
       req.url = 'https://api.easypost.com/rating/v1/rates';
-      req['_header']['content-type'] = 'application/json';
-      req['header']['Content-Type'] = 'application/json';
+      req._header['content-type'] = 'application/json';
+      req.header['Content-Type'] = 'application/json';
     }
 
     if (body) { req.send(body); }
