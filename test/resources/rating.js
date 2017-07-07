@@ -3,7 +3,6 @@ import NotImplementedError from '../../src/errors/notImplemented';
 import apiStub from '../helpers/apiStub';
 import RequestError from '../../src/errors/request';
 
-//THIS IS THE TEST PART OF IT
 describe('Rating Resource', () => {
   it('exists', () => {
     expect(rating).to.not.be.undefined;
@@ -29,5 +28,15 @@ describe('Rating Resource', () => {
     return Rating.retrieve().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
+  });
+
+  it('calls api.post when save is called and with correct url', () => {
+      const stub = apiStub();
+      const Rating = rating(stub);
+      const rt = new Rating({});
+      rt.save();
+
+      expect(stub.post).to.have.been.called;
+      expect(stub.post).to.have.been.calledWith('rating/v1/rates');
   });
 });

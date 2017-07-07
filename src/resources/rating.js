@@ -19,12 +19,30 @@ export default (api) => {
       carrier_accounts: T.array,
     }
 
+    async save() {
+      try {
+        this.validateProperties();
+      } catch (e) {
+        return Promise.reject(e);
+      }
+      try {
+        const res = await api.post(this._url || this.constructor._url, { body: this.toJSON() });
+
+        this.mapProps(res.body);
+        return res.body;
+      } catch (e) {
+        throw (e);
+      }
+    }
+
     static all() {
       return this.notImplemented('all');
     }
+
     static delete() {
       return this.notImplemented('delete');
     }
+
     static retrieve() {
       return this.notImplemented('retrieve');
     }

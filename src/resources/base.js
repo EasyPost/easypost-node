@@ -153,24 +153,20 @@ export default api => (
       } catch (e) {
         return Promise.reject(e);
       }
+
       try {
         const data = this.constructor.wrapJSON(this.toJSON());
-        let output;
+
         let res;
 
         if (this.id) {
           res = await api.put(`${this._url || this.constructor._url}/${this.id}`, { body: data });
-          output = this;
-        } else if (this.constructor._name === 'Rating') {
-          res = await api.post(this._url || this.constructor._url, { body: this.toJSON() });
-          output = res.body;
         } else {
           res = await api.post(this._url || this.constructor._url, { body: data });
-          output = this;
         }
 
         this.mapProps(res.body);
-        return output;
+        return this;
       } catch (e) {
         throw (e);
       }
