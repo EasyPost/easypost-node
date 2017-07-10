@@ -23,7 +23,7 @@ describe('Order Resource', () => {
     const oi = new Order();
     return oi.getRates().then(() => {
       expect(stub.get).to.have.been.called;
-      expect(stub.get).to.have.been.calledWith(`orders/${oi.id}/rates`);
+      expect(stub.get).to.have.been.calledWith(`v2/orders/${oi.id}/rates`);
     });
   });
 
@@ -70,7 +70,7 @@ describe('Order Resource', () => {
 
       return oi.buy(carrier, service).then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`orders/${oi.id}/buy`, {
+        expect(stub.post).to.have.been.calledWith(`v2/orders/${oi.id}/buy`, {
           body: data,
         });
       });

@@ -118,7 +118,7 @@ describe('Base API object', () => {
       });
     });
 
-    it('requets json', (done) => {
+    it('requests json', (done) => {
       api.request('').then(() => {
         expect(api.agent.getStub.accept).to.have.been.calledWith('json');
         done();

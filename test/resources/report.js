@@ -27,17 +27,17 @@ describe('Report Resource', () => {
 
     return Report.retrieve('id_123').then(() => {
       expect(stub.get).to.have.been.calledOnce;
-      expect(stub.get).to.have.been.calledWith('reports/id_123');
+      expect(stub.get).to.have.been.calledWith('v2/reports/id_123');
     });
   });
 
   it('calls all using the type that is passed', () => {
     const stub = apiStub('', false, { reports: [] });
     const Report = report(stub);
-
+    console.log(Report);
     return Report.all('shipment').then(() => {
       expect(stub.get).to.have.been.calledOnce;
-      expect(stub.get).to.have.been.calledWith('reports/shipment');
+      expect(stub.get).to.have.been.calledWith('v2/reports/shipment');
     });
   });
 

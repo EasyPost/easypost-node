@@ -26,7 +26,7 @@ import RequestError from './errors/request';
 
 export const MS_SECOND = 1000;
 export const DEFAULT_TIMEOUT = 120 * MS_SECOND;
-export const DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
+export const DEFAULT_BASE_URL = 'https://api.easypost.com/';
 
 export const UA_INFO = {
   client_version: pkg.version,
@@ -127,15 +127,10 @@ export default class API {
 
     const req = this.agent[method](this.buildPath(path))
                 .accept('json')
-                .set('Content-Type', 'application/json')
+                .type('json')
+                .set('content-type', 'application/json')
                 .set(API.buildHeaders(headers))
                 .auth(`${this.key}:`);
-
-    if (path === 'rating/v1/rates') {
-      req.url = 'https://api.easypost.com/rating/v1/rates';
-      req._header['content-type'] = 'application/json';
-      req.header['Content-Type'] = 'application/json';
-    }
 
     if (body) { req.send(body); }
 

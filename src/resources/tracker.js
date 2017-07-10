@@ -4,7 +4,7 @@ import base from './base';
 export default api => (
   class Tracker extends base(api) {
     static _name = 'Tracker';
-    static _url = 'trackers';
+    static _url = 'v2/trackers';
     static key = 'tracker';
 
     static propTypes = {

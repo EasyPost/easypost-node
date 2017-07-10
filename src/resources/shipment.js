@@ -15,7 +15,7 @@ export default (api) => {
 
   return class Shipment extends base(api) {
     static _name = 'Shipment';
-    static _url = 'shipments';
+    static _url = 'v2/shipments';
     static key = 'shipment';
 
     static propTypes = {

@@ -58,7 +58,7 @@ describe('Shipment Resource', () => {
 
       return si.buy(rate, insuranceAmount).then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/buy`, {
+        expect(stub.post).to.have.been.calledWith(`v2/shipments/${si.id}/buy`, {
           body: data,
         });
       });
@@ -70,7 +70,7 @@ describe('Shipment Resource', () => {
 
       return si.buy(rate).then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/buy`, {
+        expect(stub.post).to.have.been.calledWith(`v2/shipments/${si.id}/buy`, {
           body: data,
         });
       });
@@ -124,7 +124,7 @@ describe('Shipment Resource', () => {
 
       return si.insure(amount).then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/insure`, {
+        expect(stub.post).to.have.been.calledWith(`v2/shipments/${si.id}/insure`, {
           body: data,
         });
       });
@@ -178,7 +178,7 @@ describe('Shipment Resource', () => {
 
       return si.convertLabelFormat(format).then(() => {
         expect(stub.get).to.have.been.called;
-        expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/label`, { query: data });
+        expect(stub.get).to.have.been.calledWith(`v2/shipments/${si.id}/label`, { query: data });
       });
     });
 
@@ -218,7 +218,7 @@ describe('Shipment Resource', () => {
     it('calls api.post when regenerateRates is called', () => {
       return si.regenerateRates().then(() => {
         expect(stub.get).to.have.been.called;
-        expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/rates`);
+        expect(stub.get).to.have.been.calledWith(`v2/shipments/${si.id}/rates`);
       });
     });
 
@@ -256,7 +256,7 @@ describe('Shipment Resource', () => {
     it('calls api.post when refund is called', () => {
       return si.refund().then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/refund`);
+        expect(stub.post).to.have.been.calledWith(`v2/shipments/${si.id}/refund`);
       });
     });
 
@@ -309,7 +309,7 @@ describe('Shipment Resource', () => {
 
       return si.return().then(() => {
         expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}`);
+        expect(stub.post).to.have.been.calledWith(`v2/shipments/${si.id}`);
       });
     });
 

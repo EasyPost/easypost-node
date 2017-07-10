@@ -13,7 +13,7 @@ export default (api) => {
 
   return class Pickup extends base(api) {
     static _name = 'Pickup';
-    static _url = 'pickups';
+    static _url = 'v2/pickups';
     static key = 'pickup';
 
     static propTypes = {

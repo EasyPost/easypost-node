@@ -7,7 +7,7 @@ export default (api) => {
 
   return class ScanForm extends base(api) {
     static _name = 'ScanForm';
-    static _url = 'scan_forms';
+    static _url = 'v2/scan_forms';
 
     static propTypes = {
       id: T.string,

@@ -3,7 +3,7 @@ import base from './base';
 
 export default api => (
   class Report extends base(api) {
-    static _url = 'reports';
+    static _url = 'v2/reports';
 
     static propTypes = {
       id: T.string,
