@@ -5,6 +5,7 @@ export default api => (
   class Webhook extends base(api) {
     static _name = 'Webhook';
     static _url = 'v2/webhooks';
+    static _collectionKey = 'webhooks';
     static key = 'webhook';
 
     static propTypes = {

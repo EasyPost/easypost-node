@@ -4,6 +4,7 @@ import base from './base';
 export default api => (
   class Report extends base(api) {
     static _url = 'v2/reports';
+    static _collectionKey = 'reports';
 
     static propTypes = {
       id: T.string,

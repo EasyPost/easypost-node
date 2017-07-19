@@ -5,6 +5,7 @@ export default api => (
   class Tracker extends base(api) {
     static _name = 'Tracker';
     static _url = 'v2/trackers';
+    static _collectionKey = 'trackers';
     static key = 'tracker';
 
     static propTypes = {

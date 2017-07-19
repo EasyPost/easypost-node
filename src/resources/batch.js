@@ -7,6 +7,7 @@ export default api => (
   class Batch extends base(api) {
     static _name = 'Batch';
     static _url = 'v2/batches';
+    static _collectionKey = 'batches';
     static key = 'batch';
 
     static propTypes = {

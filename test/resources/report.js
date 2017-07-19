@@ -34,10 +34,9 @@ describe('Report Resource', () => {
   it('calls all using the type that is passed', () => {
     const stub = apiStub('', false, { reports: [] });
     const Report = report(stub);
-    console.log(Report);
     return Report.all('shipment').then(() => {
       expect(stub.get).to.have.been.calledOnce;
-      expect(stub.get).to.have.been.calledWith('v2/reports/shipment');
+      expect(stub.get).to.have.been.calledWith('reports/shipment');
     });
   });
 

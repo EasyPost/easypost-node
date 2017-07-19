@@ -17,7 +17,8 @@ export const requestStub = (fail, failRes) => {
   stub.auth = sinon.stub().returns(stub);
   stub.send = sinon.stub().returns(stub);
   stub.query = sinon.stub().returns(stub);
-
+  stub.type = sinon.stub().returns(stub);
+  
   return stub;
 };
 

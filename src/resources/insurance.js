@@ -10,6 +10,7 @@ export default (api) => {
   return class Insurance extends base(api) {
     static _name = 'Insurance';
     static _url = 'v2/insurances';
+    static _collectionKey = 'insurances';
     static key = 'insurance';
 
     static propTypes = {

@@ -5,6 +5,7 @@ export default api => (
   class Base {
     static _url = null;
     static _name = null;
+    static _collectionKey = null;
     static key = null;
     static propTypes = {};
     static jsonIdKeys = [];
@@ -55,7 +56,7 @@ export default api => (
 
     static unwrapAll(data) {
       if (Array.isArray(data)) return data;
-      return data[this._url];
+      return data[this._collectionKey];
     }
 
     _validationErrors = null;

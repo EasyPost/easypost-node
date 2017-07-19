@@ -46,7 +46,7 @@ describe('Base Resource', () => {
       it('can call all from the API via url', () => {
         stub = apiStub(url, false, { base: [{ }] });
         Base = base(stub);
-        Base._url = url;
+        Base._url, Base._collectionKey = url;
 
         return Base.all().then((bs) => {
           expect(stub.get).to.have.been.calledOnce;
