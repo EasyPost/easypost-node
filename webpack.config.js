@@ -44,6 +44,7 @@ function config(output, nodestr) {
           loader: 'babel-loader',
           query: {
             // cacheDirectory: true,
+            babelrc: false,
             presets: [
               ['env', {
                 targets: {
