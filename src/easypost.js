@@ -123,10 +123,10 @@ export default class API {
     } = params;
 
     const req = this.agent[method](this.buildPath(path))
-                  .accept('json')
-                  .set('Content-Type', 'application/json')
-                  .set(API.buildHeaders(headers))
-                  .auth(`${this.key}:`);
+      .accept('json')
+      .set('Content-Type', 'application/json')
+      .set(API.buildHeaders(headers))
+      .auth(this.key);
 
     if (body) { req.send(body); }
 

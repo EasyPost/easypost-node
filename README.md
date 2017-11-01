@@ -5,7 +5,7 @@ EasyPost is a simple shipping API. You can sign up for an account at https://eas
 [![CircleCI](https://circleci.com/gh/EasyPost/easypost-web.svg?style=svg&circle-token=6f1cef70e775021a0e45c9c8bc367943927e9bba)](https://circleci.com/gh/EasyPost/easypost-web)
 
 Installation
----------------
+------------
 
 ```
 npm install --save @easypost/api
@@ -28,10 +28,22 @@ const EasyPost = require('@easypost/api');
 To test out the API, you can run `npm install -g @easypost/api` and run
 `easypost`.  you can also clone this repository, `npm install` to install
 dependencies, `npm run build` to build the project, and run
-`API_KEY=yourkey ./repl.js --local` to try out an interactive CLI.
+`API_KEY=yourkey ./repl.js --local easypost.js` to try out an interactive CLI.
+(Replace easypost.js with whatever compatabile version you wish, as defined
+below.)
+
+Compatability
+-------------
+
+By default, @easypost/api works with Node v6 LTS. To include for other versions
+of node, you can use:
+
+* `require('@easpost/api/easypost.8-lts.js')` (Node 8.9+
+* `require('@easpost/api/easypost.6-lts.js')` (Node 6.9+)
+* `require('@easpost/api/easypost.legacy.js')` (Node 0.10+)
 
 Example
-------------------
+-------
 
 ```javascript
 const apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
