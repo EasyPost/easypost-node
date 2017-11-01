@@ -134,7 +134,7 @@ describe('Base API object', () => {
 
     it('sets auth', (done) => {
       api.request('').then(() => {
-        expect(api.agent.getStub.auth).to.have.been.calledWith(`${key}:`);
+        expect(api.agent.getStub.auth).to.have.been.calledWith(key);
         done();
       });
     });

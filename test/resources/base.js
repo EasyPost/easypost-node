@@ -189,10 +189,9 @@ describe('Base Resource', () => {
       expect(b._validationErrors.a).to.be.a('string');
     });
 
-    it('throws a validationerror on failed validation and throw = false', () => {
+    it('throws a validationerror on failed validation', () => {
       const b = new Base({ a: 1 });
       Base.proptypes = null;
-
       expect(() => b.validateProperties()).to.throw(ValidationError);
     });
 

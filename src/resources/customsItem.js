@@ -32,7 +32,7 @@ export default api => (
     }
 
     constructor(data) {
-      let value = data.value;
+      let { value } = data;
 
       if (value && typeof value !== 'string') {
         value = value.toString();
