@@ -126,7 +126,7 @@ export default class API {
                   .accept('json')
                   .set('Content-Type', 'application/json')
                   .set(API.buildHeaders(headers))
-                  .auth(`${this.key}:`);
+                  .auth(this.key);
 
     if (body) { req.send(body); }
 
