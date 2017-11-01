@@ -18,7 +18,7 @@ let API;
 
 if (args.local) {
   packageInfo = require('./package.json');
-  API = require('./index');
+  API = require('./' + args.local).default;
 } else {
   packageInfo = require('@easypost/api/package.json');
   API = require('@easypost/api');
