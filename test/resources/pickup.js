@@ -24,6 +24,15 @@ describe('Pickup Resource', () => {
     });
   });
 
+  it('throws on instance delete', () => {
+    const Pickup = pickup(apiStub());
+    const instance = new Pickup({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   describe('buying', () => {
     let Pickup;
     let pi;

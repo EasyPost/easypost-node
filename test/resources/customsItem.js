@@ -38,4 +38,13 @@ describe('Customs Item Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('throws on instance delete', () => {
+    const CustomsItem = customsItem(apiStub());
+    const instance = new CustomsItem({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 });

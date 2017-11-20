@@ -185,6 +185,15 @@ export default api => (
       }
     }
 
+    async delete() {
+      if (this.id) {
+        await this.constructor.delete(this.id);
+        return this;
+      }
+
+      throw new Error('Cannot delete an object without an id.');
+    }
+
     toJSON() {
       const idKeys = this.constructor.jsonIdKeys;
 

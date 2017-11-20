@@ -22,6 +22,15 @@ describe('CarrierType Resource', () => {
     });
   });
 
+  it('throws on instance delete', () => {
+    const CarrierType = carrierType(apiStub());
+    const instance = new CarrierType({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   it('throws on save', () => {
     const CarrierType = carrierType(apiStub());
     const cti = new CarrierType();

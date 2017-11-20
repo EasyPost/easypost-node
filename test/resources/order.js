@@ -17,6 +17,15 @@ describe('Order Resource', () => {
     });
   });
 
+  it('throws on instance delete', () => {
+    const Order = order(apiStub());
+    const instance = new Order({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   it('regenerates rates', () => {
     const stub = apiStub();
     const Order = order(stub);

@@ -15,6 +15,15 @@ describe('Batch Resource', () => {
     });
   });
 
+  it('throws on instance delete', () => {
+    const Batch = batch(apiStub());
+    const instance = new Batch({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   describe('managing shipments', () => {
     const shipmentId = '1';
     const shipmentIds = ['1', '2'];

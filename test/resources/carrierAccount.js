@@ -23,4 +23,16 @@ describe('CarrierAccount Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('deletes', () => {
+    const CarrierAccount = carrierAccount(apiStub());
+    const id = 1;
+    return CarrierAccount.delete(id);
+  });
+
+  it('deletes an instance', () => {
+    const CarrierAccount = carrierAccount(apiStub());
+    const instance = new CarrierAccount({ id: 1 });
+    return instance.delete();
+  });
 });

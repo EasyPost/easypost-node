@@ -23,6 +23,15 @@ describe('Shipment Resource', () => {
     });
   });
 
+  it('throws on instance delete', () => {
+    const Shipment = shipment(apiStub());
+    const instance = new Shipment({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   describe('buying', () => {
     let Shipment;
     let si;

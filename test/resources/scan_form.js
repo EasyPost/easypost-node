@@ -22,6 +22,15 @@ describe('ScanForm Resource', () => {
     });
   });
 
+  it('throws on instance delete', () => {
+    const ScanForm = scanForm(apiStub());
+    const instance = new ScanForm({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   describe('toJSON', () => {
     let ScanForm;
     let stub;
