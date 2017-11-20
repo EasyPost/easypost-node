@@ -37,4 +37,13 @@ describe('Parcel Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('throws on instance delete', () => {
+    const Parcel = parcel(apiStub());
+    const instance = new Parcel({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 });

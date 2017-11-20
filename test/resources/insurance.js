@@ -14,4 +14,13 @@ describe('Insurance Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('throws on instance delete', () => {
+    const Insurance = insurance(apiStub());
+    const instance = new Insurance({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 });

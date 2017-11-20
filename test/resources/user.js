@@ -14,4 +14,16 @@ describe('User Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('deletes', () => {
+    const User = user(apiStub());
+    const id = 1;
+    return User.delete(id);
+  });
+
+  it('deletes an instance', () => {
+    const User = user(apiStub());
+    const instance = new User({ id: 1 });
+    return instance.delete();
+  });
 });

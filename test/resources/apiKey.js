@@ -30,6 +30,15 @@ describe('ApiKey Resource', () => {
     });
   });
 
+  it('throws on instance delete', () => {
+    const ApiKey = apiKey(apiStub());
+    const instance = new ApiKey({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   it('throws on all', () => {
     return ApiKey.all().then(() => {}, (err) => {
       expect(err).to.be.an.instanceOf(NotImplementedError);

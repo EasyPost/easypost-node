@@ -21,4 +21,13 @@ describe('Customs Info Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('throws on instance delete', () => {
+    const CustomsInfo = customsInfo(apiStub());
+    const instance = new CustomsInfo({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 });

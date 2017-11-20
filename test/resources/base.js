@@ -282,12 +282,48 @@ describe('Base Resource', () => {
       }, (err) => { throw new Error(err); });
     });
 
-    it('throws if there is no shipment id', () => {
+    it('throws if there is no instance id', () => {
       delete data.id;
 
       const bi = new Base(data);
 
       bi.retrieve().catch((e) => {
+        expect(e.message).to.match(/without an id/);
+      });
+    });
+  });
+
+  describe('delete()', () => {
+    let stub;
+    let Base;
+    const propTypes = { a: T.string, id: T.string };
+    const name = 'base';
+    const data = { a: 'a', id: 'id' };
+    const stubRes = { toJSON: () => ({ a: 'b', id: data.id }) };
+
+    beforeEach(() => {
+      stub = apiStub();
+      Base = base(stub);
+      Base.propTypes = propTypes;
+      Base._name = name;
+      Base._url = name;
+    });
+
+    it('calls delete with the instance id', () => {
+      const bi = new Base(data);
+      const deleteStub = sinon.stub(Base, 'delete').returns(stubRes);
+
+      return bi.delete().then(() => {
+        expect(deleteStub).to.have.been.calledWith(bi.id);
+      }, (err) => { throw new Error(err); });
+    });
+
+    it('throws if there is no instance id', () => {
+      delete data.id;
+
+      const bi = new Base(data);
+
+      bi.delete().catch((e) => {
         expect(e.message).to.match(/without an id/);
       });
     });

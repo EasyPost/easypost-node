@@ -68,4 +68,13 @@ describe('Report Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('throws on instance delete', () => {
+    const Report = report(apiStub());
+    const instance = new Report({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
 });

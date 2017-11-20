@@ -22,6 +22,15 @@ describe('Address Resource', () => {
     });
   });
 
+  it('throws on instance delete', () => {
+    const Address = address(apiStub());
+    const instance = new Address({ id: 1 });
+
+    return instance.delete('id').then(() => {}, (err) => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   it('wraps json in its name', () => {
     const Address = address(apiStub());
     const data = {

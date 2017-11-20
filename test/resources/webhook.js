@@ -13,4 +13,16 @@ describe('Webhook Resource', () => {
     const data = [new Webhook()];
     expect(Webhook.unwrapAll({ webhooks: data })).to.deep.equal(data);
   });
+
+  it('deletes', () => {
+    const Webhook = webhook(apiStub());
+    const id = 1;
+    return Webhook.delete(id);
+  });
+
+  it('deletes an instance', () => {
+    const Webhook = webhook(apiStub());
+    const instance = new Webhook({ id: 1 });
+    return instance.delete();
+  });
 });
