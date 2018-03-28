@@ -38,9 +38,9 @@ Compatability
 By default, @easypost/api works with Node v6 LTS. To include for other versions
 of node, you can use:
 
-* `require('@easpost/api/easypost.8-lts.js')` (Node 8.9+
-* `require('@easpost/api/easypost.6-lts.js')` (Node 6.9+)
-* `require('@easpost/api/easypost.legacy.js')` (Node 0.10+)
+* `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+
+* `require('@easypost/api/easypost.6-lts.js')` (Node 6.9+)
+* `require('@easypost/api/easypost.legacy.js')` (Node 0.10+)
 
 Example
 -------
