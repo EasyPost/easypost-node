@@ -82,6 +82,11 @@ await fromAddress.save();
 console.log(fromAddress.id);
 ```
 
-Note: if you are using `es6`, you can use `import "@easypost/api/easypost"` to
-avoid loading regenerator-runtime twice. We plan on supporting a node6+ version
-at some point as well for native generator support.
+Note on ES6 Usage
+-----------------
+
+You can import specific versions of the compiled code if you're using later
+verisons of node. `import "@easypost/api/src/easypost"` imports the
+un-transformed es6, or you can import `@easypost/api/easypost.6-lts`,
+`@easypost/api/easypost.8-lts`, or `@easypost/api/easypost.legacy.js` (v0.10)
+to import mininally transformed versions.

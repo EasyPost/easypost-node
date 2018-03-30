@@ -92,7 +92,7 @@ export default class API {
   }
 
   constructor(key, options = {}) {
-    if (!key) {
+    if (!key && !options.useCookie) {
       throw new Error('No API key supplied. Pass in an API key as the first argument.');
     }
 
@@ -129,8 +129,11 @@ export default class API {
     const req = this.agent[method](this.buildPath(path))
       .accept('json')
       .set('Content-Type', 'application/json')
-      .set(API.buildHeaders(headers))
-      .auth(this.key);
+      .set(API.buildHeaders(headers));
+
+    if (!this.useCookie) {
+      req.auth(this.key);
+    }
 
     if (body) { req.send(body); }
 
