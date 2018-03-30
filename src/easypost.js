@@ -101,8 +101,12 @@ export default class API {
     this.baseUrl = options.baseUrl || DEFAULT_BASE_URL;
     this.agent = superagent;
 
-    Object.keys(RESOURCES).forEach((c) => {
-      this[c] = RESOURCES[c](this);
+    this.use(RESOURCES);
+  }
+
+  use(resources) {
+    Object.keys(resources).forEach((c) => {
+      this[c] = resources[c](this);
     });
   }
 
