@@ -112,8 +112,14 @@ export default class API {
   }
 
   constructor(key, options = {}) {
-    if (!key && !options.useProxy) {
+    if (!key && !options.useProxy && !options.useCookie) {
       throw new Error('No API key supplied. Pass in an API key as the first argument.');
+    }
+
+    if (options.useCookie) {
+      /* eslint no-console: 0 */
+      console.warn('options.useCookie is deprecated and will be removed in 4.0.' +
+        ' Please use `options.useProxy`.');
     }
 
     this.key = key;
