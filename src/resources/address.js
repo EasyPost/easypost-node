@@ -1,34 +1,35 @@
 import T from 'proptypes';
 import base from './base';
 
+export const propTypes = {
+  id: T.string,
+  object: T.string,
+  mode: T.string,
+  street1: T.string,
+  street2: T.string,
+  city: T.string,
+  state: T.string,
+  zip: T.string,
+  country: T.string,
+  residential: T.bool,
+  carrier_facility: T.string,
+  name: T.string,
+  company: T.string,
+  phone: T.string,
+  email: T.string,
+  federal_tax_id: T.string,
+  state_tax_id: T.string,
+  verify: T.array,
+  verify_strict: T.array,
+  verifications: T.object,
+};
+
 export default api => (
   class Address extends base(api) {
     static _name = 'Address';
     static _url = 'addresses';
     static key = 'address';
-
-    static propTypes = {
-      id: T.string,
-      object: T.string,
-      mode: T.string,
-      street1: T.string,
-      street2: T.string,
-      city: T.string,
-      state: T.string,
-      zip: T.string,
-      country: T.string,
-      residential: T.bool,
-      carrier_facility: T.string,
-      name: T.string,
-      company: T.string,
-      phone: T.string,
-      email: T.string,
-      federal_tax_id: T.string,
-      state_tax_id: T.string,
-      verify: T.array,
-      verify_strict: T.array,
-      verifications: T.object,
-    }
+    static propTypes = propTypes;
 
     static all() {
       return this.notImplemented('all');

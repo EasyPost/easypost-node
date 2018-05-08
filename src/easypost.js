@@ -3,23 +3,23 @@ import os from 'os';
 
 import pkg from '../package.json';
 
-import Address from './resources/address';
-import ApiKey from './resources/apiKey';
-import Batch from './resources/batch';
-import CarrierAccount from './resources/carrierAccount';
-import CarrierType from './resources/carrierType';
-import CustomsInfo from './resources/customsInfo';
-import CustomsItem from './resources/customsItem';
-import Insurance from './resources/insurance';
-import Order from './resources/order';
-import Parcel from './resources/parcel';
-import Pickup from './resources/pickup';
-import Report from './resources/report';
-import ScanForm from './resources/scan_form';
-import Shipment from './resources/shipment';
-import Tracker from './resources/tracker';
-import User from './resources/user';
-import Webhook from './resources/webhook';
+import Address, { propTypes as addressPropTypes } from './resources/address';
+import ApiKey, { propTypes as apiKeyPropTypes } from './resources/apiKey';
+import Batch, { propTypes as batchPropTypes } from './resources/batch';
+import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrierAccount';
+import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrierType';
+import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customsInfo';
+import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customsItem';
+import Insurance, { propTypes as insurancePropTypes } from './resources/insurance';
+import Order, { propTypes as orderPropTypes } from './resources/order';
+import Parcel, { propTypes as parcelPropTypes } from './resources/parcel';
+import Pickup, { propTypes as pickupPropTypes } from './resources/pickup';
+import Report, { propTypes as reportPropTypes } from './resources/report';
+import ScanForm, { propTypes as scanFormPropTypes } from './resources/scan_form';
+import Shipment, { propTypes as shipmentPropTypes } from './resources/shipment';
+import Tracker, { propTypes as trackerPropTypes } from './resources/tracker';
+import User, { propTypes as userPropTypes } from './resources/user';
+import Webhook, { propTypes as webhookPropTypes } from './resources/webhook';
 
 import RequestError from './errors/request';
 
@@ -71,6 +71,26 @@ export const RESOURCES = {
   Tracker,
   User,
   Webhook,
+};
+
+export const PROP_TYPES = {
+  addressPropTypes,
+  apiKeyPropTypes,
+  batchPropTypes,
+  carrierAccountPropTypes,
+  carrierTypePropTypes,
+  customsInfoPropTypes,
+  customsItemPropTypes,
+  insurancePropTypes,
+  orderPropTypes,
+  parcelPropTypes,
+  pickupPropTypes,
+  reportPropTypes,
+  scanFormPropTypes,
+  shipmentPropTypes,
+  trackerPropTypes,
+  userPropTypes,
+  webhookPropTypes,
 };
 
 export default class API {

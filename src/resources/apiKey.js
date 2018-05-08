@@ -1,16 +1,17 @@
 import T from 'proptypes';
 import base from './base';
 
+export const propTypes = {
+  id: T.string,
+  keys: T.array,
+  children: T.array,
+};
+
 export default api => (
   class ApiKey extends base(api) {
+    static propTypes = propTypes;
     static _name = 'ApiKey';
     static _url = 'api_keys';
-
-    static propTypes = {
-      id: T.string,
-      keys: T.array,
-      children: T.array,
-    }
 
     static delete() {
       return this.notImplemented('delete');

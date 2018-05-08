@@ -1,27 +1,26 @@
 import T from 'proptypes';
 import base from './base';
-import address from './address';
+import { propTypes as addressPropTypes } from './address';
 
-export default (api) => {
-  const Address = address(api);
+export const propTypes = {
+  id: T.string,
+  object: T.string,
+  status: T.string,
+  message: T.string,
+  address: T.oneOfType([T.string, T.shape(addressPropTypes)]),
+  tracking_codes: T.arrayOf(T.string),
+  form_url: T.string,
+  form_file_type: T.string,
+  batch_id: T.string,
+  created_at: T.oneOfType([T.object, T.string]),
+  updated_at: T.oneOfType([T.object, T.string]),
+};
 
-  return class ScanForm extends base(api) {
+export default api => (
+  class ScanForm extends base(api) {
+    static propTypes = propTypes;
     static _name = 'ScanForm';
     static _url = 'scan_forms';
-
-    static propTypes = {
-      id: T.string,
-      object: T.string,
-      status: T.string,
-      message: T.string,
-      address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
-      tracking_codes: T.arrayOf(T.string),
-      form_url: T.string,
-      form_file_type: T.string,
-      batch_id: T.string,
-      created_at: T.oneOfType([T.object, T.string]),
-      updated_at: T.oneOfType([T.object, T.string]),
-    }
 
     static delete() {
       return this.notImplemented('delete');
@@ -46,5 +45,5 @@ export default (api) => {
 
       return super.toJSON();
     }
-  };
-};
+  }
+);

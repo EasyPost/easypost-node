@@ -1,59 +1,55 @@
 import T from 'proptypes';
 import base from './base';
-import address from './address';
-import parcel from './parcel';
-import customsInfo from './customsInfo';
-import insurance from './insurance';
-import tracker from './tracker';
 
-export default (api) => {
-  const Address = address(api);
-  const Parcel = parcel(api);
-  const CustomsInfo = customsInfo(api);
-  const Insurance = insurance(api);
-  const Tracker = tracker(api);
+import { propTypes as addressPropTypes } from './address';
+import { propTypes as parcelPropTypes } from './parcel';
+import { propTypes as customsInfoPropTypes } from './customsInfo';
+import { propTypes as insurancePropTypes } from './insurance';
+import { propTypes as trackerPropTypes } from './tracker';
 
-  return class Shipment extends base(api) {
+export const propTypes = {
+  id: T.string,
+  object: T.string,
+  reference: T.string,
+  mode: T.string,
+  created_at: T.oneOfType([T.object, T.string]),
+  updated_at: T.oneOfType([T.object, T.string]),
+  to_address: T.oneOfType([T.string, T.shape(addressPropTypes)]),
+  from_address: T.oneOfType([T.string, T.shape(addressPropTypes)]),
+  return_address: T.oneOfType([T.string, T.shape(addressPropTypes)]),
+  buyer_address: T.oneOfType([T.string, T.shape(addressPropTypes)]),
+  parcel: T.oneOfType([T.string, T.shape(parcelPropTypes)]),
+  customs_info: T.oneOfType([T.string, T.shape(customsInfoPropTypes)]),
+  carrier_accounts: T.arrayOf(T.string),
+  carrier_account: T.string,
+  scan_form: T.oneOfType([T.string, T.object]),
+  forms: T.array,
+  insurance: T.oneOfType([T.string, T.shape(insurancePropTypes)]),
+  rates: T.arrayOf(T.object),
+  selected_rate: T.object,
+  postage_label: T.object,
+  messages: T.array,
+  options: T.object,
+  is_return: T.bool,
+  tracking_code: T.string,
+  service: T.string,
+  services: T.arrayOf(T.string),
+  usps_zone: T.string,
+  status: T.string,
+  tracker: T.oneOfType([T.string, T.shape(trackerPropTypes)]),
+  fees: T.array,
+  refund_status: T.string,
+  batch_id: T.string,
+  batch_status: T.string,
+  batch_message: T.string,
+};
+
+export default api => (
+  class Shipment extends base(api) {
     static _name = 'Shipment';
     static _url = 'shipments';
     static key = 'shipment';
-
-    static propTypes = {
-      id: T.string,
-      object: T.string,
-      reference: T.string,
-      mode: T.string,
-      created_at: T.oneOfType([T.object, T.string]),
-      updated_at: T.oneOfType([T.object, T.string]),
-      to_address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
-      from_address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
-      return_address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
-      buyer_address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
-      parcel: T.oneOfType([T.string, T.shape(Parcel.propTypes)]),
-      customs_info: T.oneOfType([T.string, T.shape(CustomsInfo.propTypes)]),
-      carrier_accounts: T.arrayOf(T.string),
-      carrier_account: T.string,
-      scan_form: T.oneOfType([T.string, T.object]),
-      forms: T.array,
-      insurance: T.oneOfType([T.string, T.shape(Insurance.propTypes)]),
-      rates: T.arrayOf(T.object),
-      selected_rate: T.object,
-      postage_label: T.object,
-      messages: T.array,
-      options: T.object,
-      is_return: T.bool,
-      tracking_code: T.string,
-      service: T.string,
-      services: T.arrayOf(T.string),
-      usps_zone: T.string,
-      status: T.string,
-      tracker: T.oneOfType([T.string, T.shape(Tracker.propTypes)]),
-      fees: T.array,
-      refund_status: T.string,
-      batch_id: T.string,
-      batch_status: T.string,
-      batch_message: T.string,
-    }
+    static propTypes = propTypes;
 
     static jsonIdKeys = [
       'to_address',
@@ -161,5 +157,5 @@ export default (api) => {
         return lowest;
       }, rates[0]);
     }
-  };
-};
+  }
+);

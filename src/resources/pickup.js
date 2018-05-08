@@ -1,40 +1,37 @@
 import T from 'proptypes';
 import base from './base';
-import shipment from './shipment';
-import batch from './batch';
-import address from './address';
-import carrierAccount from './carrierAccount';
 
-export default (api) => {
-  const Shipment = shipment(api);
-  const Address = address(api);
-  const Batch = batch(api);
-  const CarrierAccount = carrierAccount(api);
+import { propTypes as shipmentPropTypes } from './shipment';
+import { propTypes as batchPropTypes } from './batch';
+import { propTypes as addressPropTypes } from './address';
+import { propTypes as carrierAccountPropTypes } from './carrierAccount';
 
-  return class Pickup extends base(api) {
+export const propTypes = {
+  id: T.string,
+  object: T.string,
+  reference: T.string,
+  mode: T.string,
+  created_at: T.oneOfType([T.object, T.string]),
+  updated_at: T.oneOfType([T.object, T.string]),
+  min_datetime: T.oneOfType([T.object, T.string]),
+  max_datetime: T.oneOfType([T.object, T.string]),
+  is_account_address: T.bool,
+  instructions: T.string,
+  messages: T.object,
+  confirmation: T.string,
+  address: T.oneOfType([T.string, T.shape(addressPropTypes)]),
+  shipment: T.oneOfType([T.string, T.shape(shipmentPropTypes)]),
+  batch: T.oneOfType([T.string, T.shape(batchPropTypes)]),
+  carrier_accounts: T.arrayOf(T.oneOfType([T.string, T.shape(carrierAccountPropTypes)])),
+  pickup_rates: T.object,
+};
+
+export default api => (
+  class Pickup extends base(api) {
+    static propTypes = propTypes;
     static _name = 'Pickup';
     static _url = 'pickups';
     static key = 'pickup';
-
-    static propTypes = {
-      id: T.string,
-      object: T.string,
-      reference: T.string,
-      mode: T.string,
-      created_at: T.oneOfType([T.object, T.string]),
-      updated_at: T.oneOfType([T.object, T.string]),
-      min_datetime: T.oneOfType([T.object, T.string]),
-      max_datetime: T.oneOfType([T.object, T.string]),
-      is_account_address: T.bool,
-      instructions: T.string,
-      messages: T.object,
-      confirmation: T.string,
-      address: T.oneOfType([T.string, T.shape(Address.propTypes)]),
-      shipment: T.oneOfType([T.string, T.shape(Shipment.propTypes)]),
-      batch: T.oneOfType([T.string, T.shape(Batch.propTypes)]),
-      carrier_accounts: T.arrayOf(T.oneOfType([T.string, T.shape(CarrierAccount.proptypes)])),
-      pickup_rates: T.object,
-    }
 
     static jsonIdKeys = [
       'address',
@@ -66,5 +63,5 @@ export default (api) => {
 
       return this.rpc('cancel');
     }
-  };
-};
+  }
+);
