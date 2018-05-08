@@ -112,7 +112,7 @@ export default class API {
   }
 
   constructor(key, options = {}) {
-    if (!key && !options.useCookie) {
+    if (!key && !options.useProxy) {
       throw new Error('No API key supplied. Pass in an API key as the first argument.');
     }
 
@@ -151,7 +151,7 @@ export default class API {
       .set('Content-Type', 'application/json')
       .set(API.buildHeaders(headers));
 
-    if (!this.useCookie) {
+    if (this.key) {
       req.auth(this.key);
     }
 
