@@ -2,7 +2,7 @@
 
 EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com
 
-[![CircleCI](https://circleci.com/gh/EasyPost/easypost-web.svg?style=svg&circle-token=6f1cef70e775021a0e45c9c8bc367943927e9bba)](https://circleci.com/gh/EasyPost/easypost-web)
+[![Build Status](https://travis-ci.org/EasyPost/easypost-node.svg?branch=master)](https://travis-ci.org/EasyPost/easypost-node)
 
 Installation
 ------------
