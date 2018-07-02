@@ -63,6 +63,8 @@ function config(output, nodestr) {
               }],
               'stage-2',
               ['minify', {
+                keepFnName: true,
+                keepClassName: true,
               }],
             ],
             plugins: [
