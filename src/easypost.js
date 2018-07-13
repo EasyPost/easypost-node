@@ -1,4 +1,7 @@
 import superagent from 'superagent';
+
+import superagentProxy from 'superagent-proxy';
+
 import os from 'os';
 
 import pkg from '../package.json';
@@ -93,6 +96,8 @@ export const PROP_TYPES = {
   webhookPropTypes,
 };
 
+superagentProxy(superagent);
+
 export default class API {
   // Build request headers to be sent by default with each request, combined
   // (or overridden) by any additional headers
@@ -159,6 +164,10 @@ export default class API {
 
     if (this.key) {
       req.auth(this.key);
+    }
+
+    if (process.env.HTTPS_PROXY) {
+      req.proxy(process.env.HTTPS_PROXY);
     }
 
     if (body) { req.send(body); }
