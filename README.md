@@ -82,6 +82,64 @@ await fromAddress.save();
 console.log(fromAddress.id);
 ```
 
+Options
+-------
+
+You can construct an API instance with certain options:
+
+```
+const api = new Api("mykey", {
+  timeout: 120000,
+  baseUrl: "https://api.easypost.com/v2/",
+  useProxy: false,
+  superagentMiddleware: s => s,
+  requestMiddleware: r => r,
+});
+```
+
+#### timeout
+
+Time in MS that should fail requests.
+
+#### baseUrl
+
+Change the base URL that the API library uses. Useful if you proxy requests
+from a frontend through a server.
+
+
+#### superagentMiddleware
+
+Function that takes `superagent` and returns `superagent`. Useful if you need
+to wrap superagent in a function, such as the `superagent-proxy` npm library:
+
+```
+import superagentProxy from 'superagent-proxy';
+
+const api = new Api("my-key", {
+  superagentMiddleware: s => superagentProxy(s),
+});
+```
+
+
+#### superagentMiddleware
+
+Function that takes a superagent `request` and returns that request. Useful if
+you need to hook into a request, such as when using the `superagent-proxy` npm
+library:
+
+```
+import superagentProxy from 'superagent-proxy';
+
+const api = new Api("my-key", {
+  superagentMiddleware: s => superagentProxy(s),
+  requestMiddleware: r => {
+    r.proxy(process.env.HTTPS_PROXY);
+    return r;
+  },
+});
+```
+
+
 Note on ES6 Usage
 -----------------
 
