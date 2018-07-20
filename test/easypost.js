@@ -100,14 +100,22 @@ describe('Base API object', () => {
       const api = new API(key);
       expect(api.buildPath(path)).to.equal(path);
     });
+
+    it('uses superagentMiddleware if provided', () => {
+      const api = new API(key, {
+        superagentMiddleware: s => 'test',
+      });
+
+      expect(api.agent).to.equal('test');
+    });
   });
 
   describe('request', () => {
     let api;
+    const superagentMiddleware = () => superagentStub();
 
     beforeEach(() => {
-      api = new API(key);
-      api.agent = superagentStub();
+      api = new API(key, { superagentMiddleware });
     });
 
     it('makes a GET baseurl request by default', (done) => {
@@ -135,6 +143,16 @@ describe('Base API object', () => {
     it('sets auth', (done) => {
       api.request('').then(() => {
         expect(api.agent.getStub.auth).to.have.been.calledWith(key);
+        done();
+      });
+    });
+
+    it('uses requestMiddleware', (done) => {
+      const requestMiddleware = sinon.stub().returnsArg(0);
+      api = new API(key, { requestMiddleware, superagentMiddleware });
+      api.agent = superagentStub();
+      api.request('').then(() => {
+        expect(requestMiddleware).to.have.been.called;
         done();
       });
     });

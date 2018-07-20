@@ -112,20 +112,34 @@ export default class API {
   }
 
   constructor(key, options = {}) {
-    if (!key && !options.useProxy && !options.useCookie) {
+    const {
+      useProxy,
+      useCookie,
+      timeout,
+      baseUrl,
+      superagentMiddleware,
+      requestMiddleware,
+    } = options;
+
+    if (!key && !useProxy && !useCookie) {
       throw new Error('No API key supplied. Pass in an API key as the first argument.');
     }
 
-    if (options.useCookie) {
+    if (useCookie) {
       /* eslint no-console: 0 */
       console.warn('options.useCookie is deprecated and will be removed in 4.0.' +
         ' Please use `options.useProxy`.');
     }
 
     this.key = key;
-    this.timeout = options.timeout || DEFAULT_TIMEOUT;
-    this.baseUrl = options.baseUrl || DEFAULT_BASE_URL;
+    this.timeout = timeout || DEFAULT_TIMEOUT;
+    this.baseUrl = baseUrl || DEFAULT_BASE_URL;
     this.agent = superagent;
+    this.requestMiddleware = requestMiddleware;
+
+    if (superagentMiddleware) {
+      this.agent = superagentMiddleware(this.agent);
+    }
 
     this.use(RESOURCES);
   }
@@ -152,10 +166,14 @@ export default class API {
       body,
     } = params;
 
-    const req = this.agent[method](this.buildPath(path))
+    let req = this.agent[method](this.buildPath(path))
       .accept('json')
       .set('Content-Type', 'application/json')
       .set(API.buildHeaders(headers));
+
+    if (this.requestMiddleware) {
+      req = this.requestMiddleware(req);
+    }
 
     if (this.key) {
       req.auth(this.key);
