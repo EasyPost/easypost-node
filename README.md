@@ -106,34 +106,37 @@ Time in MS that should fail requests.
 Change the base URL that the API library uses. Useful if you proxy requests
 from a frontend through a server.
 
+#### useProxy
+
+Disable using the API key. Useful if you proxy requests from a frontend through
+a server.
+
 
 #### superagentMiddleware
 
 Function that takes `superagent` and returns `superagent`. Useful if you need
-to wrap superagent in a function, such as the `superagent-proxy` npm library:
+to wrap superagent in a function, such as many superagent libraries do.
 
 ```
-import superagentProxy from 'superagent-proxy';
+import superagentLib from 'some-superagent-lib';
 
 const api = new Api("my-key", {
-  superagentMiddleware: s => superagentProxy(s),
+  superagentMiddleware: s => superagentLib(s),
 });
 ```
 
 
-#### superagentMiddleware
+#### requestMiddleware
 
 Function that takes a superagent `request` and returns that request. Useful if
-you need to hook into a request, such as when using the `superagent-proxy` npm
-library:
+you need to hook into a request:
 
 ```
-import superagentProxy from 'superagent-proxy';
+import superagentLib from 'some-superagent-lib';
 
 const api = new Api("my-key", {
-  superagentMiddleware: s => superagentProxy(s),
   requestMiddleware: r => {
-    r.proxy(process.env.HTTPS_PROXY);
+    r.someLibFunction(SOME_CONFIG_VALUE);
     return r;
   },
 });
