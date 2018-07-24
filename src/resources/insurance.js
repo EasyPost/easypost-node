@@ -21,6 +21,7 @@ export const propTypes = {
   from_address: T.oneOfType([T.string, T.shape(addressPropTypes)]),
   fee: T.object,
   messages: T.array,
+  carrier: T.string,
 };
 
 export default api => (
