@@ -14,6 +14,7 @@ export const propTypes = {
   contents_explanation: T.string,
   restriction_type: T.string,
   eel_pfc: T.string,
+  non_delivery_option: T.string,
   customs_items: T.arrayOf(T.shape(ciPropTypes)),
 };
 
