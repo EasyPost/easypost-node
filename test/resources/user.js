@@ -1,6 +1,6 @@
 import apiStub from '../helpers/apiStub';
 import NotImplementedError from '../../src/errors/notImplemented';
-import user from '../../src/resources/user';
+import user, { propTypes } from '../../src/resources/user';
 
 describe('User Resource', () => {
   it('exists', () => {
@@ -25,5 +25,11 @@ describe('User Resource', () => {
     const User = user(apiStub());
     const instance = new User({ id: 1 });
     return instance.delete();
+  });
+
+  it('has proptypes', () => {
+    const User = user(apiStub());
+    expect(User.propTypes).to.equal(propTypes);
+    expect(propTypes).to.not.be.null;
   });
 });
