@@ -5,7 +5,7 @@
 const Easypost = require('@easypost/api');
 const api = new Easypost('<YOUR-TEST-PROD-API-KEY>'); // or your EasyPost API key would go here in quotes
 
-api.Shipment.retrieve('example1234...').then(function (response) {
+api.Shipment.retrieve('shp_...').then(function (response) {
     console.log(response.tracker.tracking_code, response.tracker.shipment_id);// if you want the entire response just console.log(response)
 })
 
