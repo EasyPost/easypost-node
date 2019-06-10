@@ -1,5 +1,5 @@
-import superagent from 'superagent';
 import os from 'os';
+import superagent from 'superagent';
 
 import pkg from '../package.json';
 
@@ -145,7 +145,7 @@ export default class API {
   }
 
   use(resources) {
-    Object.keys(resources).forEach((c) => {
+    Object.keys(resources).forEach(c => {
       this[c] = resources[c](this);
     });
   }

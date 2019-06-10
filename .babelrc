@@ -1,25 +1,48 @@
 {
-  "presets": [
-    ["env", {"targets": {"node": "current" }}],
-    "stage-2"
-  ],
+  "presets": [[
+    "@babel/env", {
+      targets: { node: "8.11" }
+    }
+  ]],
   "plugins": [
-    "transform-class-properties",
-    "transform-es2015-classes",
+    "@babel/plugin-syntax-export-extensions",
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": false
+      }
+    ],
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-export-namespace-from",
+    "babel-plugin-transform-export-extensions"
   ],
 
   "env": {
     "test": {
-      "presets": [["env", {"targets": {"node": "current" }}], "stage-2"],
+      "presets": [[
+        "@babel/env", {
+          targets: { node: "8.11" }
+        }
+      ]],
       "plugins": [
-        "transform-class-properties",
-        "transform-es2015-classes",
+        "@babel/plugin-syntax-export-extensions",
+        [
+          "@babel/plugin-proposal-class-properties",
+          {
+            "loose": false
+          }
+        ],
+        "@babel/plugin-proposal-export-default-from",
+        "@babel/plugin-proposal-export-namespace-from",
+        "babel-plugin-transform-export-extensions",
         ["istanbul", {
           "exclude": [
             "test/**/*"
           ]
         }]
-      ]
+      ],
     }
   }
 }
+
+

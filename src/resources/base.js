@@ -101,14 +101,14 @@ export default api => (
     // have cross browser proxy support and do neat getter/setter things. For
     // now, just map it on the instance.
     mapProps(data) {
-      Object.keys(data).forEach((key) => {
+      Object.keys(data).forEach(key => {
         this[key] = data[key];
       });
     }
 
     verifyParameters(parameters = {}, ...args) {
       if (parameters.this) {
-        parameters.this.forEach((p) => {
+        parameters.this.forEach(p => {
           if (!this[p]) {
             throw new Error(`Object requires ${p} to be set.`);
           }
@@ -177,7 +177,7 @@ export default api => (
         const res = await this.constructor.retrieve(this.id);
         const props = res.toJSON();
 
-        Object.keys(props).forEach((k) => {
+        Object.keys(props).forEach(k => {
           this[k] = props[k];
         });
       } else {
