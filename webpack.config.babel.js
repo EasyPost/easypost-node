@@ -1,5 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-const { node, rules } = require('@easypost/build');
+import { node, rules } from '@easypost/build';
 
 function config(output, nodestr) {
   const nodeConfig = node({
@@ -7,10 +7,14 @@ function config(output, nodestr) {
     outputDir: './',
   });
 
-  // Replace rule with one that matches a specific node env
-  nodeConfig.module.rules.splice(0, 1, rules.js({
+  const jsRule = rules.js({
     node: nodestr,
-  }));
+  });
+
+  jsRule.options.presets = jsRule.options.presets.filter(p => p[0] !== '@babel/preset-react');
+
+  // Replace rule with one that matches a specific node env
+  nodeConfig.module.rules.splice(0, 1, jsRule);
 
   nodeConfig.output.filename = output;
 

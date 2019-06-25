@@ -12,15 +12,17 @@
     "url": "git://github.com/easypost/easypost-node.git"
   },
   "main": "index.js",
+  "license": "MIT",
   "engines": {
     "node": ">= v0.10.0"
   },
   "scripts": {
+    "audit": "ep-node-build audit",
     "test": "eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test",
     "test:coverage": "cross-env NODE_ENV=test nyc mocha --recursive ./test",
-    "build": "webpack --config webpack.config.js",
+    "build": "ep-node-build",
     "lint": "eslint src",
-    "watch": "webpack --watch --config webpack.config.js",
+    "watch": "ep-node-build --watch",
     "repl": "./repl.js --local easypost.js"
   },
   "dependencies": {
@@ -38,9 +40,11 @@
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
     "@babel/plugin-syntax-export-extensions": "^7.0.0-beta.32",
+    "@babel/plugin-transform-react-constant-elements": "^7.2.0",
+    "@babel/plugin-transform-react-inline-elements": "^7.2.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
-    "@easypost/build": "^2.0.0",
+    "@easypost/build": "^2.2.1",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.6",
     "babel-plugin-istanbul": "5.1.4",
@@ -58,12 +62,13 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
     "mocha": "6.1.4",
+    "npm-audit-ci": "^1.2.0",
     "nyc": "14.1.1",
     "sinon": "7.3.2",
     "sinon-chai": "3.3.0",
     "vows": "0.8.2",
-    "webpack": "4.33.0",
-    "webpack-cli": "3.3.3",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5",
     "webpack-node-externals": "1.7.2"
   }
 }
