@@ -33,7 +33,7 @@ export default api => (
     toJSON() {
       if (this.shipments) {
         return {
-          shipments: this.shipments.map((s) => {
+          shipments: this.shipments.map(s => {
             if (typeof s === 'string') {
               return { id: s };
             }

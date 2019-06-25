@@ -3,7 +3,7 @@
 /* eslint import/no-extraneous-dependencies: 0, global-require: 0, import/no-unresolved: 0, no-console: 0, max-len: 0 */
 
 require('source-map-support').install();
-require('babel-polyfill');
+require('core-js/stable');
 
 const args = require('yargs').argv;
 
@@ -18,7 +18,7 @@ let API;
 
 if (args.local) {
   packageInfo = require('./package.json');
-  API = require('./' + args.local).default;
+  API = require(`./${args.local}`).default;
 } else {
   packageInfo = require('@easypost/api/package.json');
   API = require('@easypost/api');

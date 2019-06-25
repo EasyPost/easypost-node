@@ -1,30 +1,86 @@
 // Use this file as a starting point for your project's .eslintrc.
 // Copy this file, and add rule overrides as needed.
 {
-  "extends": "airbnb-base",
   "parser": "babel-eslint",
-  "ecmaFeatures": {
-    "classes": true,
-  },
+  "extends": [
+    "airbnb"
+  ],
 
   "env": {
-    "node": true,
+    "jest": true
   },
+
+  "plugins": [
+    "jest"
+  ],
 
   "settings": {
-    "import/resolver": "webpack",
-    "import/extensions": ["", ".js", ".json"]
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.babel.js"
+      }
+    },
+    "import/extensions": ["", ".js", ".ejs", ".json", ".yml", ".jsx"],
+    "import/ignore": [".ejs$", ".yml$", ".jsx"]
   },
 
-  rules: {
+  "rules": {
+    "react/jsx-filename-extension": ["error"],
+    "react/default-props-match-prop-types": ["error", {
+      "allowRequiredDefaults": true
+    }],
+    "react/require-default-props": 0,
+    "react/forbid-prop-types": 0,
+
+    "jsx-a11y/anchor-has-content": ["error"],
+    "jsx-a11y/interactive-supports-focus": ["error"],
+    "jsx-a11y/click-events-have-key-events": ["error"],
+
     "import/extensions": ["error", "always", {
       "js": "never",
+      "ejs": "never",
+      "jsx": "never",
     }],
-    "import/no-named-default": 0,
-    "no-underscore-dangle": 0,
-    "consistent-return": ["warn"],
-    "no-mixed-operators": ["error", {"allowSamePrecedence": true}],
 
-    "no-param-reassign": ["warn"],
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": ["**/*.test.js", "**/*.test.jsx"]
+      }
+    ],
+
+    "import/order": ["error",  {
+      "newlines-between": "ignore",
+      "groups":  [
+        "builtin",
+        "external",
+        ["sibling", "parent", "internal"], // They can be mingled together
+        "index"
+      ]
+    }],
+
+    "new-cap": ["error", {
+      "capIsNewExceptions": ["Event"],
+      "newIsCapExceptions": ["this.model"]
+    }],
+    "no-underscore-dangle": 0,
+    "consistent-return": 0,
+    "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
+    "no-param-reassign": ["error"],
+    "arrow-parens": ["error", "as-needed"],
+    "object-curly-newline": ["error", {
+      "ObjectExpression": { "multiline": true, "consistent": true },
+      "ObjectPattern": { "multiline": true, "consistent": true }
+    }],
+    "quotes": ["error", "single",  { "allowTemplateLiterals": true }],
+    "no-console": ["error", { "allow": ["error"] }],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }],
   },
+
+  "globals": {
+    window: true,
+    $: true,
+  }
 }
