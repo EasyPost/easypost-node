@@ -1,7 +1,7 @@
 {
   "presets": [[
     "@babel/env", {
-      targets: { node: "8.11" }
+      targets: { node: "current" }
     }
   ]],
   "plugins": [
