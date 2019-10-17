@@ -10,8 +10,13 @@ export default api => (
     static jsonIdKeys = [];
 
     static async retrieve(id, urlPrefix) {
+      let url;
       try {
-        const url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
+        if(id){
+          url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
+        } else {
+          url = urlPrefix ? `${urlPrefix}` : `${this._url}`;
+        }
         const res = (await api.get(url));
         return this.create(res.body);
       } catch (e) {
