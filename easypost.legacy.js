@@ -93,7 +93,7 @@
 /*! exports provided: name, description, version, author, homepage, bin, repository, main, license, engines, scripts, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"@easypost/api\",\"description\":\"EasyPost Node Client Library\",\"version\":\"3.7.1\",\"author\":\"Easypost Engineering <support@easypost.com>\",\"homepage\":\"https://easypost.com\",\"bin\":{\"easypost\":\"./repl.js\"},\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/easypost/easypost-node.git\"},\"main\":\"index.js\",\"license\":\"MIT\",\"engines\":{\"node\":\">= v0.10.0\"},\"scripts\":{\"audit\":\"ep-node-build audit\",\"test\":\"eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test\",\"test:coverage\":\"cross-env NODE_ENV=test nyc mocha --recursive ./test\",\"build\":\"ep-node-build\",\"lint\":\"eslint src\",\"watch\":\"ep-node-build --watch\",\"repl\":\"./repl.js --local easypost.js\"},\"dependencies\":{\"core-js\":\"3.1.3\",\"nodent-runtime\":\"3.2.1\",\"proptypes\":\"1.1.0\",\"regenerator-runtime\":\"0.13.2\",\"source-map-support\":\"0.5.12\",\"superagent\":\"5.0.6\",\"yargs\":\"13.2.4\"},\"devDependencies\":{\"@babel/core\":\"^7.5.5\",\"@babel/plugin-proposal-class-properties\":\"^7.5.5\",\"@babel/plugin-proposal-export-default-from\":\"^7.5.2\",\"@babel/plugin-proposal-export-namespace-from\":\"^7.5.2\",\"@babel/plugin-syntax-export-extensions\":\"^7.0.0-beta.32\",\"@babel/plugin-transform-react-constant-elements\":\"^7.5.0\",\"@babel/plugin-transform-react-inline-elements\":\"^7.2.0\",\"@babel/preset-env\":\"^7.5.5\",\"@babel/register\":\"^7.5.5\",\"@easypost/build\":\"^2.2.2\",\"babel-eslint\":\"10.0.1\",\"babel-loader\":\"8.0.6\",\"babel-plugin-istanbul\":\"5.1.4\",\"babel-plugin-transform-export-extensions\":\"^6.22.0\",\"babel-preset-minify\":\"0.5.0\",\"babel-register\":\"6.24.1\",\"chai\":\"4.2.0\",\"chai-as-promised\":\"7.1.1\",\"cross-env\":\"5.2.0\",\"eslint\":\"^4.19.1\",\"eslint-config-airbnb\":\"^16.1.0\",\"eslint-import-resolver-webpack\":\"0.11.1\",\"eslint-plugin-import\":\"2.17.3\",\"eslint-plugin-jest\":\"^22.15.2\",\"eslint-plugin-jsx-a11y\":\"^6.2.3\",\"eslint-plugin-react\":\"^7.14.3\",\"mocha\":\"6.1.4\",\"npm-audit-ci\":\"^1.2.1\",\"nyc\":\"14.1.1\",\"sinon\":\"7.3.2\",\"sinon-chai\":\"3.3.0\",\"vows\":\"0.8.2\",\"webpack\":\"^4.39.3\",\"webpack-cli\":\"^3.3.7\",\"webpack-node-externals\":\"1.7.2\"}}");
+module.exports = JSON.parse("{\"name\":\"@easypost/api\",\"description\":\"EasyPost Node Client Library\",\"version\":\"3.7.2\",\"author\":\"Easypost Engineering <support@easypost.com>\",\"homepage\":\"https://easypost.com\",\"bin\":{\"easypost\":\"./repl.js\"},\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/easypost/easypost-node.git\"},\"main\":\"index.js\",\"license\":\"MIT\",\"engines\":{\"node\":\">= v0.10.0\"},\"scripts\":{\"audit\":\"ep-node-build audit\",\"test\":\"eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test\",\"test:coverage\":\"cross-env NODE_ENV=test nyc mocha --recursive ./test\",\"build\":\"ep-node-build\",\"lint\":\"eslint src\",\"watch\":\"ep-node-build --watch\",\"repl\":\"./repl.js --local easypost.js\"},\"dependencies\":{\"core-js\":\"3.1.3\",\"nodent-runtime\":\"3.2.1\",\"proptypes\":\"1.1.0\",\"regenerator-runtime\":\"0.13.2\",\"source-map-support\":\"0.5.12\",\"superagent\":\"5.0.6\",\"yargs\":\"13.2.4\"},\"devDependencies\":{\"@babel/core\":\"^7.5.5\",\"@babel/plugin-proposal-class-properties\":\"^7.5.5\",\"@babel/plugin-proposal-export-default-from\":\"^7.5.2\",\"@babel/plugin-proposal-export-namespace-from\":\"^7.5.2\",\"@babel/plugin-syntax-export-extensions\":\"^7.0.0-beta.32\",\"@babel/plugin-transform-react-constant-elements\":\"^7.5.0\",\"@babel/plugin-transform-react-inline-elements\":\"^7.2.0\",\"@babel/preset-env\":\"^7.5.5\",\"@babel/register\":\"^7.5.5\",\"@easypost/build\":\"^2.2.2\",\"babel-eslint\":\"10.0.1\",\"babel-loader\":\"8.0.6\",\"babel-plugin-istanbul\":\"5.1.4\",\"babel-plugin-transform-export-extensions\":\"^6.22.0\",\"babel-preset-minify\":\"0.5.0\",\"babel-register\":\"6.24.1\",\"chai\":\"4.2.0\",\"chai-as-promised\":\"7.1.1\",\"cross-env\":\"5.2.0\",\"eslint\":\"^4.19.1\",\"eslint-config-airbnb\":\"^16.1.0\",\"eslint-import-resolver-webpack\":\"0.11.1\",\"eslint-plugin-import\":\"2.17.3\",\"eslint-plugin-jest\":\"^22.15.2\",\"eslint-plugin-jsx-a11y\":\"^6.2.3\",\"eslint-plugin-react\":\"^7.14.3\",\"mocha\":\"6.1.4\",\"npm-audit-ci\":\"^1.2.1\",\"nyc\":\"14.1.1\",\"sinon\":\"7.3.2\",\"sinon-chai\":\"3.3.0\",\"vows\":\"0.8.2\",\"webpack\":\"^4.39.3\",\"webpack-cli\":\"^3.3.7\",\"webpack-node-externals\":\"1.7.2\"}}");
 
 /***/ }),
 
@@ -3169,6 +3169,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/base.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3219,6 +3223,51 @@ var propTypes = {
     }
 
     _createClass(User, null, [{
+      key: "retrieve",
+      value: function () {
+        var _retrieve = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee(id, urlPrefix) {
+          var url, res;
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  url = urlPrefix || this._url; // retrieve self
+
+                  if (id) {
+                    // retrieve child users
+                    url = urlPrefix ? "".concat(urlPrefix, "/").concat(id) : "".concat(this._url, "/").concat(id);
+                  }
+
+                  _context.next = 5;
+                  return api.get(url);
+
+                case 5:
+                  res = _context.sent;
+                  return _context.abrupt("return", this.create(res.body));
+
+                case 9:
+                  _context.prev = 9;
+                  _context.t0 = _context["catch"](0);
+                  return _context.abrupt("return", Promise.reject(_context.t0));
+
+                case 12:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this, [[0, 9]]);
+        }));
+
+        function retrieve(_x, _x2) {
+          return _retrieve.apply(this, arguments);
+        }
+
+        return retrieve;
+      }()
+    }, {
       key: "all",
       value: function all() {
         return this.notImplemented('all');

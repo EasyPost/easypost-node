@@ -15,6 +15,23 @@ describe('User Resource', () => {
     });
   });
 
+  describe('retrieves', () => {
+    it('without an id passed', () => {
+      const stub = apiStub();
+      const User = user(stub);
+      User.retrieve();
+      expect(stub.get).to.have.been.calledWith('users');
+    });
+
+    it('with an id passed', () => {
+      const stub = apiStub();
+      const User = user(stub);
+      const id = 'user_123';
+      User.retrieve(id);
+      expect(stub.get).to.have.been.calledWith(`users/${id}`);
+    });
+  });
+
   it('deletes', () => {
     const User = user(apiStub());
     const id = 1;

@@ -25,6 +25,19 @@ export default api => (
     static key = 'user';
     static propTypes = propTypes;
 
+    static async retrieve(id, urlPrefix) {
+      try {
+        let url = urlPrefix || this._url; // retrieve self
+        if (id) { // retrieve child users
+          url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
+        }
+        const res = (await api.get(url));
+        return this.create(res.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
     static all() {
       return this.notImplemented('all');
     }
