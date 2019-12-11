@@ -93,7 +93,7 @@
 /*! exports provided: name, description, version, author, homepage, bin, repository, main, license, engines, scripts, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"@easypost/api\",\"description\":\"EasyPost Node Client Library\",\"version\":\"3.7.2\",\"author\":\"Easypost Engineering <support@easypost.com>\",\"homepage\":\"https://easypost.com\",\"bin\":{\"easypost\":\"./repl.js\"},\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/easypost/easypost-node.git\"},\"main\":\"index.js\",\"license\":\"MIT\",\"engines\":{\"node\":\">= v0.10.0\"},\"scripts\":{\"audit\":\"ep-node-build audit\",\"test\":\"eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test\",\"test:coverage\":\"cross-env NODE_ENV=test nyc mocha --recursive ./test\",\"build\":\"ep-node-build\",\"lint\":\"eslint src\",\"watch\":\"ep-node-build --watch\",\"repl\":\"./repl.js --local easypost.js\"},\"dependencies\":{\"core-js\":\"3.1.3\",\"nodent-runtime\":\"3.2.1\",\"proptypes\":\"1.1.0\",\"regenerator-runtime\":\"0.13.2\",\"source-map-support\":\"0.5.12\",\"superagent\":\"5.0.6\",\"yargs\":\"13.2.4\"},\"devDependencies\":{\"@babel/core\":\"^7.5.5\",\"@babel/plugin-proposal-class-properties\":\"^7.5.5\",\"@babel/plugin-proposal-export-default-from\":\"^7.5.2\",\"@babel/plugin-proposal-export-namespace-from\":\"^7.5.2\",\"@babel/plugin-syntax-export-extensions\":\"^7.0.0-beta.32\",\"@babel/plugin-transform-react-constant-elements\":\"^7.5.0\",\"@babel/plugin-transform-react-inline-elements\":\"^7.2.0\",\"@babel/preset-env\":\"^7.5.5\",\"@babel/register\":\"^7.5.5\",\"@easypost/build\":\"^2.2.2\",\"babel-eslint\":\"10.0.1\",\"babel-loader\":\"8.0.6\",\"babel-plugin-istanbul\":\"5.1.4\",\"babel-plugin-transform-export-extensions\":\"^6.22.0\",\"babel-preset-minify\":\"0.5.0\",\"babel-register\":\"6.24.1\",\"chai\":\"4.2.0\",\"chai-as-promised\":\"7.1.1\",\"cross-env\":\"5.2.0\",\"eslint\":\"^4.19.1\",\"eslint-config-airbnb\":\"^16.1.0\",\"eslint-import-resolver-webpack\":\"0.11.1\",\"eslint-plugin-import\":\"2.17.3\",\"eslint-plugin-jest\":\"^22.15.2\",\"eslint-plugin-jsx-a11y\":\"^6.2.3\",\"eslint-plugin-react\":\"^7.14.3\",\"mocha\":\"6.1.4\",\"npm-audit-ci\":\"^1.2.1\",\"nyc\":\"14.1.1\",\"sinon\":\"7.3.2\",\"sinon-chai\":\"3.3.0\",\"vows\":\"0.8.2\",\"webpack\":\"^4.39.3\",\"webpack-cli\":\"^3.3.7\",\"webpack-node-externals\":\"1.7.2\"}}");
+module.exports = JSON.parse("{\"name\":\"@easypost/api\",\"description\":\"EasyPost Node Client Library\",\"version\":\"3.7.2\",\"author\":\"Easypost Engineering <support@easypost.com>\",\"homepage\":\"https://easypost.com\",\"bin\":{\"easypost\":\"./repl.js\"},\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/easypost/easypost-node.git\"},\"main\":\"index.js\",\"license\":\"MIT\",\"engines\":{\"node\":\">= v0.10.0\"},\"scripts\":{\"audit\":\"ep-node-build audit\",\"test\":\"eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test\",\"test:coverage\":\"cross-env NODE_ENV=test nyc mocha --recursive ./test\",\"build\":\"ep-node-build\",\"lint\":\"eslint src\",\"watch\":\"ep-node-build --watch\",\"repl\":\"./repl.js --local easypost.js\"},\"dependencies\":{\"core-js\":\"3.1.3\",\"nodent-runtime\":\"3.2.1\",\"proptypes\":\"1.1.0\",\"regenerator-runtime\":\"0.13.2\",\"source-map-support\":\"0.5.12\",\"superagent\":\"5.0.6\",\"yargs\":\"13.2.4\"},\"devDependencies\":{\"@babel/core\":\"^7.7.5\",\"@babel/plugin-proposal-class-properties\":\"^7.7.4\",\"@babel/plugin-proposal-export-default-from\":\"^7.7.4\",\"@babel/plugin-proposal-export-namespace-from\":\"^7.7.4\",\"@babel/plugin-syntax-export-extensions\":\"^7.0.0-beta.32\",\"@babel/plugin-transform-react-constant-elements\":\"^7.7.4\",\"@babel/plugin-transform-react-inline-elements\":\"^7.7.4\",\"@babel/preset-env\":\"^7.7.6\",\"@babel/register\":\"^7.7.4\",\"@easypost/build\":\"^2.4.2\",\"babel-eslint\":\"^10.0.1\",\"babel-loader\":\"^8.0.6\",\"babel-plugin-istanbul\":\"^5.1.4\",\"babel-plugin-transform-export-extensions\":\"^6.22.0\",\"babel-preset-minify\":\"^0.5.0\",\"babel-register\":\"^6.24.1\",\"chai\":\"^4.2.0\",\"chai-as-promised\":\"^7.1.1\",\"cross-env\":\"^5.2.0\",\"eslint\":\"^4.19.1\",\"eslint-config-airbnb\":\"^16.1.0\",\"eslint-import-resolver-webpack\":\"^0.11.1\",\"eslint-plugin-import\":\"^2.17.3\",\"eslint-plugin-jest\":\"^22.21.0\",\"eslint-plugin-jsx-a11y\":\"^6.2.3\",\"eslint-plugin-react\":\"^7.17.0\",\"mocha\":\"^6.1.4\",\"npm-audit-ci\":\"^1.2.1\",\"nyc\":\"^14.1.1\",\"sinon\":\"^7.3.2\",\"sinon-chai\":\"^3.3.0\",\"vows\":\"^0.8.2\",\"webpack\":\"^4.39.3\",\"webpack-cli\":\"^3.3.10\",\"webpack-node-externals\":\"^1.7.2\"}}");
 
 /***/ }),
 
@@ -140,13 +140,9 @@ var _package_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpac
 /* harmony import */ var _resources_user__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./resources/user */ "./resources/user.js");
 /* harmony import */ var _resources_webhook__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./resources/webhook */ "./resources/webhook.js");
 /* harmony import */ var _errors_request__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./errors/request */ "./errors/request.js");
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -320,82 +316,72 @@ function () {
     }
   }, {
     key: "request",
-    value: function () {
-      var _request = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
-        var path,
-            method,
-            params,
-            headers,
-            query,
-            body,
-            req,
-            res,
-            _args = arguments;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                path = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
-                method = _args.length > 1 && _args[1] !== undefined ? _args[1] : METHODS.GET;
-                params = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
-                headers = _args.length > 3 && _args[3] !== undefined ? _args[3] : {};
-                query = params.query, body = params.body;
-                req = this.agent[method](this.buildPath(path)).accept('json').set('Content-Type', 'application/json').set(API.buildHeaders(headers));
+    value: function request() {
+      var path,
+          method,
+          params,
+          headers,
+          query,
+          body,
+          req,
+          res,
+          _args = arguments;
+      return regeneratorRuntime.async(function request$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              path = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
+              method = _args.length > 1 && _args[1] !== undefined ? _args[1] : METHODS.GET;
+              params = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
+              headers = _args.length > 3 && _args[3] !== undefined ? _args[3] : {};
+              query = params.query, body = params.body;
+              req = this.agent[method](this.buildPath(path)).accept('json').set('Content-Type', 'application/json').set(API.buildHeaders(headers));
 
-                if (this.requestMiddleware) {
-                  req = this.requestMiddleware(req);
-                }
+              if (this.requestMiddleware) {
+                req = this.requestMiddleware(req);
+              }
 
-                if (this.key) {
-                  req.auth(this.key);
-                }
+              if (this.key) {
+                req.auth(this.key);
+              }
 
-                if (body) {
-                  req.send(body);
-                }
+              if (body) {
+                req.send(body);
+              }
 
-                if (query) {
-                  req.query(query);
-                }
+              if (query) {
+                req.query(query);
+              }
 
-                _context.prev = 10;
-                _context.next = 13;
-                return req;
+              _context.prev = 10;
+              _context.next = 13;
+              return regeneratorRuntime.awrap(req);
 
-              case 13:
-                res = _context.sent;
-                return _context.abrupt("return", res);
+            case 13:
+              res = _context.sent;
+              return _context.abrupt("return", res);
 
-              case 17:
-                _context.prev = 17;
-                _context.t0 = _context["catch"](10);
+            case 17:
+              _context.prev = 17;
+              _context.t0 = _context["catch"](10);
 
-                if (!(_context.t0.response && _context.t0.response.body)) {
-                  _context.next = 21;
-                  break;
-                }
+              if (!(_context.t0.response && _context.t0.response.body)) {
+                _context.next = 21;
+                break;
+              }
 
-                throw new _errors_request__WEBPACK_IMPORTED_MODULE_20__["default"](_context.t0.response.body, path);
+              throw new _errors_request__WEBPACK_IMPORTED_MODULE_20__["default"](_context.t0.response.body, path);
 
-              case 21:
-                throw _context.t0;
+            case 21:
+              throw _context.t0;
 
-              case 22:
-              case "end":
-                return _context.stop();
-            }
+            case 22:
+            case "end":
+              return _context.stop();
           }
-        }, _callee, this, [[10, 17]]);
-      }));
-
-      function request() {
-        return _request.apply(this, arguments);
-      }
-
-      return request;
-    }()
+        }
+      }, null, this, [[10, 17]]);
+    }
   }, {
     key: "get",
     value: function get(path, params, headers) {
@@ -774,11 +760,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -821,30 +803,20 @@ var propTypes = {
 
     _createClass(ApiKey, [{
       key: "save",
-      value: function () {
-        var _save = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee() {
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  return _context.abrupt("return", this.constructor.notImplemented('save'));
+      value: function save() {
+        return regeneratorRuntime.async(function save$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                return _context.abrupt("return", this.constructor.notImplemented('save'));
 
-                case 1:
-                case "end":
-                  return _context.stop();
-              }
+              case 1:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this);
-        }));
-
-        function save() {
-          return _save.apply(this, arguments);
-        }
-
-        return save;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "enable",
       value: function enable() {
@@ -920,10 +892,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _errors_notImplemented__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../errors/notImplemented */ "./errors/notImplemented.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -942,133 +910,103 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   function () {
     _createClass(Base, null, [{
       key: "retrieve",
-      value: function () {
-        var _retrieve = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee(id, urlPrefix) {
-          var url, res;
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.prev = 0;
-                  url = urlPrefix ? "".concat(urlPrefix, "/").concat(id) : "".concat(this._url, "/").concat(id);
-                  _context.next = 4;
-                  return api.get(url);
+      value: function retrieve(id, urlPrefix) {
+        var url, res;
+        return regeneratorRuntime.async(function retrieve$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                url = urlPrefix ? "".concat(urlPrefix, "/").concat(id) : "".concat(this._url, "/").concat(id);
+                _context.next = 4;
+                return regeneratorRuntime.awrap(api.get(url));
 
-                case 4:
-                  res = _context.sent;
-                  return _context.abrupt("return", this.create(res.body));
+              case 4:
+                res = _context.sent;
+                return _context.abrupt("return", this.create(res.body));
 
-                case 8:
-                  _context.prev = 8;
-                  _context.t0 = _context["catch"](0);
-                  return _context.abrupt("return", Promise.reject(_context.t0));
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                return _context.abrupt("return", Promise.reject(_context.t0));
 
-                case 11:
-                case "end":
-                  return _context.stop();
-              }
+              case 11:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this, [[0, 8]]);
-        }));
-
-        function retrieve(_x, _x2) {
-          return _retrieve.apply(this, arguments);
-        }
-
-        return retrieve;
-      }()
+          }
+        }, null, this, [[0, 8]]);
+      }
     }, {
       key: "all",
-      value: function () {
-        var _all = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee2() {
-          var query,
-              url,
-              res,
-              _args2 = arguments;
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  query = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {};
-                  url = _args2.length > 1 ? _args2[1] : undefined;
-                  _context2.prev = 2;
-                  url = url || this._url;
-                  _context2.next = 6;
-                  return api.get(url, {
-                    query: query
-                  });
+      value: function all() {
+        var query,
+            url,
+            res,
+            _args2 = arguments;
+        return regeneratorRuntime.async(function all$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                query = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {};
+                url = _args2.length > 1 ? _args2[1] : undefined;
+                _context2.prev = 2;
+                url = url || this._url;
+                _context2.next = 6;
+                return regeneratorRuntime.awrap(api.get(url, {
+                  query: query
+                }));
 
-                case 6:
-                  res = _context2.sent;
-                  return _context2.abrupt("return", this.unwrapAll(res.body).map(this.create.bind(this)));
+              case 6:
+                res = _context2.sent;
+                return _context2.abrupt("return", this.unwrapAll(res.body).map(this.create.bind(this)));
 
-                case 10:
-                  _context2.prev = 10;
-                  _context2.t0 = _context2["catch"](2);
-                  return _context2.abrupt("return", Promise.reject(_context2.t0));
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](2);
+                return _context2.abrupt("return", Promise.reject(_context2.t0));
 
-                case 13:
-                case "end":
-                  return _context2.stop();
-              }
+              case 13:
+              case "end":
+                return _context2.stop();
             }
-          }, _callee2, this, [[2, 10]]);
-        }));
-
-        function all() {
-          return _all.apply(this, arguments);
-        }
-
-        return all;
-      }()
+          }
+        }, null, this, [[2, 10]]);
+      }
     }, {
       key: "delete",
-      value: function () {
-        var _delete2 = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee3(id) {
-          return regeneratorRuntime.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  if (id) {
-                    _context3.next = 2;
-                    break;
-                  }
+      value: function _delete(id) {
+        return regeneratorRuntime.async(function _delete$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (id) {
+                  _context3.next = 2;
+                  break;
+                }
 
-                  throw new Error("No id was passed into ".concat(this._name, " delete()"));
+                throw new Error("No id was passed into ".concat(this._name, " delete()"));
 
-                case 2:
-                  _context3.prev = 2;
-                  _context3.next = 5;
-                  return api.del("".concat(this._url, "/").concat(id));
+              case 2:
+                _context3.prev = 2;
+                _context3.next = 5;
+                return regeneratorRuntime.awrap(api.del("".concat(this._url, "/").concat(id)));
 
-                case 5:
-                  return _context3.abrupt("return", _context3.sent);
+              case 5:
+                return _context3.abrupt("return", _context3.sent);
 
-                case 8:
-                  _context3.prev = 8;
-                  _context3.t0 = _context3["catch"](2);
-                  return _context3.abrupt("return", Promise.reject(_context3.t0));
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](2);
+                return _context3.abrupt("return", Promise.reject(_context3.t0));
 
-                case 11:
-                case "end":
-                  return _context3.stop();
-              }
+              case 11:
+              case "end":
+                return _context3.stop();
             }
-          }, _callee3, this, [[2, 8]]);
-        }));
-
-        function _delete(_x3) {
-          return _delete2.apply(this, arguments);
-        }
-
-        return _delete;
-      }()
+          }
+        }, null, this, [[2, 8]]);
+      }
     }, {
       key: "notImplemented",
       value: function notImplemented(fnName) {
@@ -1178,244 +1116,204 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }, {
       key: "rpc",
-      value: function () {
-        var _rpc = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee4(path, body, pathPrefix) {
-          var method,
-              slashPath,
-              prefix,
-              url,
-              res,
-              _args4 = arguments;
-          return regeneratorRuntime.wrap(function _callee4$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  method = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : 'post';
-                  slashPath = path ? "/".concat(path) : '';
-                  prefix = pathPrefix || this.constructor._url;
-                  url = "".concat(prefix, "/").concat(this.id).concat(slashPath);
-                  _context4.prev = 4;
+      value: function rpc(path, body, pathPrefix) {
+        var method,
+            slashPath,
+            prefix,
+            url,
+            res,
+            _args4 = arguments;
+        return regeneratorRuntime.async(function rpc$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                method = _args4.length > 3 && _args4[3] !== undefined ? _args4[3] : 'post';
+                slashPath = path ? "/".concat(path) : '';
+                prefix = pathPrefix || this.constructor._url;
+                url = "".concat(prefix, "/").concat(this.id).concat(slashPath);
+                _context4.prev = 4;
 
-                  if (!(method === 'get')) {
-                    _context4.next = 11;
-                    break;
-                  }
-
-                  _context4.next = 8;
-                  return api[method](url, {
-                    query: body
-                  });
-
-                case 8:
-                  res = _context4.sent;
-                  _context4.next = 20;
+                if (!(method === 'get')) {
+                  _context4.next = 11;
                   break;
+                }
 
-                case 11:
-                  if (!body) {
-                    _context4.next = 17;
-                    break;
-                  }
+                _context4.next = 8;
+                return regeneratorRuntime.awrap(api[method](url, {
+                  query: body
+                }));
 
-                  _context4.next = 14;
-                  return api[method](url, {
-                    body: body
-                  });
+              case 8:
+                res = _context4.sent;
+                _context4.next = 20;
+                break;
 
-                case 14:
-                  res = _context4.sent;
-                  _context4.next = 20;
+              case 11:
+                if (!body) {
+                  _context4.next = 17;
                   break;
+                }
 
-                case 17:
-                  _context4.next = 19;
-                  return api[method](url);
+                _context4.next = 14;
+                return regeneratorRuntime.awrap(api[method](url, {
+                  body: body
+                }));
 
-                case 19:
-                  res = _context4.sent;
+              case 14:
+                res = _context4.sent;
+                _context4.next = 20;
+                break;
 
-                case 20:
-                  this.mapProps(res.body);
-                  return _context4.abrupt("return", this);
+              case 17:
+                _context4.next = 19;
+                return regeneratorRuntime.awrap(api[method](url));
 
-                case 24:
-                  _context4.prev = 24;
-                  _context4.t0 = _context4["catch"](4);
-                  throw _context4.t0;
+              case 19:
+                res = _context4.sent;
 
-                case 27:
-                case "end":
-                  return _context4.stop();
-              }
+              case 20:
+                this.mapProps(res.body);
+                return _context4.abrupt("return", this);
+
+              case 24:
+                _context4.prev = 24;
+                _context4.t0 = _context4["catch"](4);
+                throw _context4.t0;
+
+              case 27:
+              case "end":
+                return _context4.stop();
             }
-          }, _callee4, this, [[4, 24]]);
-        }));
-
-        function rpc(_x4, _x5, _x6) {
-          return _rpc.apply(this, arguments);
-        }
-
-        return rpc;
-      }()
+          }
+        }, null, this, [[4, 24]]);
+      }
     }, {
       key: "save",
-      value: function () {
-        var _save = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee5() {
-          var data, res;
-          return regeneratorRuntime.wrap(function _callee5$(_context5) {
-            while (1) {
-              switch (_context5.prev = _context5.next) {
-                case 0:
-                  _context5.prev = 0;
-                  this.validateProperties();
-                  _context5.next = 7;
+      value: function save() {
+        var data, res;
+        return regeneratorRuntime.async(function save$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                this.validateProperties();
+                _context5.next = 7;
+                break;
+
+              case 4:
+                _context5.prev = 4;
+                _context5.t0 = _context5["catch"](0);
+                return _context5.abrupt("return", Promise.reject(_context5.t0));
+
+              case 7:
+                _context5.prev = 7;
+                data = this.constructor.wrapJSON(this.toJSON());
+
+                if (!this.id) {
+                  _context5.next = 15;
                   break;
+                }
 
-                case 4:
-                  _context5.prev = 4;
-                  _context5.t0 = _context5["catch"](0);
-                  return _context5.abrupt("return", Promise.reject(_context5.t0));
+                _context5.next = 12;
+                return regeneratorRuntime.awrap(api.put("".concat(this._url || this.constructor._url, "/").concat(this.id), {
+                  body: data
+                }));
 
-                case 7:
-                  _context5.prev = 7;
-                  data = this.constructor.wrapJSON(this.toJSON());
+              case 12:
+                res = _context5.sent;
+                _context5.next = 18;
+                break;
 
-                  if (!this.id) {
-                    _context5.next = 15;
-                    break;
-                  }
+              case 15:
+                _context5.next = 17;
+                return regeneratorRuntime.awrap(api.post(this._url || this.constructor._url, {
+                  body: data
+                }));
 
-                  _context5.next = 12;
-                  return api.put("".concat(this._url || this.constructor._url, "/").concat(this.id), {
-                    body: data
-                  });
+              case 17:
+                res = _context5.sent;
 
-                case 12:
-                  res = _context5.sent;
-                  _context5.next = 18;
-                  break;
+              case 18:
+                this.mapProps(res.body);
+                return _context5.abrupt("return", this);
 
-                case 15:
-                  _context5.next = 17;
-                  return api.post(this._url || this.constructor._url, {
-                    body: data
-                  });
+              case 22:
+                _context5.prev = 22;
+                _context5.t1 = _context5["catch"](7);
+                throw _context5.t1;
 
-                case 17:
-                  res = _context5.sent;
-
-                case 18:
-                  this.mapProps(res.body);
-                  return _context5.abrupt("return", this);
-
-                case 22:
-                  _context5.prev = 22;
-                  _context5.t1 = _context5["catch"](7);
-                  throw _context5.t1;
-
-                case 25:
-                case "end":
-                  return _context5.stop();
-              }
+              case 25:
+              case "end":
+                return _context5.stop();
             }
-          }, _callee5, this, [[0, 4], [7, 22]]);
-        }));
-
-        function save() {
-          return _save.apply(this, arguments);
-        }
-
-        return save;
-      }()
+          }
+        }, null, this, [[0, 4], [7, 22]]);
+      }
     }, {
       key: "retrieve",
-      value: function () {
-        var _retrieve2 = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee6() {
-          var _this4 = this;
+      value: function retrieve() {
+        var _this4 = this;
 
-          var res, props;
-          return regeneratorRuntime.wrap(function _callee6$(_context6) {
-            while (1) {
-              switch (_context6.prev = _context6.next) {
-                case 0:
-                  if (!this.id) {
-                    _context6.next = 8;
-                    break;
-                  }
-
-                  _context6.next = 3;
-                  return this.constructor.retrieve(this.id);
-
-                case 3:
-                  res = _context6.sent;
-                  props = res.toJSON();
-                  Object.keys(props).forEach(function (k) {
-                    _this4[k] = props[k];
-                  });
-                  _context6.next = 9;
+        var res, props;
+        return regeneratorRuntime.async(function retrieve$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                if (!this.id) {
+                  _context6.next = 8;
                   break;
+                }
 
-                case 8:
-                  throw new Error('Cannot retrieve an object without an id.');
+                _context6.next = 3;
+                return regeneratorRuntime.awrap(this.constructor.retrieve(this.id));
 
-                case 9:
-                case "end":
-                  return _context6.stop();
-              }
+              case 3:
+                res = _context6.sent;
+                props = res.toJSON();
+                Object.keys(props).forEach(function (k) {
+                  _this4[k] = props[k];
+                });
+                _context6.next = 9;
+                break;
+
+              case 8:
+                throw new Error('Cannot retrieve an object without an id.');
+
+              case 9:
+              case "end":
+                return _context6.stop();
             }
-          }, _callee6, this);
-        }));
-
-        function retrieve() {
-          return _retrieve2.apply(this, arguments);
-        }
-
-        return retrieve;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "delete",
-      value: function () {
-        var _delete3 = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee7() {
-          return regeneratorRuntime.wrap(function _callee7$(_context7) {
-            while (1) {
-              switch (_context7.prev = _context7.next) {
-                case 0:
-                  if (!this.id) {
-                    _context7.next = 4;
-                    break;
-                  }
+      value: function _delete() {
+        return regeneratorRuntime.async(function _delete$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                if (!this.id) {
+                  _context7.next = 4;
+                  break;
+                }
 
-                  _context7.next = 3;
-                  return this.constructor.delete(this.id);
+                _context7.next = 3;
+                return regeneratorRuntime.awrap(this.constructor.delete(this.id));
 
-                case 3:
-                  return _context7.abrupt("return", this);
+              case 3:
+                return _context7.abrupt("return", this);
 
-                case 4:
-                  throw new Error('Cannot delete an object without an id.');
+              case 4:
+                throw new Error('Cannot delete an object without an id.');
 
-                case 5:
-                case "end":
-                  return _context7.stop();
-              }
+              case 5:
+              case "end":
+                return _context7.stop();
             }
-          }, _callee7, this);
-        }));
-
-        function _delete() {
-          return _delete3.apply(this, arguments);
-        }
-
-        return _delete;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "toJSON",
       value: function toJSON() {
@@ -1700,10 +1598,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/base.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1752,30 +1646,20 @@ var propTypes = {
 
     _createClass(CarrierType, [{
       key: "save",
-      value: function () {
-        var _save = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee() {
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  return _context.abrupt("return", this.constructor.notImplemented('save'));
+      value: function save() {
+        return regeneratorRuntime.async(function save$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                return _context.abrupt("return", this.constructor.notImplemented('save'));
 
-                case 1:
-                case "end":
-                  return _context.stop();
-              }
+              case 1:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this);
-        }));
-
-        function save() {
-          return _save.apply(this, arguments);
-        }
-
-        return save;
-      }()
+          }
+        }, null, this);
+      }
     }], [{
       key: "retrieve",
       value: function retrieve() {
@@ -1897,13 +1781,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/base.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1981,34 +1861,24 @@ var propTypes = {
 
     _createClass(CustomsItem, [{
       key: "save",
-      value: function () {
-        var _save = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee() {
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  if (this.value && typeof this.value !== 'string') {
-                    this.value = this.value.toString();
-                  }
+      value: function save() {
+        return regeneratorRuntime.async(function save$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (this.value && typeof this.value !== 'string') {
+                  this.value = this.value.toString();
+                }
 
-                  return _context.abrupt("return", _get(_getPrototypeOf(CustomsItem.prototype), "save", this).call(this));
+                return _context.abrupt("return", _get(_getPrototypeOf(CustomsItem.prototype), "save", this).call(this));
 
-                case 2:
-                case "end":
-                  return _context.stop();
-              }
+              case 2:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this);
-        }));
-
-        function save() {
-          return _save.apply(this, arguments);
-        }
-
-        return save;
-      }()
+          }
+        }, null, this);
+      }
     }]);
 
     return CustomsItem;
@@ -2120,10 +1990,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shipment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shipment */ "./resources/shipment.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2179,63 +2045,43 @@ var propTypes = {
 
     _createClass(Order, [{
       key: "buy",
-      value: function () {
-        var _buy = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee(carrier, service) {
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id'],
-                    args: ['carrier', 'service']
-                  }, carrier, service);
-                  return _context.abrupt("return", this.rpc('buy', {
-                    carrier: carrier,
-                    service: service
-                  }));
+      value: function buy(carrier, service) {
+        return regeneratorRuntime.async(function buy$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id'],
+                  args: ['carrier', 'service']
+                }, carrier, service);
+                return _context.abrupt("return", this.rpc('buy', {
+                  carrier: carrier,
+                  service: service
+                }));
 
-                case 2:
-                case "end":
-                  return _context.stop();
-              }
+              case 2:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this);
-        }));
-
-        function buy(_x, _x2) {
-          return _buy.apply(this, arguments);
-        }
-
-        return buy;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "getRates",
-      value: function () {
-        var _getRates = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee2() {
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  return _context2.abrupt("return", this.rpc('rates', undefined, undefined, 'get'));
+      value: function getRates() {
+        return regeneratorRuntime.async(function getRates$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                return _context2.abrupt("return", this.rpc('rates', undefined, undefined, 'get'));
 
-                case 1:
-                case "end":
-                  return _context2.stop();
-              }
+              case 1:
+              case "end":
+                return _context2.stop();
             }
-          }, _callee2, this);
-        }));
-
-        function getRates() {
-          return _getRates.apply(this, arguments);
-        }
-
-        return getRates;
-      }()
+          }
+        }, null, this);
+      }
     }], [{
       key: "delete",
       value: function _delete() {
@@ -2347,10 +2193,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _carrierAccount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./carrierAccount */ "./resources/carrierAccount.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2410,66 +2252,46 @@ var propTypes = {
 
     _createClass(Pickup, [{
       key: "buy",
-      value: function () {
-        var _buy = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee(carrier, service) {
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id'],
-                    args: ['carrier', 'service']
-                  }, carrier, service);
-                  return _context.abrupt("return", this.rpc('buy', {
-                    carrier: carrier,
-                    service: service
-                  }));
+      value: function buy(carrier, service) {
+        return regeneratorRuntime.async(function buy$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id'],
+                  args: ['carrier', 'service']
+                }, carrier, service);
+                return _context.abrupt("return", this.rpc('buy', {
+                  carrier: carrier,
+                  service: service
+                }));
 
-                case 2:
-                case "end":
-                  return _context.stop();
-              }
+              case 2:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this);
-        }));
-
-        function buy(_x, _x2) {
-          return _buy.apply(this, arguments);
-        }
-
-        return buy;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "cancel",
-      value: function () {
-        var _cancel = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee2() {
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id']
-                  });
-                  return _context2.abrupt("return", this.rpc('cancel'));
+      value: function cancel() {
+        return regeneratorRuntime.async(function cancel$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id']
+                });
+                return _context2.abrupt("return", this.rpc('cancel'));
 
-                case 2:
-                case "end":
-                  return _context2.stop();
-              }
+              case 2:
+              case "end":
+                return _context2.stop();
             }
-          }, _callee2, this);
-        }));
-
-        function cancel() {
-          return _cancel.apply(this, arguments);
-        }
-
-        return cancel;
-      }()
+          }
+        }, null, this);
+      }
     }], [{
       key: "all",
       value: function all() {
@@ -2502,10 +2324,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var proptypes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(proptypes__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/base.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2577,33 +2395,23 @@ var propTypes = {
       }
     }, {
       key: "all",
-      value: function () {
-        var _all = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee(type) {
-          var query,
-              _args = arguments;
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  query = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
-                  return _context.abrupt("return", _get(_getPrototypeOf(Report), "all", this).call(this, query, this.constructUrl(type)));
+      value: function all(type) {
+        var query,
+            _args = arguments;
+        return regeneratorRuntime.async(function all$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                query = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
+                return _context.abrupt("return", _get(_getPrototypeOf(Report), "all", this).call(this, query, this.constructUrl(type)));
 
-                case 2:
-                case "end":
-                  return _context.stop();
-              }
+              case 2:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this);
-        }));
-
-        function all(_x) {
-          return _all.apply(this, arguments);
-        }
-
-        return all;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "wrapJSON",
       value: function wrapJSON(json) {
@@ -2749,10 +2557,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tracker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tracker */ "./resources/tracker.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2830,205 +2634,145 @@ var propTypes = {
 
     _createClass(Shipment, [{
       key: "buy",
-      value: function () {
-        var _buy = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee(rate, insuranceAmount) {
-          var rateId, data;
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id'],
-                    args: ['rate']
-                  }, rate);
-                  rateId = rate;
+      value: function buy(rate, insuranceAmount) {
+        var rateId, data;
+        return regeneratorRuntime.async(function buy$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id'],
+                  args: ['rate']
+                }, rate);
+                rateId = rate;
 
-                  if (_typeof(rate) === 'object') {
-                    rateId = rate.id;
+                if (_typeof(rate) === 'object') {
+                  rateId = rate.id;
+                }
+
+                data = {
+                  rate: {
+                    id: rateId
                   }
+                };
 
-                  data = {
-                    rate: {
-                      id: rateId
-                    }
-                  };
+                if (insuranceAmount) {
+                  data.insurance = insuranceAmount;
+                }
 
-                  if (insuranceAmount) {
-                    data.insurance = insuranceAmount;
-                  }
+                return _context.abrupt("return", this.rpc('buy', data));
 
-                  return _context.abrupt("return", this.rpc('buy', data));
-
-                case 6:
-                case "end":
-                  return _context.stop();
-              }
+              case 6:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this);
-        }));
-
-        function buy(_x, _x2) {
-          return _buy.apply(this, arguments);
-        }
-
-        return buy;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "convertLabelFormat",
-      value: function () {
-        var _convertLabelFormat = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee2(format) {
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id'],
-                    args: ['format']
-                  }, format);
-                  return _context2.abrupt("return", this.rpc('label', {
-                    file_format: format
-                  }, undefined, 'get'));
+      value: function convertLabelFormat(format) {
+        return regeneratorRuntime.async(function convertLabelFormat$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id'],
+                  args: ['format']
+                }, format);
+                return _context2.abrupt("return", this.rpc('label', {
+                  file_format: format
+                }, undefined, 'get'));
 
-                case 2:
-                case "end":
-                  return _context2.stop();
-              }
+              case 2:
+              case "end":
+                return _context2.stop();
             }
-          }, _callee2, this);
-        }));
-
-        function convertLabelFormat(_x3) {
-          return _convertLabelFormat.apply(this, arguments);
-        }
-
-        return convertLabelFormat;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "regenerateRates",
-      value: function () {
-        var _regenerateRates = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee3() {
-          return regeneratorRuntime.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id']
-                  });
-                  return _context3.abrupt("return", this.rpc('rates', undefined, undefined, 'get'));
+      value: function regenerateRates() {
+        return regeneratorRuntime.async(function regenerateRates$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id']
+                });
+                return _context3.abrupt("return", this.rpc('rates', undefined, undefined, 'get'));
 
-                case 2:
-                case "end":
-                  return _context3.stop();
-              }
+              case 2:
+              case "end":
+                return _context3.stop();
             }
-          }, _callee3, this);
-        }));
-
-        function regenerateRates() {
-          return _regenerateRates.apply(this, arguments);
-        }
-
-        return regenerateRates;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "insure",
-      value: function () {
-        var _insure = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee4(amount) {
-          return regeneratorRuntime.wrap(function _callee4$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id'],
-                    args: ['amount']
-                  }, amount);
-                  return _context4.abrupt("return", this.rpc('insure', {
-                    amount: amount
-                  }));
+      value: function insure(amount) {
+        return regeneratorRuntime.async(function insure$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id'],
+                  args: ['amount']
+                }, amount);
+                return _context4.abrupt("return", this.rpc('insure', {
+                  amount: amount
+                }));
 
-                case 2:
-                case "end":
-                  return _context4.stop();
-              }
+              case 2:
+              case "end":
+                return _context4.stop();
             }
-          }, _callee4, this);
-        }));
-
-        function insure(_x4) {
-          return _insure.apply(this, arguments);
-        }
-
-        return insure;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "refund",
-      value: function () {
-        var _refund = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee5() {
-          return regeneratorRuntime.wrap(function _callee5$(_context5) {
-            while (1) {
-              switch (_context5.prev = _context5.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id']
-                  });
-                  return _context5.abrupt("return", this.rpc('refund'));
+      value: function refund() {
+        return regeneratorRuntime.async(function refund$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id']
+                });
+                return _context5.abrupt("return", this.rpc('refund'));
 
-                case 2:
-                case "end":
-                  return _context5.stop();
-              }
+              case 2:
+              case "end":
+                return _context5.stop();
             }
-          }, _callee5, this);
-        }));
-
-        function refund() {
-          return _refund.apply(this, arguments);
-        }
-
-        return refund;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "return",
-      value: function () {
-        var _return2 = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee6() {
-          var data;
-          return regeneratorRuntime.wrap(function _callee6$(_context6) {
-            while (1) {
-              switch (_context6.prev = _context6.next) {
-                case 0:
-                  this.verifyParameters({
-                    this: ['id', 'to_address', 'from_address']
-                  });
-                  data = this.toJSON();
-                  data.is_return = true;
-                  return _context6.abrupt("return", this.rpc('', data));
+      value: function _return() {
+        var data;
+        return regeneratorRuntime.async(function _return$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                this.verifyParameters({
+                  this: ['id', 'to_address', 'from_address']
+                });
+                data = this.toJSON();
+                data.is_return = true;
+                return _context6.abrupt("return", this.rpc('', data));
 
-                case 4:
-                case "end":
-                  return _context6.stop();
-              }
+              case 4:
+              case "end":
+                return _context6.stop();
             }
-          }, _callee6, this);
-        }));
-
-        function _return() {
-          return _return2.apply(this, arguments);
-        }
-
-        return _return;
-      }()
+          }
+        }, null, this);
+      }
     }, {
       key: "lowestRate",
       value: function lowestRate(carriers, services) {
@@ -3169,10 +2913,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/base.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3224,49 +2964,39 @@ var propTypes = {
 
     _createClass(User, null, [{
       key: "retrieve",
-      value: function () {
-        var _retrieve = _asyncToGenerator(
-        /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee(id, urlPrefix) {
-          var url, res;
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.prev = 0;
-                  url = urlPrefix || this._url; // retrieve self
+      value: function retrieve(id, urlPrefix) {
+        var url, res;
+        return regeneratorRuntime.async(function retrieve$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                url = urlPrefix || this._url; // retrieve self
 
-                  if (id) {
-                    // retrieve child users
-                    url = urlPrefix ? "".concat(urlPrefix, "/").concat(id) : "".concat(this._url, "/").concat(id);
-                  }
+                if (id) {
+                  // retrieve child users
+                  url = urlPrefix ? "".concat(urlPrefix, "/").concat(id) : "".concat(this._url, "/").concat(id);
+                }
 
-                  _context.next = 5;
-                  return api.get(url);
+                _context.next = 5;
+                return regeneratorRuntime.awrap(api.get(url));
 
-                case 5:
-                  res = _context.sent;
-                  return _context.abrupt("return", this.create(res.body));
+              case 5:
+                res = _context.sent;
+                return _context.abrupt("return", this.create(res.body));
 
-                case 9:
-                  _context.prev = 9;
-                  _context.t0 = _context["catch"](0);
-                  return _context.abrupt("return", Promise.reject(_context.t0));
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](0);
+                return _context.abrupt("return", Promise.reject(_context.t0));
 
-                case 12:
-                case "end":
-                  return _context.stop();
-              }
+              case 12:
+              case "end":
+                return _context.stop();
             }
-          }, _callee, this, [[0, 9]]);
-        }));
-
-        function retrieve(_x, _x2) {
-          return _retrieve.apply(this, arguments);
-        }
-
-        return retrieve;
-      }()
+          }
+        }, null, this, [[0, 9]]);
+      }
     }, {
       key: "all",
       value: function all() {
