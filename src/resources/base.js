@@ -23,7 +23,9 @@ export default api => (
       try {
         url = url || this._url;
         const res = await api.get(url, { query });
-        return this.unwrapAll(res.body).map(this.create.bind(this));
+        const result = this.unwrapAll(res.body).map(this.create.bind(this));
+        result.has_more = res.body.has_more;
+        return result;
       } catch (e) {
         return Promise.reject(e);
       }

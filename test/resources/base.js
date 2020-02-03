@@ -44,13 +44,14 @@ describe('Base Resource', () => {
       });
 
       it('can call all from the API via url', () => {
-        stub = apiStub(url, false, { base: [{ }] });
+        stub = apiStub(url, false, { base: [{ }], has_more: true });
         Base = base(stub);
         Base._url = url;
 
         return Base.all().then((bs) => {
           expect(stub.get).to.have.been.calledOnce;
           expect(stub.get).to.have.been.calledWith(Base._url, { query: {} });
+          expect(bs.has_more).to.equal(true);
           bs.map(b => expect(b).to.be.an.instanceOf(Base));
         }, (err) => { throw new Error(err); });
       });
