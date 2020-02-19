@@ -1,6 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import { node, rules } from '@easypost/build';
 
+
 function config(output, nodestr) {
   const nodeConfig = node({
     entry: './src/easypost.js',

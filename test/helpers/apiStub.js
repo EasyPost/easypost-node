@@ -1,5 +1,6 @@
 import RequestError from '../../src/errors/request';
 
+
 function buildGetStub(baseUrl, fail, data) {
   const stub = sinon.stub();
 

@@ -1,6 +1,7 @@
-import { default as batch, DEFAULT_LABEL_FORMAT } from '../../src/resources/batch';
+import batch, { DEFAULT_LABEL_FORMAT } from '../../src/resources/batch';
 import apiStub from '../helpers/apiStub';
 import NotImplementedError from '../../src/errors/notImplemented';
+
 
 describe('Batch Resource', () => {
   it('exists', () => {
@@ -10,7 +11,7 @@ describe('Batch Resource', () => {
 
   it('throws on delete', () => {
     const Batch = batch(apiStub());
-    return Batch.delete('id').then(() => {}, (err) => {
+    return Batch.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -19,7 +20,7 @@ describe('Batch Resource', () => {
     const Batch = batch(apiStub());
     const instance = new Batch({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

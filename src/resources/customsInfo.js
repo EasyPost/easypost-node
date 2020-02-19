@@ -2,6 +2,7 @@ import T from 'proptypes';
 import base from './base';
 import { propTypes as ciPropTypes } from './customsItem';
 
+
 export const propTypes = {
   id: T.string,
   object: T.string,

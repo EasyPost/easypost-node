@@ -1,8 +1,8 @@
-import {
-  default as RequestError,
+import RequestError, {
   NAME,
   createMessage,
 } from '../../src/errors/request';
+
 
 describe('Request Errors', () => {
   const error = {

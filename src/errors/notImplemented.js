@@ -1,5 +1,6 @@
 import Error from './error';
 
+
 export const NAME = 'NotImplementedError';
 export const STATUS = 405;
 

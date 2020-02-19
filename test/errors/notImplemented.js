@@ -1,18 +1,17 @@
-import {
-  default as NotImplementedError,
+import NotImplementedError, {
   NAME,
   STATUS,
   createMessage,
 } from '../../src/errors/notImplemented';
+
 
 describe('NotImplemented', () => {
   const method = 'GET';
   const endpoint = 'addresses';
 
   it('generates a helpful error message', () => {
-    expect((new NotImplementedError(method, endpoint)).message).to.equal(
-      createMessage(method, endpoint),
-    );
+    expect((new NotImplementedError(method, endpoint)).message)
+      .to.equal(createMessage(method, endpoint));
   });
 
   it('provides a status code', () => {

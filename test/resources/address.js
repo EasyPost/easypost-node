@@ -2,6 +2,7 @@ import address from '../../src/resources/address';
 import apiStub from '../helpers/apiStub';
 import NotImplementedError from '../../src/errors/notImplemented';
 
+
 describe('Address Resource', () => {
   it('exists', () => {
     expect(address).to.not.be.undefined;
@@ -10,14 +11,14 @@ describe('Address Resource', () => {
 
   it('throws on all', () => {
     const Address = address(apiStub());
-    return Address.all().then(() => {}, (err) => {
+    return Address.all().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const Address = address(apiStub());
-    return Address.delete('id').then(() => {}, (err) => {
+    return Address.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -26,7 +27,7 @@ describe('Address Resource', () => {
     const Address = address(apiStub());
     const instance = new Address({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

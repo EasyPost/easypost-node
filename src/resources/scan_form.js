@@ -2,6 +2,7 @@ import T from 'proptypes';
 import base from './base';
 import { propTypes as addressPropTypes } from './address';
 
+
 export const propTypes = {
   id: T.string,
   object: T.string,

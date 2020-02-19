@@ -2,6 +2,7 @@ import apiStub from '../helpers/apiStub';
 import NotImplementedError from '../../src/errors/notImplemented';
 import carrierAccount from '../../src/resources/carrierAccount';
 
+
 describe('CarrierAccount Resource', () => {
   it('exists', () => {
     expect(carrierAccount).to.not.be.undefined;
@@ -10,7 +11,7 @@ describe('CarrierAccount Resource', () => {
 
   it('throws on retrieve', () => {
     const CarrierAccount = carrierAccount(apiStub());
-    return CarrierAccount.retrieve().then(() => {}, (err) => {
+    return CarrierAccount.retrieve().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -19,7 +20,7 @@ describe('CarrierAccount Resource', () => {
     const CarrierAccount = carrierAccount(apiStub());
     const cti = new CarrierAccount();
 
-    return cti.save().then(() => {}, (err) => {
+    return cti.save().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

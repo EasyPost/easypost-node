@@ -7,6 +7,7 @@ import RequestError from '../../src/errors/request';
 import NotImplementedError from '../../src/errors/notImplemented';
 import ValidationError from '../../src/errors/validation';
 
+
 describe('Base Resource', () => {
   it('exists', () => {
     expect(base).to.not.be.undefined;
@@ -36,11 +37,11 @@ describe('Base Resource', () => {
         Base = base(stub);
         Base._url = url;
 
-        return Base.retrieve('id').then((b) => {
+        return Base.retrieve('id').then(b => {
           expect(stub.get).to.have.been.calledOnce;
           expect(stub.get).to.have.been.calledWith(`${Base._url}/id`);
           expect(b).to.be.an.instanceOf(Base);
-        }, (err) => { throw new Error(err); });
+        }, err => { throw new Error(err); });
       });
 
       it('can call all from the API via url', () => {
@@ -48,12 +49,12 @@ describe('Base Resource', () => {
         Base = base(stub);
         Base._url = url;
 
-        return Base.all().then((bs) => {
+        return Base.all().then(bs => {
           expect(stub.get).to.have.been.calledOnce;
           expect(stub.get).to.have.been.calledWith(Base._url, { query: {} });
           expect(bs.has_more).to.equal(true);
           bs.map(b => expect(b).to.be.an.instanceOf(Base));
-        }, (err) => { throw new Error(err); });
+        }, err => { throw new Error(err); });
       });
 
       it('can delete from the API with an id', () => {
@@ -66,13 +67,13 @@ describe('Base Resource', () => {
         return Base.delete(id).then(() => {
           expect(stub.del).to.have.been.calledOnce;
           expect(stub.del).to.have.been.calledWith(`${Base._url}/${id}`);
-        }, (err) => { throw new Error(err); });
+        }, err => { throw new Error(err); });
       });
 
       it('throws if delete is called without an id', () => {
-        Base.delete().catch((e) => {
+        Base.delete().catch(e => {
           expect(e.message).to.match(/no id was passed in/i);
-        }, (err) => { throw new Error(err); });
+        }, err => { throw new Error(err); });
       });
     });
 
@@ -83,30 +84,24 @@ describe('Base Resource', () => {
         Base._url = url;
       });
 
-      it('can handle failures on retrieve', () => {
-        return Base.retrieve('id').then(() => {}, (err) => {
-          expect(err).to.be.an.instanceOf(RequestError);
-        });
-      });
+      it('can handle failures on retrieve', () => Base.retrieve('id').then(() => {}, err => {
+        expect(err).to.be.an.instanceOf(RequestError);
+      }));
 
-      it('can handle failures on all', () => {
-        return Base.all().then(() => {}, (err) => {
-          expect(err).to.be.an.instanceOf(RequestError);
-        });
-      });
+      it('can handle failures on all', () => Base.all().then(() => {}, err => {
+        expect(err).to.be.an.instanceOf(RequestError);
+      }));
 
-      it('can handle failures on del', () => {
-        return Base.delete('id').then(() => {}, (err) => {
-          expect(err).to.be.an.instanceOf(RequestError);
-        });
-      });
+      it('can handle failures on del', () => Base.delete('id').then(() => {}, err => {
+        expect(err).to.be.an.instanceOf(RequestError);
+      }));
     });
   });
 
   it('can provide a notimplemented helper', () => {
     const stub = apiStub();
     const Base = base(stub);
-    return Base.notImplemented('test').then(() => {}, (err) => {
+    return Base.notImplemented('test').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -228,7 +223,7 @@ describe('Base Resource', () => {
       const bi = new Base(data);
       return bi.save().then(() => {
         expect(stub.post).to.have.been.calledWith(Base._url, { body: Base.wrapJSON(bi.toJSON()) });
-      }, (err) => { throw new Error(err); });
+      }, err => { throw new Error(err); });
     });
 
     it('calls api put when it has an id', () => {
@@ -237,7 +232,7 @@ describe('Base Resource', () => {
 
       return bi.save().then(() => {
         expect(stub.put).to.have.been.calledWith(`${Base._url}/${bi.id}`, { body: Base.wrapJSON(bi.toJSON()) });
-      }, (err) => { throw new Error(err); });
+      }, err => { throw new Error(err); });
     });
 
     it('rejects on api failure', () => {
@@ -246,16 +241,14 @@ describe('Base Resource', () => {
       Base._name = name;
       Base._url = name;
 
-      return new Base(data).save().then(() => {}, (err) => {
+      return new Base(data).save().then(() => {}, err => {
         expect(err).to.be.a.instanceOf(RequestError);
       });
     });
 
-    it('rejects when invalid data is passed in', () => {
-      return new Base({ a: 1 }).save().then(() => {}, (err) => {
-        expect(err).to.be.a.instanceOf(ValidationError);
-      });
-    });
+    it('rejects when invalid data is passed in', () => new Base({ a: 1 }).save().then(() => {}, err => {
+      expect(err).to.be.a.instanceOf(ValidationError);
+    }));
   });
 
   describe('retrieve()', () => {
@@ -280,7 +273,7 @@ describe('Base Resource', () => {
 
       return bi.retrieve().then(() => {
         expect(retrieveStub).to.have.been.calledWith(bi.id);
-      }, (err) => { throw new Error(err); });
+      }, err => { throw new Error(err); });
     });
 
     it('throws if there is no instance id', () => {
@@ -288,7 +281,7 @@ describe('Base Resource', () => {
 
       const bi = new Base(data);
 
-      bi.retrieve().catch((e) => {
+      bi.retrieve().catch(e => {
         expect(e.message).to.match(/without an id/);
       });
     });
@@ -316,7 +309,7 @@ describe('Base Resource', () => {
 
       return bi.delete().then(() => {
         expect(deleteStub).to.have.been.calledWith(bi.id);
-      }, (err) => { throw new Error(err); });
+      }, err => { throw new Error(err); });
     });
 
     it('throws if there is no instance id', () => {
@@ -324,7 +317,7 @@ describe('Base Resource', () => {
 
       const bi = new Base(data);
 
-      bi.delete().catch((e) => {
+      bi.delete().catch(e => {
         expect(e.message).to.match(/without an id/);
       });
     });
@@ -354,7 +347,7 @@ describe('Base Resource', () => {
 
       return bi.rpc(path, body).then(() => {
         expect(stub.post).to.have.been.calledWith(url, { body });
-      }, (err) => { throw new Error(err); });
+      }, err => { throw new Error(err); });
     });
 
     it('maps response props to itself', () => {
@@ -368,7 +361,7 @@ describe('Base Resource', () => {
 
       return bi.rpc(path, body).then(() => {
         expect(bi.b).to.equal(resData.b);
-      }, (err) => { throw new Error(err); });
+      }, err => { throw new Error(err); });
     });
 
     it('rejects on api failure', () => {
@@ -377,7 +370,7 @@ describe('Base Resource', () => {
       Base._name = name;
       Base._url = name;
 
-      return new Base(data).rpc().then(() => {}, (err) => {
+      return new Base(data).rpc().then(() => {}, err => {
         expect(err).to.be.a.instanceOf(RequestError);
       });
     });

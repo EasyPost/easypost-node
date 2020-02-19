@@ -1,5 +1,6 @@
 import Error from '../../src/errors/error';
 
+
 describe('Error', () => {
   it('captures the stack trace', () => {
     expect((new Error()).stack).to.be.a('string');

@@ -1,6 +1,7 @@
 import ValidationError from '../errors/validation';
 import NotImplementedError from '../errors/notImplemented';
 
+
 export default api => (
   class Base {
     static _url = null;

@@ -2,6 +2,7 @@ import customsItem from '../../src/resources/customsItem';
 import apiStub from '../helpers/apiStub';
 import NotImplementedError from '../../src/errors/notImplemented';
 
+
 describe('Customs Item Resource', () => {
   it('exists', () => {
     expect(customsItem).to.not.be.undefined;
@@ -27,14 +28,14 @@ describe('Customs Item Resource', () => {
 
   it('throws on all', () => {
     const CustomsItem = customsItem(apiStub());
-    return CustomsItem.all().then(() => {}, (err) => {
+    return CustomsItem.all().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const CustomsItem = customsItem(apiStub());
-    return CustomsItem.delete('id').then(() => {}, (err) => {
+    return CustomsItem.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -43,7 +44,7 @@ describe('Customs Item Resource', () => {
     const CustomsItem = customsItem(apiStub());
     const instance = new CustomsItem({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

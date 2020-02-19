@@ -1,9 +1,9 @@
-import {
-  default as ValidationError,
+import ValidationError, {
   NAME,
   STATUS,
   createMessage,
 } from '../../src/errors/validation';
+
 
 describe('Validation Errors', () => {
   const errors = ['bad thing'];
