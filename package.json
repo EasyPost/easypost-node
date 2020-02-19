@@ -21,7 +21,7 @@
     "test": "eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test",
     "test:coverage": "cross-env NODE_ENV=test nyc mocha --recursive ./test",
     "build": "ep-node-build",
-    "lint": "eslint src test --fix",
+    "lint": "eslint src test",
     "watch": "ep-node-build --watch",
     "repl": "./repl.js --local easypost.js"
   },
@@ -45,7 +45,7 @@
     "@babel/preset-env": "^7.7.6",
     "@babel/register": "^7.7.4",
     "@easypost/build": "^2.4.2",
-    "@easypost/eslint-config-easypost-base": "1.0.3",
+    "@easypost/eslint-config-easypost-base": "~1.0.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^5.1.4",
