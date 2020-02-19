@@ -7,6 +7,7 @@ import { propTypes as customsInfoPropTypes } from './customsInfo';
 import { propTypes as insurancePropTypes } from './insurance';
 import { propTypes as trackerPropTypes } from './tracker';
 
+
 export const propTypes = {
   id: T.string,
   object: T.string,

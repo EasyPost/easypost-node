@@ -3,6 +3,7 @@ import NotImplementedError from '../../src/errors/notImplemented';
 
 import scanForm from '../../src/resources/scan_form';
 
+
 describe('ScanForm Resource', () => {
   it('exists', () => {
     expect(scanForm).to.not.be.undefined;
@@ -17,7 +18,7 @@ describe('ScanForm Resource', () => {
 
   it('throws on delete', () => {
     const ScanForm = scanForm(apiStub());
-    return ScanForm.delete('id').then(() => {}, (err) => {
+    return ScanForm.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -26,7 +27,7 @@ describe('ScanForm Resource', () => {
     const ScanForm = scanForm(apiStub());
     const instance = new ScanForm({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

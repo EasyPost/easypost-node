@@ -2,6 +2,7 @@ import apiStub from '../helpers/apiStub';
 import NotImplementedError from '../../src/errors/notImplemented';
 import user, { propTypes } from '../../src/resources/user';
 
+
 describe('User Resource', () => {
   it('exists', () => {
     expect(user).to.not.be.undefined;
@@ -10,7 +11,7 @@ describe('User Resource', () => {
 
   it('throws on all', () => {
     const User = user(apiStub());
-    return User.all().then(() => {}, (err) => {
+    return User.all().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

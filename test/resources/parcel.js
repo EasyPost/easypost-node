@@ -2,6 +2,7 @@ import parcel from '../../src/resources/parcel';
 import apiStub from '../helpers/apiStub';
 import NotImplementedError from '../../src/errors/notImplemented';
 
+
 describe('Parcel Resource', () => {
   it('exists', () => {
     expect(parcel).to.not.be.undefined;
@@ -26,14 +27,14 @@ describe('Parcel Resource', () => {
 
   it('throws on all', () => {
     const Parcel = parcel(apiStub());
-    return Parcel.all().then(() => {}, (err) => {
+    return Parcel.all().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const Parcel = parcel(apiStub());
-    return Parcel.delete().then(() => {}, (err) => {
+    return Parcel.delete().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -42,7 +43,7 @@ describe('Parcel Resource', () => {
     const Parcel = parcel(apiStub());
     const instance = new Parcel({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

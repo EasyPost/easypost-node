@@ -2,6 +2,7 @@ import apiStub from '../helpers/apiStub';
 
 import webhook from '../../src/resources/webhook';
 
+
 describe('Webhook Resource', () => {
   it('exists', () => {
     expect(webhook).to.not.be.undefined;

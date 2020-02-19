@@ -2,6 +2,7 @@ import apiStub from '../helpers/apiStub';
 import NotImplementedError from '../../src/errors/notImplemented';
 import apiKey from '../../src/resources/apiKey';
 
+
 describe('ApiKey Resource', () => {
   let ApiKey;
   let key;
@@ -18,37 +19,30 @@ describe('ApiKey Resource', () => {
     expect(apiKey).to.be.a('function');
   });
 
-  it('throws on retrieve', () => {
-    return ApiKey.retrieve().then(() => {}, (err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
-  });
+  it('throws on retrieve', () => ApiKey.retrieve().then(() => {}, err => {
+    expect(err).to.be.an.instanceOf(NotImplementedError);
+  }));
 
-  it('throws on delete', () => {
-    return ApiKey.delete('id').then(() => {}, (err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
-  });
+  it('throws on delete', () => ApiKey.delete('id').then(() => {}, err => {
+    expect(err).to.be.an.instanceOf(NotImplementedError);
+  }));
 
   it('throws on instance delete', () => {
-    const ApiKey = apiKey(apiStub());
     const instance = new ApiKey({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
-  it('throws on all', () => {
-    return ApiKey.all().then(() => {}, (err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
-  });
+  it('throws on all', () => ApiKey.all().then(() => {}, err => {
+    expect(err).to.be.an.instanceOf(NotImplementedError);
+  }));
 
   it('throws on save', () => {
     const cti = new ApiKey();
 
-    return cti.save().then(() => {}, (err) => {
+    return cti.save().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

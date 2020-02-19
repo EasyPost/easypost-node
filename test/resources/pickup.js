@@ -4,6 +4,7 @@ import address from '../../src/resources/address';
 import pickup from '../../src/resources/pickup';
 import NotImplementedError from '../../src/errors/notImplemented';
 
+
 describe('Pickup Resource', () => {
   it('exists', () => {
     expect(pickup).to.not.be.undefined;
@@ -12,14 +13,14 @@ describe('Pickup Resource', () => {
 
   it('throws on all', () => {
     const Pickup = pickup(apiStub());
-    return Pickup.all().then(() => {}, (err) => {
+    return Pickup.all().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const Pickup = pickup(apiStub());
-    return Pickup.delete().then(() => {}, (err) => {
+    return Pickup.delete().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -28,7 +29,7 @@ describe('Pickup Resource', () => {
     const Pickup = pickup(apiStub());
     const instance = new Pickup({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -46,21 +47,21 @@ describe('Pickup Resource', () => {
 
     it('throws if buy is called and pickup does not have an id', () => {
       pi = new Pickup();
-      pi.buy().catch((e) => {
+      pi.buy().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
       });
     });
 
     it('throws if buy is called without carrier', () => {
-      pi.buy().catch((e) => {
+      pi.buy().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/carrier/);
       });
     });
 
     it('throws if buy is called without service', () => {
-      pi.buy('carrier').catch((e) => {
+      pi.buy('carrier').catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/service/);
       });
@@ -79,14 +80,14 @@ describe('Pickup Resource', () => {
       });
     });
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       const carrier = 'carrier';
       const service = 'service';
 
       Pickup = pickup(apiStub('pickup', true));
       pi = new Pickup({ id: '1' });
 
-      pi.buy(carrier, service).catch((e) => {
+      pi.buy(carrier, service).catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });
@@ -104,27 +105,25 @@ describe('Pickup Resource', () => {
       pi = new Pickup({ id: '1' });
     });
 
-    it('throws if cancel is called and pickup does not have an id', (done) => {
+    it('throws if cancel is called and pickup does not have an id', done => {
       pi = new Pickup();
-      pi.cancel().catch((e) => {
+      pi.cancel().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
         done();
       });
     });
 
-    it('calls api.post when cancel is called', () => {
-      return pi.cancel().then(() => {
-        expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`pickups/${pi.id}/cancel`);
-      });
-    });
+    it('calls api.post when cancel is called', () => pi.cancel().then(() => {
+      expect(stub.post).to.have.been.called;
+      expect(stub.post).to.have.been.calledWith(`pickups/${pi.id}/cancel`);
+    }));
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       Pickup = pickup(apiStub('pickup', true));
       pi = new Pickup({ id: '1' });
 
-      pi.cancel().catch((e) => {
+      pi.cancel().catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });

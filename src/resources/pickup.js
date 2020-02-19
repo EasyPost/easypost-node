@@ -6,6 +6,7 @@ import { propTypes as batchPropTypes } from './batch';
 import { propTypes as addressPropTypes } from './address';
 import { propTypes as carrierAccountPropTypes } from './carrierAccount';
 
+
 export const propTypes = {
   id: T.string,
   object: T.string,

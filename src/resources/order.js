@@ -4,6 +4,7 @@ import base from './base';
 import { propTypes as addressPropTypes } from './address';
 import { propTypes as shipmentPropTypes } from './shipment';
 
+
 export const propTypes = {
   id: T.string,
   reference: T.string,

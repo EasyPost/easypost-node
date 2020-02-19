@@ -1,5 +1,6 @@
 import Error from './error';
 
+
 export const createMessage = className => (
   `Failed validating ${className}. View \`e.errors\` for details.`
 );

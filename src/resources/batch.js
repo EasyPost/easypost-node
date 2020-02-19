@@ -1,6 +1,7 @@
 import T from 'proptypes';
 import base from './base';
 
+
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
 export const propTypes = {

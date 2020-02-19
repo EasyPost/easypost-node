@@ -10,6 +10,7 @@ import tracker from '../../src/resources/tracker';
 
 import shipment from '../../src/resources/shipment';
 
+
 describe('Shipment Resource', () => {
   it('exists', () => {
     expect(shipment).to.not.be.undefined;
@@ -18,7 +19,7 @@ describe('Shipment Resource', () => {
 
   it('throws on delete', () => {
     const Shipment = shipment(apiStub());
-    return Shipment.delete().then(() => {}, (err) => {
+    return Shipment.delete().then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -27,7 +28,7 @@ describe('Shipment Resource', () => {
     const Shipment = shipment(apiStub());
     const instance = new Shipment({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -43,17 +44,17 @@ describe('Shipment Resource', () => {
       si = new Shipment({ id: '1' });
     });
 
-    it('throws if buy is called and shipment does not have an id', (done) => {
+    it('throws if buy is called and shipment does not have an id', done => {
       si = new Shipment();
-      si.buy().catch((e) => {
+      si.buy().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
         done();
       });
     });
 
-    it('throws if buy is called without rate', (done) => {
-      si.buy().catch((e) => {
+    it('throws if buy is called without rate', done => {
+      si.buy().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/rate/);
         done();
@@ -85,14 +86,14 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       const carrier = 'carrier';
       const service = 'service';
 
       Shipment = shipment(apiStub('shipment', true));
       si = new Shipment({ id: '1' });
 
-      si.buy(carrier, service).catch((e) => {
+      si.buy(carrier, service).catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });
@@ -110,17 +111,17 @@ describe('Shipment Resource', () => {
       si = new Shipment({ id: '1' });
     });
 
-    it('throws if insure is called and shipment does not have an id', (done) => {
+    it('throws if insure is called and shipment does not have an id', done => {
       si = new Shipment();
-      si.insure().catch((e) => {
+      si.insure().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
         done();
       });
     });
 
-    it('throws if insure is called without amount', (done) => {
-      si.insure().catch((e) => {
+    it('throws if insure is called without amount', done => {
+      si.insure().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/amount/);
         done();
@@ -139,13 +140,13 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       const amount = 100;
 
       Shipment = shipment(apiStub('shipment', true));
       si = new Shipment({ id: '1' });
 
-      si.insure(amount).catch((e) => {
+      si.insure(amount).catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });
@@ -164,17 +165,17 @@ describe('Shipment Resource', () => {
       si = new Shipment({ id: '1' });
     });
 
-    it('throws if convertLabelFormat is called and shipment does not have an id', (done) => {
+    it('throws if convertLabelFormat is called and shipment does not have an id', done => {
       si = new Shipment();
-      si.convertLabelFormat().catch((e) => {
+      si.convertLabelFormat().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
         done();
       });
     });
 
-    it('throws if convertLabelFormat is called without format', (done) => {
-      si.convertLabelFormat().catch((e) => {
+    it('throws if convertLabelFormat is called without format', done => {
+      si.convertLabelFormat().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/format/);
         done();
@@ -191,13 +192,13 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       const format = 'png';
 
       Shipment = shipment(apiStub('shipment', true));
       si = new Shipment({ id: '1' });
 
-      si.convertLabelFormat(format).catch((e) => {
+      si.convertLabelFormat(format).catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });
@@ -215,27 +216,25 @@ describe('Shipment Resource', () => {
       si = new Shipment({ id: '1' });
     });
 
-    it('throws if regenerateRates is called and shipment does not have an id', (done) => {
+    it('throws if regenerateRates is called and shipment does not have an id', done => {
       si = new Shipment();
-      si.regenerateRates().catch((e) => {
+      si.regenerateRates().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
         done();
       });
     });
 
-    it('calls api.post when regenerateRates is called', () => {
-      return si.regenerateRates().then(() => {
-        expect(stub.get).to.have.been.called;
-        expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/rates`);
-      });
-    });
+    it('calls api.post when regenerateRates is called', () => si.regenerateRates().then(() => {
+      expect(stub.get).to.have.been.called;
+      expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/rates`);
+    }));
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       Shipment = shipment(apiStub('shipment', true));
       si = new Shipment({ id: '1' });
 
-      si.regenerateRates().catch((e) => {
+      si.regenerateRates().catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });
@@ -253,27 +252,25 @@ describe('Shipment Resource', () => {
       si = new Shipment({ id: '1' });
     });
 
-    it('throws if refund is called and shipment does not have an id', (done) => {
+    it('throws if refund is called and shipment does not have an id', done => {
       si = new Shipment();
-      si.refund().catch((e) => {
+      si.refund().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
         done();
       });
     });
 
-    it('calls api.post when refund is called', () => {
-      return si.refund().then(() => {
-        expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/refund`);
-      });
-    });
+    it('calls api.post when refund is called', () => si.refund().then(() => {
+      expect(stub.post).to.have.been.called;
+      expect(stub.post).to.have.been.calledWith(`shipments/${si.id}/refund`);
+    }));
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       Shipment = shipment(apiStub('shipment', true));
       si = new Shipment({ id: '1' });
 
-      si.refund().catch((e) => {
+      si.refund().catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });
@@ -291,17 +288,17 @@ describe('Shipment Resource', () => {
       si = new Shipment({ id: '1' });
     });
 
-    it('throws if return is called and shipment does not have an id', (done) => {
+    it('throws if return is called and shipment does not have an id', done => {
       si = new Shipment();
-      si.return().catch((e) => {
+      si.return().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
         done();
       });
     });
 
-    it('throws if return is called and shipment does not have a to_address or from_address', (done) => {
-      si.return().catch((e) => {
+    it('throws if return is called and shipment does not have a to_address or from_address', done => {
+      si.return().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/to_address/);
         done();
@@ -322,7 +319,7 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       const Address = address(stub);
       const toAddress = new Address({ id: '1' });
       const fromAddress = new Address({ id: '2' });
@@ -332,7 +329,7 @@ describe('Shipment Resource', () => {
       si.to_address = toAddress;
       si.from_address = fromAddress;
 
-      si.return().catch((e) => {
+      si.return().catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });

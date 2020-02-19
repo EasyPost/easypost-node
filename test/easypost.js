@@ -3,14 +3,14 @@ import superagentStub from './helpers/superagentStub';
 
 import RequestError from '../src/errors/request';
 
-import {
-  default as API,
+import API, {
   DEFAULT_HEADERS,
   DEFAULT_TIMEOUT,
   DEFAULT_BASE_URL,
   METHODS,
   RESOURCES,
 } from '../src/easypost';
+
 
 describe('Base API object', () => {
   const key = 'abc';
@@ -79,7 +79,7 @@ describe('Base API object', () => {
 
     it('sets up bound resources', () => {
       const api = new API(key);
-      Object.keys(RESOURCES).forEach((r) => {
+      Object.keys(RESOURCES).forEach(r => {
         expect(api[r]).to.be.a('function');
       });
     });
@@ -103,7 +103,7 @@ describe('Base API object', () => {
 
     it('uses superagentMiddleware if provided', () => {
       const api = new API(key, {
-        superagentMiddleware: s => 'test',
+        superagentMiddleware: () => 'test',
       });
 
       expect(api.agent).to.equal('test');
@@ -118,7 +118,7 @@ describe('Base API object', () => {
       api = new API(key, { superagentMiddleware });
     });
 
-    it('makes a GET baseurl request by default', (done) => {
+    it('makes a GET baseurl request by default', done => {
       api.request().then(() => {
         expect(api.agent.get).to.have.been.called;
         expect(api.agent.get).to.have.been.calledWith(DEFAULT_BASE_URL);
@@ -126,28 +126,28 @@ describe('Base API object', () => {
       });
     });
 
-    it('requets json', (done) => {
+    it('requets json', done => {
       api.request('').then(() => {
         expect(api.agent.getStub.accept).to.have.been.calledWith('json');
         done();
       });
     });
 
-    it('sets default headers', (done) => {
+    it('sets default headers', done => {
       api.request('').then(() => {
         expect(api.agent.getStub.set).to.have.been.calledWith(DEFAULT_HEADERS);
         done();
       });
     });
 
-    it('sets auth', (done) => {
+    it('sets auth', done => {
       api.request('').then(() => {
         expect(api.agent.getStub.auth).to.have.been.calledWith(key);
         done();
       });
     });
 
-    it('uses requestMiddleware', (done) => {
+    it('uses requestMiddleware', done => {
       const requestMiddleware = sinon.stub().returnsArg(0);
       api = new API(key, { requestMiddleware, superagentMiddleware });
       api.agent = superagentStub();
@@ -157,7 +157,7 @@ describe('Base API object', () => {
       });
     });
 
-    it('sets query if given', (done) => {
+    it('sets query if given', done => {
       const query = { a: 'a' };
 
       api.request('', METHODS.GET, { query }).then(() => {
@@ -166,7 +166,7 @@ describe('Base API object', () => {
       });
     });
 
-    it('sets body if given', (done) => {
+    it('sets body if given', done => {
       const body = { a: 'a' };
 
       api.request('', METHODS.POST, { body }).then(() => {
@@ -175,20 +175,20 @@ describe('Base API object', () => {
       });
     });
 
-    it('handles request failures with a RequestError', (done) => {
+    it('handles request failures with a RequestError', done => {
       api.agent = superagentStub(true);
 
-      api.request('', METHODS.POST).then(() => {}, (err) => {
+      api.request('', METHODS.POST).then(() => {}, err => {
         expect(err).to.be.an.instanceOf(RequestError);
         done();
       });
     });
 
-    it('handles severe request failures with an Error', (done) => {
+    it('handles severe request failures with an Error', done => {
       const error = new Error();
       api.agent = superagentStub(true, error);
 
-      api.request('', METHODS.POST).then(() => {}, (err) => {
+      api.request('', METHODS.POST).then(() => {}, err => {
         expect(err).to.equal(error);
         done();
       });

@@ -4,6 +4,7 @@ import address from '../../src/resources/address';
 import order from '../../src/resources/order';
 import NotImplementedError from '../../src/errors/notImplemented';
 
+
 describe('Order Resource', () => {
   it('exists', () => {
     expect(order).to.not.be.undefined;
@@ -12,7 +13,7 @@ describe('Order Resource', () => {
 
   it('throws on delete', () => {
     const Order = order(apiStub());
-    return Order.delete('id').then(() => {}, (err) => {
+    return Order.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -21,7 +22,7 @@ describe('Order Resource', () => {
     const Order = order(apiStub());
     const instance = new Order({ id: 1 });
 
-    return instance.delete('id').then(() => {}, (err) => {
+    return instance.delete('id').then(() => {}, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -47,25 +48,25 @@ describe('Order Resource', () => {
       oi = new Order({ id: '1' });
     });
 
-    it('throws if buy is called and order does not have an id', (done) => {
+    it('throws if buy is called and order does not have an id', done => {
       oi = new Order();
-      oi.buy().catch((e) => {
+      oi.buy().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/requires id/);
         done();
       });
     });
 
-    it('throws if buy is called without carrier', (done) => {
-      oi.buy().catch((e) => {
+    it('throws if buy is called without carrier', done => {
+      oi.buy().catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/carrier/);
         done();
       });
     });
 
-    it('throws if buy is called without service', (done) => {
-      oi.buy('carrier').catch((e) => {
+    it('throws if buy is called without service', done => {
+      oi.buy('carrier').catch(e => {
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/service/);
         done();
@@ -85,14 +86,14 @@ describe('Order Resource', () => {
       });
     });
 
-    it('rejects on api failures', (done) => {
+    it('rejects on api failures', done => {
       const carrier = 'carrier';
       const service = 'service';
 
       Order = order(apiStub('order', true));
       oi = new Order({ id: '1' });
 
-      oi.buy(carrier, service).catch((e) => {
+      oi.buy(carrier, service).catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });

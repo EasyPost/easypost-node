@@ -3,6 +3,7 @@ import base from './base';
 import { propTypes as addressPropTypes } from './address';
 import { propTypes as trackerPropTypes } from './tracker';
 
+
 export const propTypes = {
   id: T.string,
   object: T.string,
