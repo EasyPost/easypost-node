@@ -1,49 +1,39 @@
 # EasyPost Node Client Library
 
-EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com
+EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com.
 
 [![Build Status](https://travis-ci.org/EasyPost/easypost-node.svg?branch=master)](https://travis-ci.org/EasyPost/easypost-node)
 
-Installation
-------------
+## Installation
 
-```
+```bash
 npm install --save @easypost/api
 ```
 
-Note: if you are using a version of Node less than 6.9, you will need to install and
+**Note:** if you are using a version of Node less than 6.9, you will need to install and
 include a polyfill, such as `babel-polyfill`, and include it in your project:
 
-```
+```bash
 npm install --save babel-polyfill
 ```
 
 In your file:
 
-```
+```javascript
 require('babel-polyfill');
 const EasyPost = require('@easypost/api');
 ```
 
-To test out the API, you can run `npm install -g @easypost/api` and run
-`easypost`.  you can also clone this repository, `npm install` to install
-dependencies, `npm run build` to build the project, and run
-`API_KEY=yourkey ./repl.js --local easypost.js` to try out an interactive CLI.
-(Replace easypost.js with whatever compatabile version you wish, as defined
-below.)
-
-Compatability
--------------
+## Compatability
 
 By default, @easypost/api works with Node v6 LTS. To include for other versions
 of node, you can use:
 
-* `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+
+* `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+)
 * `require('@easypost/api/easypost.6-lts.js')` (Node 6.9+)
 * `require('@easypost/api/easypost.legacy.js')` (Node 0.10+)
 
-Example
--------
+## Example
 
 ```javascript
 const apiKey = 'cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi';
@@ -82,12 +72,11 @@ await fromAddress.save();
 console.log(fromAddress.id);
 ```
 
-Options
--------
+### Options
 
 You can construct an API instance with certain options:
 
-```
+```javascript
 const api = new Api("mykey", {
   timeout: 120000,
   baseUrl: "https://api.easypost.com/v2/",
@@ -99,7 +88,7 @@ const api = new Api("mykey", {
 
 #### timeout
 
-Time in MS that should fail requests.
+Time in milliseconds that should fail requests.
 
 #### baseUrl
 
@@ -111,13 +100,12 @@ from a frontend through a server.
 Disable using the API key. Useful if you proxy requests from a frontend through
 a server.
 
-
 #### superagentMiddleware
 
 Function that takes `superagent` and returns `superagent`. Useful if you need
 to wrap superagent in a function, such as many superagent libraries do.
 
-```
+```javascript
 import superagentLib from 'some-superagent-lib';
 
 const api = new Api("my-key", {
@@ -125,13 +113,12 @@ const api = new Api("my-key", {
 });
 ```
 
-
 #### requestMiddleware
 
 Function that takes a superagent `request` and returns that request. Useful if
 you need to hook into a request:
 
-```
+```javascript
 import superagentLib from 'some-superagent-lib';
 
 const api = new Api("my-key", {
@@ -142,12 +129,64 @@ const api = new Api("my-key", {
 });
 ```
 
+## Development
 
-Note on ES6 Usage
------------------
+To test out the API, you can run the following:
+
+```bash
+npm install -g @easypost/api
+easypost
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Build
+
+Build the various versions of the client library by running the following:
+
+```bash
+npm run build
+```
+
+### Testing
+
+Run unit tests by running the following:
+
+```bash
+npm test
+```
+
+### Interactive CLI
+
+Replace `easypost.js` with whatever compatabile version you wish, as defined
+under `Compatibility`.
+
+```bash
+API_KEY=yourkey ./repl.js --local easypost.js
+```
+
+## Releasing
+
+1. Update the version in the `package.json` file
+1. Update the `CHANGELOG` file
+1. Tag the release on GitHub
+1. Publish the updated npm package
+
+## Note on ES6 Usage
 
 You can import specific versions of the compiled code if you're using later
-verisons of node. `import "@easypost/api/src/easypost"` imports the
-un-transformed es6, or you can import `@easypost/api/easypost.6-lts`,
-`@easypost/api/easypost.8-lts`, or `@easypost/api/easypost.legacy.js` (v0.10)
-to import mininally transformed versions.
+versions of Node. 
+
+```javascript
+// Imports the un-transformed es6
+import "@easypost/api/src/easypost"
+
+// Use the following to import mininally transformed versions
+import "@easypost/api/easypost.6-lts"
+import "@easypost/api/easypost.8-lts"
+import "@easypost/api/easypost.legacy.js" // (v0.10)
+```
