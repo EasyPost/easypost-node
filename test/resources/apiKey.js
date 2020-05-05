@@ -19,10 +19,6 @@ describe('ApiKey Resource', () => {
     expect(apiKey).to.be.a('function');
   });
 
-  it('throws on retrieve', () => ApiKey.retrieve().then(() => {}, err => {
-    expect(err).to.be.an.instanceOf(NotImplementedError);
-  }));
-
   it('throws on delete', () => ApiKey.delete('id').then(() => {}, err => {
     expect(err).to.be.an.instanceOf(NotImplementedError);
   }));
