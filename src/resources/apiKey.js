@@ -18,10 +18,6 @@ export default api => (
       return this.notImplemented('delete');
     }
 
-    static retrieve() {
-      return this.notImplemented('retrieve');
-    }
-
     async save() {
       return this.constructor.notImplemented('save');
     }
