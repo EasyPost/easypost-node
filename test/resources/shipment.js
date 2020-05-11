@@ -277,65 +277,6 @@ describe('Shipment Resource', () => {
     });
   });
 
-  describe('return', () => {
-    let Shipment;
-    let si;
-    let stub;
-
-    beforeEach(() => {
-      stub = apiStub();
-      Shipment = shipment(stub);
-      si = new Shipment({ id: '1' });
-    });
-
-    it('throws if return is called and shipment does not have an id', done => {
-      si = new Shipment();
-      si.return().catch(e => {
-        expect(e).to.be.an.instanceof(Error);
-        expect(e.message).to.match(/id/);
-        done();
-      });
-    });
-
-    it('throws if return is called and shipment does not have a to_address or from_address', done => {
-      si.return().catch(e => {
-        expect(e).to.be.an.instanceof(Error);
-        expect(e.message).to.match(/to_address/);
-        done();
-      });
-    });
-
-    it('calls api.post when return is called', () => {
-      const Address = address(stub);
-      const toAddress = new Address({ id: '1' });
-      const fromAddress = new Address({ id: '2' });
-
-      si.to_address = toAddress;
-      si.from_address = fromAddress;
-
-      return si.return().then(() => {
-        expect(stub.post).to.have.been.called;
-        expect(stub.post).to.have.been.calledWith(`shipments/${si.id}`);
-      });
-    });
-
-    it('rejects on api failures', done => {
-      const Address = address(stub);
-      const toAddress = new Address({ id: '1' });
-      const fromAddress = new Address({ id: '2' });
-
-      Shipment = shipment(apiStub('shipment', true));
-      si = new Shipment({ id: '1' });
-      si.to_address = toAddress;
-      si.from_address = fromAddress;
-
-      si.return().catch(e => {
-        expect(e).to.be.an.instanceof(RequestError);
-        done();
-      });
-    });
-  });
-
   describe('lowest rate', () => {
     let Shipment;
     let si;

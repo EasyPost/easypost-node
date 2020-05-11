@@ -127,16 +127,6 @@ export default api => (
       return this.rpc('refund');
     }
 
-    async return() {
-      this.verifyParameters({
-        this: ['id', 'to_address', 'from_address'],
-      });
-
-      const data = this.toJSON();
-      data.is_return = true;
-      return this.rpc('', data);
-    }
-
     lowestRate(carriers, services) {
       let rates = this.rates || [];
 
