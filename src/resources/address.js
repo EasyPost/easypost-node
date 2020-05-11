@@ -32,10 +32,6 @@ export default api => (
     static key = 'address';
     static propTypes = propTypes;
 
-    static all() {
-      return this.notImplemented('all');
-    }
-
     static delete() {
       return this.notImplemented('delete');
     }

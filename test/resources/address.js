@@ -9,13 +9,6 @@ describe('Address Resource', () => {
     expect(address).to.be.a('function');
   });
 
-  it('throws on all', () => {
-    const Address = address(apiStub());
-    return Address.all().then(() => {}, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
-  });
-
   it('throws on delete', () => {
     const Address = address(apiStub());
     return Address.delete('id').then(() => {}, err => {
