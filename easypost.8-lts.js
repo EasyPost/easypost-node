@@ -93,7 +93,7 @@
 /*! exports provided: name, description, version, author, homepage, bin, repository, main, license, engines, scripts, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"@easypost/api\",\"description\":\"EasyPost Node Client Library\",\"version\":\"3.8.0\",\"author\":\"Easypost Engineering <support@easypost.com>\",\"homepage\":\"https://easypost.com\",\"bin\":{\"easypost\":\"./repl.js\"},\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/easypost/easypost-node.git\"},\"main\":\"index.js\",\"license\":\"MIT\",\"engines\":{\"node\":\">= v0.10.0\"},\"scripts\":{\"audit\":\"ep-node-build audit\",\"test\":\"eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test\",\"test:coverage\":\"cross-env NODE_ENV=test nyc mocha --recursive ./test\",\"build\":\"ep-node-build\",\"lint\":\"eslint src\",\"watch\":\"ep-node-build --watch\",\"repl\":\"./repl.js --local easypost.js\"},\"dependencies\":{\"core-js\":\"3.1.3\",\"nodent-runtime\":\"3.2.1\",\"proptypes\":\"1.1.0\",\"regenerator-runtime\":\"0.13.2\",\"source-map-support\":\"0.5.12\",\"superagent\":\"5.0.6\",\"yargs\":\"13.2.4\"},\"devDependencies\":{\"@babel/core\":\"^7.7.5\",\"@babel/plugin-proposal-class-properties\":\"^7.7.4\",\"@babel/plugin-proposal-export-default-from\":\"^7.7.4\",\"@babel/plugin-proposal-export-namespace-from\":\"^7.7.4\",\"@babel/plugin-syntax-export-extensions\":\"^7.0.0-beta.32\",\"@babel/plugin-transform-react-constant-elements\":\"^7.7.4\",\"@babel/plugin-transform-react-inline-elements\":\"^7.7.4\",\"@babel/preset-env\":\"^7.7.6\",\"@babel/register\":\"^7.7.4\",\"@easypost/build\":\"^2.4.2\",\"babel-eslint\":\"^10.0.1\",\"babel-loader\":\"^8.0.6\",\"babel-plugin-istanbul\":\"^5.1.4\",\"babel-plugin-transform-export-extensions\":\"^6.22.0\",\"babel-preset-minify\":\"^0.5.0\",\"babel-register\":\"^6.24.1\",\"chai\":\"^4.2.0\",\"chai-as-promised\":\"^7.1.1\",\"cross-env\":\"^5.2.0\",\"eslint\":\"^4.19.1\",\"eslint-config-airbnb\":\"^16.1.0\",\"eslint-import-resolver-webpack\":\"^0.11.1\",\"eslint-plugin-import\":\"^2.17.3\",\"eslint-plugin-jest\":\"^22.21.0\",\"eslint-plugin-jsx-a11y\":\"^6.2.3\",\"eslint-plugin-react\":\"^7.17.0\",\"mocha\":\"^6.1.4\",\"npm-audit-ci\":\"^1.2.1\",\"nyc\":\"^14.1.1\",\"sinon\":\"^7.3.2\",\"sinon-chai\":\"^3.3.0\",\"vows\":\"^0.8.2\",\"webpack\":\"^4.39.3\",\"webpack-cli\":\"^3.3.10\",\"webpack-node-externals\":\"^1.7.2\"}}");
+module.exports = JSON.parse("{\"name\":\"@easypost/api\",\"description\":\"EasyPost Node Client Library\",\"version\":\"3.9.0\",\"author\":\"Easypost Engineering <support@easypost.com>\",\"homepage\":\"https://easypost.com\",\"bin\":{\"easypost\":\"./repl.js\"},\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/easypost/easypost-node.git\"},\"main\":\"index.js\",\"license\":\"MIT\",\"engines\":{\"node\":\">= v0.10.0\"},\"scripts\":{\"audit\":\"ep-node-build audit\",\"test\":\"eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test\",\"test:coverage\":\"cross-env NODE_ENV=test nyc mocha --recursive ./test\",\"build\":\"ep-node-build\",\"lint\":\"eslint src test\",\"watch\":\"ep-node-build --watch\",\"repl\":\"./repl.js --local easypost.js\"},\"dependencies\":{\"core-js\":\"3.1.3\",\"nodent-runtime\":\"3.2.1\",\"proptypes\":\"1.1.0\",\"regenerator-runtime\":\"0.13.2\",\"source-map-support\":\"0.5.12\",\"superagent\":\"5.0.6\",\"yargs\":\"13.2.4\"},\"devDependencies\":{\"@babel/core\":\"^7.7.5\",\"@babel/plugin-proposal-class-properties\":\"^7.7.4\",\"@babel/plugin-proposal-export-default-from\":\"^7.7.4\",\"@babel/plugin-proposal-export-namespace-from\":\"^7.7.4\",\"@babel/plugin-syntax-export-extensions\":\"^7.0.0-beta.32\",\"@babel/plugin-transform-react-constant-elements\":\"^7.7.4\",\"@babel/plugin-transform-react-inline-elements\":\"^7.7.4\",\"@babel/preset-env\":\"^7.7.6\",\"@babel/register\":\"^7.7.4\",\"@easypost/build\":\"^2.4.2\",\"@easypost/eslint-config-easypost-base\":\"~1.0.3\",\"babel-eslint\":\"^10.0.1\",\"babel-loader\":\"^8.0.6\",\"babel-plugin-istanbul\":\"^5.1.4\",\"babel-plugin-transform-export-extensions\":\"^6.22.0\",\"babel-preset-minify\":\"^0.5.0\",\"babel-register\":\"^6.24.1\",\"chai\":\"^4.2.0\",\"chai-as-promised\":\"^7.1.1\",\"cross-env\":\"^5.2.0\",\"eslint\":\"^4.19.1\",\"eslint-config-airbnb\":\"^16.1.0\",\"eslint-import-resolver-webpack\":\"^0.11.1\",\"eslint-plugin-import\":\"^2.17.3\",\"eslint-plugin-jest\":\"^22.21.0\",\"eslint-plugin-jsx-a11y\":\"^6.2.3\",\"eslint-plugin-react\":\"^7.17.0\",\"mocha\":\"^6.1.4\",\"npm-audit-ci\":\"^1.2.1\",\"nyc\":\"^14.1.1\",\"sinon\":\"^7.3.2\",\"sinon-chai\":\"^3.3.0\",\"vows\":\"^0.8.2\",\"webpack\":\"^4.39.3\",\"webpack-cli\":\"^3.3.10\",\"webpack-node-externals\":\"^1.7.2\"}}");
 
 /***/ }),
 
@@ -418,7 +418,6 @@ __webpack_require__.r(__webpack_exports__);
 const createMessage = (status, url) => `Status ${status} returned from API request to ${url}`;
 const NAME = 'RequestError';
 class RequestError extends _error__WEBPACK_IMPORTED_MODULE_0__["default"] {
-  /* eslint consistent-return: 0 */
   constructor(error, url) {
     // Make sure an error and url were actually passed in
     if (!error) {
@@ -519,10 +518,6 @@ const propTypes = {
   var _class, _temp;
 
   return _temp = _class = class Address extends Object(_base__WEBPACK_IMPORTED_MODULE_1__["default"])(api) {
-    static all() {
-      return this.notImplemented('all');
-    }
-
     static delete() {
       return this.notImplemented('delete');
     } // Object format is { address: { ... }, verify: [ ] }, so we need to pull
@@ -578,10 +573,6 @@ const propTypes = {
   return _temp = _class = class ApiKey extends Object(_base__WEBPACK_IMPORTED_MODULE_1__["default"])(api) {
     static delete() {
       return this.notImplemented('delete');
-    }
-
-    static retrieve() {
-      return this.notImplemented('retrieve');
     }
 
     async save() {
@@ -1709,15 +1700,6 @@ const propTypes = {
         this: ['id']
       });
       return this.rpc('refund');
-    }
-
-    async return() {
-      this.verifyParameters({
-        this: ['id', 'to_address', 'from_address']
-      });
-      const data = this.toJSON();
-      data.is_return = true;
-      return this.rpc('', data);
     }
 
     lowestRate(carriers, services) {
