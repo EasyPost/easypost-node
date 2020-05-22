@@ -11,9 +11,16 @@ describe('Order Resource', () => {
     expect(order).to.be.a('function');
   });
 
+  it('throws on all', () => {
+    const Order = order(apiStub());
+    return Order.all().then(() => { }, err => {
+      expect(err).to.be.an.instanceOf(NotImplementedError);
+    });
+  });
+
   it('throws on delete', () => {
     const Order = order(apiStub());
-    return Order.delete('id').then(() => {}, err => {
+    return Order.delete('id').then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -22,7 +29,7 @@ describe('Order Resource', () => {
     const Order = order(apiStub());
     const instance = new Order({ id: 1 });
 
-    return instance.delete('id').then(() => {}, err => {
+    return instance.delete('id').then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
