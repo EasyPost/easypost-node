@@ -3,6 +3,7 @@
 EasyPost is a simple shipping API. You can sign up for an account at https://easypost.com.
 
 [![Build Status](https://travis-ci.com/EasyPost/easypost-node.svg?branch=master)](https://travis-ci.com/EasyPost/easypost-node)
+[![npm version](https://badge.fury.io/js/%40easypost%2Fapi.svg)](https://badge.fury.io/js/%40easypost%2Fapi)
 
 ## Installation
 
