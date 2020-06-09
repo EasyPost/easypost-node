@@ -1,3 +1,6 @@
+=== 3.9.1 2020-06-09
+- Bump `websocket-extensions` to 0.1.4
+
 === 3.9.0 2020-05-15
 
 * Added the ability to retrieve individual user's API keys
