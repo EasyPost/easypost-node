@@ -37,6 +37,10 @@ export default api => (
       'buyer_address',
     ]
 
+    static all() {
+      return this.notImplemented('all');
+    }
+
     static delete() {
       return this.notImplemented('delete');
     }
