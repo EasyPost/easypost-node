@@ -46,7 +46,7 @@
     "@babel/plugin-transform-react-inline-elements": "^7.7.4",
     "@babel/preset-env": "^7.7.6",
     "@babel/register": "^7.7.4",
-    "@easypost/build": "^2.4.2",
+    "@easypost/build": "^2.4.3",
     "@easypost/eslint-config-easypost-base": "~1.0.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
