@@ -93,7 +93,7 @@
 /*! exports provided: name, description, version, author, homepage, bin, repository, main, license, engines, scripts, dependencies, devDependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"@easypost/api\",\"description\":\"EasyPost Node Client Library\",\"version\":\"3.9.1\",\"author\":\"Easypost Engineering <support@easypost.com>\",\"homepage\":\"https://easypost.com\",\"bin\":{\"easypost\":\"./repl.js\"},\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/easypost/easypost-node.git\"},\"main\":\"index.js\",\"license\":\"MIT\",\"engines\":{\"node\":\">= v0.10.0\"},\"scripts\":{\"audit\":\"ep-node-build audit\",\"test\":\"eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test\",\"test:coverage\":\"cross-env NODE_ENV=test nyc mocha --recursive ./test\",\"build\":\"ep-node-build\",\"lint\":\"eslint src test\",\"watch\":\"ep-node-build --watch\",\"repl\":\"./repl.js --local easypost.js\"},\"dependencies\":{\"core-js\":\"3.1.3\",\"nodent-runtime\":\"3.2.1\",\"proptypes\":\"1.1.0\",\"regenerator-runtime\":\"0.13.2\",\"source-map-support\":\"0.5.12\",\"superagent\":\"5.0.6\",\"yargs\":\"13.2.4\"},\"devDependencies\":{\"@babel/core\":\"^7.7.5\",\"@babel/plugin-proposal-class-properties\":\"^7.7.4\",\"@babel/plugin-proposal-export-default-from\":\"^7.7.4\",\"@babel/plugin-proposal-export-namespace-from\":\"^7.7.4\",\"@babel/plugin-syntax-export-extensions\":\"^7.0.0-beta.32\",\"@babel/plugin-transform-react-constant-elements\":\"^7.7.4\",\"@babel/plugin-transform-react-inline-elements\":\"^7.7.4\",\"@babel/preset-env\":\"^7.7.6\",\"@babel/register\":\"^7.7.4\",\"@easypost/build\":\"^2.4.2\",\"@easypost/eslint-config-easypost-base\":\"~1.0.3\",\"babel-eslint\":\"^10.0.1\",\"babel-loader\":\"^8.0.6\",\"babel-plugin-istanbul\":\"^5.1.4\",\"babel-plugin-transform-export-extensions\":\"^6.22.0\",\"babel-preset-minify\":\"^0.5.0\",\"babel-register\":\"^6.24.1\",\"chai\":\"^4.2.0\",\"chai-as-promised\":\"^7.1.1\",\"cross-env\":\"^5.2.0\",\"eslint\":\"^4.19.1\",\"eslint-config-airbnb\":\"^16.1.0\",\"eslint-import-resolver-webpack\":\"^0.11.1\",\"eslint-plugin-import\":\"^2.17.3\",\"eslint-plugin-jest\":\"^22.21.0\",\"eslint-plugin-jsx-a11y\":\"^6.2.3\",\"eslint-plugin-react\":\"^7.17.0\",\"mocha\":\"^6.1.4\",\"npm-audit-ci\":\"^1.2.1\",\"nyc\":\"^14.1.1\",\"sinon\":\"^7.3.2\",\"sinon-chai\":\"^3.3.0\",\"vows\":\"^0.8.2\",\"webpack\":\"^4.39.3\",\"webpack-cli\":\"^3.3.10\",\"webpack-node-externals\":\"^1.7.2\"}}");
+module.exports = JSON.parse("{\"name\":\"@easypost/api\",\"description\":\"EasyPost Node Client Library\",\"version\":\"3.9.1\",\"author\":\"Easypost Engineering <support@easypost.com>\",\"homepage\":\"https://easypost.com\",\"bin\":{\"easypost\":\"./repl.js\"},\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/easypost/easypost-node.git\"},\"main\":\"index.js\",\"license\":\"MIT\",\"engines\":{\"node\":\">= v0.10.0\"},\"scripts\":{\"audit\":\"ep-node-build audit\",\"test\":\"eslint src && mocha --require @babel/register --require ./test/common.js --recursive ./test\",\"test:coverage\":\"cross-env NODE_ENV=test nyc mocha --recursive ./test\",\"build\":\"ep-node-build\",\"lint\":\"eslint src test\",\"watch\":\"ep-node-build --watch\",\"repl\":\"./repl.js --local easypost.js\"},\"dependencies\":{\"core-js\":\"3.1.3\",\"nodent-runtime\":\"3.2.1\",\"proptypes\":\"1.1.0\",\"regenerator-runtime\":\"0.13.2\",\"source-map-support\":\"0.5.12\",\"superagent\":\"5.0.6\",\"yargs\":\"13.2.4\"},\"devDependencies\":{\"@babel/core\":\"^7.7.5\",\"@babel/plugin-proposal-nullish-coalescing-operator\":\"^7.7.4\",\"@babel/plugin-proposal-optional-chaining\":\"^7.7.4\",\"@babel/plugin-proposal-class-properties\":\"^7.7.4\",\"@babel/plugin-proposal-export-default-from\":\"^7.7.4\",\"@babel/plugin-proposal-export-namespace-from\":\"^7.7.4\",\"@babel/plugin-syntax-export-extensions\":\"^7.0.0-beta.32\",\"@babel/plugin-transform-react-constant-elements\":\"^7.7.4\",\"@babel/plugin-transform-react-inline-elements\":\"^7.7.4\",\"@babel/preset-env\":\"^7.7.6\",\"@babel/register\":\"^7.7.4\",\"@easypost/build\":\"^2.4.3\",\"@easypost/eslint-config-easypost-base\":\"~1.0.3\",\"babel-eslint\":\"^10.0.1\",\"babel-loader\":\"~8.0.6\",\"babel-plugin-istanbul\":\"^5.1.4\",\"babel-plugin-transform-export-extensions\":\"^6.22.0\",\"babel-preset-minify\":\"^0.5.0\",\"babel-register\":\"^6.24.1\",\"chai\":\"^4.2.0\",\"chai-as-promised\":\"^7.1.1\",\"cross-env\":\"^5.2.0\",\"eslint\":\"^4.19.1\",\"eslint-config-airbnb\":\"^16.1.0\",\"eslint-import-resolver-webpack\":\"^0.11.1\",\"eslint-plugin-import\":\"^2.17.3\",\"eslint-plugin-jest\":\"^22.21.0\",\"eslint-plugin-jsx-a11y\":\"^6.2.3\",\"eslint-plugin-react\":\"^7.17.0\",\"mocha\":\"^6.1.4\",\"npm-audit-ci\":\"^1.2.1\",\"nyc\":\"^14.1.1\",\"sinon\":\"^7.3.2\",\"sinon-chai\":\"^3.3.0\",\"vows\":\"^0.8.2\",\"webpack\":\"^4.39.3\",\"webpack-cli\":\"^3.3.10\",\"webpack-node-externals\":\"^1.7.2\"}}");
 
 /***/ }),
 
@@ -129,17 +129,19 @@ var _package_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpac
 /* harmony import */ var _resources_carrierType__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/carrierType */ "./resources/carrierType.js");
 /* harmony import */ var _resources_customsInfo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./resources/customsInfo */ "./resources/customsInfo.js");
 /* harmony import */ var _resources_customsItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./resources/customsItem */ "./resources/customsItem.js");
-/* harmony import */ var _resources_insurance__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./resources/insurance */ "./resources/insurance.js");
-/* harmony import */ var _resources_order__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./resources/order */ "./resources/order.js");
-/* harmony import */ var _resources_parcel__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./resources/parcel */ "./resources/parcel.js");
-/* harmony import */ var _resources_pickup__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./resources/pickup */ "./resources/pickup.js");
-/* harmony import */ var _resources_report__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./resources/report */ "./resources/report.js");
-/* harmony import */ var _resources_scan_form__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./resources/scan_form */ "./resources/scan_form.js");
-/* harmony import */ var _resources_shipment__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./resources/shipment */ "./resources/shipment.js");
-/* harmony import */ var _resources_tracker__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./resources/tracker */ "./resources/tracker.js");
-/* harmony import */ var _resources_user__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./resources/user */ "./resources/user.js");
-/* harmony import */ var _resources_webhook__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./resources/webhook */ "./resources/webhook.js");
-/* harmony import */ var _errors_request__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./errors/request */ "./errors/request.js");
+/* harmony import */ var _resources_event__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./resources/event */ "./resources/event.js");
+/* harmony import */ var _resources_insurance__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./resources/insurance */ "./resources/insurance.js");
+/* harmony import */ var _resources_order__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./resources/order */ "./resources/order.js");
+/* harmony import */ var _resources_parcel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./resources/parcel */ "./resources/parcel.js");
+/* harmony import */ var _resources_pickup__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./resources/pickup */ "./resources/pickup.js");
+/* harmony import */ var _resources_rate__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./resources/rate */ "./resources/rate.js");
+/* harmony import */ var _resources_report__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./resources/report */ "./resources/report.js");
+/* harmony import */ var _resources_scan_form__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./resources/scan_form */ "./resources/scan_form.js");
+/* harmony import */ var _resources_shipment__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./resources/shipment */ "./resources/shipment.js");
+/* harmony import */ var _resources_tracker__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./resources/tracker */ "./resources/tracker.js");
+/* harmony import */ var _resources_user__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./resources/user */ "./resources/user.js");
+/* harmony import */ var _resources_webhook__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./resources/webhook */ "./resources/webhook.js");
+/* harmony import */ var _errors_request__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./errors/request */ "./errors/request.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -149,6 +151,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -204,16 +208,18 @@ const RESOURCES = {
   CarrierType: _resources_carrierType__WEBPACK_IMPORTED_MODULE_7__["default"],
   CustomsInfo: _resources_customsInfo__WEBPACK_IMPORTED_MODULE_8__["default"],
   CustomsItem: _resources_customsItem__WEBPACK_IMPORTED_MODULE_9__["default"],
-  Insurance: _resources_insurance__WEBPACK_IMPORTED_MODULE_10__["default"],
-  Order: _resources_order__WEBPACK_IMPORTED_MODULE_11__["default"],
-  Parcel: _resources_parcel__WEBPACK_IMPORTED_MODULE_12__["default"],
-  Pickup: _resources_pickup__WEBPACK_IMPORTED_MODULE_13__["default"],
-  Report: _resources_report__WEBPACK_IMPORTED_MODULE_14__["default"],
-  ScanForm: _resources_scan_form__WEBPACK_IMPORTED_MODULE_15__["default"],
-  Shipment: _resources_shipment__WEBPACK_IMPORTED_MODULE_16__["default"],
-  Tracker: _resources_tracker__WEBPACK_IMPORTED_MODULE_17__["default"],
-  User: _resources_user__WEBPACK_IMPORTED_MODULE_18__["default"],
-  Webhook: _resources_webhook__WEBPACK_IMPORTED_MODULE_19__["default"]
+  Event: _resources_event__WEBPACK_IMPORTED_MODULE_10__["default"],
+  Insurance: _resources_insurance__WEBPACK_IMPORTED_MODULE_11__["default"],
+  Order: _resources_order__WEBPACK_IMPORTED_MODULE_12__["default"],
+  Parcel: _resources_parcel__WEBPACK_IMPORTED_MODULE_13__["default"],
+  Pickup: _resources_pickup__WEBPACK_IMPORTED_MODULE_14__["default"],
+  Rate: _resources_rate__WEBPACK_IMPORTED_MODULE_15__["default"],
+  Report: _resources_report__WEBPACK_IMPORTED_MODULE_16__["default"],
+  ScanForm: _resources_scan_form__WEBPACK_IMPORTED_MODULE_17__["default"],
+  Shipment: _resources_shipment__WEBPACK_IMPORTED_MODULE_18__["default"],
+  Tracker: _resources_tracker__WEBPACK_IMPORTED_MODULE_19__["default"],
+  User: _resources_user__WEBPACK_IMPORTED_MODULE_20__["default"],
+  Webhook: _resources_webhook__WEBPACK_IMPORTED_MODULE_21__["default"]
 };
 const PROP_TYPES = {
   addressPropTypes: _resources_address__WEBPACK_IMPORTED_MODULE_3__["propTypes"],
@@ -223,22 +229,24 @@ const PROP_TYPES = {
   carrierTypePropTypes: _resources_carrierType__WEBPACK_IMPORTED_MODULE_7__["propTypes"],
   customsInfoPropTypes: _resources_customsInfo__WEBPACK_IMPORTED_MODULE_8__["propTypes"],
   customsItemPropTypes: _resources_customsItem__WEBPACK_IMPORTED_MODULE_9__["propTypes"],
-  insurancePropTypes: _resources_insurance__WEBPACK_IMPORTED_MODULE_10__["propTypes"],
-  orderPropTypes: _resources_order__WEBPACK_IMPORTED_MODULE_11__["propTypes"],
-  parcelPropTypes: _resources_parcel__WEBPACK_IMPORTED_MODULE_12__["propTypes"],
-  pickupPropTypes: _resources_pickup__WEBPACK_IMPORTED_MODULE_13__["propTypes"],
-  reportPropTypes: _resources_report__WEBPACK_IMPORTED_MODULE_14__["propTypes"],
-  scanFormPropTypes: _resources_scan_form__WEBPACK_IMPORTED_MODULE_15__["propTypes"],
-  shipmentPropTypes: _resources_shipment__WEBPACK_IMPORTED_MODULE_16__["propTypes"],
-  trackerPropTypes: _resources_tracker__WEBPACK_IMPORTED_MODULE_17__["propTypes"],
-  userPropTypes: _resources_user__WEBPACK_IMPORTED_MODULE_18__["propTypes"],
-  webhookPropTypes: _resources_webhook__WEBPACK_IMPORTED_MODULE_19__["propTypes"]
+  eventPropTypes: _resources_event__WEBPACK_IMPORTED_MODULE_10__["propTypes"],
+  insurancePropTypes: _resources_insurance__WEBPACK_IMPORTED_MODULE_11__["propTypes"],
+  orderPropTypes: _resources_order__WEBPACK_IMPORTED_MODULE_12__["propTypes"],
+  parcelPropTypes: _resources_parcel__WEBPACK_IMPORTED_MODULE_13__["propTypes"],
+  pickupPropTypes: _resources_pickup__WEBPACK_IMPORTED_MODULE_14__["propTypes"],
+  ratePropTypes: _resources_rate__WEBPACK_IMPORTED_MODULE_15__["propTypes"],
+  reportPropTypes: _resources_report__WEBPACK_IMPORTED_MODULE_16__["propTypes"],
+  scanFormPropTypes: _resources_scan_form__WEBPACK_IMPORTED_MODULE_17__["propTypes"],
+  shipmentPropTypes: _resources_shipment__WEBPACK_IMPORTED_MODULE_18__["propTypes"],
+  trackerPropTypes: _resources_tracker__WEBPACK_IMPORTED_MODULE_19__["propTypes"],
+  userPropTypes: _resources_user__WEBPACK_IMPORTED_MODULE_20__["propTypes"],
+  webhookPropTypes: _resources_webhook__WEBPACK_IMPORTED_MODULE_21__["propTypes"]
 };
 class API {
   // Build request headers to be sent by default with each request, combined
   // (or overridden) by any additional headers
   static buildHeaders(additionalHeaders = {}) {
-    const headers = _objectSpread({}, DEFAULT_HEADERS, {}, additionalHeaders);
+    const headers = _objectSpread(_objectSpread({}, DEFAULT_HEADERS), additionalHeaders);
 
     if (typeof window === 'undefined') {
       return headers;
@@ -329,7 +337,7 @@ class API {
         return res;
       } catch (e) {
         if (e.response && e.response.body) {
-          throw new _errors_request__WEBPACK_IMPORTED_MODULE_20__["default"](e.response.body, path);
+          throw new _errors_request__WEBPACK_IMPORTED_MODULE_22__["default"](e.response.body, path);
         }
 
         throw e;
@@ -609,7 +617,7 @@ const propTypes = {
         return [];
       }
 
-      let res = data.keys.map(k => _objectSpread({}, k, {
+      let res = data.keys.map(k => _objectSpread(_objectSpread({}, k), {}, {
         user_id: data.id
       }));
 
@@ -1254,7 +1262,7 @@ const propTypes = {
         value = value.toString();
       }
 
-      super(_objectSpread({}, data, {
+      super(_objectSpread(_objectSpread({}, data), {}, {
         value
       }));
     }
@@ -1273,6 +1281,54 @@ const propTypes = {
     }
 
   }, _defineProperty(_class, "propTypes", propTypes), _defineProperty(_class, "_name", 'CustomsItem'), _defineProperty(_class, "_url", 'customs_items'), _defineProperty(_class, "key", 'customs_item'), _temp;
+});
+
+/***/ }),
+
+/***/ "./resources/event.js":
+/*!****************************!*\
+  !*** ./resources/event.js ***!
+  \****************************/
+/*! exports provided: propTypes, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propTypes", function() { return propTypes; });
+/* harmony import */ var proptypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! proptypes */ "proptypes");
+/* harmony import */ var proptypes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(proptypes__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/base.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+const propTypes = {
+  id: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  object: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  mode: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  description: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  previous_attributes: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.object,
+  result: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.object,
+  status: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  pending_urls: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.array,
+  currency: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.array,
+  completed_urls: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  created_at: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.oneOfType([proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.object, proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string]),
+  updated_at: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.oneOfType([proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.object, proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string])
+};
+/* harmony default export */ __webpack_exports__["default"] = (api => {
+  var _class, _temp;
+
+  return _temp = _class = class Event extends Object(_base__WEBPACK_IMPORTED_MODULE_1__["default"])(api) {
+    static delete() {
+      return this.notImplemented('delete');
+    }
+
+    static save() {
+      return this.notImplemented('save');
+    }
+
+  }, _defineProperty(_class, "_name", 'Event'), _defineProperty(_class, "_url", 'events'), _defineProperty(_class, "key", 'event'), _defineProperty(_class, "propTypes", propTypes), _temp;
 });
 
 /***/ }),
@@ -1377,6 +1433,10 @@ const propTypes = {
   var _class, _temp;
 
   return _temp = _class = class Order extends Object(_base__WEBPACK_IMPORTED_MODULE_1__["default"])(api) {
+    static all() {
+      return this.notImplemented('all');
+    }
+
     static delete() {
       return this.notImplemented('delete');
     }
@@ -1545,6 +1605,66 @@ const propTypes = {
     }
 
   }, _defineProperty(_class, "propTypes", propTypes), _defineProperty(_class, "_name", 'Pickup'), _defineProperty(_class, "_url", 'pickups'), _defineProperty(_class, "key", 'pickup'), _defineProperty(_class, "jsonIdKeys", ['address', 'shipment', 'batch']), _temp;
+});
+
+/***/ }),
+
+/***/ "./resources/rate.js":
+/*!***************************!*\
+  !*** ./resources/rate.js ***!
+  \***************************/
+/*! exports provided: propTypes, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "propTypes", function() { return propTypes; });
+/* harmony import */ var proptypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! proptypes */ "proptypes");
+/* harmony import */ var proptypes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(proptypes__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./resources/base.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+const propTypes = {
+  id: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  object: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  mode: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  service: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  carrier: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  carrier_account_id: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  shipment_id: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  rate: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  currency: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  retail_rate: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  retail_currency: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  list_rate: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  list_currency: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  delivery_days: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.integer,
+  deliver_date: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  delivery_date_guaranteed: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  est_delivery_days: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.integer,
+  // deprecated
+  created_at: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.oneOfType([proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.object, proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string]),
+  updated_at: proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.oneOfType([proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.object, proptypes__WEBPACK_IMPORTED_MODULE_0___default.a.string])
+};
+/* harmony default export */ __webpack_exports__["default"] = (api => {
+  var _class, _temp;
+
+  return _temp = _class = class Rate extends Object(_base__WEBPACK_IMPORTED_MODULE_1__["default"])(api) {
+    static all() {
+      return this.notImplemented('all');
+    }
+
+    static delete() {
+      return this.notImplemented('delete');
+    }
+
+    static save() {
+      return this.notImplemented('save');
+    }
+
+  }, _defineProperty(_class, "_name", 'Rate'), _defineProperty(_class, "_url", 'rates'), _defineProperty(_class, "key", 'rate'), _defineProperty(_class, "propTypes", propTypes), _temp;
 });
 
 /***/ }),
