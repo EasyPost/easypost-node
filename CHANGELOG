@@ -1,3 +1,8 @@
+=== NEXT
+- Restored support for Node 6.x
+- Bumped many dependencies
+- Swapped out Travis CI for GitHub Actions
+
 === 3.9.1 2020-06-09
 - Bump `websocket-extensions` to 0.1.4
 
