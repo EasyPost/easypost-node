@@ -1,5 +1,7 @@
 ## CHANGELOG
 
+### 3.10.1 2021-01-12
+* Re-package to fix missing file
 
 ### 3.10.0 2021-01-12
 
