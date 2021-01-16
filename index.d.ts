@@ -2068,9 +2068,53 @@ export declare interface IShipmentListParameters {
   include_children?: boolean;
 }
 
-export declare class Address {
-  public constructor(input: DeepPartial<IAddress>);
-  public save(): Promise<IAddress>;
+
+type ParametersToOmitOnCreate = 'id' | 'object' | 'mode' | 'created_at' | 'updated_at';
+
+
+/**
+ * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
+ */
+export declare interface IAddressCreateParameters extends Omit<IAddress, ParametersToOmitOnCreate | 'verifications'> {
+  /**
+   * The verifications to perform when creating. 
+   * verify_strict takes precedence. 
+   * true will perform both delivery and zip4.
+   */
+  verify: boolean | ['delivery', 'zip4'];
+
+  /**
+   * The verifications to perform when creating. 
+   * The failure of any of these verifications causes the whole request to fail. 
+   * true will perform both delivery and zip4
+   */
+  verify_strict: boolean | ['delivery', 'zip4'];
+}
+
+export declare class Address implements IAddress {
+  public constructor(input: DeepPartial<IAddressCreateParameters>);
+
+  street1: string;
+  street2: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+  residential: boolean;
+  carrier_facility: string;
+  name: string;
+  company: string;
+  phone: string;
+  email: string;
+  federal_tax_id: string;
+  state_tax_id: string;
+  verifications: IVerifications;
+  id: string;
+  mode: "test" | "production";
+  object: "Address";
+
+  public save(): Promise<Address>;
+  public retrieve(addressId: string): Promise<Address>;
 }
 
 export declare class Parcel {
