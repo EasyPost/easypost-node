@@ -2113,12 +2113,51 @@ export declare class Address implements IAddress {
   mode: "test" | "production";
   object: "Address";
 
+  /**
+   * Depending on your use case an Address can be used in many different ways. 
+   * Certain carriers allow rating between two zip codes, but full addresses are required to purchase postage. 
+   * It is recommended to provide as much information as possible during creation and to reuse these objects whenever possible.
+   * 
+   * Address objects can also be created inline while creating another object, for example during Shipment Creation.
+   * 
+   * Verify an Address
+   *  - Verifying an Address before you ship is a great way to reduce issues with delivery.
+   *    Creating a verified Address is as simple as including an enumerated list of the verifications you'd like EasyPost to perform in the verify or verify_strict url parameters. 
+   *    If any of the verification checks included in the verify_strict list fail an error will be returned from the API. 
+   *    The example below demonstrates the most common verification: "delivery", which checks that the address is deliverable and sets its residential delivery indicator.
+   * 
+   *  - The most effective time to perform address verification is when your customer, or the person entering the delivery address, is present. 
+   *    When designing a shopping cart it is recommended to ask the shopper for their address and verify it on the spot. 
+   *    If verification fails, ask them to double check their input; if they confirm that their data is correct, assume they know their address more correctly than the verification process.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
+   */
   public save(): Promise<Address>;
-  public retrieve(addressId: string): Promise<Address>;
+
+  /**
+   * An Address can be retrieved by its id.
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-an-address
+   * 
+   * @param addressId Unique, begins with "adr_"
+   */
+  static retrieve(addressId: string): Promise<Address>;
 }
 
-export declare class Parcel {
+export declare class Parcel implements IParcel {
   public constructor(input: DeepPartial<IParcel>);
+
+  length: number;
+  width: number;
+  height: number;
+  predefined_package?: TPredefinedPackage;
+  weight: number;
+  id: string;
+  mode: "test" | "production";
+  object: "Parcel";
+  created_at: string;
+  updated_at: string;
+
   public save(): Promise<IParcel>;
 }
 
