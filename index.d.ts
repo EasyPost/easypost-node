@@ -2361,9 +2361,7 @@ export declare class Shipment implements IShipment {
    */
   public refund(): Promise<Shipment>;
 
-  // TODO create type for services https://www.easypost.com/service-levels-and-parcels#USPS
   public lowestRate(carriers?: Carrier[], services?: ServiceLevel[]): IRate;
-
 
   /**
    * A Shipment's PostageLabel can be converted from PNG to other formats. 
@@ -2455,11 +2453,75 @@ export declare class CarrierAccount implements ICarrierAccount {
   public delete(): Promise<{}>;
 }
 
+
+export declare interface IOrderCreateParameters {
+  reference?: string;
+  to_address: IAddress | string;
+  from_address: IAddress | string;
+  shipments: Shipment[];
+
+  /**
+   * optional array of ids that begin with "ca_"
+   */
+  carrier_accounts?: string[];
+}
+
+export declare class Order implements IOrder {
+  public constructor(input: DeepPartial<IOrderCreateParameters>);
+
+  reference?: string;
+  to_address: IAddress;
+  from_address: IAddress;
+  return_address: IAddress;
+  buyer_address: IAddress;
+  shipments: IShipment[];
+  rates: IRate[];
+  messages: IMessage[];
+  is_return: boolean;
+  id: string;
+  mode: "test" | "production";
+  object: "Order";
+  created_at: string;
+  updated_at: string;
+
+  /**
+   * An Order is almost exclusively a container for other objects, and thus an Order may reuse many of these objects. 
+   * Alternatively, all the objects contained within an Order may be created at the same time.
+   * 
+   * You can limit the CarrierAccounts to use for rating by passing the carrier_accounts parameter.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-an-order
+   */
+  public save(): Promise<Order>;
+
+  /**
+   * An Order can be retrieved by either its id or reference. 
+   * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
+   * 
+   * @param orderId Unique, begins with "order_"
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-an-order
+   */
+  static retrieve(orderId: string): Promise<Order>;
+
+  /**
+   * To purchase an Order you only need to specify the carrier and service to purchase. 
+   * This operation populates the tracking_code and postage_label attributes of each Shipment.
+   * 
+   * @see https://www.easypost.com/docs/api/node#buy-an-order
+   */
+  public buy(carrier: Carrier, service: ServiceLevel): Promise<Order>;
+
+
+  public getRates(): Promise<IRate[]>;
+}
+
 export declare class Easypost {
   public Address: typeof Address;
   public Parcel: typeof Parcel;
   public Shipment: typeof Shipment;
   public CarrierAccount: typeof CarrierAccount;
+  public Order: typeof Order;
 
-  public constructor(shipmentProviderSecret: string);
+  public constructor(apiKey: string);
 }
