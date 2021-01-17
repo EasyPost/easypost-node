@@ -2146,8 +2146,10 @@ export declare class Address implements IAddress {
   static retrieve(addressId: string): Promise<Address>;
 }
 
+
+export declare interface IParcelCreateParameters extends Omit<IParcel, ParametersToOmitOnCreate> { }
 export declare class Parcel implements IParcel {
-  public constructor(input: DeepPartial<IParcel>);
+  public constructor(input: DeepPartial<IParcelCreateParameters>);
 
   length: number;
   width: number;
@@ -2160,7 +2162,24 @@ export declare class Parcel implements IParcel {
   created_at: string;
   updated_at: string;
 
-  public save(): Promise<IParcel>;
+  /**
+   * Include the weight, and either a predefined_package or length, width and height if applicable.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-a-parcel
+   */
+  public save(): Promise<Parcel>;
+
+  /**
+   * Get a Parcel by its id. 
+   * In general you should not need to use this in your automated solution. 
+   * A Parcel's id can be inlined into the creation call to other objects. 
+   * This allows you to only create one Parcel for each package you will be using.
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-parcel
+   * 
+   * @param parcelId Unique, begins with "prcl_"
+   */
+  static retrieve(parcelId: string): Promise<Parcel>;
 }
 
 export declare interface IShipmentCreateParameters {
