@@ -56,6 +56,84 @@ export declare type Carrier = "AmazonMws" | "APC" | "Aramex" | "ArrowXL" | "Asen
   "RRDonnelley" | "Seko" | "OmniParcel" | "SingaporePost" | "SpeeDee" | "SprintShip" | "StarTrack" | "Toll" | "TForce" |
   "UDS" | "Ukrposhta" | "UPS" | "UPSIparcel" | "UPSMailInnovations" | "USPS" | "Veho" | "Yanwen" | "Yodel";
 
+export declare type ServiceLevelAmazonMws = "UPS Rates" | "USPS Rates" | "FedEx Rates" | "UPS Labels" | "USPS Labels" | "FedEx Labels" | "UPS Tracking" | "USPS Tracking" | "FedEx Tracking";
+export declare type ServiceLevelAPC = "parcelConnectBookService" | "parcelConnectExpeditedDDP" | "parcelConnectExpeditedDDU" | "parcelConnectPriorityDDP" | "parcelConnectPriorityDDPDelcon" | "parcelConnectPriorityDDU" | "parcelConnectPriorityDDUDelcon" | "parcelConnectPriorityDDUPQW" | "parcelConnectStandardDDU" | "parcelConnectStandardDDUPQW" | "parcelConnectPacketDDU";
+export declare type ServiceLevelAramex = "Domestic" | "PriorityDocumentExpress" | "PriorityParcelExpress" | "PriorityLetterExpress" | "DeferredDocumentExpress" | "DeferredParcelExpress" | "GroundDocumentExpress" | "GroundParcelExpress" | "EconomyParcelExpress";
+export declare type ServiceLevelArrowXL = "48HRBrownInstall" | "48HRBrownInstallRemove" | "48HROther" | "48HROtherRemove" | "48HRWhiteInstall" | "48HRWhiteInstallRemove" | "48HRWhiteRemove" | "ExpressBrownInstall" | "ExpressBrownInstallRemove" | "ExpressOther" | "ExpressOtherRemove" | "ExpressWhiteInstall" | "ExpressWhiteInstallRemove" | "ExpressWhiteRemove" | "StandardBrownInstall" | "StandardBrownInstallRemove" | "StandardBrownRemove" | "StandardOther" | "StandardOtherAssemble" | "StandardOtherNoUnpack" | "StandardOtherRemove" | "StandardOtherUnpack" | "StandardOtherUnpackLeavePackaging" | "StandardReturns" | "StandardWhiteInstall" | "StandardWhiteInstallRemove" | "StandardWhiteRemove";
+export declare type ServiceLevelAsendia = "PMI" | "ePacket" | "IPA" | "ISAL";
+export declare type ServiceLevelAustraliaPost = "ExpressPost" | "ExpressPostSignature" | "ParcelPost" | "ParcelPostSignature" | "ParcelPostExtra" | "ParcelPostWinePlusSignature";
+export declare type ServiceLevelAxlehireV3 = "AxleHireDelivery";
+export declare type ServiceLevelBorderGuru = "ECONOMY" | "PRIORITY" | "EXPEDITED";
+export declare type ServiceLevelCanadaPost = "RegularParcel" | "ExpeditedParcel" | "Xpresspost" | "XpresspostCertified" | "Priority" | "LibraryBooks" | "ExpeditedParcelUSA" | "PriorityWorldwideEnvelopeUSA" | "PriorityWorldwidePakUSA" | "PriorityWorldwideParcelUSA" | "SmallPacketUSAAir" | "TrackedPacketUSA" | "TrackedPacketUSALVM" | "XpresspostUSA" | "XpresspostInternational" | "InternationalParcelAir" | "InternationalParcelSurface" | "PriorityWorldwideEnvelopeIntl" | "PriorityWorldwidePakIntl" | "PriorityWorldwideParcelIntl" | "SmallPacketInternationalAir" | "SmallPacketInternationalSurface" | "TrackedPacketInternational";
+export declare type ServiceLevelCanpar = "Ground" | "SelectLetter" | "SelectPak" | "Select" | "OvernightLetter" | "OvernightPak" | "Overnight" | "SelectUSA" | "USAPak" | "USALetter" | "USA" | "International";
+export declare type ServiceLevelColumbusLastMile = "DISTRIBUTION" | "Same Day";
+export declare type ServiceLevelColisPrive = "Parcel";
+export declare type ServiceLevelCouriersPlease = "DomesticPrioritySignature" | "DomesticPriority" | "DomesticOffPeakSignature" | "DomesticOffPeak" | "GoldDomesticSignature" | "GoldDomestic" | "AustralianCityExpressSignature" | "AustralianCityExpress" | "DomesticSaverSignature" | "DomesticSaver" | "RoadExpress" | "5KgSatchel" | "3KgSatchel" | "1KgSatchel" | "5KgSatchelATL" | "3KgSatchelATL" | "1KgSatchelATL" | "500GramSatchel" | "500GramSatchelATL" | "25KgParcel" | "10KgParcel" | "5KgParcel" | "3KgParcel" | "1KgParcel" | "500GramParcel" | "500GramParcelATL" | "ExpressInternationalPriority" | "InternationalSaver" | "InternationalExpressImport" | "ExpressInternationalPriority" | "InternationalExpress";
+export declare type ServiceLevelDaiPost = "DomesticTracked" | "InternationalEconomy" | "InternationalStandard" | "InternationalExpress";
+export declare type ServiceLevelDeliv = "Scheduled" | "OnDemand";
+export declare type ServiceLevelDeutschePost = "PacketPlus";
+export declare type ServiceLevelDeutschePostUK = "PriorityPacketPlus" | "PriorityPacket" | "PriorityPacketTracked" | "BusinessMailRegistered" | "StandardPacket" | "BusinessMailStandard";
+export declare type ServiceLevelDHLEcommerceAsia = "Packet" | "PacketPlus" | "ParcelDirect" | "ParcelDirectExpedited";
+export declare type ServiceLevelDhlEcs = "DHLParcelExpedited" | "DHLParcelExpeditedMax" | "DHLParcelGround" | "DHLBPMExpedited" | "DHLBPMGround" | "DHLParcelInternationalDirect" | "DHLParcelInternationalStandard" | "DHLPacketInternational" | "DHLParcelInternationalDirectPriority" | "DHLParcelInternationalDirectStandard";
+export declare type ServiceLevelDHLExpress = "BreakBulkEconomy" | "BreakBulkExpress" | "DomesticEconomySelect" | "DomesticExpress" | "DomesticExpress1030" | "DomesticExpress1200" | "EconomySelect" | "EconomySelectNonDoc" | "EuroPack" | "EuropackNonDoc" | "Express1030" | "Express1030NonDoc" | "Express1200NonDoc" | "Express1200" | "Express900" | "Express900NonDoc" | "ExpressEasy" | "ExpressEasyNonDoc" | "ExpressEnvelope" | "ExpressWorldwide" | "ExpressWorldwideB2C" | "ExpressWorldwideB2CNonDoc" | "ExpressWorldwideECX" | "ExpressWorldwideNonDoc" | "FreightWorldwide" | "GlobalmailBusiness" | "JetLine" | "JumboBox" | "LogisticsServices" | "SameDay" | "SecureLine" | "SprintLine";
+export declare type ServiceLevelDicom = "Ground";
+export declare type ServiceLevelDPD = "DPDCLASSIC" | "DPD8:30" | "DPD10:00" | "DPD12:00" | "DPD18:00" | "DPDEXPRESS" | "DPDPARCELLETTER" | "DPDPARCELLETTERPLUS" | "DPDINTERNATIONALMAIL";
+export declare type ServiceLevelDPDUK = "AirExpressInternationalAir" | "AirClassicInternationalAir" | "ParcelSunday" | "FreightParcelSunday" | "PalletSunday" | "PalletDpdClassic" | "ExpresspakDpdClassic" | "ExpresspakSunday" | "ParcelDpdClassic" | "ParcelDpdTwoDay" | "ParcelDpdNextDay" | "ParcelDpd12" | "ParcelDpd10" | "ParcelDpd10" | "ParcelReturnToShop" | "ParcelSaturday" | "ParcelSaturday12" | "ParcelSaturday10" | "ParcelSaturday10" | "ParcelSunday12" | "FreightParcelDpdClassic" | "FreightParcelSunday12" | "ExpresspakDpdNextDay" | "ExpresspakDpd12" | "ExpresspakDpd10" | "ExpresspakDpd10" | "ExpresspakSaturday" | "ExpresspakSaturday12" | "ExpresspakSaturday10" | "ExpresspakSaturday10" | "ExpresspakSunday12" | "PalletSunday12" | "PalletDpdTwoDay" | "PalletDpdNextDay" | "PalletDpd12" | "PalletDpd10" | "PalletSaturday" | "PalletSaturday12" | "PalletSaturday10" | "FreightParcelDpdTwoDay" | "FreightParcelDpdNextDay" | "FreightParcelDpd12" | "FreightParcelDpd10" | "FreightParcelSaturday" | "FreightParcelSaturday12" | "FreightParcelSaturday10";
+export declare type ServiceLevelEstafeta = "NextDayBy930" | "NextDayBy1130" | "NextDay" | "Ground" | "TwoDay" | "LTL";
+export declare type ServiceLevelFastway = "Parcel" | "Satchel";
+export declare type ServiceLevelFedEx = "FEDEX_GROUND" | "FEDEX_2_DAY" | "FEDEX_2_DAY_AM" | "FEDEX_EXPRESS_SAVER" | "STANDARD_OVERNIGHT" | "FIRST_OVERNIGHT" | "PRIORITY_OVERNIGHT" | "INTERNATIONAL_ECONOMY" | "INTERNATIONAL_FIRST" | "INTERNATIONAL_PRIORITY" | "GROUND_HOME_DELIVERY" | "SMART_POST";
+export declare type ServiceLevelFedExCrossBorder = "CBEC" | "CBECL";
+export declare type ServiceLevelFedExSameDayCity = "EconomyService" | "StandardService" | "PriorityService" | "LastMile";
+export declare type ServiceLevelFedexSmartPost = "SMART_POST";
+export declare type ServiceLevelGlobegistics = "PMEI" | "PMI" | "eComDomestic" | "eComEurope" | "eComExpress" | "eComExtra" | "eComIPA" | "eComISAL" | "eComPMEIDutyPaid" | "eComPMIDutyPaid" | "eComPacket" | "eComPacketDDP" | "eComPriority" | "eComStandard" | "eComTrackedDDP" | "eComTrackedDDU";
+export declare type ServiceLevelGSO = "EarlyPriorityOvernight" | "PriorityOvernight" | "CaliforniaParcelService" | "SaturdayDeliveryService" | "EarlySaturdayService" | "Ground" | "Overnight";
+export declare type ServiceLevelHermes = "DomesticDelivery" | "DomesticDeliverySigned" | "InternationalDelivery" | "InternationalDeliverySigned";
+export declare type ServiceLevelInterlinkExpress = "InterlinkAirClassicInternationalAir" | "InterlinkAirExpressInternationalAir" | "InterlinkExpresspak1By10:30" | "InterlinkExpresspak1By12" | "InterlinkExpresspak1NextDay" | "InterlinkExpresspak1Saturday" | "InterlinkExpresspak1SaturdayBy10:30" | "InterlinkExpresspak1SaturdayBy12" | "InterlinkExpresspak1Sunday" | "InterlinkExpresspak1SundayBy12" | "InterlinkExpresspak5By10" | "InterlinkExpresspak5By10:30" | "InterlinkExpresspak5By12" | "InterlinkExpresspak5NextDay" | "InterlinkExpresspak5Saturday" | "InterlinkExpresspak5SaturdayBy10" | "InterlinkExpresspak5SaturdayBy10:30" | "InterlinkExpresspak5SaturdayBy12" | "InterlinkExpresspak5Sunday" | "InterlinkExpresspak5SundayBy12" | "InterlinkFreightBy10" | "InterlinkFreightBy12" | "InterlinkFreightNextDay" | "InterlinkFreightSaturday" | "InterlinkFreightSaturdayBy10" | "InterlinkFreightSaturdayBy12" | "InterlinkFreightSunday" | "InterlinkFreightSundayBy12" | "InterlinkParcelBy10" | "InterlinkParcelBy10:30" | "InterlinkParcelBy12" | "InterlinkParcelDpdEuropeByRoad" | "InterlinkParcelNextDay" | "InterlinkParcelReturn" | "InterlinkParcelReturnToShop" | "InterlinkParcelSaturday" | "InterlinkParcelSaturdayBy10" | "InterlinkParcelSaturdayBy10:30" | "InterlinkParcelSaturdayBy12" | "InterlinkParcelShipToShop" | "InterlinkParcelSunday" | "InterlinkParcelSundayBy12" | "InterlinkParcelTwoDay" | "InterlinkPickupParcelDpdEuropeByRoad";
+export declare type ServiceLevelLaserShipV2 = "SameDay" | "NextDay" | "Weekend";
+export declare type ServiceLevelLiefery = "TourAppointment20161124From1600To1900";
+export declare type ServiceLevelLoomisExpress = "LoomisGround" | "LoomisExpress1800" | "LoomisExpress1200" | "LoomisExpress900";
+export declare type ServiceLevelLSO = "GroundEarly" | "GroundBasic" | "PriorityBasic" | "PriorityEarly" | "PrioritySaturday" | "Priority2ndDay" | "SameDay";
+export declare type ServiceLevelNewgistics = "ParcelSelect" | "ParcelSelectLightweight" | "Ground" | "Express" | "FirstClassMail" | "PriorityMail" | "BoundPrintedMatter";
+export declare type ServiceLevelOnTrac = "Sunrise" | "Gold" | "OnTracGround" | "SameDay" | "PalletizedFreight";
+export declare type ServiceLevelOnTracDirectPost = "FirstClassMail" | "PriorityMail" | "BoundPrintedMatter" | "MediaMail" | "ParcelSelect" | "ParcelSelectLightweight";
+export declare type ServiceLevelOsmWorldwide = "First" | "Expedited" | "ParcelSelectLightweight" | "Priority" | "BPM" | "ParcelSelect" | "MediaMail" | "MarketingParcel" | "MarketingParcelTracked";
+export declare type ServiceLevelPurolator = "PurolatorExpress" | "PurolatorExpress12PM" | "PurolatorExpressPack12PM" | "PurolatorExpressBox12PM" | "PurolatorExpressEnvelope12PM" | "PurolatorExpress1030AM" | "PurolatorExpress9AM" | "PurolatorExpressBox" | "PurolatorExpressBox1030AM" | "PurolatorExpressBox9AM" | "PurolatorExpressBoxEvening" | "PurolatorExpressBoxInternational" | "PurolatorExpressBoxInternational1030AM" | "PurolatorExpressBoxInternational1200" | "PurolatorExpressBoxInternational9AM" | "PurolatorExpressBoxUS" | "PurolatorExpressBoxUS1030AM" | "PurolatorExpressBoxUS1200" | "PurolatorExpressBoxUS9AM" | "PurolatorExpressEnvelope" | "PurolatorExpressEnvelope1030AM" | "PurolatorExpressEnvelope9AM" | "PurolatorExpressEnvelopeEvening" | "PurolatorExpressEnvelopeInternational" | "PurolatorExpressEnvelopeInternational1030AM" | "PurolatorExpressEnvelopeInternational1200" | "PurolatorExpressEnvelopeInternational9AM" | "PurolatorExpressEnvelopeUS" | "PurolatorExpressEnvelopeUS1030AM" | "PurolatorExpressEnvelopeUS1200" | "PurolatorExpressEnvelopeUS9AM" | "PurolatorExpressEvening" | "PurolatorExpressInternational" | "PurolatorExpressInternational1030AM" | "PurolatorExpressInternational1200" | "PurolatorExpressInternational9AM" | "PurolatorExpressPack" | "PurolatorExpressPack1030AM" | "PurolatorExpressPack9AM" | "PurolatorExpressPackEvening" | "PurolatorExpressPackInternational" | "PurolatorExpressPackInternational1030AM" | "PurolatorExpressPackInternational1200" | "PurolatorExpressPackInternational9AM" | "PurolatorExpressPackUS" | "PurolatorExpressPackUS1030AM" | "PurolatorExpressPackUS1200" | "PurolatorExpressPackUS9AM" | "PurolatorExpressUS" | "PurolatorExpressUS1030AM" | "PurolatorExpressUS1200" | "PurolatorExpressUS9AM" | "PurolatorGround" | "PurolatorGround1030AM" | "PurolatorGround9AM" | "PurolatorGroundDistribution" | "PurolatorGroundEvening" | "PurolatorGroundRegional" | "PurolatorGroundUS";
+export declare type ServiceLevelRoyalMail = "InternationalSigned" | "InternationalStandard" | "InternationalTracked" | "InternationalTrackedAndSigned" | "1stClass" | "1stClassSignedFor" | "2ndClass" | "2ndClassSignedFor" | "RoyalMail24" | "RoyalMail24SignedFor" | "RoyalMail48" | "RoyalMail48SignedFor" | "SpecialDeliveryGuaranteed1pm" | "SpecialDeliveryGuaranteed9am" | "StandardLetter1stClass" | "StandardLetter1stClassSignedFor" | "StandardLetter2ndClass" | "StandardLetter2ndClassSignedFor" | "Tracked24" | "Tracked24HighVolume" | "Tracked24HighVolumeSignature" | "Tracked24Signature" | "Tracked48" | "Tracked48HighVolume" | "Tracked48HighVolumeSignature" | "Tracked48Signature";
+export declare type ServiceLevelRRDonnelley = "CourierServiceDDP" | "CourierServiceDDU" | "DomesticEconomyParcel" | "DomesticParcelBPM" | "DomesticPriorityParcel" | "DomesticPriorityParcelBPM" | "EMIService" | "EconomyParcelService" | "IPAService" | "ISALService" | "PMIService" | "PriorityParcelDDP" | "PriorityParcelDDU" | "PriorityParcelDeliveryConfirmationDDP" | "PriorityParcelDeliveryConfirmationDDU" | "ePacketService";
+export declare type ServiceLevelOmniParcel = "eCommerce Standard Tracked" | "eCommerce Express Tracked" | "Domestic Express" | "Domestic Standard";
+export declare type ServiceLevelSpeeDee = "SpeeDeeDelivery";
+export declare type ServiceLevelSprintShip = "RoutedDeliveries" | "OnDemand" | "WhiteGloveDeliveries";
+export declare type ServiceLevelStarTrack = "StartrackExpress" | "StartrackPremium" | "StartrackFixedPricePremium";
+export declare type ServiceLevelTForce = "SameDay" | "SameDayWhiteGlove" | "NextDay" | "NextDayWhiteGlove";
+export declare type ServiceLevelUDS = "DeliveryService";
+export declare type ServiceLevelUPS = "Ground" | "UPSStandard" | "UPSSaver" | "Express" | "ExpressPlus" | "Expedited" | "NextDayAir" | "NextDayAirSaver" | "NextDayAirEarlyAM" | "2ndDayAir" | "2ndDayAirAM" | "3DaySelect";
+export declare type ServiceLevelUPSMailInnovations = "First" | "Priority" | "ExpeditedMailInnovations" | "PriorityMailInnovations" | "EconomyMailInnovations";
+export declare type ServiceLevelUSPS = "First" | "Priority" | "Express" | "ParcelSelect" | "LibraryMail" | "MediaMail" | "FirstClassMailInternational" | "FirstClassPackageInternationalService" | "PriorityMailInternational" | "ExpressMailInternational";
+export declare type ServiceLevelVeho = "nextDay" | "sameDay";
+
+export declare type ServiceLevel = ServiceLevelAmazonMws | ServiceLevelAPC | ServiceLevelAramex | ServiceLevelArrowXL | ServiceLevelAsendia | ServiceLevelAustraliaPost | ServiceLevelAxlehireV3 | ServiceLevelBorderGuru | ServiceLevelCanadaPost | ServiceLevelCanpar | ServiceLevelColumbusLastMile | ServiceLevelColisPrive | ServiceLevelCouriersPlease | ServiceLevelDaiPost | ServiceLevelDeliv | ServiceLevelDeutschePost | ServiceLevelDeutschePostUK | ServiceLevelDHLEcommerceAsia | ServiceLevelDhlEcs | ServiceLevelDHLExpress | ServiceLevelDicom | ServiceLevelDPD | ServiceLevelDPDUK | ServiceLevelEstafeta | ServiceLevelFastway | ServiceLevelFedEx | ServiceLevelFedExCrossBorder | ServiceLevelFedExSameDayCity | ServiceLevelFedexSmartPost | ServiceLevelGlobegistics | ServiceLevelGSO | ServiceLevelHermes | ServiceLevelInterlinkExpress | ServiceLevelLaserShipV2 | ServiceLevelLiefery | ServiceLevelLoomisExpress | ServiceLevelLSO | ServiceLevelNewgistics | ServiceLevelOnTrac | ServiceLevelOnTracDirectPost | ServiceLevelOsmWorldwide | ServiceLevelPurolator | ServiceLevelRoyalMail | ServiceLevelRRDonnelley | ServiceLevelOmniParcel | ServiceLevelSpeeDee | ServiceLevelSprintShip | ServiceLevelStarTrack | ServiceLevelTForce | ServiceLevelUDS | ServiceLevelUPS | ServiceLevelUPSMailInnovations | ServiceLevelUSPS | ServiceLevelVeho;
+
+
+export declare type PredefinedPackageDHLExpress = "JumboDocument" | "JumboParcel" | "Document" | "DHLFlyer" | "Domestic" | "ExpressDocument" | "DHLExpressEnvelope" | "JumboBox" | "JumboJuniorDocument" | "JuniorJumboBox" | "JumboJuniorParcel" | "OtherDHLPackaging" | "Parcel" | "YourPackaging";
+export declare type PredefinedPackageDPDUK = "Parcel" | "Pallet" | "ExpressPak" | "FreightParcel" | "Freight";
+export declare type PredefinedPackageEstafeta = "ENVELOPE" | "PARCEL";
+export declare type PredefinedPackageFastway = "Parcel" | "Satchel";
+export declare type PredefinedPackageFedEx = "FedExEnvelope" | "FedExBox" | "FedExPak" | "FedExTube" | "FedEx10kgBox" | "FedEx25kgBox" | "FedExSmallBox" | "FedExMediumBox" | "FedExLargeBox" | "FedExExtraLargeBox";
+export declare type PredefinedPackageInterlinkExpress = "Parcel" | "Pallet" | "ExpressPak" | "FreightParcel" | "Freight";
+export declare type PredefinedPackageLaserShipV2 = "Envelope" | "Custom";
+export declare type PredefinedPackageLiefery = "SmallParcel" | "MediumParcel" | "LargeParcel" | "ExtraLargeParcel";
+export declare type PredefinedPackageOnTrac = "Letter";
+export declare type PredefinedPackagePurolator = "CustomerPackaging" | "ExpressPack" | "ExpressBox" | "ExpressEnvelope";
+export declare type PredefinedPackageRoyalMail = "Letter" | "LargeLetter" | "SmallParcel" | "MediumParcel" | "Parcel (for use with RoyalMail24 or RoyalMail48)";
+export declare type PredefinedPackageOmniParcel = "Bag" | "Box" | "Carton" | "Container" | "Crate" | "Envelope" | "Pail" | "Pallet" | "Satchel" | "Tub";
+export declare type PredefinedPackageSprintShip = "ENVELOPE" | "LARGE_BOX_OR_TOTE" | "MULTI_PACK" | "SMALL_OR_MEDIUM_BOX_OR_TOTE" | "PACKAGE";
+export declare type PredefinedPackageStarTrack = "Carton" | "Pallet" | "Satchel" | "Bag" | "Envelope" | "Item" | "Jiffybag" | "Skid";
+export declare type PredefinedPackageTForce = "Parcel" | "Letter";
+export declare type PredefinedPackageUPS = "UPSLetter" | "UPSExpressBox" | "UPS25kgBox" | "UPS10kgBox" | "Tube" | "Pak" | "SmallExpressBox" | "MediumExpressBox" | "LargeExpressBox";
+export declare type PredefinedPackageUSPS = "Card" | "Letter" | "Flat" | "FlatRateEnvelope" | "FlatRateLegalEnvelope" | "FlatRatePaddedEnvelope" | "FlatRateGiftCardEnvelope" | "FlatRateWindowEnvelope" | "FlatRateCardboardEnvelope" | "SmallFlatRateEnvelope" | "Parcel" | "LargeParcel" | "IrregularParcel" | "SoftPack" | "SmallFlatRateBox" | "MediumFlatRateBox" | "LargeFlatRateBox" | "LargeFlatRateBoxAPOFPO" | "LargeFlatRateBoardGameBox" | "RegionalRateBoxA" | "RegionalRateBoxB" | "FlatTubTrayBox" | "EMMTrayBox" | "FullTrayBox" | "HalfTrayBox" | "PMODSack";
+
+export declare type PredefinedPackage = PredefinedPackageDHLExpress | PredefinedPackageDPDUK | PredefinedPackageEstafeta | PredefinedPackageFastway | PredefinedPackageFedEx | PredefinedPackageInterlinkExpress | PredefinedPackageLaserShipV2 | PredefinedPackageLiefery | PredefinedPackageOnTrac | PredefinedPackagePurolator | PredefinedPackageRoyalMail | PredefinedPackageOmniParcel | PredefinedPackageSprintShip | PredefinedPackageStarTrack | PredefinedPackageTForce | PredefinedPackageUPS | PredefinedPackageUSPS;
+
 
 // TODO there seems to be a lot of duplicate codes listed here https://www.easypost.com/errors-guide
 export declare type TErrorCode =
@@ -251,33 +329,6 @@ export declare interface IAddress extends IObjectWithId<"Address"> {
   verifications: IVerifications;
 }
 
-export declare type TPredefinedPackage = "Card"
-  | "Letter"
-  | "Flat"
-  | "FlatRateEnvelope"
-  | "FlatRateLegalEnvelope"
-  | "FlatRatePaddedEnvelope"
-  | "FlatRateGiftCardEnvelope"
-  | "FlatRateWindowEnvelope"
-  | "FlatRateCardboardEnvelope"
-  | "SmallFlatRateEnvelope"
-  | "Parcel"
-  | "LargeParcel"
-  | "IrregularParcel"
-  | "SoftPack"
-  | "SmallFlatRateBox"
-  | "MediumFlatRateBox"
-  | "LargeFlatRateBox"
-  | "LargeFlatRateBoxAPOFPO"
-  | "LargeFlatRateBoardGameBox"
-  | "RegionalRateBoxA"
-  | "RegionalRateBoxB"
-  | "FlatTubTrayBox"
-  | "EMMTrayBox"
-  | "FullTrayBox"
-  | "HalfTrayBox"
-  | "PMODSack";
-
 /**
  * Parcel objects represent the physical container being shipped. 
  * Dimensions can be supplied either as length, width, and height dimensions, or a predefined_package string. 
@@ -310,7 +361,7 @@ export declare interface IParcel extends IObjectWithId<"Parcel">, IDatedObject {
   /**
    * Optional, one of our predefined_packages
    */
-  predefined_package?: TPredefinedPackage;
+  predefined_package?: PredefinedPackage;
 
   /**
    * Always required 
@@ -2169,7 +2220,7 @@ export declare class Parcel implements IParcel {
   length: number;
   width: number;
   height: number;
-  predefined_package?: TPredefinedPackage;
+  predefined_package?: PredefinedPackage;
   weight: number;
   id: string;
   mode: "test" | "production";
@@ -2311,7 +2362,7 @@ export declare class Shipment implements IShipment {
   public refund(): Promise<Shipment>;
 
   // TODO create type for services https://www.easypost.com/service-levels-and-parcels#USPS
-  public lowestRate(carriers?: Carrier[], services?: string[]): IRate;
+  public lowestRate(carriers?: Carrier[], services?: ServiceLevel[]): IRate;
 
 
   /**
