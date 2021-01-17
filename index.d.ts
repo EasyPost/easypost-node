@@ -2163,8 +2163,20 @@ export declare class Parcel implements IParcel {
   public save(): Promise<IParcel>;
 }
 
+export declare interface IShipmentCreateParameters {
+  reference?: string;
+  to_address: IAddress | string;
+  from_address: IAddress | string;
+  parcel: IParcel | string;
+
+  /**
+   * optional array of ids that begin with "ca_"
+   */
+  carrier_accounts?: string[];
+}
+
 export declare class Shipment implements IShipment {
-  public constructor(input: DeepPartial<IShipment>);
+  public constructor(input: IShipmentCreateParameters);
 
   reference?: string;
   to_address: IAddress;
