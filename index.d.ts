@@ -2087,42 +2087,45 @@ export declare interface IUser extends IObjectWithId<"User"> {
   children: IUser[];
 }
 
-/**
- * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
- */
-export declare interface IShipmentListParameters {
+export declare interface IAllMethodParameters {
   /**
    * Optional pagination parameter. 
-   * Only shipments created before the given ID will be included. 
+   * Only records created before the given ID will be included. 
    * May not be used with after_id
    */
   before_id?: string;
 
   /**
    * Optional pagination parameter. 
-   * Only shipments created after the given ID will be included. 
+   * Only records created after the given ID will be included. 
    * May not be used with before_id
    */
   after_id?: string;
 
   /**
-   * Only return Shipments created after this timestamp. 
+   * Only return records created after this timestamp. 
    * Defaults to 1 month ago, or 1 month before a passed end_datetime
    */
   start_datetime?: string;
 
   /**
-   * Only return Shipments created before this timestamp. 
+   * Only return records created before this timestamp. 
    * Defaults to end of the current day, or 1 month after a passed start_datetime
    */
   end_datetime?: string;
 
   /**
-   * The number of Shipments to return on each page. 
+   * The number of records to return on each page. 
    * The maximum value is 100
    */
   page_size?: number;
+}
 
+
+/**
+ * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
+ */
+export declare interface IShipmentListParameters extends IAllMethodParameters {
   /**
    * Only include Shipments that have been purchased. 
    * Default is true
@@ -2318,7 +2321,7 @@ export declare class Shipment implements IShipment {
    * 
    * @param params 
    */
-  static all(params?: IShipmentListParameters): Promise<Shipment[]>;
+  static all(params?: IShipmentListParameters): Promise<{ shipments: Shipment[], has_more: boolean }>;
 
   /**
    * A Shipment can be retrieved by either its id or reference. 
@@ -2516,12 +2519,94 @@ export declare class Order implements IOrder {
   public getRates(): Promise<IRate[]>;
 }
 
+
+export declare interface IInsuranceCreateParameters {
+  reference?: string;
+  to_address: IAddress | string;
+  from_address: IAddress | string;
+
+  /**
+   * The carrier associated with the tracking_code you provided. 
+   * The carrier will get auto-detected if none is provided
+   */
+  carrier?: Carrier;
+
+  /**
+   * The tracking code associated with the non-EasyPost-purchased package you'd like to insure.
+   */
+  tracking_code: string;
+
+  /**
+   * The USD value of contents you would like to insure. 
+   * Currently the maximum is $5000
+   * 
+   * @example 100.00
+   */
+  amount: string;
+}
+
+export declare class Insurance implements IInsurance {
+  public constructor(input: DeepPartial<IInsuranceCreateParameters>);
+
+  reference: string;
+  amount: string;
+  provider: string;
+  provider_id: string;
+  shipment_id: string;
+  tracking_code: string;
+  status: TInsuranceStatus;
+  tracker: ITracker;
+  to_address: IAddress;
+  from_address: IAddress;
+  fee: IFee;
+  messages: string[];
+  id: string;
+  mode: "test" | "production";
+  object: "Insurance";
+  created_at: string;
+  updated_at: string;
+
+  /**
+   * An Insurance created via this endpoint must belong to a shipment purchased outside of EasyPost. 
+   * Insurance for Shipments created within EasyPost must be created via the Shipment Buy or Insure endpoints. 
+   * When creating Insurance for a non-EasyPost shipment, you must provide to_address, from_address, tracking_code, and amount information. 
+   * Optionally, you can provide the carrier parameter, which will help EasyPost identify the carrier the package was shipped with. 
+   * If no carrier is provided, EasyPost will attempt to determine the carrier based on the tracking_code provided. 
+   * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier. 
+   * In addition, not having to auto-match the carrier will significantly speed up the response time.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-an-insurance
+   */
+  public save(): Promise<Insurance>;
+
+  /**
+   * The Insurance List is a paginated list of all Insurance objects associated with the given API Key. 
+   * It accepts a variety of parameters which can be used to modify the scope. 
+   * The has_more attribute indicates whether or not additional pages can be requested. 
+   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
+   */
+  static all(params?: IAllMethodParameters): Promise<{ insurances: Insurance[], has_more: boolean }>;
+
+
+  /**
+   * Retrieve an Insurance by id.
+   * 
+   * @param insuranceId Unique, starts with "ins_"
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-an-insurance
+   */
+  static retrieve(insuranceId: string): Promise<Insurance>;
+}
+
 export declare class Easypost {
   public Address: typeof Address;
   public Parcel: typeof Parcel;
   public Shipment: typeof Shipment;
   public CarrierAccount: typeof CarrierAccount;
   public Order: typeof Order;
+  public Insurance: typeof Insurance;
 
   public constructor(apiKey: string);
 }
