@@ -2310,8 +2310,9 @@ export declare class Shipment implements IShipment {
   public insure(amount: number): Promise<Shipment>;
 }
 
+export declare interface ICarrierAccountCreateParameters extends Omit<ICarrierAccount, ParametersToOmitOnCreate> { }
 export declare class CarrierAccount implements ICarrierAccount {
-  public constructor(input: DeepPartial<ICarrierAccount>);
+  public constructor(input: DeepPartial<ICarrierAccountCreateParameters>);
 
   type: string;
   fields: ICarrierAccountFields;
@@ -2327,9 +2328,45 @@ export declare class CarrierAccount implements ICarrierAccount {
   created_at: string;
   updated_at: string;
 
+  /**
+   * CarrierAccount objects may be managed through the EasyPost API using the Production mode API key only. 
+   * Multiple accounts can be added for a single carrier.
+   * 
+   * The CarrierType of the preferred CarrierAccount should be consulted before attempting to create a new CarrierAccount, as it will inform you of the field names expected by a certain carrier.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-a-carrier-account
+   * @see https://www.easypost.com/docs/api/node#update-a-carrieraccount
+   * @requires production API Key.
+   */
   public save(): Promise<CarrierAccount>;
-  public all(): Promise<CarrierAccount[]>;
-  public retrieve(carrierAccountId: string): Promise<CarrierAccount>;
+
+  /**
+   * Retrieve an unpaginated list of all CarrierAccounts available to the authenticated account. 
+   * Only Production API keys may be used to retrieve this list, as there is no test mode equivalent.
+   * 
+   * @see https://www.easypost.com/docs/api/node#list-all-carrier-accounts
+   * @requires production API Key.
+   */
+  static all(): Promise<CarrierAccount[]>;
+
+
+  /**
+   * Retrieve a CarrierAccount by either its id or reference. 
+   * However it is recommended to use EasyPost's provided identifiers because we do not enforce a unique reference.
+   * 
+   * @param carrierAccountId Unique, begins with "ca_"
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-carrieraccount
+   * @requires production API Key.
+   */
+  static retrieve(carrierAccountId: string): Promise<CarrierAccount>;
+
+  /**
+   * CarrierAccount objects may be removed from your account when they become out of date or no longer useful.
+   * 
+   * @see https://www.easypost.com/docs/api/node#delete-a-carrier-account
+   * @requires production API Key.
+   */
   public delete(): Promise<{}>;
 }
 
@@ -2337,6 +2374,7 @@ export declare class Easypost {
   public Address: typeof Address;
   public Parcel: typeof Parcel;
   public Shipment: typeof Shipment;
+  public CarrierAccount: typeof CarrierAccount;
 
   public constructor(shipmentProviderSecret: string);
 }
