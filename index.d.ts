@@ -42,6 +42,21 @@ export declare interface IObjectWithId<ObjectName> extends IBaseObject<ObjectNam
   mode: "test" | "production";
 }
 
+/**
+ * @see https://www.easypost.com/docs/api/node#carrier-tracking-strings
+ */
+export declare type Carrier = "AmazonMws" | "APC" | "Aramex" | "ArrowXL" | "Asendia" | "AustraliaPost" | "AxlehireV3" |
+  "BorderGuru" | "Cainiao" | "CanadaPost" | "Canpar" | "ColumbusLastMile" | "Chronopost" | "ColisPrive" | "Colissimo" |
+  "CouriersPlease" | "DaiPost" | "Deliv" | "DeutschePost" | "DeutschePostUK" | "DHLEcommerceAsia" | "DhlEcs" |
+  "DHLExpress" | "DHLFreight" | "DHLGermany" | "Dicom" | "DPD" | "DPDUK" | "ChinaEMS" | "Estafeta" | "Estes" |
+  "Fastway" | "FedEx" | "FedExCrossBorder" | "FedExMailview" | "FedExSameDayCity" | "FedexSmartPost" | "FirstMile" |
+  "Globegistics" | "GSO" | "Hermes" | "HongKongPost" | "InterlinkExpress" | "JancoFreight" | "JPPost" | "KuronekoYamato" |
+  "LaPoste" | "LaserShipV2" | "Liefery" | "LoomisExpress" | "LSO" | "Newgistics" | "OnTrac" | "OnTracDirectPost" |
+  "OsmWorldwide" | "Parcelforce" | "Passport" | "Pilot" | "PostNL" | "Posten" | "PostNord" | "Purolator" | "RoyalMail" |
+  "RRDonnelley" | "Seko" | "OmniParcel" | "SingaporePost" | "SpeeDee" | "SprintShip" | "StarTrack" | "Toll" | "TForce" |
+  "UDS" | "Ukrposhta" | "UPS" | "UPSIparcel" | "UPSMailInnovations" | "USPS" | "Veho" | "Yanwen" | "Yodel";
+
+
 // TODO there seems to be a lot of duplicate codes listed here https://www.easypost.com/errors-guide
 export declare type TErrorCode =
   "INTERNAL_SERVER_ERROR" | "NOT_ACCEPTABLE" | "NOT_FOUND" | "FORBIDDEN" | "PAYMENT_REQUIRED" | "UNAUTHORIZED" |
@@ -2295,8 +2310,8 @@ export declare class Shipment implements IShipment {
    */
   public refund(): Promise<Shipment>;
 
-  // TODO create types for carriers and services https://www.easypost.com/service-levels-and-parcels#USPS
-  public lowestRate(carriers?: string[], services?: string[]): IRate;
+  // TODO create type for services https://www.easypost.com/service-levels-and-parcels#USPS
+  public lowestRate(carriers?: Carrier[], services?: string[]): IRate;
 
 
   /**
