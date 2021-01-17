@@ -2470,7 +2470,7 @@ export declare interface IOrderCreateParameters {
 }
 
 export declare class Order implements IOrder {
-  public constructor(input: DeepPartial<IOrderCreateParameters>);
+  public constructor(input: IOrderCreateParameters);
 
   reference?: string;
   to_address: IAddress;
@@ -2546,7 +2546,7 @@ export declare interface IInsuranceCreateParameters {
 }
 
 export declare class Insurance implements IInsurance {
-  public constructor(input: DeepPartial<IInsuranceCreateParameters>);
+  public constructor(input: IInsuranceCreateParameters);
 
   reference: string;
   amount: string;
@@ -2600,6 +2600,95 @@ export declare class Insurance implements IInsurance {
   static retrieve(insuranceId: string): Promise<Insurance>;
 }
 
+
+export declare interface ITrackerCreateParameters {
+  /**
+   * The tracking code associated with the package you'd like to track
+   */
+  tracking_code: string;
+
+  /**
+   * The carrier associated with the tracking_code you provided. 
+   * The carrier will get auto-detected if none is provided
+   */
+  carrier?: Carrier;
+}
+
+export declare interface ITrackerListParameters extends IAllMethodParameters {
+  /**
+   * Only returns Trackers with the given tracking_code. 
+   * Useful for retrieving an individual Tracker by tracking_code rather than by ID
+   */
+  tracking_code?: string;
+
+  /**
+   * Only returns Trackers with the given carrier value
+   */
+  carrier?: Carrier;
+}
+
+export declare class Tracker implements ITracker {
+  public constructor(input: ITrackerCreateParameters);
+
+  tracking_code: string;
+  status: TTrackerStatus;
+  signed_by: string;
+  weight: number;
+  est_delivery_date: string;
+  shipment_id: string;
+  carrier: string;
+  tracking_details: ITrackingDetail[];
+  carrier_detail: ICarrierDetail;
+  public_url: string;
+  fees: IFee[];
+  id: string;
+  mode: "test" | "production";
+  object: "Tracker";
+  created_at: string;
+  updated_at: string;
+
+  /**
+   * A Tracker can be created with only a tracking_code. 
+   * Optionally, you can provide the carrier parameter, which indicates the carrier the package was shipped with. 
+   * If no carrier is provided, EasyPost will attempt to determine the carrier based on the tracking_code provided. 
+   * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier. 
+   * In addition, not having to auto-match the carrier will significantly speed up the response time.
+   * 
+   * In an effort to reduce wasted resources, EasyPost prevents the creation of duplicate Trackers. 
+   * A Tracker is considered to be a duplicate if another Tracker with the same tracking_code and carrier was created by the same User in the last three months. 
+   * In the case where a duplicate request is submitted, the original Tracker will be returned.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-a-tracker
+   */
+  public save(): Promise<Tracker>;
+
+
+  /**
+   * The Tracker List is a paginated list of all Tracker objects associated with the given API Key. 
+   * It accepts a variety of parameters which can be used to modify the scope. 
+   * The has_more attribute indicates whether or not additional pages can be requested. 
+   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * 
+   * Using the Tracker List endpoint is the recommended way of retrieving a Tracker by tracking_code or carrier. 
+   * Unlike the retrieving a Tracker using the Retrieve endpoint, which accepts an id, the List endpoint accepts the tracking_code as the search parameter. 
+   * Normally, you'll only have one Tracker with a given tracking_code, but it is also possible to further filter those results by including the carrier parameter in your request.
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers
+   */
+  static all(params?: ITrackerListParameters): Promise<{ trackers: Tracker[], has_more: boolean }>;
+
+
+  /**
+   * Retrieve a Tracker by id.
+   * 
+   * @param trackerId Unique, starts with "trk_"
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-tracker
+   */
+  static retrieve(trackerId: string): Promise<Tracker>;
+}
+
+
 export declare class Easypost {
   public Address: typeof Address;
   public Parcel: typeof Parcel;
@@ -2607,6 +2696,7 @@ export declare class Easypost {
   public CarrierAccount: typeof CarrierAccount;
   public Order: typeof Order;
   public Insurance: typeof Insurance;
+  public Tracker: typeof Tracker;
 
   public constructor(apiKey: string);
 }
