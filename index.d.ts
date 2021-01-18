@@ -2883,6 +2883,19 @@ export declare class Webhook implements IWebhook {
   static delete(webhookId: string): Promise<{}>;
 }
 
+export declare class CarrierType implements ICarrierType {
+  type: string;
+  fields: ICarrierTypeFields;
+  object: "CarrierType";
+
+  /**
+   * The CarrierType list is an unpaginated list of all carrier types available to the account of the given API key.
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-available-carrier-types
+   * @requires production API Key.
+   */
+  static all(): Promise<CarrierType[]>;
+}
 
 export declare class Easypost {
   public Address: typeof Address;
@@ -2895,6 +2908,7 @@ export declare class Easypost {
   public Pickup: typeof Pickup;
   public Batch: typeof Batch;
   public Webhook: typeof Webhook;
+  public CarrierType: typeof CarrierType;
 
   public constructor(apiKey: string);
 }
