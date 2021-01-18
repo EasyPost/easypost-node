@@ -2836,6 +2836,54 @@ export declare class Batch implements IBatch {
   public createScanForm(): Promise<Batch>;
 }
 
+export declare interface IWebhookCreateParameters {
+  url: string;
+}
+
+export declare class Webhook implements IWebhook {
+  public constructor(input: IWebhookCreateParameters);
+
+  url: string;
+  disabled_at: string;
+  id: string;
+  mode: "test" | "production";
+  object: "Webhook";
+
+  /**
+   * To create a Webhook, you simply need to provide a url parameter that you wish to receive notifications to.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-a-webhook
+   * @see https://www.easypost.com/docs/api/node#update-a-webhook
+   */
+  public save(): Promise<Webhook>;
+
+  /**
+   * Retrieve an unpaginated list of all Webhooks available to the authenticated account.
+   * 
+   * @see https://www.easypost.com/docs/api/node#list-a-webhooks
+   */
+  static all(): Promise<{ webhooks: Webhook[] }>;
+
+  /**
+   * Retrieve a Webhook by id.
+   * 
+   * @param webhookId Unique, starts with "hook_"
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-webhook
+   */
+  static retrieve(webhookId: string): Promise<Webhook>;
+
+  /**
+   * Delete a Webhook by id.
+   * 
+   * @param webhookId Unique, starts with "hook_"
+   * 
+   * @see https://www.easypost.com/docs/api/node#delete-a-webhook
+   */
+  static delete(webhookId: string): Promise<{}>;
+}
+
+
 export declare class Easypost {
   public Address: typeof Address;
   public Parcel: typeof Parcel;
@@ -2846,6 +2894,7 @@ export declare class Easypost {
   public Tracker: typeof Tracker;
   public Pickup: typeof Pickup;
   public Batch: typeof Batch;
+  public Webhook: typeof Webhook;
 
   public constructor(apiKey: string);
 }
