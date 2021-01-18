@@ -2688,6 +2688,153 @@ export declare class Tracker implements ITracker {
   static retrieve(trackerId: string): Promise<Tracker>;
 }
 
+export declare interface IPickupCreateParameters {
+  address: Address | string;
+
+  /**
+   * if no batch
+   */
+  shipment?: Shipment | string;
+
+  /**
+   * if no shipment
+   */
+  batch?: Batch | string;
+
+  carrier_accounts?: CarrierAccount[];
+  instructions?: string;
+  reference?: string;
+  is_account_address?: boolean;
+  min_datetime: string;
+  max_datetime: string;
+}
+
+export declare class Pickup implements IPickup {
+  public constructor(input: IPickupCreateParameters);
+
+  reference?: string;
+  status: "unknown" | "scheduled" | "canceled";
+  min_datetime: string;
+  max_datetime: string;
+  is_account_address: boolean;
+  instructions: string;
+  messages: IMessage[];
+  confirmation: string;
+  shipment: IShipment;
+  address: IAddress;
+  carrier_accounts: ICarrierAccount[];
+  pickup_rates: IPickupRate[];
+  id: string;
+  mode: "test" | "production";
+  object: "Pickup";
+  created_at: string;
+  updated_at: string;
+
+  /**
+   * Creating a Pickup will automatically fetch rates for the given time frame and location.
+   * 
+   * Pickups work with existing shipments or a batch and either a fully-specified Address object or id. 
+   * The examples below assume that a shipment and address have both already been created.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-a-pickup
+   */
+  public save(): Promise<Pickup>;
+
+  /**
+   * A Pickup object can be retrieved by either an id or reference. 
+   * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
+   * 
+   * @param pickupId Unique, starts with "pickup_"
+   * 
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-pickup
+   */
+  static retrieve(pickupId: string): Promise<Pickup>;
+
+  /**
+   * To purchase a Pickup a PickupRate must be specified by its carrier and service name, instead of its id. 
+   * The client libraries will handle this automatically if a PickupRate is provided.
+   * 
+   * @see https://www.easypost.com/docs/api/node#buy-a-pickup
+   */
+  public buy(carrier: Carrier, service: ServiceLevel): Promise<Pickup>;
+
+  /**
+   * You may cancel a Pickup anytime before it has been completed. 
+   * It requires no additional parameters other than the id or reference. 
+   * The status will change to "canceled" on success.
+   * 
+   * @see https://www.easypost.com/docs/api/node#cancel-a-pickup
+   */
+  public cancel(): Promise<Pickup>;
+}
+
+export declare interface IBatchCreateParameters {
+  shipments?: Array<Shipment | string>;
+}
+
+export declare class Batch implements IBatch {
+  public constructor(input: IBatchCreateParameters);
+
+  reference?: string;
+  state: TBatchState;
+  num_shipments: number;
+  shipments: IBatchShipment[];
+  status: TBatchStatuses;
+  label_url: string;
+  scan_form: IScanForm;
+  pickup: IPickup;
+  id: string;
+  mode: "test" | "production";
+  object: "Batch";
+  created_at: string;
+  updated_at: string;
+
+  /**
+   * A Batch can be created with or without Shipments. 
+   * When created with Shipments the initial state will be creating. 
+   * Once the state changes to created a webhook Event will be sent. 
+   * When created with no Shipments the initial state will be created and webhook will be sent.
+   * 
+   * @see https://www.easypost.com/docs/api/node#create-a-batch
+   */
+  public save(): Promise<Batch>;
+
+  static retrieve(batchId: string): Promise<Batch>;
+
+  /**
+   * Shipments can be added to a Batch throughout its life cycle. 
+   * Just remember that the state change of a Batch is asynchronous and will fire a webhook Event when the state change is completed.
+   * 
+   * @see https://www.easypost.com/docs/api/node#add-shipments-to-a-batch
+   */
+  public addShipments(shipments: IBatchCreateParameters['shipments']): Promise<Batch>;
+
+  /**
+   * There could be times when a Shipment needs to be removed from the Batch during its life cycle. 
+   * Removing a Shipment does not remove it from the consolidated label or ScanForm.
+   * 
+   * @see https://www.easypost.com/docs/api/node#remove-shipments-from-a-batch
+   */
+  public removeShipments(shipments: IBatchCreateParameters['shipments']): Promise<Batch>;
+
+  /**
+   * One of the advantages of processing Shipments in batches is the ability to consolidate the PostageLabel into one file. 
+   * This can only be done once for each batch and all Shipments must have a status of postage_purchased.
+   * 
+   * Available label formats are 'pdf', 'zpl' or 'epl2' format. 
+   * Like converting a PostageLabel format, if this process will change the format of the labels they must have been created as PNGs.
+   * 
+   * @see https://www.easypost.com/docs/api/node#batch-labels
+   */
+  public generateLabel(labelFormat: LabelFormat): Promise<Batch>;
+
+  /**
+   * See [Scan Form](https://www.easypost.com/docs/api/node#scan-form) rules and [Object Definition](https://www.easypost.com/docs/api/node#scan-form-object).
+   * 
+   * @see https://www.easypost.com/docs/api/node#manifesting-scan-form
+   */
+  public createScanForm(): Promise<Batch>;
+}
 
 export declare class Easypost {
   public Address: typeof Address;
@@ -2697,6 +2844,8 @@ export declare class Easypost {
   public Order: typeof Order;
   public Insurance: typeof Insurance;
   public Tracker: typeof Tracker;
+  public Pickup: typeof Pickup;
+  public Batch: typeof Batch;
 
   public constructor(apiKey: string);
 }
