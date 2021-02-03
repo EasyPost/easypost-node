@@ -107,7 +107,7 @@ export default api => (
         this: ['id'],
       });
 
-      return this.rpc('rates', undefined, undefined, 'get');
+      return this.rpc('rerate', undefined, undefined, 'post');
     }
 
     async insure(amount) {
