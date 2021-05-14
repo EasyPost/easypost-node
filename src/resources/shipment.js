@@ -110,6 +110,14 @@ export default api => (
       return this.rpc('rates', undefined, undefined, 'get');
     }
 
+    async getSmartrates() {
+      this.verifyParameters({
+        this: ['id'],
+      });
+
+      return this.rpc('smartrate', undefined, undefined, 'get');
+    }
+
     async insure(amount) {
       this.verifyParameters({
         this: ['id'],

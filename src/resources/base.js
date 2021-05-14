@@ -131,6 +131,7 @@ export default api => (
       const slashPath = path ? `/${path}` : '';
       const prefix = pathPrefix || this.constructor._url;
       const url = `${prefix}/${this.id}${slashPath}`;
+      const pathsWithoutEasyPostObjects = ['smartrate'];
 
       try {
         let res;
@@ -143,6 +144,9 @@ export default api => (
           res = await api[method](url);
         }
 
+        if (pathsWithoutEasyPostObjects.includes(path)) {
+          return res.body;
+        }
         this.mapProps(res.body);
         return this;
       } catch (e) {

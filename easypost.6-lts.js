@@ -814,6 +814,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         const slashPath = path ? `/${path}` : '';
         const prefix = pathPrefix || _this4.constructor._url;
         const url = `${prefix}/${_this4.id}${slashPath}`;
+        const pathsWithoutEasyPostObjects = ['smartrate'];
 
         try {
           let res;
@@ -828,6 +829,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
           } else {
             res = yield api[method](url);
+          }
+
+          if (pathsWithoutEasyPostObjects.includes(path)) {
+            return res.body;
           }
 
           _this4.mapProps(res.body);
@@ -1943,30 +1948,42 @@ const propTypes = {
       })();
     }
 
-    insure(amount) {
+    getSmartrates() {
       var _this4 = this;
 
       return _asyncToGenerator(function* () {
         _this4.verifyParameters({
+          this: ['id']
+        });
+
+        return _this4.rpc('smartrate', undefined, undefined, 'get');
+      })();
+    }
+
+    insure(amount) {
+      var _this5 = this;
+
+      return _asyncToGenerator(function* () {
+        _this5.verifyParameters({
           this: ['id'],
           args: ['amount']
         }, amount);
 
-        return _this4.rpc('insure', {
+        return _this5.rpc('insure', {
           amount
         });
       })();
     }
 
     refund() {
-      var _this5 = this;
+      var _this6 = this;
 
       return _asyncToGenerator(function* () {
-        _this5.verifyParameters({
+        _this6.verifyParameters({
           this: ['id']
         });
 
-        return _this5.rpc('refund');
+        return _this6.rpc('refund');
       })();
     }
 
