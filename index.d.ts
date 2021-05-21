@@ -2897,6 +2897,23 @@ export declare class CarrierType implements ICarrierType {
   static all(): Promise<CarrierType[]>;
 }
 
+export declare class Event implements IEvent {
+  description: string;
+  previous_attributes: any;
+  result: any;
+  status: "completed" | "failed" | "in_queue" | "retrying" | "pending";
+  pending_urls: string[];
+  completed_urls: string[];
+  id: string;
+  mode: "test" | "production";
+  object: "Event";
+  created_at: string;
+  updated_at: string;
+
+  static retrieve(eventId: string): Promise<Event>;
+  static all(): Promise<Event[]>;
+}
+
 export declare class Easypost {
   public Address: typeof Address;
   public Parcel: typeof Parcel;
@@ -2909,6 +2926,7 @@ export declare class Easypost {
   public Batch: typeof Batch;
   public Webhook: typeof Webhook;
   public CarrierType: typeof CarrierType;
+  public Event: typeof Event;
 
   public constructor(apiKey: string);
 }
