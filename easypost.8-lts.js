@@ -768,7 +768,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       const slashPath = path ? `/${path}` : '';
       const prefix = pathPrefix || this.constructor._url;
       const url = `${prefix}/${this.id}${slashPath}`;
-      const pathsWithoutEasyPostObjects = ['smartrate'];
 
       try {
         let res;
@@ -783,10 +782,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           });
         } else {
           res = await api[method](url);
-        }
-
-        if (pathsWithoutEasyPostObjects.includes(path)) {
-          return res.body;
         }
 
         this.mapProps(res.body);
@@ -1808,13 +1803,6 @@ const propTypes = {
         this: ['id']
       });
       return this.rpc('rates', undefined, undefined, 'get');
-    }
-
-    async getSmartrates() {
-      this.verifyParameters({
-        this: ['id']
-      });
-      return this.rpc('smartrate', undefined, undefined, 'get');
     }
 
     async insure(amount) {

@@ -1121,7 +1121,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             slashPath,
             prefix,
             url,
-            pathsWithoutEasyPostObjects,
             res,
             _args4 = arguments;
         return regeneratorRuntime.async(function rpc$(_context4) {
@@ -1132,70 +1131,61 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 slashPath = path ? "/".concat(path) : '';
                 prefix = pathPrefix || this.constructor._url;
                 url = "".concat(prefix, "/").concat(this.id).concat(slashPath);
-                pathsWithoutEasyPostObjects = ['smartrate'];
-                _context4.prev = 5;
+                _context4.prev = 4;
 
                 if (!(method === 'get')) {
-                  _context4.next = 12;
+                  _context4.next = 11;
                   break;
                 }
 
-                _context4.next = 9;
+                _context4.next = 8;
                 return regeneratorRuntime.awrap(api[method](url, {
                   query: body
                 }));
 
-              case 9:
+              case 8:
                 res = _context4.sent;
-                _context4.next = 21;
+                _context4.next = 20;
                 break;
 
-              case 12:
+              case 11:
                 if (!body) {
-                  _context4.next = 18;
+                  _context4.next = 17;
                   break;
                 }
 
-                _context4.next = 15;
+                _context4.next = 14;
                 return regeneratorRuntime.awrap(api[method](url, {
                   body: body
                 }));
 
-              case 15:
+              case 14:
                 res = _context4.sent;
-                _context4.next = 21;
+                _context4.next = 20;
                 break;
 
-              case 18:
-                _context4.next = 20;
+              case 17:
+                _context4.next = 19;
                 return regeneratorRuntime.awrap(api[method](url));
 
-              case 20:
+              case 19:
                 res = _context4.sent;
 
-              case 21:
-                if (!pathsWithoutEasyPostObjects.includes(path)) {
-                  _context4.next = 23;
-                  break;
-                }
-
-                return _context4.abrupt("return", res.body);
-
-              case 23:
+              case 20:
                 this.mapProps(res.body);
                 return _context4.abrupt("return", this);
 
-              case 27:
-                _context4.prev = 27;
-                _context4.t0 = _context4["catch"](5);
+              case 24:
+                _context4.prev = 24;
+                _context4.t0 = _context4["catch"](4);
                 throw _context4.t0;
 
-              case 30:
+              case 27:
               case "end":
                 return _context4.stop();
             }
           }
-        }, null, this, [[5, 27]]);
+        }, null, this, [[4, 24]]);
       }
     }, {
       key: "save",
@@ -2901,16 +2891,19 @@ var propTypes = {
         }, null, this);
       }
     }, {
-      key: "getSmartrates",
-      value: function getSmartrates() {
-        return regeneratorRuntime.async(function getSmartrates$(_context4) {
+      key: "insure",
+      value: function insure(amount) {
+        return regeneratorRuntime.async(function insure$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 this.verifyParameters({
-                  this: ['id']
-                });
-                return _context4.abrupt("return", this.rpc('smartrate', undefined, undefined, 'get'));
+                  this: ['id'],
+                  args: ['amount']
+                }, amount);
+                return _context4.abrupt("return", this.rpc('insure', {
+                  amount: amount
+                }));
 
               case 2:
               case "end":
@@ -2920,42 +2913,20 @@ var propTypes = {
         }, null, this);
       }
     }, {
-      key: "insure",
-      value: function insure(amount) {
-        return regeneratorRuntime.async(function insure$(_context5) {
+      key: "refund",
+      value: function refund() {
+        return regeneratorRuntime.async(function refund$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 this.verifyParameters({
-                  this: ['id'],
-                  args: ['amount']
-                }, amount);
-                return _context5.abrupt("return", this.rpc('insure', {
-                  amount: amount
-                }));
+                  this: ['id']
+                });
+                return _context5.abrupt("return", this.rpc('refund'));
 
               case 2:
               case "end":
                 return _context5.stop();
-            }
-          }
-        }, null, this);
-      }
-    }, {
-      key: "refund",
-      value: function refund() {
-        return regeneratorRuntime.async(function refund$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                this.verifyParameters({
-                  this: ['id']
-                });
-                return _context6.abrupt("return", this.rpc('refund'));
-
-              case 2:
-              case "end":
-                return _context6.stop();
             }
           }
         }, null, this);
