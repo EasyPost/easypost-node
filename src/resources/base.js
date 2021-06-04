@@ -144,7 +144,7 @@ export default api => (
         }
 
         if (path === 'smartrate') {
-          return res.body.result;
+          return res.body.result || [];
         }
 
         this.mapProps(res.body);
