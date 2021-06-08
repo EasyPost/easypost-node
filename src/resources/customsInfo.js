@@ -17,6 +17,7 @@ export const propTypes = {
   eel_pfc: T.string,
   non_delivery_option: T.string,
   customs_items: T.arrayOf(T.shape(ciPropTypes)),
+  declaration: T.string,
 };
 
 export default api => (
