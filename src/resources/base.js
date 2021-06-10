@@ -143,6 +143,10 @@ export default api => (
           res = await api[method](url);
         }
 
+        if (path === 'smartrate') {
+          return res.body.result || [];
+        }
+
         this.mapProps(res.body);
         return this;
       } catch (e) {
