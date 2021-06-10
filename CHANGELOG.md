@@ -1,6 +1,14 @@
 ## CHANGELOG
 
+### 3.11.0 2021-06-10
+
+* Adds `SmartRate` functionality to the `Shipments` object (available by calling `getSmartrates()` on a shipment)
+* Adds missing `declaration` and `restriction_comments` propTypes to the customsInfo object
+* Changes the `usps_zone` propType from a string to an integer to match what is returned from the API
+* Bumped dependencies
+
 ### 3.10.1 2021-01-12
+
 * Re-package to fix missing file
 
 ### 3.10.0 2021-01-12
