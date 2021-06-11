@@ -25,6 +25,8 @@ require('babel-polyfill');
 const EasyPost = require('@easypost/api');
 ```
 
+You can alternatively download the various built assets from this project's [releases page](https://github.com/EasyPost/easypost-node/releases).
+
 ## Compatability
 
 By default, @easypost/api works with Node v6 LTS. To include for other versions
@@ -175,6 +177,7 @@ API_KEY=yourkey ./repl.js --local easypost.js
 1. Update the version in the `package.json` file
 1. Update the `CHANGELOG` file
 1. Tag the release on GitHub
+1. Upload the built assets from `npm run build` to the new GitHub release (eg: `easypost.js`, `easypost.6-lts.js`, etc)
 1. Publish the npm package with `npm publish` (this will build the project and run tests as a part of the process)
 
 ## Note on ES6 Usage
