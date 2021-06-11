@@ -23,7 +23,8 @@
     "build": "ep-node-build",
     "lint": "eslint src test",
     "watch": "ep-node-build --watch",
-    "repl": "./repl.js --local easypost.js"
+    "repl": "./repl.js --local easypost.js",
+    "prepublishOnly": "npm run build && npm run test"
   },
   "dependencies": {
     "core-js": "3.1.3",
