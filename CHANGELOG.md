@@ -1,5 +1,12 @@
 ## CHANGELOG
 
+### 3.11.1 2021-06-11
+
+* Re-package to fix missing file
+* add "prepublishOnly" script and ignore all build assets (#177)
+* fix: switch "package" to "prepublishOnly"
+* docs: adds info about built docs to README
+
 ### 3.11.0 2021-06-10
 
 * Adds `SmartRate` functionality to the `Shipments` object (available by calling `getSmartrates()` on a shipment)
