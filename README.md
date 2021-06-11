@@ -174,9 +174,9 @@ API_KEY=yourkey ./repl.js --local easypost.js
 
 1. Update the version in the `package.json` file
 1. Update the `CHANGELOG` file
-1. Ensure that checked-in compiled assets are re-built with `npm run build`
 1. Tag the release on GitHub
-1. Publish the updated npm package
+1. Ensure that compiled assets (eg: ./easypost.js) are re-built and will be published with `npm run package`
+1. Publish the npm package with `npm publish`
 
 ## Note on ES6 Usage
 
