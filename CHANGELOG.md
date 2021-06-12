@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-## 3.11.2 2021-06-12
+## 3.11.2 2021-06-11
 
 * Corrects the `usps_zone` propType from integer to number
 
