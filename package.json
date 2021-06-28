@@ -12,6 +12,7 @@
     "url": "git://github.com/easypost/easypost-node.git"
   },
   "main": "index.js",
+  "types": "index.d.ts",
   "license": "MIT",
   "engines": {
     "node": ">= v0.10.0"
