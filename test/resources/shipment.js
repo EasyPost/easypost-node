@@ -19,7 +19,7 @@ describe('Shipment Resource', () => {
 
   it('throws on delete', () => {
     const Shipment = shipment(apiStub());
-    return Shipment.delete().then(() => {}, err => {
+    return Shipment.delete().then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -28,7 +28,7 @@ describe('Shipment Resource', () => {
     const Shipment = shipment(apiStub());
     const instance = new Shipment({ id: 1 });
 
-    return instance.delete('id').then(() => {}, err => {
+    return instance.delete('id').then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -182,7 +182,7 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when convertLabelFormat is called, passing in format and method', () => {
+    it('calls api.get when convertLabelFormat is called, passing in format and method', () => {
       const format = 'png';
       const data = { file_format: format };
 
@@ -225,7 +225,7 @@ describe('Shipment Resource', () => {
       });
     });
 
-    it('calls api.post when regenerateRates is called', () => si.regenerateRates().then(() => {
+    it('calls api.get when regenerateRates is called', () => si.regenerateRates().then(() => {
       expect(stub.get).to.have.been.called;
       expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/rates`);
     }));
@@ -235,6 +235,42 @@ describe('Shipment Resource', () => {
       si = new Shipment({ id: '1' });
 
       si.regenerateRates().catch(e => {
+        expect(e).to.be.an.instanceof(RequestError);
+        done();
+      });
+    });
+  });
+
+  describe('retrieving smartrates', () => {
+    let Shipment;
+    let si;
+    let stub;
+
+    beforeEach(() => {
+      stub = apiStub();
+      Shipment = shipment(stub);
+      si = new Shipment({ id: '1' });
+    });
+
+    it('throws if getSmartrates is called and shipment does not have an id', done => {
+      si = new Shipment();
+      si.getSmartrates().catch(e => {
+        expect(e).to.be.an.instanceof(Error);
+        expect(e.message).to.match(/id/);
+        done();
+      });
+    });
+
+    it('calls api.get when getSmartrates is called', () => si.getSmartrates().then(() => {
+      expect(stub.get).to.have.been.called;
+      expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/smartrate`);
+    }));
+
+    it('rejects on api failures', done => {
+      Shipment = shipment(apiStub('shipment', true));
+      si = new Shipment({ id: '1' });
+
+      si.getSmartrates().catch(e => {
         expect(e).to.be.an.instanceof(RequestError);
         done();
       });

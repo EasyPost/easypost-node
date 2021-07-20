@@ -1,6 +1,24 @@
 ## CHANGELOG
 
+## 3.11.2 2021-06-11
+
+* Corrects the `usps_zone` propType from integer to number
+
+### 3.11.1 2021-06-11
+
+* Re-package to fix missing file
+* add "prepublishOnly" script and ignore all build assets (#177)
+* docs: adds info about built docs to README
+
+### 3.11.0 2021-06-10
+
+* Adds `SmartRate` functionality to the `Shipments` object (available by calling `getSmartrates()` on a shipment)
+* Adds missing `declaration` and `restriction_comments` propTypes to the customsInfo object
+* Changes the `usps_zone` propType from a string to an integer to match what is returned from the API
+* Bumped dependencies
+
 ### 3.10.1 2021-01-12
+
 * Re-package to fix missing file
 
 ### 3.10.0 2021-01-12

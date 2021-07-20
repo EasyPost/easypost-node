@@ -35,7 +35,7 @@ export const propTypes = {
   tracking_code: T.string,
   service: T.string,
   services: T.arrayOf(T.string),
-  usps_zone: T.string,
+  usps_zone: T.number,
   status: T.string,
   tracker: T.oneOfType([T.string, T.shape(trackerPropTypes)]),
   fees: T.array,
@@ -116,6 +116,14 @@ export default api => (
       });
 
       return this.rpc('rerate', undefined, undefined, 'post');
+    }
+
+    async getSmartrates() {
+      this.verifyParameters({
+        this: ['id'],
+      });
+
+      return this.rpc('smartrate', undefined, undefined, 'get');
     }
 
     async insure(amount) {
