@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+## NEXT RELEASE
+
+* The `regenerateRates` method now makes a post request to re-rate a shipment. The new `retrieveRates` will simply retrieve the rates of a shipment without re-rating
+
 ## 3.11.2 2021-06-11
 
 * Corrects the `usps_zone` propType from integer to number
