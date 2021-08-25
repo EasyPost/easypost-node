@@ -102,12 +102,20 @@ export default api => (
       return this.rpc('label', { file_format: format }, undefined, 'get');
     }
 
-    async regenerateRates() {
+    async retrieveRates() {
       this.verifyParameters({
         this: ['id'],
       });
 
       return this.rpc('rates', undefined, undefined, 'get');
+    }
+
+    async regenerateRates() {
+      this.verifyParameters({
+        this: ['id'],
+      });
+
+      return this.rpc('rerate', undefined, undefined, 'post');
     }
 
     async getSmartrates() {
