@@ -126,13 +126,6 @@ describe('Base API object', () => {
       });
     });
 
-    it('requets json', done => {
-      api.request('').then(() => {
-        expect(api.agent.getStub.accept).to.have.been.calledWith('json');
-        done();
-      });
-    });
-
     it('sets default headers', done => {
       api.request('').then(() => {
         expect(api.agent.getStub.set).to.have.been.calledWith(DEFAULT_HEADERS);
@@ -178,7 +171,7 @@ describe('Base API object', () => {
     it('handles request failures with a RequestError', done => {
       api.agent = superagentStub(true);
 
-      api.request('', METHODS.POST).then(() => {}, err => {
+      api.request('', METHODS.POST).then(() => { }, err => {
         expect(err).to.be.an.instanceOf(RequestError);
         done();
       });
@@ -188,7 +181,7 @@ describe('Base API object', () => {
       const error = new Error();
       api.agent = superagentStub(true, error);
 
-      api.request('', METHODS.POST).then(() => {}, err => {
+      api.request('', METHODS.POST).then(() => { }, err => {
         expect(err).to.equal(error);
         done();
       });
