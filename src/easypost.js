@@ -41,8 +41,9 @@ export const UA_INFO = {
 export const EASYPOST_UA_HEADER = 'X-EasyPost-Client-User-Agent';
 
 export const DEFAULT_HEADERS = {
+  Accept: 'application/json',
   'Accept-Encoding': 'gzip,deflate,sdch,br',
-  'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
   'User-Agent': `EasyPost/v2 NodejsClient/${pkg.version}`,
   [EASYPOST_UA_HEADER]: JSON.stringify(UA_INFO),
 };
@@ -174,8 +175,6 @@ export default class API {
     } = params;
 
     let req = this.agent[method](this.buildPath(path))
-      .accept('json')
-      .set('Content-Type', 'application/json')
       .set(API.buildHeaders(headers));
 
     if (this.requestMiddleware) {
