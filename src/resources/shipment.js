@@ -43,6 +43,7 @@ export const propTypes = {
   batch_id: T.string,
   batch_status: T.string,
   batch_message: T.string,
+  tax_identifiers: T.arrayOf(T.object),
 };
 
 export default api => (
