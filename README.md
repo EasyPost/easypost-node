@@ -199,8 +199,9 @@ API_KEY=yourkey ./repl.js --local easypost.js
 1. Update the version in the `package.json` file
 1. Update the `CHANGELOG` file
 1. Tag the release on GitHub
-1. Upload the built assets from `npm run build` to the new GitHub release (eg: `easypost.js`, `easypost.6-lts.js`, etc)
+1. Build the package via `npm run build`
 1. Publish the npm package with `npm publish` (this will build the project and run tests as a part of the process)
+1. Upload the built assets from the earlier step `npm run build` to the new GitHub release (eg: `easypost.js`, `easypost.6-lts.js`, etc)
 
 ## Note on ES6 Usage
 
