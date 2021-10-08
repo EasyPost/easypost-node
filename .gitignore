@@ -18,3 +18,5 @@ npm-debug.log
 /easypost.legacy.js.map
 .nyc_output
 coverage
+
+build.tar.gz
