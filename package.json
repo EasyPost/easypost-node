@@ -1,7 +1,7 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "3.11.2",
+  "version": "4.0.0",
   "author": "Easypost Engineering <support@easypost.com>",
   "homepage": "https://easypost.com",
   "bin": {
@@ -37,11 +37,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.7.4",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-export-default-from": "^7.7.4",
     "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.4",
     "@babel/plugin-syntax-export-extensions": "^7.0.0-beta.32",
     "@babel/plugin-transform-react-constant-elements": "^7.7.4",
     "@babel/plugin-transform-react-inline-elements": "^7.7.4",
@@ -70,7 +70,7 @@
     "nyc": "^14.1.1",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0",
-    "vows": "^0.8.2",
+    "vows": "^0.8.3",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.10",
     "webpack-node-externals": "^1.7.2"

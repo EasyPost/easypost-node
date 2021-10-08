@@ -1,8 +1,11 @@
 ## CHANGELOG
 
-## NEXT RELEASE
+## 4.0.0 2021-10-06
 
+* JSON encodes POST bodies instead of form encoding them by default
+* Adds support for `tax_identifiers`
 * The `regenerateRates` method now makes a post request to re-rate a shipment. The new `retrieveRates` will simply retrieve the rates of a shipment without re-rating
+* Ran `npm audit fix` to bump patch versions of dependencies
 
 ## 3.11.2 2021-06-11
 
