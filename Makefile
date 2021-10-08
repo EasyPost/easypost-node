@@ -6,6 +6,7 @@ help:
 clean:
 	rm -f easypost*.js
 	rm -f easypost*.map
+	rm build.tar.gz
 
 ## build - Runs the commands to build this package
 build:
