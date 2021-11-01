@@ -2,7 +2,7 @@
 
 ## NEXT RELEASE
 
-* Lowered the default timeout of requests from 120 seconds to 30 seconds
+* Lowered the default timeout of requests from 120 seconds to 60 seconds
 
 ## 4.0.0 2021-10-06
 
