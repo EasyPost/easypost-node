@@ -27,7 +27,7 @@ import RequestError from './errors/request';
 
 
 export const MS_SECOND = 1000;
-export const DEFAULT_TIMEOUT = 120 * MS_SECOND;
+export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
 export const DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
 
 export const UA_INFO = {
