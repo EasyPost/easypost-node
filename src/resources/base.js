@@ -23,8 +23,7 @@ export default (api) =>
       try {
         url = url || this._url;
         const res = await api.get(url, { query });
-        const result = res.body;
-        return result;
+        return res.body;
       } catch (e) {
         return Promise.reject(e);
       }
