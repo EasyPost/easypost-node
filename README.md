@@ -185,6 +185,14 @@ Run unit tests by running the following:
 npm test
 ```
 
+### Linting
+
+Lint the project with the following:
+
+```bash
+npm run lint
+```
+
 ### Interactive CLI
 
 Replace `easypost.js` with whatever compatabile version you wish, as defined
