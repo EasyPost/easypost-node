@@ -3,6 +3,7 @@
 ## NEXT RELEASE
 
 * Lowered the default timeout of requests from 120 seconds to 60 seconds
+* Added the Nodejs version in use to the User-Agent header on requests
 
 ## 4.0.0 2021-10-06
 
