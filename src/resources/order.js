@@ -21,6 +21,7 @@ export const propTypes = {
   messages: T.arrayOf(T.object),
   is_return: T.bool,
   carrier_accounts: T.arrayOf(T.oneOfType([T.string, T.object])),
+  service: T.string,
 };
 
 export default api => (

@@ -2,6 +2,7 @@
 
 ## NEXT RELEASE
 
+* Adds support to one-call buy an order
 * Lowered the default timeout of requests from 120 seconds to 60 seconds
 * Added the Nodejs version in use to the User-Agent header on requests
 
