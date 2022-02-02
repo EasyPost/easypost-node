@@ -36,7 +36,7 @@ export default api => (
     createList(param) {
       const newParam = new Map();
       newParam.set('trackers', param);
-      this.rpc('create_list1', newParam);
+      this.rpc('create_list', newParam);
       return true;
     }
   }
