@@ -31,4 +31,19 @@ describe('Tracker Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  describe('Trackers in bulk', () => {
+    const trackingCodes = ['EZ1000000001', 'EZ1000000002', 'EZ1000000003'];
+    const trackingParam = new Map();
+
+    trackingCodes.forEach((trackingCode, index) => {
+      const code = new Map([['tracking_code', trackingCode], ['carrier', 'USPS']]);
+      trackingParam.set(index.toString(), code);
+    });
+    it('Add trackers in bulk', () => {
+      const Tracker = tracker(apiStub());
+      const trackerObj = new Tracker();
+      expect(trackerObj.createList(trackingParam)).to.be.true;
+    });
+  });
 });

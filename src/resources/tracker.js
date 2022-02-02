@@ -32,5 +32,12 @@ export default api => (
     static delete() {
       return this.notImplemented('delete');
     }
+
+    createList(param) {
+      const newParam = new Map();
+      newParam.set('trackers', param);
+      this.rpc('create_list1', newParam);
+      return true;
+    }
   }
 );
