@@ -34,11 +34,11 @@ export default api => (
     }
 
     static async createList(params = {}) {
-      const newParam = { trackers: params };
+      const newParams = { trackers: params };
       try {
         const url = 'trackers/create_list';
-        await api.post(url, { body: newParam });
-        // This endpoint does not return anything so true is return here
+        await api.post(url, { body: newParams });
+        // This endpoint does not return anything so true is returned here
         return true;
       } catch (e) {
         return Promise.reject(e);
