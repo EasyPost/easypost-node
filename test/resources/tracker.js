@@ -31,4 +31,18 @@ describe('Tracker Resource', () => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  describe('Trackers in bulk', () => {
+    const trackingCode = {
+      0: { tracking_code: 'EZ1000000001' },
+      1: { tracking_code: 'EZ1000000002' },
+      2: { tracking_code: 'EZ1000000003' },
+    };
+    it('Add trackers in bulk', () => {
+      const Tracker = tracker(apiStub());
+      return Tracker.createList(trackingCode).then(result => {
+        expect(result).to.be.true;
+      });
+    });
+  });
 });
