@@ -33,11 +33,16 @@ export default api => (
       return this.notImplemented('delete');
     }
 
-    createList(param) {
-      const newParam = new Map();
-      newParam.set('trackers', param);
-      this.rpc('create_list', newParam);
-      return true;
+    static async createList(params = {}) {
+      const newParam = { trackers: params };
+      try {
+        const url = 'trackers/create_list';
+        await api.post(url, { body: newParam });
+        // This endpoint does not return anything so true is return here
+        return true;
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
   }
 );
