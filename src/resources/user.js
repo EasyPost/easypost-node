@@ -46,10 +46,8 @@ export default api => (
     async updateBrand(params) {
       try {
         const newParams = { brand: params };
-        const urlPrefix = this.constructor._url;
         const userData = this.constructor.wrapJSON(this.toJSON());
-        const endpoint = 'brand';
-        const url = `${urlPrefix}/${userData.user.id}/${endpoint}`;
+        const url = `${this.constructor._url}/${userData.user.id}/brand`;
         const res = await api.put(url, { body: newParams });
         return res.body;
       } catch (e) {
