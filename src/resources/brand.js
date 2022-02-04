@@ -9,9 +9,9 @@ export const propTypes = {
   logo_href: T.string,
   ad: T.string,
   ad_href: T.string,
-  name: T.array,
-  user_id: T.array,
-  theme: T.array,
+  name: T.string,
+  user_id: T.string,
+  theme: T.string,
 };
 
 

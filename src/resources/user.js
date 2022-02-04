@@ -43,13 +43,13 @@ export default api => (
       return this.notImplemented('all');
     }
 
-    async updateBrand(param, id) {
+    async updateBrand(params) {
       try {
-        const newParams = { brand: param };
-        const endpoint = 'brand';
+        const newParams = { brand: params };
         const urlPrefix = this.constructor._url;
         const userData = this.constructor.wrapJSON(this.toJSON());
-        const url = id ? `${urlPrefix}/${id}/${endpoint}` : `${urlPrefix}/${userData.user.id}/${endpoint}`;
+        const endpoint = 'brand';
+        const url = `${urlPrefix}/${userData.user.id}/${endpoint}`;
         const res = await api.put(url, { body: newParams });
         return res.body;
       } catch (e) {
