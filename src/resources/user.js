@@ -42,5 +42,17 @@ export default api => (
     static all() {
       return this.notImplemented('all');
     }
+
+    async updateBrand(params) {
+      try {
+        const newParams = { brand: params };
+        const userData = this.constructor.wrapJSON(this.toJSON());
+        const url = `${this.constructor._url}/${userData.user.id}/brand`;
+        const res = await api.put(url, { body: newParams });
+        return res.body;
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
 );
