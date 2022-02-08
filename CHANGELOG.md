@@ -7,9 +7,7 @@
 * Added the Nodejs version in use to the User-Agent header on requests
 * Added support for create list of trackers
 * Added support for update brand for user
-* Removed `RetrieveRate()` method because the shipment object already
-* has rates. If you need to get new rates for a shipment, please use
-* regenerateRates() method instead
+* Removed `retrieveRates()` method because the shipment object already has rates. If you need to get new rates for a shipment, please use regenerateRates() method instead
 
 ## 4.0.0 2021-10-06
 
