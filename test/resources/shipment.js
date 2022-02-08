@@ -205,42 +205,6 @@ describe('Shipment Resource', () => {
     });
   });
 
-  describe('retrieving rates', () => {
-    let Shipment;
-    let si;
-    let stub;
-
-    beforeEach(() => {
-      stub = apiStub();
-      Shipment = shipment(stub);
-      si = new Shipment({ id: '1' });
-    });
-
-    it('throws if retrieveRates is called and shipment does not have an id', done => {
-      si = new Shipment();
-      si.retrieveRates().catch(e => {
-        expect(e).to.be.an.instanceof(Error);
-        expect(e.message).to.match(/id/);
-        done();
-      });
-    });
-
-    it('calls api.get when retrieveRates is called', () => si.retrieveRates().then(() => {
-      expect(stub.get).to.have.been.called;
-      expect(stub.get).to.have.been.calledWith(`shipments/${si.id}/rates`);
-    }));
-
-    it('rejects on api failures', done => {
-      Shipment = shipment(apiStub('shipment', true));
-      si = new Shipment({ id: '1' });
-
-      si.retrieveRates().catch(e => {
-        expect(e).to.be.an.instanceof(RequestError);
-        done();
-      });
-    });
-  });
-
   describe('regenerating rates', () => {
     let Shipment;
     let si;
