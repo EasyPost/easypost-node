@@ -11,13 +11,6 @@ EasyPost is a simple shipping API. You can sign up for an account at https://eas
 npm install --save @easypost/api
 ```
 
-**Note:** if you are using a version of Node less than 6.9, you will need to install and
-include a polyfill, such as `babel-polyfill`, and include it in your project:
-
-```bash
-npm install --save babel-polyfill
-```
-
 In your file:
 
 ```javascript
@@ -26,15 +19,6 @@ const EasyPost = require('@easypost/api');
 ```
 
 You can alternatively download the various built assets from this project's [releases page](https://github.com/EasyPost/easypost-node/releases).
-
-## Compatability
-
-By default, @easypost/api works with Node v6 LTS. To include for other versions
-of node, you can use:
-
-* `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+)
-* `require('@easypost/api/easypost.6-lts.js')` (Node 6.9+)
-* `require('@easypost/api/easypost.legacy.js')` (Node 0.10+)
 
 ## Example
 
@@ -195,9 +179,6 @@ npm run lint
 
 ### Interactive CLI
 
-Replace `easypost.js` with whatever compatabile version you wish, as defined
-under `Compatibility`.
-
 ```bash
 API_KEY=yourkey ./repl.js --local easypost.js
 ```
@@ -213,15 +194,9 @@ API_KEY=yourkey ./repl.js --local easypost.js
 
 ## Note on ES6 Usage
 
-You can import specific versions of the compiled code if you're using later
-versions of Node. 
+You can import specific versions of the compiled code if you're using later versions of Node.
 
 ```javascript
 // Imports the un-transformed es6
 import "@easypost/api/src/easypost"
-
-// Use the following to import mininally transformed versions
-import "@easypost/api/easypost.6-lts"
-import "@easypost/api/easypost.8-lts"
-import "@easypost/api/easypost.legacy.js" // (v0.10)
 ```

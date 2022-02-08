@@ -22,6 +22,7 @@ function config(output, nodestr) {
   return nodeConfig;
 }
 
+// TODO: remove the unecessary build targets here
 module.exports = [
   config('easypost.js', '6.9'),
   config('easypost.6-lts.js', '6.9'),
