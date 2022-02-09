@@ -122,21 +122,14 @@ export default class API {
   constructor(key, options = {}) {
     const {
       useProxy,
-      useCookie,
       timeout,
       baseUrl,
       superagentMiddleware,
       requestMiddleware,
     } = options;
 
-    if (!key && !useProxy && !useCookie) {
+    if (!key && !useProxy) {
       throw new Error('No API key supplied. Pass in an API key as the first argument.');
-    }
-
-    if (useCookie) {
-      /* eslint no-console: 0 */
-      console.warn('options.useCookie is deprecated and will be removed in 4.0.' +
-        ' Please use `options.useProxy`.');
     }
 
     this.key = key;
