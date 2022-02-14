@@ -3,13 +3,13 @@
   "instrument": false,
   "reporter": [
     "lcov",
-    "text-summary"
+    "text"
   ],
   "include": [
     "src/**/*.js"
   ],
   "require": [
-    "babel-register",
+    "@babel/register",
     "./test/common.js"
   ]
 }
