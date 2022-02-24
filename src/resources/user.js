@@ -39,6 +39,11 @@ export default api => (
       }
     }
 
+    static async retrieveMe() {
+      const response = await api.get(this._url);
+      return this.create(response.body);
+    }
+
     static all() {
       return this.notImplemented('all');
     }

@@ -33,6 +33,15 @@ describe('User Resource', () => {
     });
   });
 
+  describe('retrieve me', () => {
+    it('retrieve current user', () => {
+      const stub = apiStub();
+      const User = user(stub);
+      User.retrieveMe();
+      expect(stub.get).to.have.been.calledWith('users');
+    });
+  });
+
   it('deletes', () => {
     const User = user(apiStub());
     const id = 1;
