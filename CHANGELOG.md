@@ -2,6 +2,8 @@
 
 ## NEXT RELEASE
 
+* Bumps the minimum version of Node to `v10`
+* Removes build targets of `0.10`, `6`, and `8`, the library is now only published under a single bundled package `easypost`
 * Adds support to one-call buy an order
 * Lowered the default timeout of requests from 120 seconds to 60 seconds
 * Added the Nodejs version in use to the User-Agent header on requests

@@ -23,8 +23,5 @@ function config(output, nodestr) {
 }
 
 module.exports = [
-  config('easypost.js', '6.9'),
-  config('easypost.6-lts.js', '6.9'),
-  config('easypost.8-lts.js', '8.9'),
-  config('easypost.legacy.js', '0.10'),
+  config('easypost.js', '10'),
 ];

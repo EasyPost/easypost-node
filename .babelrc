@@ -1,48 +1,58 @@
 {
-  "presets": [[
-    "@babel/env", {
-      targets: { node: "current" }
-    }
-  ]],
-  "plugins": [
-    "@babel/plugin-syntax-export-extensions",
-    [
-      "@babel/plugin-proposal-class-properties",
-      {
-        "loose": false
-      }
+    "presets": [
+        [
+            "@babel/env",
+            {
+                "targets": {
+                    "node": "current"
+                }
+            }
+        ]
     ],
-    "@babel/plugin-proposal-export-default-from",
-    "@babel/plugin-proposal-export-namespace-from",
-    "babel-plugin-transform-export-extensions"
-  ],
-
-  "env": {
-    "test": {
-      "presets": [[
-        "@babel/env", {
-          targets: { node: "8.11" }
-        }
-      ]],
-      "plugins": [
+    "plugins": [
         "@babel/plugin-syntax-export-extensions",
         [
-          "@babel/plugin-proposal-class-properties",
-          {
-            "loose": false
-          }
+            "@babel/plugin-proposal-class-properties",
+            {
+                "loose": false
+            }
         ],
         "@babel/plugin-proposal-export-default-from",
         "@babel/plugin-proposal-export-namespace-from",
-        "babel-plugin-transform-export-extensions",
-        ["istanbul", {
-          "exclude": [
-            "test/**/*"
-          ]
-        }]
-      ],
+        "babel-plugin-transform-export-extensions"
+    ],
+    "env": {
+        "test": {
+            "presets": [
+                [
+                    "@babel/env",
+                    {
+                        "targets": {
+                            "node": "10.0"
+                        }
+                    }
+                ]
+            ],
+            "plugins": [
+                "@babel/plugin-syntax-export-extensions",
+                [
+                    "@babel/plugin-proposal-class-properties",
+                    {
+                        "loose": false
+                    }
+                ],
+                "@babel/plugin-proposal-export-default-from",
+                "@babel/plugin-proposal-export-namespace-from",
+                "babel-plugin-transform-export-extensions",
+                [
+                    "istanbul",
+                    {
+                        "exclude": [
+                            "test/**/*"
+                        ]
+                    }
+                ]
+            ]
+        }
     }
-  }
 }
-
-

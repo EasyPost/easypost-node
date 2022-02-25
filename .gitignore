@@ -11,12 +11,6 @@ node_modules
 npm-debug.log
 /easypost.js
 /easypost.js.map
-/easypost.6-lts.js
-/easypost.6-lts.js.map
-/easypost.8-lts.js
-/easypost.8-lts.js.map
-/easypost.legacy.js
-/easypost.legacy.js.map
 .nyc_output
 coverage
 

@@ -11,8 +11,7 @@ EasyPost is a simple shipping API. You can sign up for an account at https://eas
 npm install --save @easypost/api
 ```
 
-**Note:** if you are using a version of Node less than 6.9, you will need to install and
-include a polyfill, such as `babel-polyfill`, and include it in your project:
+**Note:** If you are using @easypost/api prior to v5 and a version of Node less than 6.9, you will need to install and include a polyfill, such as `babel-polyfill`, and include it in your project:
 
 ```bash
 npm install --save babel-polyfill
@@ -29,8 +28,7 @@ You can alternatively download the various built assets from this project's [rel
 
 ## Compatability
 
-By default, @easypost/api works with Node v6 LTS. To include for other versions
-of node, you can use:
+By default, @easypost/api (prior to v5) works with Node v6 LTS. To include for other versions of node, you can use:
 
 * `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+)
 * `require('@easypost/api/easypost.6-lts.js')` (Node 6.9+)
@@ -213,8 +211,7 @@ API_KEY=yourkey ./repl.js --local easypost.js
 
 ## Note on ES6 Usage
 
-You can import specific versions of the compiled code if you're using later
-versions of Node. 
+You can import specific versions of the compiled code if you're using later versions of Node and using @easypost/api prior to v5.
 
 ```javascript
 // Imports the un-transformed es6
