@@ -19,5 +19,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run build
-      - run: npm test
+      - run: EASYPOST_TEST_API_KEY=123 npm test
       - run: npm run lint

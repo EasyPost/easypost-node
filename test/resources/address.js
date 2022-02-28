@@ -1,57 +1,27 @@
-import address from '../../src/resources/address';
-import apiStub from '../helpers/apiStub';
-import NotImplementedError from '../../src/errors/notImplemented';
+import EasyPost from '../../src/easypost';
+import * as setupPolly from '../setupPolly';
 
 
 describe('Address Resource', () => {
-  it('exists', () => {
-    expect(address).to.not.be.undefined;
-    expect(address).to.be.a('function');
-  });
+  setupPolly.startPolly();
 
-  it('throws on delete', () => {
-    const Address = address(apiStub());
-    return Address.delete('id').then(() => {}, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
-  });
+  it('creates an address', async function createAddress() {
+    const { server } = this.polly;
+    setupPolly.stripCreds(server);
 
-  it('throws on instance delete', () => {
-    const Address = address(apiStub());
-    const instance = new Address({ id: 1 });
+    const api = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
 
-    return instance.delete('id').then(() => {}, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
-  });
+    const address = await new api.Address({
+      name: 'Jack Sparrow',
+      company: 'EasyPost',
+      street1: '388 Townsend St',
+      street2: 'Apt 20',
+      city: 'San Francisco',
+      state: 'CA',
+      zip: '94107',
+      phone: '5555555555',
+    }).save();
 
-  it('wraps json in its name', () => {
-    const Address = address(apiStub());
-    const data = {
-      street1: '1 1st st',
-    };
-
-    const expectedJSON = {
-      address: { street1: data.street1 },
-    };
-
-    expect(Address.wrapJSON(data)).to.deep.equal(expectedJSON);
-  });
-
-  it('wraps json, separating verify and address', () => {
-    const Address = address(apiStub());
-    const data = {
-      street1: '1 1st st',
-      verify: ['zip4'],
-      verify_strict: ['deliverable'],
-    };
-
-    const expectedJSON = {
-      address: { street1: data.street1 },
-      verify: data.verify,
-      verify_strict: data.verify_strict,
-    };
-
-    expect(Address.wrapJSON(data)).to.deep.equal(expectedJSON);
+    expect(address.street1).to.equal('388 Townsend St');
   });
 });
