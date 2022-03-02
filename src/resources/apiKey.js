@@ -37,21 +37,5 @@ export default api => (
     static unwrapAll(data) {
       return this.convertKeyMap(data);
     }
-
-    enable() {
-      this.verifyParameters({
-        this: ['id'],
-      });
-
-      return this.rpc('enable', undefined, this.constructor._url);
-    }
-
-    disable() {
-      this.verifyParameters({
-        this: ['id'],
-      });
-
-      return this.rpc('disable', undefined, this.constructor._url);
-    }
   }
 );
