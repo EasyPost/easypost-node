@@ -7,11 +7,13 @@ const mode = process.env.NODE_ENV || 'development';
 const isDev = mode === 'development';
 
 module.exports = {
-  entry: './src/easypost.js',
+  entry: path.resolve(__dirname, 'src', 'easypost.js'),
   output: {
     path: path.resolve(__dirname),
     filename: 'easypost.js',
+    libraryTarget: 'commonjs', // TODO: In Webpack 5, there is a new `library` property up one level
   },
+  context: path.resolve(__dirname, 'src'),
   mode,
   cache: isDev,
   devtool: isDev ? 'source-map' : undefined,
@@ -30,5 +32,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js'],
+    modules: [
+      path.resolve(__dirname, 'src'),
+      path.resolve(__dirname, './node_modules'),
+    ],
   },
 };
