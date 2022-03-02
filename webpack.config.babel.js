@@ -1,4 +1,6 @@
+/* eslint import/no-extraneous-dependencies: 0 */
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 
 const mode = process.env.NODE_ENV || 'development';
@@ -11,30 +13,17 @@ module.exports = {
     filename: 'easypost.js',
   },
   mode,
-  target: 'node', // TODO: In webpack 5 you can specify the version in this string
   cache: isDev,
   devtool: isDev ? 'source-map' : undefined,
+  target: 'node', // TODO: In Webpack 5, replace this line with `externalsPresets: { node: true },`
+  externals: [nodeExternals()],
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          // options: {
-          //   presets: ['@babel/preset-env'],
-          //   plugins: [
-          //     '@babel/plugin-proposal-export-namespace-from',
-          //     ['@babel/plugin-proposal-class-properties', {
-          //       loose: false,
-          //     }],
-          //     '@babel/plugin-proposal-export-default-from',
-          //     '@babel/plugin-syntax-export-extensions',
-          //     'babel-plugin-transform-export-extensions',
-          //     '@babel/plugin-proposal-optional-chaining',
-          //     '@babel/plugin-proposal-nullish-coalescing-operator',
-          //   ],
-          // },
         },
       },
     ],

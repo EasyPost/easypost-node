@@ -22,7 +22,7 @@
     "coverage": "cross-env NODE_ENV=test nyc npm run test",
     "fix": "eslint src test --fix",
     "lint": "eslint src test",
-    "prepublishOnly": "npm run build && npm run test && npm run lint",
+    "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint",
     "repl": "./repl.js --local easypost.js",
     "test": "mocha --timeout 10000 --require @babel/register --require ./test/common.js --recursive ./test",
     "watch": "webpack --config webpack.config.babel.js --watch"
