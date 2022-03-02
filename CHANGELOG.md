@@ -4,6 +4,8 @@
 
 * Bumps the minimum version of Node to `v10`
 * Removes build targets of `0.10`, `6`, and `8`, the library is now only published under a single bundled package `easypost`
+* Removes `@easypost/build` and instead uses Webpack standalone to build the project
+    * The project is now only built for `node` and may not provide browser compatible code. If you require browser compatible Javascript, we suggest you build from source
 * Adds support to one-call buy an order
 * Lowered the default timeout of requests from 120 seconds to 60 seconds
 * Added the Nodejs version in use to the User-Agent header on requests

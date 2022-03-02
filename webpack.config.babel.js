@@ -1,27 +1,45 @@
-/* eslint import/no-extraneous-dependencies: 0 */
-import { node, rules } from '@easypost/build';
+const path = require('path');
 
 
-function config(output, nodestr) {
-  const nodeConfig = node({
-    entry: './src/easypost.js',
-    outputDir: './',
-  });
+const mode = process.env.NODE_ENV || 'development';
+const isDev = mode === 'development';
 
-  const jsRule = rules.js({
-    node: nodestr,
-  });
-
-  jsRule.options.presets = jsRule.options.presets.filter(p => p[0] !== '@babel/preset-react');
-
-  // Replace rule with one that matches a specific node env
-  nodeConfig.module.rules.splice(0, 1, jsRule);
-
-  nodeConfig.output.filename = output;
-
-  return nodeConfig;
-}
-
-module.exports = [
-  config('easypost.js', '10'),
-];
+module.exports = {
+  entry: './src/easypost.js',
+  output: {
+    path: path.resolve(__dirname),
+    filename: 'easypost.js',
+  },
+  mode,
+  target: 'node', // TODO: In webpack 5 you can specify the version in this string
+  cache: isDev,
+  devtool: isDev ? 'source-map' : undefined,
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          // options: {
+          //   presets: ['@babel/preset-env'],
+          //   plugins: [
+          //     '@babel/plugin-proposal-export-namespace-from',
+          //     ['@babel/plugin-proposal-class-properties', {
+          //       loose: false,
+          //     }],
+          //     '@babel/plugin-proposal-export-default-from',
+          //     '@babel/plugin-syntax-export-extensions',
+          //     'babel-plugin-transform-export-extensions',
+          //     '@babel/plugin-proposal-optional-chaining',
+          //     '@babel/plugin-proposal-nullish-coalescing-operator',
+          //   ],
+          // },
+        },
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js'],
+  },
+};
