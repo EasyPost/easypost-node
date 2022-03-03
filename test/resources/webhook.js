@@ -1,4 +1,4 @@
-import apiStub from '../helpers/apiStub';
+import apiStub from '../helpers/api_stub';
 
 import webhook from '../../src/resources/webhook';
 

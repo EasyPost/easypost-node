@@ -1,6 +1,6 @@
 import T from 'proptypes';
 import base from './base';
-import { propTypes as ciPropTypes } from './customsItem';
+import { propTypes as ciPropTypes } from './customs_item';
 
 
 export const propTypes = {

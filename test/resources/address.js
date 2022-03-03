@@ -1,5 +1,5 @@
 import EasyPost from '../../src/easypost';
-import * as setupPolly from '../setupPolly';
+import * as setupPolly from '../setup_polly';
 
 
 describe('Address Resource', () => {

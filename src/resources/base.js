@@ -1,5 +1,5 @@
 import ValidationError from '../errors/validation';
-import NotImplementedError from '../errors/notImplemented';
+import NotImplementedError from '../errors/not_implemented';
 
 
 export default api => (

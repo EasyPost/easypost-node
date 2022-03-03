@@ -1,5 +1,5 @@
-import apiStub from '../helpers/apiStub';
-import NotImplementedError from '../../src/errors/notImplemented';
+import apiStub from '../helpers/api_stub';
+import NotImplementedError from '../../src/errors/not_implemented';
 import user, { propTypes } from '../../src/resources/user';
 
 
@@ -11,7 +11,7 @@ describe('User Resource', () => {
 
   it('throws on all', () => {
     const User = user(apiStub());
-    return User.all().then(() => {}, err => {
+    return User.all().then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

@@ -4,12 +4,12 @@ import superagent from 'superagent';
 import pkg from '../package.json';
 
 import Address, { propTypes as addressPropTypes } from './resources/address';
-import ApiKey, { propTypes as apiKeyPropTypes } from './resources/apiKey';
+import ApiKey, { propTypes as apiKeyPropTypes } from './resources/api_key';
 import Batch, { propTypes as batchPropTypes } from './resources/batch';
-import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrierAccount';
-import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrierType';
-import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customsInfo';
-import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customsItem';
+import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrier_account';
+import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrier_type';
+import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customs_info';
+import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customs_item';
 import Event, { propTypes as eventPropTypes } from './resources/event';
 import Insurance, { propTypes as insurancePropTypes } from './resources/insurance';
 import Order, { propTypes as orderPropTypes } from './resources/order';
