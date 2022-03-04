@@ -2,7 +2,6 @@ import parcel from '../../src/resources/parcel';
 import apiStub from '../helpers/api_stub';
 import NotImplementedError from '../../src/errors/not_implemented';
 
-
 describe('Parcel Resource', () => {
   it('exists', () => {
     expect(parcel).to.not.be.undefined;
@@ -24,27 +23,35 @@ describe('Parcel Resource', () => {
     });
   });
 
-
   it('throws on all', () => {
     const Parcel = parcel(apiStub());
-    return Parcel.all().then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return Parcel.all().then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   it('throws on delete', () => {
     const Parcel = parcel(apiStub());
-    return Parcel.delete().then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return Parcel.delete().then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   it('throws on instance delete', () => {
     const Parcel = parcel(apiStub());
     const instance = new Parcel({ id: 1 });
 
-    return instance.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return instance.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 });

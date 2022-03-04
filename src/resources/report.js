@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -18,14 +17,16 @@ export const propTypes = {
   updated_at: T.oneOfType([T.object, T.string]),
 };
 
-export default api => (
+export default (api) =>
   class Report extends base(api) {
     static _url = 'reports';
     static propTypes = propTypes;
 
     constructor(data = {}) {
       super(data);
-      if (data.type) { this._url = this.constructor.constructUrl(data.type); }
+      if (data.type) {
+        this._url = this.constructor.constructUrl(data.type);
+      }
     }
 
     static constructUrl(type) {
@@ -43,5 +44,4 @@ export default api => (
     static delete() {
       return this.notImplemented('delete');
     }
-  }
-);
+  };

@@ -4,7 +4,6 @@ import base from './base';
 import { propTypes as addressPropTypes } from './address';
 import { propTypes as shipmentPropTypes } from './shipment';
 
-
 export const propTypes = {
   id: T.string,
   reference: T.string,
@@ -24,19 +23,14 @@ export const propTypes = {
   service: T.string,
 };
 
-export default api => (
+export default (api) =>
   class Order extends base(api) {
     static propTypes = propTypes;
     static _name = 'Order';
     static _url = 'orders';
     static key = 'order';
 
-    static jsonIdKeys = [
-      'to_address',
-      'from_address',
-      'return_address',
-      'buyer_address',
-    ]
+    static jsonIdKeys = ['to_address', 'from_address', 'return_address', 'buyer_address'];
 
     static all() {
       return this.notImplemented('all');
@@ -47,10 +41,14 @@ export default api => (
     }
 
     async buy(carrier, service) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['carrier', 'service'],
-      }, carrier, service);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['carrier', 'service'],
+        },
+        carrier,
+        service,
+      );
 
       return this.rpc('buy', { carrier, service });
     }
@@ -58,5 +56,4 @@ export default api => (
     async getRates() {
       return this.rpc('rates', undefined, undefined, 'get');
     }
-  }
-);
+  };

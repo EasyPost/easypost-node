@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -18,7 +17,7 @@ export const propTypes = {
   currency: T.string,
 };
 
-export default api => (
+export default (api) =>
   class CustomsItem extends base(api) {
     static propTypes = propTypes;
     static _name = 'CustomsItem';
@@ -50,5 +49,4 @@ export default api => (
 
       return super.save();
     }
-  }
-);
+  };

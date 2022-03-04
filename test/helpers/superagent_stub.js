@@ -1,12 +1,14 @@
 export const requestStub = (fail, failRes) => {
   const stub = new Promise((r, x) => {
     if (fail) {
-      return x(failRes || {
-        response: {
-          status: 500,
-          body: { message: 'Server is kill' },
+      return x(
+        failRes || {
+          response: {
+            status: 500,
+            body: { message: 'Server is kill' },
+          },
         },
-      });
+      );
     }
 
     return r();

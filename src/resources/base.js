@@ -1,8 +1,7 @@
 import ValidationError from '../errors/validation';
 import NotImplementedError from '../errors/not_implemented';
 
-
-export default api => (
+export default (api) =>
   class Base {
     static _url = null;
     static _name = null;
@@ -13,7 +12,7 @@ export default api => (
     static async retrieve(id, urlPrefix) {
       try {
         const url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
-        const res = (await api.get(url));
+        const res = await api.get(url);
         return this.create(res.body);
       } catch (e) {
         return Promise.reject(e);
@@ -79,7 +78,13 @@ export default api => (
       // Loop through proptypes and match them against props; this will catch
       // issues such as isRequred or type mismatches.
       const errors = Object.keys(this.constructor.propTypes).reduce((errorHash, key) => {
-        const err = this.constructor.propTypes[key](props, key, `${this.constructor._name}`, 'prop', key);
+        const err = this.constructor.propTypes[key](
+          props,
+          key,
+          `${this.constructor._name}`,
+          'prop',
+          key,
+        );
 
         if (err) {
           /* eslint no-param-reassign: 0 */
@@ -104,14 +109,14 @@ export default api => (
     // have cross browser proxy support and do neat getter/setter things. For
     // now, just map it on the instance.
     mapProps(data) {
-      Object.keys(data).forEach(key => {
+      Object.keys(data).forEach((key) => {
         this[key] = data[key];
       });
     }
 
     verifyParameters(parameters = {}, ...args) {
       if (parameters.this) {
-        parameters.this.forEach(p => {
+        parameters.this.forEach((p) => {
           if (!this[p]) {
             throw new Error(`Object requires ${p} to be set.`);
           }
@@ -169,13 +174,15 @@ export default api => (
         if (this.id) {
           res = await api.put(`${this._url || this.constructor._url}/${this.id}`, { body: data });
         } else {
-          res = await api.post(this._url || this.constructor._url, { body: data });
+          res = await api.post(this._url || this.constructor._url, {
+            body: data,
+          });
         }
 
         this.mapProps(res.body);
         return this;
       } catch (e) {
-        throw (e);
+        throw e;
       }
     }
 
@@ -184,7 +191,7 @@ export default api => (
         const res = await this.constructor.retrieve(this.id);
         const props = res.toJSON();
 
-        Object.keys(props).forEach(k => {
+        Object.keys(props).forEach((k) => {
           this[k] = props[k];
         });
       } else {
@@ -227,5 +234,4 @@ export default api => (
         return json;
       }, {});
     }
-  }
-);
+  };

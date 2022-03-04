@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -17,11 +16,10 @@ export const propTypes = {
   updated_at: T.oneOfType([T.object, T.string]),
 };
 
-export default api => (
+export default (api) =>
   class CarrierAccount extends base(api) {
     static _name = 'CarrierAccount';
     static _url = 'carrier_accounts';
     static key = 'carrier_account';
     static propTypes = propTypes;
-  }
-);
+  };

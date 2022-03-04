@@ -9,8 +9,7 @@ Icon
 
 node_modules
 npm-debug.log
-/easypost.js
-/easypost.js.map
+dist
 .nyc_output
 coverage
 

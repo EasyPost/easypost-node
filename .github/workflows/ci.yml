@@ -21,3 +21,4 @@ jobs:
       - run: npm run build
       - run: EASYPOST_TEST_API_KEY=123 npm test
       - run: npm run lint
+      - run: npm run check

@@ -2,7 +2,6 @@ import T from 'proptypes';
 import base from './base';
 import { propTypes as addressPropTypes } from './address';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -17,7 +16,7 @@ export const propTypes = {
   updated_at: T.oneOfType([T.object, T.string]),
 };
 
-export default api => (
+export default (api) =>
   class ScanForm extends base(api) {
     static propTypes = propTypes;
     static _name = 'ScanForm';
@@ -34,7 +33,7 @@ export default api => (
     toJSON() {
       if (this.shipments) {
         return {
-          shipments: this.shipments.map(s => {
+          shipments: this.shipments.map((s) => {
             if (typeof s === 'string') {
               return { id: s };
             }
@@ -46,5 +45,4 @@ export default api => (
 
       return super.toJSON();
     }
-  }
-);
+  };

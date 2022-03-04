@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   background_color: T.string,
   color: T.string,
@@ -14,9 +13,4 @@ export const propTypes = {
   theme: T.string,
 };
 
-
-export default api => (
-  class Brand extends base(api) {
-
-  }
-);
+export default (api) => class Brand extends base(api) {};

@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -19,7 +18,7 @@ export const propTypes = {
   recharge_threshold: T.oneOfType([T.object, T.string]),
 };
 
-export default api => (
+export default (api) =>
   class User extends base(api) {
     static _name = 'User';
     static _url = 'users';
@@ -29,10 +28,11 @@ export default api => (
     static async retrieve(id, urlPrefix) {
       try {
         let url = urlPrefix || this._url; // retrieve self
-        if (id) { // retrieve child users
+        if (id) {
+          // retrieve child users
           url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
         }
-        const res = (await api.get(url));
+        const res = await api.get(url);
         return this.create(res.body);
       } catch (e) {
         return Promise.reject(e);
@@ -59,5 +59,4 @@ export default api => (
         return Promise.reject(e);
       }
     }
-  }
-);
+  };

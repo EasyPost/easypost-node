@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -22,7 +21,7 @@ export const propTypes = {
   updated_at: T.oneOfType([T.object, T.string]),
 };
 
-export default api => (
+export default (api) =>
   class Tracker extends base(api) {
     static propTypes = propTypes;
     static _name = 'Tracker';
@@ -44,5 +43,4 @@ export default api => (
         return Promise.reject(e);
       }
     }
-  }
-);
+  };
