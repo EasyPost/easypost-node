@@ -30,9 +30,9 @@ You can alternatively download the various built assets from this project's [rel
 
 By default, @easypost/api (prior to v5) works with Node v6 LTS. To include for other versions of node, you can use:
 
-* `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+)
-* `require('@easypost/api/easypost.6-lts.js')` (Node 6.9+)
-* `require('@easypost/api/easypost.legacy.js')` (Node 0.10+)
+- `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+)
+- `require('@easypost/api/easypost.6-lts.js')` (Node 6.9+)
+- `require('@easypost/api/easypost.legacy.js')` (Node 0.10+)
 
 ## Example
 
@@ -65,7 +65,7 @@ const shipment = new api.Shipment({
     length: 8,
     width: 5,
     height: 5,
-    weight: 5
+    weight: 5,
   },
   customs_info: {
     eel_pfc: 'NOEEI 30.37(a)',
@@ -80,19 +80,19 @@ const shipment = new api.Shipment({
 
     customs_items: [
       new api.CustomsItem({
-        'description': 'Sweet shirts 1',
-        'quantity': 2,
-        'weight': 11,
-        'value': 23,
-        'hs_tariff_number': '654321',
-        'origin_country': 'US',
-        'code': '123'
+        description: 'Sweet shirts 1',
+        quantity: 2,
+        weight: 11,
+        value: 23,
+        hs_tariff_number: '654321',
+        origin_country: 'US',
+        code: '123',
       }),
-    ]
-  }
+    ],
+  },
 });
 
-shipment.save().then(s => s.buy(shipment.lowestRate()).then(console.log).catch(console.log))
+shipment.save().then((s) => s.buy(shipment.lowestRate()).then(console.log).catch(console.log));
 ```
 
 ### Options
@@ -100,12 +100,12 @@ shipment.save().then(s => s.buy(shipment.lowestRate()).then(console.log).catch(c
 You can construct an API instance with certain options:
 
 ```javascript
-const api = new Api("mykey", {
+const api = new Api('mykey', {
   timeout: 120000,
-  baseUrl: "https://api.easypost.com/v2/",
+  baseUrl: 'https://api.easypost.com/v2/',
   useProxy: false,
-  superagentMiddleware: s => s,
-  requestMiddleware: r => r,
+  superagentMiddleware: (s) => s,
+  requestMiddleware: (r) => r,
 });
 ```
 
@@ -131,8 +131,8 @@ to wrap superagent in a function, such as many superagent libraries do.
 ```javascript
 import superagentLib from 'some-superagent-lib';
 
-const api = new Api("my-key", {
-  superagentMiddleware: s => superagentLib(s),
+const api = new Api('my-key', {
+  superagentMiddleware: (s) => superagentLib(s),
 });
 ```
 
@@ -144,8 +144,8 @@ you need to hook into a request:
 ```javascript
 import superagentLib from 'some-superagent-lib';
 
-const api = new Api("my-key", {
-  requestMiddleware: r => {
+const api = new Api('my-key', {
+  requestMiddleware: (r) => {
     r.someLibFunction(SOME_CONFIG_VALUE);
     return r;
   },
@@ -205,7 +205,7 @@ API_KEY=yourkey ./repl.js --local easypost.js
 1. Update the version in the `package.json` file
 1. Update the `CHANGELOG` file
 1. Tag the release on GitHub
-1. Build the package via `make build` (which runs `npm run build` and generates `build.tar.gz` containing `easypost.js`, `easypost.6-lts.js`, `easypost.js.map`, etc) 
+1. Build the package via `make build` (which runs `npm run build` and generates `build.tar.gz` containing `easypost.js`, `easypost.6-lts.js`, `easypost.js.map`, etc)
 1. Publish the npm package via `make publish (which runs `npm publish`). This will build the project and run tests as a part of the process.
 1. Upload the individual built assets in `build.tar.gz` from the earlier `make build` step to the new GitHub release. This is to make it easy for others to more easily use the EasyPost library without having to download the entire source tree.
 
@@ -215,10 +215,10 @@ You can import specific versions of the compiled code if you're using later vers
 
 ```javascript
 // Imports the un-transformed es6
-import "@easypost/api/src/easypost"
+import '@easypost/api/src/easypost';
 
 // Use the following to import mininally transformed versions
-import "@easypost/api/easypost.6-lts"
-import "@easypost/api/easypost.8-lts"
-import "@easypost/api/easypost.legacy.js" // (v0.10)
+import '@easypost/api/easypost.6-lts';
+import '@easypost/api/easypost.8-lts';
+import '@easypost/api/easypost.legacy.js'; // (v0.10)
 ```

@@ -4,8 +4,7 @@ import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   /* eslint no-console: 0 */
   console.error(err, err.stack);
 });

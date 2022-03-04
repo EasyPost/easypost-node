@@ -3,7 +3,6 @@ import NotImplementedError from '../../src/errors/not_implemented';
 
 import tracker from '../../src/resources/tracker';
 
-
 describe('Tracker Resource', () => {
   it('exists', () => {
     expect(tracker).to.not.be.undefined;
@@ -18,18 +17,24 @@ describe('Tracker Resource', () => {
 
   it('throws on delete', () => {
     const Tracker = tracker(apiStub());
-    return Tracker.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return Tracker.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   it('throws on instance delete', () => {
     const Tracker = tracker(apiStub());
     const instance = new Tracker({ id: 1 });
 
-    return instance.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return instance.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   describe('Trackers in bulk', () => {
@@ -40,7 +45,7 @@ describe('Tracker Resource', () => {
     };
     it('Add trackers in bulk', () => {
       const Tracker = tracker(apiStub());
-      return Tracker.createList(trackingCode).then(result => {
+      return Tracker.createList(trackingCode).then((result) => {
         expect(result).to.be.true;
       });
     });

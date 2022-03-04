@@ -5,9 +5,8 @@
 require('source-map-support').install();
 require('core-js/stable');
 
-const args = require('yargs').argv;
-
 const repl = require('repl');
+const args = require('yargs').argv;
 
 process.on('unhandledRejection', (err) => {
   console.log(err, err.stack);
@@ -27,16 +26,17 @@ if (args.local) {
 console.log(`Starting ${packageInfo.name} v${packageInfo.version} repl`);
 console.log('Enter `help()` for information.');
 
-
 let api;
 
 if (process.env.API_KEY) {
   api = new API(process.env.API_KEY);
 } else {
-  console.log([
-    'Create an instance by using `api = new API(apikey)`, or restart',
-    'the repl with an API_KEY environment variable.',
-  ].join(' '));
+  console.log(
+    [
+      'Create an instance by using `api = new API(apikey)`, or restart',
+      'the repl with an API_KEY environment variable.',
+    ].join(' '),
+  );
 }
 
 const local = repl.start('$> ');

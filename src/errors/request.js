@@ -1,16 +1,16 @@
 import FakeError from './error';
 
-
-export const createMessage = (status, url) => (
-  `Status ${status} returned from API request to ${url}`
-);
+export const createMessage = (status, url) =>
+  `Status ${status} returned from API request to ${url}`;
 
 export const NAME = 'RequestError';
 
 export default class RequestError extends FakeError {
   constructor(error, url) {
     // Make sure an error and url were actually passed in
-    if (!error) { throw new Error('No error passed to RequestError'); }
+    if (!error) {
+      throw new Error('No error passed to RequestError');
+    }
 
     if (typeof url !== 'string') {
       throw new Error('No url passed to RequestError');

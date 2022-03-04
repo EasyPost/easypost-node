@@ -25,7 +25,6 @@ import Webhook, { propTypes as webhookPropTypes } from './resources/webhook';
 
 import RequestError from './errors/request';
 
-
 export const MS_SECOND = 1000;
 export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
 export const DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
@@ -120,13 +119,7 @@ export default class API {
   }
 
   constructor(key, options = {}) {
-    const {
-      useProxy,
-      timeout,
-      baseUrl,
-      superagentMiddleware,
-      requestMiddleware,
-    } = options;
+    const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
 
     if (!key && !useProxy) {
       throw new Error('No API key supplied. Pass in an API key as the first argument.');
@@ -146,7 +139,7 @@ export default class API {
   }
 
   use(resources) {
-    Object.keys(resources).forEach(c => {
+    Object.keys(resources).forEach((c) => {
       this[c] = resources[c](this);
     });
   }
@@ -162,13 +155,9 @@ export default class API {
   }
 
   async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
-    const {
-      query,
-      body,
-    } = params;
+    const { query, body } = params;
 
-    let req = this.agent[method](this.buildPath(path))
-      .set(API.buildHeaders(headers));
+    let req = this.agent[method](this.buildPath(path)).set(API.buildHeaders(headers));
 
     if (this.requestMiddleware) {
       req = this.requestMiddleware(req);
@@ -178,9 +167,13 @@ export default class API {
       req.auth(this.key);
     }
 
-    if (body) { req.send(body); }
+    if (body) {
+      req.send(body);
+    }
 
-    if (query) { req.query(query); }
+    if (query) {
+      req.query(query);
+    }
 
     try {
       const res = await req;
@@ -194,9 +187,19 @@ export default class API {
     }
   }
 
-  get(path, params, headers) { return this.request(path, METHODS.GET, params, headers); }
-  post(path, params, headers) { return this.request(path, METHODS.POST, params, headers); }
-  put(path, params, headers) { return this.request(path, METHODS.PUT, params, headers); }
-  patch(path, params, headers) { return this.request(path, METHODS.PATCH, params, headers); }
-  del(path, params, headers) { return this.request(path, METHODS.DELETE, params, headers); }
+  get(path, params, headers) {
+    return this.request(path, METHODS.GET, params, headers);
+  }
+  post(path, params, headers) {
+    return this.request(path, METHODS.POST, params, headers);
+  }
+  put(path, params, headers) {
+    return this.request(path, METHODS.PUT, params, headers);
+  }
+  patch(path, params, headers) {
+    return this.request(path, METHODS.PATCH, params, headers);
+  }
+  del(path, params, headers) {
+    return this.request(path, METHODS.DELETE, params, headers);
+  }
 }

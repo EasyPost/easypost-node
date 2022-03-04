@@ -1,8 +1,4 @@
-import RequestError, {
-  NAME,
-  createMessage,
-} from '../../src/errors/request';
-
+import RequestError, { NAME, createMessage } from '../../src/errors/request';
 
 describe('Request Errors', () => {
   const error = {
@@ -16,21 +12,21 @@ describe('Request Errors', () => {
   const url = '/addresses';
 
   it('generates a helpful error message', () => {
-    expect((new RequestError(error, url)).message).to.equal(createMessage(error.status, url));
-    expect((new RequestError(error, url)).message).to.not.be.undefined;
+    expect(new RequestError(error, url).message).to.equal(createMessage(error.status, url));
+    expect(new RequestError(error, url).message).to.not.be.undefined;
   });
 
   it('maps code to status on sys errors', () => {
-    expect((new RequestError(sysError, url)).status).to.equal(sysError.code);
-    expect((new RequestError(sysError, url)).error.code).to.equal(sysError.code);
+    expect(new RequestError(sysError, url).status).to.equal(sysError.code);
+    expect(new RequestError(sysError, url).error.code).to.equal(sysError.code);
   });
 
   it('has a name', () => {
-    expect((new RequestError(error, url)).name).to.equal(NAME);
+    expect(new RequestError(error, url).name).to.equal(NAME);
   });
 
   it('sets the status based on the error', () => {
-    expect((new RequestError(error, url)).status).to.equal(error.status);
+    expect(new RequestError(error, url).status).to.equal(error.status);
   });
 
   it('throws if no error is passed in', () => {
@@ -52,7 +48,7 @@ describe('Request Errors', () => {
       status: 422,
     };
 
-    expect((new RequestError(res, url)).detail).to.equal(res.body.error.message);
-    expect((new RequestError(res, url)).errors).to.equal(res.body.error.errors);
+    expect(new RequestError(res, url).detail).to.equal(res.body.error.message);
+    expect(new RequestError(res, url).errors).to.equal(res.body.error.errors);
   });
 });

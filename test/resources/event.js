@@ -2,7 +2,6 @@ import apiStub from '../helpers/api_stub';
 import NotImplementedError from '../../src/errors/not_implemented';
 import event from '../../src/resources/event';
 
-
 describe('Event Resource', () => {
   it('exists', () => {
     expect(event).to.not.be.undefined;
@@ -17,15 +16,21 @@ describe('Event Resource', () => {
 
   it('throws on delete', () => {
     const Event = event(apiStub());
-    return Event.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return Event.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   it('throws on save', () => {
     const Event = event(apiStub());
-    return Event.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return Event.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 });

@@ -3,7 +3,6 @@ import NotImplementedError from '../../src/errors/not_implemented';
 
 import scanForm from '../../src/resources/scan_form';
 
-
 describe('ScanForm Resource', () => {
   it('exists', () => {
     expect(scanForm).to.not.be.undefined;
@@ -18,18 +17,24 @@ describe('ScanForm Resource', () => {
 
   it('throws on delete', () => {
     const ScanForm = scanForm(apiStub());
-    return ScanForm.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return ScanForm.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   it('throws on instance delete', () => {
     const ScanForm = scanForm(apiStub());
     const instance = new ScanForm({ id: 1 });
 
-    return instance.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return instance.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   describe('toJSON', () => {
@@ -52,7 +57,7 @@ describe('ScanForm Resource', () => {
       expect(ScanForm.wrapJSON(json)).to.deep.equal(json);
     });
 
-    it('returns and empty object if there\'s no shipments', () => {
+    it("returns and empty object if there's no shipments", () => {
       const sf = new ScanForm();
       expect(sf.toJSON()).to.deep.equal({});
     });

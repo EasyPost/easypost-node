@@ -1,9 +1,7 @@
 import Error from './error';
 
-
-export const createMessage = className => (
-  `Failed validating ${className}. View \`e.errors\` for details.`
-);
+export const createMessage = (className) =>
+  `Failed validating ${className}. View \`e.errors\` for details.`;
 
 export const NAME = 'ValidationError';
 export const STATUS = 422;

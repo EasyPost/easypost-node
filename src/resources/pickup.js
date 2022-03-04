@@ -6,7 +6,6 @@ import { propTypes as batchPropTypes } from './batch';
 import { propTypes as addressPropTypes } from './address';
 import { propTypes as carrierAccountPropTypes } from './carrier_account';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -27,18 +26,14 @@ export const propTypes = {
   pickup_rates: T.object,
 };
 
-export default api => (
+export default (api) =>
   class Pickup extends base(api) {
     static propTypes = propTypes;
     static _name = 'Pickup';
     static _url = 'pickups';
     static key = 'pickup';
 
-    static jsonIdKeys = [
-      'address',
-      'shipment',
-      'batch',
-    ]
+    static jsonIdKeys = ['address', 'shipment', 'batch'];
 
     static all() {
       return this.notImplemented('all');
@@ -49,10 +44,14 @@ export default api => (
     }
 
     async buy(carrier, service) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['carrier', 'service'],
-      }, carrier, service);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['carrier', 'service'],
+        },
+        carrier,
+        service,
+      );
 
       return this.rpc('buy', { carrier, service });
     }
@@ -64,5 +63,4 @@ export default api => (
 
       return this.rpc('cancel');
     }
-  }
-);
+  };

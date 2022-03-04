@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -11,7 +10,7 @@ export const propTypes = {
   fields: T.object,
 };
 
-export default api => (
+export default (api) =>
   class CarrierType extends base(api) {
     static propTypes = propTypes;
     static _name = 'CarrierType';
@@ -28,5 +27,4 @@ export default api => (
     async save() {
       return this.constructor.notImplemented('save');
     }
-  }
-);
+  };

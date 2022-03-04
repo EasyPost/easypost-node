@@ -1,6 +1,5 @@
 const Easypost = require('@easypost/api');
 
-
 const api = new Easypost(process.env.EASYPOST_PROD_API_KEY);
 
 // Setup timeframe for each report (Must be less than 31 days between start/end)

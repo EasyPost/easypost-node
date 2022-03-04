@@ -2,7 +2,6 @@ import batch, { DEFAULT_LABEL_FORMAT } from '../../src/resources/batch';
 import apiStub from '../helpers/api_stub';
 import NotImplementedError from '../../src/errors/not_implemented';
 
-
 describe('Batch Resource', () => {
   it('exists', () => {
     expect(batch).to.not.be.undefined;
@@ -11,18 +10,24 @@ describe('Batch Resource', () => {
 
   it('throws on delete', () => {
     const Batch = batch(apiStub());
-    return Batch.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return Batch.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   it('throws on instance delete', () => {
     const Batch = batch(apiStub());
     const instance = new Batch({ id: 1 });
 
-    return instance.delete('id').then(() => { }, err => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
+    return instance.delete('id').then(
+      () => {},
+      (err) => {
+        expect(err).to.be.an.instanceOf(NotImplementedError);
+      },
+    );
   });
 
   describe('managing shipments', () => {

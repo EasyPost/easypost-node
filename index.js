@@ -1,1 +1,1 @@
-module.exports = require('./easypost.js').default;
+module.exports = require('./dist/easypost.js').default;

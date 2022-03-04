@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -24,7 +23,7 @@ export const propTypes = {
   updated_at: T.oneOfType([T.object, T.string]),
 };
 
-export default api => (
+export default (api) =>
   class Rate extends base(api) {
     static _name = 'Rate';
     static _url = 'rates';
@@ -42,5 +41,4 @@ export default api => (
     static save() {
       return this.notImplemented('save');
     }
-  }
-);
+  };

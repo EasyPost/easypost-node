@@ -2,7 +2,6 @@ import T from 'proptypes';
 import base from './base';
 import { propTypes as ciPropTypes } from './customs_item';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -21,7 +20,7 @@ export const propTypes = {
   restriction_comments: T.string,
 };
 
-export default api => (
+export default (api) =>
   class CustomsInfo extends base(api) {
     static _name = 'CustomsInfo';
     static _url = 'customs_infos';
@@ -35,5 +34,4 @@ export default api => (
     static delete() {
       return this.notImplemented('delete');
     }
-  }
-);
+  };

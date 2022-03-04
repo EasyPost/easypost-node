@@ -2,14 +2,13 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
-
 const mode = process.env.NODE_ENV || 'development';
 const isDev = mode === 'development';
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'easypost.js'),
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'easypost.js',
     libraryTarget: 'commonjs', // TODO: In Webpack 5, there is a new `library` property up one level
   },
@@ -32,9 +31,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js'],
-    modules: [
-      path.resolve(__dirname, 'src'),
-      path.resolve(__dirname, './node_modules'),
-    ],
+    modules: [path.resolve(__dirname, 'src'), path.resolve(__dirname, './node_modules')],
   },
 };

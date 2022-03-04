@@ -1,6 +1,5 @@
 const Easypost = require('@easypost/api');
 
-
 const api = new Easypost(process.env.API_KEY);
 
 const parcel = new api.Parcel({

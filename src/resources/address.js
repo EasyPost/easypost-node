@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -25,7 +24,7 @@ export const propTypes = {
   verifications: T.object,
 };
 
-export default api => (
+export default (api) =>
   class Address extends base(api) {
     static _name = 'Address';
     static _url = 'addresses';
@@ -41,16 +40,18 @@ export default api => (
     static wrapJSON(json) {
       const topLevelKeys = ['verify', 'verify_strict'];
 
-      return Object.keys(json).reduce((j, k) => {
-        /* eslint no-param-reassign: 0 */
-        if (topLevelKeys.includes(k)) {
-          j[k] = json[k];
-          return j;
-        }
+      return Object.keys(json).reduce(
+        (j, k) => {
+          /* eslint no-param-reassign: 0 */
+          if (topLevelKeys.includes(k)) {
+            j[k] = json[k];
+            return j;
+          }
 
-        j.address[k] = json[k];
-        return j;
-      }, { address: {} });
+          j.address[k] = json[k];
+          return j;
+        },
+        { address: {} },
+      );
     }
-  }
-);
+  };

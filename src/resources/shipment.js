@@ -7,7 +7,6 @@ import { propTypes as customsInfoPropTypes } from './customs_info';
 import { propTypes as insurancePropTypes } from './insurance';
 import { propTypes as trackerPropTypes } from './tracker';
 
-
 export const propTypes = {
   id: T.string,
   object: T.string,
@@ -46,7 +45,7 @@ export const propTypes = {
   tax_identifiers: T.arrayOf(T.object),
 };
 
-export default api => (
+export default (api) =>
   class Shipment extends base(api) {
     static _name = 'Shipment';
     static _url = 'shipments';
@@ -63,17 +62,20 @@ export default api => (
       'carrier_accounts',
       'insurance',
       'tracker',
-    ]
+    ];
 
     static delete() {
       return this.notImplemented('delete');
     }
 
     async buy(rate, insuranceAmount) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['rate'],
-      }, rate);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['rate'],
+        },
+        rate,
+      );
 
       let rateId = rate;
 
@@ -95,10 +97,13 @@ export default api => (
     }
 
     async convertLabelFormat(format) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['format'],
-      }, format);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['format'],
+        },
+        format,
+      );
 
       return this.rpc('label', { file_format: format }, undefined, 'get');
     }
@@ -120,10 +125,13 @@ export default api => (
     }
 
     async insure(amount) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['amount'],
-      }, amount);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['amount'],
+        },
+        amount,
+      );
 
       return this.rpc('insure', { amount });
     }
@@ -140,13 +148,13 @@ export default api => (
       let rates = this.rates || [];
 
       if (carriers) {
-        const carriersLower = carriers.map(c => c.toLowerCase());
-        rates = rates.filter(r => carriersLower.includes(r.carrier.toLowerCase()));
+        const carriersLower = carriers.map((c) => c.toLowerCase());
+        rates = rates.filter((r) => carriersLower.includes(r.carrier.toLowerCase()));
       }
 
       if (services) {
-        const servicesLower = services.map(s => s.toLowerCase());
-        rates = rates.filter(r => servicesLower.includes(r.service.toLowerCase()));
+        const servicesLower = services.map((s) => s.toLowerCase());
+        rates = rates.filter((r) => servicesLower.includes(r.service.toLowerCase()));
       }
 
       return rates.reduce((lowest, rate) => {
@@ -157,5 +165,4 @@ export default api => (
         return lowest;
       }, rates[0]);
     }
-  }
-);
+  };

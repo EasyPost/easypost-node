@@ -1,7 +1,6 @@
 import T from 'proptypes';
 import base from './base';
 
-
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
 export const propTypes = {
@@ -20,7 +19,7 @@ export const propTypes = {
   updated_at: T.oneOfType([T.object, T.string]),
 };
 
-export default api => (
+export default (api) =>
   class Batch extends base(api) {
     static _name = 'Batch';
     static _url = 'batches';
@@ -32,46 +31,65 @@ export default api => (
     }
 
     addShipment(shipmentId) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['shipmentId'],
-      }, shipmentId);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['shipmentId'],
+        },
+        shipmentId,
+      );
 
       return this.rpc('add_shipments', { shipments: [{ id: shipmentId }] });
     }
 
     addShipments(shipmentIds) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['shipmentIds'],
-      }, shipmentIds);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['shipmentIds'],
+        },
+        shipmentIds,
+      );
 
-      return this.rpc('add_shipments', { shipments: shipmentIds.map(s => ({ id: s })) });
+      return this.rpc('add_shipments', {
+        shipments: shipmentIds.map((s) => ({ id: s })),
+      });
     }
 
     removeShipment(shipmentId) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['shipmentId'],
-      }, shipmentId);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['shipmentId'],
+        },
+        shipmentId,
+      );
 
       return this.rpc('remove_shipments', { shipments: [{ id: shipmentId }] });
     }
 
     removeShipments(shipmentIds) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['shipmentIds'],
-      }, shipmentIds);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['shipmentIds'],
+        },
+        shipmentIds,
+      );
 
-      return this.rpc('remove_shipments', { shipments: shipmentIds.map(s => ({ id: s })) });
+      return this.rpc('remove_shipments', {
+        shipments: shipmentIds.map((s) => ({ id: s })),
+      });
     }
 
     generateLabel(fileFormat = DEFAULT_LABEL_FORMAT) {
-      this.verifyParameters({
-        this: ['id'],
-        args: ['fileFormat'],
-      }, fileFormat);
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['fileFormat'],
+        },
+        fileFormat,
+      );
 
       return this.rpc('label', { file_format: fileFormat });
     }
@@ -91,5 +109,4 @@ export default api => (
 
       return this.rpc('buy');
     }
-  }
-);
+  };
