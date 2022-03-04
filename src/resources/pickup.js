@@ -4,7 +4,7 @@ import base from './base';
 import { propTypes as shipmentPropTypes } from './shipment';
 import { propTypes as batchPropTypes } from './batch';
 import { propTypes as addressPropTypes } from './address';
-import { propTypes as carrierAccountPropTypes } from './carrierAccount';
+import { propTypes as carrierAccountPropTypes } from './carrier_account';
 
 
 export const propTypes = {

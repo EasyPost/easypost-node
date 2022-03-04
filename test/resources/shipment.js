@@ -1,10 +1,10 @@
-import apiStub from '../helpers/apiStub';
+import apiStub from '../helpers/api_stub';
 import RequestError from '../../src/errors/request';
-import NotImplementedError from '../../src/errors/notImplemented';
+import NotImplementedError from '../../src/errors/not_implemented';
 
 import address from '../../src/resources/address';
 import parcel from '../../src/resources/parcel';
-import customsInfo from '../../src/resources/customsInfo';
+import customsInfo from '../../src/resources/customs_info';
 import insurance from '../../src/resources/insurance';
 import tracker from '../../src/resources/tracker';
 

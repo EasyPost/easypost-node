@@ -2,7 +2,7 @@ import NotImplementedError, {
   NAME,
   STATUS,
   createMessage,
-} from '../../src/errors/notImplemented';
+} from '../../src/errors/not_implemented';
 
 
 describe('NotImplemented', () => {

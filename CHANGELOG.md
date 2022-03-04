@@ -3,7 +3,8 @@
 ## NEXT RELEASE
 
 * Bumps the minimum version of Node to `v10`
-* Removes build targets of `0.10`, `6`, and `8`, the library is now only published under a single bundled package `easypost`
+* Removes build targets of `0.10`, `6`, and `8`, the library is now only published under a single bundled `easypost` package instead of separate bundled assets per version
+* Bumps all dependencies to the most recent compatible versions that still support Node 10, the library is now buildable on Node 16+
 * Removes `@easypost/build` and instead uses Webpack standalone to build the project
     * The project is now only built for `node` and may not provide browser compatible code. If you require browser compatible Javascript, we suggest you build from source
 * Adds support to one-call buy an order
@@ -13,7 +14,7 @@
 * Added support for update brand for user
 * Removed `retrieveRates()` method because the shipment object already has rates. If you need to get new rates for a shipment, please use regenerateRates() method instead
 * Add `retrieveMe()` Convenience Function that allow users to retrieve without specifying an ID.
-* Removed `enable()` and `disable()` methods in the apiKey class. Please use this functionality through  EasyPost website 
+* Removed `enable()` and `disable()` methods in the apiKey class. Please use this functionality through EasyPost website 
 * Removed `options.useCookie` from the parameter since it's deprecated in v4.0. Please use `options.useProxy` instead.
 
 ## 4.0.0 2021-10-06

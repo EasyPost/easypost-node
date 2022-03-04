@@ -3,7 +3,7 @@ import base from './base';
 
 import { propTypes as addressPropTypes } from './address';
 import { propTypes as parcelPropTypes } from './parcel';
-import { propTypes as customsInfoPropTypes } from './customsInfo';
+import { propTypes as customsInfoPropTypes } from './customs_info';
 import { propTypes as insurancePropTypes } from './insurance';
 import { propTypes as trackerPropTypes } from './tracker';
 

@@ -1,8 +1,8 @@
-import apiStub from '../helpers/apiStub';
+import apiStub from '../helpers/api_stub';
 import RequestError from '../../src/errors/request';
 import address from '../../src/resources/address';
 import pickup from '../../src/resources/pickup';
-import NotImplementedError from '../../src/errors/notImplemented';
+import NotImplementedError from '../../src/errors/not_implemented';
 
 
 describe('Pickup Resource', () => {
@@ -13,14 +13,14 @@ describe('Pickup Resource', () => {
 
   it('throws on all', () => {
     const Pickup = pickup(apiStub());
-    return Pickup.all().then(() => {}, err => {
+    return Pickup.all().then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
   it('throws on delete', () => {
     const Pickup = pickup(apiStub());
-    return Pickup.delete().then(() => {}, err => {
+    return Pickup.delete().then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -29,7 +29,7 @@ describe('Pickup Resource', () => {
     const Pickup = pickup(apiStub());
     const instance = new Pickup({ id: 1 });
 
-    return instance.delete('id').then(() => {}, err => {
+    return instance.delete('id').then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -47,21 +47,21 @@ describe('Pickup Resource', () => {
 
     it('throws if buy is called and pickup does not have an id', () => {
       pi = new Pickup();
-      pi.buy().catch(e => {
+      pi.buy().catch(e => { // eslint-disable-line jest/valid-expect-in-promise
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/id/);
       });
     });
 
     it('throws if buy is called without carrier', () => {
-      pi.buy().catch(e => {
+      pi.buy().catch(e => { // eslint-disable-line jest/valid-expect-in-promise
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/carrier/);
       });
     });
 
     it('throws if buy is called without service', () => {
-      pi.buy('carrier').catch(e => {
+      pi.buy('carrier').catch(e => { // eslint-disable-line jest/valid-expect-in-promise
         expect(e).to.be.an.instanceof(Error);
         expect(e.message).to.match(/service/);
       });

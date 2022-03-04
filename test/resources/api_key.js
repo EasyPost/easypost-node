@@ -1,6 +1,6 @@
-import apiStub from '../helpers/apiStub';
-import NotImplementedError from '../../src/errors/notImplemented';
-import apiKey from '../../src/resources/apiKey';
+import apiStub from '../helpers/api_stub';
+import NotImplementedError from '../../src/errors/not_implemented';
+import apiKey from '../../src/resources/api_key';
 
 
 describe('ApiKey Resource', () => {
@@ -17,26 +17,26 @@ describe('ApiKey Resource', () => {
     expect(apiKey).to.be.a('function');
   });
 
-  it('throws on delete', () => ApiKey.delete('id').then(() => {}, err => {
+  it('throws on delete', () => ApiKey.delete('id').then(() => { }, err => {
     expect(err).to.be.an.instanceOf(NotImplementedError);
   }));
 
   it('throws on instance delete', () => {
     const instance = new ApiKey({ id: 1 });
 
-    return instance.delete('id').then(() => {}, err => {
+    return instance.delete('id').then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 
-  it('throws on all', () => ApiKey.all().then(() => {}, err => {
+  it('throws on all', () => ApiKey.all().then(() => { }, err => {
     expect(err).to.be.an.instanceOf(NotImplementedError);
   }));
 
   it('throws on save', () => {
     const cti = new ApiKey();
 
-    return cti.save().then(() => {}, err => {
+    return cti.save().then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

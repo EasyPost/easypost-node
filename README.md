@@ -177,17 +177,17 @@ npm run build
 
 ### Testing
 
-Run unit tests by running the following:
+Tests will be transpiled on the fly.
 
 ```bash
+# Run tests
 npm test
 ```
 
 ### Linting
 
-Lint the project with the following:
-
 ```bash
+# Lint the project
 npm run lint
 ```
 

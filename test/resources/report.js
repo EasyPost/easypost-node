@@ -1,6 +1,6 @@
 import report from '../../src/resources/report';
-import NotImplementedError from '../../src/errors/notImplemented';
-import apiStub from '../helpers/apiStub';
+import NotImplementedError from '../../src/errors/not_implemented';
+import apiStub from '../helpers/api_stub';
 
 
 describe('Report Resource', () => {
@@ -65,7 +65,7 @@ describe('Report Resource', () => {
 
   it('throws on delete', () => {
     const Report = report(apiStub());
-    return Report.delete('id').then(() => {}, err => {
+    return Report.delete('id').then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -74,7 +74,7 @@ describe('Report Resource', () => {
     const Report = report(apiStub());
     const instance = new Report({ id: 1 });
 
-    return instance.delete('id').then(() => {}, err => {
+    return instance.delete('id').then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });

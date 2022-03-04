@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import superagentStub from './helpers/superagentStub';
+import superagentStub from './helpers/superagent_stub';
 
 import RequestError from '../src/errors/request';
 

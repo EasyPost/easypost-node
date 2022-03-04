@@ -1,8 +1,8 @@
-import apiStub from '../helpers/apiStub';
+import apiStub from '../helpers/api_stub';
 import RequestError from '../../src/errors/request';
 import address from '../../src/resources/address';
 import order from '../../src/resources/order';
-import NotImplementedError from '../../src/errors/notImplemented';
+import NotImplementedError from '../../src/errors/not_implemented';
 
 
 describe('Order Resource', () => {

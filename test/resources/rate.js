@@ -1,5 +1,5 @@
-import apiStub from '../helpers/apiStub';
-import NotImplementedError from '../../src/errors/notImplemented';
+import apiStub from '../helpers/api_stub';
+import NotImplementedError from '../../src/errors/not_implemented';
 import rate from '../../src/resources/rate';
 
 

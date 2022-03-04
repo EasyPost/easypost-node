@@ -2,9 +2,9 @@ import T from 'proptypes';
 import sinon from 'sinon';
 
 import base from '../../src/resources/base';
-import apiStub from '../helpers/apiStub';
+import apiStub from '../helpers/api_stub';
 import RequestError from '../../src/errors/request';
-import NotImplementedError from '../../src/errors/notImplemented';
+import NotImplementedError from '../../src/errors/not_implemented';
 import ValidationError from '../../src/errors/validation';
 
 
@@ -33,7 +33,7 @@ describe('Base Resource', () => {
 
     describe('success', () => {
       it('can retrieve from the API via url', () => {
-        stub = apiStub(url, false, { [url]: { } });
+        stub = apiStub(url, false, { [url]: {} });
         Base = base(stub);
         Base._url = url;
 
@@ -45,7 +45,7 @@ describe('Base Resource', () => {
       });
 
       it('can call all from the API via url', () => {
-        stub = apiStub(url, false, { base: [{ }], has_more: true });
+        stub = apiStub(url, false, { base: [{}], has_more: true });
         Base = base(stub);
         Base._url = url;
 
@@ -71,7 +71,7 @@ describe('Base Resource', () => {
       });
 
       it('throws if delete is called without an id', () => {
-        Base.delete().catch(e => {
+        Base.delete().catch(e => { // eslint-disable-line jest/valid-expect-in-promise
           expect(e.message).to.match(/no id was passed in/i);
         }, err => { throw new Error(err); });
       });
@@ -84,15 +84,15 @@ describe('Base Resource', () => {
         Base._url = url;
       });
 
-      it('can handle failures on retrieve', () => Base.retrieve('id').then(() => {}, err => {
+      it('can handle failures on retrieve', () => Base.retrieve('id').then(() => { }, err => {
         expect(err).to.be.an.instanceOf(RequestError);
       }));
 
-      it('can handle failures on all', () => Base.all().then(() => {}, err => {
+      it('can handle failures on all', () => Base.all().then(() => { }, err => {
         expect(err).to.be.an.instanceOf(RequestError);
       }));
 
-      it('can handle failures on del', () => Base.delete('id').then(() => {}, err => {
+      it('can handle failures on del', () => Base.delete('id').then(() => { }, err => {
         expect(err).to.be.an.instanceOf(RequestError);
       }));
     });
@@ -101,7 +101,7 @@ describe('Base Resource', () => {
   it('can provide a notimplemented helper', () => {
     const stub = apiStub();
     const Base = base(stub);
-    return Base.notImplemented('test').then(() => {}, err => {
+    return Base.notImplemented('test').then(() => { }, err => {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
@@ -241,12 +241,12 @@ describe('Base Resource', () => {
       Base._name = name;
       Base._url = name;
 
-      return new Base(data).save().then(() => {}, err => {
+      return new Base(data).save().then(() => { }, err => {
         expect(err).to.be.a.instanceOf(RequestError);
       });
     });
 
-    it('rejects when invalid data is passed in', () => new Base({ a: 1 }).save().then(() => {}, err => {
+    it('rejects when invalid data is passed in', () => new Base({ a: 1 }).save().then(() => { }, err => {
       expect(err).to.be.a.instanceOf(ValidationError);
     }));
   });
@@ -281,7 +281,7 @@ describe('Base Resource', () => {
 
       const bi = new Base(data);
 
-      bi.retrieve().catch(e => {
+      bi.retrieve().catch(e => { // eslint-disable-line jest/valid-expect-in-promise
         expect(e.message).to.match(/without an id/);
       });
     });
@@ -317,7 +317,7 @@ describe('Base Resource', () => {
 
       const bi = new Base(data);
 
-      bi.delete().catch(e => {
+      bi.delete().catch(e => { // eslint-disable-line jest/valid-expect-in-promise
         expect(e.message).to.match(/without an id/);
       });
     });
@@ -370,7 +370,7 @@ describe('Base Resource', () => {
       Base._name = name;
       Base._url = name;
 
-      return new Base(data).rpc().then(() => {}, err => {
+      return new Base(data).rpc().then(() => { }, err => {
         expect(err).to.be.a.instanceOf(RequestError);
       });
     });
