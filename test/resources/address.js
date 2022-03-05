@@ -35,13 +35,11 @@ describe('Address Resource', () => {
 
     const addressesArray = addresses.addresses;
 
-    // expect(addressesArray).to.be.lessThanOrEqual(5);
+    expect(addressesArray.length).to.be.lessThanOrEqual(5);
     expect(addresses.has_more).to.not.be.null;
-    // TODO: This is broken, cannot iterate like this in Mocha test
+    // TODO: Fix the instanceOf assertion
     addressesArray.forEach((address) => {
-      it('should be an instance of object', funtion () {
-        expect(address).to.be.an.instanceOf(String);
-      });
+      expect(address).to.be.an.instanceOf(easypost.Address);
     });
   });
 });
