@@ -48,8 +48,11 @@ export const propTypes = {
 export default (api) =>
   class Shipment extends base(api) {
     static _name = 'Shipment';
+
     static _url = 'shipments';
+
     static key = 'shipment';
+
     static propTypes = propTypes;
 
     static jsonIdKeys = [

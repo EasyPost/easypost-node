@@ -19,8 +19,11 @@ export const propTypes = {
 export default (api) =>
   class Event extends base(api) {
     static _name = 'Event';
+
     static _url = 'events';
+
     static key = 'event';
+
     static propTypes = propTypes;
 
     static delete() {

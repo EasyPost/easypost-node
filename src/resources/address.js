@@ -27,8 +27,11 @@ export const propTypes = {
 export default (api) =>
   class Address extends base(api) {
     static _name = 'Address';
+
     static _url = 'addresses';
+
     static key = 'address';
+
     static propTypes = propTypes;
 
     static delete() {

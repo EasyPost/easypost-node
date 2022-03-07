@@ -20,6 +20,7 @@ export const propTypes = {
 export default (api) =>
   class Report extends base(api) {
     static _url = 'reports';
+
     static propTypes = propTypes;
 
     constructor(data = {}) {

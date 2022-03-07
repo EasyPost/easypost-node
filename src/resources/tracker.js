@@ -24,8 +24,11 @@ export const propTypes = {
 export default (api) =>
   class Tracker extends base(api) {
     static propTypes = propTypes;
+
     static _name = 'Tracker';
+
     static _url = 'trackers';
+
     static key = 'tracker';
 
     static delete() {
