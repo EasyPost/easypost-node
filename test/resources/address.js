@@ -37,7 +37,6 @@ describe('Address Resource', () => {
 
     expect(addressesArray.length).to.be.lessThanOrEqual(5);
     expect(addresses.has_more).to.not.be.null;
-    // TODO: Fix the instanceOf assertion
     addressesArray.forEach((address) => {
       expect(address).to.be.an.instanceOf(easypost.Address);
     });

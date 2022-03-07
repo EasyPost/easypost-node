@@ -23,7 +23,12 @@ export default (api) =>
       try {
         url = url || this._url;
         const res = await api.get(url, { query });
-        return res.body;
+        const objectList = this.unwrapAll(res.body).map(this.create.bind(this));
+        const result = {
+          [url]: objectList,
+          has_more: res.body.has_more,
+        };
+        return result;
       } catch (e) {
         return Promise.reject(e);
       }
