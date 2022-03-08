@@ -17,6 +17,7 @@
 - Add `retrieveMe()` Convenience Function that allow users to retrieve without specifying an ID.
 - Removed `enable()` and `disable()` methods in the apiKey class. Please use this functionality through EasyPost website
 - Removed `options.useCookie` from the parameter since it's deprecated in v4.0. Please use `options.useProxy` instead.
+- Fixes `customs_item.value` to ve a `number` instead of a `string`
 
 ## 4.0.0 2021-10-06
 
