@@ -38,14 +38,28 @@ export default (api) =>
 
     static jsonIdKeys = ['address', 'shipment', 'batch'];
 
+    /**
+     * all not implemented
+     * @returns {Promise<never>}
+     */
     static all() {
       return this.notImplemented('all');
     }
 
+    /**
+     * all not implemented
+     * @returns {Promise<never>}
+     */
     static delete() {
       return this.notImplemented('delete');
     }
 
+    /**
+     * Buy a pickup.
+     * @param {strin} carrier
+     * @param {string} service
+     * @returns {this}
+     */
     async buy(carrier, service) {
       this.verifyParameters(
         {
@@ -59,6 +73,10 @@ export default (api) =>
       return this.rpc('buy', { carrier, service });
     }
 
+    /**
+     * Cancel a pickup.
+     * @returns {this}
+     */
     async cancel() {
       this.verifyParameters({
         this: ['id'],

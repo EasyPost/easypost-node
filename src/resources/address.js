@@ -34,12 +34,20 @@ export default (api) =>
 
     static propTypes = propTypes;
 
+    /**
+     * delete not implemented.
+     * @returns {this}
+     */
     static delete() {
       return this.notImplemented('delete');
     }
 
-    // Object format is { address: { ... }, verify: [ ] }, so we need to pull
-    // the verify properties to the top level when wrapping.
+    /**
+     * Object format is { address: { ... }, verify: [ ] }, so we need to pull
+     * the verify properties to the top level when wrapping.
+     * @param {object} json
+     * @returns {string}
+     */
     static wrapJSON(json) {
       const topLevelKeys = ['verify', 'verify_strict'];
 

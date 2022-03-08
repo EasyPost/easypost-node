@@ -34,6 +34,10 @@ export default (api) =>
 
     static propTypes = propTypes;
 
+    /**
+     * delete not implemented
+     * @returns {Promise<never>}
+     */
     static delete() {
       return this.notImplemented('delete');
     }

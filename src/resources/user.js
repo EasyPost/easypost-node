@@ -28,6 +28,12 @@ export default (api) =>
 
     static propTypes = propTypes;
 
+    /**
+     * Retrieve a child user.
+     * @param {string} id
+     * @param {string} urlPrefix
+     * @returns {this}
+     */
     static async retrieve(id, urlPrefix) {
       try {
         let url = urlPrefix || this._url; // retrieve self
@@ -42,15 +48,28 @@ export default (api) =>
       }
     }
 
+    /**
+     * Retrieve the authenticated user.
+     * @returns {this}
+     */
     static async retrieveMe() {
       const response = await api.get(this._url);
       return this.create(response.body);
     }
 
+    /**
+     * all not implemented
+     * @returns {Promise<never>}
+     */
     static all() {
       return this.notImplemented('all');
     }
 
+    /**
+     * Update the brand of a user.
+     * @param {object} params
+     * @returns {object}
+     */
     async updateBrand(params) {
       try {
         const newParams = { brand: params };

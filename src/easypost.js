@@ -101,23 +101,6 @@ export const PROP_TYPES = {
 };
 
 export default class API {
-  // Build request headers to be sent by default with each request, combined
-  // (or overridden) by any additional headers
-  static buildHeaders(additionalHeaders = {}) {
-    const headers = {
-      ...DEFAULT_HEADERS,
-      ...additionalHeaders,
-    };
-
-    if (typeof window === 'undefined') {
-      return headers;
-    }
-
-    delete headers['User-Agent'];
-    delete headers['Accept-Encoding'];
-    return headers;
-  }
-
   constructor(key, options = {}) {
     const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
 
@@ -138,14 +121,41 @@ export default class API {
     this.use(RESOURCES);
   }
 
+  /**
+   * Build request headers to be sent by default with each request, combined (or overridden) by any additional headers
+   * @param {object} additionalHeaders
+   * @returns {object}
+   */
+  static buildHeaders(additionalHeaders = {}) {
+    const headers = {
+      ...DEFAULT_HEADERS,
+      ...additionalHeaders,
+    };
+
+    if (typeof window === 'undefined') {
+      return headers;
+    }
+
+    delete headers['User-Agent'];
+    delete headers['Accept-Encoding'];
+    return headers;
+  }
+
+  /**
+   * Convert to an EasyPost resource.
+   * @param {*} resources
+   */
   use(resources) {
     Object.keys(resources).forEach((c) => {
       this[c] = resources[c](this);
     });
   }
 
-  // If the path passed in is a full URI, use it; otherwise, prepend the base
-  // url from the api.
+  /**
+   * If the path passed in is a full URI, use it; otherwise, prepend the base url from the api.
+   * @param {string} path
+   * @returns {string}
+   */
   buildPath(path = '') {
     if (path.indexOf('http') === 0) {
       return path;
@@ -154,6 +164,14 @@ export default class API {
     return this.baseUrl + path;
   }
 
+  /**
+   * Make an HTTP request.
+   * @param {string} path
+   * @param {string} method
+   * @param {object} params
+   * @param {object} headers
+   * @returns {*}
+   */
   async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
     const { query, body } = params;
 
@@ -187,22 +205,57 @@ export default class API {
     }
   }
 
+  /**
+   * Make a GET HTTP request.
+   * @param {string} path
+   * @param {object} params
+   * @param {object} headers
+   * @returns {*}
+   */
   get(path, params, headers) {
     return this.request(path, METHODS.GET, params, headers);
   }
 
+  /**
+   * Make a POST HTTP request.
+   * @param {string} path
+   * @param {object} params
+   * @param {object} headers
+   * @returns {*}
+   */
   post(path, params, headers) {
     return this.request(path, METHODS.POST, params, headers);
   }
 
+  /**
+   * Make a PUT HTTP request.
+   * @param {string} path
+   * @param {object} params
+   * @param {object} headers
+   * @returns {*}
+   */
   put(path, params, headers) {
     return this.request(path, METHODS.PUT, params, headers);
   }
 
+  /**
+   * Make a PATCH HTTP request.
+   * @param {string} path
+   * @param {object} params
+   * @param {object} headers
+   * @returns {*}
+   */
   patch(path, params, headers) {
     return this.request(path, METHODS.PATCH, params, headers);
   }
 
+  /**
+   * Make a DELETE HTTP request.
+   * @param {string} path
+   * @param {object} params
+   * @param {object} headers
+   * @returns {*}
+   */
   del(path, params, headers) {
     return this.request(path, METHODS.DELETE, params, headers);
   }

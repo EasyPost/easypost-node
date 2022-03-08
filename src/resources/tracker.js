@@ -35,6 +35,11 @@ export default (api) =>
       return this.notImplemented('delete');
     }
 
+    /**
+     * Create trackers in bulk.
+     * @param {object} params
+     * @returns {bool|Promise<never>}
+     */
     static async createList(params = {}) {
       const newParams = { trackers: params };
       try {

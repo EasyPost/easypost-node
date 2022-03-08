@@ -30,18 +30,38 @@ export default (api) =>
       }
     }
 
+    /**
+     * Construct the URL for the reports endpoint.
+     * @param {string} type
+     * @returns
+     */
     static constructUrl(type) {
       return `reports/${type}`;
     }
 
+    /**
+     * Retrieve a list of reports.
+     * @param {string} type
+     * @param {object} query
+     * @returns {this}
+     */
     static async all(type, query = {}) {
       return super.all(query, this.constructUrl(type));
     }
 
+    /**
+     * Override the wrapJSON function for this object.
+     * @param {object} json
+     * @returns {object}
+     */
     static wrapJSON(json) {
       return json;
     }
 
+    /**
+     * delete not implemented
+     * @returns {Promise<never>}
+     */
     static delete() {
       return this.notImplemented('delete');
     }

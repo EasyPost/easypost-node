@@ -13,63 +13,9 @@ export default (api) =>
 
     static jsonIdKeys = [];
 
-    static async retrieve(id, urlPrefix) {
-      try {
-        const url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
-        const res = await api.get(url);
-        return this.create(res.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-
-    static async all(query = {}, url) {
-      try {
-        url = url || this._url;
-        const res = await api.get(url, { query });
-        const objectList = this.unwrapAll(res.body).map(this.create.bind(this));
-        const result = {
-          [url]: objectList,
-          has_more: res.body.has_more,
-        };
-        return result;
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-
-    static async delete(id) {
-      if (!id) {
-        throw new Error(`No id was passed into ${this._name} delete()`);
-      }
-
-      try {
-        return await api.del(`${this._url}/${id}`);
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-
-    static notImplemented(fnName) {
-      return Promise.reject(new NotImplementedError(fnName, this._url));
-    }
-
-    static wrapJSON(json) {
-      return { [this.key]: json };
-    }
-
-    static create(data) {
-      return new this(data);
-    }
-
-    static unwrapAll(data) {
-      if (Array.isArray(data)) return data;
-      return data[this._url];
-    }
-
     _validationErrors = null;
 
-    // suppressVAlidation is used when creating objects from API responses-
+    // suppressValidation is used when creating objects from API responses-
     // the API returns keys that we don't later on use for creating or editing.
     // We want access to read these, but we don't want to throw validation
     // errors; they're valid, but read-only. Note to self: maybe add a readonly
@@ -139,6 +85,105 @@ export default (api) =>
       }
     }
 
+    /**
+     * Retrieve a record from the API.
+     * @param {string} id
+     * @param {string} urlPrefix
+     * @returns {Base|Promise<never>}
+     */
+    static async retrieve(id, urlPrefix) {
+      try {
+        const url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
+        const res = await api.get(url);
+        return this.create(res.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a list of records from the API.
+     * @param {object} query
+     * @param {string} url
+     * @returns {object|Promise<never>}
+     */
+    static async all(query = {}, url) {
+      try {
+        url = url || this._url;
+        const res = await api.get(url, { query });
+        const objectList = this.unwrapAll(res.body).map(this.create.bind(this));
+        const result = {
+          [url]: objectList,
+          has_more: res.body.has_more,
+        };
+        return result;
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Deletes an object from the API.
+     * @param {string} id
+     * @returns {Promise|Promise<never>}
+     */
+    static async delete(id) {
+      if (!id) {
+        throw new Error(`No id was passed into ${this._name} delete()`);
+      }
+
+      try {
+        return await api.del(`${this._url}/${id}`);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Creates a new NotImplementedError.
+     * @param {string} fnName
+     * @returns {Promise<never>}
+     */
+    static notImplemented(fnName) {
+      return Promise.reject(new NotImplementedError(fnName, this._url));
+    }
+
+    /**
+     * Wraps JSON in a nested object.
+     * @param {object} json
+     * @returns {object}
+     */
+    static wrapJSON(json) {
+      return { [this.key]: json };
+    }
+
+    /**
+     * Creates a new object from the API.
+     * @param {*} data
+     * @returns {Base}
+     */
+    static create(data) {
+      return new this(data);
+    }
+
+    /**
+     * Unwraps the response from an `/all` call.
+     * @param {*} data
+     * @returns {Array|Base}
+     */
+    static unwrapAll(data) {
+      if (Array.isArray(data)) return data;
+      return data[this._url];
+    }
+
+    /**
+     * RPC - builds the details needed to make an HTTP request.
+     * @param {string} path
+     * @param {object|Array} body
+     * @param {string} pathPrefix
+     * @param {string} method
+     * @returns {*}
+     */
     async rpc(path, body, pathPrefix, method = 'post') {
       const slashPath = path ? `/${path}` : '';
       const prefix = pathPrefix || this.constructor._url;
@@ -166,6 +211,10 @@ export default (api) =>
       }
     }
 
+    /**
+     * Save (update) a record from the API.
+     * @returns {this|Promise<never>}
+     */
     async save() {
       try {
         this.validateProperties();
@@ -193,6 +242,9 @@ export default (api) =>
       }
     }
 
+    /**
+     * Retrieve a record from the API.
+     */
     async retrieve() {
       if (this.id) {
         const res = await this.constructor.retrieve(this.id);
@@ -206,6 +258,10 @@ export default (api) =>
       }
     }
 
+    /**
+     * Delete a record from the API.
+     * @returns {this}
+     */
     async delete() {
       if (this.id) {
         await this.constructor.delete(this.id);
@@ -215,6 +271,10 @@ export default (api) =>
       throw new Error('Cannot delete an object without an id.');
     }
 
+    /**
+     * Converts an object to JSON.
+     * @returns {object}
+     */
     toJSON() {
       const idKeys = this.constructor.jsonIdKeys;
 

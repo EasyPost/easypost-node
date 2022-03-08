@@ -28,10 +28,19 @@ export default (api) =>
       return this.notImplemented('delete');
     }
 
+    /**
+     * Override the wrapJSON function for this object.
+     * @param {object} json
+     * @returns
+     */
     static wrapJSON(json) {
       return json;
     }
 
+    /**
+     * Converts an object to JSON.
+     * @returns {object}
+     */
     toJSON() {
       if (this.shipments) {
         return {

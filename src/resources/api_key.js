@@ -15,14 +15,27 @@ export default (api) =>
 
     static _url = 'api_keys';
 
+    /**
+     * delete not implemented.
+     * @returns {Promise<never>}
+     */
     static delete() {
       return this.notImplemented('delete');
     }
 
+    /**
+     * save not implemented.
+     * @returns {Promise<never>}
+     */
     async save() {
       return this.constructor.notImplemented('save');
     }
 
+    /**
+     * Converts the key map of API keys.
+     * @param {*} data
+     * @returns {*}
+     */
     static convertKeyMap(data) {
       if (!data.keys) {
         return [];
@@ -37,6 +50,11 @@ export default (api) =>
       return res;
     }
 
+    /**
+     * Unwraps the response of the `/all` request
+     * @param {*} data
+     * @returns {this}
+     */
     static unwrapAll(data) {
       return this.convertKeyMap(data);
     }
