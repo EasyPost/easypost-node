@@ -9,7 +9,7 @@ export const propTypes = {
   updated_at: T.oneOfType([T.object, T.string]),
   description: T.string,
   quantity: T.number,
-  value: T.string, // decimal, so use as a string instead of a number
+  value: T.number,
   weight: T.number,
   hs_tariff_number: T.string,
   code: T.string,
