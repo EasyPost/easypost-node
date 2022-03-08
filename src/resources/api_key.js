@@ -10,7 +10,9 @@ export const propTypes = {
 export default (api) =>
   class ApiKey extends base(api) {
     static propTypes = propTypes;
+
     static _name = 'ApiKey';
+
     static _url = 'api_keys';
 
     static delete() {

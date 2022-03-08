@@ -22,8 +22,11 @@ export const propTypes = {
 export default (api) =>
   class Batch extends base(api) {
     static _name = 'Batch';
+
     static _url = 'batches';
+
     static key = 'batch';
+
     static propTypes = propTypes;
 
     static delete() {

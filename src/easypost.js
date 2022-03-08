@@ -190,15 +190,19 @@ export default class API {
   get(path, params, headers) {
     return this.request(path, METHODS.GET, params, headers);
   }
+
   post(path, params, headers) {
     return this.request(path, METHODS.POST, params, headers);
   }
+
   put(path, params, headers) {
     return this.request(path, METHODS.PUT, params, headers);
   }
+
   patch(path, params, headers) {
     return this.request(path, METHODS.PATCH, params, headers);
   }
+
   del(path, params, headers) {
     return this.request(path, METHODS.DELETE, params, headers);
   }

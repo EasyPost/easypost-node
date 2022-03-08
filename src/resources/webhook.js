@@ -12,7 +12,10 @@ export const propTypes = {
 export default (api) =>
   class Webhook extends base(api) {
     static _name = 'Webhook';
+
     static _url = 'webhooks';
+
     static key = 'webhook';
+
     static propTypes = propTypes;
   };

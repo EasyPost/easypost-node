@@ -26,8 +26,11 @@ export const propTypes = {
 export default (api) =>
   class Rate extends base(api) {
     static _name = 'Rate';
+
     static _url = 'rates';
+
     static key = 'rate';
+
     static propTypes = propTypes;
 
     static all() {

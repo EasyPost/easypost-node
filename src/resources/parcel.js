@@ -17,8 +17,11 @@ export const propTypes = {
 export default (api) =>
   class Parcel extends base(api) {
     static _name = 'Parcel';
+
     static _url = 'parcels';
+
     static key = 'parcel';
+
     static propTypes = propTypes;
 
     static all() {

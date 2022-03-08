@@ -23,8 +23,11 @@ export const propTypes = {
 export default (api) =>
   class CustomsInfo extends base(api) {
     static _name = 'CustomsInfo';
+
     static _url = 'customs_infos';
+
     static key = 'customs_info';
+
     static propTypes = propTypes;
 
     static all() {

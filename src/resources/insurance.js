@@ -27,8 +27,11 @@ export const propTypes = {
 export default (api) =>
   class Insurance extends base(api) {
     static _name = 'Insurance';
+
     static _url = 'insurances';
+
     static key = 'insurance';
+
     static propTypes = propTypes;
 
     static delete() {

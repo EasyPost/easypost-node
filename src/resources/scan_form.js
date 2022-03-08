@@ -19,7 +19,9 @@ export const propTypes = {
 export default (api) =>
   class ScanForm extends base(api) {
     static propTypes = propTypes;
+
     static _name = 'ScanForm';
+
     static _url = 'scan_forms';
 
     static delete() {

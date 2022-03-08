@@ -4,9 +4,13 @@ import NotImplementedError from '../errors/not_implemented';
 export default (api) =>
   class Base {
     static _url = null;
+
     static _name = null;
+
     static key = null;
+
     static propTypes = {};
+
     static jsonIdKeys = [];
 
     static async retrieve(id, urlPrefix) {
@@ -216,7 +220,8 @@ export default (api) =>
           if (idKeys.includes(key) && typeof this[key] !== 'object') {
             json[key] = { id: this[key] };
             return json;
-          } else if (idKeys.includes(key) && this[key].id) {
+          }
+          if (idKeys.includes(key) && this[key].id) {
             json[key] = { id: this[key].id };
             return json;
           }

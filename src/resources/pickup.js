@@ -29,8 +29,11 @@ export const propTypes = {
 export default (api) =>
   class Pickup extends base(api) {
     static propTypes = propTypes;
+
     static _name = 'Pickup';
+
     static _url = 'pickups';
+
     static key = 'pickup';
 
     static jsonIdKeys = ['address', 'shipment', 'batch'];

@@ -26,8 +26,11 @@ export const propTypes = {
 export default (api) =>
   class Order extends base(api) {
     static propTypes = propTypes;
+
     static _name = 'Order';
+
     static _url = 'orders';
+
     static key = 'order';
 
     static jsonIdKeys = ['to_address', 'from_address', 'return_address', 'buyer_address'];

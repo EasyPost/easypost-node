@@ -13,7 +13,9 @@ export const propTypes = {
 export default (api) =>
   class CarrierType extends base(api) {
     static propTypes = propTypes;
+
     static _name = 'CarrierType';
+
     static _url = 'carrier_types';
 
     static retrieve() {

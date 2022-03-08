@@ -21,8 +21,11 @@ export const propTypes = {
 export default (api) =>
   class User extends base(api) {
     static _name = 'User';
+
     static _url = 'users';
+
     static key = 'user';
+
     static propTypes = propTypes;
 
     static async retrieve(id, urlPrefix) {
