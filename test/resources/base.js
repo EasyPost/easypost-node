@@ -54,11 +54,11 @@ describe('Base Resource', () => {
         Base._url = url;
 
         return Base.all().then(
-          (bs) => {
+          (b) => {
             expect(stub.get).to.have.been.calledOnce;
             expect(stub.get).to.have.been.calledWith(Base._url, { query: {} });
-            expect(bs.has_more).to.equal(true);
-            bs.map((b) => expect(b).to.be.an.instanceOf(Base));
+            expect(b.base).to.be.an('array');
+            expect(b.has_more).to.equal(true);
           },
           (err) => {
             throw new Error(err);
