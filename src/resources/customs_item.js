@@ -27,14 +27,6 @@ export default (api) =>
 
     static key = 'customs_item';
 
-    static all() {
-      return this.notImplemented('all');
-    }
-
-    static delete() {
-      return this.notImplemented('delete');
-    }
-
     constructor(data) {
       let { value } = data;
 
@@ -45,11 +37,19 @@ export default (api) =>
       super({ ...data, value });
     }
 
-    async save() {
-      if (this.value && typeof this.value !== 'string') {
-        this.value = this.value.toString();
-      }
+    /**
+     * all not implemented.
+     * @returns {Promise<never>}
+     */
+    static all() {
+      return this.notImplemented('all');
+    }
 
-      return super.save();
+    /**
+     * delete not implemented.
+     * @returns {Promise<never>}
+     */
+    static delete() {
+      return this.notImplemented('delete');
     }
   };

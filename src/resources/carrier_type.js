@@ -18,14 +18,26 @@ export default (api) =>
 
     static _url = 'carrier_types';
 
+    /**
+     * retrieve not implemented.
+     * @returns {Promise<never>}
+     */
     static retrieve() {
       return super.notImplemented('retrieve');
     }
 
+    /**
+     * delete not implemented.
+     * @returns {Promise<never>}
+     */
     static delete() {
       return this.notImplemented('delete');
     }
 
+    /**
+     * save not implemented.
+     * @returns {Promise<never>}
+     */
     async save() {
       return this.constructor.notImplemented('save');
     }

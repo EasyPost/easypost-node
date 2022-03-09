@@ -2,6 +2,7 @@ import T from 'proptypes';
 import base from './base';
 
 export const propTypes = {
+  id: T.string,
   background_color: T.string,
   color: T.string,
   logo: T.string,

@@ -29,10 +29,19 @@ export default (api) =>
 
     static propTypes = propTypes;
 
+    /**
+     * delete not implemented.
+     * @returns {Promise<never>}
+     */
     static delete() {
       return this.notImplemented('delete');
     }
 
+    /**
+     * Add a shipment to a batch.
+     * @param {string} shipmentId
+     * @returns {this}
+     */
     addShipment(shipmentId) {
       this.verifyParameters(
         {
@@ -45,6 +54,11 @@ export default (api) =>
       return this.rpc('add_shipments', { shipments: [{ id: shipmentId }] });
     }
 
+    /**
+     * Add shipments to a batch.
+     * @param {Array} shipmentIds
+     * @returns {this}
+     */
     addShipments(shipmentIds) {
       this.verifyParameters(
         {
@@ -59,6 +73,11 @@ export default (api) =>
       });
     }
 
+    /**
+     * Remove a shipment from a batch.
+     * @param {string} shipmentId
+     * @returns {this}
+     */
     removeShipment(shipmentId) {
       this.verifyParameters(
         {
@@ -71,6 +90,11 @@ export default (api) =>
       return this.rpc('remove_shipments', { shipments: [{ id: shipmentId }] });
     }
 
+    /**
+     * Removes shipments from a batch.
+     * @param {Array} shipmentIds
+     * @returns
+     */
     removeShipments(shipmentIds) {
       this.verifyParameters(
         {
@@ -85,6 +109,11 @@ export default (api) =>
       });
     }
 
+    /**
+     * Convert the label of a batch.
+     * @param {string} fileFormat
+     * @returns {this}
+     */
     generateLabel(fileFormat = DEFAULT_LABEL_FORMAT) {
       this.verifyParameters(
         {
@@ -97,6 +126,10 @@ export default (api) =>
       return this.rpc('label', { file_format: fileFormat });
     }
 
+    /**
+     * Create a scanform for a batch.
+     * @returns {this}
+     */
     createScanForm() {
       this.verifyParameters({
         this: ['id'],
@@ -105,6 +138,10 @@ export default (api) =>
       return this.rpc('scan_form');
     }
 
+    /**
+     * Buy a batch.
+     * @returns {this}
+     */
     buy() {
       this.verifyParameters({
         this: ['id', 'shipments'],

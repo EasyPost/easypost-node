@@ -26,10 +26,18 @@ export default (api) =>
 
     static propTypes = propTypes;
 
+    /**
+     * delete not implemented
+     * @returns {Promise<never>}
+     */
     static delete() {
       return this.notImplemented('delete');
     }
 
+    /**
+     * save not implemented
+     * @returns {Promise<never>}
+     */
     static save() {
       return this.notImplemented('save');
     }
