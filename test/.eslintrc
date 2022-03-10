@@ -33,7 +33,6 @@
   },
 
   "globals": {
-    "expect": true,
-    "sinon": true
+    "expect": true
   }
 }

@@ -17,6 +17,9 @@
 - Add `retrieveMe()` Convenience Function that allow users to retrieve without specifying an ID.
 - Removed `enable()` and `disable()` methods in the apiKey class. Please use this functionality through EasyPost website
 - Removed `options.useCookie` from the parameter since it's deprecated in v4.0. Please use `options.useProxy` instead.
+- Removes `add_shipment` and `remove_shipment` from the Batch object which could lead to confusion as the API documentation only describes adding/removing as an array. If you need to add or remove a single shipment from a batch, use the already existing `add_shipments` and `remove_shipments` and pass your single shipment as an array.
+- The responses from requests to the `/all` endpoint are no longer unwrapped and instead now follow the documentation where records will be wrapped in their respective object key
+- Fixes `delivery_date` property typo on Rate object
 - Fixes `customs_item.value` to ve a `number` instead of a `string`
 
 ## 4.0.0 2021-10-06

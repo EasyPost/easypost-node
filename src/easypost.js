@@ -6,6 +6,7 @@ import pkg from '../package.json';
 import Address, { propTypes as addressPropTypes } from './resources/address';
 import ApiKey, { propTypes as apiKeyPropTypes } from './resources/api_key';
 import Batch, { propTypes as batchPropTypes } from './resources/batch';
+import Brand, { propTypes as brandPropTypes } from './resources/brand';
 import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrier_account';
 import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrier_type';
 import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customs_info';
@@ -60,6 +61,7 @@ export const RESOURCES = {
   Address,
   ApiKey,
   Batch,
+  Brand,
   CarrierAccount,
   CarrierType,
   CustomsInfo,
@@ -82,6 +84,7 @@ export const PROP_TYPES = {
   addressPropTypes,
   apiKeyPropTypes,
   batchPropTypes,
+  brandPropTypes,
   carrierAccountPropTypes,
   carrierTypePropTypes,
   customsInfoPropTypes,

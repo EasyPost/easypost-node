@@ -38,23 +38,6 @@ export default (api) =>
     }
 
     /**
-     * Add a shipment to a batch.
-     * @param {string} shipmentId
-     * @returns {this}
-     */
-    addShipment(shipmentId) {
-      this.verifyParameters(
-        {
-          this: ['id'],
-          args: ['shipmentId'],
-        },
-        shipmentId,
-      );
-
-      return this.rpc('add_shipments', { shipments: [{ id: shipmentId }] });
-    }
-
-    /**
      * Add shipments to a batch.
      * @param {Array} shipmentIds
      * @returns {this}
@@ -71,23 +54,6 @@ export default (api) =>
       return this.rpc('add_shipments', {
         shipments: shipmentIds.map((s) => ({ id: s })),
       });
-    }
-
-    /**
-     * Remove a shipment from a batch.
-     * @param {string} shipmentId
-     * @returns {this}
-     */
-    removeShipment(shipmentId) {
-      this.verifyParameters(
-        {
-          this: ['id'],
-          args: ['shipmentId'],
-        },
-        shipmentId,
-      );
-
-      return this.rpc('remove_shipments', { shipments: [{ id: shipmentId }] });
     }
 
     /**

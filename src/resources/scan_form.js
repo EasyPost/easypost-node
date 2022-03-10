@@ -38,7 +38,7 @@ export default (api) =>
     }
 
     /**
-     * Converts an object to JSON.
+     * Override the toJSON function for this object.
      * @returns {object}
      */
     toJSON() {

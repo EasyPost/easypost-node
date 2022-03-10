@@ -181,7 +181,10 @@ Tests will be transpiled on the fly.
 
 ```bash
 # Run tests
-npm test
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... npm test
+
+# Run tests with coverage
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... npm coverage
 ```
 
 ### Linting

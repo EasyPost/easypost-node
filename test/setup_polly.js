@@ -1,6 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { resolve } from 'path';
 import FSPersister from '@pollyjs/persister-fs';
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
-import { resolve } from 'path';
 import { Polly, setupMocha as setupPolly } from '@pollyjs/core';
 
 Polly.register(FSPersister);
@@ -15,7 +16,6 @@ function startPolly() {
         recordingsDir: resolve(__dirname, './cassettes'),
       },
     },
-    recordIfMissing: true,
     matchRequestsBy: {
       headers: false,
     },
