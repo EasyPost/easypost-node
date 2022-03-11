@@ -1354,7 +1354,7 @@ export declare interface IOptions {
    *  - UPS - Need dry_ice_weight to be set
    *  - UPS MailInnovations - Need dry_ice_weight to be set
    */
-  dry_ice_medical: boolean; // TODO docs say string but description indicates boolean value
+  dry_ice_medical: boolean;
 
   /**
    * Weight of the dry ice in ounces.
