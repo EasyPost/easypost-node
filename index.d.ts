@@ -1211,9 +1211,9 @@ export declare interface IShipment extends IObjectWithId<"Shipment">, IDatedObje
   batch_id: string;
 
   /**
-   * The current state of the associated BatchShipment
+   * The current status of the associated BatchShipment
    */
-  batch_status: TBatchStatus; // TODO state or status? (Description says state but property says status)
+  batch_status: TBatchStatus;
 
   /**
    * The current message of the associated BatchShipment
