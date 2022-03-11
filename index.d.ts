@@ -2263,6 +2263,9 @@ export declare interface IShipmentCreateParameters {
    * optional array of ids that begin with "ca_"
    */
   carrier_accounts?: string[];
+
+  customs_info?: ICustomsInfo;
+  options?: IOptions;
 }
 
 export declare class Shipment implements IShipment {
