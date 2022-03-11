@@ -725,7 +725,7 @@ export declare interface IBatch extends IObjectWithId<"Batch">, IDatedObject {
   /**
    * A map of BatchShipment statuses to the count of BatchShipments with that status. Valid statuses are "postage_purchased", "postage_purchase_failed", "queued_for_purchase", and "creation_failed"
    */
-  status: TBatchStatuses; // TODO
+  status: TBatchStatuses;
 
   /**
    * The label image url
@@ -1855,7 +1855,7 @@ export declare interface IScanForm extends IObjectWithId<"ScanForm">, IDatedObje
 }
 
 /**
- * @todo PostageLabel hasn't be documented - https://www.easypost.com/docs/api/node
+ * PostageLabel Object
  */
 export declare interface IPostageLabel extends IObjectWithId<"PostageLabel">, IDatedObject {
   date_advance: number;
@@ -1887,8 +1887,7 @@ export declare interface IPostageLabel extends IObjectWithId<"PostageLabel">, ID
  * A 200 is preferred, but any 2XX status will indicate to our system that the Webhook request was successful. 
  * Endpoints that return a large volume and rate of failures over a period of time will get automatically disabled by the system; a disabled Webhook can be re-enabled using the Webhook update endpoint.
  * 
- * @todo [Webhook Object] anchor links to Report Object - need to fix
- * @see https://www.easypost.com/docs/api/node#webhooks
+ * @see https://www.easypost.com/docs/api/node#webhook-object
  */
 export declare interface IWebhook extends IObjectWithId<"Webhook"> {
   /**
