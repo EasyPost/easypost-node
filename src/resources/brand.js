@@ -3,6 +3,7 @@ import base from './base';
 
 export const propTypes = {
   id: T.string,
+  object: T.string,
   background_color: T.string,
   color: T.string,
   logo: T.string,
@@ -14,4 +15,13 @@ export const propTypes = {
   theme: T.string,
 };
 
-export default (api) => class Brand extends base(api) {};
+export default (api) =>
+  class Brand extends base(api) {
+    static propTypes = propTypes;
+
+    static _name = 'Brand';
+
+    static _url = 'brand';
+
+    static key = 'brand';
+  };

@@ -152,7 +152,7 @@ export default (api) =>
 
     /**
      * Insure a shipment.
-     * @param {number} amount
+     * @param {number|string} amount
      * @returns {this}
      */
     async insure(amount) {

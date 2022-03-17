@@ -27,16 +27,6 @@ export default (api) =>
 
     static key = 'customs_item';
 
-    constructor(data) {
-      let { value } = data;
-
-      if (value && typeof value !== 'string') {
-        value = value.toString();
-      }
-
-      super({ ...data, value });
-    }
-
     /**
      * all not implemented.
      * @returns {Promise<never>}

@@ -1,0 +1,197 @@
+export default class Fixture {
+  // We keep the page_size of retrieving `all` records small so cassettes stay small
+  static pageSize() {
+    return 5;
+  }
+
+  // This is the carrier account ID for the default USPS account that comes by default. All tests should use this carrier account
+  static uspsCarrierAccountId() {
+    return 'ca_5ba7ca3632c54adeb17ad4bcac13c890';
+  }
+
+  static childUserId() {
+    return 'user_440324784cde4116a7df4372e7b483aa';
+  }
+
+  static usps() {
+    return 'USPS';
+  }
+
+  static uspsService() {
+    return 'First';
+  }
+
+  static pickupService() {
+    return 'NextDay';
+  }
+
+  static webhookUrl() {
+    return 'http://example.com';
+  }
+
+  // If ever these need to change due to re-recording cassettes, simply increment this date by 1
+  static reportStartDate() {
+    return '2022-03-07';
+  }
+
+  // If ever these need to change due to re-recording cassettes, simply increment this date by 1
+  static reportEndDate() {
+    return '2022-03-09';
+  }
+
+  static basicAddress() {
+    return {
+      name: 'Jack Sparrow',
+      company: 'EasyPost',
+      street1: '388 Townsend St',
+      street2: 'Apt 20',
+      city: 'San Francisco',
+      state: 'CA',
+      zip: '94107',
+      phone: '5555555555',
+    };
+  }
+
+  static incorrectAddressToVerify() {
+    return {
+      verify: [true],
+      street1: '417 montgomery streat',
+      street2: 'FL 5',
+      city: 'San Francisco',
+      state: 'CA',
+      zip: '94104',
+      country: 'US',
+      company: 'EasyPost',
+      phone: '415-123-4567',
+    };
+  }
+
+  static pickupAddress() {
+    return {
+      name: 'Dr. Steve Brule',
+      street1: '179 N Harbor Dr',
+      city: 'Redondo Beach',
+      state: 'CA',
+      zip: '90277',
+      country: 'US',
+      phone: '3331114444',
+    };
+  }
+
+  static basicParcel() {
+    return {
+      length: 10,
+      width: 8,
+      height: 4,
+      weight: 15.4,
+    };
+  }
+
+  static basicCustomsItem() {
+    return {
+      description: 'Sweet shirts',
+      quantity: 2,
+      weight: 11,
+      value: 23.25,
+      hs_tariff_number: '654321',
+      origin_country: 'US',
+    };
+  }
+
+  static basicCustomsInfo() {
+    return {
+      eel_pfc: 'NOEEI 30.37(a)',
+      customs_certify: true,
+      customs_signer: 'Steve Brule',
+      contents_type: 'merchandise',
+      contents_explanation: '',
+      restriction_type: 'none',
+      non_delivery_option: 'return',
+      customs_items: [this.basicCustomsItem()],
+    };
+  }
+
+  static taxIdentifier() {
+    return {
+      entity: 'SENDER',
+      tax_id_type: 'IOSS',
+      tax_id: '12345',
+      issuing_country: 'GB',
+    };
+  }
+
+  static basicShipment() {
+    return {
+      to_address: this.basicAddress(),
+      from_address: this.basicAddress(),
+      parcel: this.basicParcel(),
+    };
+  }
+
+  static fullShipment() {
+    return {
+      to_address: this.basicAddress(),
+      from_address: this.basicAddress(),
+      parcel: this.basicParcel(),
+      customs_info: this.basicCustomsInfo(),
+      options: {
+        label_format: 'PNG', // Must be PNG so we can convert to ZPL later
+        invoice_number: '123',
+      },
+      reference: '123',
+    };
+  }
+
+  static oneCallBuyShipment() {
+    return {
+      to_address: this.basicAddress(),
+      from_address: this.basicAddress(),
+      parcel: this.basicParcel(),
+      service: this.uspsService(),
+      carrier_accounts: [this.uspsCarrierAccountId()],
+      carrier: this.usps(),
+    };
+  }
+
+  // This fixture will require you to add a `shipment` key with a Shipment object from a test.
+  // If you need to re-record cassettes, simply iterate the dates below and ensure they're one day in the future,
+  // USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
+  static basicPickup() {
+    return {
+      address: this.basicAddress(),
+      min_datetime: '2022-03-17',
+      max_datetime: '2022-03-18',
+      instructions: 'Pickup at front door',
+    };
+  }
+
+  static basicCarrierAccount() {
+    return {
+      type: 'UpsAccount',
+      credentials: {
+        account_number: 'A1A1A1',
+        user_id: 'USERID',
+        password: 'PASSWORD',
+        access_license_number: 'ALN',
+      },
+    };
+  }
+
+  // This fixture will require you to append a `tracking_code` key with the shipment's tracking code
+  static basicInsurance() {
+    return {
+      from_address: this.basicAddress(),
+      to_address: this.basicAddress(),
+      carrier: this.usps(),
+      amount: '100',
+    };
+  }
+
+  static basicOrder() {
+    return {
+      from_address: this.basicAddress(),
+      to_address: this.basicAddress(),
+      shipments: [this.basicShipment()],
+    };
+  }
+}

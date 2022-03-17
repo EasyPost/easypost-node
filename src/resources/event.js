@@ -38,7 +38,7 @@ export default (api) =>
      * save not implemented
      * @returns {Promise<never>}
      */
-    static save() {
-      return this.notImplemented('save');
+    async save() {
+      return this.constructor.notImplemented('save');
     }
   };

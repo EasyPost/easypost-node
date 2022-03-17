@@ -15,21 +15,21 @@ export default (api) =>
 
     _validationErrors = null;
 
-    // suppressValidation is used when creating objects from API responses-
-    // the API returns keys that we don't later on use for creating or editing.
-    // We want access to read these, but we don't want to throw validation
-    // errors; they're valid, but read-only. Note to self: maybe add a readonly
-    // type that uses getters and setters?
     constructor(data = {}) {
       this.mapProps(data);
     }
 
+    /**
+     *
+     * @param {bool} throwOnFailure
+     * @returns {object}
+     */
     validateProperties(throwOnFailure = true) {
       this._validationErrors = null;
       const props = this.toJSON();
 
       // Loop through proptypes and match them against props; this will catch
-      // issues such as isRequred or type mismatches.
+      // issues such as isRequired or type mismatches.
       const errors = Object.keys(this.constructor.propTypes).reduce((errorHash, key) => {
         const err = this.constructor.propTypes[key](
           props,
@@ -58,15 +58,23 @@ export default (api) =>
       return errors;
     }
 
-    // Map data props to `this`, so that it can be used easily. Someday, we'll
-    // have cross browser proxy support and do neat getter/setter things. For
-    // now, just map it on the instance.
+    /**
+     * Map data props to `this`, so that it can be used easily. Someday, we'll
+     * have cross browser proxy support and do neat getter/setter things. For
+     * now, just map it on the instance.
+     * @param {*} data
+     */
     mapProps(data) {
       Object.keys(data).forEach((key) => {
         this[key] = data[key];
       });
     }
 
+    /**
+     * Verifies that parameters are set when required.
+     * @param {*} parameters
+     * @param  {...any} args
+     */
     verifyParameters(parameters = {}, ...args) {
       if (parameters.this) {
         parameters.this.forEach((p) => {
@@ -112,6 +120,13 @@ export default (api) =>
         url = url || this._url;
         const res = await api.get(url, { query });
         const objectList = this.unwrapAll(res.body).map(this.create.bind(this));
+
+        // Override the key used for reports to be the generic `reports` instead
+        // of including the report type in the object key below (eg: reports/shipment).
+        if (url.includes('reports')) {
+          url = 'reports';
+        }
+
         const result = {
           [url]: objectList,
           has_more: res.body.has_more,
@@ -200,6 +215,7 @@ export default (api) =>
           res = await api[method](url);
         }
 
+        // When hitting the `/smartrate` endpoint, return the results directly
         if (path === 'smartrate') {
           return res.body.result || [];
         }
@@ -212,7 +228,7 @@ export default (api) =>
     }
 
     /**
-     * Save (update) a record from the API.
+     * Save (create or update) a record.
      * @returns {this|Promise<never>}
      */
     async save() {
@@ -280,6 +296,8 @@ export default (api) =>
 
       return Object.keys(this.constructor.propTypes).reduce((json, key) => {
         if (this[key]) {
+          // If providing an object as a parameter to another object, only pass along
+          // the ID so the API will use the object reference correctly.
           if (idKeys.includes(key) && typeof this[key] !== 'object') {
             json[key] = { id: this[key] };
             return json;

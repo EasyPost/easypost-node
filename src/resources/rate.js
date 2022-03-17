@@ -16,7 +16,7 @@ export const propTypes = {
   list_rate: T.string,
   list_currency: T.string,
   delivery_days: T.integer,
-  deliver_date: T.string,
+  delivery_date: T.string,
   delivery_date_guaranteed: T.string,
   est_delivery_days: T.integer, // deprecated
   created_at: T.oneOfType([T.object, T.string]),
@@ -53,7 +53,7 @@ export default (api) =>
      * save not implemented
      * @returns {Promise<never>}
      */
-    static save() {
-      return this.notImplemented('save');
+    async save() {
+      return this.constructor.notImplemented('save');
     }
   };

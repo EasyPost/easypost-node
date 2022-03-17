@@ -41,4 +41,22 @@ export default (api) =>
     async save() {
       return this.constructor.notImplemented('save');
     }
+
+    /**
+     * Retrieve a list of records from the API (overrides default behavior to unwrap response).
+     * @param {object} query
+     * @param {string} url
+     * @returns {Array|Promise<never>}
+     */
+    static async all(query = {}, url) {
+      try {
+        // eslint-disable-next-line no-param-reassign
+        url = url || this._url;
+        const response = await api.get(url, { query });
+        const carrierList = this.unwrapAll(response.body).map(this.create.bind(this));
+        return carrierList;
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   };
