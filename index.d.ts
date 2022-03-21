@@ -16,12 +16,12 @@ export declare interface IFieldError {
 
 export declare interface IDatedObject {
   /**
-   * Date ISO String 
+   * Date ISO String
    */
   created_at: string;
 
   /**
-   * Date ISO String 
+   * Date ISO String
    */
   updated_at: string;
 }
@@ -39,148 +39,1043 @@ export declare interface IObjectWithId<ObjectName> extends IBaseObject<ObjectNam
   /**
    * Set based on which api-key you used, either "test" or "production"
    */
-  mode: "test" | "production";
+  mode: 'test' | 'production';
 }
 
 /**
  * @see https://www.easypost.com/docs/api/node#carrier-tracking-strings
  */
-export declare type Carrier = "AmazonMws" | "APC" | "Aramex" | "ArrowXL" | "Asendia" | "AustraliaPost" | "AxlehireV3" |
-  "BorderGuru" | "Cainiao" | "CanadaPost" | "Canpar" | "ColumbusLastMile" | "Chronopost" | "ColisPrive" | "Colissimo" |
-  "CouriersPlease" | "DaiPost" | "Deliv" | "DeutschePost" | "DeutschePostUK" | "DHLEcommerceAsia" | "DhlEcs" |
-  "DHLExpress" | "DHLFreight" | "DHLGermany" | "Dicom" | "DPD" | "DPDUK" | "ChinaEMS" | "Estafeta" | "Estes" |
-  "Fastway" | "FedEx" | "FedExCrossBorder" | "FedExMailview" | "FedExSameDayCity" | "FedexSmartPost" | "FirstMile" |
-  "Globegistics" | "GSO" | "Hermes" | "HongKongPost" | "InterlinkExpress" | "JancoFreight" | "JPPost" | "KuronekoYamato" |
-  "LaPoste" | "LaserShipV2" | "Liefery" | "LoomisExpress" | "LSO" | "Newgistics" | "OnTrac" | "OnTracDirectPost" |
-  "OsmWorldwide" | "Parcelforce" | "Passport" | "Pilot" | "PostNL" | "Posten" | "PostNord" | "Purolator" | "RoyalMail" |
-  "RRDonnelley" | "Seko" | "OmniParcel" | "SingaporePost" | "SpeeDee" | "SprintShip" | "StarTrack" | "Toll" | "TForce" |
-  "UDS" | "Ukrposhta" | "UPS" | "UPSIparcel" | "UPSMailInnovations" | "USPS" | "Veho" | "Yanwen" | "Yodel";
+export declare type Carrier =
+  | 'AmazonMws'
+  | 'APC'
+  | 'Aramex'
+  | 'ArrowXL'
+  | 'Asendia'
+  | 'AustraliaPost'
+  | 'AxlehireV3'
+  | 'BorderGuru'
+  | 'Cainiao'
+  | 'CanadaPost'
+  | 'Canpar'
+  | 'ColumbusLastMile'
+  | 'Chronopost'
+  | 'ColisPrive'
+  | 'Colissimo'
+  | 'CouriersPlease'
+  | 'DaiPost'
+  | 'Deliv'
+  | 'DeutschePost'
+  | 'DeutschePostUK'
+  | 'DHLEcommerceAsia'
+  | 'DhlEcs'
+  | 'DHLExpress'
+  | 'DHLFreight'
+  | 'DHLGermany'
+  | 'Dicom'
+  | 'DPD'
+  | 'DPDUK'
+  | 'ChinaEMS'
+  | 'Estafeta'
+  | 'Estes'
+  | 'Fastway'
+  | 'FedEx'
+  | 'FedExCrossBorder'
+  | 'FedExMailview'
+  | 'FedExSameDayCity'
+  | 'FedexSmartPost'
+  | 'FirstMile'
+  | 'Globegistics'
+  | 'GSO'
+  | 'Hermes'
+  | 'HongKongPost'
+  | 'InterlinkExpress'
+  | 'JancoFreight'
+  | 'JPPost'
+  | 'KuronekoYamato'
+  | 'LaPoste'
+  | 'LaserShipV2'
+  | 'Liefery'
+  | 'LoomisExpress'
+  | 'LSO'
+  | 'Newgistics'
+  | 'OnTrac'
+  | 'OnTracDirectPost'
+  | 'OsmWorldwide'
+  | 'Parcelforce'
+  | 'Passport'
+  | 'Pilot'
+  | 'PostNL'
+  | 'Posten'
+  | 'PostNord'
+  | 'Purolator'
+  | 'RoyalMail'
+  | 'RRDonnelley'
+  | 'Seko'
+  | 'OmniParcel'
+  | 'SingaporePost'
+  | 'SpeeDee'
+  | 'SprintShip'
+  | 'StarTrack'
+  | 'Toll'
+  | 'TForce'
+  | 'UDS'
+  | 'Ukrposhta'
+  | 'UPS'
+  | 'UPSIparcel'
+  | 'UPSMailInnovations'
+  | 'USPS'
+  | 'Veho'
+  | 'Yanwen'
+  | 'Yodel';
 
-export declare type ServiceLevelAmazonMws = "UPS Rates" | "USPS Rates" | "FedEx Rates" | "UPS Labels" | "USPS Labels" | "FedEx Labels" | "UPS Tracking" | "USPS Tracking" | "FedEx Tracking";
-export declare type ServiceLevelAPC = "parcelConnectBookService" | "parcelConnectExpeditedDDP" | "parcelConnectExpeditedDDU" | "parcelConnectPriorityDDP" | "parcelConnectPriorityDDPDelcon" | "parcelConnectPriorityDDU" | "parcelConnectPriorityDDUDelcon" | "parcelConnectPriorityDDUPQW" | "parcelConnectStandardDDU" | "parcelConnectStandardDDUPQW" | "parcelConnectPacketDDU";
-export declare type ServiceLevelAramex = "Domestic" | "PriorityDocumentExpress" | "PriorityParcelExpress" | "PriorityLetterExpress" | "DeferredDocumentExpress" | "DeferredParcelExpress" | "GroundDocumentExpress" | "GroundParcelExpress" | "EconomyParcelExpress";
-export declare type ServiceLevelArrowXL = "48HRBrownInstall" | "48HRBrownInstallRemove" | "48HROther" | "48HROtherRemove" | "48HRWhiteInstall" | "48HRWhiteInstallRemove" | "48HRWhiteRemove" | "ExpressBrownInstall" | "ExpressBrownInstallRemove" | "ExpressOther" | "ExpressOtherRemove" | "ExpressWhiteInstall" | "ExpressWhiteInstallRemove" | "ExpressWhiteRemove" | "StandardBrownInstall" | "StandardBrownInstallRemove" | "StandardBrownRemove" | "StandardOther" | "StandardOtherAssemble" | "StandardOtherNoUnpack" | "StandardOtherRemove" | "StandardOtherUnpack" | "StandardOtherUnpackLeavePackaging" | "StandardReturns" | "StandardWhiteInstall" | "StandardWhiteInstallRemove" | "StandardWhiteRemove";
-export declare type ServiceLevelAsendia = "PMI" | "ePacket" | "IPA" | "ISAL";
-export declare type ServiceLevelAustraliaPost = "ExpressPost" | "ExpressPostSignature" | "ParcelPost" | "ParcelPostSignature" | "ParcelPostExtra" | "ParcelPostWinePlusSignature";
-export declare type ServiceLevelAxlehireV3 = "AxleHireDelivery";
-export declare type ServiceLevelBorderGuru = "ECONOMY" | "PRIORITY" | "EXPEDITED";
-export declare type ServiceLevelCanadaPost = "RegularParcel" | "ExpeditedParcel" | "Xpresspost" | "XpresspostCertified" | "Priority" | "LibraryBooks" | "ExpeditedParcelUSA" | "PriorityWorldwideEnvelopeUSA" | "PriorityWorldwidePakUSA" | "PriorityWorldwideParcelUSA" | "SmallPacketUSAAir" | "TrackedPacketUSA" | "TrackedPacketUSALVM" | "XpresspostUSA" | "XpresspostInternational" | "InternationalParcelAir" | "InternationalParcelSurface" | "PriorityWorldwideEnvelopeIntl" | "PriorityWorldwidePakIntl" | "PriorityWorldwideParcelIntl" | "SmallPacketInternationalAir" | "SmallPacketInternationalSurface" | "TrackedPacketInternational";
-export declare type ServiceLevelCanpar = "Ground" | "SelectLetter" | "SelectPak" | "Select" | "OvernightLetter" | "OvernightPak" | "Overnight" | "SelectUSA" | "USAPak" | "USALetter" | "USA" | "International";
-export declare type ServiceLevelColumbusLastMile = "DISTRIBUTION" | "Same Day";
-export declare type ServiceLevelColisPrive = "Parcel";
-export declare type ServiceLevelCouriersPlease = "DomesticPrioritySignature" | "DomesticPriority" | "DomesticOffPeakSignature" | "DomesticOffPeak" | "GoldDomesticSignature" | "GoldDomestic" | "AustralianCityExpressSignature" | "AustralianCityExpress" | "DomesticSaverSignature" | "DomesticSaver" | "RoadExpress" | "5KgSatchel" | "3KgSatchel" | "1KgSatchel" | "5KgSatchelATL" | "3KgSatchelATL" | "1KgSatchelATL" | "500GramSatchel" | "500GramSatchelATL" | "25KgParcel" | "10KgParcel" | "5KgParcel" | "3KgParcel" | "1KgParcel" | "500GramParcel" | "500GramParcelATL" | "ExpressInternationalPriority" | "InternationalSaver" | "InternationalExpressImport" | "ExpressInternationalPriority" | "InternationalExpress";
-export declare type ServiceLevelDaiPost = "DomesticTracked" | "InternationalEconomy" | "InternationalStandard" | "InternationalExpress";
-export declare type ServiceLevelDeliv = "Scheduled" | "OnDemand";
-export declare type ServiceLevelDeutschePost = "PacketPlus";
-export declare type ServiceLevelDeutschePostUK = "PriorityPacketPlus" | "PriorityPacket" | "PriorityPacketTracked" | "BusinessMailRegistered" | "StandardPacket" | "BusinessMailStandard";
-export declare type ServiceLevelDHLEcommerceAsia = "Packet" | "PacketPlus" | "ParcelDirect" | "ParcelDirectExpedited";
-export declare type ServiceLevelDhlEcs = "DHLParcelExpedited" | "DHLParcelExpeditedMax" | "DHLParcelGround" | "DHLBPMExpedited" | "DHLBPMGround" | "DHLParcelInternationalDirect" | "DHLParcelInternationalStandard" | "DHLPacketInternational" | "DHLParcelInternationalDirectPriority" | "DHLParcelInternationalDirectStandard";
-export declare type ServiceLevelDHLExpress = "BreakBulkEconomy" | "BreakBulkExpress" | "DomesticEconomySelect" | "DomesticExpress" | "DomesticExpress1030" | "DomesticExpress1200" | "EconomySelect" | "EconomySelectNonDoc" | "EuroPack" | "EuropackNonDoc" | "Express1030" | "Express1030NonDoc" | "Express1200NonDoc" | "Express1200" | "Express900" | "Express900NonDoc" | "ExpressEasy" | "ExpressEasyNonDoc" | "ExpressEnvelope" | "ExpressWorldwide" | "ExpressWorldwideB2C" | "ExpressWorldwideB2CNonDoc" | "ExpressWorldwideECX" | "ExpressWorldwideNonDoc" | "FreightWorldwide" | "GlobalmailBusiness" | "JetLine" | "JumboBox" | "LogisticsServices" | "SameDay" | "SecureLine" | "SprintLine";
-export declare type ServiceLevelDicom = "Ground";
-export declare type ServiceLevelDPD = "DPDCLASSIC" | "DPD8:30" | "DPD10:00" | "DPD12:00" | "DPD18:00" | "DPDEXPRESS" | "DPDPARCELLETTER" | "DPDPARCELLETTERPLUS" | "DPDINTERNATIONALMAIL";
-export declare type ServiceLevelDPDUK = "AirExpressInternationalAir" | "AirClassicInternationalAir" | "ParcelSunday" | "FreightParcelSunday" | "PalletSunday" | "PalletDpdClassic" | "ExpresspakDpdClassic" | "ExpresspakSunday" | "ParcelDpdClassic" | "ParcelDpdTwoDay" | "ParcelDpdNextDay" | "ParcelDpd12" | "ParcelDpd10" | "ParcelDpd10" | "ParcelReturnToShop" | "ParcelSaturday" | "ParcelSaturday12" | "ParcelSaturday10" | "ParcelSaturday10" | "ParcelSunday12" | "FreightParcelDpdClassic" | "FreightParcelSunday12" | "ExpresspakDpdNextDay" | "ExpresspakDpd12" | "ExpresspakDpd10" | "ExpresspakDpd10" | "ExpresspakSaturday" | "ExpresspakSaturday12" | "ExpresspakSaturday10" | "ExpresspakSaturday10" | "ExpresspakSunday12" | "PalletSunday12" | "PalletDpdTwoDay" | "PalletDpdNextDay" | "PalletDpd12" | "PalletDpd10" | "PalletSaturday" | "PalletSaturday12" | "PalletSaturday10" | "FreightParcelDpdTwoDay" | "FreightParcelDpdNextDay" | "FreightParcelDpd12" | "FreightParcelDpd10" | "FreightParcelSaturday" | "FreightParcelSaturday12" | "FreightParcelSaturday10";
-export declare type ServiceLevelEstafeta = "NextDayBy930" | "NextDayBy1130" | "NextDay" | "Ground" | "TwoDay" | "LTL";
-export declare type ServiceLevelFastway = "Parcel" | "Satchel";
-export declare type ServiceLevelFedEx = "FEDEX_GROUND" | "FEDEX_2_DAY" | "FEDEX_2_DAY_AM" | "FEDEX_EXPRESS_SAVER" | "STANDARD_OVERNIGHT" | "FIRST_OVERNIGHT" | "PRIORITY_OVERNIGHT" | "INTERNATIONAL_ECONOMY" | "INTERNATIONAL_FIRST" | "INTERNATIONAL_PRIORITY" | "GROUND_HOME_DELIVERY" | "SMART_POST";
-export declare type ServiceLevelFedExCrossBorder = "CBEC" | "CBECL";
-export declare type ServiceLevelFedExSameDayCity = "EconomyService" | "StandardService" | "PriorityService" | "LastMile";
-export declare type ServiceLevelFedexSmartPost = "SMART_POST";
-export declare type ServiceLevelGlobegistics = "PMEI" | "PMI" | "eComDomestic" | "eComEurope" | "eComExpress" | "eComExtra" | "eComIPA" | "eComISAL" | "eComPMEIDutyPaid" | "eComPMIDutyPaid" | "eComPacket" | "eComPacketDDP" | "eComPriority" | "eComStandard" | "eComTrackedDDP" | "eComTrackedDDU";
-export declare type ServiceLevelGSO = "EarlyPriorityOvernight" | "PriorityOvernight" | "CaliforniaParcelService" | "SaturdayDeliveryService" | "EarlySaturdayService" | "Ground" | "Overnight";
-export declare type ServiceLevelHermes = "DomesticDelivery" | "DomesticDeliverySigned" | "InternationalDelivery" | "InternationalDeliverySigned";
-export declare type ServiceLevelInterlinkExpress = "InterlinkAirClassicInternationalAir" | "InterlinkAirExpressInternationalAir" | "InterlinkExpresspak1By10:30" | "InterlinkExpresspak1By12" | "InterlinkExpresspak1NextDay" | "InterlinkExpresspak1Saturday" | "InterlinkExpresspak1SaturdayBy10:30" | "InterlinkExpresspak1SaturdayBy12" | "InterlinkExpresspak1Sunday" | "InterlinkExpresspak1SundayBy12" | "InterlinkExpresspak5By10" | "InterlinkExpresspak5By10:30" | "InterlinkExpresspak5By12" | "InterlinkExpresspak5NextDay" | "InterlinkExpresspak5Saturday" | "InterlinkExpresspak5SaturdayBy10" | "InterlinkExpresspak5SaturdayBy10:30" | "InterlinkExpresspak5SaturdayBy12" | "InterlinkExpresspak5Sunday" | "InterlinkExpresspak5SundayBy12" | "InterlinkFreightBy10" | "InterlinkFreightBy12" | "InterlinkFreightNextDay" | "InterlinkFreightSaturday" | "InterlinkFreightSaturdayBy10" | "InterlinkFreightSaturdayBy12" | "InterlinkFreightSunday" | "InterlinkFreightSundayBy12" | "InterlinkParcelBy10" | "InterlinkParcelBy10:30" | "InterlinkParcelBy12" | "InterlinkParcelDpdEuropeByRoad" | "InterlinkParcelNextDay" | "InterlinkParcelReturn" | "InterlinkParcelReturnToShop" | "InterlinkParcelSaturday" | "InterlinkParcelSaturdayBy10" | "InterlinkParcelSaturdayBy10:30" | "InterlinkParcelSaturdayBy12" | "InterlinkParcelShipToShop" | "InterlinkParcelSunday" | "InterlinkParcelSundayBy12" | "InterlinkParcelTwoDay" | "InterlinkPickupParcelDpdEuropeByRoad";
-export declare type ServiceLevelLaserShipV2 = "SameDay" | "NextDay" | "Weekend";
-export declare type ServiceLevelLiefery = "TourAppointment20161124From1600To1900";
-export declare type ServiceLevelLoomisExpress = "LoomisGround" | "LoomisExpress1800" | "LoomisExpress1200" | "LoomisExpress900";
-export declare type ServiceLevelLSO = "GroundEarly" | "GroundBasic" | "PriorityBasic" | "PriorityEarly" | "PrioritySaturday" | "Priority2ndDay" | "SameDay";
-export declare type ServiceLevelNewgistics = "ParcelSelect" | "ParcelSelectLightweight" | "Ground" | "Express" | "FirstClassMail" | "PriorityMail" | "BoundPrintedMatter";
-export declare type ServiceLevelOnTrac = "Sunrise" | "Gold" | "OnTracGround" | "SameDay" | "PalletizedFreight";
-export declare type ServiceLevelOnTracDirectPost = "FirstClassMail" | "PriorityMail" | "BoundPrintedMatter" | "MediaMail" | "ParcelSelect" | "ParcelSelectLightweight";
-export declare type ServiceLevelOsmWorldwide = "First" | "Expedited" | "ParcelSelectLightweight" | "Priority" | "BPM" | "ParcelSelect" | "MediaMail" | "MarketingParcel" | "MarketingParcelTracked";
-export declare type ServiceLevelPurolator = "PurolatorExpress" | "PurolatorExpress12PM" | "PurolatorExpressPack12PM" | "PurolatorExpressBox12PM" | "PurolatorExpressEnvelope12PM" | "PurolatorExpress1030AM" | "PurolatorExpress9AM" | "PurolatorExpressBox" | "PurolatorExpressBox1030AM" | "PurolatorExpressBox9AM" | "PurolatorExpressBoxEvening" | "PurolatorExpressBoxInternational" | "PurolatorExpressBoxInternational1030AM" | "PurolatorExpressBoxInternational1200" | "PurolatorExpressBoxInternational9AM" | "PurolatorExpressBoxUS" | "PurolatorExpressBoxUS1030AM" | "PurolatorExpressBoxUS1200" | "PurolatorExpressBoxUS9AM" | "PurolatorExpressEnvelope" | "PurolatorExpressEnvelope1030AM" | "PurolatorExpressEnvelope9AM" | "PurolatorExpressEnvelopeEvening" | "PurolatorExpressEnvelopeInternational" | "PurolatorExpressEnvelopeInternational1030AM" | "PurolatorExpressEnvelopeInternational1200" | "PurolatorExpressEnvelopeInternational9AM" | "PurolatorExpressEnvelopeUS" | "PurolatorExpressEnvelopeUS1030AM" | "PurolatorExpressEnvelopeUS1200" | "PurolatorExpressEnvelopeUS9AM" | "PurolatorExpressEvening" | "PurolatorExpressInternational" | "PurolatorExpressInternational1030AM" | "PurolatorExpressInternational1200" | "PurolatorExpressInternational9AM" | "PurolatorExpressPack" | "PurolatorExpressPack1030AM" | "PurolatorExpressPack9AM" | "PurolatorExpressPackEvening" | "PurolatorExpressPackInternational" | "PurolatorExpressPackInternational1030AM" | "PurolatorExpressPackInternational1200" | "PurolatorExpressPackInternational9AM" | "PurolatorExpressPackUS" | "PurolatorExpressPackUS1030AM" | "PurolatorExpressPackUS1200" | "PurolatorExpressPackUS9AM" | "PurolatorExpressUS" | "PurolatorExpressUS1030AM" | "PurolatorExpressUS1200" | "PurolatorExpressUS9AM" | "PurolatorGround" | "PurolatorGround1030AM" | "PurolatorGround9AM" | "PurolatorGroundDistribution" | "PurolatorGroundEvening" | "PurolatorGroundRegional" | "PurolatorGroundUS";
-export declare type ServiceLevelRoyalMail = "InternationalSigned" | "InternationalStandard" | "InternationalTracked" | "InternationalTrackedAndSigned" | "1stClass" | "1stClassSignedFor" | "2ndClass" | "2ndClassSignedFor" | "RoyalMail24" | "RoyalMail24SignedFor" | "RoyalMail48" | "RoyalMail48SignedFor" | "SpecialDeliveryGuaranteed1pm" | "SpecialDeliveryGuaranteed9am" | "StandardLetter1stClass" | "StandardLetter1stClassSignedFor" | "StandardLetter2ndClass" | "StandardLetter2ndClassSignedFor" | "Tracked24" | "Tracked24HighVolume" | "Tracked24HighVolumeSignature" | "Tracked24Signature" | "Tracked48" | "Tracked48HighVolume" | "Tracked48HighVolumeSignature" | "Tracked48Signature";
-export declare type ServiceLevelRRDonnelley = "CourierServiceDDP" | "CourierServiceDDU" | "DomesticEconomyParcel" | "DomesticParcelBPM" | "DomesticPriorityParcel" | "DomesticPriorityParcelBPM" | "EMIService" | "EconomyParcelService" | "IPAService" | "ISALService" | "PMIService" | "PriorityParcelDDP" | "PriorityParcelDDU" | "PriorityParcelDeliveryConfirmationDDP" | "PriorityParcelDeliveryConfirmationDDU" | "ePacketService";
-export declare type ServiceLevelOmniParcel = "eCommerce Standard Tracked" | "eCommerce Express Tracked" | "Domestic Express" | "Domestic Standard";
-export declare type ServiceLevelSpeeDee = "SpeeDeeDelivery";
-export declare type ServiceLevelSprintShip = "RoutedDeliveries" | "OnDemand" | "WhiteGloveDeliveries";
-export declare type ServiceLevelStarTrack = "StartrackExpress" | "StartrackPremium" | "StartrackFixedPricePremium";
-export declare type ServiceLevelTForce = "SameDay" | "SameDayWhiteGlove" | "NextDay" | "NextDayWhiteGlove";
-export declare type ServiceLevelUDS = "DeliveryService";
-export declare type ServiceLevelUPS = "Ground" | "UPSStandard" | "UPSSaver" | "Express" | "ExpressPlus" | "Expedited" | "NextDayAir" | "NextDayAirSaver" | "NextDayAirEarlyAM" | "2ndDayAir" | "2ndDayAirAM" | "3DaySelect";
-export declare type ServiceLevelUPSMailInnovations = "First" | "Priority" | "ExpeditedMailInnovations" | "PriorityMailInnovations" | "EconomyMailInnovations";
-export declare type ServiceLevelUSPS = "First" | "Priority" | "Express" | "ParcelSelect" | "LibraryMail" | "MediaMail" | "FirstClassMailInternational" | "FirstClassPackageInternationalService" | "PriorityMailInternational" | "ExpressMailInternational";
-export declare type ServiceLevelVeho = "nextDay" | "sameDay";
+export declare type ServiceLevelAmazonMws =
+  | 'UPS Rates'
+  | 'USPS Rates'
+  | 'FedEx Rates'
+  | 'UPS Labels'
+  | 'USPS Labels'
+  | 'FedEx Labels'
+  | 'UPS Tracking'
+  | 'USPS Tracking'
+  | 'FedEx Tracking';
+export declare type ServiceLevelAPC =
+  | 'parcelConnectBookService'
+  | 'parcelConnectExpeditedDDP'
+  | 'parcelConnectExpeditedDDU'
+  | 'parcelConnectPriorityDDP'
+  | 'parcelConnectPriorityDDPDelcon'
+  | 'parcelConnectPriorityDDU'
+  | 'parcelConnectPriorityDDUDelcon'
+  | 'parcelConnectPriorityDDUPQW'
+  | 'parcelConnectStandardDDU'
+  | 'parcelConnectStandardDDUPQW'
+  | 'parcelConnectPacketDDU';
+export declare type ServiceLevelAramex =
+  | 'Domestic'
+  | 'PriorityDocumentExpress'
+  | 'PriorityParcelExpress'
+  | 'PriorityLetterExpress'
+  | 'DeferredDocumentExpress'
+  | 'DeferredParcelExpress'
+  | 'GroundDocumentExpress'
+  | 'GroundParcelExpress'
+  | 'EconomyParcelExpress';
+export declare type ServiceLevelArrowXL =
+  | '48HRBrownInstall'
+  | '48HRBrownInstallRemove'
+  | '48HROther'
+  | '48HROtherRemove'
+  | '48HRWhiteInstall'
+  | '48HRWhiteInstallRemove'
+  | '48HRWhiteRemove'
+  | 'ExpressBrownInstall'
+  | 'ExpressBrownInstallRemove'
+  | 'ExpressOther'
+  | 'ExpressOtherRemove'
+  | 'ExpressWhiteInstall'
+  | 'ExpressWhiteInstallRemove'
+  | 'ExpressWhiteRemove'
+  | 'StandardBrownInstall'
+  | 'StandardBrownInstallRemove'
+  | 'StandardBrownRemove'
+  | 'StandardOther'
+  | 'StandardOtherAssemble'
+  | 'StandardOtherNoUnpack'
+  | 'StandardOtherRemove'
+  | 'StandardOtherUnpack'
+  | 'StandardOtherUnpackLeavePackaging'
+  | 'StandardReturns'
+  | 'StandardWhiteInstall'
+  | 'StandardWhiteInstallRemove'
+  | 'StandardWhiteRemove';
+export declare type ServiceLevelAsendia = 'PMI' | 'ePacket' | 'IPA' | 'ISAL';
+export declare type ServiceLevelAustraliaPost =
+  | 'ExpressPost'
+  | 'ExpressPostSignature'
+  | 'ParcelPost'
+  | 'ParcelPostSignature'
+  | 'ParcelPostExtra'
+  | 'ParcelPostWinePlusSignature';
+export declare type ServiceLevelAxlehireV3 = 'AxleHireDelivery';
+export declare type ServiceLevelBorderGuru = 'ECONOMY' | 'PRIORITY' | 'EXPEDITED';
+export declare type ServiceLevelCanadaPost =
+  | 'RegularParcel'
+  | 'ExpeditedParcel'
+  | 'Xpresspost'
+  | 'XpresspostCertified'
+  | 'Priority'
+  | 'LibraryBooks'
+  | 'ExpeditedParcelUSA'
+  | 'PriorityWorldwideEnvelopeUSA'
+  | 'PriorityWorldwidePakUSA'
+  | 'PriorityWorldwideParcelUSA'
+  | 'SmallPacketUSAAir'
+  | 'TrackedPacketUSA'
+  | 'TrackedPacketUSALVM'
+  | 'XpresspostUSA'
+  | 'XpresspostInternational'
+  | 'InternationalParcelAir'
+  | 'InternationalParcelSurface'
+  | 'PriorityWorldwideEnvelopeIntl'
+  | 'PriorityWorldwidePakIntl'
+  | 'PriorityWorldwideParcelIntl'
+  | 'SmallPacketInternationalAir'
+  | 'SmallPacketInternationalSurface'
+  | 'TrackedPacketInternational';
+export declare type ServiceLevelCanpar =
+  | 'Ground'
+  | 'SelectLetter'
+  | 'SelectPak'
+  | 'Select'
+  | 'OvernightLetter'
+  | 'OvernightPak'
+  | 'Overnight'
+  | 'SelectUSA'
+  | 'USAPak'
+  | 'USALetter'
+  | 'USA'
+  | 'International';
+export declare type ServiceLevelColumbusLastMile = 'DISTRIBUTION' | 'Same Day';
+export declare type ServiceLevelColisPrive = 'Parcel';
+export declare type ServiceLevelCouriersPlease =
+  | 'DomesticPrioritySignature'
+  | 'DomesticPriority'
+  | 'DomesticOffPeakSignature'
+  | 'DomesticOffPeak'
+  | 'GoldDomesticSignature'
+  | 'GoldDomestic'
+  | 'AustralianCityExpressSignature'
+  | 'AustralianCityExpress'
+  | 'DomesticSaverSignature'
+  | 'DomesticSaver'
+  | 'RoadExpress'
+  | '5KgSatchel'
+  | '3KgSatchel'
+  | '1KgSatchel'
+  | '5KgSatchelATL'
+  | '3KgSatchelATL'
+  | '1KgSatchelATL'
+  | '500GramSatchel'
+  | '500GramSatchelATL'
+  | '25KgParcel'
+  | '10KgParcel'
+  | '5KgParcel'
+  | '3KgParcel'
+  | '1KgParcel'
+  | '500GramParcel'
+  | '500GramParcelATL'
+  | 'ExpressInternationalPriority'
+  | 'InternationalSaver'
+  | 'InternationalExpressImport'
+  | 'ExpressInternationalPriority'
+  | 'InternationalExpress';
+export declare type ServiceLevelDaiPost =
+  | 'DomesticTracked'
+  | 'InternationalEconomy'
+  | 'InternationalStandard'
+  | 'InternationalExpress';
+export declare type ServiceLevelDeliv = 'Scheduled' | 'OnDemand';
+export declare type ServiceLevelDeutschePost = 'PacketPlus';
+export declare type ServiceLevelDeutschePostUK =
+  | 'PriorityPacketPlus'
+  | 'PriorityPacket'
+  | 'PriorityPacketTracked'
+  | 'BusinessMailRegistered'
+  | 'StandardPacket'
+  | 'BusinessMailStandard';
+export declare type ServiceLevelDHLEcommerceAsia =
+  | 'Packet'
+  | 'PacketPlus'
+  | 'ParcelDirect'
+  | 'ParcelDirectExpedited';
+export declare type ServiceLevelDhlEcs =
+  | 'DHLParcelExpedited'
+  | 'DHLParcelExpeditedMax'
+  | 'DHLParcelGround'
+  | 'DHLBPMExpedited'
+  | 'DHLBPMGround'
+  | 'DHLParcelInternationalDirect'
+  | 'DHLParcelInternationalStandard'
+  | 'DHLPacketInternational'
+  | 'DHLParcelInternationalDirectPriority'
+  | 'DHLParcelInternationalDirectStandard';
+export declare type ServiceLevelDHLExpress =
+  | 'BreakBulkEconomy'
+  | 'BreakBulkExpress'
+  | 'DomesticEconomySelect'
+  | 'DomesticExpress'
+  | 'DomesticExpress1030'
+  | 'DomesticExpress1200'
+  | 'EconomySelect'
+  | 'EconomySelectNonDoc'
+  | 'EuroPack'
+  | 'EuropackNonDoc'
+  | 'Express1030'
+  | 'Express1030NonDoc'
+  | 'Express1200NonDoc'
+  | 'Express1200'
+  | 'Express900'
+  | 'Express900NonDoc'
+  | 'ExpressEasy'
+  | 'ExpressEasyNonDoc'
+  | 'ExpressEnvelope'
+  | 'ExpressWorldwide'
+  | 'ExpressWorldwideB2C'
+  | 'ExpressWorldwideB2CNonDoc'
+  | 'ExpressWorldwideECX'
+  | 'ExpressWorldwideNonDoc'
+  | 'FreightWorldwide'
+  | 'GlobalmailBusiness'
+  | 'JetLine'
+  | 'JumboBox'
+  | 'LogisticsServices'
+  | 'SameDay'
+  | 'SecureLine'
+  | 'SprintLine';
+export declare type ServiceLevelDicom = 'Ground';
+export declare type ServiceLevelDPD =
+  | 'DPDCLASSIC'
+  | 'DPD8:30'
+  | 'DPD10:00'
+  | 'DPD12:00'
+  | 'DPD18:00'
+  | 'DPDEXPRESS'
+  | 'DPDPARCELLETTER'
+  | 'DPDPARCELLETTERPLUS'
+  | 'DPDINTERNATIONALMAIL';
+export declare type ServiceLevelDPDUK =
+  | 'AirExpressInternationalAir'
+  | 'AirClassicInternationalAir'
+  | 'ParcelSunday'
+  | 'FreightParcelSunday'
+  | 'PalletSunday'
+  | 'PalletDpdClassic'
+  | 'ExpresspakDpdClassic'
+  | 'ExpresspakSunday'
+  | 'ParcelDpdClassic'
+  | 'ParcelDpdTwoDay'
+  | 'ParcelDpdNextDay'
+  | 'ParcelDpd12'
+  | 'ParcelDpd10'
+  | 'ParcelDpd10'
+  | 'ParcelReturnToShop'
+  | 'ParcelSaturday'
+  | 'ParcelSaturday12'
+  | 'ParcelSaturday10'
+  | 'ParcelSaturday10'
+  | 'ParcelSunday12'
+  | 'FreightParcelDpdClassic'
+  | 'FreightParcelSunday12'
+  | 'ExpresspakDpdNextDay'
+  | 'ExpresspakDpd12'
+  | 'ExpresspakDpd10'
+  | 'ExpresspakDpd10'
+  | 'ExpresspakSaturday'
+  | 'ExpresspakSaturday12'
+  | 'ExpresspakSaturday10'
+  | 'ExpresspakSaturday10'
+  | 'ExpresspakSunday12'
+  | 'PalletSunday12'
+  | 'PalletDpdTwoDay'
+  | 'PalletDpdNextDay'
+  | 'PalletDpd12'
+  | 'PalletDpd10'
+  | 'PalletSaturday'
+  | 'PalletSaturday12'
+  | 'PalletSaturday10'
+  | 'FreightParcelDpdTwoDay'
+  | 'FreightParcelDpdNextDay'
+  | 'FreightParcelDpd12'
+  | 'FreightParcelDpd10'
+  | 'FreightParcelSaturday'
+  | 'FreightParcelSaturday12'
+  | 'FreightParcelSaturday10';
+export declare type ServiceLevelEstafeta =
+  | 'NextDayBy930'
+  | 'NextDayBy1130'
+  | 'NextDay'
+  | 'Ground'
+  | 'TwoDay'
+  | 'LTL';
+export declare type ServiceLevelFastway = 'Parcel' | 'Satchel';
+export declare type ServiceLevelFedEx =
+  | 'FEDEX_GROUND'
+  | 'FEDEX_2_DAY'
+  | 'FEDEX_2_DAY_AM'
+  | 'FEDEX_EXPRESS_SAVER'
+  | 'STANDARD_OVERNIGHT'
+  | 'FIRST_OVERNIGHT'
+  | 'PRIORITY_OVERNIGHT'
+  | 'INTERNATIONAL_ECONOMY'
+  | 'INTERNATIONAL_FIRST'
+  | 'INTERNATIONAL_PRIORITY'
+  | 'GROUND_HOME_DELIVERY'
+  | 'SMART_POST';
+export declare type ServiceLevelFedExCrossBorder = 'CBEC' | 'CBECL';
+export declare type ServiceLevelFedExSameDayCity =
+  | 'EconomyService'
+  | 'StandardService'
+  | 'PriorityService'
+  | 'LastMile';
+export declare type ServiceLevelFedexSmartPost = 'SMART_POST';
+export declare type ServiceLevelGlobegistics =
+  | 'PMEI'
+  | 'PMI'
+  | 'eComDomestic'
+  | 'eComEurope'
+  | 'eComExpress'
+  | 'eComExtra'
+  | 'eComIPA'
+  | 'eComISAL'
+  | 'eComPMEIDutyPaid'
+  | 'eComPMIDutyPaid'
+  | 'eComPacket'
+  | 'eComPacketDDP'
+  | 'eComPriority'
+  | 'eComStandard'
+  | 'eComTrackedDDP'
+  | 'eComTrackedDDU';
+export declare type ServiceLevelGSO =
+  | 'EarlyPriorityOvernight'
+  | 'PriorityOvernight'
+  | 'CaliforniaParcelService'
+  | 'SaturdayDeliveryService'
+  | 'EarlySaturdayService'
+  | 'Ground'
+  | 'Overnight';
+export declare type ServiceLevelHermes =
+  | 'DomesticDelivery'
+  | 'DomesticDeliverySigned'
+  | 'InternationalDelivery'
+  | 'InternationalDeliverySigned';
+export declare type ServiceLevelInterlinkExpress =
+  | 'InterlinkAirClassicInternationalAir'
+  | 'InterlinkAirExpressInternationalAir'
+  | 'InterlinkExpresspak1By10:30'
+  | 'InterlinkExpresspak1By12'
+  | 'InterlinkExpresspak1NextDay'
+  | 'InterlinkExpresspak1Saturday'
+  | 'InterlinkExpresspak1SaturdayBy10:30'
+  | 'InterlinkExpresspak1SaturdayBy12'
+  | 'InterlinkExpresspak1Sunday'
+  | 'InterlinkExpresspak1SundayBy12'
+  | 'InterlinkExpresspak5By10'
+  | 'InterlinkExpresspak5By10:30'
+  | 'InterlinkExpresspak5By12'
+  | 'InterlinkExpresspak5NextDay'
+  | 'InterlinkExpresspak5Saturday'
+  | 'InterlinkExpresspak5SaturdayBy10'
+  | 'InterlinkExpresspak5SaturdayBy10:30'
+  | 'InterlinkExpresspak5SaturdayBy12'
+  | 'InterlinkExpresspak5Sunday'
+  | 'InterlinkExpresspak5SundayBy12'
+  | 'InterlinkFreightBy10'
+  | 'InterlinkFreightBy12'
+  | 'InterlinkFreightNextDay'
+  | 'InterlinkFreightSaturday'
+  | 'InterlinkFreightSaturdayBy10'
+  | 'InterlinkFreightSaturdayBy12'
+  | 'InterlinkFreightSunday'
+  | 'InterlinkFreightSundayBy12'
+  | 'InterlinkParcelBy10'
+  | 'InterlinkParcelBy10:30'
+  | 'InterlinkParcelBy12'
+  | 'InterlinkParcelDpdEuropeByRoad'
+  | 'InterlinkParcelNextDay'
+  | 'InterlinkParcelReturn'
+  | 'InterlinkParcelReturnToShop'
+  | 'InterlinkParcelSaturday'
+  | 'InterlinkParcelSaturdayBy10'
+  | 'InterlinkParcelSaturdayBy10:30'
+  | 'InterlinkParcelSaturdayBy12'
+  | 'InterlinkParcelShipToShop'
+  | 'InterlinkParcelSunday'
+  | 'InterlinkParcelSundayBy12'
+  | 'InterlinkParcelTwoDay'
+  | 'InterlinkPickupParcelDpdEuropeByRoad';
+export declare type ServiceLevelLaserShipV2 = 'SameDay' | 'NextDay' | 'Weekend';
+export declare type ServiceLevelLiefery = 'TourAppointment20161124From1600To1900';
+export declare type ServiceLevelLoomisExpress =
+  | 'LoomisGround'
+  | 'LoomisExpress1800'
+  | 'LoomisExpress1200'
+  | 'LoomisExpress900';
+export declare type ServiceLevelLSO =
+  | 'GroundEarly'
+  | 'GroundBasic'
+  | 'PriorityBasic'
+  | 'PriorityEarly'
+  | 'PrioritySaturday'
+  | 'Priority2ndDay'
+  | 'SameDay';
+export declare type ServiceLevelNewgistics =
+  | 'ParcelSelect'
+  | 'ParcelSelectLightweight'
+  | 'Ground'
+  | 'Express'
+  | 'FirstClassMail'
+  | 'PriorityMail'
+  | 'BoundPrintedMatter';
+export declare type ServiceLevelOnTrac =
+  | 'Sunrise'
+  | 'Gold'
+  | 'OnTracGround'
+  | 'SameDay'
+  | 'PalletizedFreight';
+export declare type ServiceLevelOnTracDirectPost =
+  | 'FirstClassMail'
+  | 'PriorityMail'
+  | 'BoundPrintedMatter'
+  | 'MediaMail'
+  | 'ParcelSelect'
+  | 'ParcelSelectLightweight';
+export declare type ServiceLevelOsmWorldwide =
+  | 'First'
+  | 'Expedited'
+  | 'ParcelSelectLightweight'
+  | 'Priority'
+  | 'BPM'
+  | 'ParcelSelect'
+  | 'MediaMail'
+  | 'MarketingParcel'
+  | 'MarketingParcelTracked';
+export declare type ServiceLevelPurolator =
+  | 'PurolatorExpress'
+  | 'PurolatorExpress12PM'
+  | 'PurolatorExpressPack12PM'
+  | 'PurolatorExpressBox12PM'
+  | 'PurolatorExpressEnvelope12PM'
+  | 'PurolatorExpress1030AM'
+  | 'PurolatorExpress9AM'
+  | 'PurolatorExpressBox'
+  | 'PurolatorExpressBox1030AM'
+  | 'PurolatorExpressBox9AM'
+  | 'PurolatorExpressBoxEvening'
+  | 'PurolatorExpressBoxInternational'
+  | 'PurolatorExpressBoxInternational1030AM'
+  | 'PurolatorExpressBoxInternational1200'
+  | 'PurolatorExpressBoxInternational9AM'
+  | 'PurolatorExpressBoxUS'
+  | 'PurolatorExpressBoxUS1030AM'
+  | 'PurolatorExpressBoxUS1200'
+  | 'PurolatorExpressBoxUS9AM'
+  | 'PurolatorExpressEnvelope'
+  | 'PurolatorExpressEnvelope1030AM'
+  | 'PurolatorExpressEnvelope9AM'
+  | 'PurolatorExpressEnvelopeEvening'
+  | 'PurolatorExpressEnvelopeInternational'
+  | 'PurolatorExpressEnvelopeInternational1030AM'
+  | 'PurolatorExpressEnvelopeInternational1200'
+  | 'PurolatorExpressEnvelopeInternational9AM'
+  | 'PurolatorExpressEnvelopeUS'
+  | 'PurolatorExpressEnvelopeUS1030AM'
+  | 'PurolatorExpressEnvelopeUS1200'
+  | 'PurolatorExpressEnvelopeUS9AM'
+  | 'PurolatorExpressEvening'
+  | 'PurolatorExpressInternational'
+  | 'PurolatorExpressInternational1030AM'
+  | 'PurolatorExpressInternational1200'
+  | 'PurolatorExpressInternational9AM'
+  | 'PurolatorExpressPack'
+  | 'PurolatorExpressPack1030AM'
+  | 'PurolatorExpressPack9AM'
+  | 'PurolatorExpressPackEvening'
+  | 'PurolatorExpressPackInternational'
+  | 'PurolatorExpressPackInternational1030AM'
+  | 'PurolatorExpressPackInternational1200'
+  | 'PurolatorExpressPackInternational9AM'
+  | 'PurolatorExpressPackUS'
+  | 'PurolatorExpressPackUS1030AM'
+  | 'PurolatorExpressPackUS1200'
+  | 'PurolatorExpressPackUS9AM'
+  | 'PurolatorExpressUS'
+  | 'PurolatorExpressUS1030AM'
+  | 'PurolatorExpressUS1200'
+  | 'PurolatorExpressUS9AM'
+  | 'PurolatorGround'
+  | 'PurolatorGround1030AM'
+  | 'PurolatorGround9AM'
+  | 'PurolatorGroundDistribution'
+  | 'PurolatorGroundEvening'
+  | 'PurolatorGroundRegional'
+  | 'PurolatorGroundUS';
+export declare type ServiceLevelRoyalMail =
+  | 'InternationalSigned'
+  | 'InternationalStandard'
+  | 'InternationalTracked'
+  | 'InternationalTrackedAndSigned'
+  | '1stClass'
+  | '1stClassSignedFor'
+  | '2ndClass'
+  | '2ndClassSignedFor'
+  | 'RoyalMail24'
+  | 'RoyalMail24SignedFor'
+  | 'RoyalMail48'
+  | 'RoyalMail48SignedFor'
+  | 'SpecialDeliveryGuaranteed1pm'
+  | 'SpecialDeliveryGuaranteed9am'
+  | 'StandardLetter1stClass'
+  | 'StandardLetter1stClassSignedFor'
+  | 'StandardLetter2ndClass'
+  | 'StandardLetter2ndClassSignedFor'
+  | 'Tracked24'
+  | 'Tracked24HighVolume'
+  | 'Tracked24HighVolumeSignature'
+  | 'Tracked24Signature'
+  | 'Tracked48'
+  | 'Tracked48HighVolume'
+  | 'Tracked48HighVolumeSignature'
+  | 'Tracked48Signature';
+export declare type ServiceLevelRRDonnelley =
+  | 'CourierServiceDDP'
+  | 'CourierServiceDDU'
+  | 'DomesticEconomyParcel'
+  | 'DomesticParcelBPM'
+  | 'DomesticPriorityParcel'
+  | 'DomesticPriorityParcelBPM'
+  | 'EMIService'
+  | 'EconomyParcelService'
+  | 'IPAService'
+  | 'ISALService'
+  | 'PMIService'
+  | 'PriorityParcelDDP'
+  | 'PriorityParcelDDU'
+  | 'PriorityParcelDeliveryConfirmationDDP'
+  | 'PriorityParcelDeliveryConfirmationDDU'
+  | 'ePacketService';
+export declare type ServiceLevelOmniParcel =
+  | 'eCommerce Standard Tracked'
+  | 'eCommerce Express Tracked'
+  | 'Domestic Express'
+  | 'Domestic Standard';
+export declare type ServiceLevelSpeeDee = 'SpeeDeeDelivery';
+export declare type ServiceLevelSprintShip =
+  | 'RoutedDeliveries'
+  | 'OnDemand'
+  | 'WhiteGloveDeliveries';
+export declare type ServiceLevelStarTrack =
+  | 'StartrackExpress'
+  | 'StartrackPremium'
+  | 'StartrackFixedPricePremium';
+export declare type ServiceLevelTForce =
+  | 'SameDay'
+  | 'SameDayWhiteGlove'
+  | 'NextDay'
+  | 'NextDayWhiteGlove';
+export declare type ServiceLevelUDS = 'DeliveryService';
+export declare type ServiceLevelUPS =
+  | 'Ground'
+  | 'UPSStandard'
+  | 'UPSSaver'
+  | 'Express'
+  | 'ExpressPlus'
+  | 'Expedited'
+  | 'NextDayAir'
+  | 'NextDayAirSaver'
+  | 'NextDayAirEarlyAM'
+  | '2ndDayAir'
+  | '2ndDayAirAM'
+  | '3DaySelect';
+export declare type ServiceLevelUPSMailInnovations =
+  | 'First'
+  | 'Priority'
+  | 'ExpeditedMailInnovations'
+  | 'PriorityMailInnovations'
+  | 'EconomyMailInnovations';
+export declare type ServiceLevelUSPS =
+  | 'First'
+  | 'Priority'
+  | 'Express'
+  | 'ParcelSelect'
+  | 'LibraryMail'
+  | 'MediaMail'
+  | 'FirstClassMailInternational'
+  | 'FirstClassPackageInternationalService'
+  | 'PriorityMailInternational'
+  | 'ExpressMailInternational';
+export declare type ServiceLevelVeho = 'nextDay' | 'sameDay';
 
-export declare type ServiceLevel = ServiceLevelAmazonMws | ServiceLevelAPC | ServiceLevelAramex | ServiceLevelArrowXL | ServiceLevelAsendia | ServiceLevelAustraliaPost | ServiceLevelAxlehireV3 | ServiceLevelBorderGuru | ServiceLevelCanadaPost | ServiceLevelCanpar | ServiceLevelColumbusLastMile | ServiceLevelColisPrive | ServiceLevelCouriersPlease | ServiceLevelDaiPost | ServiceLevelDeliv | ServiceLevelDeutschePost | ServiceLevelDeutschePostUK | ServiceLevelDHLEcommerceAsia | ServiceLevelDhlEcs | ServiceLevelDHLExpress | ServiceLevelDicom | ServiceLevelDPD | ServiceLevelDPDUK | ServiceLevelEstafeta | ServiceLevelFastway | ServiceLevelFedEx | ServiceLevelFedExCrossBorder | ServiceLevelFedExSameDayCity | ServiceLevelFedexSmartPost | ServiceLevelGlobegistics | ServiceLevelGSO | ServiceLevelHermes | ServiceLevelInterlinkExpress | ServiceLevelLaserShipV2 | ServiceLevelLiefery | ServiceLevelLoomisExpress | ServiceLevelLSO | ServiceLevelNewgistics | ServiceLevelOnTrac | ServiceLevelOnTracDirectPost | ServiceLevelOsmWorldwide | ServiceLevelPurolator | ServiceLevelRoyalMail | ServiceLevelRRDonnelley | ServiceLevelOmniParcel | ServiceLevelSpeeDee | ServiceLevelSprintShip | ServiceLevelStarTrack | ServiceLevelTForce | ServiceLevelUDS | ServiceLevelUPS | ServiceLevelUPSMailInnovations | ServiceLevelUSPS | ServiceLevelVeho;
+export declare type ServiceLevel =
+  | ServiceLevelAmazonMws
+  | ServiceLevelAPC
+  | ServiceLevelAramex
+  | ServiceLevelArrowXL
+  | ServiceLevelAsendia
+  | ServiceLevelAustraliaPost
+  | ServiceLevelAxlehireV3
+  | ServiceLevelBorderGuru
+  | ServiceLevelCanadaPost
+  | ServiceLevelCanpar
+  | ServiceLevelColumbusLastMile
+  | ServiceLevelColisPrive
+  | ServiceLevelCouriersPlease
+  | ServiceLevelDaiPost
+  | ServiceLevelDeliv
+  | ServiceLevelDeutschePost
+  | ServiceLevelDeutschePostUK
+  | ServiceLevelDHLEcommerceAsia
+  | ServiceLevelDhlEcs
+  | ServiceLevelDHLExpress
+  | ServiceLevelDicom
+  | ServiceLevelDPD
+  | ServiceLevelDPDUK
+  | ServiceLevelEstafeta
+  | ServiceLevelFastway
+  | ServiceLevelFedEx
+  | ServiceLevelFedExCrossBorder
+  | ServiceLevelFedExSameDayCity
+  | ServiceLevelFedexSmartPost
+  | ServiceLevelGlobegistics
+  | ServiceLevelGSO
+  | ServiceLevelHermes
+  | ServiceLevelInterlinkExpress
+  | ServiceLevelLaserShipV2
+  | ServiceLevelLiefery
+  | ServiceLevelLoomisExpress
+  | ServiceLevelLSO
+  | ServiceLevelNewgistics
+  | ServiceLevelOnTrac
+  | ServiceLevelOnTracDirectPost
+  | ServiceLevelOsmWorldwide
+  | ServiceLevelPurolator
+  | ServiceLevelRoyalMail
+  | ServiceLevelRRDonnelley
+  | ServiceLevelOmniParcel
+  | ServiceLevelSpeeDee
+  | ServiceLevelSprintShip
+  | ServiceLevelStarTrack
+  | ServiceLevelTForce
+  | ServiceLevelUDS
+  | ServiceLevelUPS
+  | ServiceLevelUPSMailInnovations
+  | ServiceLevelUSPS
+  | ServiceLevelVeho;
 
+export declare type PredefinedPackageDHLExpress =
+  | 'JumboDocument'
+  | 'JumboParcel'
+  | 'Document'
+  | 'DHLFlyer'
+  | 'Domestic'
+  | 'ExpressDocument'
+  | 'DHLExpressEnvelope'
+  | 'JumboBox'
+  | 'JumboJuniorDocument'
+  | 'JuniorJumboBox'
+  | 'JumboJuniorParcel'
+  | 'OtherDHLPackaging'
+  | 'Parcel'
+  | 'YourPackaging';
+export declare type PredefinedPackageDPDUK =
+  | 'Parcel'
+  | 'Pallet'
+  | 'ExpressPak'
+  | 'FreightParcel'
+  | 'Freight';
+export declare type PredefinedPackageEstafeta = 'ENVELOPE' | 'PARCEL';
+export declare type PredefinedPackageFastway = 'Parcel' | 'Satchel';
+export declare type PredefinedPackageFedEx =
+  | 'FedExEnvelope'
+  | 'FedExBox'
+  | 'FedExPak'
+  | 'FedExTube'
+  | 'FedEx10kgBox'
+  | 'FedEx25kgBox'
+  | 'FedExSmallBox'
+  | 'FedExMediumBox'
+  | 'FedExLargeBox'
+  | 'FedExExtraLargeBox';
+export declare type PredefinedPackageInterlinkExpress =
+  | 'Parcel'
+  | 'Pallet'
+  | 'ExpressPak'
+  | 'FreightParcel'
+  | 'Freight';
+export declare type PredefinedPackageLaserShipV2 = 'Envelope' | 'Custom';
+export declare type PredefinedPackageLiefery =
+  | 'SmallParcel'
+  | 'MediumParcel'
+  | 'LargeParcel'
+  | 'ExtraLargeParcel';
+export declare type PredefinedPackageOnTrac = 'Letter';
+export declare type PredefinedPackagePurolator =
+  | 'CustomerPackaging'
+  | 'ExpressPack'
+  | 'ExpressBox'
+  | 'ExpressEnvelope';
+export declare type PredefinedPackageRoyalMail =
+  | 'Letter'
+  | 'LargeLetter'
+  | 'SmallParcel'
+  | 'MediumParcel'
+  | 'Parcel (for use with RoyalMail24 or RoyalMail48)';
+export declare type PredefinedPackageOmniParcel =
+  | 'Bag'
+  | 'Box'
+  | 'Carton'
+  | 'Container'
+  | 'Crate'
+  | 'Envelope'
+  | 'Pail'
+  | 'Pallet'
+  | 'Satchel'
+  | 'Tub';
+export declare type PredefinedPackageSprintShip =
+  | 'ENVELOPE'
+  | 'LARGE_BOX_OR_TOTE'
+  | 'MULTI_PACK'
+  | 'SMALL_OR_MEDIUM_BOX_OR_TOTE'
+  | 'PACKAGE';
+export declare type PredefinedPackageStarTrack =
+  | 'Carton'
+  | 'Pallet'
+  | 'Satchel'
+  | 'Bag'
+  | 'Envelope'
+  | 'Item'
+  | 'Jiffybag'
+  | 'Skid';
+export declare type PredefinedPackageTForce = 'Parcel' | 'Letter';
+export declare type PredefinedPackageUPS =
+  | 'UPSLetter'
+  | 'UPSExpressBox'
+  | 'UPS25kgBox'
+  | 'UPS10kgBox'
+  | 'Tube'
+  | 'Pak'
+  | 'SmallExpressBox'
+  | 'MediumExpressBox'
+  | 'LargeExpressBox';
+export declare type PredefinedPackageUSPS =
+  | 'Card'
+  | 'Letter'
+  | 'Flat'
+  | 'FlatRateEnvelope'
+  | 'FlatRateLegalEnvelope'
+  | 'FlatRatePaddedEnvelope'
+  | 'FlatRateGiftCardEnvelope'
+  | 'FlatRateWindowEnvelope'
+  | 'FlatRateCardboardEnvelope'
+  | 'SmallFlatRateEnvelope'
+  | 'Parcel'
+  | 'LargeParcel'
+  | 'IrregularParcel'
+  | 'SoftPack'
+  | 'SmallFlatRateBox'
+  | 'MediumFlatRateBox'
+  | 'LargeFlatRateBox'
+  | 'LargeFlatRateBoxAPOFPO'
+  | 'LargeFlatRateBoardGameBox'
+  | 'RegionalRateBoxA'
+  | 'RegionalRateBoxB'
+  | 'FlatTubTrayBox'
+  | 'EMMTrayBox'
+  | 'FullTrayBox'
+  | 'HalfTrayBox'
+  | 'PMODSack';
 
-export declare type PredefinedPackageDHLExpress = "JumboDocument" | "JumboParcel" | "Document" | "DHLFlyer" | "Domestic" | "ExpressDocument" | "DHLExpressEnvelope" | "JumboBox" | "JumboJuniorDocument" | "JuniorJumboBox" | "JumboJuniorParcel" | "OtherDHLPackaging" | "Parcel" | "YourPackaging";
-export declare type PredefinedPackageDPDUK = "Parcel" | "Pallet" | "ExpressPak" | "FreightParcel" | "Freight";
-export declare type PredefinedPackageEstafeta = "ENVELOPE" | "PARCEL";
-export declare type PredefinedPackageFastway = "Parcel" | "Satchel";
-export declare type PredefinedPackageFedEx = "FedExEnvelope" | "FedExBox" | "FedExPak" | "FedExTube" | "FedEx10kgBox" | "FedEx25kgBox" | "FedExSmallBox" | "FedExMediumBox" | "FedExLargeBox" | "FedExExtraLargeBox";
-export declare type PredefinedPackageInterlinkExpress = "Parcel" | "Pallet" | "ExpressPak" | "FreightParcel" | "Freight";
-export declare type PredefinedPackageLaserShipV2 = "Envelope" | "Custom";
-export declare type PredefinedPackageLiefery = "SmallParcel" | "MediumParcel" | "LargeParcel" | "ExtraLargeParcel";
-export declare type PredefinedPackageOnTrac = "Letter";
-export declare type PredefinedPackagePurolator = "CustomerPackaging" | "ExpressPack" | "ExpressBox" | "ExpressEnvelope";
-export declare type PredefinedPackageRoyalMail = "Letter" | "LargeLetter" | "SmallParcel" | "MediumParcel" | "Parcel (for use with RoyalMail24 or RoyalMail48)";
-export declare type PredefinedPackageOmniParcel = "Bag" | "Box" | "Carton" | "Container" | "Crate" | "Envelope" | "Pail" | "Pallet" | "Satchel" | "Tub";
-export declare type PredefinedPackageSprintShip = "ENVELOPE" | "LARGE_BOX_OR_TOTE" | "MULTI_PACK" | "SMALL_OR_MEDIUM_BOX_OR_TOTE" | "PACKAGE";
-export declare type PredefinedPackageStarTrack = "Carton" | "Pallet" | "Satchel" | "Bag" | "Envelope" | "Item" | "Jiffybag" | "Skid";
-export declare type PredefinedPackageTForce = "Parcel" | "Letter";
-export declare type PredefinedPackageUPS = "UPSLetter" | "UPSExpressBox" | "UPS25kgBox" | "UPS10kgBox" | "Tube" | "Pak" | "SmallExpressBox" | "MediumExpressBox" | "LargeExpressBox";
-export declare type PredefinedPackageUSPS = "Card" | "Letter" | "Flat" | "FlatRateEnvelope" | "FlatRateLegalEnvelope" | "FlatRatePaddedEnvelope" | "FlatRateGiftCardEnvelope" | "FlatRateWindowEnvelope" | "FlatRateCardboardEnvelope" | "SmallFlatRateEnvelope" | "Parcel" | "LargeParcel" | "IrregularParcel" | "SoftPack" | "SmallFlatRateBox" | "MediumFlatRateBox" | "LargeFlatRateBox" | "LargeFlatRateBoxAPOFPO" | "LargeFlatRateBoardGameBox" | "RegionalRateBoxA" | "RegionalRateBoxB" | "FlatTubTrayBox" | "EMMTrayBox" | "FullTrayBox" | "HalfTrayBox" | "PMODSack";
-
-export declare type PredefinedPackage = PredefinedPackageDHLExpress | PredefinedPackageDPDUK | PredefinedPackageEstafeta | PredefinedPackageFastway | PredefinedPackageFedEx | PredefinedPackageInterlinkExpress | PredefinedPackageLaserShipV2 | PredefinedPackageLiefery | PredefinedPackageOnTrac | PredefinedPackagePurolator | PredefinedPackageRoyalMail | PredefinedPackageOmniParcel | PredefinedPackageSprintShip | PredefinedPackageStarTrack | PredefinedPackageTForce | PredefinedPackageUPS | PredefinedPackageUSPS;
-
+export declare type PredefinedPackage =
+  | PredefinedPackageDHLExpress
+  | PredefinedPackageDPDUK
+  | PredefinedPackageEstafeta
+  | PredefinedPackageFastway
+  | PredefinedPackageFedEx
+  | PredefinedPackageInterlinkExpress
+  | PredefinedPackageLaserShipV2
+  | PredefinedPackageLiefery
+  | PredefinedPackageOnTrac
+  | PredefinedPackagePurolator
+  | PredefinedPackageRoyalMail
+  | PredefinedPackageOmniParcel
+  | PredefinedPackageSprintShip
+  | PredefinedPackageStarTrack
+  | PredefinedPackageTForce
+  | PredefinedPackageUPS
+  | PredefinedPackageUSPS;
 
 // TODO there seems to be a lot of duplicate codes listed here https://www.easypost.com/errors-guide
 export declare type TErrorCode =
-  "INTERNAL_SERVER_ERROR" | "NOT_ACCEPTABLE" | "NOT_FOUND" | "FORBIDDEN" | "PAYMENT_REQUIRED" | "UNAUTHORIZED" |
-  "BAD_REQUEST" | "PAYMENT_GATEWAY.ERROR" | "MODE.UNAUTHORIZED" | "MODE.CONFLICT" | "DATE.PARSE.FAILURE" | "PARAMETER.FORBIDDEN" |
-  "PARAMETER.REQUIRED" | "ADDRESS.PARAMETERS.INVALID_CHARACTER" | "ADDRESS.PARAMETERS.INVALID" | "ADDRESS.COUNTRY.INVALID" | "ADDRESS.VERIFICATION.NOT_FOUND" | "ADDRESS.VERIFICATION.FAILURE" |
-  "ADDRESS.VERIFY.UNAVAILABLE" | "ADDRESS.VERIFICATION.INVALID" | "ADDRESS.VERIFICATION.NOT_FOUND" | "ADDRESS.VERIFY.FAILURE" | "ADDRESS.VERIFY.CARRIER_INVALID" | "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE" |
-  "ADDRESS.VERIFY.ONLY_US" | "ADDRESS.VERIFY.INTL_NOT_ENABLED" | "ADDRESS.VERIFY.MISSING_STREET" | "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP" |
+  | 'INTERNAL_SERVER_ERROR'
+  | 'NOT_ACCEPTABLE'
+  | 'NOT_FOUND'
+  | 'FORBIDDEN'
+  | 'PAYMENT_REQUIRED'
+  | 'UNAUTHORIZED'
+  | 'BAD_REQUEST'
+  | 'PAYMENT_GATEWAY.ERROR'
+  | 'MODE.UNAUTHORIZED'
+  | 'MODE.CONFLICT'
+  | 'DATE.PARSE.FAILURE'
+  | 'PARAMETER.FORBIDDEN'
+  | 'PARAMETER.REQUIRED'
+  | 'ADDRESS.PARAMETERS.INVALID_CHARACTER'
+  | 'ADDRESS.PARAMETERS.INVALID'
+  | 'ADDRESS.COUNTRY.INVALID'
+  | 'ADDRESS.VERIFICATION.NOT_FOUND'
+  | 'ADDRESS.VERIFICATION.FAILURE'
+  | 'ADDRESS.VERIFY.UNAVAILABLE'
+  | 'ADDRESS.VERIFICATION.INVALID'
+  | 'ADDRESS.VERIFICATION.NOT_FOUND'
+  | 'ADDRESS.VERIFY.FAILURE'
+  | 'ADDRESS.VERIFY.CARRIER_INVALID'
+  | 'ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE'
+  | 'ADDRESS.VERIFY.ONLY_US'
+  | 'ADDRESS.VERIFY.INTL_NOT_ENABLED'
+  | 'ADDRESS.VERIFY.MISSING_STREET'
+  | 'ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP'
 
   /**
    * The typo "FORAMT" is in both the docs and api error response.
    * @link https://github.com/EasyPost/easypost-node/pull/156#discussion_r819811282
    */
-  "BATCH.FILE_FORAMT.INVALID" |
-
-  "BATCH.SHIPMENT.TOO_LARGE" | "BATCH.SHIPMENT.MISSING" | "BATCH.SHIPMENTS.REQUIRED" | "BATCH.STATE.CREATING" | "BATCH.STATE.CREATION_FAILED" | "BATCH.STATE.ALREADY_PURCHASED" |
-  "BATCH.STATE.NOT_PURCHASED" | "BATCH.PARAMS.INVALID" | "BANK_ACCOUNT.CHARGE.FAILURE" | "BANK_ACCOUNT.VERIFY.FAILURE" | "CARRIER_ACCOUNT.REGISTRATION.FAILED" | "CARRIER_ACCOUNT.PARAMETERS.INVALID" |
-  "CARRIER_ACCOUNT.INVALID" | "CARRIER_ACCOUNT.TYPE.EXISTS" | "CARRIER_ACCOUNT.TYPE.UNKNOWN" | "CREDIT_CARD.CHARGE.FAILURE" | "CREDIT_CARD.INVALID" | "CONTAINER.TYPE.INVALID" | "CONTAINER.DIMENSION.REQUIRED" |
-  "CONTAINER.NAME.REQUIRED" | "CUSTOMS_INFO.PARAMETERS.INVALID" | "CUSTOMS_ITEM.ORIGIN_COUNTRY.REQUIRED" | "CUSTOMS_ITEM.CURRENCY.ONE_CURRENCY_SUPPORTED" | "CUSTOMS_ITEM.PARAMETERS.INVALID" |
-  "DOCUMENT.COMMERCIAL_INVOICE.FAILURE" | "DOCUMENT.CONVERSION.FAILURE" | "EMAIL_VERIFICATION.USED" | "EMAIL_VERIFICATION.NOT_FOUND" | "EMAIL_VERIFICATION.EXPIRED" |
-  "IMAGE.CONVERSION.FAILURE" | "IMAGE.WIDTH.INVALID" | "INSURANCE.PARAMETERS.INVALID" | "INSURANCE.CREATE.FAILURE" | "INSURANCE.PURCHASE.NOT_ALLOWED" | "INSURANCE.PURCHASE.FAILED" |
-  "INSURANCE.AMOUNT.BELOW_MINIMUM" | "INSURANCE.AMOUNT.REQUIRED" | "INSURANCE.AMOUNT.ABOVE_MAXIMUM" | "ITEM.WEIGHT.REQUIRED" | "ITEM.HEIGHT.REQUIRED" | "ITEM.WIDTH.REQUIRED" |
-  "ITEM.LENGTH.REQUIRED" | "ITEM.VALUE.REQUIRED" | "ITEM.NAME.REQUIRED" | "ORDER.SHIPMENTS.REQUIRED" | "ORDER.FROM_ADDRESS.REQUIRED" | "ORDER.TO_ADDRESS.REQUIRED" |
-  "ORDER.OPTIONS.INVALID" | "ORDER.PARAMS.REQUIRED" | "ORDER.INVALID" | "ORDER.RATE.UNAVAILABLE" | "ORDER.SERVICE.REQUIRED" | "ORDER.CARRIER.REQUIRED" |
-  "ORDER.LABEL_DATE.INVALID" | "ORDER.CARRIER_ACCOUNTS.CONFLICT" | "PARCEL.PREDEFINED_PACKAGE.INVALID" | "PARCEL.PARAMETERS.INVALID" | "PICKUP.MIN_DATETIME.REQUIRED" |
-  "PICKUP.MAX_DATETIME.REQUIRED" | "PICKUP.IS_ACCOUNT_ADDRESS.REQUIRED" | "PICKUP.ADDRESS.INVALID" | "PICKUP.ADDRESS.REQUIRED" | "PICKUP.REQUEST.INVALID" | "PICKUP.BATCH.INVALID" |
-  "PICKUP.BATCH.REQUIRED" | "PICKUP.SHIPMENT_SERVICE.INVALID" | "PICKUP.BATCH_CARRIER.INCONSISTENT" | "PICKUP.STATUS.INVALID" | "PICKUP.BUY.FAILED" | "PICKUP.BUY.NO_MATCHING_RATES" |
-  "PICKUP.SERVICE.REQUIRED" | "PICKUP.CARRIER.REQUIRED" | "PICKUP.SHIPMENT_COUNTRY.INVALID" | "PICKUP.BUY.FORBIDDEN" | "PICKUP.CANCEL.FAILED" | "REFUND.NO_RESPONSE" |
-  "REFUND.FAILURE" | "REFUND.TRACKING_CODES.INVALID" | "REFUND.TRACKING_CODE.NOT_FOUND" | "SCAN_FORM.FAILURE" | "SCAN_FORM.BATCH.MULTIPLE_CARRIERS" | "SCAN_FORM.BATCH.NOT_PURCHASED" |
-  "SCAN_FORM.SHIPMENTS.INVALID" | "SCAN_FORM.SHIPMENTS.REQUIRED" | "SCAN_FORM.CREATE.CARRIER_NOT_SUPPORTED" | "SCAN_FORM.CREATE.FAILURE" | "SHIPMENT.PURCHASE.FAILURE" |
-  "SHIPMENT.OPTIONS.INVALID" | "SHIPMENT.INVALID_PARAMS" | "SHIPMENT.INVALID" | "SHIPMENT.POSTAGE.INVALID_FORMAT" | "SHIPMENT.POSTAGE.FORMAT_UNAVAILABLE" | "SHIPMENT.POSTAGE.REQUIRED" |
-  "SHIPMENT.POSTAGE.EXISTS" | "SHIPMENT.POSTAGE.NO_RESPONSE" | "SHIPMENT.POSTAGE.FAILURE" | "SHIPMENT.REFUND.UNAVAILABLE" | "SHIPMENT.REFUND.FAILURE" | "SHIPMENT.CUSTOMS_INFO.DESCRIPTION_REQUIRED" |
-  "SHIPMENT.CUSTOMS_INFO.REQUIRED" | "SHIPMENT.RATE.CARRIER_ACCOUNT_INVALID" | "SHIPMENT.CARRIER_ACCOUNTS.CONFLICT" | "SHIPMENT.TRACKING_CODE.INVALID_CARRIER" | "SHIPMENT.INSURANCE.ALREADY_PURCHASED" |
-  "SHIPMENT.MISSING_RATE" | "SHIPMENT.MISSING_INFORMATION" | "SHIPMENT.PURCHASE.IN_PROGRESS" | "SHIPMENT.RATES.UNAVAILABLE" | "SHIPMENT.RATE.STAMP_UNAVAILABLE" | "SHIPMENT.RATE.BARCODE_UNAVAILABLE" |
-  "SHIPMENT.POSTAGE.ASCII" | "SHIPMENT_REPORT.DATE_RANGE.INVALID" | "SHIPMENT_REPORT.ALREADY_IN_PROGRESS" | "SHIPMENT_REPORT.DATE_RANGE.TOO_LONG" | "TRACKER.RETRIEVE.ERROR" | "TRACKER.RUN.ERROR" |
-  "TRACKER.CREATE.ERROR" | "TRACKER.NOT_FOUND" | "TRACKER.INVALID_TEST_CODE" | "TRACKER.NO_CARRIER_ACCOUNT" | "TRACKER.INVALID_PARAMS" | "TRACKER.UNSUPPORTED_CARRIER" | "TRACKER.CARRIER_CODE_MISMATCH" |
-  "TRACKER.MULTIPLE_CARRIERS_FOR_CODE" | "TRACKER.NO_CARRIER_FOR_CODE" | "USER.UNAUTHORIZED" | "USER.INVALID" | "USER.PARENT.INVALID" | "USER.CHARGE.NOT_ALLOWED" |
-  "WEBHOOK.EVENT.INVALID" | "WEBHOOK.INVALID" | "DHLGM.RATE_TABLE.NOT_FOUND" | "DHLGM.SCAN_FORM.GENERATION_FAILED" | "DHLGM.RETURN.AUTHORIZATION_NUMBER_REQUIRED" | "DHLGM.LABEL.FAILURE" |
-  "DHLGM.NO_INTERNATIONAL" | "DHLGM.NO_ALCOHOL" | "DHLGM.GIRTH_MAX" | "DHLGM.LETTER_NOT_SUPPORTED" | "DHLGM.ACCESS_TOKEN.GENERATION_FAILED";
-
+  | 'BATCH.FILE_FORAMT.INVALID'
+  | 'BATCH.SHIPMENT.TOO_LARGE'
+  | 'BATCH.SHIPMENT.MISSING'
+  | 'BATCH.SHIPMENTS.REQUIRED'
+  | 'BATCH.STATE.CREATING'
+  | 'BATCH.STATE.CREATION_FAILED'
+  | 'BATCH.STATE.ALREADY_PURCHASED'
+  | 'BATCH.STATE.NOT_PURCHASED'
+  | 'BATCH.PARAMS.INVALID'
+  | 'BANK_ACCOUNT.CHARGE.FAILURE'
+  | 'BANK_ACCOUNT.VERIFY.FAILURE'
+  | 'CARRIER_ACCOUNT.REGISTRATION.FAILED'
+  | 'CARRIER_ACCOUNT.PARAMETERS.INVALID'
+  | 'CARRIER_ACCOUNT.INVALID'
+  | 'CARRIER_ACCOUNT.TYPE.EXISTS'
+  | 'CARRIER_ACCOUNT.TYPE.UNKNOWN'
+  | 'CREDIT_CARD.CHARGE.FAILURE'
+  | 'CREDIT_CARD.INVALID'
+  | 'CONTAINER.TYPE.INVALID'
+  | 'CONTAINER.DIMENSION.REQUIRED'
+  | 'CONTAINER.NAME.REQUIRED'
+  | 'CUSTOMS_INFO.PARAMETERS.INVALID'
+  | 'CUSTOMS_ITEM.ORIGIN_COUNTRY.REQUIRED'
+  | 'CUSTOMS_ITEM.CURRENCY.ONE_CURRENCY_SUPPORTED'
+  | 'CUSTOMS_ITEM.PARAMETERS.INVALID'
+  | 'DOCUMENT.COMMERCIAL_INVOICE.FAILURE'
+  | 'DOCUMENT.CONVERSION.FAILURE'
+  | 'EMAIL_VERIFICATION.USED'
+  | 'EMAIL_VERIFICATION.NOT_FOUND'
+  | 'EMAIL_VERIFICATION.EXPIRED'
+  | 'IMAGE.CONVERSION.FAILURE'
+  | 'IMAGE.WIDTH.INVALID'
+  | 'INSURANCE.PARAMETERS.INVALID'
+  | 'INSURANCE.CREATE.FAILURE'
+  | 'INSURANCE.PURCHASE.NOT_ALLOWED'
+  | 'INSURANCE.PURCHASE.FAILED'
+  | 'INSURANCE.AMOUNT.BELOW_MINIMUM'
+  | 'INSURANCE.AMOUNT.REQUIRED'
+  | 'INSURANCE.AMOUNT.ABOVE_MAXIMUM'
+  | 'ITEM.WEIGHT.REQUIRED'
+  | 'ITEM.HEIGHT.REQUIRED'
+  | 'ITEM.WIDTH.REQUIRED'
+  | 'ITEM.LENGTH.REQUIRED'
+  | 'ITEM.VALUE.REQUIRED'
+  | 'ITEM.NAME.REQUIRED'
+  | 'ORDER.SHIPMENTS.REQUIRED'
+  | 'ORDER.FROM_ADDRESS.REQUIRED'
+  | 'ORDER.TO_ADDRESS.REQUIRED'
+  | 'ORDER.OPTIONS.INVALID'
+  | 'ORDER.PARAMS.REQUIRED'
+  | 'ORDER.INVALID'
+  | 'ORDER.RATE.UNAVAILABLE'
+  | 'ORDER.SERVICE.REQUIRED'
+  | 'ORDER.CARRIER.REQUIRED'
+  | 'ORDER.LABEL_DATE.INVALID'
+  | 'ORDER.CARRIER_ACCOUNTS.CONFLICT'
+  | 'PARCEL.PREDEFINED_PACKAGE.INVALID'
+  | 'PARCEL.PARAMETERS.INVALID'
+  | 'PICKUP.MIN_DATETIME.REQUIRED'
+  | 'PICKUP.MAX_DATETIME.REQUIRED'
+  | 'PICKUP.IS_ACCOUNT_ADDRESS.REQUIRED'
+  | 'PICKUP.ADDRESS.INVALID'
+  | 'PICKUP.ADDRESS.REQUIRED'
+  | 'PICKUP.REQUEST.INVALID'
+  | 'PICKUP.BATCH.INVALID'
+  | 'PICKUP.BATCH.REQUIRED'
+  | 'PICKUP.SHIPMENT_SERVICE.INVALID'
+  | 'PICKUP.BATCH_CARRIER.INCONSISTENT'
+  | 'PICKUP.STATUS.INVALID'
+  | 'PICKUP.BUY.FAILED'
+  | 'PICKUP.BUY.NO_MATCHING_RATES'
+  | 'PICKUP.SERVICE.REQUIRED'
+  | 'PICKUP.CARRIER.REQUIRED'
+  | 'PICKUP.SHIPMENT_COUNTRY.INVALID'
+  | 'PICKUP.BUY.FORBIDDEN'
+  | 'PICKUP.CANCEL.FAILED'
+  | 'REFUND.NO_RESPONSE'
+  | 'REFUND.FAILURE'
+  | 'REFUND.TRACKING_CODES.INVALID'
+  | 'REFUND.TRACKING_CODE.NOT_FOUND'
+  | 'SCAN_FORM.FAILURE'
+  | 'SCAN_FORM.BATCH.MULTIPLE_CARRIERS'
+  | 'SCAN_FORM.BATCH.NOT_PURCHASED'
+  | 'SCAN_FORM.SHIPMENTS.INVALID'
+  | 'SCAN_FORM.SHIPMENTS.REQUIRED'
+  | 'SCAN_FORM.CREATE.CARRIER_NOT_SUPPORTED'
+  | 'SCAN_FORM.CREATE.FAILURE'
+  | 'SHIPMENT.PURCHASE.FAILURE'
+  | 'SHIPMENT.OPTIONS.INVALID'
+  | 'SHIPMENT.INVALID_PARAMS'
+  | 'SHIPMENT.INVALID'
+  | 'SHIPMENT.POSTAGE.INVALID_FORMAT'
+  | 'SHIPMENT.POSTAGE.FORMAT_UNAVAILABLE'
+  | 'SHIPMENT.POSTAGE.REQUIRED'
+  | 'SHIPMENT.POSTAGE.EXISTS'
+  | 'SHIPMENT.POSTAGE.NO_RESPONSE'
+  | 'SHIPMENT.POSTAGE.FAILURE'
+  | 'SHIPMENT.REFUND.UNAVAILABLE'
+  | 'SHIPMENT.REFUND.FAILURE'
+  | 'SHIPMENT.CUSTOMS_INFO.DESCRIPTION_REQUIRED'
+  | 'SHIPMENT.CUSTOMS_INFO.REQUIRED'
+  | 'SHIPMENT.RATE.CARRIER_ACCOUNT_INVALID'
+  | 'SHIPMENT.CARRIER_ACCOUNTS.CONFLICT'
+  | 'SHIPMENT.TRACKING_CODE.INVALID_CARRIER'
+  | 'SHIPMENT.INSURANCE.ALREADY_PURCHASED'
+  | 'SHIPMENT.MISSING_RATE'
+  | 'SHIPMENT.MISSING_INFORMATION'
+  | 'SHIPMENT.PURCHASE.IN_PROGRESS'
+  | 'SHIPMENT.RATES.UNAVAILABLE'
+  | 'SHIPMENT.RATE.STAMP_UNAVAILABLE'
+  | 'SHIPMENT.RATE.BARCODE_UNAVAILABLE'
+  | 'SHIPMENT.POSTAGE.ASCII'
+  | 'SHIPMENT_REPORT.DATE_RANGE.INVALID'
+  | 'SHIPMENT_REPORT.ALREADY_IN_PROGRESS'
+  | 'SHIPMENT_REPORT.DATE_RANGE.TOO_LONG'
+  | 'TRACKER.RETRIEVE.ERROR'
+  | 'TRACKER.RUN.ERROR'
+  | 'TRACKER.CREATE.ERROR'
+  | 'TRACKER.NOT_FOUND'
+  | 'TRACKER.INVALID_TEST_CODE'
+  | 'TRACKER.NO_CARRIER_ACCOUNT'
+  | 'TRACKER.INVALID_PARAMS'
+  | 'TRACKER.UNSUPPORTED_CARRIER'
+  | 'TRACKER.CARRIER_CODE_MISMATCH'
+  | 'TRACKER.MULTIPLE_CARRIERS_FOR_CODE'
+  | 'TRACKER.NO_CARRIER_FOR_CODE'
+  | 'USER.UNAUTHORIZED'
+  | 'USER.INVALID'
+  | 'USER.PARENT.INVALID'
+  | 'USER.CHARGE.NOT_ALLOWED'
+  | 'WEBHOOK.EVENT.INVALID'
+  | 'WEBHOOK.INVALID'
+  | 'DHLGM.RATE_TABLE.NOT_FOUND'
+  | 'DHLGM.SCAN_FORM.GENERATION_FAILED'
+  | 'DHLGM.RETURN.AUTHORIZATION_NUMBER_REQUIRED'
+  | 'DHLGM.LABEL.FAILURE'
+  | 'DHLGM.NO_INTERNATIONAL'
+  | 'DHLGM.NO_ALCOHOL'
+  | 'DHLGM.GIRTH_MAX'
+  | 'DHLGM.LETTER_NOT_SUPPORTED'
+  | 'DHLGM.ACCESS_TOKEN.GENERATION_FAILED';
 
 /**
  * In the event of a client or server error, the response will contain the standard 4xx or 5xx respectively, accompanied by a well-formed JSON body describing the issue, e.g., a required field was omitted, a purchase failed, etc.
- * 
- * Each client library will encapsulate these errors and raise an exception, in addition to other exceptional cases, such as network failures. 
+ *
+ * Each client library will encapsulate these errors and raise an exception, in addition to other exceptional cases, such as network failures.
  * It is recommended to handle exceptions gracefully and to report any issues to support@easypost.com.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#error-object
  */
 export declare interface IError {
@@ -248,14 +1143,14 @@ export declare interface IVerifications {
 }
 
 /**
- * Address objects are used to represent people, places, and organizations in a number of contexts. 
+ * Address objects are used to represent people, places, and organizations in a number of contexts.
  * For example, a Shipment requires a to_address and from_address to accurately calculate rates and generate postage.
- * 
+ *
  * Additionally, EasyPost offers several verification tools that can be used to detect deliverability issues, correct minor errors in spelling/formatting, and determine if an Address is residential or not (which has a significant effect on Shipment rating for many carriers).
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#address-object
  */
-export declare interface IAddress extends IObjectWithId<"Address"> {
+export declare interface IAddress extends IObjectWithId<'Address'> {
   /**
    * First line of the address
    */
@@ -333,16 +1228,16 @@ export declare interface IAddress extends IObjectWithId<"Address"> {
 }
 
 /**
- * Parcel objects represent the physical container being shipped. 
- * Dimensions can be supplied either as length, width, and height dimensions, or a predefined_package string. 
+ * Parcel objects represent the physical container being shipped.
+ * Dimensions can be supplied either as length, width, and height dimensions, or a predefined_package string.
  * Only weight is required, but since many carriers charge different rates for packages with large dimensions, we strongly recommend including all dimensions if available.
- * 
+ *
  * Weights are in OUNCES (OZ) and go to one decimal point.
  * Dimensions are in INCHES (IN) and go to one decimal point.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#parcel-object
  */
-export declare interface IParcel extends IObjectWithId<"Parcel">, IDatedObject {
+export declare interface IParcel extends IObjectWithId<'Parcel'>, IDatedObject {
   /**
    * Required if width and/or height are present
    * float (inches)
@@ -367,32 +1262,32 @@ export declare interface IParcel extends IObjectWithId<"Parcel">, IDatedObject {
   predefined_package?: PredefinedPackage;
 
   /**
-   * Always required 
+   * Always required
    * float (oz)
    */
   weight: number;
 }
 
-export declare type TInsuranceStatus = "new" | "pending" | "purchased" | "failed" | "cancelled";
+export declare type TInsuranceStatus = 'new' | 'pending' | 'purchased' | 'failed' | 'cancelled';
 
 /**
- * An Insurance object represents insurance for packages purchased both via the EasyPost API as well as shipments purchased through third parties and later registered with EasyPost. 
+ * An Insurance object represents insurance for packages purchased both via the EasyPost API as well as shipments purchased through third parties and later registered with EasyPost.
  * An Insurance is created automatically whenever you buy a Shipment through EasyPost and pass insurance options during the Buy call or in a later call to Insure a Shipment.
- * 
- * Insurance purchased through the Shipment Buy or Insure endpoints is immediately insured - there is no possibility of rejection based on tracking information, as the package was just created. 
+ *
+ * Insurance purchased through the Shipment Buy or Insure endpoints is immediately insured - there is no possibility of rejection based on tracking information, as the package was just created.
  * On the other hand, Insurance purchased on shipments purchased outside of EasyPost requires creation with a tracking code so that EasyPost may confirm the package existence and current shipping status at the time of purchase.
- * 
- * Standalone insurance is created in a pending state to help distinguish it from insurance purchased for an EasyPost Shipment. 
- * Both kinds of Insurance use the Tracking system to receive periodic updates, and will report those updates to any appropriate Webhooks on file. 
+ *
+ * Standalone insurance is created in a pending state to help distinguish it from insurance purchased for an EasyPost Shipment.
+ * Both kinds of Insurance use the Tracking system to receive periodic updates, and will report those updates to any appropriate Webhooks on file.
  * Standalone insurance will cancel itself if the tracking information for the given tracking code shows evidence of having been shipped anytime before the insurance was purchased.
- * 
- * Unlike Shipments within EasyPost, Insurance objects register To and From Address objects according to the destination and ship-from locations of the package. 
- * This means that a Shipment with "is_return: true" actually ships to the listed From Address. 
+ *
+ * Unlike Shipments within EasyPost, Insurance objects register To and From Address objects according to the destination and ship-from locations of the package.
+ * This means that a Shipment with "is_return: true" actually ships to the listed From Address.
  * Insurance does not have a concept of "is_return", so all insurance records refer to their true package destination as "to_address", regardless of whether or not the shipment is a return.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#insurance-object
  */
-export declare interface IInsurance extends IObjectWithId<"Insurance">, IDatedObject {
+export declare interface IInsurance extends IObjectWithId<'Insurance'>, IDatedObject {
   /**
    * The unique reference for this Insurance, if any
    */
@@ -454,21 +1349,20 @@ export declare interface IInsurance extends IObjectWithId<"Insurance">, IDatedOb
   messages: string[];
 }
 
-export declare type TFeeType = "LabelFee" | "PostageFee" | "InsuranceFee" | "TrackerFee";
+export declare type TFeeType = 'LabelFee' | 'PostageFee' | 'InsuranceFee' | 'TrackerFee';
 
 /**
- * Fee objects are used to represent the breakdown of charges made when purchasing an item on EasyPost. 
+ * Fee objects are used to represent the breakdown of charges made when purchasing an item on EasyPost.
  * Shipments and Trackers both have associations to Fee objects.
- * 
- * Each Shipment object will have a Fee of type "LabelFee" to represent the label fee charged by EasyPost for the service. 
- * Shipments with postage collected by EasyPost (as opposed to shipments with postage collected directly by the carrier) will have a "PostageFee" according to the postage amount. 
- * Insurance on a Shipment will add an "InsuranceFee" with the insurance premium (not the covered value) for the amount. 
+ *
+ * Each Shipment object will have a Fee of type "LabelFee" to represent the label fee charged by EasyPost for the service.
+ * Shipments with postage collected by EasyPost (as opposed to shipments with postage collected directly by the carrier) will have a "PostageFee" according to the postage amount.
+ * Insurance on a Shipment will add an "InsuranceFee" with the insurance premium (not the covered value) for the amount.
  * Tracker objects will have a "TrackerFee" with the price, even when a Tracker is free.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#fee-object
  */
-export declare interface IFee extends IObjectWithId<"Fee"> {
-
+export declare interface IFee extends IObjectWithId<'Fee'> {
   /**
    * The name of the category of fee. Possible types are "LabelFee", "PostageFee", "InsuranceFee", and "TrackerFee"
    */
@@ -490,37 +1384,47 @@ export declare interface IFee extends IObjectWithId<"Fee"> {
   refunded: boolean;
 }
 
-export declare type TTrackerStatus = "unknown" | "pre_transit" | "in_transit" | "out_for_delivery" | "delivered" | "available_for_pickup" | "return_to_sender" | "failure" | "cancelled" | "error";
+export declare type TTrackerStatus =
+  | 'unknown'
+  | 'pre_transit'
+  | 'in_transit'
+  | 'out_for_delivery'
+  | 'delivered'
+  | 'available_for_pickup'
+  | 'return_to_sender'
+  | 'failure'
+  | 'cancelled'
+  | 'error';
 
 /**
- * A Tracker object contains all of the tracking information for a package. 
+ * A Tracker object contains all of the tracking information for a package.
  * A Tracker is created automatically whenever you buy a Shipment through EasyPost.
- * Ff you don't use EasyPost to purchase your shipping labels, you can still track packages through our API by creating a Tracker object directly. 
+ * Ff you don't use EasyPost to purchase your shipping labels, you can still track packages through our API by creating a Tracker object directly.
  * Each Tracker is continually updated in the background as the package moves through its life cycle, regardless of whether or not the label was purchased through EasyPost.
- * 
- * After creation, a Tracker object will be updated periodically based on when the carrier provides EasyPost with new tracking information. 
- * This information can be consumed by using our webhooks infrastructure. 
+ *
+ * After creation, a Tracker object will be updated periodically based on when the carrier provides EasyPost with new tracking information.
+ * This information can be consumed by using our webhooks infrastructure.
  * Every time a Tracker is updated a webhook Event will be sent.
- * 
- * The Tracker object contains both the current information about the package as well as previous updates. 
- * All of the previous updates are stored in the tracking_details array. 
+ *
+ * The Tracker object contains both the current information about the package as well as previous updates.
+ * All of the previous updates are stored in the tracking_details array.
  * Each TrackingDetail object contains the status, the message from the carrier, and a TrackingLocation.
- * 
- * The TrackingLocation contains city, state, country, and zip information about the location where the package was scanned. 
+ *
+ * The TrackingLocation contains city, state, country, and zip information about the location where the package was scanned.
  * The information each carrier provides is different, so some carriers may not make use of all of these fields.
- * 
- * Some Tracker objects may also contain a CarrierDetail, which stores some additional information about the Tracker that the carrier has made available to EasyPost. 
- * The CarrierDetail object contains the service and container_type of the package. 
+ *
+ * Some Tracker objects may also contain a CarrierDetail, which stores some additional information about the Tracker that the carrier has made available to EasyPost.
+ * The CarrierDetail object contains the service and container_type of the package.
  * Additionally, it also stores the est_delivery_date_local and est_delivery_time_local, which provide information about the local delivery time.
- * 
- * It's worth noting that tracking_codes are not globally unique. 
- * Each carrier promises uniqueness for a given tracking_code for a certain period of time, but the length of time varies greatly based on the specific carrier and service level. 
- * The carriers do eventually recycle tracking_codes, and for this reason enforcing uniqueness on the tracking_code field is not recommended. 
+ *
+ * It's worth noting that tracking_codes are not globally unique.
+ * Each carrier promises uniqueness for a given tracking_code for a certain period of time, but the length of time varies greatly based on the specific carrier and service level.
+ * The carriers do eventually recycle tracking_codes, and for this reason enforcing uniqueness on the tracking_code field is not recommended.
  * EasyPost does, however, prevent the creation of duplicate Trackers based on tracking_code and carrier; duplicate requests by the same User will simply return the original Tracker.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#tracker-object
  */
-export declare interface ITracker extends IObjectWithId<"Tracker">, IDatedObject {
+export declare interface ITracker extends IObjectWithId<'Tracker'>, IDatedObject {
   /**
    * The tracking code provided by the carrier
    */
@@ -578,12 +1482,22 @@ export declare interface ITracker extends IObjectWithId<"Tracker">, IDatedObject
   fees: IFee[];
 }
 
-export declare type TTrackingStatus = "unknown" | "pre_transit" | "in_transit" | "out_for_delivery" | "delivered" | "available_for_pickup" | "return_to_sender" | "failure" | "cancelled" | "error";
+export declare type TTrackingStatus =
+  | 'unknown'
+  | 'pre_transit'
+  | 'in_transit'
+  | 'out_for_delivery'
+  | 'delivered'
+  | 'available_for_pickup'
+  | 'return_to_sender'
+  | 'failure'
+  | 'cancelled'
+  | 'error';
 
 /**
  * @see https://www.easypost.com/docs/api/node#tracking-detail-object
  */
-export declare interface ITrackingDetail extends IBaseObject<"TrackingDetail"> {
+export declare interface ITrackingDetail extends IBaseObject<'TrackingDetail'> {
   /**
    * Description of the scan event
    */
@@ -613,7 +1527,7 @@ export declare interface ITrackingDetail extends IBaseObject<"TrackingDetail"> {
 /**
  * @see https://www.easypost.com/docs/api/node#tracking-location-object
  */
-export declare interface ITrackingLocation extends IBaseObject<"TrackingLocation"> {
+export declare interface ITrackingLocation extends IBaseObject<'TrackingLocation'> {
   /**
    * The city where the scan event occurred (if available)
    */
@@ -638,7 +1552,7 @@ export declare interface ITrackingLocation extends IBaseObject<"TrackingLocation
 /**
  * @see https://www.easypost.com/docs/api/node#carrier-detail-object
  */
-export declare interface ICarrierDetail extends IBaseObject<"CarrierDetail"> {
+export declare interface ICarrierDetail extends IBaseObject<'CarrierDetail'> {
   /**
    * The service level the associated shipment was shipped with (if available)
    */
@@ -695,16 +1609,24 @@ export declare interface ICarrierDetail extends IBaseObject<"CarrierDetail"> {
   initial_delivery_attempt: string;
 }
 
-export declare type TBatchState = "creating" | "creation_failed" | "created" | "purchasing" | "purchase_failed" | "purchased" | "label_generating" | "label_generated";
+export declare type TBatchState =
+  | 'creating'
+  | 'creation_failed'
+  | 'created'
+  | 'purchasing'
+  | 'purchase_failed'
+  | 'purchased'
+  | 'label_generating'
+  | 'label_generated';
 
 /**
- * The Batch object allows you to perform operations on multiple Shipments at once. 
- * This includes scheduling a Pickup, creating a ScanForm and consolidating labels. 
+ * The Batch object allows you to perform operations on multiple Shipments at once.
+ * This includes scheduling a Pickup, creating a ScanForm and consolidating labels.
  * Operations performed on Batches are asynchronous and take advantage of our webhook infrastructure.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#batch-object
  */
-export declare interface IBatch extends IObjectWithId<"Batch">, IDatedObject {
+export declare interface IBatch extends IObjectWithId<'Batch'>, IDatedObject {
   /**
    * An optional field that may be used in place of ID in some API endpoints
    */
@@ -743,8 +1665,13 @@ export declare interface IBatch extends IObjectWithId<"Batch">, IDatedObject {
   pickup: IPickup;
 }
 
-export declare type TBatchStatus = "postage_purchased" | "postage_purchase_failed" | "queued_for_purchase" | "creation_failed" | "created";
-export declare type TBatchStatuses = { [key in TBatchStatus]: number; }
+export declare type TBatchStatus =
+  | 'postage_purchased'
+  | 'postage_purchase_failed'
+  | 'queued_for_purchase'
+  | 'creation_failed'
+  | 'created';
+export declare type TBatchStatuses = { [key in TBatchStatus]: number };
 
 /**
  * @see https://www.easypost.com/docs/api/node#batch-shipment-object
@@ -771,20 +1698,26 @@ export declare interface IBatchShipment {
   batch_message: string;
 }
 
-export declare type TCustomsContentsType = "documents" | "gift" | "merchandise" | "returned_goods" | "sample" | "other";
+export declare type TCustomsContentsType =
+  | 'documents'
+  | 'gift'
+  | 'merchandise'
+  | 'returned_goods'
+  | 'sample'
+  | 'other';
 
 /**
  * CustomsInfo objects contain CustomsItem objects and all necessary information for the generation of customs forms required for international shipping.
- * 
+ *
  * Please see the Shipments documentation for examples of including a CustomsInfo object in a shipment.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#customs-info-object
  */
-export declare interface ICustomsInfo extends IObjectWithId<"CustomsInfo">, IDatedObject {
+export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDatedObject {
   /**
    * "EEL" or "PFC"
    */
-  eel_pfc: "EEL" | "PFC";
+  eel_pfc: 'EEL' | 'PFC';
 
   /**
    * "documents", "gift", "merchandise", "returned_goods", "sample", or "other"
@@ -792,7 +1725,7 @@ export declare interface ICustomsInfo extends IObjectWithId<"CustomsInfo">, IDat
   contents_type: TCustomsContentsType;
 
   /**
-   * (max 255 characters) Human readable description of content. 
+   * (max 255 characters) Human readable description of content.
    * Required for certain carriers and always required if contents_type is "other"
    */
   contents_explanation: string;
@@ -810,12 +1743,12 @@ export declare interface ICustomsInfo extends IObjectWithId<"CustomsInfo">, IDat
   /**
    * "abandon" or "return", defaults to "return"
    */
-  non_delivery_option: "abandon" | "return" | "return";
+  non_delivery_option: 'abandon' | 'return' | 'return';
 
   /**
    * "none", "other", "quarantine", or "sanitary_phytosanitary_inspection"
    */
-  restriction_type: "none" | "other" | "quarantine" | "sanitary_phytosanitary_inspection";
+  restriction_type: 'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection';
 
   /**
    * Required if restriction_type is not "none"
@@ -830,10 +1763,10 @@ export declare interface ICustomsInfo extends IObjectWithId<"CustomsInfo">, IDat
 
 /**
  * A CustomsItem object describes goods for international shipment and should be created then included in a CustomsInfo object.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#customs-item-object
  */
-export declare interface ICustomsItem extends IObjectWithId<"CustomsItem">, IDatedObject {
+export declare interface ICustomsItem extends IObjectWithId<'CustomsItem'>, IDatedObject {
   /**
    * Required, description of item being shipped
    */
@@ -859,7 +1792,7 @@ export declare interface ICustomsItem extends IObjectWithId<"CustomsItem">, IDat
 
   /**
    * Harmonized Tariff Schedule, e.g. "6109.10.0012" for Men's T-shirts
-   * 
+   *
    * @see https://hts.usitc.gov/
    */
   hs_tariff_number: string;
@@ -881,15 +1814,15 @@ export declare interface ICustomsItem extends IObjectWithId<"CustomsItem">, IDat
 }
 
 /**
- * Webhook Events are triggered by changes in objects you've created via the API. 
- * Every time an Event related to one of your objects is created, EasyPost guarantees at least one POST request will be sent to each of the webhook URLs set up for your account. 
- * For this reason, we strongly encourage your webhook handler to be idempotent. 
+ * Webhook Events are triggered by changes in objects you've created via the API.
+ * Every time an Event related to one of your objects is created, EasyPost guarantees at least one POST request will be sent to each of the webhook URLs set up for your account.
+ * For this reason, we strongly encourage your webhook handler to be idempotent.
  * See the webhooks guide for more information.
- * 
+ *
  * @see [webhooks guide] https://www.easypost.com/webhooks-guide
  * @see https://www.easypost.com/docs/api/node#events
  */
-export declare interface IEvent extends IObjectWithId<"Event">, IDatedObject {
+export declare interface IEvent extends IObjectWithId<'Event'>, IDatedObject {
   /**
    * Result type and event name, see the "Possible Event Types" section for more information
    */
@@ -901,20 +1834,20 @@ export declare interface IEvent extends IObjectWithId<"Event">, IDatedObject {
   previous_attributes: any;
 
   /**
-   * The object associated with the Event. See the "object" attribute on the result to determine its specific type. 
+   * The object associated with the Event. See the "object" attribute on the result to determine its specific type.
    * This field will not be returned when retrieving events directly from the API
    */
   result: any;
 
   /**
    * The current status of the event. Possible values are "completed", "failed", "in_queue", "retrying", or "pending" (deprecated)
-   * 
+   *
    * @deprecated
    */
-  status: "completed" | "failed" | "in_queue" | "retrying" | "pending";
+  status: 'completed' | 'failed' | 'in_queue' | 'retrying' | 'pending';
 
   /**
-   * Webhook URLs that have not yet been successfully notified as of the time this webhook event was sent. 
+   * Webhook URLs that have not yet been successfully notified as of the time this webhook event was sent.
    * The URL receiving the Event will still be listed in pending_urls, as will any other URLs that receive the Event at the same time
    */
   pending_urls: string[];
@@ -926,16 +1859,16 @@ export declare interface IEvent extends IObjectWithId<"Event">, IDatedObject {
 }
 
 /**
- * The Order object represents a collection of packages and can be used for Multi-Piece Shipments. 
- * Like a single Shipment each Order consists of a "to" and "from" Address to be used for each Shipment within the Order. 
- * These Addresses will be copied to each Shipment so there is no need to specify them multiple times. 
+ * The Order object represents a collection of packages and can be used for Multi-Piece Shipments.
+ * Like a single Shipment each Order consists of a "to" and "from" Address to be used for each Shipment within the Order.
+ * These Addresses will be copied to each Shipment so there is no need to specify them multiple times.
  * Each Shipment must then specify its Parcel, Options, and CustomsInfo.
- * 
+ *
  * An Order created with valid Address Objects and Parcel data nested within the Order's Shipment object will automatically retrieve available shipping Rate options.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#order-object
  */
-export declare interface IOrder extends IObjectWithId<"Order">, IDatedObject {
+export declare interface IOrder extends IObjectWithId<'Order'>, IDatedObject {
   /**
    * An optional field that may be used in place of id in other API endpoints
    */
@@ -983,12 +1916,12 @@ export declare interface IOrder extends IObjectWithId<"Order">, IDatedObject {
 }
 
 /**
- * When rating a Shipment or Pickup, some carriers may fail to generate rates. 
+ * When rating a Shipment or Pickup, some carriers may fail to generate rates.
  * These failures are returned as part of the Shipment or Pickup as part of their messages attribute, and follow a common object structure.
- * 
- * It is important to note that the message value for any member of this list comes directly from the carrier, not from EasyPost. 
+ *
+ * It is important to note that the message value for any member of this list comes directly from the carrier, not from EasyPost.
  * This means that if you see an authentication or other non-shipping error here, it is not an issue between you and EasyPost, it is an issue between you and the carrier, or an issue with the given data.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#message-object
  */
 export declare interface IMessage {
@@ -1014,14 +1947,14 @@ export declare interface IMessage {
 }
 
 /**
- * After a Shipment is successfully created, it will automatically fetch Rates. 
+ * After a Shipment is successfully created, it will automatically fetch Rates.
  * You can limit the CarrierAccounts to use for rating by passing the carrier_accounts parameter upon Shipment creation.
- * 
+ *
  * There are three rate types: the actual rate that will be purchased, rate and currency, the published non-discounted rate, list_rate and list_currency, and the rate if purchased from the post office, retail_rate and retail_currency.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#rate-object
  */
-export declare interface IRate extends IObjectWithId<"Rate">, IDatedObject {
+export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
   /**
    * service level/name
    * @see https://www.easypost.com/docs/api/node#service-levels
@@ -1090,14 +2023,14 @@ export declare interface IRate extends IObjectWithId<"Rate">, IDatedObject {
 }
 
 /**
- * The workhorse of the EasyPost API, a Shipment is made up of a "to" and "from" Address, the Parcel being shipped, and any customs forms required for international deliveries. 
+ * The workhorse of the EasyPost API, a Shipment is made up of a "to" and "from" Address, the Parcel being shipped, and any customs forms required for international deliveries.
  * Once created a Shipment object is used to retrieve shipping Rates and purchase a label.
- * 
+ *
  * A Shipment created with a valid to_address, from_address, and parcel will automatically populate its rates attribute.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#shipment-object
  */
-export declare interface IShipment extends IObjectWithId<"Shipment">, IDatedObject {
+export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObject {
   /**
    * An optional field that may be used in place of id in other API endpoints
    */
@@ -1206,7 +2139,7 @@ export declare interface IShipment extends IObjectWithId<"Shipment">, IDatedObje
   /**
    * The current status of the shipment refund process. Possible values are "submitted", "refunded", "rejected".
    */
-  refund_status: "submitted" | "refunded" | "rejected";
+  refund_status: 'submitted' | 'refunded' | 'rejected';
 
   /**
    * The ID of the batch that contains this shipment, if any
@@ -1225,47 +2158,69 @@ export declare interface IShipment extends IObjectWithId<"Shipment">, IDatedObje
 }
 
 /**
-  *  - FedEx
-  *    - (null) - If print_custom_1_code is not provided it defaults to Customer Reference
-  *    - PO - Purchase Order Number
-  *    - DP - Department Number
-  *    - RMA - Return Merchandise Authorization
-  *  - UPS
-  *    - AJ - Accounts Receivable Customer Account
-  *    - AT - Appropriation Number
-  *    - BM - Bill of Lading Number
-  *    - 9V - Collect on Delivery (COD) Number
-  *    - ON - Dealer Order Number
-  *    - DP - Department Number
-  *    - 3Q - Food and Drug Administration (FDA) Product Code
-  *    - IK - Invoice Number
-  *    - MK - Manifest Key Number
-  *    - MJ - Model Number
-  *    - PM - Part Number
-  *    - PC - Production Code
-  *    - PO - Purchase Order Number
-  *    - RQ - Purchase Request Number
-  *    - RZ - Return Authorization Number
-  *    - SA - Salesperson Number
-  *    - SE - Serial Number
-  *    - ST - Store Number
-  *    - TN - Transaction Reference Number
-  *    - EI - Employer's ID Number
-  *    - TJ - Federal Taxpayer ID No.
-  */
-export declare type TPrintCustomCode = "PO" | "DP" | "RMA" | "AJ" | "AT" | "BM" | "9V" | "ON" | "3Q" | "IK" | "MK" | "MJ" | "PM" | "PC" | "RQ" | "RZ" | "SA" | "SE" | "ST" | "TN" | "EI" | "TJ"; // TODO enum maybe?
+ *  - FedEx
+ *    - (null) - If print_custom_1_code is not provided it defaults to Customer Reference
+ *    - PO - Purchase Order Number
+ *    - DP - Department Number
+ *    - RMA - Return Merchandise Authorization
+ *  - UPS
+ *    - AJ - Accounts Receivable Customer Account
+ *    - AT - Appropriation Number
+ *    - BM - Bill of Lading Number
+ *    - 9V - Collect on Delivery (COD) Number
+ *    - ON - Dealer Order Number
+ *    - DP - Department Number
+ *    - 3Q - Food and Drug Administration (FDA) Product Code
+ *    - IK - Invoice Number
+ *    - MK - Manifest Key Number
+ *    - MJ - Model Number
+ *    - PM - Part Number
+ *    - PC - Production Code
+ *    - PO - Purchase Order Number
+ *    - RQ - Purchase Request Number
+ *    - RZ - Return Authorization Number
+ *    - SA - Salesperson Number
+ *    - SE - Serial Number
+ *    - ST - Store Number
+ *    - TN - Transaction Reference Number
+ *    - EI - Employer's ID Number
+ *    - TJ - Federal Taxpayer ID No.
+ */
+export declare type TPrintCustomCode =
+  | 'PO'
+  | 'DP'
+  | 'RMA'
+  | 'AJ'
+  | 'AT'
+  | 'BM'
+  | '9V'
+  | 'ON'
+  | '3Q'
+  | 'IK'
+  | 'MK'
+  | 'MJ'
+  | 'PM'
+  | 'PC'
+  | 'RQ'
+  | 'RZ'
+  | 'SA'
+  | 'SE'
+  | 'ST'
+  | 'TN'
+  | 'EI'
+  | 'TJ'; // TODO enum maybe?
 
-export declare type LabelFormat = "PNG" | "PDF" | "ZPL" | "EPL2";
+export declare type LabelFormat = 'PNG' | 'PDF' | 'ZPL' | 'EPL2';
 
 /**
- * Shipments can have a variety of additional options which you can specify when creating a shipment. 
+ * Shipments can have a variety of additional options which you can specify when creating a shipment.
  * The Options object can be populated with the keys below.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#options-object
  */
 export declare interface IOptions {
   /**
-   * Setting this option to true, will add an additional handling charge. 
+   * Setting this option to true, will add an additional handling charge.
    * An Additional Handling charge may be applied to the following:
    *  - Any article that is encased in an outside shipping container made of metal or wood.
    *  - Any item, such as a barrel, drum, pail or tire, that is not fully encased in a corrugated cardboard shipping container.
@@ -1275,7 +2230,7 @@ export declare interface IOptions {
   additional_handling: boolean;
 
   /**
-   * Setting this option to "0", will allow the minimum amount of address information to pass the validation check. 
+   * Setting this option to "0", will allow the minimum amount of address information to pass the validation check.
    * Only for USPS postage.
    */
   address_validation_level: string;
@@ -1306,11 +2261,11 @@ export declare interface IOptions {
   /**
    * Method for payment. "CASH", "CHECK", "MONEY_ORDER"
    */
-  cod_method: "CASH" | "CHECK" | "MONEY_ORDER";
+  cod_method: 'CASH' | 'CHECK' | 'MONEY_ORDER';
 
   /**
-   * The ID of the Address to which the COD payment should be returned. 
-   * Defaults to the origin address. 
+   * The ID of the Address to which the COD payment should be returned.
+   * Defaults to the origin address.
    * Only available on FedEx shipments.
    */
   cod_address_id: string;
@@ -1321,7 +2276,7 @@ export declare interface IOptions {
   currency: string;
 
   /**
-   * If you want to request a signature, you can pass "ADULT_SIGNATURE" or "SIGNATURE". 
+   * If you want to request a signature, you can pass "ADULT_SIGNATURE" or "SIGNATURE".
    * You may also request "NO_SIGNATURE" to leave the package at the door.
    *  - All - some options may be limited for international shipments
    *  - FedEx - "INDIRECT_SIGNATURE" is also an option
@@ -1329,11 +2284,17 @@ export declare interface IOptions {
    *    - "ADULT_SIGNATURE_RESTRICTED"
    *    - "SIGNATURE_RESTRICTED"
    */
-  delivery_confirmation: "ADULT_SIGNATURE" | "SIGNATURE" | "NO_SIGNATURE" | "INDIRECT_SIGNATURE" | "ADULT_SIGNATURE_RESTRICTED" | "SIGNATURE_RESTRICTED";
+  delivery_confirmation:
+    | 'ADULT_SIGNATURE'
+    | 'SIGNATURE'
+    | 'NO_SIGNATURE'
+    | 'INDIRECT_SIGNATURE'
+    | 'ADULT_SIGNATURE_RESTRICTED'
+    | 'SIGNATURE_RESTRICTED';
 
   /**
-   * Method the customer will use to transfer the package to the carrier. 
-   * "REGULAR_PICKUP", "SCHEDULED_PICKUP", "RETAIL_LOCATION", "STATION" or "DROP_BOX". 
+   * Method the customer will use to transfer the package to the carrier.
+   * "REGULAR_PICKUP", "SCHEDULED_PICKUP", "RETAIL_LOCATION", "STATION" or "DROP_BOX".
    * Supported carriers and their corresponding carrier dropoff codes:
    *  - FedEx
    *    - "REGULAR_PICKUP" - "REGULAR_PICKUP" (default)
@@ -1342,7 +2303,14 @@ export declare interface IOptions {
    *    - "STATION" - "STATION"
    *    - "DROP_BOX" - "DROP_BOX"
    */
-  dropoff_type: "REGULAR_PICKUP" | "SCHEDULED_PICKUP" | "RETAIL_LOCATION" | "STATION" | "DROP_BOX" | "REQUEST_COURIER" | "BUSINESS_SERVICE_CENTER";
+  dropoff_type:
+    | 'REGULAR_PICKUP'
+    | 'SCHEDULED_PICKUP'
+    | 'RETAIL_LOCATION'
+    | 'STATION'
+    | 'DROP_BOX'
+    | 'REQUEST_COURIER'
+    | 'BUSINESS_SERVICE_CENTER';
 
   /**
    * Package contents contain dry ice.
@@ -1370,10 +2338,15 @@ export declare interface IOptions {
   /**
    * Possible values "ADDRESS_SERVICE_REQUESTED", "FORWARDING_SERVICE_REQUESTED", "CHANGE_SERVICE_REQUESTED", "RETURN_SERVICE_REQUESTED", "LEAVE_IF_NO_RESPONSE"
    */
-  endorsement: "ADDRESS_SERVICE_REQUESTED" | "FORWARDING_SERVICE_REQUESTED" | "CHANGE_SERVICE_REQUESTED" | "RETURN_SERVICE_REQUESTED" | "LEAVE_IF_NO_RESPONSE";
+  endorsement:
+    | 'ADDRESS_SERVICE_REQUESTED'
+    | 'FORWARDING_SERVICE_REQUESTED'
+    | 'CHANGE_SERVICE_REQUESTED'
+    | 'RETURN_SERVICE_REQUESTED'
+    | 'LEAVE_IF_NO_RESPONSE';
 
   /**
-   * Additional cost to be added to the invoice of this shipment. 
+   * Additional cost to be added to the invoice of this shipment.
    * Only applies to UPS currently.
    */
   freight_charge: number;
@@ -1384,11 +2357,20 @@ export declare interface IOptions {
   handling_instructions: string;
 
   /**
-   * Dangerous goods indicator. 
-   * Possible values are "PRIMARY_CONTAINED", "PRIMARY_PACKED", "PRIMARY", "SECONDARY_CONTAINED", "SECONDARY_PACKED", "SECONDARY", "ORMD", "LIMITED_QUANTITY", "LITHIUM". 
+   * Dangerous goods indicator.
+   * Possible values are "PRIMARY_CONTAINED", "PRIMARY_PACKED", "PRIMARY", "SECONDARY_CONTAINED", "SECONDARY_PACKED", "SECONDARY", "ORMD", "LIMITED_QUANTITY", "LITHIUM".
    * Applies to USPS, FedEx and DHL eCommerce.
    */
-  hazmat: "PRIMARY_CONTAINED" | "PRIMARY_PACKED" | "PRIMARY" | "SECONDARY_CONTAINED" | "SECONDARY_PACKED" | "SECONDARY" | "ORMD" | "LIMITED_QUANTITY" | "LITHIUM";
+  hazmat:
+    | 'PRIMARY_CONTAINED'
+    | 'PRIMARY_PACKED'
+    | 'PRIMARY'
+    | 'SECONDARY_CONTAINED'
+    | 'SECONDARY_PACKED'
+    | 'SECONDARY'
+    | 'ORMD'
+    | 'LIMITED_QUANTITY'
+    | 'LITHIUM';
 
   /**
    * Package will wait at carrier facility for pickup.
@@ -1396,11 +2378,11 @@ export declare interface IOptions {
   hold_for_pickup: boolean;
 
   /**
-   * Incoterm negotiated for shipment. 
-   * Supported values are "EXW", "FCA", "CPT", "CIP", "DAT", "DAP", "DDP", "FAS", "FOB", "CFR", and "CIF". 
+   * Incoterm negotiated for shipment.
+   * Supported values are "EXW", "FCA", "CPT", "CIP", "DAT", "DAP", "DDP", "FAS", "FOB", "CFR", and "CIF".
    * Setting this value to anything other than "DDP" will pass the cost and responsibility of duties on to the recipient of the package(s), as specified by Incoterms rules
    */
-  incoterm: "EXW" | "FCA" | "CPT" | "CIP" | "DAT" | "DAP" | "DDP" | "FAS" | "FOB" | "CFR" | "CIF";
+  incoterm: 'EXW' | 'FCA' | 'CPT' | 'CIP' | 'DAT' | 'DAP' | 'DDP' | 'FAS' | 'FOB' | 'CFR' | 'CIF';
 
   /**
    * This will print an invoice number on the postage label.
@@ -1408,16 +2390,16 @@ export declare interface IOptions {
   invoice_number: string;
 
   /**
-   * Set the date that will appear on the postage label. 
-   * Accepts ISO 8601 formatted string including time zone offset. 
+   * Set the date that will appear on the postage label.
+   * Accepts ISO 8601 formatted string including time zone offset.
    * EasyPost stores all dates as UTC time.
    */
   label_date: string;
 
   /**
-   * Supported label formats include "PNG", "PDF", "ZPL", and "EPL2". 
+   * Supported label formats include "PNG", "PDF", "ZPL", and "EPL2".
    * "PNG" is the only format that allows for conversion.
-   * 
+   *
    * @see https://www.easypost.com/docs/api#convert-the-label-format-of-a-shipment
    */
   label_format: LabelFormat;
@@ -1434,29 +2416,29 @@ export declare interface IOptions {
     /**
      * Supported values are "SENDER", "THIRD_PARTY", "RECEIVER", "COLLECT". Defaults to SENDER.
      */
-    type: "SENDER" | "THIRD_PARTY" | "RECEIVER" | "COLLECT";
+    type: 'SENDER' | 'THIRD_PARTY' | 'RECEIVER' | 'COLLECT';
 
     /**
-     * Setting account number. 
+     * Setting account number.
      * Required for RECEIVER and THIRD_PARTY.
      */
     account: string;
 
     /**
-     * Setting country code that the account is based in. 
+     * Setting country code that the account is based in.
      * Required for THIRD_PARTY.
      */
     country: string;
 
     /**
-     * Setting postal code that the account is based in. 
+     * Setting postal code that the account is based in.
      * Required for RECEIVER and THIRD_PARTY.
      */
     postal_code: string;
   };
 
   /**
-   * You can optionally print custom messages on labels. 
+   * You can optionally print custom messages on labels.
    * The locations of these fields show up on different spots on the carrier's labels.
    */
   print_custom_1: string;
@@ -1502,15 +2484,15 @@ export declare interface IOptions {
   print_custom_3_code: TPrintCustomCode;
 
   /**
-   * Set this value to true for delivery on Saturday. 
-   * When setting the saturday_delivery option, you will only get rates for services that are eligible for saturday delivery. 
-   * If no services are available for saturday delivery, then you will not be returned any rates. 
+   * Set this value to true for delivery on Saturday.
+   * When setting the saturday_delivery option, you will only get rates for services that are eligible for saturday delivery.
+   * If no services are available for saturday delivery, then you will not be returned any rates.
    * You may need to create 2 shipments, one with the saturday_delivery option set on one without to get all your eligible rates.
    */
   saturday_delivery: boolean;
 
   /**
-   * This option allows you to request restrictive rates from USPS. 
+   * This option allows you to request restrictive rates from USPS.
    * Can set to 'USPS.MEDIAMAIL' or 'USPS.LIBRARYMAIL'.
    */
   special_rates_eligibility: 'USPS.MEDIAMAIL' | 'USPS.LIBRARYMAIL';
@@ -1536,7 +2518,7 @@ export declare interface IOptions {
   certified_mail: boolean;
 
   /**
-   * Registered Mail is the most secure service that the USPS offers. 
+   * Registered Mail is the most secure service that the USPS offers.
    * It incorporates a system of receipts to monitor the movement of the mail from the point of acceptance to delivery
    */
   registered_mail: boolean;
@@ -1547,21 +2529,25 @@ export declare interface IOptions {
   registered_mail_amount: number;
 
   /**
-   * An electronic return receipt may be purchased at the time of mailing and provides a shipper with evidence of delivery (to whom the mail was delivered and date of delivery), and information about the recipient's actual delivery address. 
+   * An electronic return receipt may be purchased at the time of mailing and provides a shipper with evidence of delivery (to whom the mail was delivered and date of delivery), and information about the recipient's actual delivery address.
    * Only applies to the USPS.
    */
   return_receipt: boolean;
 }
 
-
 /**
  * @see https://www.easypost.com/docs/api/node#form-object
  */
-export declare interface IForm extends IObjectWithId<"Form">, IDatedObject {
+export declare interface IForm extends IObjectWithId<'Form'>, IDatedObject {
   /**
    * The type of form that we returned, can be one of "high_value_report", "commercial_invoice", "cod_return_label", "order_summary", "cn22"
    */
-  form_type: "high_value_report" | "commercial_invoice" | "cod_return_label" | "order_summary" | "cn22";
+  form_type:
+    | 'high_value_report'
+    | 'commercial_invoice'
+    | 'cod_return_label'
+    | 'order_summary'
+    | 'cn22';
 
   /**
    * The address we return the form back at
@@ -1574,9 +2560,8 @@ export declare interface IForm extends IObjectWithId<"Form">, IDatedObject {
   submitted_electronically: boolean;
 }
 
-
 /**
- * The Pickup object allows you to schedule a pickup from your carrier from your customer's residence or place of business. 
+ * The Pickup object allows you to schedule a pickup from your carrier from your customer's residence or place of business.
  * Supported carriers include:
  *  - Asendia Europe
  *  - Canada Post
@@ -1591,13 +2576,13 @@ export declare interface IForm extends IObjectWithId<"Form">, IDatedObject {
  *  - Purolator
  *  - UPS
  *  - USPS
- * 
- * After a Pickup is successfully created, it will automatically fetch PickupRates for each CarrierAccount specified that supports scheduled pickups. 
+ *
+ * After a Pickup is successfully created, it will automatically fetch PickupRates for each CarrierAccount specified that supports scheduled pickups.
  * Then a PickupRate must be selected and purchased before the pickup can be successfully scheduled.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#pickup-object
  */
-export declare interface IPickup extends IObjectWithId<"Pickup">, IDatedObject {
+export declare interface IPickup extends IObjectWithId<'Pickup'>, IDatedObject {
   /**
    * An optional field that may be used in place of ID in some API endpoints
    */
@@ -1606,7 +2591,7 @@ export declare interface IPickup extends IObjectWithId<"Pickup">, IDatedObject {
   /**
    * One of: "unknown", "scheduled", or "canceled"
    */
-  status: "unknown" | "scheduled" | "canceled";
+  status: 'unknown' | 'scheduled' | 'canceled';
 
   /**
    * The earliest time at which the package is available to pick up
@@ -1614,7 +2599,7 @@ export declare interface IPickup extends IObjectWithId<"Pickup">, IDatedObject {
   min_datetime: string;
 
   /**
-   * The latest time at which the package is available to pick up. 
+   * The latest time at which the package is available to pick up.
    * Must be later than the min_datetime
    */
   max_datetime: string;
@@ -1660,11 +2645,10 @@ export declare interface IPickup extends IObjectWithId<"Pickup">, IDatedObject {
   pickup_rates: IPickupRate[];
 }
 
-
 /**
  * @see https://www.easypost.com/docs/api/node#pickup-rate-object
  */
-export declare interface IPickupRate extends IObjectWithId<"PickupRate">, IDatedObject {
+export declare interface IPickupRate extends IObjectWithId<'PickupRate'>, IDatedObject {
   /**
    * service name
    */
@@ -1692,18 +2676,18 @@ export declare interface IPickupRate extends IObjectWithId<"PickupRate">, IDated
 }
 
 /**
- * A CarrierAccount encapsulates your credentials with the carrier. 
+ * A CarrierAccount encapsulates your credentials with the carrier.
  * The CarrierAccount object provides CRUD operations for all CarrierAccounts.
- * 
+ *
  * Each EasyPost account is automatically provided a USPS account managed by EasyPost.
- * 
- * Other operations, such as Shipment creation, can reference CarrierAccounts to reduce the scope of data returned. 
- * For instance, you may have multiple warehouses that need to use distinct FedEx SmartPost credentials to request the correct rates. 
+ *
+ * Other operations, such as Shipment creation, can reference CarrierAccounts to reduce the scope of data returned.
+ * For instance, you may have multiple warehouses that need to use distinct FedEx SmartPost credentials to request the correct rates.
  * Rate objects will include a carrier_account_id field which can be used to determine the account used for rating.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#carrier-account-object
  */
-export declare interface ICarrierAccount extends IObjectWithId<"CarrierAccount">, IDatedObject {
+export declare interface ICarrierAccount extends IObjectWithId<'CarrierAccount'>, IDatedObject {
   /**
    * The name of the carrier type.
    */
@@ -1802,10 +2786,9 @@ export declare interface ICarrierAccountField {
   value: string;
 }
 
-
 /**
- * A ScanForm can be created to speed up and simplify the carrier pickup process. 
- * The ScanForm is one document that can be scanned to mark all included tracking codes as "Accepted for Shipment" by the carrier. 
+ * A ScanForm can be created to speed up and simplify the carrier pickup process.
+ * The ScanForm is one document that can be scanned to mark all included tracking codes as "Accepted for Shipment" by the carrier.
  * The following criteria must met before creation:
  *  - Refunded Shipments cannot be added
  *  - Each Shipment must have the same origin address
@@ -1813,15 +2796,15 @@ export declare interface ICarrierAccountField {
  *  - Shipments cannot be added to more than one ScanForm
  *  - Existing ScanForms may not be updated with additional Shipments. If a ScanForm already exists, and new Shipments need to be added, a new ScanForm must be created.
  *  - Shipments should be provided in the form of an array
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#scan-form-object
  */
-export declare interface IScanForm extends IObjectWithId<"ScanForm">, IDatedObject {
+export declare interface IScanForm extends IObjectWithId<'ScanForm'>, IDatedObject {
   /**
-   * Current status. 
+   * Current status.
    * Possible values are "creating", "created" and "failed"
    */
-  status: "creating" | "created" | "failed";
+  status: 'creating' | 'created' | 'failed';
 
   /**
    * Human readable message explaining any failures
@@ -1857,7 +2840,7 @@ export declare interface IScanForm extends IObjectWithId<"ScanForm">, IDatedObje
 /**
  * PostageLabel Object
  */
-export declare interface IPostageLabel extends IObjectWithId<"PostageLabel">, IDatedObject {
+export declare interface IPostageLabel extends IObjectWithId<'PostageLabel'>, IDatedObject {
   date_advance: number;
   integrated_form: string;
   label_date: string;
@@ -1871,25 +2854,24 @@ export declare interface IPostageLabel extends IObjectWithId<"PostageLabel">, ID
   label_zpl_url: string;
 }
 
-
 /**
- * Each Webhook contains the url which EasyPost will notify whenever an object in our system updates. 
- * Several types of objects are processed asynchronously in the EasyPost system, so whenever an object updates, an Event is sent via HTTP POST to each configured webhook URL. 
+ * Each Webhook contains the url which EasyPost will notify whenever an object in our system updates.
+ * Several types of objects are processed asynchronously in the EasyPost system, so whenever an object updates, an Event is sent via HTTP POST to each configured webhook URL.
  * The Webhook object provides CRUD operations for all Webhooks.
- * 
- * Currently, our recommended best practice for securing Webhooks involves using basic authentication and HTTPS on your endpoint. 
- * This will help prevent any altering of any information communicated to you by EasyPost, prevent any third parties from seeing your webhooks in transit, and will prevent any third parties from masquerading as EasyPost and sending fraudulent data. 
- * EasyPost performs certificate validation and requires any TLS-enabled (HTTPS) webhook recipients to have a certificate signed by a public trusted certification authority. 
- * We do not support sending webhooks to over SSLv2, SSLv3, or any connection using so-called export-grade ciphers. 
+ *
+ * Currently, our recommended best practice for securing Webhooks involves using basic authentication and HTTPS on your endpoint.
+ * This will help prevent any altering of any information communicated to you by EasyPost, prevent any third parties from seeing your webhooks in transit, and will prevent any third parties from masquerading as EasyPost and sending fraudulent data.
+ * EasyPost performs certificate validation and requires any TLS-enabled (HTTPS) webhook recipients to have a certificate signed by a public trusted certification authority.
+ * We do not support sending webhooks to over SSLv2, SSLv3, or any connection using so-called export-grade ciphers.
  * For documentation on how to set up your server with TLS, we recommend Mozilla's guide to Server-Side TLS and Qualys's SSL/TLS deployment best practices guide.
- * 
- * In general, a Webhook's endpoint should return a status code of 2XX. 
- * A 200 is preferred, but any 2XX status will indicate to our system that the Webhook request was successful. 
+ *
+ * In general, a Webhook's endpoint should return a status code of 2XX.
+ * A 200 is preferred, but any 2XX status will indicate to our system that the Webhook request was successful.
  * Endpoints that return a large volume and rate of failures over a period of time will get automatically disabled by the system; a disabled Webhook can be re-enabled using the Webhook update endpoint.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#webhook-object
  */
-export declare interface IWebhook extends IObjectWithId<"Webhook"> {
+export declare interface IWebhook extends IObjectWithId<'Webhook'> {
   /**
    * http://example.com
    */
@@ -1901,29 +2883,35 @@ export declare interface IWebhook extends IObjectWithId<"Webhook"> {
   disabled_at: string;
 }
 
-export declare type TReportObject = "CashFlowReport" | "PaymentLogReport" | "RefundReport" | "ShipmentReport" | "ShipmentInvoiceReport" | "TrackerReport";
+export declare type TReportObject =
+  | 'CashFlowReport'
+  | 'PaymentLogReport'
+  | 'RefundReport'
+  | 'ShipmentReport'
+  | 'ShipmentInvoiceReport'
+  | 'TrackerReport';
 
 /**
  * A Report contains a csv that is a log of all the objects created within a certain time frame.
- * 
- * Reports can be generated using the Reports Endpoint. 
+ *
+ * Reports can be generated using the Reports Endpoint.
  * You can create and view Reports created between any time frame defined between the start_date and end_date.
- * 
- * The Report api can be categorized into several types. 
+ *
+ * The Report api can be categorized into several types.
  * These types determine which EasyPost Object to produce a Report for, and should be passed as the type in our libraries:
  *  - payment_log
  *  - refund
  *  - shipment
  *  - shipment_invoice
  *  - tracker
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#report-object
  */
 export declare interface IReport extends IObjectWithId<TReportObject>, IDatedObject {
   /**
    * "new", "available", "failed", or null
    */
-  status: "new" | "available" | "failed" | null;
+  status: 'new' | 'available' | 'failed' | null;
 
   /**
    * A date string in YYYY-MM-DD form eg: "2016-02-02"
@@ -1941,7 +2929,7 @@ export declare interface IReport extends IObjectWithId<TReportObject>, IDatedObj
   include_children: boolean;
 
   /**
-   * A url that contains a link to the Report. 
+   * A url that contains a link to the Report.
    * Expires 30 seconds after retrieving this object
    */
   url: string;
@@ -1957,23 +2945,22 @@ export declare interface IReport extends IObjectWithId<TReportObject>, IDatedObj
   send_email: boolean;
 }
 
-
 /**
- * The CarrierType object provides an export declare interface for determining the valid fields of a CarrierAccount. 
+ * The CarrierType object provides an export declare interface for determining the valid fields of a CarrierAccount.
  * The list of CarrierType objects only changes when a new carrier is added to EasyPost.
- * 
- * The CarrierType objects consist of their top level attributes as well as a fields object that contains credentials and sometimes test_credentials sub-objects, 
+ *
+ * The CarrierType objects consist of their top level attributes as well as a fields object that contains credentials and sometimes test_credentials sub-objects,
  * which themselves are collections of attributes for CarrierAccount creation as well as metadata about presentation and the naming of said attributes.
- * 
- * There are a couple special case CarrierAccounts, with structures differing somewhat from the norm. 
+ *
+ * There are a couple special case CarrierAccounts, with structures differing somewhat from the norm.
  * For instance, instead of credentials for UspsAccount, it has only auto_link: true, which indicates that it is an account that can be added or removed without any carrier-specific fields.
- * 
- * The other custom option in the fields list is custom_workflow: true, which indicates that the EasyPost website export declare interface includes special processing for signups for the associated CarrierType. 
+ *
+ * The other custom option in the fields list is custom_workflow: true, which indicates that the EasyPost website export declare interface includes special processing for signups for the associated CarrierType.
  * Carriers with a custom workflow will also present their normal credential rules, but it is considered unsafe to directly add a CarrierAccount of this type with these attributes filled out via another source than the EasyPost custom workflow.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#carrier-type-object
  */
-export declare interface ICarrierType extends IBaseObject<"CarrierType"> {
+export declare interface ICarrierType extends IBaseObject<'CarrierType'> {
   /**
    * Specifies the CarrierAccount type.
    */
@@ -1984,7 +2971,6 @@ export declare interface ICarrierType extends IBaseObject<"CarrierType"> {
    */
   fields: ICarrierTypeFields;
 }
-
 
 /**
  * @see https://www.easypost.com/docs/api/node#carrier-type-fields-object
@@ -2006,7 +2992,7 @@ export declare interface ICarrierTypeFields {
   credentials: ICarrierTypeCredentials;
 
   /**
-   * If this object is present, it contains attribute names and metadata just as the credentials object. 
+   * If this object is present, it contains attribute names and metadata just as the credentials object.
    * It is not required for CarrierAccount creation if you do not plan on using the carrier account for test mode
    */
   test_credentials: ICarrierTypeCredentials;
@@ -2024,7 +3010,7 @@ export declare interface ICarrierTypeCredentials {
   /**
    * There are five possible values, which encode the security need and storage type for each attribute: "visible", "checkbox", "fake", "password", and "masked"
    */
-  visibility: "visible" | "checkbox" | "fake" | "password" | "masked";
+  visibility: 'visible' | 'checkbox' | 'fake' | 'password' | 'masked';
 
   /**
    * Most attributes have generic names, so for clarity a "label" value is provided for clearer representation when rendering forms
@@ -2032,18 +3018,17 @@ export declare interface ICarrierTypeCredentials {
   label: string;
 }
 
-
 /**
- * The User object can be used to manage your own account and to create child accounts. 
+ * The User object can be used to manage your own account and to create child accounts.
  * Only a Production mode API key can be used to make requests against the Users API.
- * 
+ *
  * Balance and recharge values on User objects are expressed in higher precision USD.
- * 
+ *
  * @see https://www.easypost.com/docs/api/node#user-object
  */
-export declare interface IUser extends IObjectWithId<"User"> {
+export declare interface IUser extends IObjectWithId<'User'> {
   /**
-   * The ID of the parent user object. 
+   * The ID of the parent user object.
    * Top-level users are defined as users with no parent
    */
   parent_id: string;
@@ -2091,74 +3076,72 @@ export declare interface IUser extends IObjectWithId<"User"> {
 
 export declare interface IAllMethodParameters {
   /**
-   * Optional pagination parameter. 
-   * Only records created before the given ID will be included. 
+   * Optional pagination parameter.
+   * Only records created before the given ID will be included.
    * May not be used with after_id
    */
   before_id?: string;
 
   /**
-   * Optional pagination parameter. 
-   * Only records created after the given ID will be included. 
+   * Optional pagination parameter.
+   * Only records created after the given ID will be included.
    * May not be used with before_id
    */
   after_id?: string;
 
   /**
-   * Only return records created after this timestamp. 
+   * Only return records created after this timestamp.
    * Defaults to 1 month ago, or 1 month before a passed end_datetime
    */
   start_datetime?: string;
 
   /**
-   * Only return records created before this timestamp. 
+   * Only return records created before this timestamp.
    * Defaults to end of the current day, or 1 month after a passed start_datetime
    */
   end_datetime?: string;
 
   /**
-   * The number of records to return on each page. 
+   * The number of records to return on each page.
    * The maximum value is 100
    */
   page_size?: number;
 }
-
 
 /**
  * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
  */
 export declare interface IShipmentListParameters extends IAllMethodParameters {
   /**
-   * Only include Shipments that have been purchased. 
+   * Only include Shipments that have been purchased.
    * Default is true
    */
   purchased?: boolean;
 
   /**
-   * Also include Shipments created by Child Users. 
+   * Also include Shipments created by Child Users.
    * Defaults to false
    */
   include_children?: boolean;
 }
 
-
 type ParametersToOmitOnCreate = 'id' | 'object' | 'mode' | 'created_at' | 'updated_at';
-
 
 /**
  * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
  */
-export declare interface IAddressCreateParameters extends Omit<IAddress, ParametersToOmitOnCreate | 'verifications'> {
+export declare interface IAddressCreateParameters
+  extends Omit<IAddress, ParametersToOmitOnCreate | 'verifications'> {
   /**
-   * The verifications to perform when creating. 
-   * verify_strict takes precedence. 
+   * The verifications to perform when creating.
+   * verify_strict takes precedence.
    * true will perform both delivery and zip4.
    */
   verify: boolean | ['delivery', 'zip4'];
 
   /**
-   * The verifications to perform when creating. 
-   * The failure of any of these verifications causes the whole request to fail. 
+   * The verifications to perform when creating.
+   * The failure of any of these verifications causes the whole request to fail.
    * true will perform both delivery and zip4
    */
   verify_strict: boolean | ['delivery', 'zip4'];
@@ -2183,42 +3166,41 @@ export declare class Address implements IAddress {
   state_tax_id: string;
   verifications: IVerifications;
   id: string;
-  mode: "test" | "production";
-  object: "Address";
+  mode: 'test' | 'production';
+  object: 'Address';
 
   /**
-   * Depending on your use case an Address can be used in many different ways. 
-   * Certain carriers allow rating between two zip codes, but full addresses are required to purchase postage. 
+   * Depending on your use case an Address can be used in many different ways.
+   * Certain carriers allow rating between two zip codes, but full addresses are required to purchase postage.
    * It is recommended to provide as much information as possible during creation and to reuse these objects whenever possible.
-   * 
+   *
    * Address objects can also be created inline while creating another object, for example during Shipment Creation.
-   * 
+   *
    * Verify an Address
    *  - Verifying an Address before you ship is a great way to reduce issues with delivery.
-   *    Creating a verified Address is as simple as including an enumerated list of the verifications you'd like EasyPost to perform in the verify or verify_strict url parameters. 
-   *    If any of the verification checks included in the verify_strict list fail an error will be returned from the API. 
+   *    Creating a verified Address is as simple as including an enumerated list of the verifications you'd like EasyPost to perform in the verify or verify_strict url parameters.
+   *    If any of the verification checks included in the verify_strict list fail an error will be returned from the API.
    *    The example below demonstrates the most common verification: "delivery", which checks that the address is deliverable and sets its residential delivery indicator.
-   * 
-   *  - The most effective time to perform address verification is when your customer, or the person entering the delivery address, is present. 
-   *    When designing a shopping cart it is recommended to ask the shopper for their address and verify it on the spot. 
+   *
+   *  - The most effective time to perform address verification is when your customer, or the person entering the delivery address, is present.
+   *    When designing a shopping cart it is recommended to ask the shopper for their address and verify it on the spot.
    *    If verification fails, ask them to double check their input; if they confirm that their data is correct, assume they know their address more correctly than the verification process.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
    */
   public save(): Promise<Address>;
 
   /**
    * An Address can be retrieved by its id.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-an-address
-   * 
+   *
    * @param addressId Unique, begins with "adr_"
    */
   static retrieve(addressId: string): Promise<Address>;
 }
 
-
-export declare interface IParcelCreateParameters extends Omit<IParcel, ParametersToOmitOnCreate> { }
+export declare interface IParcelCreateParameters extends Omit<IParcel, ParametersToOmitOnCreate> {}
 export declare class Parcel implements IParcel {
   public constructor(input: DeepPartial<IParcelCreateParameters>);
 
@@ -2228,26 +3210,26 @@ export declare class Parcel implements IParcel {
   predefined_package?: PredefinedPackage;
   weight: number;
   id: string;
-  mode: "test" | "production";
-  object: "Parcel";
+  mode: 'test' | 'production';
+  object: 'Parcel';
   created_at: string;
   updated_at: string;
 
   /**
    * Include the weight, and either a predefined_package or length, width and height if applicable.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-a-parcel
    */
   public save(): Promise<Parcel>;
 
   /**
-   * Get a Parcel by its id. 
-   * In general you should not need to use this in your automated solution. 
-   * A Parcel's id can be inlined into the creation call to other objects. 
+   * Get a Parcel by its id.
+   * In general you should not need to use this in your automated solution.
+   * A Parcel's id can be inlined into the creation call to other objects.
    * This allows you to only create one Parcel for each package you will be using.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-parcel
-   * 
+   *
    * @param parcelId Unique, begins with "prcl_"
    */
   static retrieve(parcelId: string): Promise<Parcel>;
@@ -2292,79 +3274,81 @@ export declare class Shipment implements IShipment {
   status: string;
   tracker: ITracker;
   fees: IFee[];
-  refund_status: "submitted" | "refunded" | "rejected";
+  refund_status: 'submitted' | 'refunded' | 'rejected';
   batch_id: string;
   batch_status: TBatchStatus;
   batch_message: string;
   id: string;
-  mode: "test" | "production";
-  object: "Shipment";
+  mode: 'test' | 'production';
+  object: 'Shipment';
   created_at: string;
   updated_at: string;
 
   /**
-   * A Shipment is almost exclusively a container for other objects, and thus a Shipment may reuse many of these objects. 
+   * A Shipment is almost exclusively a container for other objects, and thus a Shipment may reuse many of these objects.
    * Additionally, all the objects contained within a Shipment may be created at the same time.
-   * 
-   * The origin/destination Address and Parcel are required for rating. 
-   * CustomsInfo is required to rate an international Shipment, this includes when the destination is a US Territory. 
+   *
+   * The origin/destination Address and Parcel are required for rating.
+   * CustomsInfo is required to rate an international Shipment, this includes when the destination is a US Territory.
    * The associated Tracker, Fees, and Rates are generated by EasyPost and cannot be modified by the user.
-   * 
+   *
    * You can limit the CarrierAccounts to use for rating by passing the carrier_accounts parameter.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-a-shipment
    */
   public save(): Promise<Shipment>;
 
   /**
-   * The Shipment List is a paginated list of all Shipment objects associated with the given API Key. 
-   * It accepts a variety of parameters which can be used to modify the scope. 
-   * The has_more attribute indicates whether or not additional pages can be requested. 
+   * The Shipment List is a paginated list of all Shipment objects associated with the given API Key.
+   * It accepts a variety of parameters which can be used to modify the scope.
+   * The has_more attribute indicates whether or not additional pages can be requested.
    * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
-   * 
-   * @param params 
+   *
+   * @param params
    */
-  static all(params?: IShipmentListParameters): Promise<{ shipments: Shipment[], has_more: boolean }>;
+  static all(
+    params?: IShipmentListParameters,
+  ): Promise<{ shipments: Shipment[]; has_more: boolean }>;
 
   /**
-   * A Shipment can be retrieved by either its id or reference. 
+   * A Shipment can be retrieved by either its id or reference.
    * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-shipment
-   * 
+   *
    * @param shipmentId Unique, begins with "shp_"
    */
   static retrieve(shipmentId: string): Promise<Shipment>;
 
   /**
-   * To purchase a Shipment you only need to specify the Rate to purchase. 
-   * This operation populates the tracking_code and postage_label attributes. 
-   * The default image format of the associated PostageLabel is PNG. 
+   * To purchase a Shipment you only need to specify the Rate to purchase.
+   * This operation populates the tracking_code and postage_label attributes.
+   * The default image format of the associated PostageLabel is PNG.
    * To change this default see the label_format option.
-   * 
-   * Additionally, insurance may be added during the purchase. 
-   * To specify an amount to insure, pass the insurance attribute as a string. 
+   *
+   * Additionally, insurance may be added during the purchase.
+   * To specify an amount to insure, pass the insurance attribute as a string.
    * The currency of all insurance is USD.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#buy-a-shipment
-   * 
+   *
    * @param rate rate id (begins with "rate_") or rate object
-   * @param insuranceAmount 
+   * @param insuranceAmount
    */
   public buy(rate: string | IRate, insuranceAmount?: number): Promise<Shipment>;
 
   /**
-   * Refunding a Shipment is available for many carriers supported by EasyPost. 
-   * Once the refund has been submitted, refund_status attribute of the Shipment will be populated with one of the possible values: "submitted", "refunded", "rejected". 
-   * The most common initial status is "submitted". 
-   * Many carriers require that the refund be processed before the refund_status will move to "refunded". 
+   * Refunding a Shipment is available for many carriers supported by EasyPost.
+   * Once the refund has been submitted, refund_status attribute of the Shipment will be populated with one of the possible values: "submitted", "refunded", "rejected".
+   * The most common initial status is "submitted".
+   * Many carriers require that the refund be processed before the refund_status will move to "refunded".
    * The length of this process depends on the carrier, but no greater than 30 days.
-   * 
-   * Refunds created very shortly after a label is generated may be improperly flagged as invalid, but you may retry a refund with the "rejected" status by submitting the same request again. 
+   *
+   * Refunds created very shortly after a label is generated may be improperly flagged as invalid, but you may retry a refund with the "rejected" status by submitting the same request again.
    * Carriers that are bill-on-scan tend to have refunds attempts return as "not_applicable", which will not change with multiple retries.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#refund-a-shipment
    */
   public refund(): Promise<Shipment>;
@@ -2372,36 +3356,37 @@ export declare class Shipment implements IShipment {
   public lowestRate(carriers?: Carrier[], services?: ServiceLevel[]): IRate;
 
   /**
-   * A Shipment's PostageLabel can be converted from PNG to other formats. 
+   * A Shipment's PostageLabel can be converted from PNG to other formats.
    * If the PostageLabel was originally generated in a format other than PNG it cannot be converted.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#convert-the-label-format-of-a-shipment
    */
   public convertLabelFormat(format: LabelFormat): Promise<Shipment>;
 
   /**
-   * You can update the Rates of a Shipment at any time. 
+   * You can update the Rates of a Shipment at any time.
    * This operation respects the carrier_accounts attribute.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment
    */
   public regenerateRates(): Promise<Shipment>;
 
   /**
-   * Insuring your Shipment is as simple as sending us the value of the contents. 
-   * We charge 1% of the value, with a $1 minimum, and handle all the claims. 
+   * Insuring your Shipment is as simple as sending us the value of the contents.
+   * We charge 1% of the value, with a $1 minimum, and handle all the claims.
    * All our claims are paid out within 10 days.
-   * 
+   *
    * To buy insurance, first purchase the Shipment, then make the insurance call before the package begins being handled by the carrier.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#insure-a-shipment
-   * 
-   * @param amount 
+   *
+   * @param amount
    */
   public insure(amount: number): Promise<Shipment>;
 }
 
-export declare interface ICarrierAccountCreateParameters extends Omit<ICarrierAccount, ParametersToOmitOnCreate> { }
+export declare interface ICarrierAccountCreateParameters
+  extends Omit<ICarrierAccount, ParametersToOmitOnCreate> {}
 export declare class CarrierAccount implements ICarrierAccount {
   public constructor(input: DeepPartial<ICarrierAccountCreateParameters>);
 
@@ -2414,17 +3399,17 @@ export declare class CarrierAccount implements ICarrierAccount {
   credentials: ICarrierAccountCredentials;
   test_credentials: ICarrierAccountCredentials;
   id: string;
-  mode: "test" | "production";
-  object: "CarrierAccount";
+  mode: 'test' | 'production';
+  object: 'CarrierAccount';
   created_at: string;
   updated_at: string;
 
   /**
-   * CarrierAccount objects may be managed through the EasyPost API using the Production mode API key only. 
+   * CarrierAccount objects may be managed through the EasyPost API using the Production mode API key only.
    * Multiple accounts can be added for a single carrier.
-   * 
+   *
    * The CarrierType of the preferred CarrierAccount should be consulted before attempting to create a new CarrierAccount, as it will inform you of the field names expected by a certain carrier.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-a-carrier-account
    * @see https://www.easypost.com/docs/api/node#update-a-carrieraccount
    * @requires production API Key.
@@ -2432,21 +3417,20 @@ export declare class CarrierAccount implements ICarrierAccount {
   public save(): Promise<CarrierAccount>;
 
   /**
-   * Retrieve an unpaginated list of all CarrierAccounts available to the authenticated account. 
+   * Retrieve an unpaginated list of all CarrierAccounts available to the authenticated account.
    * Only Production API keys may be used to retrieve this list, as there is no test mode equivalent.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#list-all-carrier-accounts
    * @requires production API Key.
    */
   static all(): Promise<CarrierAccount[]>;
 
-
   /**
-   * Retrieve a CarrierAccount by either its id or reference. 
+   * Retrieve a CarrierAccount by either its id or reference.
    * However it is recommended to use EasyPost's provided identifiers because we do not enforce a unique reference.
-   * 
+   *
    * @param carrierAccountId Unique, begins with "ca_"
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-carrieraccount
    * @requires production API Key.
    */
@@ -2454,13 +3438,12 @@ export declare class CarrierAccount implements ICarrierAccount {
 
   /**
    * CarrierAccount objects may be removed from your account when they become out of date or no longer useful.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#delete-a-carrier-account
    * @requires production API Key.
    */
   public delete(): Promise<{}>;
 }
-
 
 export declare interface IOrderCreateParameters {
   reference?: string;
@@ -2487,43 +3470,41 @@ export declare class Order implements IOrder {
   messages: IMessage[];
   is_return: boolean;
   id: string;
-  mode: "test" | "production";
-  object: "Order";
+  mode: 'test' | 'production';
+  object: 'Order';
   created_at: string;
   updated_at: string;
 
   /**
-   * An Order is almost exclusively a container for other objects, and thus an Order may reuse many of these objects. 
+   * An Order is almost exclusively a container for other objects, and thus an Order may reuse many of these objects.
    * Alternatively, all the objects contained within an Order may be created at the same time.
-   * 
+   *
    * You can limit the CarrierAccounts to use for rating by passing the carrier_accounts parameter.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-an-order
    */
   public save(): Promise<Order>;
 
   /**
-   * An Order can be retrieved by either its id or reference. 
+   * An Order can be retrieved by either its id or reference.
    * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
-   * 
+   *
    * @param orderId Unique, begins with "order_"
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-an-order
    */
   static retrieve(orderId: string): Promise<Order>;
 
   /**
-   * To purchase an Order you only need to specify the carrier and service to purchase. 
+   * To purchase an Order you only need to specify the carrier and service to purchase.
    * This operation populates the tracking_code and postage_label attributes of each Shipment.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#buy-an-order
    */
   public buy(carrier: Carrier, service: ServiceLevel): Promise<Order>;
 
-
   public getRates(): Promise<IRate[]>;
 }
-
 
 export declare interface IInsuranceCreateParameters {
   reference?: string;
@@ -2531,7 +3512,7 @@ export declare interface IInsuranceCreateParameters {
   from_address: IAddress | string;
 
   /**
-   * The carrier associated with the tracking_code you provided. 
+   * The carrier associated with the tracking_code you provided.
    * The carrier will get auto-detected if none is provided
    */
   carrier?: Carrier;
@@ -2542,9 +3523,9 @@ export declare interface IInsuranceCreateParameters {
   tracking_code: string;
 
   /**
-   * The USD value of contents you would like to insure. 
+   * The USD value of contents you would like to insure.
    * Currently the maximum is $5000
-   * 
+   *
    * @example 100.00
    */
   amount: string;
@@ -2566,45 +3547,45 @@ export declare class Insurance implements IInsurance {
   fee: IFee;
   messages: string[];
   id: string;
-  mode: "test" | "production";
-  object: "Insurance";
+  mode: 'test' | 'production';
+  object: 'Insurance';
   created_at: string;
   updated_at: string;
 
   /**
-   * An Insurance created via this endpoint must belong to a shipment purchased outside of EasyPost. 
-   * Insurance for Shipments created within EasyPost must be created via the Shipment Buy or Insure endpoints. 
-   * When creating Insurance for a non-EasyPost shipment, you must provide to_address, from_address, tracking_code, and amount information. 
-   * Optionally, you can provide the carrier parameter, which will help EasyPost identify the carrier the package was shipped with. 
-   * If no carrier is provided, EasyPost will attempt to determine the carrier based on the tracking_code provided. 
-   * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier. 
+   * An Insurance created via this endpoint must belong to a shipment purchased outside of EasyPost.
+   * Insurance for Shipments created within EasyPost must be created via the Shipment Buy or Insure endpoints.
+   * When creating Insurance for a non-EasyPost shipment, you must provide to_address, from_address, tracking_code, and amount information.
+   * Optionally, you can provide the carrier parameter, which will help EasyPost identify the carrier the package was shipped with.
+   * If no carrier is provided, EasyPost will attempt to determine the carrier based on the tracking_code provided.
+   * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier.
    * In addition, not having to auto-match the carrier will significantly speed up the response time.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-an-insurance
    */
   public save(): Promise<Insurance>;
 
   /**
-   * The Insurance List is a paginated list of all Insurance objects associated with the given API Key. 
-   * It accepts a variety of parameters which can be used to modify the scope. 
-   * The has_more attribute indicates whether or not additional pages can be requested. 
+   * The Insurance List is a paginated list of all Insurance objects associated with the given API Key.
+   * It accepts a variety of parameters which can be used to modify the scope.
+   * The has_more attribute indicates whether or not additional pages can be requested.
    * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
    */
-  static all(params?: IAllMethodParameters): Promise<{ insurances: Insurance[], has_more: boolean }>;
-
+  static all(
+    params?: IAllMethodParameters,
+  ): Promise<{ insurances: Insurance[]; has_more: boolean }>;
 
   /**
    * Retrieve an Insurance by id.
-   * 
+   *
    * @param insuranceId Unique, starts with "ins_"
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-an-insurance
    */
   static retrieve(insuranceId: string): Promise<Insurance>;
 }
-
 
 export declare interface ITrackerCreateParameters {
   /**
@@ -2613,7 +3594,7 @@ export declare interface ITrackerCreateParameters {
   tracking_code: string;
 
   /**
-   * The carrier associated with the tracking_code you provided. 
+   * The carrier associated with the tracking_code you provided.
    * The carrier will get auto-detected if none is provided
    */
   carrier?: Carrier;
@@ -2621,7 +3602,7 @@ export declare interface ITrackerCreateParameters {
 
 export declare interface ITrackerListParameters extends IAllMethodParameters {
   /**
-   * Only returns Trackers with the given tracking_code. 
+   * Only returns Trackers with the given tracking_code.
    * Useful for retrieving an individual Tracker by tracking_code rather than by ID
    */
   tracking_code?: string;
@@ -2647,47 +3628,45 @@ export declare class Tracker implements ITracker {
   public_url: string;
   fees: IFee[];
   id: string;
-  mode: "test" | "production";
-  object: "Tracker";
+  mode: 'test' | 'production';
+  object: 'Tracker';
   created_at: string;
   updated_at: string;
 
   /**
-   * A Tracker can be created with only a tracking_code. 
-   * Optionally, you can provide the carrier parameter, which indicates the carrier the package was shipped with. 
-   * If no carrier is provided, EasyPost will attempt to determine the carrier based on the tracking_code provided. 
-   * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier. 
+   * A Tracker can be created with only a tracking_code.
+   * Optionally, you can provide the carrier parameter, which indicates the carrier the package was shipped with.
+   * If no carrier is provided, EasyPost will attempt to determine the carrier based on the tracking_code provided.
+   * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier.
    * In addition, not having to auto-match the carrier will significantly speed up the response time.
-   * 
-   * In an effort to reduce wasted resources, EasyPost prevents the creation of duplicate Trackers. 
-   * A Tracker is considered to be a duplicate if another Tracker with the same tracking_code and carrier was created by the same User in the last three months. 
+   *
+   * In an effort to reduce wasted resources, EasyPost prevents the creation of duplicate Trackers.
+   * A Tracker is considered to be a duplicate if another Tracker with the same tracking_code and carrier was created by the same User in the last three months.
    * In the case where a duplicate request is submitted, the original Tracker will be returned.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-a-tracker
    */
   public save(): Promise<Tracker>;
 
-
   /**
-   * The Tracker List is a paginated list of all Tracker objects associated with the given API Key. 
-   * It accepts a variety of parameters which can be used to modify the scope. 
-   * The has_more attribute indicates whether or not additional pages can be requested. 
+   * The Tracker List is a paginated list of all Tracker objects associated with the given API Key.
+   * It accepts a variety of parameters which can be used to modify the scope.
+   * The has_more attribute indicates whether or not additional pages can be requested.
    * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
-   * 
-   * Using the Tracker List endpoint is the recommended way of retrieving a Tracker by tracking_code or carrier. 
-   * Unlike the retrieving a Tracker using the Retrieve endpoint, which accepts an id, the List endpoint accepts the tracking_code as the search parameter. 
+   *
+   * Using the Tracker List endpoint is the recommended way of retrieving a Tracker by tracking_code or carrier.
+   * Unlike the retrieving a Tracker using the Retrieve endpoint, which accepts an id, the List endpoint accepts the tracking_code as the search parameter.
    * Normally, you'll only have one Tracker with a given tracking_code, but it is also possible to further filter those results by including the carrier parameter in your request.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers
    */
-  static all(params?: ITrackerListParameters): Promise<{ trackers: Tracker[], has_more: boolean }>;
-
+  static all(params?: ITrackerListParameters): Promise<{ trackers: Tracker[]; has_more: boolean }>;
 
   /**
    * Retrieve a Tracker by id.
-   * 
+   *
    * @param trackerId Unique, starts with "trk_"
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-tracker
    */
   static retrieve(trackerId: string): Promise<Tracker>;
@@ -2718,7 +3697,7 @@ export declare class Pickup implements IPickup {
   public constructor(input: IPickupCreateParameters);
 
   reference?: string;
-  status: "unknown" | "scheduled" | "canceled";
+  status: 'unknown' | 'scheduled' | 'canceled';
   min_datetime: string;
   max_datetime: string;
   is_account_address: boolean;
@@ -2730,44 +3709,44 @@ export declare class Pickup implements IPickup {
   carrier_accounts: ICarrierAccount[];
   pickup_rates: IPickupRate[];
   id: string;
-  mode: "test" | "production";
-  object: "Pickup";
+  mode: 'test' | 'production';
+  object: 'Pickup';
   created_at: string;
   updated_at: string;
 
   /**
    * Creating a Pickup will automatically fetch rates for the given time frame and location.
-   * 
-   * Pickups work with existing shipments or a batch and either a fully-specified Address object or id. 
+   *
+   * Pickups work with existing shipments or a batch and either a fully-specified Address object or id.
    * The examples below assume that a shipment and address have both already been created.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-a-pickup
    */
   public save(): Promise<Pickup>;
 
   /**
-   * A Pickup object can be retrieved by either an id or reference. 
+   * A Pickup object can be retrieved by either an id or reference.
    * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
-   * 
+   *
    * @param pickupId Unique, starts with "pickup_"
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-pickup
    */
   static retrieve(pickupId: string): Promise<Pickup>;
 
   /**
-   * To purchase a Pickup a PickupRate must be specified by its carrier and service name, instead of its id. 
+   * To purchase a Pickup a PickupRate must be specified by its carrier and service name, instead of its id.
    * The client libraries will handle this automatically if a PickupRate is provided.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#buy-a-pickup
    */
   public buy(carrier: Carrier, service: ServiceLevel): Promise<Pickup>;
 
   /**
-   * You may cancel a Pickup anytime before it has been completed. 
-   * It requires no additional parameters other than the id or reference. 
+   * You may cancel a Pickup anytime before it has been completed.
+   * It requires no additional parameters other than the id or reference.
    * The status will change to "canceled" on success.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#cancel-a-pickup
    */
   public cancel(): Promise<Pickup>;
@@ -2789,17 +3768,17 @@ export declare class Batch implements IBatch {
   scan_form: IScanForm;
   pickup: IPickup;
   id: string;
-  mode: "test" | "production";
-  object: "Batch";
+  mode: 'test' | 'production';
+  object: 'Batch';
   created_at: string;
   updated_at: string;
 
   /**
-   * A Batch can be created with or without Shipments. 
-   * When created with Shipments the initial state will be creating. 
-   * Once the state changes to created a webhook Event will be sent. 
+   * A Batch can be created with or without Shipments.
+   * When created with Shipments the initial state will be creating.
+   * Once the state changes to created a webhook Event will be sent.
    * When created with no Shipments the initial state will be created and webhook will be sent.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-a-batch
    */
   public save(): Promise<Batch>;
@@ -2807,35 +3786,35 @@ export declare class Batch implements IBatch {
   static retrieve(batchId: string): Promise<Batch>;
 
   /**
-   * Shipments can be added to a Batch throughout its life cycle. 
+   * Shipments can be added to a Batch throughout its life cycle.
    * Just remember that the state change of a Batch is asynchronous and will fire a webhook Event when the state change is completed.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#add-shipments-to-a-batch
    */
   public addShipments(shipments: IBatchCreateParameters['shipments']): Promise<Batch>;
 
   /**
-   * There could be times when a Shipment needs to be removed from the Batch during its life cycle. 
+   * There could be times when a Shipment needs to be removed from the Batch during its life cycle.
    * Removing a Shipment does not remove it from the consolidated label or ScanForm.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#remove-shipments-from-a-batch
    */
   public removeShipments(shipments: IBatchCreateParameters['shipments']): Promise<Batch>;
 
   /**
-   * One of the advantages of processing Shipments in batches is the ability to consolidate the PostageLabel into one file. 
+   * One of the advantages of processing Shipments in batches is the ability to consolidate the PostageLabel into one file.
    * This can only be done once for each batch and all Shipments must have a status of postage_purchased.
-   * 
-   * Available label formats are 'pdf', 'zpl' or 'epl2' format. 
+   *
+   * Available label formats are 'pdf', 'zpl' or 'epl2' format.
    * Like converting a PostageLabel format, if this process will change the format of the labels they must have been created as PNGs.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#batch-labels
    */
   public generateLabel(labelFormat: LabelFormat): Promise<Batch>;
 
   /**
    * See [Scan Form](https://www.easypost.com/docs/api/node#scan-form) rules and [Object Definition](https://www.easypost.com/docs/api/node#scan-form-object).
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#manifesting-scan-form
    */
   public createScanForm(): Promise<Batch>;
@@ -2851,12 +3830,12 @@ export declare class Webhook implements IWebhook {
   url: string;
   disabled_at: string;
   id: string;
-  mode: "test" | "production";
-  object: "Webhook";
+  mode: 'test' | 'production';
+  object: 'Webhook';
 
   /**
    * To create a Webhook, you simply need to provide a url parameter that you wish to receive notifications to.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#create-a-webhook
    * @see https://www.easypost.com/docs/api/node#update-a-webhook
    */
@@ -2864,25 +3843,25 @@ export declare class Webhook implements IWebhook {
 
   /**
    * Retrieve an unpaginated list of all Webhooks available to the authenticated account.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#list-a-webhooks
    */
   static all(): Promise<{ webhooks: Webhook[] }>;
 
   /**
    * Retrieve a Webhook by id.
-   * 
+   *
    * @param webhookId Unique, starts with "hook_"
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-webhook
    */
   static retrieve(webhookId: string): Promise<Webhook>;
 
   /**
    * Delete a Webhook by id.
-   * 
+   *
    * @param webhookId Unique, starts with "hook_"
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#delete-a-webhook
    */
   static delete(webhookId: string): Promise<{}>;
@@ -2891,11 +3870,11 @@ export declare class Webhook implements IWebhook {
 export declare class CarrierType implements ICarrierType {
   type: string;
   fields: ICarrierTypeFields;
-  object: "CarrierType";
+  object: 'CarrierType';
 
   /**
    * The CarrierType list is an unpaginated list of all carrier types available to the account of the given API key.
-   * 
+   *
    * @see https://www.easypost.com/docs/api/node#retrieve-available-carrier-types
    * @requires production API Key.
    */
@@ -2906,12 +3885,12 @@ export declare class Event implements IEvent {
   description: string;
   previous_attributes: any;
   result: any;
-  status: "completed" | "failed" | "in_queue" | "retrying" | "pending";
+  status: 'completed' | 'failed' | 'in_queue' | 'retrying' | 'pending';
   pending_urls: string[];
   completed_urls: string[];
   id: string;
-  mode: "test" | "production";
-  object: "Event";
+  mode: 'test' | 'production';
+  object: 'Event';
   created_at: string;
   updated_at: string;
 
