@@ -2255,8 +2255,8 @@ export declare class Parcel implements IParcel {
 
 export declare interface IShipmentCreateParameters {
   reference?: string;
-  to_address: IAddress | string;
-  from_address: IAddress | string;
+  to_address: DeepPartial<IAddressCreateParameters> | string;
+  from_address: DeepPartial<IAddressCreateParameters> | string;
   parcel: IParcel | string;
 
   /**
@@ -2264,8 +2264,8 @@ export declare interface IShipmentCreateParameters {
    */
   carrier_accounts?: string[];
 
-  customs_info?: ICustomsInfo;
-  options?: IOptions;
+  customs_info?: DeepPartial<ICustomsInfo>;
+  options?: DeepPartial<IOptions>;
 }
 
 export declare class Shipment implements IShipment {
