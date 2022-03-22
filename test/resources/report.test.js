@@ -17,7 +17,7 @@ describe('Report Resource', function () {
     setupPolly.stripCreds(server);
   });
 
-  it(`create a report with columns`, async function () {
+  it(`creates a report by specifying columns`, async function () {
     const report = await new this.easypost.Report({
       start_date: Fixture.reportStartDate(),
       end_date: Fixture.reportEndDate(),
