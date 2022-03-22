@@ -21,6 +21,7 @@
 - The responses from requests to the `/all` endpoint are no longer unwrapped and instead now follow the documentation where records will be wrapped in their respective object key
 - Fixes `delivery_date` property typo on Rate object
 - Fixes `customs_item.value` to ve a `number` instead of a `string`
+- Add support for `columns` and `additional_columns` on Report creation
 
 ## 4.0.0 2021-10-06
 

@@ -15,6 +15,8 @@ export const propTypes = {
   send_email: T.bool,
   created_at: T.oneOfType([T.object, T.string]),
   updated_at: T.oneOfType([T.object, T.string]),
+  columns: T.array,
+  additional_columns: T.array,
 };
 
 export default (api) =>
@@ -27,6 +29,49 @@ export default (api) =>
       super(data);
       if (data.type) {
         this._url = this.constructor.constructUrl(data.type);
+      }
+    }
+
+    /**
+     * Save (create or update) a report.
+     * @returns {this|Promise<never>}
+     */
+    async save() {
+      try {
+        this.validateProperties();
+      } catch (e) {
+        return Promise.reject(e);
+      }
+
+      try {
+        const data = this.constructor.wrapJSON(this.toJSON());
+
+        let url = `${this._url || this.constructor._url}?`;
+
+        if (data.columns != null) {
+          Object.values(data.columns).forEach((column) => {
+            url += `columns[]=${column}&`;
+          });
+          // Delete the columns from the data sinces it's added in the url query.
+          delete data.columns;
+        }
+
+        if (data.additional_columns != null) {
+          Object.values(data.additional_columns).forEach((column) => {
+            url += `additional_columns[]=${column}&`;
+          });
+          // Delete the additional_columns from the data sinces it's added in the url query.
+          delete data.additional_columns;
+        }
+
+        const res = await api.post(url, {
+          body: data,
+        });
+
+        this.mapProps(res.body);
+        return this;
+      } catch (e) {
+        throw e;
       }
     }
 
