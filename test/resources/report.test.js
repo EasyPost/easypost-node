@@ -30,7 +30,7 @@ describe('Report Resource', function () {
     expect(report).to.be.an.instanceOf(this.easypost.Report);
   });
 
-  it(`create a report with additional columns`, async function () {
+  it(`creates a report with additional columns`, async function () {
     const report = await new this.easypost.Report({
       start_date: Fixture.reportStartDate(),
       end_date: Fixture.reportEndDate(),

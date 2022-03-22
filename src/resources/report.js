@@ -34,6 +34,7 @@ export default (api) =>
 
     /**
      * Save (create or update) a report.
+     * This function is overridden from the parent class with default save behavior.
      * @returns {this|Promise<never>}
      */
     async save() {
