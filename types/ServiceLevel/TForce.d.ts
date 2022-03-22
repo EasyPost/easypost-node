@@ -1,5 +1,5 @@
 export declare type ServiceLevelTForce =
-| 'SameDay'
-| 'SameDayWhiteGlove'
-| 'NextDay'
-| 'NextDayWhiteGlove';
+  | 'SameDay'
+  | 'SameDayWhiteGlove'
+  | 'NextDay'
+  | 'NextDayWhiteGlove';

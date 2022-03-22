@@ -1,7 +1,6 @@
-import { IBaseObject, IDatedObject, IObjectWithId } from "./base";
-import { ServiceLevel } from "./ServiceLevel";
-import { DeepPartial } from "./utils";
-
+import { IBaseObject, IDatedObject, IObjectWithId } from './base';
+import { ServiceLevel } from './ServiceLevel';
+import { DeepPartial } from './utils';
 
 export declare interface IFieldError {
   /**
@@ -100,8 +99,6 @@ export declare type Carrier =
   | 'Veho'
   | 'Yanwen'
   | 'Yodel';
-
-
 
 export declare type PredefinedPackageDHLExpress =
   | 'JumboDocument'

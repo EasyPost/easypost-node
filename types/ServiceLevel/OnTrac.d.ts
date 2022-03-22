@@ -1,6 +1,6 @@
 export declare type ServiceLevelOnTrac =
-| 'Sunrise'
-| 'Gold'
-| 'OnTracGround'
-| 'SameDay'
-| 'PalletizedFreight';
+  | 'Sunrise'
+  | 'Gold'
+  | 'OnTracGround'
+  | 'SameDay'
+  | 'PalletizedFreight';

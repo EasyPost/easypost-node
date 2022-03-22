@@ -1,6 +1,6 @@
 export declare type ServiceLevelUPSMailInnovations =
-| 'First'
-| 'Priority'
-| 'ExpeditedMailInnovations'
-| 'PriorityMailInnovations'
-| 'EconomyMailInnovations';
+  | 'First'
+  | 'Priority'
+  | 'ExpeditedMailInnovations'
+  | 'PriorityMailInnovations'
+  | 'EconomyMailInnovations';

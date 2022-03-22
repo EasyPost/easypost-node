@@ -1,5 +1,5 @@
 export declare type ServiceLevelDHLEcommerceAsia =
-| 'Packet'
-| 'PacketPlus'
-| 'ParcelDirect'
-| 'ParcelDirectExpedited';
+  | 'Packet'
+  | 'PacketPlus'
+  | 'ParcelDirect'
+  | 'ParcelDirectExpedited';

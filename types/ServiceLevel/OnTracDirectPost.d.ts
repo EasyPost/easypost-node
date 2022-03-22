@@ -1,7 +1,7 @@
 export declare type ServiceLevelOnTracDirectPost =
-| 'FirstClassMail'
-| 'PriorityMail'
-| 'BoundPrintedMatter'
-| 'MediaMail'
-| 'ParcelSelect'
-| 'ParcelSelectLightweight';
+  | 'FirstClassMail'
+  | 'PriorityMail'
+  | 'BoundPrintedMatter'
+  | 'MediaMail'
+  | 'ParcelSelect'
+  | 'ParcelSelectLightweight';
