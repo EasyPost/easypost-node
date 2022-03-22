@@ -52,7 +52,7 @@ export default (api) =>
           Object.values(data.columns).forEach((column) => {
             url += `columns[]=${column}&`;
           });
-          // Delete the columns from the data sinces it's added in the url query.
+          // Delete the columns from the data since it's added in the url query.
           delete data.columns;
         }
 
