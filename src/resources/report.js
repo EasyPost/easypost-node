@@ -60,7 +60,7 @@ export default (api) =>
           Object.values(data.additional_columns).forEach((column) => {
             url += `additional_columns[]=${column}&`;
           });
-          // Delete the additional_columns from the data sinces it's added in the url query.
+          // Delete the additional_columns from the data since it's added in the url query.
           delete data.additional_columns;
         }
 
