@@ -17,6 +17,32 @@ describe('Report Resource', function () {
     setupPolly.stripCreds(server);
   });
 
+  it(`creates a report by specifying columns`, async function () {
+    const report = await new this.easypost.Report({
+      start_date: Fixture.reportStartDate(),
+      end_date: Fixture.reportEndDate(),
+      type: 'shipment',
+      columns: ['usps_zone'],
+    }).save();
+
+    // Reports are queued, so we can't wait for completion.
+    // Verifying columns would require parsing CSV. Verify correct parameters via URL in cassette
+    expect(report).to.be.an.instanceOf(this.easypost.Report);
+  });
+
+  it(`creates a report with additional columns`, async function () {
+    const report = await new this.easypost.Report({
+      start_date: Fixture.reportStartDate(),
+      end_date: Fixture.reportEndDate(),
+      type: 'shipment',
+      additional_columns: ['from_name', 'from_company'],
+    }).save();
+
+    // Reports are queued, so we can't wait for completion.
+    // Verifying columns would require parsing CSV. Verify correct parameters via URL in cassette
+    expect(report).to.be.an.instanceOf(this.easypost.Report);
+  });
+
   it('creates a payment_log report', async function () {
     const report = await new this.easypost.Report({
       start_date: Fixture.reportStartDate(),
