@@ -33,50 +33,6 @@ export default (api) =>
     }
 
     /**
-     * Save (create or update) a report.
-     * This function is overridden from the parent class with default save behavior.
-     * @returns {this|Promise<never>}
-     */
-    async save() {
-      try {
-        this.validateProperties();
-      } catch (e) {
-        return Promise.reject(e);
-      }
-
-      try {
-        const data = this.constructor.wrapJSON(this.toJSON());
-
-        let url = `${this._url || this.constructor._url}?`;
-
-        if (data.columns != null) {
-          Object.values(data.columns).forEach((column) => {
-            url += `columns[]=${column}&`;
-          });
-          // Delete the columns from the data since it's added in the url query.
-          delete data.columns;
-        }
-
-        if (data.additional_columns != null) {
-          Object.values(data.additional_columns).forEach((column) => {
-            url += `additional_columns[]=${column}&`;
-          });
-          // Delete the additional_columns from the data since it's added in the url query.
-          delete data.additional_columns;
-        }
-
-        const res = await api.post(url, {
-          body: data,
-        });
-
-        this.mapProps(res.body);
-        return this;
-      } catch (e) {
-        throw e;
-      }
-    }
-
-    /**
      * Construct the URL for the reports endpoint.
      * @param {string} type
      * @returns
