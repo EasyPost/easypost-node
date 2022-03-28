@@ -6,3 +6,4 @@ export * from './TrackingDetail';
 export * from './TrackingLocation';
 export * from './TrackingStatus';
 export * from './TrackerCreateParameters';
+export * from './TrackerListParameters';

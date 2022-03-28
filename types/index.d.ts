@@ -1,7 +1,7 @@
 import { Address, IAddress, IAddressCreateParameters, IVerifications } from './Address';
 import { IBaseObject, IDatedObject, IObjectWithId } from './base';
 import { IFee } from './Fee';
-import { PredefinedPackage } from './PredefinedPackage';
+import { PredefinedPackage } from './Parcel';
 import { ServiceLevel } from './ServiceLevel';
 import { Carrier, ITracker, Tracker } from './Tracker';
 import { DeepPartial, IAllMethodParameters, ParametersToOmitOnCreate } from './utils';
