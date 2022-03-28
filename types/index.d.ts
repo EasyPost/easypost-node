@@ -7,51 +7,8 @@ import { Parcel } from './Parcel';
 import { Pickup } from './Pickup';
 import { IMessage, IRate, IShipment, ServiceLevel, Shipment } from './Shipment';
 import { Carrier, Tracker } from './Tracker';
-
-/**
- * Webhook Events are triggered by changes in objects you've created via the API.
- * Every time an Event related to one of your objects is created, EasyPost guarantees at least one POST request will be sent to each of the webhook URLs set up for your account.
- * For this reason, we strongly encourage your webhook handler to be idempotent.
- * See the webhooks guide for more information.
- *
- * @see [webhooks guide] https://www.easypost.com/webhooks-guide
- * @see https://www.easypost.com/docs/api/node#events
- */
-export declare interface IEvent extends IObjectWithId<'Event'>, IDatedObject {
-  /**
-   * Result type and event name, see the "Possible Event Types" section for more information
-   */
-  description: string;
-
-  /**
-   * Previous values of relevant result attributes
-   */
-  previous_attributes: any;
-
-  /**
-   * The object associated with the Event. See the "object" attribute on the result to determine its specific type.
-   * This field will not be returned when retrieving events directly from the API
-   */
-  result: any;
-
-  /**
-   * The current status of the event. Possible values are "completed", "failed", "in_queue", "retrying", or "pending" (deprecated)
-   *
-   * @deprecated
-   */
-  status: 'completed' | 'failed' | 'in_queue' | 'retrying' | 'pending';
-
-  /**
-   * Webhook URLs that have not yet been successfully notified as of the time this webhook event was sent.
-   * The URL receiving the Event will still be listed in pending_urls, as will any other URLs that receive the Event at the same time
-   */
-  pending_urls: string[];
-
-  /**
-   * Webhook URLs that have already been successfully notified as of the time this webhook was sent
-   */
-  completed_urls: string[];
-}
+import { Event } from './Event';
+import { Webhook } from './Webhook';
 
 /**
  * The Order object represents a collection of packages and can be used for Multi-Piece Shipments.
@@ -108,35 +65,6 @@ export declare interface IOrder extends IObjectWithId<'Order'>, IDatedObject {
    * Set true to create as a return
    */
   is_return: boolean;
-}
-
-/**
- * Each Webhook contains the url which EasyPost will notify whenever an object in our system updates.
- * Several types of objects are processed asynchronously in the EasyPost system, so whenever an object updates, an Event is sent via HTTP POST to each configured webhook URL.
- * The Webhook object provides CRUD operations for all Webhooks.
- *
- * Currently, our recommended best practice for securing Webhooks involves using basic authentication and HTTPS on your endpoint.
- * This will help prevent any altering of any information communicated to you by EasyPost, prevent any third parties from seeing your webhooks in transit, and will prevent any third parties from masquerading as EasyPost and sending fraudulent data.
- * EasyPost performs certificate validation and requires any TLS-enabled (HTTPS) webhook recipients to have a certificate signed by a public trusted certification authority.
- * We do not support sending webhooks to over SSLv2, SSLv3, or any connection using so-called export-grade ciphers.
- * For documentation on how to set up your server with TLS, we recommend Mozilla's guide to Server-Side TLS and Qualys's SSL/TLS deployment best practices guide.
- *
- * In general, a Webhook's endpoint should return a status code of 2XX.
- * A 200 is preferred, but any 2XX status will indicate to our system that the Webhook request was successful.
- * Endpoints that return a large volume and rate of failures over a period of time will get automatically disabled by the system; a disabled Webhook can be re-enabled using the Webhook update endpoint.
- *
- * @see https://www.easypost.com/docs/api/node#webhook-object
- */
-export declare interface IWebhook extends IObjectWithId<'Webhook'> {
-  /**
-   * http://example.com
-   */
-  url: string;
-
-  /**
-   * the timestamp at which the webhook was most recently disabled (if any)
-   */
-  disabled_at: string;
 }
 
 export declare type TReportObject =
@@ -391,53 +319,6 @@ export declare class Order implements IOrder {
   public getRates(): Promise<IRate[]>;
 }
 
-export declare interface IWebhookCreateParameters {
-  url: string;
-}
-
-export declare class Webhook implements IWebhook {
-  public constructor(input: IWebhookCreateParameters);
-
-  url: string;
-  disabled_at: string;
-  id: string;
-  mode: 'test' | 'production';
-  object: 'Webhook';
-
-  /**
-   * To create a Webhook, you simply need to provide a url parameter that you wish to receive notifications to.
-   *
-   * @see https://www.easypost.com/docs/api/node#create-a-webhook
-   * @see https://www.easypost.com/docs/api/node#update-a-webhook
-   */
-  public save(): Promise<Webhook>;
-
-  /**
-   * Retrieve an unpaginated list of all Webhooks available to the authenticated account.
-   *
-   * @see https://www.easypost.com/docs/api/node#list-a-webhooks
-   */
-  static all(): Promise<{ webhooks: Webhook[] }>;
-
-  /**
-   * Retrieve a Webhook by id.
-   *
-   * @param webhookId Unique, starts with "hook_"
-   *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-webhook
-   */
-  static retrieve(webhookId: string): Promise<Webhook>;
-
-  /**
-   * Delete a Webhook by id.
-   *
-   * @param webhookId Unique, starts with "hook_"
-   *
-   * @see https://www.easypost.com/docs/api/node#delete-a-webhook
-   */
-  static delete(webhookId: string): Promise<{}>;
-}
-
 export declare class CarrierType implements ICarrierType {
   type: string;
   fields: ICarrierTypeFields;
@@ -450,23 +331,6 @@ export declare class CarrierType implements ICarrierType {
    * @requires production API Key.
    */
   static all(): Promise<CarrierType[]>;
-}
-
-export declare class Event implements IEvent {
-  description: string;
-  previous_attributes: any;
-  result: any;
-  status: 'completed' | 'failed' | 'in_queue' | 'retrying' | 'pending';
-  pending_urls: string[];
-  completed_urls: string[];
-  id: string;
-  mode: 'test' | 'production';
-  object: 'Event';
-  created_at: string;
-  updated_at: string;
-
-  static retrieve(eventId: string): Promise<Event>;
-  static all(): Promise<Event[]>;
 }
 
 export declare class Easypost {
