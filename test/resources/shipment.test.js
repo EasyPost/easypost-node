@@ -43,6 +43,7 @@ describe('Shipment Resource', function () {
     expect(shipment.options).to.not.be.null; // The EasyPost API populates some default values here
     expect(shipment.customs_info).to.be.null;
     expect(shipment.reference).to.be.null;
+    expect(shipment.tax_identifiers).to.be.null;
   });
 
   it('creates a shipment with tax_identifiers', async function () {
