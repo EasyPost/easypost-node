@@ -1,4 +1,4 @@
-import { Carrier } from './Carrier';
+import { Carrier } from '../Carrier';
 
 export declare interface ITrackerCreateParameters {
   /**

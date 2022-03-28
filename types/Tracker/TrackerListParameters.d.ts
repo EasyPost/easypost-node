@@ -1,5 +1,5 @@
 import { IAllMethodParameters } from '../utils';
-import { Carrier } from './Carrier';
+import { Carrier } from '../Carrier';
 
 export declare interface ITrackerListParameters extends IAllMethodParameters {
   /**

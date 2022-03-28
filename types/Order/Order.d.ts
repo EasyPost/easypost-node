@@ -1,7 +1,7 @@
 import { IAddress } from '../Address';
 import { IDatedObject, IObjectWithId } from '../base';
 import { IMessage, IRate, IShipment, ServiceLevel } from '../Shipment';
-import { Carrier } from '../Tracker';
+import { Carrier } from '../Carrier';
 import { IOrderCreateParameters } from './OrderCreateParameters';
 
 /**

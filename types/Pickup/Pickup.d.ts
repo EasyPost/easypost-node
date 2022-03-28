@@ -1,8 +1,8 @@
 import { IAddress } from '../Address';
 import { IDatedObject, IObjectWithId } from '../base';
-import { ICarrierAccount } from '../CarrierAccount';
+import { ICarrierAccount } from '../Carrier';
 import { IMessage, IShipment, ServiceLevel } from '../Shipment';
-import { Carrier } from '../Tracker';
+import { Carrier } from '../Carrier';
 import { IPickupCreateParameters } from './PickupCreateParameters';
 import { IPickupRate } from './PickupRate';
 

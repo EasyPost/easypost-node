@@ -1,4 +1,4 @@
-import { ParametersToOmitOnCreate } from '../utils';
+import { ParametersToOmitOnCreate } from '../../utils';
 import { ICarrierAccount } from './CarrierAccount';
 
 export declare interface ICarrierAccountCreateParameters

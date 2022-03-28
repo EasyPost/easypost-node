@@ -1,5 +1,5 @@
-import { IDatedObject, IObjectWithId } from '../base';
-import { DeepPartial } from '../utils';
+import { IDatedObject, IObjectWithId } from '../../base';
+import { DeepPartial } from '../../utils';
 import { ICarrierAccountCreateParameters } from './CarrierAccountCreateParameters';
 import { ICarrierAccountCredentials } from './CarrierAccountCredentials';
 import { ICarrierAccountFields } from './CarrierAccountFields';

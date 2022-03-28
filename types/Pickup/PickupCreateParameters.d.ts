@@ -1,6 +1,6 @@
 import { Address } from '../Address';
 import { Batch } from '../Batch';
-import { CarrierAccount } from '../CarrierAccount';
+import { CarrierAccount } from '../Carrier';
 import { Shipment } from '../Shipment';
 
 export declare interface IPickupCreateParameters {

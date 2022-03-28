@@ -1,5 +1,5 @@
 import { IAddress } from '../Address';
-import { Carrier } from '../Tracker';
+import { Carrier } from '../Carrier';
 
 export declare interface IInsuranceCreateParameters {
   reference?: string;

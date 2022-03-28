@@ -1,4 +1,3 @@
-export * from './Carrier';
 export * from './CarrierDetail';
 export * from './Tracker';
 export * from './TrackerStatus';
