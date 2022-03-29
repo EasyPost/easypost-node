@@ -1,4 +1,4 @@
-import { IFieldError } from '../errors/FieldError';
+import { IFieldError } from '../errors';
 import { IVerificationDetails } from './VerificationDetails';
 
 /**
