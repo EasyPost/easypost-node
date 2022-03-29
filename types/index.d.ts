@@ -17,4 +17,4 @@ export * from './User';
 export * from './Webhook';
 export * from './base';
 export * from './utils';
-export * from './Easypost';
+export { default } from './EasyPost';

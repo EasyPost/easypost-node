@@ -10,7 +10,7 @@ import { Event } from './Event';
 import { Webhook } from './Webhook';
 import { Order } from './Order';
 
-export declare class Easypost {
+export default class EasyPost {
   public Address: typeof Address;
   public Parcel: typeof Parcel;
   public Shipment: typeof Shipment;
