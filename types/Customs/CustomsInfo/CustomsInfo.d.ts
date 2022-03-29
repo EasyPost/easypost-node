@@ -12,8 +12,10 @@ import { ICustomsItem } from '../CustomsItem/CustomsItem';
 export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDatedObject {
   /**
    * "EEL" or "PFC"
+   * value less than $2500: "NOEEI 30.37(a)"
+   * value greater than $2500: see [Customs Guide](https://www.easypost.com/customs-guide)
    */
-  eel_pfc: 'EEL' | 'PFC';
+  eel_pfc: string;
 
   /**
    * "documents", "gift", "merchandise", "returned_goods", "sample", or "other"
