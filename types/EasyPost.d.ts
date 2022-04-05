@@ -37,7 +37,7 @@ export interface IEasyPostOptions {
    * Function that takes a superagent `request` and returns that request.
    * Useful if you need to hook into a request:
    */
-  requestMiddleware: (request: any) => any;
+  requestMiddleware?: (request: any) => any;
 }
 
 export default class EasyPost {

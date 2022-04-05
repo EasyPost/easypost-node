@@ -57,4 +57,9 @@ export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDat
    * Describes to products being shipped
    */
   customs_items: ICustomsItem[];
+
+  /**
+   * TODO: undocumented property
+   */
+  declaration?: string;
 }
