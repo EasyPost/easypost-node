@@ -43,6 +43,36 @@ export default (api) =>
     }
 
     /**
+     * Creates and verifies an address in a single call.
+     * @returns {this}
+     */
+    static async createAndVerify(params) {
+      const newParams = { address: params };
+
+      try {
+        const url = 'addresses/create_and_verify';
+        const response = await api.post(url, { body: newParams });
+
+        return this.create(response.body.address);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Verify an address.
+     * Not titled `verify` because that's already a propType and causes conflicts.
+     * @returns {this}
+     */
+    async verifyAddress() {
+      this.verifyParameters({
+        this: ['id'],
+      });
+
+      return this.rpc('verify', undefined, undefined, 'get');
+    }
+
+    /**
      * Object format is { address: { ... }, verify: [ ] }, so we need to pull
      * the verify properties to the top level when wrapping.
      * @param {object} json
