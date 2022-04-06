@@ -33,7 +33,7 @@ describe('Address Resource', function () {
 
     expect(address).to.be.an.instanceOf(this.easypost.Address);
     expect(address.id).to.match(/^adr_/);
-    expect(address.street1).to.equal('417 MONTGOMERY ST STE 500');
+    expect(address.street1).to.equal('417 MONTGOMERY ST FL 5');
   });
 
   it('creates an address with verify_strict param', async function () {
@@ -67,14 +67,21 @@ describe('Address Resource', function () {
     });
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('creates and verifies an address', async function () {
-    // TODO: There is no `createAndVerify` function in this lib
+  it('creates a verified address', async function () {
+    const address = await this.easypost.Address.createAndVerify(Fixture.incorrectAddressToVerify());
+
+    expect(address).to.be.an.instanceOf(this.easypost.Address);
+    expect(address.id).to.match(/^adr_/);
+    expect(address.street1).to.equal('417 MONTGOMERY ST FL 5');
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('verifies an address', async function () {
-    // TODO: There is no `verify` function in this lib
+  it('verifies an address', async function () {
+    const address = await new this.easypost.Address(Fixture.basicAddress()).save();
+    const verifiedAddress = await address.verifyAddress();
+
+    expect(verifiedAddress).to.be.an.instanceOf(this.easypost.Address);
+    expect(verifiedAddress.id).to.match(/^adr_/);
+    expect(verifiedAddress.street1).to.equal('388 Townsend St');
   });
 
   it('throws on delete', function () {
