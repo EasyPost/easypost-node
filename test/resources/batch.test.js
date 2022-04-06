@@ -49,6 +49,16 @@ describe('Batch Resource', function () {
     });
   });
 
+  it('creates and buys a batch in a single call', async function () {
+    const batch = await this.easypost.Batch.createAndBuy({
+      shipments: [Fixture.oneCallBuyShipment(), Fixture.oneCallBuyShipment()],
+    });
+
+    expect(batch).to.be.an.instanceOf(this.easypost.Batch);
+    expect(batch.id).to.match(/^batch_/);
+    expect(batch.num_shipments).to.equal(2);
+  });
+
   it('buys a batch', async function () {
     const batch = await new this.easypost.Batch({
       shipments: [Fixture.oneCallBuyShipment()],

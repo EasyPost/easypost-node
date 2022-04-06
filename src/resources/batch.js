@@ -105,6 +105,23 @@ export default (api) =>
     }
 
     /**
+     * Creates and buys a batch in a single call.
+     * @returns {this}
+     */
+    static async createAndBuy(params) {
+      const newParams = { batch: params };
+
+      try {
+        const url = `${this._url}/create_and_buy`;
+        const response = await api.post(url, { body: newParams });
+
+        return this.create(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
      * Buy a batch.
      * @returns {this}
      */
