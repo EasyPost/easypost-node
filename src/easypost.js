@@ -17,6 +17,7 @@ import Order, { propTypes as orderPropTypes } from './resources/order';
 import Parcel, { propTypes as parcelPropTypes } from './resources/parcel';
 import Pickup, { propTypes as pickupPropTypes } from './resources/pickup';
 import Rate, { propTypes as ratePropTypes } from './resources/rate';
+import Refund, { propTypes as refundPropTypes } from './resources/refund';
 import Report, { propTypes as reportPropTypes } from './resources/report';
 import ScanForm, { propTypes as scanFormPropTypes } from './resources/scan_form';
 import Shipment, { propTypes as shipmentPropTypes } from './resources/shipment';
@@ -72,6 +73,7 @@ export const RESOURCES = {
   Parcel,
   Pickup,
   Rate,
+  Refund,
   Report,
   ScanForm,
   Shipment,
@@ -95,6 +97,7 @@ export const PROP_TYPES = {
   parcelPropTypes,
   pickupPropTypes,
   ratePropTypes,
+  refundPropTypes,
   reportPropTypes,
   scanFormPropTypes,
   shipmentPropTypes,
