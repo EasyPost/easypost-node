@@ -24,6 +24,7 @@
 - Add support for `columns` and `additional_columns` on Report creation
 - Adds `address.verifyAddress()` and `Address.createAndVerify()` functions
 - Adds `Batch.createAndBuy()` function
+- Adds `Refund` class which has `Refund.save()`, `Refund.all()`, and `Refund.retrieve()`
 
 ## 4.0.0 2021-10-06
 
