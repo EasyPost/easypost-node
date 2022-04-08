@@ -23,6 +23,7 @@
 - Fixes `customs_item.value` to ve a `number` instead of a `string`
 - Add support for `columns` and `additional_columns` on Report creation
 - Adds `address.verifyAddress()` and `Address.createAndVerify()` functions
+- Adds `Batch.createAndBuy()` function
 
 ## 4.0.0 2021-10-06
 

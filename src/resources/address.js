@@ -50,7 +50,7 @@ export default (api) =>
       const newParams = { address: params };
 
       try {
-        const url = 'addresses/create_and_verify';
+        const url = `${this._url}/create_and_verify`;
         const response = await api.post(url, { body: newParams });
 
         return this.create(response.body.address);
