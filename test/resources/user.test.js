@@ -2,7 +2,6 @@
 import { expect } from 'chai';
 import * as setupPolly from '../setup_polly';
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
 
 describe('User Resource', function () {
@@ -30,7 +29,9 @@ describe('User Resource', function () {
   });
 
   it('retrieves a child user', async function () {
-    const user = await this.easypost.User.retrieve(Fixture.childUserId());
+    const authenticatedUser = await this.easypost.User.retrieveMe();
+
+    const user = await this.easypost.User.retrieve(authenticatedUser.children[0].id);
 
     expect(user).to.be.an.instanceOf(this.easypost.User);
     expect(user.id).to.match(/^user_/);

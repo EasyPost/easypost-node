@@ -4,13 +4,10 @@ export default class Fixture {
     return 5;
   }
 
-  // This is the carrier account ID for the default USPS account that comes by default. All tests should use this carrier account
+  // This is the USPS carrier account ID that comes with your EasyPost account by default and should be used for all tests
   static uspsCarrierAccountId() {
-    return 'ca_5ba7ca3632c54adeb17ad4bcac13c890';
-  }
-
-  static childUserId() {
-    return 'user_440324784cde4116a7df4372e7b483aa';
+    // Fallback to the EasyPost Node Client Library Test User USPS carrier account ID
+    return process.env.USPS_CARRIER_ACCOUNT_ID || 'ca_5ba7ca3632c54adeb17ad4bcac13c890';
   }
 
   static usps() {
@@ -25,18 +22,17 @@ export default class Fixture {
     return 'NextDay';
   }
 
+  static reportType() {
+    return 'shipment';
+  }
+
+  // If you need to re-record cassettes, increment this date by 1
+  static reportDate() {
+    return '2022-04-11';
+  }
+
   static webhookUrl() {
     return 'http://example.com';
-  }
-
-  // If ever these need to change due to re-recording cassettes, simply increment this date by 1
-  static reportStartDate() {
-    return '2022-03-07';
-  }
-
-  // If ever these need to change due to re-recording cassettes, simply increment this date by 1
-  static reportEndDate() {
-    return '2022-03-09';
   }
 
   static basicAddress() {
@@ -154,13 +150,15 @@ export default class Fixture {
   }
 
   // This fixture will require you to add a `shipment` key with a Shipment object from a test.
-  // If you need to re-record cassettes, simply iterate the dates below and ensure they're one day in the future,
+  // If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
   // USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
   static basicPickup() {
+    const pickupDate = '2022-04-12';
+
     return {
       address: this.basicAddress(),
-      min_datetime: '2022-03-17',
-      max_datetime: '2022-03-18',
+      min_datetime: pickupDate,
+      max_datetime: pickupDate,
       instructions: 'Pickup at front door',
     };
   }
