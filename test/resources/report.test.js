@@ -17,11 +17,22 @@ describe('Report Resource', function () {
     setupPolly.stripCreds(server);
   });
 
+  it('creates a report', async function () {
+    const report = await new this.easypost.Report({
+      start_date: Fixture.reportDate(),
+      end_date: Fixture.reportDate(),
+      type: Fixture.reportType(),
+    }).save();
+
+    expect(report).to.be.an.instanceOf(this.easypost.Report);
+    expect(report.id).to.match(/^shprep_/);
+  });
+
   it(`creates a report by specifying columns`, async function () {
     const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'shipment',
+      start_date: Fixture.reportDate(),
+      end_date: Fixture.reportDate(),
+      type: Fixture.reportType(),
       columns: ['usps_zone'],
     }).save();
 
@@ -32,9 +43,9 @@ describe('Report Resource', function () {
 
   it(`creates a report with additional columns`, async function () {
     const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'shipment',
+      start_date: Fixture.reportDate(),
+      end_date: Fixture.reportDate(),
+      type: Fixture.reportType(),
       additional_columns: ['from_name', 'from_company'],
     }).save();
 
@@ -43,122 +54,11 @@ describe('Report Resource', function () {
     expect(report).to.be.an.instanceOf(this.easypost.Report);
   });
 
-  it('creates a payment_log report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'payment_log',
-    }).save();
-
-    expect(report).to.be.an.instanceOf(this.easypost.Report);
-    expect(report.id).to.match(/^plrep_/);
-  });
-
-  it('creates a refund report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'refund',
-    }).save();
-
-    expect(report).to.be.an.instanceOf(this.easypost.Report);
-    expect(report.id).to.match(/^refrep_/);
-  });
-
-  it('creates a shipment report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'shipment',
-    }).save();
-
-    expect(report).to.be.an.instanceOf(this.easypost.Report);
-    expect(report.id).to.match(/^shprep_/);
-  });
-
-  it('creates a shipment_invoice report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'shipment_invoice',
-    }).save();
-
-    expect(report).to.be.an.instanceOf(this.easypost.Report);
-    expect(report.id).to.match(/^shpinvrep_/);
-  });
-
-  it('creates a tracker report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'tracker',
-    }).save();
-
-    expect(report).to.be.an.instanceOf(this.easypost.Report);
-    expect(report.id).to.match(/^trkrep_/);
-  });
-
-  it('retrieves a payment_log report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'payment_log',
-    }).save();
-
-    const retrievedReport = await this.easypost.Report.retrieve(report.id);
-
-    expect(retrievedReport).to.be.an.instanceOf(this.easypost.Report);
-    expect(retrievedReport.start_date).to.equal(report.start_date);
-    expect(retrievedReport.end_date).to.equal(report.end_date);
-  });
-
-  it('retrieves a refund report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'refund',
-    }).save();
-
-    const retrievedReport = await this.easypost.Report.retrieve(report.id);
-
-    expect(retrievedReport).to.be.an.instanceOf(this.easypost.Report);
-    expect(retrievedReport.start_date).to.equal(report.start_date);
-    expect(retrievedReport.end_date).to.equal(report.end_date);
-  });
-
   it('retrieves a shipment report', async function () {
     const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'shipment',
-    }).save();
-
-    const retrievedReport = await this.easypost.Report.retrieve(report.id);
-
-    expect(retrievedReport).to.be.an.instanceOf(this.easypost.Report);
-    expect(retrievedReport.start_date).to.equal(report.start_date);
-    expect(retrievedReport.end_date).to.equal(report.end_date);
-  });
-
-  it('retrieves a shipment_invoice report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'shipment_invoice',
-    }).save();
-
-    const retrievedReport = await this.easypost.Report.retrieve(report.id);
-
-    expect(retrievedReport).to.be.an.instanceOf(this.easypost.Report);
-    expect(retrievedReport.start_date).to.equal(report.start_date);
-    expect(retrievedReport.end_date).to.equal(report.end_date);
-  });
-
-  it('retrieves a tracker report', async function () {
-    const report = await new this.easypost.Report({
-      start_date: Fixture.reportStartDate(),
-      end_date: Fixture.reportEndDate(),
-      type: 'tracker',
+      start_date: Fixture.reportDate(),
+      end_date: Fixture.reportDate(),
+      type: Fixture.reportType(),
     }).save();
 
     const retrievedReport = await this.easypost.Report.retrieve(report.id);
@@ -169,7 +69,7 @@ describe('Report Resource', function () {
   });
 
   it('retrieves all reports', async function () {
-    const reports = await this.easypost.Report.all('shipment', {
+    const reports = await this.easypost.Report.all(Fixture.reportType(), {
       page_size: Fixture.pageSize(),
     });
 
