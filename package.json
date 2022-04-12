@@ -1,8 +1,8 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "4.0.0",
-  "author": "Easypost Engineering <support@easypost.com>",
+  "version": "5.0.0",
+  "author": "Easypost Engineering <oss@easypost.com>",
   "homepage": "https://easypost.com",
   "bin": {
     "easypost": "./repl.js"
