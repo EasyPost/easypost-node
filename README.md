@@ -158,6 +158,12 @@ Replace `easypost.js` with whatever compatabile version you wish, as defined und
 API_KEY=yourkey ./repl.js --local easypost.js
 ```
 
+## Documentation
+
+API Documentation can be found at: https://easypost.com/docs/api.
+
+Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_GUIDE.md).
+
 ## Development
 
 ```bash
