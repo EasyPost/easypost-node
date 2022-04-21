@@ -178,8 +178,6 @@ export default class API {
    * @returns {*}
    */
   async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
-    const { query, body } = params;
-
     let req = this.agent[method](this.buildPath(path)).set(API.buildHeaders(headers));
 
     if (this.requestMiddleware) {
@@ -190,12 +188,10 @@ export default class API {
       req.auth(this.key);
     }
 
-    if (body) {
-      req.send(body);
-    }
-
-    if (query) {
-      req.query(query);
+    if (method === METHODS.GET || method === METHODS.DELETE) {
+      req.query(params);
+    } else {
+      req.send(params);
     }
 
     try {
@@ -217,7 +213,7 @@ export default class API {
    * @param {object} headers
    * @returns {*}
    */
-  get(path, params, headers) {
+  get(path, params = {}, headers = {}) {
     return this.request(path, METHODS.GET, params, headers);
   }
 
@@ -228,7 +224,7 @@ export default class API {
    * @param {object} headers
    * @returns {*}
    */
-  post(path, params, headers) {
+  post(path, params = {}, headers = {}) {
     return this.request(path, METHODS.POST, params, headers);
   }
 
@@ -239,7 +235,7 @@ export default class API {
    * @param {object} headers
    * @returns {*}
    */
-  put(path, params, headers) {
+  put(path, params = {}, headers = {}) {
     return this.request(path, METHODS.PUT, params, headers);
   }
 
@@ -250,7 +246,7 @@ export default class API {
    * @param {object} headers
    * @returns {*}
    */
-  del(path, params, headers) {
+  del(path, params = {}, headers = {}) {
     return this.request(path, METHODS.DELETE, params, headers);
   }
 }

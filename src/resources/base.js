@@ -118,7 +118,7 @@ export default (api) =>
     static async all(query = {}, url) {
       try {
         url = url || this._url;
-        const res = await api.get(url, { query });
+        const res = await api.get(url, query);
         const objectList = this.unwrapAll(res.body).map(this.create.bind(this));
 
         // Override the key used for reports to be the generic `reports` instead
@@ -192,7 +192,7 @@ export default (api) =>
     }
 
     /**
-     * RPC - builds the details needed to make an HTTP request.
+     * RPC (Remote Procedure Call) - builds the details needed to make an HTTP request.
      * @param {string} path
      * @param {object|Array} body
      * @param {string} pathPrefix
@@ -208,9 +208,9 @@ export default (api) =>
         let res;
 
         if (method === 'get') {
-          res = await api[method](url, { query: body });
+          res = await api[method](url, body);
         } else if (body) {
-          res = await api[method](url, { body });
+          res = await api[method](url, body);
         } else {
           res = await api[method](url);
         }
@@ -244,11 +244,9 @@ export default (api) =>
         let res;
 
         if (this.id) {
-          res = await api.put(`${this._url || this.constructor._url}/${this.id}`, { body: data });
+          res = await api.put(`${this._url || this.constructor._url}/${this.id}`, data);
         } else {
-          res = await api.post(this._url || this.constructor._url, {
-            body: data,
-          });
+          res = await api.post(this._url || this.constructor._url, data);
         }
 
         this.mapProps(res.body);
