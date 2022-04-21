@@ -27,7 +27,7 @@ export default (api) =>
     static async save(params = {}) {
       const newParams = { refund: params };
       try {
-        const response = await api.post(this._url, { body: newParams });
+        const response = await api.post(this._url, newParams);
         return response.body;
       } catch (e) {
         return Promise.reject(e);

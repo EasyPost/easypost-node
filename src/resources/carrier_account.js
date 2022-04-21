@@ -36,7 +36,7 @@ export default (api) =>
       try {
         // eslint-disable-next-line no-param-reassign
         url = url || this._url;
-        const response = await api.get(url, { query });
+        const response = await api.get(url, query);
         const carrierList = this.unwrapAll(response.body).map(this.create.bind(this));
         return carrierList;
       } catch (e) {

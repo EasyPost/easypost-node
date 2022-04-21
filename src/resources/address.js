@@ -51,7 +51,7 @@ export default (api) =>
 
       try {
         const url = `${this._url}/create_and_verify`;
-        const response = await api.post(url, { body: newParams });
+        const response = await api.post(url, newParams);
 
         return this.create(response.body.address);
       } catch (e) {
