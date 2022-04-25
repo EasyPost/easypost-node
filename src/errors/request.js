@@ -6,27 +6,30 @@ export const createMessage = (status, url) =>
 export const NAME = 'RequestError';
 
 export default class RequestError extends FakeError {
-  constructor(error, url) {
-    // Make sure an error and url were actually passed in
-    if (!error) {
-      throw new Error('No error passed to RequestError');
+  constructor(response, url) {
+    // Make sure a response and url were actually passed in
+    if (!response) {
+      throw new Error('No response passed to RequestError');
     }
 
     if (typeof url !== 'string') {
       throw new Error('No url passed to RequestError');
     }
 
-    const message = createMessage(error.status || error.code, url);
+    const message = createMessage(
+      response.status || response.statusCode || response.code || response.body.code,
+      url,
+    );
 
     super(message);
-    this.error = error;
+    this.error = response;
 
     this.name = NAME;
-    this.status = error.status || error.code;
+    this.status = response.status || response.code;
 
-    if (error.body) {
-      this.detail = error.body.error.message;
-      this.errors = error.body.error.errors;
+    if (response.body) {
+      this.detail = response.body.message || response.body.error.message;
+      this.errors = response.body.errors || response.body.error.errors;
     }
   }
 }

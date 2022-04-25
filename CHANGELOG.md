@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+## Next Release
+
+- Fix API error parsing
+
 ## v5.0.0 (2022-04-13)
 
 ### Breaking Changes
