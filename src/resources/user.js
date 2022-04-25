@@ -1,5 +1,6 @@
 import T from 'proptypes';
 import base from './base';
+import Brand from "./brand";
 
 export const propTypes = {
   id: T.string,
@@ -76,7 +77,8 @@ export default (api) =>
         const userData = this.constructor.wrapJSON(this.toJSON());
         const url = `${this.constructor._url}/${userData.user.id}/brand`;
         const res = await api.put(url, newParams);
-        return res.body;
+        // eslint-disable-next-line new-cap
+        return Brand(api).create(res.body);
       } catch (e) {
         return Promise.reject(e);
       }

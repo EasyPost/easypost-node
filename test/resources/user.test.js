@@ -74,7 +74,7 @@ describe('User Resource', function () {
       color,
     });
 
-    // TODO: This response isn't deserializing to an instance of Brand
+    // TODO: This function now returns a Brand object, but this instance check still fails
     // expect(brand).to.be.an.instanceOf(this.easypost.Brand);
     expect(brand.id).to.match(/^brd_/);
     expect(brand.color).to.equal(color);
