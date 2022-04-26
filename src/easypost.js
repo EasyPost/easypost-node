@@ -22,10 +22,8 @@ import Report, { propTypes as reportPropTypes } from './resources/report';
 import ScanForm, { propTypes as scanFormPropTypes } from './resources/scan_form';
 import Shipment, { propTypes as shipmentPropTypes } from './resources/shipment';
 import Tracker, { propTypes as trackerPropTypes } from './resources/tracker';
-import User, { propTypes as userPropTypes, propTypes as referralPropTypes } from './resources/user';
+import User, { propTypes as userPropTypes } from './resources/user';
 import Webhook, { propTypes as webhookPropTypes } from './resources/webhook';
-
-import Referral from "./beta/resources/referral";
 
 import RequestError from './errors/request';
 
@@ -81,7 +79,6 @@ export const RESOURCES = {
   Tracker,
   User,
   Webhook,
-  Referral,
 };
 
 export const PROP_TYPES = {
@@ -106,7 +103,6 @@ export const PROP_TYPES = {
   trackerPropTypes,
   userPropTypes,
   webhookPropTypes,
-  referralPropTypes,
 };
 
 export default class API {
@@ -128,6 +124,17 @@ export default class API {
     }
 
     this.use(RESOURCES);
+  }
+
+  static copyApi(api, options = {}) {
+    const { apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
+    return new API(apiKey || api.key, {
+      useProxy: useProxy || api.useProxy,
+      timeout: timeout || api.timeout,
+      baseUrl: baseUrl || api.baseUrl,
+      superagentMiddleware: superagentMiddleware || api.superagentMiddleware,
+      requestMiddleware: requestMiddleware || api.requestMiddleware,
+    });
   }
 
   /**

@@ -1,56 +1,63 @@
 /* eslint-disable no-dupe-class-members,no-unused-vars,class-methods-use-this */
 import superagent from 'superagent';
 
-import User, {propTypes as userPropTypes} from "../../resources/user";
-import RequestError from "../../errors/request";
+import T from 'proptypes';
+import base from '../../resources/base';
+import { propTypes as userPropTypes } from '../../resources/user';
+import RequestError from '../../errors/request';
+import API from '../../easypost';
+
+export const propTypes = Object.assign({}, userPropTypes, {
+  name: T.string.isRequired, // mark as required
+  email: T.string.isRequired, // mark as required
+  phone: T.string.isRequired, // handle discrepancy between phone (create Referral) and phone_number (all User functions, retrieve Referral)
+});
 
 export default (api) =>
-  // eslint-disable-next-line new-cap
-  class Referral extends User(api) {
+  class Referral extends base(api) {
     static _name = 'Referral';
 
     static _url = 'referral_customers';
 
     static key = 'user';
 
-    static propTypes = userPropTypes;
+    static propTypes = propTypes;
 
     static #stripeCreditCardUrl = 'https://api.stripe.com/v1/tokens';
 
-    /**
-     * List all referrals.
-     * @returns {Promise<never>}
-     */
-    static all() {
-      return this.notImplemented('all');
+    static #getReferralApi(referralApiKey) {
+      return API.copyApi(api, {
+        apiKey: referralApiKey,
+      });
+    }
+
+    async save() {
+      if (this.phone_number !== undefined) {
+        // handle discrepancy between phone (create Referral) and phone_number (all User functions, retrieve Referral)
+        this.phone = this.phone_number;
+      }
+      return super.save();
     }
 
     /**
-     * retrieve not implemented
-     * @returns {Promise<never>}
+     * Update the referral's email address.
+     * @param {string} referralUserId - The referral user's ID.
+     * @param {string} email - The new email address.
+     * @returns {Promise<boolean>}
      */
-    static async retrieve(id, urlPrefix) {
-      return this.notImplemented('retrieve');
+    static async updateEmail(referralUserId, email) {
+      try {
+        const newParams = { user: { email } };
+        await api.put(`${this._url}/${referralUserId}`, newParams);
+        return true;
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
 
     /**
-     * retrieveMe not implemented
-     * @returns {Promise<never>}
-     */
-    static async retrieveMe() {
-      return this.notImplemented('retrieveMe');
-    }
-
-    /**
-     * updateBrand not implemented
-     * @returns {Promise<never>}
-     */
-    async updateBrand(params) {
-      return this.constructor.notImplemented('updateBrand');
-    }
-
-    /**
-     * Add a credit card to the referral's account.
+     * Add a credit card to the referral's account
+     * @param {string} referralApiKey - The referral user's production API key.
      * @param {object} creditCardDetails  - Credit card details:
      * @param {string} creditCardDetails.number  - Credit card number
      * @param {string} creditCardDetails.expirationMonth  - Credit card expiration month
@@ -59,14 +66,22 @@ export default (api) =>
      * @param {string} primaryOrSecondary  - Whether to add the card as the primary or secondary card (defaults to primary)
      * @returns {Promise<never>}
      */
-    async addCreditCard(creditCardDetails = {}, primaryOrSecondary = "primary") {
+    static async addCreditCard(
+      referralApiKey,
+      creditCardDetails = {},
+      primaryOrSecondary = 'primary',
+    ) {
       const stripeCreditCardId = await Referral.#sendCardDetailsToStripe(creditCardDetails);
-      await Referral.#sendCardDetailsToEasyPost(stripeCreditCardId, primaryOrSecondary);
-      // nothing to return. If an error wasn't thrown, then the card was added successfully
+      const paymentMethod = await Referral.#sendCardDetailsToEasyPost(
+        referralApiKey,
+        stripeCreditCardId,
+        primaryOrSecondary,
+      );
+      return paymentMethod;
     }
 
     static async #getStripeKey() {
-      const response = await api.get("/partners/stripe_public_key");
+      const response = await api.get('partners/stripe_public_key');
       return response.body.public_key;
     }
 
@@ -80,17 +95,20 @@ export default (api) =>
      * @returns {Promise<string>} - Stripe credit card ID
      */
     static async #sendCardDetailsToStripe(creditCardDetails = {}) {
-      const {number, expirationMonth, expirationYear, cvc} = creditCardDetails;
-      const stripeKey = Referral.#getStripeKey();
+      const { number, expirationMonth, expirationYear, cvc } = creditCardDetails;
+      const stripeKey = await Referral.#getStripeKey();
 
-      const req = superagent.post(this.#stripeCreditCardUrl).set({"Authorization": `Basic ${stripeKey}`});
+      const req = superagent.post(this.#stripeCreditCardUrl).set({
+        Authorization: `Bearer ${stripeKey}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
       req.send({
-        "card": {
-          "number": number,
-          "exp_month": expirationMonth,
-          "exp_year": expirationYear,
-          "cvc": cvc
-        }
+        card: {
+          number,
+          exp_month: expirationMonth,
+          exp_year: expirationYear,
+          cvc,
+        },
       });
       try {
         const res = await req;
@@ -105,13 +123,15 @@ export default (api) =>
 
     /*
      * Send the Stripe credit card ID to EasyPost to add the card to the user's account.
+     * @param {string} referralApiKey - The referral user's production API key.
      * @param {string} stripeCreditCardId  - Stripe credit card ID
      * @param {string} primaryOrSecondary  - Whether to add the card as the primary or secondary card (defaults to primary)
      * @returns {Object} - Response body (EasyPost credit card details)
      */
-    static async #sendCardDetailsToEasyPost(stripeCreditCardId, priority) {
-      const params = {stripe_object_id: stripeCreditCardId, priority};
-      const response = await api.post("/credit_cards", params);
+    static async #sendCardDetailsToEasyPost(referralApiKey, stripeCreditCardId, priority) {
+      const _api = this.#getReferralApi(referralApiKey);
+      const params = { credit_card: { stripe_object_id: stripeCreditCardId, priority } };
+      const response = await _api.post('credit_cards', params);
       return response.body;
     }
   };

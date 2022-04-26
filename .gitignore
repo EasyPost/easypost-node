@@ -14,3 +14,5 @@ dist
 coverage
 
 build.tar.gz
+/test/cassettes/Referral-Resource_2042494388/add-a-referral-user-credit-card_1978527022/recording.har
+/test/cassettes/Referral-Resource_2042494388/creates-a-referral-user_159009729/recording.har
