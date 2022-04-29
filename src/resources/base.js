@@ -93,26 +93,6 @@ export default (api) =>
       }
     }
 
-    static async rawGet(url, params = {}) {
-      const response = await api.get(url, params);
-      return response.body;
-    }
-
-    static async rawPost(url, params = {}) {
-      const response = await api.post(url, params);
-      return response.body;
-    }
-
-    static async rawPut(url, params = {}) {
-      const response = await api.put(url, params);
-      return response.body;
-    }
-
-    static async rawDelete(url, params = {}) {
-      const response = await api.delete(url, params);
-      return response.body;
-    }
-
     /**
      * Retrieve a record from the API.
      * @param {string} id
