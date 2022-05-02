@@ -201,7 +201,7 @@ export default class API {
       return res;
     } catch (e) {
       if (e.response && e.response.body) {
-        throw new RequestError(e.response.body, path);
+        throw new RequestError(e.response, path);
       }
 
       throw e;

@@ -17,8 +17,9 @@ describe('Request Errors', () => {
   });
 
   it('maps code to status on sys errors', () => {
-    expect(new RequestError(sysError, url).status).to.equal(sysError.code);
-    expect(new RequestError(sysError, url).error.code).to.equal(sysError.code);
+    const requestError = new RequestError(sysError, url);
+    expect(requestError.status).to.equal(sysError.code);
+    expect(requestError.error.code).to.equal(sysError.code);
   });
 
   it('has a name', () => {
@@ -29,8 +30,8 @@ describe('Request Errors', () => {
     expect(new RequestError(error, url).status).to.equal(error.status);
   });
 
-  it('throws if no error is passed in', () => {
-    expect(() => new RequestError()).to.throw(/no error/i);
+  it('throws if no response is passed in', () => {
+    expect(() => new RequestError()).to.throw(/no response/i);
   });
 
   it('throws if no url is passed in', () => {
