@@ -83,13 +83,16 @@ describe('Referral Resource', function () {
     };
     const paymentMethod = await this.easypost.Referral.addCreditCard(
       referralProdApiKey,
-      creditCardDetails,
+      creditCardDetails.number,
+      creditCardDetails.expirationMonth,
+      creditCardDetails.expirationYear,
+      creditCardDetails.cvv,
       'primary',
     );
 
     expect(paymentMethod).to.not.be.null;
     expect(paymentMethod.id).to.match(/^card_/);
     expect(paymentMethod.object).to.equal('CreditCard');
-    expect(paymentMethod.last4).to.equal('1234');
+    expect(paymentMethod.last4).to.equal(creditCardDetails.number.substring(11));
   });
 });
