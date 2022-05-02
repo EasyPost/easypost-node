@@ -3,27 +3,27 @@ import superagent from 'superagent';
 
 import pkg from '../package.json';
 
-import Address, {propTypes as addressPropTypes} from './resources/address';
-import ApiKey, {propTypes as apiKeyPropTypes} from './resources/api_key';
-import Batch, {propTypes as batchPropTypes} from './resources/batch';
-import Brand, {propTypes as brandPropTypes} from './resources/brand';
-import CarrierAccount, {propTypes as carrierAccountPropTypes} from './resources/carrier_account';
-import CarrierType, {propTypes as carrierTypePropTypes} from './resources/carrier_type';
-import CustomsInfo, {propTypes as customsInfoPropTypes} from './resources/customs_info';
-import CustomsItem, {propTypes as customsItemPropTypes} from './resources/customs_item';
-import Event, {propTypes as eventPropTypes} from './resources/event';
-import Insurance, {propTypes as insurancePropTypes} from './resources/insurance';
-import Order, {propTypes as orderPropTypes} from './resources/order';
-import Parcel, {propTypes as parcelPropTypes} from './resources/parcel';
-import Pickup, {propTypes as pickupPropTypes} from './resources/pickup';
-import Rate, {propTypes as ratePropTypes} from './resources/rate';
-import Refund, {propTypes as refundPropTypes} from './resources/refund';
-import Report, {propTypes as reportPropTypes} from './resources/report';
-import ScanForm, {propTypes as scanFormPropTypes} from './resources/scan_form';
-import Shipment, {propTypes as shipmentPropTypes} from './resources/shipment';
-import Tracker, {propTypes as trackerPropTypes} from './resources/tracker';
-import User, {propTypes as userPropTypes} from './resources/user';
-import Webhook, {propTypes as webhookPropTypes} from './resources/webhook';
+import Address, { propTypes as addressPropTypes } from './resources/address';
+import ApiKey, { propTypes as apiKeyPropTypes } from './resources/api_key';
+import Batch, { propTypes as batchPropTypes } from './resources/batch';
+import Brand, { propTypes as brandPropTypes } from './resources/brand';
+import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrier_account';
+import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrier_type';
+import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customs_info';
+import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customs_item';
+import Event, { propTypes as eventPropTypes } from './resources/event';
+import Insurance, { propTypes as insurancePropTypes } from './resources/insurance';
+import Order, { propTypes as orderPropTypes } from './resources/order';
+import Parcel, { propTypes as parcelPropTypes } from './resources/parcel';
+import Pickup, { propTypes as pickupPropTypes } from './resources/pickup';
+import Rate, { propTypes as ratePropTypes } from './resources/rate';
+import Refund, { propTypes as refundPropTypes } from './resources/refund';
+import Report, { propTypes as reportPropTypes } from './resources/report';
+import ScanForm, { propTypes as scanFormPropTypes } from './resources/scan_form';
+import Shipment, { propTypes as shipmentPropTypes } from './resources/shipment';
+import Tracker, { propTypes as trackerPropTypes } from './resources/tracker';
+import User, { propTypes as userPropTypes } from './resources/user';
+import Webhook, { propTypes as webhookPropTypes } from './resources/webhook';
 
 import RequestError from './errors/request';
 
@@ -107,7 +107,7 @@ export const PROP_TYPES = {
 
 export default class API {
   constructor(key, options = {}) {
-    const {useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware} = options;
+    const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
 
     if (!key && !useProxy) {
       throw new Error('No API key supplied. Pass in an API key as the first argument.');
@@ -133,7 +133,7 @@ export default class API {
    * @returns {API} A new API instance.
    */
   static copyApi(api, options = {}) {
-    const {apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware} = options;
+    const { apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
     return new API(apiKey || api.key, {
       useProxy: useProxy || api.useProxy,
       timeout: timeout || api.timeout,

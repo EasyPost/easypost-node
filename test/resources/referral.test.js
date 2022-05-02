@@ -21,7 +21,7 @@ describe('Referral Resource', function () {
     const referral = await new this.easypost.Referral({
       name: 'Test Referral',
       email: 'me@email.com',
-      phone_number: '1111111111', // phone_number will be copied to phone behind the scenes
+      phone: '1111111111',
     }).save();
     return referral;
   }
