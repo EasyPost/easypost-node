@@ -3,6 +3,7 @@ import T from 'proptypes';
 import base from './base';
 import { propTypes as addressPropTypes } from './address';
 import { propTypes as shipmentPropTypes } from './shipment';
+import Util from './util';
 
 export const propTypes = {
   id: T.string,
@@ -76,5 +77,17 @@ export default (api) =>
      */
     async getRates() {
       return this.rpc('rates', undefined, undefined, 'get');
+    }
+
+    /**
+     * Get the lowest rate of an order.
+     * @param {string} carriers
+     * @param {string} services
+     * @returns {Object}
+     */
+    lowestRate(carriers, services) {
+      const lowestRate = Util.getLowestObjectRate(this, carriers, services);
+
+      return lowestRate;
     }
   };

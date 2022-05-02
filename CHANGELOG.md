@@ -2,6 +2,9 @@
 
 ## Next Release
 
+- Adds a `lowestRate` function to Orders and Pickups
+- Adds a `Shipment.getLowestSmartrate()` and `shipment.lowest_smartrate()` functions
+- Adds an error message to `lowestRate()` functions when no lowest rate can be found
 - Fix API error parsing
 
 ## v5.0.0 (2022-04-13)

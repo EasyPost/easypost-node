@@ -5,6 +5,7 @@ import { propTypes as shipmentPropTypes } from './shipment';
 import { propTypes as batchPropTypes } from './batch';
 import { propTypes as addressPropTypes } from './address';
 import { propTypes as carrierAccountPropTypes } from './carrier_account';
+import Util from './util';
 
 export const propTypes = {
   id: T.string,
@@ -83,5 +84,17 @@ export default (api) =>
       });
 
       return this.rpc('cancel');
+    }
+
+    /**
+     * Get the lowest rate of a pickup.
+     * @param {string} carriers
+     * @param {string} services
+     * @returns {Object}
+     */
+    lowestRate(carriers, services) {
+      const lowestRate = Util.getLowestObjectRate(this, carriers, services, 'pickup_rates');
+
+      return lowestRate;
     }
   };
