@@ -18,7 +18,7 @@ const stripeCreditCardUrl = 'https://api.stripe.com/v1/tokens';
 /**
  * Get an instance of the API client using the referral user's API key.
  * @param {API} api - The API client to copy.
- * @param {string }referralApiKey - The referral user's API key.
+ * @param {string} referralApiKey - The referral user's API key.
  * @returns {API} - An instance of the API client.
  */
 function getReferralApi(api, referralApiKey) {
@@ -39,13 +39,13 @@ async function getEasyPostStripeKey(api) {
 }
 
 /**
- * Send the credit card details to Stripe to get a Stripe credit card ID.
+ * Send the credit card details to Stripe to get a Stripe credit card token.
  * @param {string} stripeKey - The Stripe API key.
- * @param {string} number - Credit card number
- * @param {string} expirationMonth - Credit card expiration month
- * @param {string} expirationYear - Credit card expiration year
- * @param {string} cvc - Credit card CVC
- * @returns {Promise<string>} - Stripe credit card ID
+ * @param {string} number - Credit card number.
+ * @param {string} expirationMonth - Credit card expiration month.
+ * @param {string} expirationYear - Credit card expiration year.
+ * @param {string} cvc - Credit card CVC.
+ * @returns {Promise<string>} - Stripe credit card ID.
  */
 async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
   // need to form-encode per Stripe's API
@@ -75,12 +75,12 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
 }
 
 /**
- * Send the Stripe credit card ID to EasyPost to add the card to the user's account.
+ * Send the Stripe credit card token to EasyPost to add the card to the user's account.
  * @param {API} api - The API client to use.
  * @param {string} referralApiKey - The referral user's production API key.
- * @param {string} stripeCreditCardId - Stripe credit card ID
- * @param {string} priority - Whether to add the card as the 'primary' or 'secondary' card
- * @returns {Object} - Response body (EasyPost payment method object)
+ * @param {string} stripeCreditCardId - Stripe credit card ID.
+ * @param {string} priority - Whether to add the card as the 'primary' or 'secondary' card.
+ * @returns {Object} - Response body (EasyPost payment method object).
  */
 async function sendCardDetailsToEasyPost(api, referralApiKey, stripeCreditCardId, priority) {
   const _api = getReferralApi(api, referralApiKey);
@@ -120,8 +120,8 @@ export default (api) =>
      * @param {string} expirationMonth - The credit card expiration month.
      * @param {string} expirationYear - The credit card expiration year.
      * @param {string} cvc - The credit card CVC.
-     * @param {string} primaryOrSecondary - Whether to add the card as 'primary' or 'secondary' payment method (defaults to 'primary')
-     * @returns {Promise<never>} - Response body (EasyPost payment method object)
+     * @param {string} primaryOrSecondary - Whether to add the card as 'primary' or 'secondary' payment method (defaults to 'primary').
+     * @returns {Promise<never>} - Response body (EasyPost payment method object).
      */
     static async addCreditCard(
       referralApiKey,
