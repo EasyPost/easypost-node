@@ -69,7 +69,6 @@ describe('Referral Resource', function () {
   it.skip('add a referral user credit card', async function () {
     // skip due to exposed API keys, exposed tokens, and fake credit card details
     // E2E test with real data
-    // this.timeout(10000); // 10 seconds, since there are multiple API calls
 
     const referral = await createTestReferral.call(this);
 

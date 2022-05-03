@@ -40,22 +40,14 @@ async function getEasyPostStripeKey(api) {
 
 /**
  * Send the credit card details to Stripe to get a Stripe credit card ID.
- * @param {API} api - The API client to use.
- * @param {string} creditCardNumber - Credit card number
- * @param {string} creditCardExpirationMonth - Credit card expiration month
- * @param {string} creditCardExpirationYear - Credit card expiration year
- * @param {string} creditCardCVC - Credit card CVC
+ * @param {string} stripeKey - The Stripe API key.
+ * @param {string} number - Credit card number
+ * @param {string} expirationMonth - Credit card expiration month
+ * @param {string} expirationYear - Credit card expiration year
+ * @param {string} cvc - Credit card CVC
  * @returns {Promise<string>} - Stripe credit card ID
  */
-async function sendCardDetailsToStripe(
-  api,
-  creditCardNumber,
-  creditCardExpirationMonth,
-  creditCardExpirationYear,
-  creditCardCVC,
-) {
-  const stripeKey = await getEasyPostStripeKey(api);
-
+async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
   // need to form-encode per Stripe's API
   const request = superagent.post(stripeCreditCardUrl).set({
     Authorization: `Bearer ${stripeKey}`,
@@ -63,10 +55,10 @@ async function sendCardDetailsToStripe(
   });
   request.send({
     card: {
-      number: creditCardNumber,
-      exp_month: creditCardExpirationMonth,
-      exp_year: creditCardExpirationYear,
-      cvc: creditCardCVC,
+      number,
+      exp_month: expirationMonth,
+      exp_year: expirationYear,
+      cvc,
     },
   });
 
@@ -115,47 +107,46 @@ export default (api) =>
      * @returns {Promise<boolean>} - Returns true if the referral was updated successfully, false otherwise.
      */
     static async updateEmail(referralUserId, email) {
-      try {
-        const newParams = { user: { email } };
-        await api.put(`${this._url}/${referralUserId}`, newParams);
+      const newParams = { user: { email } };
+      await api.put(`${this._url}/${referralUserId}`, newParams); // will throw if there's an error
 
-        return true;
-      } catch (error) {
-        return Promise.reject(error);
-      }
+      return true;
     }
 
     /**
      * Add a credit card to the referral's account
      * @param {string} referralApiKey - The referral user's production API key.
-     * @param {string} creditCardNumber - The credit card number.
-     * @param {string} creditCardExpirationMonth - The credit card expiration month.
-     * @param {string} creditCardExpirationYear - The credit card expiration year.
-     * @param {string} creditCardCVC - The credit card CVC.
+     * @param {string} number - The credit card number.
+     * @param {string} expirationMonth - The credit card expiration month.
+     * @param {string} expirationYear - The credit card expiration year.
+     * @param {string} cvc - The credit card CVC.
      * @param {string} primaryOrSecondary - Whether to add the card as 'primary' or 'secondary' payment method (defaults to 'primary')
      * @returns {Promise<never>} - Response body (EasyPost payment method object)
      */
     static async addCreditCard(
       referralApiKey,
-      creditCardNumber,
-      creditCardExpirationMonth,
-      creditCardExpirationYear,
-      creditCardCVC,
+      number,
+      expirationMonth,
+      expirationYear,
+      cvc,
       primaryOrSecondary = 'primary',
     ) {
+      const stripeKey = await getEasyPostStripeKey(api); // will throw if there's an error
+
       const stripeCreditCardId = await sendCardDetailsToStripe(
-        api,
-        creditCardNumber,
-        creditCardExpirationMonth,
-        creditCardExpirationYear,
-        creditCardCVC,
-      );
+        stripeKey,
+        number,
+        expirationMonth,
+        expirationYear,
+        cvc,
+      ); // will throw if there's an error
+
       const paymentMethod = await sendCardDetailsToEasyPost(
         api,
         referralApiKey,
         stripeCreditCardId,
         primaryOrSecondary,
-      );
+      ); // will throw if there's an error
 
       return paymentMethod;
     }

@@ -14,5 +14,3 @@ dist
 coverage
 
 build.tar.gz
-/test/cassettes/Referral*/creates-a-referral-user*
-/test/cassettes/Referral*/add-a-referral-user-credit-card*
