@@ -73,4 +73,25 @@ describe('Order Resource', function () {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('gets the lowest rate', async function () {
+    const order = await new this.easypost.Order(Fixture.basicOrder()).save();
+
+    // Test lowest rate with no filters
+    const lowestRate = order.lowestRate();
+    expect(lowestRate.service).to.equal('First');
+    expect(lowestRate.rate).to.equal('5.49');
+    expect(lowestRate.carrier).to.equal('USPS');
+
+    // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
+    const lowestRateService = order.lowestRate(null, ['Priority']);
+    expect(lowestRateService.service).to.equal('Priority');
+    expect(lowestRateService.rate).to.equal('7.37');
+    expect(lowestRateService.carrier).to.equal('USPS');
+
+    // Test lowest rate with carrier filter (should error due to bad carrier)
+    expect(function () {
+      order.lowestRate(['BAD CARRIER'], null);
+    }).to.throw(Error, 'No rates found.');
+  });
 });

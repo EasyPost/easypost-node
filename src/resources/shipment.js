@@ -6,6 +6,7 @@ import { propTypes as parcelPropTypes } from './parcel';
 import { propTypes as customsInfoPropTypes } from './customs_info';
 import { propTypes as insurancePropTypes } from './insurance';
 import { propTypes as trackerPropTypes } from './tracker';
+import Util from './util';
 
 export const propTypes = {
   id: T.string,
@@ -183,27 +184,70 @@ export default (api) =>
      * Get the lowest rate of a shipment.
      * @param {string} carriers
      * @param {string} services
-     * @returns {object}
+     * @returns {Object}
      */
     lowestRate(carriers, services) {
-      let rates = this.rates || [];
+      const lowestRate = Util.getLowestObjectRate(this, carriers, services);
 
-      if (carriers) {
-        const carriersLower = carriers.map((c) => c.toLowerCase());
-        rates = rates.filter((r) => carriersLower.includes(r.carrier.toLowerCase()));
+      return lowestRate;
+    }
+
+    /**
+     * Get the lowest smartrate of this shipment.
+     * @param {number} delivery_days
+     * @param {string} delivery_accuracy
+     * @returns {Object}
+     */
+    async lowestSmartrate(deliveryDays, deliveryAccuracy) {
+      const smartrates = await this.getSmartrates();
+      const lowestSmartrate = Shipment.getLowestSmartrate(
+        smartrates,
+        deliveryDays,
+        deliveryAccuracy,
+      );
+
+      return lowestSmartrate;
+    }
+
+    static getLowestSmartrate(smartrates, deliveryDays, deliveryAccuracy) {
+      const validDeliveryAccuracyValues = new Set([
+        'percentile_50',
+        'percentile_75',
+        'percentile_85',
+        'percentile_90',
+        'percentile_95',
+        'percentile_97',
+        'percentile_99',
+      ]);
+      let lowestSmartrate = null;
+      const lowercaseDeliveryAccuracy = deliveryAccuracy.toLowerCase();
+
+      if (validDeliveryAccuracyValues.has(lowercaseDeliveryAccuracy) === false) {
+        throw new Error(
+          `Invalid deliveryAccuracy value, must be one of: ${new Array(
+            ...validDeliveryAccuracyValues,
+          ).join(', ')}`,
+        );
       }
 
-      if (services) {
-        const servicesLower = services.map((s) => s.toLowerCase());
-        rates = rates.filter((r) => servicesLower.includes(r.service.toLowerCase()));
-      }
+      for (let i = 0; i < smartrates.length; i += 1) {
+        const rate = smartrates[i];
 
-      return rates.reduce((lowest, rate) => {
-        if (parseFloat(rate.rate) < parseFloat(lowest.rate)) {
-          return rate;
+        if (rate.time_in_transit[lowercaseDeliveryAccuracy] > parseInt(deliveryDays, 10)) {
+          // eslint-disable-next-line no-continue
+          continue;
+        } else if (
+          lowestSmartrate === null ||
+          parseFloat(rate.rate) < parseFloat(lowestSmartrate.rate)
+        ) {
+          lowestSmartrate = rate;
         }
+      }
 
-        return lowest;
-      }, rates[0]);
+      if (lowestSmartrate === null) {
+        throw new Error('No rates found.');
+      }
+
+      return lowestSmartrate;
     }
   };

@@ -90,4 +90,29 @@ describe('Pickup Resource', function () {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('gets the lowest rate', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
+
+    const pickupData = Fixture.basicPickup();
+    pickupData.shipment = shipment;
+
+    const pickup = await new this.easypost.Pickup(pickupData).save();
+
+    // Test lowest rate with no filters
+    const lowestRate = pickup.lowestRate();
+    expect(lowestRate.service).to.equal('NextDay');
+    expect(lowestRate.rate).to.equal('0.00');
+    expect(lowestRate.carrier).to.equal('USPS');
+
+    // Test lowest rate with service filter (should error due to bad service)
+    expect(function () {
+      pickup.lowestRate(null, ['BAD SERVICE']);
+    }).to.throw(Error, 'No rates found.');
+
+    // Test lowest rate with carrier filter (should error due to bad carrier)
+    expect(function () {
+      pickup.lowestRate(['BAD CARRIER'], null);
+    }).to.throw(Error, 'No rates found.');
+  });
 });

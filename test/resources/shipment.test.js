@@ -178,4 +178,90 @@ describe('Shipment Resource', function () {
       expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
+
+  it('gets the lowest rate', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.fullShipment()).save();
+
+    // Test lowest rate with no filters
+    const lowestRate = shipment.lowestRate();
+    expect(lowestRate.service).to.equal('First');
+    expect(lowestRate.rate).to.equal('5.49');
+    expect(lowestRate.carrier).to.equal('USPS');
+
+    // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
+    const lowestRateService = shipment.lowestRate(null, ['Priority']);
+    expect(lowestRateService.service).to.equal('Priority');
+    expect(lowestRateService.rate).to.equal('7.37');
+    expect(lowestRateService.carrier).to.equal('USPS');
+
+    // Test lowest rate with carrier filter (should error due to bad carrier)
+    expect(function () {
+      shipment.lowestRate(['BAD CARRIER'], null);
+    }).to.throw(Error, 'No rates found.');
+  });
+
+  it('gets the lowest smartrate', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+
+    // Test lowest smartrate with valid filters
+    const lowestSmartrate = await shipment.lowestSmartrate(1, 'percentile_90');
+    expect(lowestSmartrate.service).to.equal('Priority');
+    expect(lowestSmartrate.rate).to.equal(7.37);
+    expect(lowestSmartrate.carrier).to.equal('USPS');
+  });
+
+  it('raises an error for lowestSmartrate when no rates are found due to deliveryDays', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+
+    // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
+    await expect(shipment.lowestSmartrate(0, 'percentile_90')).to.be.rejectedWith(
+      Error,
+      'No rates found.',
+    );
+  });
+
+  it('raises an error for lowestSmartrate when no rates are found due to deliveryAccuracy', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+
+    // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
+    await expect(shipment.lowestSmartrate(3, 'BAD_ACCURACY')).to.be.rejectedWith(
+      Error,
+      /Invalid deliveryAccuracy value/,
+    );
+  });
+
+  it('gets the lowest smartrate from a list of smartrates', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+    const smartrates = await shipment.getSmartrates();
+
+    // Test lowest smartrate with valid filters
+    const lowestSmartrate = this.easypost.Shipment.getLowestSmartrate(
+      smartrates,
+      1,
+      'percentile_90',
+    );
+    expect(lowestSmartrate.service).to.equal('Priority');
+    expect(lowestSmartrate.rate).to.equal(7.37);
+    expect(lowestSmartrate.carrier).to.equal('USPS');
+  });
+
+  it('raises an error for getLowestSmartrate when no rates are found due to deliveryDays', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+    const smartrates = await shipment.getSmartrates();
+
+    // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
+    expect(function () {
+      this.easypost.Shipment.getLowestSmartrate(smartrates, 0, 'percentile_90');
+    }).to.throw(Error);
+  });
+
+  it('raises an error for getLowestSmartrate when no rates are found due to deliveryAccuracy', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+    const smartrates = await shipment.getSmartrates();
+
+    // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
+    expect(function () {
+      this.easypost.Shipment.getLowestSmartrate(smartrates, 3, 'BAD_ACCURACY');
+    }).to.throw(Error);
+  });
 });
