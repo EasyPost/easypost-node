@@ -67,10 +67,10 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
 
     return response.body.id;
   } catch (error) {
-    if (error.response && error.response.body) {
-      throw new RequestError(error.response.body, stripeCreditCardUrl);
-    }
-    throw error;
+    throw new RequestError(
+      'Could not send card details to Stripe, please try again later',
+      stripeCreditCardUrl,
+    );
   }
 }
 
