@@ -45,7 +45,7 @@ async function getEasyPostStripeKey(api) {
  * @param {string} expirationMonth - Credit card expiration month.
  * @param {string} expirationYear - Credit card expiration year.
  * @param {string} cvc - Credit card CVC.
- * @returns {Promise<string>} - Stripe credit card ID.
+ * @returns {Promise<string>} - Stripe credit card token.
  */
 async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
   // need to form-encode per Stripe's API
