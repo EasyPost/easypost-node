@@ -82,9 +82,9 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
  * @param {string} priority - Whether to add the card as the 'primary' or 'secondary' card.
  * @returns {Object} - Response body (EasyPost payment method object).
  */
-async function sendCardDetailsToEasyPost(api, referralApiKey, stripeCreditCardId, priority) {
+async function sendCardDetailsToEasyPost(api, referralApiKey, stripeCreditCardToken, priority) {
   const _api = getReferralApi(api, referralApiKey);
-  const params = { credit_card: { stripe_object_id: stripeCreditCardId, priority } };
+  const params = { credit_card: { stripe_object_id: stripeCreditCardToken, priority } };
   const response = await _api.post('credit_cards', params);
 
   return response.body;
