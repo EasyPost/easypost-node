@@ -127,6 +127,23 @@ export default class API {
   }
 
   /**
+   * Create a copy of an API instance with overridden options.
+   * @param {API} api The API instance to clone.
+   * @param {Object} options The options to override.
+   * @returns {API} A new API instance.
+   */
+  static copyApi(api, options = {}) {
+    const { apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
+    return new API(apiKey || api.key, {
+      useProxy: useProxy || api.useProxy,
+      timeout: timeout || api.timeout,
+      baseUrl: baseUrl || api.baseUrl,
+      agent: superagentMiddleware(api.agent) || api.agent,
+      requestMiddleware: requestMiddleware || api.requestMiddleware,
+    });
+  }
+
+  /**
    * Build request headers to be sent by default with each request, combined (or overridden) by any additional headers
    * @param {object} additionalHeaders
    * @returns {object}

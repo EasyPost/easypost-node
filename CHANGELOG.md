@@ -6,6 +6,8 @@
 - Adds a `Shipment.getLowestSmartrate()` and `shipment.lowest_smartrate()` functions
 - Adds an error message to `lowestRate()` functions when no lowest rate can be found
 - Fix API error parsing
+- Add beta Referral class for White Label API with these new functions:
+  `create()`, `update_email()`, `all()`, and `add_credit_card()`
 
 ## v5.0.0 (2022-04-13)
 
