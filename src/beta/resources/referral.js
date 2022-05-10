@@ -1,7 +1,8 @@
 /* eslint-disable no-dupe-class-members,no-unused-vars,class-methods-use-this */
 import superagent from 'superagent';
-
 import T from 'proptypes';
+
+import FakeError from '../../errors/error';
 import base from '../../resources/base';
 import { propTypes as userPropTypes } from '../../resources/user';
 import RequestError from '../../errors/request';
@@ -67,9 +68,8 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
 
     return response.body.id;
   } catch (error) {
-    throw new RequestError(
-      'Could not send card details to Stripe, please try again later',
-      stripeCreditCardUrl,
+    throw new FakeError(
+      'Could not send card details to Stripe, please verify your details and try again later',
     );
   }
 }
@@ -78,7 +78,7 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
  * Send the Stripe credit card token to EasyPost to add the card to the user's account.
  * @param {API} api - The API client to use.
  * @param {string} referralApiKey - The referral user's production API key.
- * @param {string} stripeCreditCardId - Stripe credit card ID.
+ * @param {string} stripeCreditCardToken - Stripe credit card token.
  * @param {string} priority - Whether to add the card as the 'primary' or 'secondary' card.
  * @returns {Object} - Response body (EasyPost payment method object).
  */

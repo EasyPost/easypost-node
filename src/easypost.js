@@ -138,7 +138,7 @@ export default class API {
       useProxy: useProxy || api.useProxy,
       timeout: timeout || api.timeout,
       baseUrl: baseUrl || api.baseUrl,
-      agent: superagentMiddleware(api.agent) || api.agent,
+      agent: superagentMiddleware ? superagentMiddleware(api.agent) : api.agent,
       requestMiddleware: requestMiddleware || api.requestMiddleware,
     });
   }

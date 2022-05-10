@@ -76,9 +76,9 @@ describe('Referral Resource', function () {
 
     const creditCardDetails = {
       number: '1234123412341234', // fake credit card number, Stripe will reject if you re-record with this number
-      expirationMonth: '04',
+      expirationMonth: '05',
       expirationYear: '2028',
-      cvv: '015',
+      cvv: '778',
     };
     const paymentMethod = await this.easypost.Referral.addCreditCard(
       referralProdApiKey,
@@ -92,6 +92,6 @@ describe('Referral Resource', function () {
     expect(paymentMethod).to.not.be.null;
     expect(paymentMethod.id).to.match(/^card_/);
     expect(paymentMethod.object).to.equal('CreditCard');
-    expect(paymentMethod.last4).to.equal(creditCardDetails.number.substring(11));
+    expect(paymentMethod.last4).to.equal(creditCardDetails.number.substring(12));
   });
 });
