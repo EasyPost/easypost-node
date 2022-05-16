@@ -24,7 +24,7 @@ describe('EndShipper Resource', function () {
     expect(endShipper.street1).to.equal('388 TOWNSEND ST APT 20');
   });
 
-  it('retrieves an EndShipper', async function () {
+  it('retrieves an EndShipper object', async function () {
     const endShipper = await new this.easypost.EndShipper(Fixture.endShipperAddress()).save();
     const retrievedEndShipper = await this.easypost.EndShipper.retrieve(endShipper.id);
 
@@ -32,7 +32,7 @@ describe('EndShipper Resource', function () {
     expect(endShipper.street1).to.equal(retrievedEndShipper.street1);
   });
 
-  it('retrieves all EndShippers', async function () {
+  it('retrieves all EndShipper objects', async function () {
     const endShippers = await this.easypost.EndShipper.all({ page_size: Fixture.pageSize() });
     const endShippersArray = endShippers.end_shippers;
 
@@ -42,7 +42,7 @@ describe('EndShipper Resource', function () {
     });
   });
 
-  it('updates an EndShipper', async function () {
+  it('updates an EndShipper object', async function () {
     const endShipper = await new this.easypost.EndShipper(Fixture.endShipperAddress()).save();
     endShipper.phone = '9999999999';
 

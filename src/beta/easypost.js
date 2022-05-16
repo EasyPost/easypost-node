@@ -1,5 +1,5 @@
 import Referral, { propTypes as referralPropTypes } from './resources/referral';
-import EndShipper from './resources/end_shipper';
+import EndShipper, { propTypes as endShipperPropTypes } from './resources/end_shipper';
 
 import API from '../easypost';
 
@@ -12,6 +12,7 @@ export const RESOURCES = {
 
 export const PROP_TYPES = {
   referralPropTypes,
+  endShipperPropTypes,
 };
 
 export default class BetaAPI extends API {
