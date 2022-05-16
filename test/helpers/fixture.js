@@ -192,4 +192,19 @@ export default class Fixture {
       shipments: [this.basicShipment()],
     };
   }
+
+  static endShipperAddress() {
+    return {
+      name: 'Jack Sparrow',
+      company: 'EasyPost',
+      street1: '388 Townsend St',
+      street2: 'Apt 20',
+      city: 'San Francisco',
+      state: 'CA',
+      country: 'US',
+      email: 'test@example.com',
+      zip: '94107',
+      phone: '5555555555',
+    };
+  }
 }

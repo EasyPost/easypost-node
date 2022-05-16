@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+## Next Release
+
+- Adds the `EndShipper` Beta class with `save()`, `retrieve()`, and `all()` functions
+
 ## v5.1.0 (2022-05-09)
 
 - Adds a `lowestRate()` function to Orders and Pickups

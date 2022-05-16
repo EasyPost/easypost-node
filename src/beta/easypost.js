@@ -1,10 +1,12 @@
 import Referral, { propTypes as referralPropTypes } from './resources/referral';
+import EndShipper from './resources/end_shipper';
 
 import API from '../easypost';
 
 export const DEFAULT_BASE_URL = 'https://api.easypost.com/beta/';
 
 export const RESOURCES = {
+  EndShipper,
   Referral,
 };
 
