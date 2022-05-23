@@ -43,7 +43,6 @@ export const EASYPOST_UA_HEADER = 'X-EasyPost-Client-User-Agent';
 
 export const DEFAULT_HEADERS = {
   Accept: 'application/json',
-  'Accept-Encoding': 'gzip,deflate,sdch,br',
   'Content-Type': 'application/json',
   'User-Agent': `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${process.versions.node}`,
   [EASYPOST_UA_HEADER]: JSON.stringify(UA_INFO),

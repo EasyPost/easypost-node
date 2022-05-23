@@ -13,7 +13,7 @@ describe('User Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.stripCassettes(server);
   });
 
   // eslint-disable-next-line jest/no-disabled-tests

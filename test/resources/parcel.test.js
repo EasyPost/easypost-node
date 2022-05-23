@@ -14,7 +14,7 @@ describe('Parcel Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.stripCassettes(server);
   });
 
   it('creates a parcel', async function () {

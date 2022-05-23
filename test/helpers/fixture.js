@@ -207,4 +207,16 @@ export default class Fixture {
       phone: '5555555555',
     };
   }
+
+  // The credit card details below are for a valid proxy card usable
+  // for tests only and cannot be used for real transactions.
+  // DO NOT alter these details with real credit card information.
+  static creditCardDetails() {
+    return {
+      number: '4536410136126170',
+      expirationMonth: '05',
+      expirationYear: '2028',
+      cvv: '778',
+    };
+  }
 }

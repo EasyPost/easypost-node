@@ -1,5 +1,7 @@
 /* eslint-disable func-names */
+import fs from 'fs';
 import { expect } from 'chai';
+import { resolve } from 'path';
 import * as setupPolly from '../setup_polly';
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
@@ -14,7 +16,7 @@ describe('Batch Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.stripCassettes(server);
   });
 
   it('creates a batch', async function () {
@@ -77,8 +79,16 @@ describe('Batch Resource', function () {
 
     await batch.buy();
 
-    // Uncomment the following line if you need to re-record the cassette
-    // await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait enough time for the batch to process buying the shipment
+    if (
+      !fs.existsSync(
+        resolve(
+          __dirname,
+          '../cassettes/Batch-Resource_4123662849/creates-a-scanform-for-a-batch_397052124',
+        ),
+      )
+    ) {
+      await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the batch to process buying the shipment
+    }
 
     await batch.createScanForm();
 
@@ -105,8 +115,16 @@ describe('Batch Resource', function () {
 
     await batch.buy();
 
-    // Uncomment the following line if you need to re-record the cassette
-    // await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait enough time for the batch to process buying the shipment
+    if (
+      !fs.existsSync(
+        resolve(
+          __dirname,
+          '../cassettes/Batch-Resource_4123662849/generates-a-label-for-a-batch_2376202846',
+        ),
+      )
+    ) {
+      await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the batch to process buying the shipment
+    }
 
     await batch.generateLabel('ZPL');
 

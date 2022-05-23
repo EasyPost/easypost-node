@@ -14,7 +14,7 @@ describe('Tracker Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.stripCassettes(server);
   });
 
   it('creates a tracker', async function () {

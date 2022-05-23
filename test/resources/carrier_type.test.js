@@ -13,7 +13,7 @@ describe('CarrierType Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.stripCassettes(server);
   });
 
   it('retrieves the carrier account types available', async function () {

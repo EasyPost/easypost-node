@@ -14,7 +14,7 @@ describe('Insurance Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.stripCassettes(server);
   });
 
   it('creates an insurance object', async function () {
