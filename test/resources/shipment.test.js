@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../setup_polly';
+import * as setupPolly from '../helpers/setup_polly';
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
@@ -14,7 +14,7 @@ describe('Shipment Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCassettes(server);
+    setupPolly.setupCassette(server);
   });
 
   it('creates a shipment', async function () {
@@ -205,8 +205,8 @@ describe('Shipment Resource', function () {
 
     // Test lowest smartrate with valid filters
     const lowestSmartrate = await shipment.lowestSmartrate(1, 'percentile_90');
-    expect(lowestSmartrate.service).to.equal('Priority');
-    expect(lowestSmartrate.rate).to.equal(7.37);
+    expect(lowestSmartrate.service).to.equal('First');
+    expect(lowestSmartrate.rate).to.equal(5.49);
     expect(lowestSmartrate.carrier).to.equal('USPS');
   });
 
@@ -240,8 +240,8 @@ describe('Shipment Resource', function () {
       1,
       'percentile_90',
     );
-    expect(lowestSmartrate.service).to.equal('Priority');
-    expect(lowestSmartrate.rate).to.equal(7.37);
+    expect(lowestSmartrate.service).to.equal('First');
+    expect(lowestSmartrate.rate).to.equal(5.49);
     expect(lowestSmartrate.carrier).to.equal('USPS');
   });
 

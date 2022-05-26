@@ -2,7 +2,7 @@
 import fs from 'fs';
 import { expect } from 'chai';
 import { resolve } from 'path';
-import * as setupPolly from '../setup_polly';
+import * as setupPolly from '../helpers/setup_polly';
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
@@ -16,7 +16,7 @@ describe('Batch Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCassettes(server);
+    setupPolly.setupCassette(server);
   });
 
   it('creates a batch', async function () {
@@ -33,6 +33,7 @@ describe('Batch Resource', function () {
     const batch = await new this.easypost.Batch({
       shipments: [Fixture.oneCallBuyShipment()],
     }).save();
+
     const retrievedBatch = await this.easypost.Batch.retrieve(batch.id);
 
     expect(retrievedBatch).to.be.an.instanceOf(this.easypost.Batch);
@@ -97,14 +98,13 @@ describe('Batch Resource', function () {
   });
 
   it('adds and removes shipments from a batch', async function () {
-    const shipment1 = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
-    const shipment2 = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
+    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
     const batch = await new this.easypost.Batch().save();
 
-    const addShipmentsResponse = await batch.addShipments([shipment1.id, shipment2.id]);
-    expect(addShipmentsResponse.num_shipments).to.equal(2);
+    const addShipmentsResponse = await batch.addShipments([shipment.id]);
+    expect(addShipmentsResponse.num_shipments).to.equal(1);
 
-    const removeShipmentsResponse = await batch.removeShipments([shipment1.id, shipment2.id]);
+    const removeShipmentsResponse = await batch.removeShipments([shipment.id]);
     expect(removeShipmentsResponse.num_shipments).to.equal(0);
   });
 

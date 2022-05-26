@@ -10,6 +10,6 @@
   ],
   "require": [
     "@babel/register",
-    "./test/common.js"
+    "./test/helpers/common.js"
   ]
 }

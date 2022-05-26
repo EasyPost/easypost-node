@@ -1,6 +1,6 @@
 /* eslint-disable func-names,jest/no-disabled-tests */
 import { expect } from 'chai';
-import * as setupPolly from '../../setup_polly';
+import * as setupPolly from '../../helpers/setup_polly';
 import EasyPost from '../../../src/beta/easypost';
 import Fixture from '../../helpers/fixture';
 
@@ -14,7 +14,7 @@ describe('Referral Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCassettes(server);
+    setupPolly.setupCassette(server);
   });
 
   async function createTestReferral() {

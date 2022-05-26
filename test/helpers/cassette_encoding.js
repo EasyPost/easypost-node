@@ -1,6 +1,8 @@
+import { text } from 'superagent/lib/node/parsers';
 import { gunzipSync, gzipSync } from 'zlib';
 
-const defaultEncoding = 'utf-8';
+const charset = 'utf8';
+const encoding = 'base64';
 
 const hasHeader =
   (headers) =>
@@ -21,20 +23,29 @@ const isContentChunked = (headers) =>
 const isContentGzipped = (headers) =>
   hasHeader(headers)(['content-encoding', headerValueContains('gzip')]);
 
-const decodeContent = async (response) => {
+const decodeContent = (response) => {
   const { content, headers } = response;
   if (!isContentGzipped(headers) || content.size === 0) {
     return;
   }
 
-  const parsedBody = JSON.parse(content.text);
+  const chunks = JSON.parse(content.text);
 
-  const wholeBody = isContentChunked(headers) ? parsedBody.join('') : parsedBody;
+  if (isContentChunked(headers)) {
+    const chunkBuffers = [];
 
-  const zipped = Buffer.from(wholeBody, 'base64');
-  const unzipped = await gunzipSync(zipped);
+    for (let i = 0; i < chunks.length; i += 1) {
+      const decodedBuffer = Buffer.from(chunks[i], encoding);
+      chunkBuffers.push(decodedBuffer);
+    }
 
-  content.text = unzipped.toString(defaultEncoding);
+    const allBuffers = Buffer.concat(chunkBuffers);
+    const unzipped = gunzipSync(allBuffers);
+
+    content.text = unzipped.toString(charset);
+  } else {
+    throw Error('Unchunked content has no cassette decoding logic and will need to be configured.');
+  }
 };
 
 const encodeContent = (response) => {
@@ -43,15 +54,14 @@ const encodeContent = (response) => {
     return;
   }
 
-  const unzipped = Buffer.from(content.text, defaultEncoding);
+  const unzipped = Buffer.from(content.text, charset);
   const zipped = gzipSync(unzipped);
-  const base64String = zipped.toString('base64');
+  const base64String = zipped.toString(encoding);
   const body = isContentChunked(headers)
     ? // re-chunk the content
-      [base64String] // making the first chunk 20 chars, as it seems to match polly's typical result
+      [base64String.slice(0, 20), base64String.substring(20)] // making the first chunk 20 chars, as it seems to match polly's typical result
     : base64String;
-  const text = JSON.stringify(body);
-  content.text = text;
+  content.text = JSON.stringify(body);
 
   // recalculating the content size in case manual editing of data changes the size
   content.size = text.length;

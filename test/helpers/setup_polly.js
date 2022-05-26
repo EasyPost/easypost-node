@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import FSPersister from '@pollyjs/persister-fs';
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
 import { Polly, setupMocha as setupPolly } from '@pollyjs/core';
-import { encodeContent, decodeContent } from './helpers/cassette_encoding';
+import { encodeContent, decodeContent } from './cassette_encoding';
 
 Polly.register(FSPersister);
 Polly.register(NodeHttpAdapter);
@@ -14,19 +14,20 @@ function startPolly() {
     persister: 'fs',
     persisterOptions: {
       fs: {
-        recordingsDir: resolve(__dirname, './cassettes'),
+        recordingsDir: resolve(__dirname, '../cassettes'),
       },
     },
+    flushRequestsOnStop: true,
   });
 }
 
-function stripCassettes(server) {
+function setupCassette(server) {
   server.any().on('beforePersist', (_, recording) => {
     const headerScrubbers = [
       'authorization',
       'user-agent',
       'x-client-user-agent',
-      'x-easypost-client-user-agent',
+      'x-easypost-client-user-agent', // deprecated
     ];
 
     // eslint-disable-next-line no-param-reassign
@@ -34,18 +35,20 @@ function stripCassettes(server) {
       ({ name }) => !headerScrubbers.includes(name),
     );
 
-    // eslint-disable-next-line no-param-reassign
-    // recording.response.url = recording.response.url.replace(
-    //   /card[number]=[^&]+/,
-    //   'card[number]=<redacted>',
-    // );
-
-    decodeContent(recording.response);
+    try {
+      decodeContent(recording.response);
+    } catch (err) {
+      throw new Error(`Error decoding cassette: ${err.message}`);
+    }
   });
 
   server.any().on('beforeReplay', (_, recording) => {
-    encodeContent(recording.response);
+    try {
+      encodeContent(recording.response);
+    } catch (err) {
+      throw new Error(`Error encoding cassette: ${err.message}`);
+    }
   });
 }
 
-export { startPolly, stripCassettes };
+export { startPolly, setupCassette };

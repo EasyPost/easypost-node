@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../setup_polly';
+import * as setupPolly from '../helpers/setup_polly';
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
@@ -14,8 +14,17 @@ describe('Address Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCassettes(server);
+    setupPolly.setupCassette(server);
   });
+
+  // afterEach(function () {
+  //   try {
+  //     const { server } = this.polly;
+  //     server.any().off();
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // });
 
   it('creates an address', async function () {
     const address = await new this.easypost.Address(Fixture.basicAddress()).save();
