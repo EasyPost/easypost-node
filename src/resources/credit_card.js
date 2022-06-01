@@ -3,6 +3,7 @@ import base from './base';
 
 export const propTypes = {
   id: T.string,
+  disabled_at: T.string,
   object: T.string,
   name: T.string,
   last4: T.string,
@@ -22,7 +23,7 @@ export default (api) =>
     static propTypes = propTypes;
 
     /**
-     * fund a credit card.
+     * fund your EasyPost wallet by charging your primary or secondary card on file.
      * @param {String} amount
      * @param {String} primaryOrSecondary
      * @returns {Promise<never>}
@@ -35,7 +36,11 @@ export default (api) =>
       };
 
       const paymentMethodToUse = paymentMethodMap[primaryOrSecondary];
-      const cardId = paymentMethods.body[paymentMethodToUse].id;
+
+      let cardId = null;
+      if (paymentMethodToUse !== undefined) {
+        cardId = paymentMethods.body[paymentMethodToUse].id;
+      }
 
       if (paymentMethodToUse === undefined || cardId === undefined || !cardId.startsWith('card_')) {
         throw new Error('The chosen payment method is not a credit card. Please try again.');
