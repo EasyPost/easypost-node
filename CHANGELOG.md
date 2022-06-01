@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds `PaymentMethod.all()`, `CreditCard.fund()`, and `CreditCard.delete()` functions
+
 ## v5.2.0 (2022-05-19)
 
 - Adds the `EndShipper` Beta class with `save()`, `retrieve()`, and `all()` functions
