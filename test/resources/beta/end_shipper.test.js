@@ -44,11 +44,13 @@ describe('EndShipper Resource', function () {
 
   it('updates an EndShipper object', async function () {
     const endShipper = await new this.easypost.EndShipper(Fixture.endShipperAddress()).save();
-    endShipper.phone = '9999999999';
+
+    const newName = 'Captain Sparrow';
+    endShipper.name = newName;
 
     const updatedEndShipper = await endShipper.save();
 
     expect(updatedEndShipper).to.be.an.instanceOf(this.easypost.EndShipper);
-    expect(updatedEndShipper.phone).to.equal('9999999999');
+    expect(updatedEndShipper.name).to.equal(newName.toUpperCase());
   });
 });

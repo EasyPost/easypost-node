@@ -16,10 +16,10 @@ describe('ApiKey Resource', function () {
     setupPolly.setupCassette(server);
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('retrieves all apiKeys', async function () {
-    // API keys are returned as plaintext, do not run this test.
-    this.easypost.ApiKey.all();
+  it('retrieves all apiKeys', async function () {
+    const apiKeys = await this.easypost.ApiKey.all();
+
+    expect(apiKeys.keys).not.to.be.null;
   });
 
   it('throws on save', function () {

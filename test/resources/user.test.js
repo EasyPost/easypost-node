@@ -16,9 +16,7 @@ describe('User Resource', function () {
     setupPolly.setupCassette(server);
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('creates a child user', async function () {
-    // This endpoint returns the child user keys in plain text, do not run this test.
+  it('creates a child user', async function () {
     const user = await new this.easypost.User({
       name: 'Test User',
     }).save();
@@ -26,12 +24,14 @@ describe('User Resource', function () {
     expect(user).to.be.an.instanceOf(this.easypost.User);
     expect(user.id).to.match(/^user_/);
     expect(user.name).to.equal('Test User');
+
+    await user.delete();
   });
 
-  it('retrieves a child user', async function () {
+  it('retrieves a user', async function () {
     const authenticatedUser = await this.easypost.User.retrieveMe();
 
-    const user = await this.easypost.User.retrieve(authenticatedUser.children[0].id);
+    const user = await this.easypost.User.retrieve(authenticatedUser.id);
 
     expect(user).to.be.an.instanceOf(this.easypost.User);
     expect(user.id).to.match(/^user_/);
@@ -44,25 +44,30 @@ describe('User Resource', function () {
     expect(user.id).to.match(/^user_/);
   });
 
-  it('updates a user', async function () {
-    const user = await this.easypost.User.retrieveMe();
+  // TODO: Skipped because VCR cannot match the cassette properly
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.skip('updates a user', async function () {
+    const testName = 'Test User';
 
-    const testPhone = '5555555555';
+    return this.easypost.User.retrieveMe().then(async (user) => {
+      // eslint-disable-next-line no-param-reassign
+      user.name = testName;
+      await user.save();
 
-    user.phone_number = testPhone;
-    await user.save();
-
-    expect(user).to.be.an.instanceOf(this.easypost.User);
-    expect(user.id).to.match(/^user_/);
-    expect(user.phone_number).to.equal(testPhone);
+      expect(user).to.be.an.instanceOf(this.easypost.User);
+      expect(user.id).to.match(/^user_/);
+      expect(user.name).to.equal(testName);
+    });
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('deletes a user', async function () {
-    // Due to our inability to create child users securely, we must also skip deleting them as we cannot replace the deleted ones easily.
-    const user = await this.easypost.User.retrieve('usr_123');
+  it('deletes a user', async function () {
+    const user = await new this.easypost.User({
+      name: 'Test User',
+    }).save();
 
-    user.delete();
+    const deletedUser = await user.delete();
+
+    expect(deletedUser).to.be.an.instanceOf(this.easypost.User);
   });
 
   it("updates the authenticated user's brand", async function () {

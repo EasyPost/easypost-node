@@ -17,15 +17,6 @@ describe('Address Resource', function () {
     setupPolly.setupCassette(server);
   });
 
-  // afterEach(function () {
-  //   try {
-  //     const { server } = this.polly;
-  //     server.any().off();
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // });
-
   it('creates an address', async function () {
     const address = await new this.easypost.Address(Fixture.basicAddress()).save();
 

@@ -23,7 +23,7 @@ const isContentChunked = (headers) =>
 const isContentGzipped = (headers) =>
   hasHeader(headers)(['content-encoding', headerValueContains('gzip')]);
 
-const decodeContent = (response) => {
+const decodeCassetteResponseBodies = (response) => {
   const { content, headers } = response;
   if (!isContentGzipped(headers) || content.size === 0) {
     return;
@@ -48,7 +48,7 @@ const decodeContent = (response) => {
   }
 };
 
-const encodeContent = (response) => {
+const encodeCassetteResponseBodies = (response) => {
   const { content, headers } = response;
   if (!isContentGzipped(headers)) {
     return;
@@ -68,4 +68,4 @@ const encodeContent = (response) => {
   response.bodySize = text.length;
 };
 
-export { decodeContent, encodeContent };
+export { decodeCassetteResponseBodies, encodeCassetteResponseBodies };
