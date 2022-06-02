@@ -23,6 +23,7 @@ export const propTypes = {
   customs_info: T.oneOfType([T.string, T.shape(customsInfoPropTypes)]),
   carrier_accounts: T.arrayOf(T.string),
   carrier_account: T.string,
+  carrier: T.string,
   scan_form: T.oneOfType([T.string, T.object]),
   forms: T.array,
   insurance: T.oneOfType([T.string, T.shape(insurancePropTypes)]),

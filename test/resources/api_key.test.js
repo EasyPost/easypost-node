@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../setup_polly';
+import * as setupPolly from '../helpers/setup_polly';
 import EasyPost from '../../src/easypost';
 import NotImplementedError from '../../src/errors/not_implemented';
 
@@ -13,13 +13,13 @@ describe('ApiKey Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.setupCassette(server);
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('retrieves all apiKeys', async function () {
-    // API keys are returned as plaintext, do not run this test.
-    this.easypost.ApiKey.all();
+  it('retrieves all apiKeys', async function () {
+    const apiKeys = await this.easypost.ApiKey.all();
+
+    expect(apiKeys.keys).not.to.be.null;
   });
 
   it('throws on save', function () {

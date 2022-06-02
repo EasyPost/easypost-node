@@ -153,7 +153,7 @@ export default class Fixture {
   // If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
   // USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
   static basicPickup() {
-    const pickupDate = '2022-05-04';
+    const pickupDate = '2022-06-03';
 
     return {
       address: this.basicAddress(),
@@ -205,6 +205,18 @@ export default class Fixture {
       email: 'test@example.com',
       zip: '94107',
       phone: '5555555555',
+    };
+  }
+
+  // The credit card details below are for a valid proxy card usable
+  // for tests only and cannot be used for real transactions.
+  // DO NOT alter these details with real credit card information.
+  static creditCardDetails() {
+    return {
+      number: '4536410136126170',
+      expirationMonth: '05',
+      expirationYear: '2028',
+      cvc: '778',
     };
   }
 }

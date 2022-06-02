@@ -1,6 +1,6 @@
 /* eslint-disable func-names,jest/no-disabled-tests */
 import { expect } from 'chai';
-import * as setupPolly from '../../setup_polly';
+import * as setupPolly from '../../helpers/setup_polly';
 import EasyPost from '../../../src/beta/easypost';
 import Fixture from '../../helpers/fixture';
 
@@ -13,7 +13,7 @@ describe('EndShipper Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.setupCassette(server);
   });
 
   it('creates an EndShipper object', async function () {
@@ -44,11 +44,13 @@ describe('EndShipper Resource', function () {
 
   it('updates an EndShipper object', async function () {
     const endShipper = await new this.easypost.EndShipper(Fixture.endShipperAddress()).save();
-    endShipper.phone = '9999999999';
+
+    const newName = 'Captain Sparrow';
+    endShipper.name = newName;
 
     const updatedEndShipper = await endShipper.save();
 
     expect(updatedEndShipper).to.be.an.instanceOf(this.easypost.EndShipper);
-    expect(updatedEndShipper.phone).to.equal('9999999999');
+    expect(updatedEndShipper.name).to.equal(newName.toUpperCase());
   });
 });

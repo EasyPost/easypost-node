@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../setup_polly';
+import * as setupPolly from '../helpers/setup_polly';
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 
@@ -13,7 +13,7 @@ describe('Webhook Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.setupCassette(server);
   });
 
   it('creates a webhook', async function () {
@@ -57,13 +57,29 @@ describe('Webhook Resource', function () {
     });
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('updates a webhook', async function () {
-    // Cannot be easily tested - requires a disabled webhook.
+  it('updates a webhook', async function () {
+    const webhook = await new this.easypost.Webhook({
+      url: Fixture.webhookUrl(),
+    }).save();
+
+    await this.easypost.Webhook.retrieve(webhook.id).then(async (retrievedWebhook) => {
+      // eslint-disable-next-line no-param-reassign
+      await retrievedWebhook.save();
+
+      expect(retrievedWebhook).to.be.an.instanceOf(this.easypost.Webhook);
+    });
+
+    // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
+    await webhook.delete();
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('deletes a webhook', async function () {
-    // No need to re-test this here since we delete each webhook after each test right now
+  it('deletes a webhook', async function () {
+    const webhook = await new this.easypost.Webhook({
+      url: Fixture.webhookUrl(),
+    }).save();
+
+    const deletedWebhook = await webhook.delete();
+
+    expect(deletedWebhook).to.be.an.instanceOf(this.easypost.Webhook);
   });
 });

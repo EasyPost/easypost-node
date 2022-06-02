@@ -78,7 +78,7 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
  * Send the Stripe credit card token to EasyPost to add the card to the user's account.
  * @param {API} api - The API client to use.
  * @param {string} referralApiKey - The referral user's production API key.
- * @param {string} stripeCreditCardId - Stripe credit card ID.
+ * @param {string} stripeCreditCardToken - Stripe credit card token.
  * @param {string} priority - Whether to add the card as the 'primary' or 'secondary' card.
  * @returns {Object} - Response body (EasyPost payment method object).
  */

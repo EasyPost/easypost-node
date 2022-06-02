@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../setup_polly';
+import * as setupPolly from '../helpers/setup_polly';
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
@@ -14,7 +14,7 @@ describe('Refund Resource', function () {
 
   beforeEach(function () {
     const { server } = this.polly;
-    setupPolly.stripCreds(server);
+    setupPolly.setupCassette(server);
   });
 
   it('creates a refund', async function () {
