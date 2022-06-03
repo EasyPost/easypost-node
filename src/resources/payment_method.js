@@ -24,6 +24,10 @@ export default (api) =>
      */
     static async all() {
       const res = await api.get(this._url);
+
+      if (res.body.id == null) {
+        throw new Error('Billing has not been setup for this user. Please add a payment method.');
+      }
       return res.body;
     }
 
