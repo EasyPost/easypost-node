@@ -12,4 +12,33 @@ export default (api) =>
     static key = 'address';
 
     static propTypes = propTypes;
+
+    /**
+     * Save (create or update) a record.
+     * @returns {this|Promise<never>}
+     */
+     async save() {
+      try {
+        this.validateProperties();
+      } catch (e) {
+        return Promise.reject(e);
+      }
+
+      try {
+        const data = this.constructor.wrapJSON(this.toJSON());
+
+        let res;
+
+        if (this.id) {
+          res = await api.put(`${this._url || this.constructor._url}/${this.id}`, data);
+        } else {
+          res = await api.post(this._url || this.constructor._url, data);
+        }
+
+        this.mapProps(res.body);
+        return this;
+      } catch (e) {
+        throw e;
+      }
+    }
   };

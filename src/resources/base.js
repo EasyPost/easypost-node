@@ -236,7 +236,7 @@ export default (api) =>
         let res;
 
         if (this.id) {
-          res = await api.put(`${this._url || this.constructor._url}/${this.id}`, data);
+          res = await api.patch(`${this._url || this.constructor._url}/${this.id}`, data);
         } else {
           res = await api.post(this._url || this.constructor._url, data);
         }
