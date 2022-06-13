@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
+      - run: npm install --force # TODO: Remove the `--force` flag once we've dropped support for Node 10 and can modernize the dependency matrix
       - run: npm run build
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 npm test
       - run: npm run lint
