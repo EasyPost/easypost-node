@@ -55,6 +55,7 @@ export const METHODS = {
   GET: 'get',
   POST: 'post',
   PUT: 'put',
+  PATCH: 'patch',
   DELETE: 'del',
 };
 
@@ -261,6 +262,17 @@ export default class API {
    */
   put(path, params = {}, headers = {}) {
     return this.request(path, METHODS.PUT, params, headers);
+  }
+
+  /**
+   * Make a PATCH HTTP request.
+   * @param {string} path
+   * @param {object} params
+   * @param {object} headers
+   * @returns {*}
+   */
+  patch(path, params = {}, headers = {}) {
+    return this.request(path, METHODS.PATCH, params, headers);
   }
 
   /**
