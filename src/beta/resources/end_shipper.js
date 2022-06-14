@@ -17,7 +17,7 @@ export default (api) =>
      * Save (create or update) a record.
      * @returns {this|Promise<never>}
      */
-     async save() {
+    async save() {
       try {
         this.validateProperties();
       } catch (e) {

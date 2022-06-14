@@ -264,7 +264,7 @@ export default class API {
     return this.request(path, METHODS.PUT, params, headers);
   }
 
-   /**
+  /**
    * Make a PATCH HTTP request.
    * @param {string} path
    * @param {object} params
