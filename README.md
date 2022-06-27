@@ -186,6 +186,15 @@ npm run lint
 npm run format
 ```
 
+### Typescript Definitions (Beta)
+
+This project has bundled Typescript definitions included. These definitions are in their infancy and are **not yet recommended for production applications**. We welcome the community's help in maintaining these definitions and contributing improvements as we add missing types or make small corrections.
+
+#### Typescript Exclusions
+
+- We do not provide a DefinitelyTyped version of these definitions at this time
+- Predefined packages and carrier service levels
+
 ### Testing
 
 The test suite in this project was specifically built to produce consistent results on every run, regardless of when they run or who is running them. This project uses [Pollyjs](https://github.com/Netflix/pollyjs) (AKA: VCR) to record and replay HTTP requests and responses via "cassettes". When the suite is run, the HTTP requests and responses for each test function will be saved to a cassette if they do not exist already and replayed from this saved file if they do, which saves the need to make live API calls on every test run.
