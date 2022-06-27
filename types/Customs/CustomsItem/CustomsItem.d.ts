@@ -34,12 +34,12 @@ export declare interface ICustomsItem extends IObjectWithId<'CustomsItem'>, IDat
    *
    * @see https://hts.usitc.gov/
    */
-  hs_tariff_number: string;
+  hs_tariff_number?: string | null;
 
   /**
    * SKU/UPC or other product identifier
    */
-  code: string;
+  code?: string | null;
 
   /**
    * Required, 2 char country code
@@ -49,5 +49,5 @@ export declare interface ICustomsItem extends IObjectWithId<'CustomsItem'>, IDat
   /**
    * 3 char currency code, default USD
    */
-  currency: string;
+  currency?: string | null;
 }

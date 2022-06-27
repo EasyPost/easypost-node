@@ -12,7 +12,7 @@ export declare interface IBatchShipment {
   /**
    * An optional field that may be used in place of ID in some API endpoints
    */
-  reference?: string;
+  reference?: string | null;
 
   /**
    * The current status. Possible values are "postage_purchased", "postage_purchase_failed", "queued_for_purchase", "creation_failed", and "created"

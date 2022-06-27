@@ -1,7 +1,6 @@
 import { IDatedObject, IObjectWithId } from '../../base';
 import { DeepPartial } from '../../utils';
 import { ICarrierAccountCreateParameters } from './CarrierAccountCreateParameters';
-import { ICarrierAccountCredentials } from './CarrierAccountCredentials';
 import { ICarrierAccountFields } from './CarrierAccountFields';
 
 /**
@@ -30,17 +29,17 @@ export declare interface ICarrierAccount extends IObjectWithId<'CarrierAccount'>
   /**
    * If clone is true, only the reference and description are possible to update
    */
-  clone: boolean;
+  clone?: boolean | null;
 
   /**
    * An optional, user-readable field to help distinguish accounts
    */
-  description: string;
+  description?: string | null;
 
   /**
    * An optional field that may be used in place of carrier_account_id in other API endpoints
    */
-  reference: string;
+  reference?: string | null;
 
   /**
    * The name used when displaying a readable value for the type of the account
@@ -50,28 +49,28 @@ export declare interface ICarrierAccount extends IObjectWithId<'CarrierAccount'>
   /**
    * Unlike the "credentials" object contained in "fields", this nullable object contains just raw credential pairs for client library consumption
    */
-  credentials: ICarrierAccountCredentials;
+  credentials?: object | null;
 
   /**
    * Unlike the "test_credentials" object contained in "fields", this nullable object contains just raw test_credential pairs for client library consumption
    */
-  test_credentials: ICarrierAccountCredentials;
+  test_credentials?: object | null;
 }
 
 export declare class CarrierAccount implements ICarrierAccount {
   public constructor(input: DeepPartial<ICarrierAccountCreateParameters>);
 
-  type: string;
-  fields: ICarrierAccountFields;
-  clone: boolean;
-  description: string;
-  reference: string;
-  readable: string;
-  credentials: ICarrierAccountCredentials;
-  test_credentials: ICarrierAccountCredentials;
   id: string;
   mode: 'test' | 'production';
   object: 'CarrierAccount';
+  type: string;
+  fields: ICarrierAccountFields;
+  clone?: boolean | null;
+  description?: string | null;
+  reference?: string | null;
+  readable: string;
+  credentials?: object | null;
+  test_credentials?: object | null;
   created_at: string;
   updated_at: string;
 

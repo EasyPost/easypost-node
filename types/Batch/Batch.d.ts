@@ -18,7 +18,7 @@ export declare interface IBatch extends IObjectWithId<'Batch'>, IDatedObject {
   /**
    * An optional field that may be used in place of ID in some API endpoints
    */
-  reference?: string;
+  reference?: string | null;
 
   /**
    * The overall state. Possible values are "creating", "creation_failed", "created", "purchasing", "purchase_failed", "purchased", "label_generating", and "label_generated"
@@ -40,7 +40,7 @@ export declare interface IBatch extends IObjectWithId<'Batch'>, IDatedObject {
   /**
    * The label image url
    */
-  label_url: string;
+  label_url?: string | null;
 
   /**
    * The created ScanForm
@@ -56,17 +56,17 @@ export declare interface IBatch extends IObjectWithId<'Batch'>, IDatedObject {
 export declare class Batch implements IBatch {
   public constructor(input: IBatchCreateParameters);
 
-  reference?: string;
+  id: string;
+  mode: 'test' | 'production';
+  object: 'Batch';
+  reference?: string | null;
   state: TBatchState;
   num_shipments: number;
   shipments: IBatchShipment[];
   status: TBatchStatuses;
-  label_url: string;
+  label_url?: string | null;
   scan_form: IScanForm;
   pickup: IPickup;
-  id: string;
-  mode: 'test' | 'production';
-  object: 'Batch';
   created_at: string;
   updated_at: string;
 

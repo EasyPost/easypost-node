@@ -188,12 +188,19 @@ npm run format
 
 ### Typescript Definitions (Beta)
 
-This project has bundled Typescript definitions included. These definitions are in their infancy and are **not yet recommended for production applications**. We welcome the community's help in maintaining these definitions and contributing improvements as we add missing types or make small corrections.
+Starting with v5.3.0, this project has bundled Typescript definitions included. These definitions are in their infancy and are **not yet recommended for production applications**. We welcome the community's help in maintaining these definitions and contributing improvements as we add missing types or make small corrections.
 
 #### Typescript Exclusions
 
 - We do not provide a DefinitelyTyped version of these definitions at this time
-- Predefined packages and carrier service levels
+- Predefined packages (due to maintenance cost)
+- Carrier service levels (due to maintenance cost)
+- Carrier list (due to maintenance cost)
+
+#### Typescript TODOs
+
+- Nullability for every field may need additional work
+- Error codes may not be comprehensive
 
 ### Testing
 

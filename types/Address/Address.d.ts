@@ -15,22 +15,22 @@ export declare interface IAddress extends IObjectWithId<'Address'> {
   /**
    * First line of the address
    */
-  street1: string;
+  street1?: string | null;
 
   /**
    * Second line of the address
    */
-  street2: string;
+  street2?: string | null;
 
   /**
    * City the address is located in
    */
-  city: string;
+  city?: string | null;
 
   /**
    * State or province the address is located in
    */
-  state: string;
+  state?: string | null;
 
   /**
    * ZIP or postal code the address is located in
@@ -45,42 +45,42 @@ export declare interface IAddress extends IObjectWithId<'Address'> {
   /**
    * Whether or not this address would be considered residential
    */
-  residential: boolean;
+  residential?: boolean | null;
 
   /**
    * The specific designation for the address (only relevant if the address is a carrier facility)
    */
-  carrier_facility: string;
+  carrier_facility?: string | null;
 
   /**
    * Name of the person. Both name and company can be included
    */
-  name: string;
+  name?: string | null;
 
   /**
    * Name of the organization. Both name and company can be included
    */
-  company: string;
+  company?: string | null;
 
   /**
    * Phone number to reach the person or organization
    */
-  phone: string;
+  phone?: string | null;
 
   /**
    * Email to reach the person or organization
    */
-  email: string;
+  email?: string | null;
 
   /**
    * Federal tax identifier of the person or organization
    */
-  federal_tax_id: string;
+  federal_tax_id?: string | null;
 
   /**
    * State tax identifier of the person or organization
    */
-  state_tax_id: string;
+  state_tax_id?: string | null;
 
   /**
    * The result of any verifications requested
@@ -91,24 +91,24 @@ export declare interface IAddress extends IObjectWithId<'Address'> {
 export declare class Address implements IAddress {
   public constructor(input: DeepPartial<IAddressCreateParameters>);
 
-  street1: string;
-  street2: string;
-  city: string;
-  state: string;
-  zip: string;
-  country: string;
-  residential: boolean;
-  carrier_facility: string;
-  name: string;
-  company: string;
-  phone: string;
-  email: string;
-  federal_tax_id: string;
-  state_tax_id: string;
-  verifications: IVerifications;
   id: string;
   mode: 'test' | 'production';
   object: 'Address';
+  street1?: string | null;
+  street2?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zip: string;
+  country: string;
+  residential?: boolean | null;
+  carrier_facility?: string | null;
+  name?: string | null;
+  company?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  federal_tax_id?: string | null;
+  state_tax_id?: string | null;
+  verifications: IVerifications;
 
   /**
    * Depending on your use case an Address can be used in many different ways.

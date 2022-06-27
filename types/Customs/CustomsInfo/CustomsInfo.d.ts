@@ -1,5 +1,4 @@
 import { IDatedObject, IObjectWithId } from '../../base';
-import { TCustomsContentsType } from '../CustomsContentsType';
 import { ICustomsItem } from '../CustomsItem/CustomsItem';
 
 /**
@@ -15,51 +14,51 @@ export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDat
    * value less than $2500: "NOEEI 30.37(a)"
    * value greater than $2500: see [Customs Guide](https://www.easypost.com/customs-guide)
    */
-  eel_pfc: string;
+  eel_pfc?: string | null;
 
   /**
    * "documents", "gift", "merchandise", "returned_goods", "sample", or "other"
    */
-  contents_type: TCustomsContentsType;
+  contents_type?: string | null;
 
   /**
    * (max 255 characters) Human readable description of content.
    * Required for certain carriers and always required if contents_type is "other"
    */
-  contents_explanation: string;
+  contents_explanation?: string | null;
 
   /**
    * Electronically certify the information provided
    */
-  customs_certify: boolean;
+  customs_certify?: boolean | null;
 
   /**
    * Required if customs_certify is true
    */
-  customs_signer: string;
+  customs_signer?: string | null;
 
   /**
    * "abandon" or "return", defaults to "return"
    */
-  non_delivery_option: 'abandon' | 'return' | 'return';
+  non_delivery_option?: 'abandon' | 'return' | 'return' | null;
 
   /**
    * "none", "other", "quarantine", or "sanitary_phytosanitary_inspection"
    */
-  restriction_type: 'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection';
+  restriction_type?: 'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection' | null;
 
   /**
    * Required if restriction_type is not "none"
    */
-  restriction_comments: string;
+  restriction_comments?: string | null;
 
   /**
-   * Describes to products being shipped
+   * Describes the products being shipped
    */
   customs_items: ICustomsItem[];
 
   /**
    * TODO: undocumented property
    */
-  declaration?: string;
+  declaration?: string | null;
 }

@@ -2,6 +2,7 @@
 
 ## Next Release
 
+- Adds bundled Typescript definitions
 - Adds `PaymentMethod.all()`, `CreditCard.fund()`, and `CreditCard.delete()` functions
 - Add support for webhook secrets
 
