@@ -46,15 +46,15 @@ export declare interface IEvent extends IObjectWithId<'Event'>, IDatedObject {
 }
 
 export declare class Event implements IEvent {
+  id: string;
+  mode: 'test' | 'production';
+  object: 'Event';
   description: string;
   previous_attributes: any;
   result: any;
   status: 'completed' | 'failed' | 'in_queue' | 'retrying' | 'pending';
   pending_urls: string[];
   completed_urls: string[];
-  id: string;
-  mode: 'test' | 'production';
-  object: 'Event';
   created_at: string;
   updated_at: string;
 

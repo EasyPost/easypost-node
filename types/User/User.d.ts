@@ -28,7 +28,7 @@ export declare interface IUser extends IObjectWithId<'User'> {
   /**
    * Optional
    */
-  phone_number: string;
+  phone_number?: string | null;
 
   /**
    * Formatted as string "XX.XXXXX"

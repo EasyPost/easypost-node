@@ -5,7 +5,7 @@ import { DeepPartial } from '../utils';
 import { IOptions } from './Options';
 
 export declare interface IShipmentCreateParameters {
-  reference?: string;
+  reference?: string | null;
   to_address: DeepPartial<IAddressCreateParameters> | string;
   from_address: DeepPartial<IAddressCreateParameters> | string;
   parcel: Partial<IParcelCreateParameters> | string;
@@ -13,8 +13,8 @@ export declare interface IShipmentCreateParameters {
   /**
    * optional array of ids that begin with "ca_"
    */
-  carrier_accounts?: string[];
+  carrier_accounts?: string[] | null;
 
-  customs_info?: DeepPartial<ICustomsInfo>;
-  options?: DeepPartial<IOptions>;
+  customs_info?: DeepPartial<ICustomsInfo> | null;
+  options?: DeepPartial<IOptions> | null;
 }

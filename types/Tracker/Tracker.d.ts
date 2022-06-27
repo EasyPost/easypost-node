@@ -95,6 +95,9 @@ export declare interface ITracker extends IObjectWithId<'Tracker'>, IDatedObject
 export declare class Tracker implements ITracker {
   public constructor(input: ITrackerCreateParameters);
 
+  id: string;
+  mode: 'test' | 'production';
+  object: 'Tracker';
   tracking_code: string;
   status: TTrackerStatus;
   signed_by: string;
@@ -106,9 +109,6 @@ export declare class Tracker implements ITracker {
   carrier_detail: ICarrierDetail;
   public_url: string;
   fees: IFee[];
-  id: string;
-  mode: 'test' | 'production';
-  object: 'Tracker';
   created_at: string;
   updated_at: string;
 

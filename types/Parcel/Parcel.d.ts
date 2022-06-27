@@ -17,24 +17,24 @@ export declare interface IParcel extends IObjectWithId<'Parcel'>, IDatedObject {
    * Required if width and/or height are present
    * float (inches)
    */
-  length: number;
+  length?: number | null;
 
   /**
    * Required if width and/or height are present
    * float (inches)
    */
-  width: number;
+  width?: number | null;
 
   /**
    * Required if width and/or height are present
    * float (inches)
    */
-  height: number;
+  height?: number | null;
 
   /**
    * Optional, one of our predefined_packages
    */
-  predefined_package?: string;
+  predefined_package?: string | null;
 
   /**
    * Always required
@@ -46,14 +46,14 @@ export declare interface IParcel extends IObjectWithId<'Parcel'>, IDatedObject {
 export declare class Parcel implements IParcel {
   public constructor(input: DeepPartial<IParcelCreateParameters>);
 
-  length: number;
-  width: number;
-  height: number;
-  predefined_package?: string;
-  weight: number;
   id: string;
   mode: 'test' | 'production';
   object: 'Parcel';
+  length?: number | null;
+  width?: number | null;
+  height?: number | null;
+  predefined_package?: string | null;
+  weight: number;
   created_at: string;
   updated_at: string;
 

@@ -27,7 +27,7 @@ export declare interface IInsurance extends IObjectWithId<'Insurance'>, IDatedOb
   /**
    * The unique reference for this Insurance, if any
    */
-  reference: string;
+  reference?: string | null;
 
   /**
    * USD value of insured goods with sub-cent precision
@@ -88,7 +88,10 @@ export declare interface IInsurance extends IObjectWithId<'Insurance'>, IDatedOb
 export declare class Insurance implements IInsurance {
   public constructor(input: IInsuranceCreateParameters);
 
-  reference: string;
+  id: string;
+  mode: 'test' | 'production';
+  object: 'Insurance';
+  reference?: string | null;
   amount: string;
   provider: string;
   provider_id: string;
@@ -100,9 +103,6 @@ export declare class Insurance implements IInsurance {
   from_address: IAddress;
   fee: IFee;
   messages: string[];
-  id: string;
-  mode: 'test' | 'production';
-  object: 'Insurance';
   created_at: string;
   updated_at: string;
 

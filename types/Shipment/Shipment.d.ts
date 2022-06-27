@@ -6,14 +6,12 @@ import { IFee } from '../Fee';
 import { IInsurance } from '../Insurance';
 import { IParcel } from '../Parcel';
 import { IScanForm } from '../ScanForm';
-import { Carrier } from '../Carrier';
 import { ITracker } from '../Tracker';
 import { IForm } from './Form';
 import { IMessage } from './Message';
 import { IOptions, LabelFormat } from './Options';
 import { IPostageLabel } from './PostageLabel';
 import { IRate } from './Rate';
-import { ServiceLevel } from './ServiceLevel';
 import { IShipmentCreateParameters } from './ShipmentCreateParameters';
 import { IShipmentListParameters } from './ShipmentListParameters';
 
@@ -29,7 +27,7 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
   /**
    * An optional field that may be used in place of id in other API endpoints
    */
-  reference?: string;
+  reference?: string | null;
 
   /**
    * The destination address
@@ -44,12 +42,12 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
   /**
    * The shipper's address, defaults to from_address
    */
-  return_address: IAddress;
+  return_address?: IAddress | null;
 
   /**
    * The buyer's address, defaults to to_address
    */
-  buyer_address: IAddress;
+  buyer_address?: IAddress | null;
 
   /**
    * The dimensions and weight of the package
@@ -59,7 +57,7 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
   /**
    * Information for the processing of customs
    */
-  customs_info: ICustomsInfo;
+  customs_info?: ICustomsInfo | null;
 
   /**
    * Document created to manifest and scan multiple shipments
@@ -99,12 +97,12 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
   /**
    * All of the options passed to the shipment, discussed in more depth below
    */
-  options: IOptions;
+  options?: IOptions | null;
 
   /**
    * Set true to create as a return, discussed in more depth below
    */
-  is_return: boolean;
+  is_return?: boolean | null;
 
   /**
    * If purchased, the tracking code will appear here as well as within the Tracker object
@@ -155,13 +153,16 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
 export declare class Shipment implements IShipment {
   public constructor(input: IShipmentCreateParameters);
 
-  reference?: string;
+  id: string;
+  mode: 'test' | 'production';
+  object: 'Shipment';
+  reference?: string | null;
   to_address: IAddress;
   from_address: IAddress;
-  return_address: IAddress;
-  buyer_address: IAddress;
+  return_address?: IAddress | null;
+  buyer_address?: IAddress | null;
   parcel: IParcel;
-  customs_info: ICustomsInfo;
+  customs_info?: ICustomsInfo | null;
   scan_form: IScanForm;
   forms: IForm[];
   insurance: IInsurance;
@@ -169,8 +170,8 @@ export declare class Shipment implements IShipment {
   selected_rate: IRate;
   postage_label: IPostageLabel;
   messages: IMessage[];
-  options: IOptions;
-  is_return: boolean;
+  options?: IOptions | null;
+  is_return?: boolean | null;
   tracking_code: string;
   usps_zone: string;
   status: string;
@@ -180,9 +181,6 @@ export declare class Shipment implements IShipment {
   batch_id: string;
   batch_status: TBatchStatus;
   batch_message: string;
-  id: string;
-  mode: 'test' | 'production';
-  object: 'Shipment';
   created_at: string;
   updated_at: string;
 
@@ -255,7 +253,7 @@ export declare class Shipment implements IShipment {
    */
   public refund(): Promise<Shipment>;
 
-  public lowestRate(carriers?: Carrier[], services?: ServiceLevel[]): IRate;
+  public lowestRate(carriers?: string[], services?: string[]): IRate;
 
   /**
    * A Shipment's PostageLabel can be converted from PNG to other formats.

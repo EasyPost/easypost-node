@@ -1,7 +1,6 @@
 import { IAddress } from '../Address';
 import { IDatedObject, IObjectWithId } from '../base';
-import { IMessage, IRate, IShipment, ServiceLevel } from '../Shipment';
-import { Carrier } from '../Carrier';
+import { IMessage, IRate, IShipment } from '../Shipment';
 import { IOrderCreateParameters } from './OrderCreateParameters';
 
 /**
@@ -18,7 +17,7 @@ export declare interface IOrder extends IObjectWithId<'Order'>, IDatedObject {
   /**
    * An optional field that may be used in place of id in other API endpoints
    */
-  reference?: string;
+  reference?: string | null;
 
   /**
    * The destination address
@@ -33,12 +32,12 @@ export declare interface IOrder extends IObjectWithId<'Order'>, IDatedObject {
   /**
    * The shipper's address, defaults to from_address
    */
-  return_address: IAddress;
+  return_address?: IAddress | null;
 
   /**
    * The buyer's address, defaults to to_address
    */
-  buyer_address: IAddress;
+  buyer_address?: IAddress | null;
 
   /**
    * All associated Shipment objects. Maximum of 100.
@@ -58,12 +57,15 @@ export declare interface IOrder extends IObjectWithId<'Order'>, IDatedObject {
   /**
    * Set true to create as a return
    */
-  is_return: boolean;
+  is_return?: boolean | null;
 }
 
 export declare class Order implements IOrder {
   public constructor(input: IOrderCreateParameters);
 
+  id: string;
+  mode: 'test' | 'production';
+  object: 'Order';
   reference?: string;
   to_address: IAddress;
   from_address: IAddress;
@@ -73,9 +75,6 @@ export declare class Order implements IOrder {
   rates: IRate[];
   messages: IMessage[];
   is_return: boolean;
-  id: string;
-  mode: 'test' | 'production';
-  object: 'Order';
   created_at: string;
   updated_at: string;
 
@@ -105,7 +104,7 @@ export declare class Order implements IOrder {
    *
    * @see https://www.easypost.com/docs/api/node#buy-an-order
    */
-  public buy(carrier: Carrier, service: ServiceLevel): Promise<Order>;
+  public buy(carrier: string, service: string): Promise<Order>;
 
   public getRates(): Promise<IRate[]>;
 }

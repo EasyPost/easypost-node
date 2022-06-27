@@ -1,8 +1,7 @@
 import { IAddress } from '../Address';
-import { Carrier } from '../Carrier';
 
 export declare interface IInsuranceCreateParameters {
-  reference?: string;
+  reference?: string | null;
   to_address: IAddress | string;
   from_address: IAddress | string;
 
@@ -10,7 +9,7 @@ export declare interface IInsuranceCreateParameters {
    * The carrier associated with the tracking_code you provided.
    * The carrier will get auto-detected if none is provided
    */
-  carrier?: Carrier;
+  carrier?: string | null;
 
   /**
    * The tracking code associated with the non-EasyPost-purchased package you'd like to insure.

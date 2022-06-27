@@ -1,5 +1,3 @@
-import { Carrier } from '../Carrier';
-
 export declare interface ITrackerCreateParameters {
   /**
    * The tracking code associated with the package you'd like to track
@@ -10,5 +8,5 @@ export declare interface ITrackerCreateParameters {
    * The carrier associated with the tracking_code you provided.
    * The carrier will get auto-detected if none is provided
    */
-  carrier?: Carrier;
+  carrier?: string;
 }

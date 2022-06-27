@@ -2,7 +2,7 @@ import { IAddress } from '../Address';
 import { Shipment } from '../Shipment';
 
 export declare interface IOrderCreateParameters {
-  reference?: string;
+  reference?: string | null;
   to_address: IAddress | string;
   from_address: IAddress | string;
   shipments: Shipment[];
@@ -10,5 +10,5 @@ export declare interface IOrderCreateParameters {
   /**
    * optional array of ids that begin with "ca_"
    */
-  carrier_accounts?: string[];
+  carrier_accounts?: string[] | null;
 }

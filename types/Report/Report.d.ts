@@ -9,6 +9,7 @@ import { TReportObjectType } from './ReportObjectType';
  *
  * The Report api can be categorized into several types.
  * These types determine which EasyPost Object to produce a Report for, and should be passed as the type in our libraries:
+ *  - cash_flow
  *  - payment_log
  *  - refund
  *  - shipment
@@ -36,7 +37,7 @@ export declare interface IReport extends IObjectWithId<TReportObjectType>, IDate
   /**
    * Set true if you would like to include Refunds /Shipments /Trackers created by child users
    */
-  include_children: boolean;
+  include_children?: boolean | null;
 
   /**
    * A url that contains a link to the Report.
@@ -52,7 +53,7 @@ export declare interface IReport extends IObjectWithId<TReportObjectType>, IDate
   /**
    * Set true if you would like to send an email containing the Report
    */
-  send_email: boolean;
+  send_email?: boolean | null;
 }
 
 // TODO Report class

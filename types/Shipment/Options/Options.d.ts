@@ -16,13 +16,13 @@ export declare interface IOptions {
    *  - Any package with the longest side exceeding 60 inches or its second longest side exceeding 30 inches.
    *  - Any package with an actual weight greater than 70 pounds.
    */
-  additional_handling: boolean;
+  additional_handling?: boolean | null;
 
   /**
    * Setting this option to "0", will allow the minimum amount of address information to pass the validation check.
    * Only for USPS postage.
    */
-  address_validation_level: string;
+  address_validation_level?: string | null;
 
   /**
    * Set this option to true if your shipment contains alcohol.
@@ -30,39 +30,39 @@ export declare interface IOptions {
    *  - FedEx - only supported for US Domestic shipments
    *  - Canada Post - Requires adult signature 19 years or older. If you want adult signature 18 years or older, instead use delivery_confirmation: ADULT_SIGNATURE
    */
-  alcohol: boolean;
+  alcohol?: boolean | null;
 
   /**
    * Setting this option to true will indicate to the carrier to prefer delivery by drone, if the carrier supports drone delivery.
    */
-  by_drone: boolean;
+  by_drone?: boolean | null;
 
   /**
    * Setting this to true will add a charge to reduce carbon emissions.
    */
-  carbon_neutral: boolean;
+  carbon_neutral?: boolean | null;
 
   /**
    * Adding an amount will have the carrier collect the specified amount from the recipient.
    */
-  cod_amount: string;
+  cod_amount?: string | null;
 
   /**
    * Method for payment. "CASH", "CHECK", "MONEY_ORDER"
    */
-  cod_method: 'CASH' | 'CHECK' | 'MONEY_ORDER';
+  cod_method?: 'CASH' | 'CHECK' | 'MONEY_ORDER' | null;
 
   /**
    * The ID of the Address to which the COD payment should be returned.
    * Defaults to the origin address.
    * Only available on FedEx shipments.
    */
-  cod_address_id: string;
+  cod_address_id?: string | null;
 
   /**
    * Which currency this shipment will show for rates if carrier allows.
    */
-  currency: string;
+  currency?: string | null;
 
   /**
    * If you want to request a signature, you can pass "ADULT_SIGNATURE" or "SIGNATURE".
@@ -73,13 +73,14 @@ export declare interface IOptions {
    *    - "ADULT_SIGNATURE_RESTRICTED"
    *    - "SIGNATURE_RESTRICTED"
    */
-  delivery_confirmation:
+  delivery_confirmation?:
     | 'ADULT_SIGNATURE'
     | 'SIGNATURE'
     | 'NO_SIGNATURE'
     | 'INDIRECT_SIGNATURE'
     | 'ADULT_SIGNATURE_RESTRICTED'
-    | 'SIGNATURE_RESTRICTED';
+    | 'SIGNATURE_RESTRICTED'
+    | null;
 
   /**
    * Method the customer will use to transfer the package to the carrier.
@@ -92,14 +93,15 @@ export declare interface IOptions {
    *    - "STATION" - "STATION"
    *    - "DROP_BOX" - "DROP_BOX"
    */
-  dropoff_type:
+  dropoff_type?:
     | 'REGULAR_PICKUP'
     | 'SCHEDULED_PICKUP'
     | 'RETAIL_LOCATION'
     | 'STATION'
     | 'DROP_BOX'
     | 'REQUEST_COURIER'
-    | 'BUSINESS_SERVICE_CENTER';
+    | 'BUSINESS_SERVICE_CENTER'
+    | null;
 
   /**
    * Package contents contain dry ice.
@@ -107,14 +109,14 @@ export declare interface IOptions {
    *  - UPS MailInnovations - Need dry_ice_weight to be set
    *  - FedEx - Need dry_ice_weight to be set
    */
-  dry_ice: boolean;
+  dry_ice?: boolean | null;
 
   /**
    * If the dry ice is for medical use, set this option to true.
    *  - UPS - Need dry_ice_weight to be set
    *  - UPS MailInnovations - Need dry_ice_weight to be set
    */
-  dry_ice_medical: boolean;
+  dry_ice_medical?: boolean | null;
 
   /**
    * Weight of the dry ice in ounces.
@@ -122,35 +124,36 @@ export declare interface IOptions {
    *  - UPS MailInnovations - Need dry_ice to be set
    *  - FedEx - Need dry_ice to be set
    */
-  dry_ice_weight: string;
+  dry_ice_weight?: string | null;
 
   /**
    * Possible values "ADDRESS_SERVICE_REQUESTED", "FORWARDING_SERVICE_REQUESTED", "CHANGE_SERVICE_REQUESTED", "RETURN_SERVICE_REQUESTED", "LEAVE_IF_NO_RESPONSE"
    */
-  endorsement:
+  endorsement?:
     | 'ADDRESS_SERVICE_REQUESTED'
     | 'FORWARDING_SERVICE_REQUESTED'
     | 'CHANGE_SERVICE_REQUESTED'
     | 'RETURN_SERVICE_REQUESTED'
-    | 'LEAVE_IF_NO_RESPONSE';
+    | 'LEAVE_IF_NO_RESPONSE'
+    | null;
 
   /**
    * Additional cost to be added to the invoice of this shipment.
    * Only applies to UPS currently.
    */
-  freight_charge: number;
+  freight_charge?: number | null;
 
   /**
    * This is to designate special instructions for the carrier like "Do not drop!".
    */
-  handling_instructions: string;
+  handling_instructions?: string | null;
 
   /**
    * Dangerous goods indicator.
    * Possible values are "PRIMARY_CONTAINED", "PRIMARY_PACKED", "PRIMARY", "SECONDARY_CONTAINED", "SECONDARY_PACKED", "SECONDARY", "ORMD", "LIMITED_QUANTITY", "LITHIUM".
    * Applies to USPS, FedEx and DHL eCommerce.
    */
-  hazmat:
+  hazmat?:
     | 'PRIMARY_CONTAINED'
     | 'PRIMARY_PACKED'
     | 'PRIMARY'
@@ -159,31 +162,44 @@ export declare interface IOptions {
     | 'SECONDARY'
     | 'ORMD'
     | 'LIMITED_QUANTITY'
-    | 'LITHIUM';
+    | 'LITHIUM'
+    | null;
 
   /**
    * Package will wait at carrier facility for pickup.
    */
-  hold_for_pickup: boolean;
+  hold_for_pickup?: boolean | null;
 
   /**
    * Incoterm negotiated for shipment.
    * Supported values are "EXW", "FCA", "CPT", "CIP", "DAT", "DAP", "DDP", "FAS", "FOB", "CFR", and "CIF".
    * Setting this value to anything other than "DDP" will pass the cost and responsibility of duties on to the recipient of the package(s), as specified by Incoterms rules
    */
-  incoterm: 'EXW' | 'FCA' | 'CPT' | 'CIP' | 'DAT' | 'DAP' | 'DDP' | 'FAS' | 'FOB' | 'CFR' | 'CIF';
+  incoterm?:
+    | 'EXW'
+    | 'FCA'
+    | 'CPT'
+    | 'CIP'
+    | 'DAT'
+    | 'DAP'
+    | 'DDP'
+    | 'FAS'
+    | 'FOB'
+    | 'CFR'
+    | 'CIF'
+    | null;
 
   /**
    * This will print an invoice number on the postage label.
    */
-  invoice_number: string;
+  invoice_number?: string | null;
 
   /**
    * Set the date that will appear on the postage label.
    * Accepts ISO 8601 formatted string including time zone offset.
    * EasyPost stores all dates as UTC time.
    */
-  label_date: string;
+  label_date?: string | null;
 
   /**
    * Supported label formats include "PNG", "PDF", "ZPL", and "EPL2".
@@ -191,12 +207,12 @@ export declare interface IOptions {
    *
    * @see https://www.easypost.com/docs/api#convert-the-label-format-of-a-shipment
    */
-  label_format: LabelFormat;
+  label_format?: LabelFormat | null;
 
   /**
    * Whether or not the parcel can be processed by the carriers equipment.
    */
-  machinable: boolean;
+  machinable?: boolean | null;
 
   /**
    * Setting payment type to bill the correct account for purchasing postage.
@@ -205,72 +221,72 @@ export declare interface IOptions {
     /**
      * Supported values are "SENDER", "THIRD_PARTY", "RECEIVER", "COLLECT". Defaults to SENDER.
      */
-    type: 'SENDER' | 'THIRD_PARTY' | 'RECEIVER' | 'COLLECT';
+    type?: 'SENDER' | 'THIRD_PARTY' | 'RECEIVER' | 'COLLECT' | null;
 
     /**
      * Setting account number.
      * Required for RECEIVER and THIRD_PARTY.
      */
-    account: string;
+    account?: string | null;
 
     /**
      * Setting country code that the account is based in.
      * Required for THIRD_PARTY.
      */
-    country: string;
+    country?: string | null;
 
     /**
      * Setting postal code that the account is based in.
      * Required for RECEIVER and THIRD_PARTY.
      */
-    postal_code: string;
+    postal_code?: string | null;
   };
 
   /**
    * You can optionally print custom messages on labels.
    * The locations of these fields show up on different spots on the carrier's labels.
    */
-  print_custom_1: string;
+  print_custom_1?: string | null;
 
   /**
    * An additional message on the label. Same restrictions as print_custom_1
    */
-  print_custom_2: string;
+  print_custom_2?: string | null;
 
   /**
    * An additional message on the label. Same restrictions as print_custom_1
    */
-  print_custom_3: string;
+  print_custom_3?: string | null;
 
   /**
    * Create a barcode for this custom reference if supported by carrier.
    */
-  print_custom_1_barcode: boolean;
+  print_custom_1_barcode?: boolean | null;
 
   /**
    * Create a barcode for this custom reference if supported by carrier.
    */
-  print_custom_2_barcode: boolean;
+  print_custom_2_barcode?: boolean | null;
 
   /**
    * Create a barcode for this custom reference if supported by carrier.
    */
-  print_custom_3_barcode: boolean;
+  print_custom_3_barcode?: boolean | null;
 
   /**
    * Specify the type of print_custom_1.
    */
-  print_custom_1_code: TPrintCustomCode;
+  print_custom_1_code?: TPrintCustomCode | null;
 
   /**
    * Specify the type of print_custom_2.
    */
-  print_custom_2_code: TPrintCustomCode;
+  print_custom_2_code?: TPrintCustomCode | null;
 
   /**
    * Specify the type of print_custom_3.
    */
-  print_custom_3_code: TPrintCustomCode;
+  print_custom_3_code?: TPrintCustomCode | null;
 
   /**
    * Set this value to true for delivery on Saturday.
@@ -278,48 +294,48 @@ export declare interface IOptions {
    * If no services are available for saturday delivery, then you will not be returned any rates.
    * You may need to create 2 shipments, one with the saturday_delivery option set on one without to get all your eligible rates.
    */
-  saturday_delivery: boolean;
+  saturday_delivery?: boolean | null;
 
   /**
    * This option allows you to request restrictive rates from USPS.
    * Can set to 'USPS.MEDIAMAIL' or 'USPS.LIBRARYMAIL'.
    */
-  special_rates_eligibility: 'USPS.MEDIAMAIL' | 'USPS.LIBRARYMAIL';
+  special_rates_eligibility?: 'USPS.MEDIAMAIL' | 'USPS.LIBRARYMAIL' | null;
 
   /**
    * You can use this to override the hub ID you have on your account.
    */
-  smartpost_hub: string;
+  smartpost_hub?: string | null;
 
   /**
    * The manifest ID is used to group SmartPost packages onto a manifest for each trailer.
    */
-  smartpost_manifest: string;
+  smartpost_manifest?: string | null;
 
   /**
    * A reference ID for aggregating DHL eCommerce billing data.
    */
-  billing_ref: string;
+  billing_ref?: string | null;
 
   /**
    * Certified Mail provides the sender with a mailing receipt and, upon request, electronic verification that an article was delivered or that a delivery attempt was made.
    */
-  certified_mail: boolean;
+  certified_mail?: boolean | null;
 
   /**
    * Registered Mail is the most secure service that the USPS offers.
    * It incorporates a system of receipts to monitor the movement of the mail from the point of acceptance to delivery
    */
-  registered_mail: boolean;
+  registered_mail?: boolean | null;
 
   /**
    * The value of the package contents
    */
-  registered_mail_amount: number;
+  registered_mail_amount?: number | null;
 
   /**
    * An electronic return receipt may be purchased at the time of mailing and provides a shipper with evidence of delivery (to whom the mail was delivered and date of delivery), and information about the recipient's actual delivery address.
    * Only applies to the USPS.
    */
-  return_receipt: boolean;
+  return_receipt?: boolean | null;
 }

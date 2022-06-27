@@ -9,17 +9,17 @@ export declare interface IPickupCreateParameters {
   /**
    * if no batch
    */
-  shipment?: Shipment | string;
+  shipment?: Shipment | string | null;
 
   /**
    * if no shipment
    */
-  batch?: Batch | string;
+  batch?: Batch | string | null;
 
-  carrier_accounts?: CarrierAccount[];
-  instructions?: string;
-  reference?: string;
-  is_account_address?: boolean;
+  carrier_accounts?: CarrierAccount[] | null;
+  instructions?: string | null;
+  reference?: string | null;
+  is_account_address?: boolean | null;
   min_datetime: string;
   max_datetime: string;
 }
