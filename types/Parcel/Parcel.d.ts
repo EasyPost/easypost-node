@@ -1,7 +1,6 @@
 import { IDatedObject, IObjectWithId } from '../base';
 import { DeepPartial } from '../utils';
 import { IParcelCreateParameters } from './ParcelCreateParameters';
-import { PredefinedPackage } from './PredefinedPackage';
 
 /**
  * Parcel objects represent the physical container being shipped.
@@ -35,7 +34,7 @@ export declare interface IParcel extends IObjectWithId<'Parcel'>, IDatedObject {
   /**
    * Optional, one of our predefined_packages
    */
-  predefined_package?: PredefinedPackage;
+  predefined_package?: string;
 
   /**
    * Always required
@@ -50,7 +49,7 @@ export declare class Parcel implements IParcel {
   length: number;
   width: number;
   height: number;
-  predefined_package?: PredefinedPackage;
+  predefined_package?: string;
   weight: number;
   id: string;
   mode: 'test' | 'production';
