@@ -22,3 +22,4 @@ jobs:
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 npm test
       - run: npm run lint
       - run: npm run check
+      - run: npx audit-ci -c # TODO: lower this to something closer to `-m` when we modernize our dependencies
