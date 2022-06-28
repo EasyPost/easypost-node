@@ -3,6 +3,7 @@
 ## Next Release
 
 - Adds `PaymentMethod.all()`, `CreditCard.fund()`, and `CreditCard.delete()` functions
+- Add support for webhook secrets
 
 ## v5.2.0 (2022-05-19)
 
