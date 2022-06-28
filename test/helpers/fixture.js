@@ -35,10 +35,6 @@ export default class Fixture {
     return 'http://example.com';
   }
 
-  static webhookSecret() {
-    return 'this_is_a_secret';
-  }
-
   static basicAddress() {
     return {
       name: 'Jack Sparrow',
