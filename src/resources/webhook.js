@@ -7,6 +7,7 @@ export const propTypes = {
   mode: T.string,
   url: T.string,
   disabled_at: T.oneOfType([T.object, T.string]),
+  webhook_secret: T.string,
 };
 
 export default (api) =>
