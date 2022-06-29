@@ -40,7 +40,7 @@ export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDat
   /**
    * "abandon" or "return", defaults to "return"
    */
-  non_delivery_option?: 'abandon' | 'return' | 'return' | null;
+  non_delivery_option?: 'abandon' | 'return' | null;
 
   /**
    * "none", "other", "quarantine", or "sanitary_phytosanitary_inspection"

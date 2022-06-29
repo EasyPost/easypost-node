@@ -6,6 +6,8 @@ import { Shipment } from '../Shipment';
 export declare interface IPickupCreateParameters {
   address: Address | string;
 
+  // TODO: make the Shipment and Batch params mutually exclusive (as you can only use one or the other)
+  // https://github.com/EasyPost/easypost-node/pull/156#discussion_r908662224
   /**
    * if no batch
    */

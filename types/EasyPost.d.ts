@@ -1,14 +1,14 @@
 import { Address } from './Address';
 import { Batch } from './Batch';
 import { CarrierAccount, CarrierType } from './Carrier';
+import { Event } from './Event';
 import { Insurance } from './Insurance';
+import { Order } from './Order';
 import { Parcel } from './Parcel';
 import { Pickup } from './Pickup';
 import { Shipment } from './Shipment';
 import { Tracker } from './Tracker';
-import { Event } from './Event';
 import { Webhook } from './Webhook';
-import { Order } from './Order';
 
 export interface IEasyPostOptions {
   /**
@@ -54,7 +54,7 @@ export default class EasyPost {
   public CarrierType: typeof CarrierType;
   public Event: typeof Event;
 
-  // TODO Report class
+  // TODO: Report class
 
   public constructor(apiKey: string, options?: IEasyPostOptions);
 }

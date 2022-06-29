@@ -56,4 +56,4 @@ export declare interface IReport extends IObjectWithId<TReportObjectType>, IDate
   send_email?: boolean | null;
 }
 
-// TODO Report class
+// TODO: Report class
