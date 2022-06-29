@@ -19,7 +19,7 @@ export declare interface ITrackingDetail extends IBaseObject<'TrackingDetail'> {
   /**
    * The timestamp when the tracking scan occurred
    */
-  datetime: string; // TODO: maybe type should be Date?
+  datetime: string;
 
   /**
    * The original source of the information for this scan event, usually the carrier
