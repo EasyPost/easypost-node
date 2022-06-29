@@ -19,7 +19,7 @@ describe('CreditCard Resource', function () {
   // eslint-disable-next-line jest/no-disabled-tests
   it.skip('fund a credit card', async function () {
     // Skipping due to the lack of an available real credit card in tests
-    const creditCard = await this.easypost.CreditCard.fund('20', 'primary');
+    const creditCard = await this.easypost.CreditCard.fund('2000', 'primary');
 
     expect(creditCard).to.not.undefined;
   });
