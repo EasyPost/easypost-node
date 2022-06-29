@@ -52,6 +52,7 @@
     "@pollyjs/adapter-node-http": "^6.0.5",
     "@pollyjs/core": "^6.0.5",
     "@pollyjs/persister-fs": "^6.0.5",
+    "audit-ci": "^5.1.2",
     "babel-loader": "~8.2.3",
     "babel-plugin-istanbul": "^6.1.1",
     "babel-plugin-transform-export-extensions": "^6.22.0",
