@@ -11,8 +11,6 @@ Polly.register(NodeHttpAdapter);
 const headerScrubbers = [
   'authorization',
   'user-agent',
-  'x-client-user-agent',
-  'x-easypost-client-user-agent', // deprecated
 ];
 
 function startPolly() {

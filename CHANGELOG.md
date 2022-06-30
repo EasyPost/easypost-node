@@ -4,6 +4,7 @@
 
 - Adds `PaymentMethod.all()`, `CreditCard.fund()`, and `CreditCard.delete()` functions
 - Add support for webhook secrets
+- Adds OS-specific details to the user-agent header
 
 ## v5.2.0 (2022-05-19)
 

@@ -33,21 +33,12 @@ export const MS_SECOND = 1000;
 export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
 export const DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
 
-export const UA_INFO = {
-  client_version: pkg.version,
-  lang: 'nodejs',
-  lang_version: process.version,
-  publisher: 'easypost',
-  platform: os.platform(),
-};
-
-export const EASYPOST_UA_HEADER = 'X-EasyPost-Client-User-Agent';
-
 export const DEFAULT_HEADERS = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
-  'User-Agent': `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${process.versions.node}`,
-  [EASYPOST_UA_HEADER]: JSON.stringify(UA_INFO),
+  'User-Agent': `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${
+    process.versions.node
+  } OS/${os.platform()} OSVersion/${os.release()} OSArch/${os.arch()}`,
 };
 
 // Map HTTP methods to superagent methods.
