@@ -8,10 +8,7 @@ import { encodeCassetteResponseBodies, decodeCassetteResponseBodies } from './ca
 Polly.register(FSPersister);
 Polly.register(NodeHttpAdapter);
 
-const headerScrubbers = [
-  'authorization',
-  'user-agent',
-];
+const headerScrubbers = ['authorization', 'user-agent'];
 
 function startPolly() {
   setupPolly({
