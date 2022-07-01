@@ -5,6 +5,7 @@ Icon
 ._*
 .Spotlight-V100
 .Trashes
+.idea/
 
 node_modules
 npm-debug.log
@@ -18,3 +19,5 @@ npm-debug.log
 /easypost.legacy.js.map
 .nyc_output
 coverage
+dist/
+build.tar.gz
