@@ -37,7 +37,8 @@
     "regenerator-runtime": "0.13.9",
     "source-map-support": "0.5.21",
     "superagent": "7.1.1",
-    "yargs": "16.2.0"
+    "yargs": "16.2.0",
+    "yargs-parser": "20.2.9"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -55,6 +56,7 @@
     "@pollyjs/persister-fs": "^6.0.5",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
+    "audit-ci": "^5.1.2",
     "babel-loader": "~8.2.3",
     "babel-plugin-istanbul": "^6.1.1",
     "babel-plugin-transform-export-extensions": "^6.22.0",
