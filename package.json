@@ -12,6 +12,7 @@
     "url": "git://github.com/easypost/easypost-node.git"
   },
   "main": "index.js",
+  "types": "types/index.d.ts",
   "license": "MIT",
   "engines": {
     "node": ">= 10.0"
@@ -21,9 +22,9 @@
     "check": "prettier --check .",
     "clean": "rm -rf ./dist ./nyc_output ./node_modules/.cache ./coverage",
     "coverage": "cross-env NODE_ENV=test nyc npm run test",
-    "fix": "eslint src test --fix",
+    "fix": "eslint src types test --ext .js,.ts --fix",
     "format": "prettier --write .",
-    "lint": "eslint src test",
+    "lint": "eslint src types test --ext .js,.ts",
     "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run check",
     "repl": "./repl.js --local easypost.js",
     "test": "cross-env NODE_ENV=test mocha --timeout 10000 --require @babel/register --require ./test/helpers/common.js --recursive ./test",
@@ -36,7 +37,8 @@
     "regenerator-runtime": "0.13.9",
     "source-map-support": "0.5.21",
     "superagent": "7.1.1",
-    "yargs": "16.2.0"
+    "yargs": "16.2.0",
+    "yargs-parser": "20.2.9"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -52,6 +54,8 @@
     "@pollyjs/adapter-node-http": "^6.0.5",
     "@pollyjs/core": "^6.0.5",
     "@pollyjs/persister-fs": "^6.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "audit-ci": "^5.1.2",
     "babel-loader": "~8.2.3",
     "babel-plugin-istanbul": "^6.1.1",
@@ -71,6 +75,7 @@
     "mocha": "^8.4.0",
     "nyc": "^15.1.0",
     "prettier": "^2.5.1",
+    "typescript": "~4.7.0",
     "vows": "^0.8.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
