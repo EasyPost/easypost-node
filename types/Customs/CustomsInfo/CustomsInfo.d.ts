@@ -58,7 +58,7 @@ export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDat
   customs_items: ICustomsItem[];
 
   /**
-   * TODO: undocumented property
+   * A customs declaration message, available for eligible carriers
    */
   declaration?: string | null;
 }

@@ -58,6 +58,15 @@ export declare class Event implements IEvent {
   created_at: string;
   updated_at: string;
 
+  /**
+   * Events can be retrieved by their ID.
+   *
+   * @param eventId the ID of the event object.
+   */
   static retrieve(eventId: string): Promise<Event>;
+
+  /**
+   * Retrieve all event objects.
+   */
   static all(): Promise<Event[]>;
 }

@@ -253,6 +253,11 @@ export declare class Shipment implements IShipment {
    */
   public refund(): Promise<Shipment>;
 
+  /**
+   *
+   * @param carriers a list of carriers to filter rates for
+   * @param services a list of services to filter rates for
+   */
   public lowestRate(carriers?: string[], services?: string[]): IRate;
 
   /**

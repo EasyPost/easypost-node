@@ -6,6 +6,7 @@ import { Insurance } from './Insurance';
 import { Order } from './Order';
 import { Parcel } from './Parcel';
 import { Pickup } from './Pickup';
+import { Report } from './Report';
 import { Shipment } from './Shipment';
 import { Tracker } from './Tracker';
 import { Webhook } from './Webhook';
@@ -42,19 +43,18 @@ export interface IEasyPostOptions {
 
 export default class EasyPost {
   public Address: typeof Address;
-  public Parcel: typeof Parcel;
-  public Shipment: typeof Shipment;
-  public CarrierAccount: typeof CarrierAccount;
-  public Order: typeof Order;
-  public Insurance: typeof Insurance;
-  public Tracker: typeof Tracker;
-  public Pickup: typeof Pickup;
   public Batch: typeof Batch;
-  public Webhook: typeof Webhook;
+  public CarrierAccount: typeof CarrierAccount;
   public CarrierType: typeof CarrierType;
   public Event: typeof Event;
-
-  // TODO: Report class
+  public Insurance: typeof Insurance;
+  public Order: typeof Order;
+  public Parcel: typeof Parcel;
+  public Pickup: typeof Pickup;
+  public Report: typeof Report;
+  public Shipment: typeof Shipment;
+  public Tracker: typeof Tracker;
+  public Webhook: typeof Webhook;
 
   public constructor(apiKey: string, options?: IEasyPostOptions);
 }

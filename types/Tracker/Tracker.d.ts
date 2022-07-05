@@ -9,7 +9,7 @@ import { ITrackingDetail } from './TrackingDetail';
 /**
  * A Tracker object contains all of the tracking information for a package.
  * A Tracker is created automatically whenever you buy a Shipment through EasyPost.
- * Ff you don't use EasyPost to purchase your shipping labels, you can still track packages through our API by creating a Tracker object directly.
+ * If you don't use EasyPost to purchase your shipping labels, you can still track packages through our API by creating a Tracker object directly.
  * Each Tracker is continually updated in the background as the package moves through its life cycle, regardless of whether or not the label was purchased through EasyPost.
  *
  * After creation, a Tracker object will be updated periodically based on when the carrier provides EasyPost with new tracking information.

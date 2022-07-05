@@ -2,7 +2,14 @@
  * @see https://www.easypost.com/docs/api/node#verification_details-object
  */
 export declare interface IVerificationDetails {
+  /**
+   * The latitude of an Address.
+   */
   latitude: number;
+
+  /**
+   * The longitude of an Address.
+   */
   longitude: number;
 
   /**

@@ -106,5 +106,8 @@ export declare class Order implements IOrder {
    */
   public buy(carrier: string, service: string): Promise<Order>;
 
+  /**
+   * Returns the rates of an Order.
+   */
   public getRates(): Promise<IRate[]>;
 }

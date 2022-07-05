@@ -80,6 +80,13 @@ export declare class Batch implements IBatch {
    */
   public save(): Promise<Batch>;
 
+  /**
+   * A Batch can be retrieved by its id.
+   *
+   * TODO: Add documentation link when available
+   *
+   * @param batchId Unique, begins with "batch_"
+   */
   static retrieve(batchId: string): Promise<Batch>;
 
   /**
