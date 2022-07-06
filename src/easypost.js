@@ -16,7 +16,7 @@ import Event, { propTypes as eventPropTypes } from './resources/event';
 import Insurance, { propTypes as insurancePropTypes } from './resources/insurance';
 import Order, { propTypes as orderPropTypes } from './resources/order';
 import Parcel, { propTypes as parcelPropTypes } from './resources/parcel';
-import PaymentMethod, { propTypes as paymentMethodTypes } from './resources/payment_method';
+import PaymentMethod, { propTypes as paymentMethodPropTypes } from './resources/payment_method';
 import Pickup, { propTypes as pickupPropTypes } from './resources/pickup';
 import Rate, { propTypes as ratePropTypes } from './resources/rate';
 import Refund, { propTypes as refundPropTypes } from './resources/refund';
@@ -90,7 +90,7 @@ export const PROP_TYPES = {
   insurancePropTypes,
   orderPropTypes,
   parcelPropTypes,
-  paymentMethodTypes,
+  paymentMethodPropTypes,
   pickupPropTypes,
   ratePropTypes,
   refundPropTypes,
