@@ -20,7 +20,7 @@ describe('Billing Resource', function () {
     // Skipping due to the lack of an available real payment method in tests
     const fund = await this.easypost.Billing.fundWallet('2000', 'primary');
 
-    expect(fund).to.not.undefined;
+    expect(fund).to.eql(true);
   });
 
   // eslint-disable-next-line jest/no-disabled-tests
@@ -28,7 +28,7 @@ describe('Billing Resource', function () {
     // Skipping due to the lack of an available real payment method in tests
     const deletedPaymentMethod = await this.easypost.Billing.deletePaymentMethod('primary');
 
-    expect(deletedPaymentMethod).to.not.undefined;
+    expect(deletedPaymentMethod).to.eql(true);
   });
 
   // eslint-disable-next-line jest/no-disabled-tests
@@ -36,7 +36,7 @@ describe('Billing Resource', function () {
     // Skipping due to the lack of an available real payment method in tests
     const paymentMethods = await this.easypost.Billing.retrievePaymentMethods();
 
-    expect(paymentMethods.primary_payment_method).to.not.undefined;
-    expect(paymentMethods.secondary_payment_method).to.not.be.undefined;
+    expect(paymentMethods.primary_payment_method).to.not.null;
+    expect(paymentMethods.secondary_payment_method).to.not.be.null;
   });
 });

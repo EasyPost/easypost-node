@@ -1,17 +1,8 @@
 import T from 'proptypes';
+import { propTypes as paymentMethodPropTypes } from './payment_method';
 
 export const propTypes = {
-  id: T.string,
-  disabled_at: T.string,
-  object: T.string,
-  name: T.string,
-  last4: T.string,
-  expiration_month: T.string,
-  expiration_year: T.string,
-  brand: T.string,
-  country: T.string,
-  verified: T.bool,
-  bank_account: T.string,
+  payment_method: T.oneOfType([T.string, T.shape(paymentMethodPropTypes)]),
 };
 
 export default (api) =>
@@ -25,7 +16,7 @@ export default (api) =>
     static propTypes = propTypes;
 
     /**
-     * fund your EasyPost wallet by charging your primary or secondary payment method on file.
+     * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
      * @param {String} amount
      * @param {String} primaryOrSecondary
      * @returns {Promise<never>}
@@ -36,12 +27,14 @@ export default (api) =>
       const paymentMethodID = paymentInfo[1];
       const wrappedParams = { amount };
 
-      const res = await api.post(`${endpoint}/${paymentMethodID}/charges`, wrappedParams);
-      return res.body;
+      await api.post(`${endpoint}/${paymentMethodID}/charges`, wrappedParams);
+
+      // Return true if succeeds, an error will be thrown if it fails
+      return true;
     }
 
     /**
-     * delete a payment method
+     * Delete a payment method
      * @returns {Promise|Promise<never>}
      */
     static async deletePaymentMethod(primaryOrSecondary) {
@@ -49,12 +42,14 @@ export default (api) =>
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
 
-      const res = await api.del(`${endpoint}/${paymentMethodID}`);
-      return res.body;
+      await api.del(`${endpoint}/${paymentMethodID}`);
+
+      // Return true if succeeds, an error will be thrown if it fails
+      return true;
     }
 
     /**
-     * retrieve all payment methods.
+     * Retrieve all payment methods.
      * @returns {Promise|Promise<never>}
      */
     static async retrievePaymentMethods() {
@@ -63,11 +58,13 @@ export default (api) =>
       if (res.body.id == null) {
         throw new Error('Billing has not been setup for this user. Please add a payment method.');
       }
+
       return res.body;
     }
 
     /**
      * Get payment info (type of the payment method and ID of the payment method)
+     * This function is intended for internal use only, please avoid using this function
      * @returns {Promise<never>}
      */
     static async getPaymentInfo(primaryOrSecondary) {
@@ -82,7 +79,7 @@ export default (api) =>
       let endpoint;
       const errorString = 'The chosen payment method is not valid. Please try again.';
 
-      if (paymentMethodToUse !== undefined && paymentMethods[paymentMethodToUse].id !== undefined) {
+      if (paymentMethodToUse !== undefined && paymentMethods[paymentMethodToUse] !== null) {
         paymentMethodID = paymentMethods[paymentMethodToUse].id;
         if (paymentMethodID.startsWith('card_')) {
           endpoint = 'credit_cards';
