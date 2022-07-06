@@ -9,14 +9,13 @@ import Batch, { propTypes as batchPropTypes } from './resources/batch';
 import Brand, { propTypes as brandPropTypes } from './resources/brand';
 import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrier_account';
 import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrier_type';
-import CreditCard, { propTypes as creditCardPropTypes } from './resources/credit_card';
+import Billing, { propTypes as BillingPropTypes } from './resources/billing';
 import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customs_info';
 import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customs_item';
 import Event, { propTypes as eventPropTypes } from './resources/event';
 import Insurance, { propTypes as insurancePropTypes } from './resources/insurance';
 import Order, { propTypes as orderPropTypes } from './resources/order';
 import Parcel, { propTypes as parcelPropTypes } from './resources/parcel';
-import PaymentMethod, { propTypes as paymentMethodPropTypes } from './resources/payment_method';
 import Pickup, { propTypes as pickupPropTypes } from './resources/pickup';
 import Rate, { propTypes as ratePropTypes } from './resources/rate';
 import Refund, { propTypes as refundPropTypes } from './resources/refund';
@@ -57,14 +56,13 @@ export const RESOURCES = {
   Brand,
   CarrierAccount,
   CarrierType,
-  CreditCard,
+  Billing,
   CustomsInfo,
   CustomsItem,
   Event,
   Insurance,
   Order,
   Parcel,
-  PaymentMethod,
   Pickup,
   Rate,
   Refund,
@@ -83,14 +81,13 @@ export const PROP_TYPES = {
   brandPropTypes,
   carrierAccountPropTypes,
   carrierTypePropTypes,
-  creditCardPropTypes,
+  BillingPropTypes,
   customsInfoPropTypes,
   customsItemPropTypes,
   eventPropTypes,
   insurancePropTypes,
   orderPropTypes,
   parcelPropTypes,
-  paymentMethodPropTypes,
   pickupPropTypes,
   ratePropTypes,
   refundPropTypes,
