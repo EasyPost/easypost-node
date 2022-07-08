@@ -1,4 +1,4 @@
 * text=auto
 
-tests/cassettes/* -diff
-tests/cassettes/* linguist-generated
+tests/cassettes/**/* -diff
+tests/cassettes/**/* linguist-generated
