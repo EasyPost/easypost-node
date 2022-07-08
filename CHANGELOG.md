@@ -3,7 +3,7 @@
 ## Next Release
 
 - Adds bundled Typescript definitions as a beta
-- Adds `PaymentMethod.all()`, `CreditCard.fund()`, and `CreditCard.delete()` functions
+- Adds `Billing.retrievePaymentMethods()`, `Billing.deletePaymentMethod()`, and `Billing.fundWallet()` functions
 - Add support for webhook secrets
 - Adds OS-specific details to the user-agent header
 

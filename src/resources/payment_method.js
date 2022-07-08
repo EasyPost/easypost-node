@@ -1,57 +1,20 @@
 import T from 'proptypes';
-import base from './base';
 
 export const propTypes = {
   id: T.string,
   object: T.string,
-  primary_payment_method: T.object,
-  secondary_payment_method: T.object,
+  disabled_at: T.string,
+  name: T.string,
+  last4: T.string,
+  expiration_month: T.number,
+  expiration_year: T.number,
+  brand: T.string,
+  country: T.string,
+  verified: T.bool,
+  bank_account: T.string,
 };
 
-export default (api) =>
-  class PaymentMethod extends base(api) {
-    static _name = 'PaymentMethod';
-
-    static _url = 'payment_methods';
-
-    static key = 'payment_methods';
-
+export default () =>
+  class PaymentMethod {
     static propTypes = propTypes;
-
-    /**
-     * retrieve all payment methods.
-     * @returns {Promise<never>}
-     */
-    static async all() {
-      const res = await api.get(this._url);
-
-      if (res.body.id == null) {
-        throw new Error('Billing has not been setup for this user. Please add a payment method.');
-      }
-      return res.body;
-    }
-
-    /**
-     * retrieve not implemented.
-     * @returns {NotImplementedError}
-     */
-    static retrieve() {
-      return super.notImplemented('retrieve');
-    }
-
-    /**
-     * delete not implemented.
-     * @returns {NotImplementedError}
-     */
-    static delete() {
-      return this.notImplemented('delete');
-    }
-
-    /**
-     * save not implemented.
-     * @returns {NotImplementedError}
-     */
-    async save() {
-      return this.constructor.notImplemented('save');
-    }
   };

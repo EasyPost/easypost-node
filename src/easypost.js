@@ -9,7 +9,7 @@ import Batch, { propTypes as batchPropTypes } from './resources/batch';
 import Brand, { propTypes as brandPropTypes } from './resources/brand';
 import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrier_account';
 import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrier_type';
-import CreditCard, { propTypes as creditCardPropTypes } from './resources/credit_card';
+import Billing, { propTypes as BillingPropTypes } from './resources/billing';
 import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customs_info';
 import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customs_item';
 import Event, { propTypes as eventPropTypes } from './resources/event';
@@ -57,7 +57,7 @@ export const RESOURCES = {
   Brand,
   CarrierAccount,
   CarrierType,
-  CreditCard,
+  Billing,
   CustomsInfo,
   CustomsItem,
   Event,
@@ -83,7 +83,7 @@ export const PROP_TYPES = {
   brandPropTypes,
   carrierAccountPropTypes,
   carrierTypePropTypes,
-  creditCardPropTypes,
+  BillingPropTypes,
   customsInfoPropTypes,
   customsItemPropTypes,
   eventPropTypes,
