@@ -43,6 +43,7 @@ describe('Referral Resource', function () {
     const referralsArray = referrals.referral_customers;
 
     expect(referralsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
+    expect(referrals.has_more).to.not.be.null;
     referralsArray.forEach((referral) => {
       expect(referral).to.be.an.instanceOf(this.easypost.Referral);
     });
