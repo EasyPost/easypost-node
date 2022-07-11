@@ -1,11 +1,12 @@
 # CHANGELOG
 
-## Next Release
+## v5.3.0 (2022-07-11)
 
-- Adds bundled Typescript definitions as a beta
+- Adds bundled Typescript definitions in beta (closes #119, #122, #184, and #243 - big thank you to our awesome community!)
 - Adds `Billing.retrievePaymentMethods()`, `Billing.deletePaymentMethod()`, and `Billing.fundWallet()` functions
-- Add support for webhook secrets
+- Adds support for webhook secrets
 - Adds OS-specific details to the user-agent header
+- Swaps update functions from `put` to `patch` to better match API expectation and documentation. Behavior of these functions should remain the same
 
 ## v5.2.0 (2022-05-19)
 
