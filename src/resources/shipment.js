@@ -175,8 +175,7 @@ export default (api) =>
      * @param {object} formOptions
      * @returns {this}
      */
-    async generateForm(formType, formOptions) {
-      const _formOptions = formOptions || {};
+    async generateForm(formType, formOptions = {}) {
       this.verifyParameters(
         {
           this: ['id'],
@@ -186,7 +185,7 @@ export default (api) =>
       );
 
       const combinedOptions = {
-        ..._formOptions,
+        ...formOptions,
         type: formType,
       };
 
