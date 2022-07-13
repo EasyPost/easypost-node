@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds typescript definition for Billing and PaymentMethod
+
 ## v5.3.0 (2022-07-11)
 
 - Adds bundled Typescript definitions in beta (closes #119, #122, #184, and #243 - big thank you to our awesome community!)
