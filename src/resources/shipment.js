@@ -170,6 +170,29 @@ export default (api) =>
     }
 
     /**
+     * Generate a form for a shipment.
+     * @param {string} formType
+     * @param {object} formOptions
+     * @returns {this}
+     */
+    async generateForm(formType, formOptions = {}) {
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['formType'],
+        },
+        formType,
+      );
+
+      const combinedOptions = {
+        ...formOptions,
+        type: formType,
+      };
+
+      return this.rpc('forms', { form: combinedOptions });
+    }
+
+    /**
      * Refund a shipment.
      * @returns {this}
      */
