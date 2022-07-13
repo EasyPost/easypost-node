@@ -295,5 +295,5 @@ export declare class Shipment implements IShipment {
    * @param formType The type of form to generate.
    * @param formOptions Additional options to use when generating the form.
    */
-  public generateForm(formType: string, formOptions: object | null): Promise<Shipment>;
+  public generateForm(formType: string, formOptions?: object): Promise<Shipment>;
 }
