@@ -270,7 +270,7 @@ describe('Shipment Resource', function () {
   it('generates a form for a shipment', async function () {
     const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
 
-    const formType = "return_packing_slip";
+    const formType = 'return_packing_slip';
 
     await shipment.generateForm(formType, Fixture.rmaFormOptions());
 
