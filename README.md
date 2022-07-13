@@ -201,7 +201,6 @@ Starting with v5.3.0, this project has bundled Typescript definitions included. 
 
 - Nullability for every field may need additional work
 - Error codes may not be comprehensive
-- Add missing report class
 
 ### Testing
 
