@@ -266,4 +266,19 @@ describe('Shipment Resource', function () {
       this.easypost.Shipment.getLowestSmartrate(smartrates, 3, 'BAD_ACCURACY');
     }).to.throw(Error);
   });
+
+  it('generates a form for a shipment', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
+
+    const formType = "return_packing_slip";
+
+    await shipment.generateForm(formType, Fixture.rmaFormOptions());
+
+    expect(shipment.forms.length).to.equal(1);
+
+    const form = shipment.forms[0];
+
+    expect(form.form_type).to.equal(formType);
+    expect(form.form_url).to.not.be.null;
+  });
 });

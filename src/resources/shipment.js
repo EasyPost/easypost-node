@@ -1,11 +1,11 @@
 import T from 'proptypes';
 import base from './base';
 
-import { propTypes as addressPropTypes } from './address';
-import { propTypes as parcelPropTypes } from './parcel';
-import { propTypes as customsInfoPropTypes } from './customs_info';
-import { propTypes as insurancePropTypes } from './insurance';
-import { propTypes as trackerPropTypes } from './tracker';
+import {propTypes as addressPropTypes} from './address';
+import {propTypes as parcelPropTypes} from './parcel';
+import {propTypes as customsInfoPropTypes} from './customs_info';
+import {propTypes as insurancePropTypes} from './insurance';
+import {propTypes as trackerPropTypes} from './tracker';
 import Util from './util';
 
 export const propTypes = {
@@ -125,7 +125,7 @@ export default (api) =>
         format,
       );
 
-      return this.rpc('label', { file_format: format }, undefined, 'get');
+      return this.rpc('label', {file_format: format}, undefined, 'get');
     }
 
     /**
@@ -166,7 +166,32 @@ export default (api) =>
         amount,
       );
 
-      return this.rpc('insure', { amount });
+      return this.rpc('insure', {amount});
+    }
+
+    /**
+     * Generate a form for a shipment.
+     * @param {string} formType
+     * @param formOptions
+     * @returns {this}
+     */
+    async generateForm(formType, formOptions) {
+      // eslint-disable-next-line no-param-reassign
+      formOptions = formOptions || {};
+      this.verifyParameters(
+        {
+          this: ['id'],
+          args: ['formType'],
+        },
+        formType,
+      );
+
+      const combinedOptions = {
+        ...formOptions,
+        type: formType,
+      };
+
+      return this.rpc('forms', {form: combinedOptions});
     }
 
     /**
