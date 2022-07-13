@@ -204,7 +204,7 @@ export default (api) =>
       const lowestSmartrate = Shipment.getLowestSmartrate(
         smartrates,
         deliveryDays,
-        deliveryAccuracy,
+        deliveryAccuracy.toLowerCase(),
       );
 
       return lowestSmartrate;
