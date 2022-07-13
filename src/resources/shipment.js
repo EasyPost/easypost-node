@@ -172,12 +172,11 @@ export default (api) =>
     /**
      * Generate a form for a shipment.
      * @param {string} formType
-     * @param formOptions
+     * @param {object} formOptions
      * @returns {this}
      */
     async generateForm(formType, formOptions) {
-      // eslint-disable-next-line no-param-reassign
-      formOptions = formOptions || {};
+      const _formOptions = formOptions || {};
       this.verifyParameters(
         {
           this: ['id'],
@@ -187,7 +186,7 @@ export default (api) =>
       );
 
       const combinedOptions = {
-        ...formOptions,
+        ..._formOptions,
         type: formType,
       };
 
