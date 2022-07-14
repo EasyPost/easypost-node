@@ -19,7 +19,7 @@ export default (api) =>
      * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
      * @param {String} amount
      * @param {String} primaryOrSecondary
-     * @returns {Promise<never>}
+     * @returns {boolean}
      */
     static async fundWallet(amount, primaryOrSecondary = 'primary') {
       const paymentInfo = await this.getPaymentInfo(primaryOrSecondary.toLowerCase());
@@ -35,7 +35,7 @@ export default (api) =>
 
     /**
      * Delete a payment method
-     * @returns {Promise|Promise<never>}
+     * @returns {boolean}
      */
     static async deletePaymentMethod(primaryOrSecondary) {
       const paymentInfo = await this.getPaymentInfo(primaryOrSecondary.toLowerCase());
