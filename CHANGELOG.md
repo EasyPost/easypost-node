@@ -1,8 +1,9 @@
 # CHANGELOG
 
-## Next Release
+## v5.4.0 (2022-07-18)
 
-- Adds typescript definition for Billing and PaymentMethod
+- Adds the ability to generate shipment forms via `Shipment.generateForm()` function
+- Adds missing Typescript definitions for Billing and PaymentMethod
 
 ## v5.3.0 (2022-07-11)
 
