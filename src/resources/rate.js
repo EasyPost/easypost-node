@@ -19,6 +19,7 @@ export const propTypes = {
   delivery_date: T.string,
   delivery_date_guaranteed: T.string,
   est_delivery_days: T.integer, // deprecated
+  carbon_offset: T.object,
   created_at: T.oneOfType([T.object, T.string]),
   updated_at: T.oneOfType([T.object, T.string]),
 };

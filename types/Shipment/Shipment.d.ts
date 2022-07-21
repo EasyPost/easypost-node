@@ -148,6 +148,11 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
    * The current message of the associated BatchShipment
    */
   batch_message: string;
+
+  /**
+   * Indicate if the shipment is carbon offset
+   */
+  carbon_offset: boolean;
 }
 
 export declare class Shipment implements IShipment {
@@ -181,6 +186,7 @@ export declare class Shipment implements IShipment {
   batch_id: string;
   batch_status: TBatchStatus;
   batch_message: string;
+  carbon_offset: boolean;
   created_at: string;
   updated_at: string;
 
@@ -195,8 +201,10 @@ export declare class Shipment implements IShipment {
    * You can limit the CarrierAccounts to use for rating by passing the carrier_accounts parameter.
    *
    * @see https://www.easypost.com/docs/api/node#create-a-shipment
+   *
+   * @param carbonOffset
    */
-  public save(): Promise<Shipment>;
+  public save(carbonOffset?: boolean): Promise<Shipment>;
 
   /**
    * The Shipment List is a paginated list of all Shipment objects associated with the given API Key.
@@ -236,8 +244,13 @@ export declare class Shipment implements IShipment {
    *
    * @param rate rate id (begins with "rate_") or rate object
    * @param insuranceAmount
+   * @param carbonOffset
    */
-  public buy(rate: string | IRate, insuranceAmount?: number): Promise<Shipment>;
+  public buy(
+    rate: string | IRate,
+    insuranceAmount?: number,
+    carbonOffset?: boolean,
+  ): Promise<Shipment>;
 
   /**
    * Refunding a Shipment is available for many carriers supported by EasyPost.
@@ -273,8 +286,10 @@ export declare class Shipment implements IShipment {
    * This operation respects the carrier_accounts attribute.
    *
    * @see https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment
+   *
+   * @param carbonOffset
    */
-  public regenerateRates(): Promise<Shipment>;
+  public regenerateRates(carbonOffset?: boolean): Promise<Shipment>;
 
   /**
    * Insuring your Shipment is as simple as sending us the value of the contents.
