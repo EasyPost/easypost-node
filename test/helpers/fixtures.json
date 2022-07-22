@@ -1,0 +1,328 @@
+{
+  "page_sizes": {
+    "one_result": 1,
+    "five_results": 5,
+    "ten_results": 10,
+    "twenty_results": 20,
+    "fifty_results": 50,
+    "one_hundred_results": 100
+  },
+  "usps_carrier_account_ids": {
+    "node": "ca_5ba7ca3632c54adeb17ad4bcac13c890"
+  },
+  "carrier_strings": {
+    "usps": "USPS"
+  },
+  "service_names": {
+    "usps": {
+      "first_service": "First",
+      "pickup_service": "NextDay"
+    }
+  },
+  "report_types": {
+    "shipment": "shipment"
+  },
+  "webhook_url": "http://example.com",
+  "addresses": {
+    "basic": {
+      "name": "Jack Sparrow",
+      "company": "EasyPost",
+      "street1": "388 Townsend St",
+      "street2": "Apt 20",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94107",
+      "phone": "5555555555"
+    },
+    "incorrect": {
+      "street1": "417 montgomery street",
+      "street2": "FL 5",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94104",
+      "country": "US",
+      "company": "EasyPost",
+      "phone": "415-123-4567"
+    },
+    "pickup": {
+      "name": "Dr. Steve Brule",
+      "street1": "179 N Harbor Dr",
+      "city": "Redondo Beach",
+      "state": "CA",
+      "zip": "90277",
+      "country": "US",
+      "phone": "3331114444"
+    },
+    "end_shipper": {
+      "name": "Jack Sparrow",
+      "company": "EasyPost",
+      "street1": "388 Townsend St",
+      "street2": "Apt 20",
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "US",
+      "email": "test@example.com",
+      "zip": "94107",
+      "phone": "5555555555"
+    }
+  },
+  "parcels": {
+    "basic": {
+      "length": 10,
+      "width": 8,
+      "height": 4,
+      "weight": 15.4
+    }
+  },
+  "customs_items": {
+    "basic": {
+      "description": "Sweet shirts",
+      "quantity": 2,
+      "weight": 11,
+      "value": 23.25,
+      "hs_tariff_number": "654321",
+      "origin_country": "US"
+    }
+  },
+  "customs_infos": {
+    "basic": {
+      "eel_pfc": "NOEEI 30.37(a)",
+      "customs_certify": true,
+      "customs_signer": "Steve Brule",
+      "contents_type": "merchandise",
+      "contents_explanation": "",
+      "restriction_type": "none",
+      "non_delivery_option": "return",
+      "customs_items": [
+        {
+          "description": "Sweet shirts",
+          "quantity": 2,
+          "weight": 11,
+          "value": 23.25,
+          "hs_tariff_number": "654321",
+          "origin_country": "US"
+        }
+      ]
+    }
+  },
+  "tax_identifiers": {
+    "basic": {
+      "entity": "SENDER",
+      "tax_id_type": "IOSS",
+      "tax_id": "12345",
+      "issuing_country": "GB"
+    }
+  },
+  "shipments": {
+    "basic_domestic": {
+      "from_address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "to_address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "parcel": {
+        "length": 10,
+        "width": 8,
+        "height": 4,
+        "weight": 15.4
+      }
+    },
+    "full": {
+      "from_address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "to_address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "parcel": {
+        "length": 10,
+        "width": 8,
+        "height": 4,
+        "weight": 15.4
+      },
+      "customs_info": {
+        "eel_pfc": "NOEEI 30.37(a)",
+        "customs_certify": true,
+        "customs_signer": "Steve Brule",
+        "contents_type": "merchandise",
+        "contents_explanation": "",
+        "restriction_type": "none",
+        "non_delivery_option": "return",
+        "customs_items": [
+          {
+            "description": "Sweet shirts",
+            "quantity": 2,
+            "weight": 11,
+            "value": 23.25,
+            "hs_tariff_number": "654321",
+            "origin_country": "US"
+          }
+        ]
+      },
+      "options": {
+        "label_format": "PNG",
+        "invoice_number": "123"
+      },
+      "reference": "123"
+    }
+  },
+  "pickups": {
+    "basic": {
+      "address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "min_datetime": "2022-08-01",
+      "max_datetime": "2022-08-02",
+      "instructions": "Pickup at front door"
+    }
+  },
+  "carrier_accounts": {
+    "basic": {
+      "type": "UpsAccount",
+      "credentials": {
+        "account_number": "A1A1A1",
+        "user_id": "USERID",
+        "password": "PASSWORD",
+        "access_license_number": "ALN"
+      }
+    }
+  },
+  "insurances": {
+    "basic": {
+      "from_address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "to_address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "carrier": "USPS",
+      "amount": "100"
+    }
+  },
+  "orders": {
+    "basic": {
+      "from_address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "to_address": {
+        "name": "Jack Sparrow",
+        "company": "EasyPost",
+        "street1": "388 Townsend St",
+        "street2": "Apt 20",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94107",
+        "phone": "5555555555"
+      },
+      "shipments": [
+        {
+          "from_address": {
+            "name": "Jack Sparrow",
+            "company": "EasyPost",
+            "street1": "388 Townsend St",
+            "street2": "Apt 20",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94107",
+            "phone": "5555555555"
+          },
+          "to_address": {
+            "name": "Jack Sparrow",
+            "company": "EasyPost",
+            "street1": "388 Townsend St",
+            "street2": "Apt 20",
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94107",
+            "phone": "5555555555"
+          },
+          "parcel": {
+            "length": 10,
+            "width": 8,
+            "height": 4,
+            "weight": 15.4
+          }
+        }
+      ]
+    }
+  },
+  "credit_cards": {
+    "test": {
+      "number": "4536410136126170",
+      "expirationMonth": "05",
+      "expirationYear": "2028",
+      "cvc": "778"
+    }
+  },
+  "form_options": {
+    "rma": {
+      "barcode": "RMA12345678900",
+      "line_items": [
+        {
+          "product": {
+            "title": "Square Reader",
+            "barcode": "855658003251"
+          },
+          "units": 8
+        }
+      ]
+    }
+  }
+}

@@ -80,7 +80,10 @@ describe('Address Resource', function () {
   });
 
   it('creates a verified address', async function () {
-    const address = await this.easypost.Address.createAndVerify(Fixture.incorrectAddressToVerify());
+    const addressData = Fixture.incorrectAddressToVerify();
+    addressData.verify = true;
+
+    const address = await this.easypost.Address.createAndVerify(addressData);
 
     expect(address).to.be.an.instanceOf(this.easypost.Address);
     expect(address.id).to.match(/^adr_/);
