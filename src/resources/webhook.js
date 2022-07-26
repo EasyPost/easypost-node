@@ -23,6 +23,16 @@ export default (api) =>
 
     static propTypes = propTypes;
 
+    /**
+     * Validate a webhook by comparing the HMAC signature header sent from EasyPost to your shared secret.
+     * If the signatures do not match, an error will be raised signifying the webhook either did not originate
+     * from EasyPost or the secrets do not match. If the signatures do match, the `event_body` will be returned
+     * as JSON.
+     * @param {buffer} eventBody
+     * @param {object} headers
+     * @param {string} webhookSecret
+     * @returns {object}
+     */
     static validateWebhook(eventBody, headers, webhookSecret) {
       let webhook = {};
       const easypostHmacSignature = headers['X-Hmac-Signature'] ?? null;
