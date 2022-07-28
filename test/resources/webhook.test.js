@@ -1,8 +1,9 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Webhook Resource', function () {
   setupPolly.startPolly();
@@ -81,5 +82,44 @@ describe('Webhook Resource', function () {
     const deletedWebhook = await webhook.delete();
 
     expect(deletedWebhook).to.be.an.instanceOf(this.easypost.Webhook);
+  });
+
+  it('validates a webhook secret', function () {
+    const webhookSecret = 'sécret';
+    const expectedHmacSignature =
+      'hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115a46b';
+    const headers = {
+      'X-Hmac-Signature': expectedHmacSignature,
+    };
+
+    const webhookBody = this.easypost.Webhook.validateWebhook(
+      Fixture.eventBody(),
+      headers,
+      webhookSecret,
+    );
+
+    expect(webhookBody.description).to.eq('batch.created');
+  });
+
+  it('throws an error when a webhook secret is invalid', function () {
+    const webhookSecret = 'invalid_secret';
+    const headers = {
+      'X-Hmac-Signature': 'some-signature',
+    };
+
+    expect(function () {
+      this.easypost.Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+    }).to.throw(Error);
+  });
+
+  it('throws an error when webhook is missing a secret', function () {
+    const webhookSecret = '123';
+    const headers = {
+      'some-header': 'some-value',
+    };
+
+    expect(function () {
+      this.easypost.Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+    }).to.throw(Error);
   });
 });
