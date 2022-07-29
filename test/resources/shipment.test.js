@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Shipment Resource', function () {
   setupPolly.startPolly();
@@ -206,7 +207,7 @@ describe('Shipment Resource', function () {
     const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
 
     // Test lowest smartrate with valid filters
-    const lowestSmartrate = await shipment.lowestSmartrate(1, 'percentile_90');
+    const lowestSmartrate = await shipment.lowestSmartrate(2, 'percentile_90');
     expect(lowestSmartrate.service).to.equal('First');
     expect(lowestSmartrate.rate).to.equal(5.49);
     expect(lowestSmartrate.carrier).to.equal('USPS');
@@ -239,7 +240,7 @@ describe('Shipment Resource', function () {
     // Test lowest smartrate with valid filters
     const lowestSmartrate = this.easypost.Shipment.getLowestSmartrate(
       smartrates,
-      1,
+      2,
       'percentile_90',
     );
     expect(lowestSmartrate.service).to.equal('First');
@@ -280,5 +281,51 @@ describe('Shipment Resource', function () {
 
     expect(form.form_type).to.equal(formType);
     expect(form.form_url).to.not.be.null;
+  });
+
+  it('create a carbon offset shipment', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save(true);
+
+    expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
+
+    shipment.rates.forEach((rate) => {
+      expect(rate.carbon_offset).not.to.be.null;
+    });
+  });
+
+  it('buy a carbon offset shipment', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save();
+    await shipment.buy(shipment.lowestRate(), null, true);
+
+    expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
+
+    let foundCarbonOffset = false;
+
+    shipment.fees.forEach((fee) => {
+      if (fee.type === 'CarbonOffsetFee') {
+        foundCarbonOffset = true;
+      }
+    });
+
+    expect(foundCarbonOffset).to.be.true;
+  });
+
+  it('one call buy a carbon offset shipment', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyCarbonOffset()).save(true);
+
+    expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
+    shipment.rates.forEach((rate) => {
+      expect(rate.carbon_offset).not.to.be.null;
+    });
+  });
+
+  it('rerate a shipment with carbon offset', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyCarbonOffset()).save();
+
+    const newCarbonOffsetRates = await shipment.regenerateRates(true);
+
+    newCarbonOffsetRates.rates.forEach((rate) => {
+      expect(rate.carbon_offset).not.to.be.null;
+    });
   });
 });

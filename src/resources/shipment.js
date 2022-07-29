@@ -78,12 +78,38 @@ export default (api) =>
     }
 
     /**
+     * Create a shipment.
+     * @param {boolean} withCarbonOffset
+     * @returns {this|Promise<never>}
+     */
+    async save(withCarbonOffset = false) {
+      try {
+        this.validateProperties();
+      } catch (e) {
+        return Promise.reject(e);
+      }
+
+      try {
+        const wrappedParams = this.constructor.wrapJSON(this.toJSON());
+        wrappedParams.carbon_offset = withCarbonOffset;
+
+        const res = await api.post(this._url || this.constructor._url, wrappedParams);
+
+        this.mapProps(res.body);
+        return this;
+      } catch (e) {
+        throw e;
+      }
+    }
+
+    /**
      * Buy a shipment.
      * @param {object} rate
      * @param {number} insuranceAmount
+     * @param {boolean} withCarbonOffset
      * @returns {this}
      */
-    async buy(rate, insuranceAmount) {
+    async buy(rate, insuranceAmount, withCarbonOffset = false) {
       this.verifyParameters(
         {
           this: ['id'],
@@ -102,6 +128,7 @@ export default (api) =>
         rate: {
           id: rateId,
         },
+        carbon_offset: withCarbonOffset,
       };
 
       if (insuranceAmount) {
@@ -130,14 +157,17 @@ export default (api) =>
 
     /**
      * Regenerate rates of a shipment.
+     * @param {boolean} withCarbonOffset
      * @returns {this}
      */
-    async regenerateRates() {
+    async regenerateRates(withCarbonOffset = false) {
       this.verifyParameters({
         this: ['id'],
       });
-
-      return this.rpc('rerate', undefined, undefined, 'post');
+      const data = {
+        carbon_offset: withCarbonOffset,
+      };
+      return this.rpc('rerate', data, undefined, 'post');
     }
 
     /**
@@ -233,6 +263,13 @@ export default (api) =>
       return lowestSmartrate;
     }
 
+    /**
+     * Get the lowest smartrate of this shipment.
+     * @param {Object} smartrates
+     * @param {number} delivery_days
+     * @param {string} delivery_accuracy
+     * @returns {Object}
+     */
     static getLowestSmartrate(smartrates, deliveryDays, deliveryAccuracy) {
       const validDeliveryAccuracyValues = new Set([
         'percentile_50',

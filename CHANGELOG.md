@@ -4,6 +4,10 @@
 
 - Adds `validateWebhook` function that returns your webhook or raises an error if there is a `webhookSecret` mismatch
 - Allows for looser values to the `verify` and `verify_strict` params when creating an address (can accept strings or bools outside of an array)
+- Adds the ability to create a shipment with carbon_offset
+- Adds the ability to buy a shipment with carbon_offset
+- Adds the ability to one-call-buy a shipment with carbon_offset
+- Adds the ability to regenerate a shipment with carbon_offset
 
 ## v5.4.0 (2022-07-18)
 
