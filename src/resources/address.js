@@ -1,4 +1,5 @@
 import T from 'proptypes';
+
 import base from './base';
 import { baseAddress as baseAddressPropTypes } from './base_address';
 
@@ -8,8 +9,8 @@ export const propTypes = Object.assign({}, baseAddressPropTypes, {
   carrier_facility: T.string,
   federal_tax_id: T.string,
   state_tax_id: T.string,
-  verify: T.array,
-  verify_strict: T.array,
+  verify: T.oneOfType([T.bool, T.string, T.array]),
+  verify_strict: T.oneOfType([T.bool, T.string, T.array]),
   verifications: T.object,
 });
 

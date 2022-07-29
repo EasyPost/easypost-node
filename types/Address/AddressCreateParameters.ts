@@ -11,12 +11,12 @@ export declare interface IAddressCreateParameters
    * verify_strict takes precedence.
    * true will perform both delivery and zip4.
    */
-  verify?: boolean | ['delivery', 'zip4'] | null;
+  verify?: boolean | string | ['true', 'delivery', 'zip4'] | null;
 
   /**
    * The verifications to perform when creating.
    * The failure of any of these verifications causes the whole request to fail.
    * true will perform both delivery and zip4
    */
-  verify_strict?: boolean | ['delivery', 'zip4'] | null;
+  verify_strict?: boolean | string | ['true', 'delivery', 'zip4'] | null;
 }

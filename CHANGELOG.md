@@ -3,6 +3,7 @@
 ## NEXT RELEASE
 
 - Adds `validateWebhook` function that returns your webhook or raises an error if there is a `webhookSecret` mismatch
+- Allows for looser values to the `verify` and `verify_strict` params when creating an address (can accept strings or bools outside of an array)
 
 ## v5.4.0 (2022-07-18)
 

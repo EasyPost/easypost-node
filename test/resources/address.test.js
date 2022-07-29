@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Address Resource', function () {
   setupPolly.startPolly();
@@ -27,7 +28,7 @@ describe('Address Resource', function () {
 
   it('creates an address with verify param', async function () {
     const addressData = Fixture.incorrectAddressToVerify();
-    addressData.verify = [true];
+    addressData.verify = true;
 
     const address = await new this.easypost.Address(addressData).save();
 
@@ -38,13 +39,24 @@ describe('Address Resource', function () {
 
   it('creates an address with verify_strict param', async function () {
     const addressData = Fixture.basicAddress();
-    addressData.verify_strict = [true];
+    addressData.verify_strict = true;
 
     const address = await new this.easypost.Address(addressData).save();
 
     expect(address).to.be.an.instanceOf(this.easypost.Address);
     expect(address.id).to.match(/^adr_/);
     expect(address.street1).to.equal('388 TOWNSEND ST APT 20');
+  });
+
+  it('creates an address with an array verify param', async function () {
+    const addressData = Fixture.incorrectAddressToVerify();
+    addressData.verify = [true];
+
+    const address = await new this.easypost.Address(addressData).save();
+
+    expect(address).to.be.an.instanceOf(this.easypost.Address);
+    expect(address.id).to.match(/^adr_/);
+    expect(address.street1).to.equal('417 MONTGOMERY ST FL 5');
   });
 
   it('retrieves an address', async function () {
