@@ -76,7 +76,7 @@ export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
   delivery_date_guaranteed: boolean;
 
   /**
-   * indicate if a rate has carbon offset
+   * Indicate if a rate includes a carbon offset fee
    */
   carbon_offset: object;
 }

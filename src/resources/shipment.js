@@ -79,10 +79,10 @@ export default (api) =>
 
     /**
      * Create a shipment.
-     * @param {boolean} carbonOffset
+     * @param {boolean} withCarbonOffset
      * @returns {this|Promise<never>}
      */
-    async save(carbonOffset = false) {
+    async save(withCarbonOffset = false) {
       try {
         this.validateProperties();
       } catch (e) {
@@ -91,10 +91,7 @@ export default (api) =>
 
       try {
         const wrappedParams = this.constructor.wrapJSON(this.toJSON());
-
-        if (carbonOffset) {
-          wrappedParams.carbon_offset = carbonOffset;
-        }
+        wrappedParams.carbon_offset = withCarbonOffset;
 
         const res = await api.post(this._url || this.constructor._url, wrappedParams);
 
@@ -109,10 +106,10 @@ export default (api) =>
      * Buy a shipment.
      * @param {object} rate
      * @param {number} insuranceAmount
-     * @param {boolean} carbonOffset
+     * @param {boolean} withCarbonOffset
      * @returns {this}
      */
-    async buy(rate, insuranceAmount, carbonOffset = false) {
+    async buy(rate, insuranceAmount, withCarbonOffset = false) {
       this.verifyParameters(
         {
           this: ['id'],
@@ -131,7 +128,7 @@ export default (api) =>
         rate: {
           id: rateId,
         },
-        carbon_offset: carbonOffset,
+        carbon_offset: withCarbonOffset,
       };
 
       if (insuranceAmount) {
@@ -160,15 +157,15 @@ export default (api) =>
 
     /**
      * Regenerate rates of a shipment.
-     * @param {boolean} carbonOffset
+     * @param {boolean} withCarbonOffset
      * @returns {this}
      */
-    async regenerateRates(carbonOffset = false) {
+    async regenerateRates(withCarbonOffset = false) {
       this.verifyParameters({
         this: ['id'],
       });
       const data = {
-        carbon_offset: carbonOffset,
+        carbon_offset: withCarbonOffset,
       };
       return this.rpc('rerate', data, undefined, 'post');
     }

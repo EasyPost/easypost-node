@@ -150,7 +150,7 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
   batch_message: string;
 
   /**
-   * Indicate if the shipment is carbon offset
+   * Indicate if the shipment includes a carbon offset fee
    */
   carbon_offset: boolean;
 }
