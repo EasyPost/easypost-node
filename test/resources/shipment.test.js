@@ -283,8 +283,10 @@ describe('Shipment Resource', function () {
     expect(form.form_url).to.not.be.null;
   });
 
-  it('create a carbon offset shipment', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save(true);
+  it('create a shipment with carbon offset', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save({
+      withCarbonOffset: true,
+    });
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
 
@@ -293,7 +295,7 @@ describe('Shipment Resource', function () {
     });
   });
 
-  it('buy a carbon offset shipment', async function () {
+  it('buy a shipment with carbon offset', async function () {
     const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save();
     await shipment.buy(shipment.lowestRate(), null, true);
 
@@ -310,8 +312,10 @@ describe('Shipment Resource', function () {
     expect(foundCarbonOffset).to.be.true;
   });
 
-  it('one call buy a carbon offset shipment', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyCarbonOffset()).save(true);
+  it('one call buy a shipment with carbon offset', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyCarbonOffset()).save({
+      withCarbonOffset: true,
+    });
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     shipment.rates.forEach((rate) => {
