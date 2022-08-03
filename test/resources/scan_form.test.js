@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('ScanForm Resource', function () {
   setupPolly.startPolly();
@@ -50,7 +51,7 @@ describe('ScanForm Resource', function () {
     const scanformsArray = scanforms.scan_forms;
 
     expect(scanformsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(scanforms.has_more).to.not.be.null;
+    expect(scanforms.has_more).to.not.be.undefined;
     scanformsArray.forEach((scanform) => {
       expect(scanform).to.be.an.instanceOf(this.easypost.ScanForm);
     });

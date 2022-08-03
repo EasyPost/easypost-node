@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Order Resource', function () {
   setupPolly.startPolly();
@@ -22,7 +23,7 @@ describe('Order Resource', function () {
 
     expect(order).to.be.an.instanceOf(this.easypost.Order);
     expect(order.id).to.match(/^order_/);
-    expect(order.rates).to.not.be.null;
+    expect(order.rates).to.not.be.undefined;
   });
 
   it('retrieves an order', async function () {
@@ -56,7 +57,7 @@ describe('Order Resource', function () {
     const shipmentsArray = order.shipments;
 
     shipmentsArray.forEach((shipment) => {
-      expect(shipment.postage_label).to.not.be.null;
+      expect(shipment.postage_label).to.not.be.undefined;
     });
   });
 

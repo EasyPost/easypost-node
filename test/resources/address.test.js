@@ -73,7 +73,7 @@ describe('Address Resource', function () {
     const addressesArray = addresses.addresses;
 
     expect(addressesArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(addresses.has_more).to.not.be.null;
+    expect(addresses.has_more).to.not.be.undefined;
     addressesArray.forEach((address) => {
       expect(address).to.be.an.instanceOf(this.easypost.Address);
     });

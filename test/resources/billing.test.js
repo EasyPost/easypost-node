@@ -1,7 +1,8 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Billing Resource', function () {
   setupPolly.startPolly();
@@ -36,7 +37,7 @@ describe('Billing Resource', function () {
     // Skipping due to the lack of an available real payment method in tests
     const paymentMethods = await this.easypost.Billing.retrievePaymentMethods();
 
-    expect(paymentMethods.primary_payment_method).to.not.null;
-    expect(paymentMethods.secondary_payment_method).to.not.be.null;
+    expect(paymentMethods.primary_payment_method).to.not.be.undefined;
+    expect(paymentMethods.secondary_payment_method).to.not.be.undefined;
   });
 });

@@ -1,8 +1,9 @@
 /* eslint-disable func-names,jest/no-disabled-tests */
 import { expect } from 'chai';
-import * as setupPolly from '../../helpers/setup_polly';
+
 import EasyPost from '../../../src/beta/easypost';
 import Fixture from '../../helpers/fixture';
+import * as setupPolly from '../../helpers/setup_polly';
 
 describe('Referral Resource', function () {
   setupPolly.startPolly();
@@ -43,7 +44,7 @@ describe('Referral Resource', function () {
     const referralsArray = referrals.referral_customers;
 
     expect(referralsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(referrals.has_more).to.not.be.null;
+    expect(referrals.has_more).to.not.be.undefined;
     referralsArray.forEach((referral) => {
       expect(referral).to.be.an.instanceOf(this.easypost.Referral);
     });
