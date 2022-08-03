@@ -52,7 +52,6 @@ describe('Webhook Resource', function () {
     const webhooksArray = webhooks.webhooks;
 
     expect(webhooksArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(webhooks.has_more).to.not.be.null;
     webhooksArray.forEach((webhook) => {
       expect(webhook).to.be.an.instanceOf(this.easypost.Webhook);
     });

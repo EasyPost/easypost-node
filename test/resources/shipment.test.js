@@ -23,7 +23,7 @@ describe('Shipment Resource', function () {
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     expect(shipment.id).to.match(/^shp_/);
-    expect(shipment.rates).to.not.be.null;
+    expect(shipment.rates).to.not.be.undefined;
     expect(shipment.options.label_format).to.equal('PNG');
     expect(shipment.options.invoice_number).to.equal('123');
     expect(shipment.reference).to.equal('123');
@@ -34,17 +34,17 @@ describe('Shipment Resource', function () {
     const shipmentData = Fixture.basicShipment();
     shipmentData.customs_info = null;
     shipmentData.options = null;
-    shipmentData.tax_identifiers = null;
+    shipmentData.tax_identifiers = undefined;
     shipmentData.reference = '';
 
     const shipment = await new this.easypost.Shipment(shipmentData).save();
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     expect(shipment.id).to.match(/^shp_/);
-    expect(shipment.options).to.not.be.null; // The EasyPost API populates some default values here
+    expect(shipment.options).to.not.be.undefined; // The EasyPost API populates some default values here
     expect(shipment.customs_info).to.be.null;
     expect(shipment.reference).to.be.null;
-    expect(shipment.tax_identifiers).to.be.null;
+    expect(shipment.tax_identifiers).to.be.undefined;
   });
 
   it('creates a shipment with tax_identifiers', async function () {
@@ -94,7 +94,7 @@ describe('Shipment Resource', function () {
     const shipmentsArray = shipments.shipments;
 
     expect(shipmentsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(shipments.has_more).to.not.be.null;
+    expect(shipments.has_more).to.not.be.undefined;
     shipmentsArray.forEach((shipment) => {
       expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     });
@@ -105,7 +105,7 @@ describe('Shipment Resource', function () {
 
     await shipment.buy(shipment.lowestRate());
 
-    expect(shipment.postage_label).to.not.be.null;
+    expect(shipment.postage_label).to.not.be.undefined;
   });
 
   it('regenerates rates for a shipment', async function () {
@@ -129,7 +129,7 @@ describe('Shipment Resource', function () {
 
     await shipment.convertLabelFormat('ZPL');
 
-    expect(shipment.postage_label.label_zpl_url).to.not.be.null;
+    expect(shipment.postage_label.label_zpl_url).to.not.be.undefined;
   });
 
   // TODO: Skipped because the `insurance` field is not sending properly when scrubbing is enabled
@@ -161,17 +161,17 @@ describe('Shipment Resource', function () {
   it('retrieves smartrates of a shipment', async function () {
     const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
 
-    expect(shipment.rates).to.not.be.null;
+    expect(shipment.rates).to.not.be.undefined;
 
     const smartrates = await shipment.getSmartrates();
 
-    expect(smartrates[0].time_in_transit.percentile_50).to.not.be.null;
-    expect(smartrates[0].time_in_transit.percentile_75).to.not.be.null;
-    expect(smartrates[0].time_in_transit.percentile_85).to.not.be.null;
-    expect(smartrates[0].time_in_transit.percentile_90).to.not.be.null;
-    expect(smartrates[0].time_in_transit.percentile_95).to.not.be.null;
-    expect(smartrates[0].time_in_transit.percentile_97).to.not.be.null;
-    expect(smartrates[0].time_in_transit.percentile_99).to.not.be.null;
+    expect(smartrates[0].time_in_transit.percentile_50).to.not.be.undefined;
+    expect(smartrates[0].time_in_transit.percentile_75).to.not.be.undefined;
+    expect(smartrates[0].time_in_transit.percentile_85).to.not.be.undefined;
+    expect(smartrates[0].time_in_transit.percentile_90).to.not.be.undefined;
+    expect(smartrates[0].time_in_transit.percentile_95).to.not.be.undefined;
+    expect(smartrates[0].time_in_transit.percentile_97).to.not.be.undefined;
+    expect(smartrates[0].time_in_transit.percentile_99).to.not.be.undefined;
   });
 
   it('throws on delete', function () {
@@ -280,7 +280,7 @@ describe('Shipment Resource', function () {
     const form = shipment.forms[0];
 
     expect(form.form_type).to.equal(formType);
-    expect(form.form_url).to.not.be.null;
+    expect(form.form_url).to.not.be.undefined;
   });
 
   it('create a shipment with carbon offset', async function () {

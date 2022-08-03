@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Pickup Resource', function () {
   setupPolly.startPolly();
@@ -27,7 +28,7 @@ describe('Pickup Resource', function () {
 
     expect(pickup).to.be.an.instanceOf(this.easypost.Pickup);
     expect(pickup.id).to.match(/^pickup_/);
-    expect(pickup.pickup_rates).to.not.be.null;
+    expect(pickup.pickup_rates).to.not.be.undefined;
   });
 
   it('retrieves a pickup', async function () {
@@ -57,7 +58,7 @@ describe('Pickup Resource', function () {
 
     expect(boughtPickup).to.be.an.instanceOf(this.easypost.Pickup);
     expect(boughtPickup.id).to.match(/^pickup_/);
-    expect(boughtPickup.confirmation).to.not.be.null;
+    expect(boughtPickup.confirmation).to.not.be.undefined;
     expect(boughtPickup.status).to.equal('scheduled');
   });
 

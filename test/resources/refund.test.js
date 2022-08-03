@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Refund Resource', function () {
   setupPolly.startPolly();
@@ -40,7 +41,7 @@ describe('Refund Resource', function () {
     const refundsArray = refunds.refunds;
 
     expect(refundsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(refunds.has_more).to.not.be.null;
+    expect(refunds.has_more).to.not.be.undefined;
     refundsArray.forEach((address) => {
       expect(address).to.be.an.instanceOf(this.easypost.Refund);
     });

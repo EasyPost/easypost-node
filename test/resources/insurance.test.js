@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Insurance Resource', function () {
   setupPolly.startPolly();
@@ -52,7 +53,7 @@ describe('Insurance Resource', function () {
     const insuranceArray = insurance.insurances;
 
     expect(insuranceArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(insurance.has_more).to.not.be.null;
+    expect(insurance.has_more).to.not.be.undefined;
     insuranceArray.forEach((event) => {
       expect(event).to.be.an.instanceOf(this.easypost.Insurance);
     });

@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Report Resource', function () {
   setupPolly.startPolly();
@@ -76,7 +77,7 @@ describe('Report Resource', function () {
     const reportsArray = reports.reports;
 
     expect(reportsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(reports.has_more).to.not.be.null;
+    expect(reports.has_more).to.not.be.undefined;
     reportsArray.forEach((report) => {
       expect(report).to.be.an.instanceOf(this.easypost.Report);
     });

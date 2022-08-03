@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Tracker Resource', function () {
   setupPolly.startPolly();
@@ -46,7 +47,7 @@ describe('Tracker Resource', function () {
     const trackersArray = trackers.trackers;
 
     expect(trackersArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(trackers.has_more).to.not.be.null;
+    expect(trackers.has_more).to.not.be.undefined;
     trackersArray.forEach((tracker) => {
       expect(tracker).to.be.an.instanceOf(this.easypost.Tracker);
     });

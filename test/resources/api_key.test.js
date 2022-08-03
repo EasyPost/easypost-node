@@ -1,8 +1,9 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
 import NotImplementedError from '../../src/errors/not_implemented';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('ApiKey Resource', function () {
   setupPolly.startPolly();
@@ -19,7 +20,9 @@ describe('ApiKey Resource', function () {
   it('retrieves all apiKeys', async function () {
     const apiKeys = await this.easypost.ApiKey.all();
 
-    expect(apiKeys.keys).not.to.be.null;
+    // TODO: `api_keys` does not match the expectation or docs of the API and
+    // should instead be `keys` and `children`.
+    expect(apiKeys.api_keys).to.not.be.undefined;
   });
 
   it('throws on save', function () {

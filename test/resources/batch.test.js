@@ -2,10 +2,11 @@
 import fs from 'fs';
 import { expect } from 'chai';
 import { resolve } from 'path';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
-import Fixture from '../helpers/fixture';
 import NotImplementedError from '../../src/errors/not_implemented';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('Batch Resource', function () {
   setupPolly.startPolly();
@@ -26,7 +27,7 @@ describe('Batch Resource', function () {
 
     expect(batch).to.be.an.instanceOf(this.easypost.Batch);
     expect(batch.id).to.match(/^batch_/);
-    expect(batch.shipments).to.not.be.null;
+    expect(batch.shipments).to.not.be.undefined;
   });
 
   it('retrieves a batch', async function () {
@@ -46,7 +47,7 @@ describe('Batch Resource', function () {
     const addressesArray = batches.batches;
 
     expect(addressesArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(batches.has_more).to.not.be.null;
+    expect(batches.has_more).to.not.be.undefined;
     addressesArray.forEach((batch) => {
       expect(batch).to.be.an.instanceOf(this.easypost.Batch);
     });
