@@ -284,14 +284,12 @@ describe('Shipment Resource', function () {
   });
 
   it('create a shipment with carbon offset', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save({
-      withCarbonOffset: true,
-    });
+    const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save(true);
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
 
     shipment.rates.forEach((rate) => {
-      expect(rate.carbon_offset).not.to.be.null;
+      expect(rate.carbon_offset).not.to.be.undefined;
     });
   });
 
@@ -313,13 +311,11 @@ describe('Shipment Resource', function () {
   });
 
   it('one call buy a shipment with carbon offset', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyCarbonOffset()).save({
-      withCarbonOffset: true,
-    });
+    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyCarbonOffset()).save(true);
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     shipment.rates.forEach((rate) => {
-      expect(rate.carbon_offset).not.to.be.null;
+      expect(rate.carbon_offset).not.to.be.undefined;
     });
   });
 
@@ -329,7 +325,7 @@ describe('Shipment Resource', function () {
     const newCarbonOffsetRates = await shipment.regenerateRates(true);
 
     newCarbonOffsetRates.rates.forEach((rate) => {
-      expect(rate.carbon_offset).not.to.be.null;
+      expect(rate.carbon_offset).not.to.be.undefined;
     });
   });
 });
