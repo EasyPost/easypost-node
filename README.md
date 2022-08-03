@@ -168,22 +168,31 @@ Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_G
 
 ```bash
 # Install dependencies
-npm install
+make install
 
-# Build the client library
-npm run build
+# Update dependencies
+make update
 
-# Run tests (these will be transpiled on the fly)
-EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... npm test
-
-# Run tests with coverage (these will be transpiled on the fly)
-EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... npm coverage
+# Build the project
+make build
 
 # Lint the project
-npm run lint
+make lint
 
-# Format with Prettier
-npm run format
+# Fix lint errors
+make fix
+
+# Format the project
+make format
+
+# Run tests (these will be transpiled on the fly)
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make test
+
+# Run tests with coverage (these will be transpiled on the fly)
+EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make coverage
+
+# Run security analysis
+make scan
 ```
 
 ### Typescript Definitions (Beta)
