@@ -81,13 +81,13 @@ describe('Order Resource', function () {
     // Test lowest rate with no filters
     const lowestRate = order.lowestRate();
     expect(lowestRate.service).to.equal('First');
-    expect(lowestRate.rate).to.equal('5.49');
+    expect(lowestRate.rate).to.equal('5.57');
     expect(lowestRate.carrier).to.equal('USPS');
 
     // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
     const lowestRateService = order.lowestRate(null, ['Priority']);
     expect(lowestRateService.service).to.equal('Priority');
-    expect(lowestRateService.rate).to.equal('7.37');
+    expect(lowestRateService.rate).to.equal('7.90');
     expect(lowestRateService.carrier).to.equal('USPS');
 
     // Test lowest rate with carrier filter (should error due to bad carrier)

@@ -16,10 +16,7 @@ export default class Fixture {
 
   // This is the USPS carrier account ID that comes with your EasyPost account by default and should be used for all tests
   static uspsCarrierAccountId() {
-    // Fallback to the EasyPost Node Client Library Test User USPS carrier account ID
-    return (
-      process.env.USPS_CARRIER_ACCOUNT_ID || this.readFixtureData().usps_carrier_account_ids.node
-    );
+    return process.env.USPS_CARRIER_ACCOUNT_ID || '123';
   }
 
   static usps() {
@@ -40,23 +37,23 @@ export default class Fixture {
 
   // If you need to re-record cassettes, increment this date by 1
   static reportDate() {
-    return '2022-04-11';
+    return '2022-08-01';
   }
 
   static webhookUrl() {
     return this.readFixtureData().webhook_url;
   }
 
-  static basicAddress() {
-    return this.readFixtureData().addresses.basic;
+  static caAddress1() {
+    return this.readFixtureData().addresses.ca_address_1;
   }
 
-  static incorrectAddressToVerify() {
+  static caAddress2() {
+    return this.readFixtureData().addresses.ca_address_2;
+  }
+
+  static incorrectAddress() {
     return this.readFixtureData().addresses.incorrect;
-  }
-
-  static pickupAddress() {
-    return this.readFixtureData().addresses.pickup;
   }
 
   static basicParcel() {
@@ -85,8 +82,8 @@ export default class Fixture {
 
   static oneCallBuyShipment() {
     return {
-      to_address: this.basicAddress(),
-      from_address: this.basicAddress(),
+      to_address: this.caAddress2(),
+      from_address: this.caAddress1(),
       parcel: this.basicParcel(),
       service: this.uspsService(),
       carrier_accounts: [this.uspsCarrierAccountId()],
@@ -98,7 +95,7 @@ export default class Fixture {
   // If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
   // USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
   static basicPickup() {
-    const pickupDate = '2022-08-01';
+    const pickupDate = '2022-08-10';
 
     const pickupData = this.readFixtureData().pickups.basic;
     pickupData.min_datetime = pickupDate;
@@ -136,80 +133,8 @@ export default class Fixture {
   }
 
   static eventBody() {
-    const data = {
-      result: {
-        id: 'batch_123...',
-        object: 'Batch',
-        mode: 'test',
-        state: 'created',
-        num_shipments: 0,
-        reference: null,
-        created_at: '2022-07-26T17:22:32Z',
-        updated_at: '2022-07-26T17:22:32Z',
-        scan_form: null,
-        shipments: [],
-        status: {
-          created: 0,
-          queued_for_purchase: 0,
-          creation_failed: 0,
-          postage_purchased: 0,
-          postage_purchase_failed: 0,
-        },
-        pickup: null,
-        label_url: null,
-      },
-      description: 'batch.created',
-      mode: 'test',
-      previous_attributes: null,
-      completed_urls: null,
-      user_id: 'user_123...',
-      status: 'pending',
-      object: 'Event',
-      id: 'evt_123...',
-    };
+    const eventBody = this.readFixtureData().event_body;
 
-    return Buffer.from(JSON.stringify(data), 'utf8');
-  }
-
-  static carbonOffsetShipment() {
-    return {
-      to_address: {
-        name: 'Dr. Steve Brule',
-        street1: '179 N Harbor Dr',
-        city: 'Redondo Beach',
-        state: 'CA',
-        zip: '90277',
-        country: 'US',
-        phone: '8573875756',
-        email: 'dr_steve_brule@gmail.com',
-      },
-      from_address: {
-        name: 'EasyPost',
-        street1: '417 Montgomery Street',
-        street2: '5th Floor',
-        city: 'San Francisco',
-        state: 'CA',
-        zip: '94104',
-        country: 'US',
-        phone: '4153334445',
-        email: 'support@easypost.com',
-      },
-      parcel: {
-        length: 20.2,
-        width: 10.9,
-        height: 5,
-        weight: 65.9,
-      },
-    };
-  }
-
-  static oneCallBuyCarbonOffset() {
-    const shipment = this.carbonOffsetShipment();
-
-    shipment.service = 'Priority';
-    shipment.carrier_accounts = [this.uspsCarrierAccountId()];
-    shipment.carrier = this.usps();
-
-    return shipment;
+    return Buffer.from(JSON.stringify(eventBody), 'utf8');
   }
 }

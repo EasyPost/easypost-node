@@ -1,9 +1,10 @@
-/* eslint-disable func-names,jest/no-disabled-tests */
 import { expect } from 'chai';
-import * as setupPolly from '../../helpers/setup_polly';
+
 import EasyPost from '../../../src/beta/easypost';
 import Fixture from '../../helpers/fixture';
+import * as setupPolly from '../../helpers/setup_polly';
 
+/* eslint-disable func-names,jest/no-disabled-tests */
 describe('EndShipper Resource', function () {
   setupPolly.startPolly();
 
@@ -17,7 +18,7 @@ describe('EndShipper Resource', function () {
   });
 
   it('creates an EndShipper object', async function () {
-    const endShipper = await new this.easypost.EndShipper(Fixture.endShipperAddress()).save();
+    const endShipper = await new this.easypost.EndShipper(Fixture.caAddress1()).save();
 
     expect(endShipper).to.be.an.instanceOf(this.easypost.EndShipper);
     expect(endShipper.id).to.match(/^es_/);
@@ -25,7 +26,7 @@ describe('EndShipper Resource', function () {
   });
 
   it('retrieves an EndShipper object', async function () {
-    const endShipper = await new this.easypost.EndShipper(Fixture.endShipperAddress()).save();
+    const endShipper = await new this.easypost.EndShipper(Fixture.caAddress1()).save();
     const retrievedEndShipper = await this.easypost.EndShipper.retrieve(endShipper.id);
 
     expect(retrievedEndShipper).to.be.an.instanceOf(this.easypost.EndShipper);
@@ -43,7 +44,7 @@ describe('EndShipper Resource', function () {
   });
 
   it('updates an EndShipper object', async function () {
-    const endShipper = await new this.easypost.EndShipper(Fixture.endShipperAddress()).save();
+    const endShipper = await new this.easypost.EndShipper(Fixture.caAddress1()).save();
 
     const newName = 'Captain Sparrow';
     endShipper.name = newName;
