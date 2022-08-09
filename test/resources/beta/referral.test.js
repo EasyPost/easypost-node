@@ -9,8 +9,9 @@ describe('Referral Resource', function () {
   setupPolly.startPolly();
 
   before(function () {
-    this.easypost = new EasyPost(process.env.PARTNER_USER_PROD_API_KEY);
+    const partnerUserProdApiKey = process.env.PARTNER_USER_PROD_API_KEY || '123';
     this.referralUserProdApiKey = process.env.REFERRAL_USER_PROD_API_KEY || '123';
+    this.easypost = new EasyPost(partnerUserProdApiKey);
   });
 
   beforeEach(function () {
