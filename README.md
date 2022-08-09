@@ -193,6 +193,10 @@ EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make coverage
 
 # Run security analysis
 make scan
+
+# Update submodules
+git submodule init
+git submodule update --remote
 ```
 
 ### Typescript Definitions (Beta)

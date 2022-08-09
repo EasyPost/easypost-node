@@ -4,7 +4,9 @@ export default class Fixture {
   // Read fixture data from the fixtures JSON file
   static readFixtureData() {
     const currentDir = process.cwd();
-    const fixtures = JSON.parse(fs.readFileSync(`${currentDir}/test/helpers/fixtures.json`));
+    const fixtures = JSON.parse(
+      fs.readFileSync(`${currentDir}/examples/official/fixtures/client-library-fixtures.json`),
+    );
 
     return fixtures;
   }
