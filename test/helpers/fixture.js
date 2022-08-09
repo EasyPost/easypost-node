@@ -16,7 +16,8 @@ export default class Fixture {
 
   // This is the USPS carrier account ID that comes with your EasyPost account by default and should be used for all tests
   static uspsCarrierAccountId() {
-    return process.env.USPS_CARRIER_ACCOUNT_ID || '123';
+    // Fallback to the EasyPost Node Client Library Test User USPS carrier account ID due to strict matching
+    return process.env.USPS_CARRIER_ACCOUNT_ID || 'ca_5ba7ca3632c54adeb17ad4bcac13c890';
   }
 
   static usps() {
