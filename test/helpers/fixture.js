@@ -94,7 +94,7 @@ export default class Fixture {
   // If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
   // USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
   static basicPickup() {
-    const pickupDate = '2022-08-10';
+    const pickupDate = '2022-08-11';
 
     const pickupData = this.readFixtureData().pickups.basic;
     pickupData.min_datetime = pickupDate;
