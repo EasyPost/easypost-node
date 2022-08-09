@@ -9,22 +9,15 @@ describe('Referral Resource', function () {
   setupPolly.startPolly();
 
   before(function () {
-    this.easypost = new EasyPost(process.env.EASYPOST_PROD_API_KEY);
+    const partnerUserProdApiKey = process.env.PARTNER_USER_PROD_API_KEY || '123';
     this.referralUserProdApiKey = process.env.REFERRAL_USER_PROD_API_KEY || '123';
+    this.easypost = new EasyPost(partnerUserProdApiKey);
   });
 
   beforeEach(function () {
     const { server } = this.polly;
     setupPolly.setupCassette(server);
   });
-
-  async function retrieveTestReferral() {
-    const referrals = await this.easypost.Referral.all({ page_size: Fixture.pageSize() });
-
-    const referralsArray = referrals.referral_customers;
-
-    return referralsArray[0];
-  }
 
   it('creates a referral user', async function () {
     const referral = await new this.easypost.Referral({
@@ -51,11 +44,12 @@ describe('Referral Resource', function () {
   });
 
   it('updates a referral user', async function () {
-    const referral = await retrieveTestReferral.call(this);
+    const referrals = await this.easypost.Referral.all({ page_size: Fixture.pageSize() });
+    const singleReferral = referrals.referral_customers[0];
 
     const testEmail = 'me2@email.com';
 
-    const success = await this.easypost.Referral.updateEmail(referral.id, testEmail);
+    const success = await this.easypost.Referral.updateEmail(singleReferral.id, testEmail);
 
     expect(success).to.eql(true);
   });

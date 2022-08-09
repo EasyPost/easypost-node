@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
@@ -6,6 +5,7 @@ import NotImplementedError from '../../src/errors/not_implemented';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
+/* eslint-disable func-names */
 describe('Shipment Resource', function () {
   setupPolly.startPolly();
 
@@ -59,8 +59,8 @@ describe('Shipment Resource', function () {
   });
 
   it('creates a shipment when only IDs are used', async function () {
-    const fromAddress = await new this.easypost.Address(Fixture.basicAddress()).save();
-    const toAddress = await new this.easypost.Address(Fixture.basicAddress()).save();
+    const fromAddress = await new this.easypost.Address(Fixture.caAddress1()).save();
+    const toAddress = await new this.easypost.Address(Fixture.caAddress2()).save();
     const parcel = await new this.easypost.Parcel(Fixture.basicParcel()).save();
 
     const shipment = await new this.easypost.Shipment({
@@ -188,13 +188,13 @@ describe('Shipment Resource', function () {
     // Test lowest rate with no filters
     const lowestRate = shipment.lowestRate();
     expect(lowestRate.service).to.equal('First');
-    expect(lowestRate.rate).to.equal('5.49');
+    expect(lowestRate.rate).to.equal('5.57');
     expect(lowestRate.carrier).to.equal('USPS');
 
     // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
     const lowestRateService = shipment.lowestRate(null, ['Priority']);
     expect(lowestRateService.service).to.equal('Priority');
-    expect(lowestRateService.rate).to.equal('7.37');
+    expect(lowestRateService.rate).to.equal('7.90');
     expect(lowestRateService.carrier).to.equal('USPS');
 
     // Test lowest rate with carrier filter (should error due to bad carrier)
@@ -209,7 +209,7 @@ describe('Shipment Resource', function () {
     // Test lowest smartrate with valid filters
     const lowestSmartrate = await shipment.lowestSmartrate(2, 'percentile_90');
     expect(lowestSmartrate.service).to.equal('First');
-    expect(lowestSmartrate.rate).to.equal(5.49);
+    expect(lowestSmartrate.rate).to.equal(5.57);
     expect(lowestSmartrate.carrier).to.equal('USPS');
   });
 
@@ -244,7 +244,7 @@ describe('Shipment Resource', function () {
       'percentile_90',
     );
     expect(lowestSmartrate.service).to.equal('First');
-    expect(lowestSmartrate.rate).to.equal(5.49);
+    expect(lowestSmartrate.rate).to.equal(5.57);
     expect(lowestSmartrate.carrier).to.equal('USPS');
   });
 
@@ -284,7 +284,7 @@ describe('Shipment Resource', function () {
   });
 
   it('create a shipment with carbon offset', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save(true);
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save(true);
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
 
@@ -294,7 +294,7 @@ describe('Shipment Resource', function () {
   });
 
   it('buy a shipment with carbon offset', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.carbonOffsetShipment()).save();
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
     await shipment.buy(shipment.lowestRate(), null, true);
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
@@ -311,7 +311,7 @@ describe('Shipment Resource', function () {
   });
 
   it('one call buy a shipment with carbon offset', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyCarbonOffset()).save(true);
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save(true);
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     shipment.rates.forEach((rate) => {
@@ -320,7 +320,7 @@ describe('Shipment Resource', function () {
   });
 
   it('rerate a shipment with carbon offset', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyCarbonOffset()).save();
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
 
     const newCarbonOffsetRates = await shipment.regenerateRates(true);
 

@@ -29,6 +29,8 @@ format-check:
 ## install - Install project dependencies
 # TODO:  Remove the `--force` flag once we've dropped support for Node 10 and can modernize the dependency matrix
 install:
+	git submodule init
+	git submodule update
 	npm install --force
 
 ## lint - Lint the project
@@ -55,6 +57,7 @@ test:
 
 ## update - Update dependencies
 update:
+	git submodule update --remote
 	npm update
 
 .PHONY: help build clean coverage fix format format-check install lint publish release scan test update

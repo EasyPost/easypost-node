@@ -1,8 +1,9 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('CarrierAccount Resource', function () {
   setupPolly.startPolly();
@@ -23,7 +24,7 @@ describe('CarrierAccount Resource', function () {
 
     expect(carrierAccount).to.be.an.instanceOf(this.easypost.CarrierAccount);
     expect(carrierAccount.id).to.match(/^ca_/);
-    expect(carrierAccount.type).to.equal('UpsAccount');
+    expect(carrierAccount.type).to.equal('DhlEcsAccount');
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
     await carrierAccount.delete();
