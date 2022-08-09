@@ -119,10 +119,6 @@ export default class Fixture {
     return this.readFixtureData().orders.basic;
   }
 
-  static endShipperAddress() {
-    return this.readFixtureData().addresses.end_shipper;
-  }
-
   // The credit card details below are for a valid proxy card usable
   // for tests only and cannot be used for real transactions.
   // DO NOT alter these details with real credit card information.
