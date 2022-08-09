@@ -35,9 +35,8 @@ export default class Fixture {
     return this.readFixtureData().report_types.shipment;
   }
 
-  // If you need to re-record cassettes, increment this date by 1
   static reportDate() {
-    return '2022-08-01';
+    return '2022-04-11';
   }
 
   static webhookUrl() {
