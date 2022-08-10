@@ -311,7 +311,7 @@ describe('Shipment Resource', function () {
   });
 
   it('one call buy a shipment with carbon offset', async function () {
-    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save(true);
+    const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save(true);
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     shipment.rates.forEach((rate) => {
