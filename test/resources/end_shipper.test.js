@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
-import EasyPost from '../../../src/beta/easypost';
-import Fixture from '../../helpers/fixture';
-import * as setupPolly from '../../helpers/setup_polly';
+import EasyPost from '../../src/easypost';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable func-names,jest/no-disabled-tests */
 describe('EndShipper Resource', function () {
@@ -35,9 +35,11 @@ describe('EndShipper Resource', function () {
 
   it('retrieves all EndShipper objects', async function () {
     const endShippers = await this.easypost.EndShipper.all({ page_size: Fixture.pageSize() });
+
     const endShippersArray = endShippers.end_shippers;
 
     expect(endShippersArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
+    expect(endShippers.has_more).to.not.be.undefined;
     endShippersArray.forEach((endShipper) => {
       expect(endShipper).to.be.an.instanceOf(this.easypost.EndShipper);
     });
