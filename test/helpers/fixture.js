@@ -131,7 +131,10 @@ export default class Fixture {
   }
 
   static eventBody() {
-    const eventBody = this.readFixtureData().event_body;
+    const currentDir = process.cwd();
+    const eventBody = JSON.parse(
+      fs.readFileSync(`${currentDir}/examples/official/fixtures/event-body.json`),
+    );
 
     return Buffer.from(JSON.stringify(eventBody), 'utf8');
   }
