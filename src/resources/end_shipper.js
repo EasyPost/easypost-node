@@ -1,5 +1,5 @@
-import base from '../../resources/base';
-import { baseAddress as baseAddressPropTypes } from '../../resources/base_address';
+import base from './base';
+import { baseAddress as baseAddressPropTypes } from './base_address';
 
 export const propTypes = Object.assign({}, baseAddressPropTypes);
 
