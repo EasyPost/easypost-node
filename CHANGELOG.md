@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v5.6.0 (2022-08-25)
+
+- Moves EndShipper out of beta to the general library namespace
+
 ## v5.5.0 (2022-08-02)
 
 - Adds Carbon Offset support
