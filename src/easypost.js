@@ -12,7 +12,7 @@ import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carr
 import Billing, { propTypes as BillingPropTypes } from './resources/billing';
 import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customs_info';
 import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customs_item';
-import EndShipper, {propTypes as endShipperPropTypes} from './resources/end_shipper';
+import EndShipper, { propTypes as endShipperPropTypes } from './resources/end_shipper';
 import Event, { propTypes as eventPropTypes } from './resources/event';
 import Insurance, { propTypes as insurancePropTypes } from './resources/insurance';
 import Order, { propTypes as orderPropTypes } from './resources/order';
