@@ -22,7 +22,7 @@ export default class RequestError extends FakeError {
     );
 
     super(message);
-    this.error = response.body;
+    this.error = response.body || response;
     this.name = NAME;
     this.status = response.status || response.code;
 

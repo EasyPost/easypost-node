@@ -1,19 +1,16 @@
 /* eslint-disable no-dupe-class-members,no-unused-vars,class-methods-use-this */
+import T from 'proptypes';
 import superagent from 'superagent';
 
-import T from 'proptypes';
+import API from '../../easypost';
 import base from '../../resources/base';
 import { propTypes as userPropTypes } from '../../resources/user';
-import RequestError from '../../errors/request';
-import API from '../../easypost';
 
 export const propTypes = Object.assign({}, userPropTypes, {
   name: T.string.isRequired,
   email: T.string.isRequired,
   phone: T.string.isRequired,
 });
-
-const stripeCreditCardUrl = 'https://api.stripe.com/v1/tokens';
 
 /**
  * Get an instance of the API client using the referral user's API key.
@@ -48,8 +45,8 @@ async function getEasyPostStripeKey(api) {
  * @returns {Promise<string>} - Stripe credit card token.
  */
 async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
-  // need to form-encode per Stripe's API
-  const request = superagent.post(stripeCreditCardUrl).set({
+  // Stripe's endpoint requires form-encoded requests
+  const request = superagent.post('https://api.stripe.com/v1/tokens').set({
     Authorization: `Bearer ${stripeKey}`,
     'Content-Type': 'application/x-www-form-urlencoded',
   });
@@ -67,10 +64,7 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
 
     return response.body.id;
   } catch (error) {
-    throw new RequestError(
-      'Could not send card details to Stripe, please try again later',
-      stripeCreditCardUrl,
-    );
+    throw new Error('Could not send card details to Stripe, please try again later');
   }
 }
 
