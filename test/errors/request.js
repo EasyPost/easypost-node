@@ -1,4 +1,4 @@
-import RequestError, { NAME, createMessage } from '../../src/errors/request';
+import RequestError, { createMessage, NAME } from '../../src/errors/request';
 
 describe('Request Errors', () => {
   const error = {
