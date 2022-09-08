@@ -1,8 +1,9 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## v5.6.1 (2022-09-08)
 
 - Fixes a regression introduced in v5.1.0 that included the entire response instead of the response body when errors are returned from the API
+- Corrects the error type when Stripe cannot be reached when adding a credit card for referral users
 
 ## v5.6.0 (2022-08-25)
 
