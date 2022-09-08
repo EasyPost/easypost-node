@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT RELEASE
+
+- Fixes a regression introduced in v5.1.0 that included the entire response instead of the response body when errors are returned from the API
+
 ## v5.6.0 (2022-08-25)
 
 - Moves EndShipper out of beta to the general library namespace

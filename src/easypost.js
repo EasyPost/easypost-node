@@ -2,14 +2,14 @@ import os from 'os';
 import superagent from 'superagent';
 
 import pkg from '../package.json';
-
+import RequestError from './errors/request';
 import Address, { propTypes as addressPropTypes } from './resources/address';
 import ApiKey, { propTypes as apiKeyPropTypes } from './resources/api_key';
 import Batch, { propTypes as batchPropTypes } from './resources/batch';
+import Billing, { propTypes as BillingPropTypes } from './resources/billing';
 import Brand, { propTypes as brandPropTypes } from './resources/brand';
 import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrier_account';
 import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrier_type';
-import Billing, { propTypes as BillingPropTypes } from './resources/billing';
 import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customs_info';
 import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customs_item';
 import EndShipper, { propTypes as endShipperPropTypes } from './resources/end_shipper';
@@ -27,8 +27,6 @@ import Shipment, { propTypes as shipmentPropTypes } from './resources/shipment';
 import Tracker, { propTypes as trackerPropTypes } from './resources/tracker';
 import User, { propTypes as userPropTypes } from './resources/user';
 import Webhook, { propTypes as webhookPropTypes } from './resources/webhook';
-
-import RequestError from './errors/request';
 
 export const MS_SECOND = 1000;
 export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
@@ -195,33 +193,33 @@ export default class API {
    * @returns {*}
    */
   async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
-    let req = this.agent[method](this.buildPath(path)).set(API.buildHeaders(headers));
+    let request = this.agent[method](this.buildPath(path)).set(API.buildHeaders(headers));
 
     if (this.requestMiddleware) {
-      req = this.requestMiddleware(req);
+      request = this.requestMiddleware(request);
     }
 
     if (this.key) {
-      req.auth(this.key);
+      request.auth(this.key);
     }
 
     if (params !== {} && params !== undefined) {
       if (method === METHODS.GET || method === METHODS.DELETE) {
-        req.query(params);
+        request.query(params);
       } else {
-        req.send(params);
+        request.send(params);
       }
     }
 
     try {
-      const res = await req;
-      return res;
-    } catch (e) {
-      if (e.response && e.response.body) {
-        throw new RequestError(e.response, path);
+      const response = await request;
+      return response;
+    } catch (error) {
+      if (error.response && error.response.body) {
+        throw new RequestError(error.response, path);
       }
 
-      throw e;
+      throw error;
     }
   }
 
