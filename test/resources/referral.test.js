@@ -1,11 +1,11 @@
 /* eslint-disable func-names,jest/no-disabled-tests */
 import { expect } from 'chai';
 
-import EasyPost from '../../../src/beta/easypost';
-import Fixture from '../../helpers/fixture';
-import * as setupPolly from '../../helpers/setup_polly';
+import EasyPost from '../../src/beta/easypost';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
-describe('Referral Beta Resource', function () {
+describe('Referral Resource', function () {
   setupPolly.startPolly();
 
   before(function () {

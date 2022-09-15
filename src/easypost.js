@@ -20,6 +20,7 @@ import Parcel, { propTypes as parcelPropTypes } from './resources/parcel';
 import PaymentMethod, { propTypes as paymentMethodPropTypes } from './resources/payment_method';
 import Pickup, { propTypes as pickupPropTypes } from './resources/pickup';
 import Rate, { propTypes as ratePropTypes } from './resources/rate';
+import Referral, { propTypes as referralPropTypes } from './resources/referral';
 import Refund, { propTypes as refundPropTypes } from './resources/refund';
 import Report, { propTypes as reportPropTypes } from './resources/report';
 import ScanForm, { propTypes as scanFormPropTypes } from './resources/scan_form';
@@ -53,10 +54,10 @@ export const RESOURCES = {
   Address,
   ApiKey,
   Batch,
+  Billing,
   Brand,
   CarrierAccount,
   CarrierType,
-  Billing,
   CustomsInfo,
   CustomsItem,
   EndShipper,
@@ -80,10 +81,10 @@ export const PROP_TYPES = {
   addressPropTypes,
   apiKeyPropTypes,
   batchPropTypes,
+  BillingPropTypes,
   brandPropTypes,
   carrierAccountPropTypes,
   carrierTypePropTypes,
-  BillingPropTypes,
   customsInfoPropTypes,
   customsItemPropTypes,
   endShipperPropTypes,
@@ -94,6 +95,7 @@ export const PROP_TYPES = {
   paymentMethodPropTypes,
   pickupPropTypes,
   ratePropTypes,
+  referralPropTypes,
   refundPropTypes,
   reportPropTypes,
   scanFormPropTypes,
