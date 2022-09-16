@@ -1,10 +1,10 @@
 import T from 'proptypes';
-import base from './base';
 
 import { propTypes as addressPropTypes } from './address';
-import { propTypes as parcelPropTypes } from './parcel';
+import base from './base';
 import { propTypes as customsInfoPropTypes } from './customs_info';
 import { propTypes as insurancePropTypes } from './insurance';
+import { propTypes as parcelPropTypes } from './parcel';
 import { propTypes as trackerPropTypes } from './tracker';
 import Util from './util';
 
@@ -109,7 +109,7 @@ export default (api) =>
      * @param {boolean} withCarbonOffset
      * @returns {this}
      */
-    async buy(rate, insuranceAmount, withCarbonOffset = false) {
+    async buy(rate, insuranceAmount = null, withCarbonOffset = false, endShipperId = null) {
       this.verifyParameters(
         {
           this: ['id'],
@@ -133,6 +133,10 @@ export default (api) =>
 
       if (insuranceAmount) {
         data.insurance = insuranceAmount;
+      }
+
+      if (endShipperId) {
+        data.end_shipper_id = endShipperId;
       }
 
       return this.rpc('buy', data);

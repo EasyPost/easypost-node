@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT RELEASE
+
+- Adds support to pass `endShipperId` to the shipment buy call
+
 ## v5.6.1 (2022-09-08)
 
 - Fixes a regression introduced in v5.1.0 that included the entire response instead of the response body when errors are returned from the API
