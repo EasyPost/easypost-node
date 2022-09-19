@@ -1,1 +1,1 @@
-module.exports = require('./dist/easypost.js').PROP_TYPES;
+module.exports = require('./dist/easypost').PROP_TYPES;

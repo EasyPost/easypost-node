@@ -1,4 +1,3 @@
-/* eslint-disable no-dupe-class-members,no-unused-vars,class-methods-use-this */
 import T from 'proptypes';
 import superagent from 'superagent';
 
