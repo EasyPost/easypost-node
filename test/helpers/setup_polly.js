@@ -26,7 +26,7 @@ function startPolly() {
       },
     },
     expiresIn: '180d',
-    expiryStrategy: 'error',
+    expiryStrategy: 'warn',
   });
 }
 
