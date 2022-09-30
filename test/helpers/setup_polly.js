@@ -1,9 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { resolve } from 'path';
-import FSPersister from '@pollyjs/persister-fs';
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
 import { Polly, setupMocha as setupPolly } from '@pollyjs/core';
-import { encodeCassetteResponseBodies, decodeCassetteResponseBodies } from './cassette_encoding';
+import FSPersister from '@pollyjs/persister-fs';
+import { resolve } from 'path';
+
+import { decodeCassetteResponseBodies, encodeCassetteResponseBodies } from './cassette_encoding';
 
 Polly.register(FSPersister);
 Polly.register(NodeHttpAdapter);
@@ -24,6 +25,8 @@ function startPolly() {
         exclude: headerScrubbers,
       },
     },
+    expiresIn: '180d',
+    expiryStrategy: 'error',
   });
 }
 
