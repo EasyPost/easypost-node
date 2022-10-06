@@ -1,6 +1,8 @@
 {
   "sourceMap": false,
   "instrument": false,
+  "check-coverage": true,
+  "lines": 83,
   "reporter": [
     "lcov",
     "text"

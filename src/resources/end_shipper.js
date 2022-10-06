@@ -20,11 +20,7 @@ export default (api) =>
     async save() {
       try {
         this.validateProperties();
-      } catch (e) {
-        return Promise.reject(e);
-      }
 
-      try {
         const data = this.constructor.wrapJSON(this.toJSON());
 
         let res;
@@ -38,7 +34,7 @@ export default (api) =>
         this.mapProps(res.body);
         return this;
       } catch (e) {
-        throw e;
+        return Promise.reject(e);
       }
     }
   };

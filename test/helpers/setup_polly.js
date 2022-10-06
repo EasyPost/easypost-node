@@ -15,6 +15,7 @@ function startPolly() {
   setupPolly({
     adapters: ['node-http'],
     persister: 'fs',
+    recordFailedRequests: true,
     persisterOptions: {
       fs: {
         recordingsDir: resolve(__dirname, '../cassettes'),

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import os from 'os';
 import superagent from 'superagent';
 
@@ -6,7 +7,7 @@ import RequestError from './errors/request';
 import Address, { propTypes as addressPropTypes } from './resources/address';
 import ApiKey, { propTypes as apiKeyPropTypes } from './resources/api_key';
 import Batch, { propTypes as batchPropTypes } from './resources/batch';
-import Billing, { propTypes as BillingPropTypes } from './resources/billing';
+import Billing, { propTypes as billingPropTypes } from './resources/billing';
 import Brand, { propTypes as brandPropTypes } from './resources/brand';
 import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrier_account';
 import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrier_type';
@@ -20,6 +21,7 @@ import Parcel, { propTypes as parcelPropTypes } from './resources/parcel';
 import PaymentMethod, { propTypes as paymentMethodPropTypes } from './resources/payment_method';
 import Pickup, { propTypes as pickupPropTypes } from './resources/pickup';
 import Rate, { propTypes as ratePropTypes } from './resources/rate';
+import Referral, { propTypes as referralPropTypes } from './resources/referral';
 import Refund, { propTypes as refundPropTypes } from './resources/refund';
 import Report, { propTypes as reportPropTypes } from './resources/report';
 import ScanForm, { propTypes as scanFormPropTypes } from './resources/scan_form';
@@ -68,6 +70,7 @@ export const RESOURCES = {
   Pickup,
   Rate,
   Refund,
+  Referral,
   Report,
   ScanForm,
   Shipment,
@@ -80,7 +83,7 @@ export const PROP_TYPES = {
   addressPropTypes,
   apiKeyPropTypes,
   batchPropTypes,
-  BillingPropTypes,
+  billingPropTypes,
   brandPropTypes,
   carrierAccountPropTypes,
   carrierTypePropTypes,
@@ -94,6 +97,7 @@ export const PROP_TYPES = {
   paymentMethodPropTypes,
   pickupPropTypes,
   ratePropTypes,
+  referralPropTypes,
   refundPropTypes,
   reportPropTypes,
   scanFormPropTypes,
@@ -142,6 +146,21 @@ export default class API {
   }
 
   /**
+   * Returns true if this code is running in a browser.
+   * @returns bool
+   */
+  static runningInBrowser() {
+    // TODO: This function may not be necessary any longer as we may block browser based requests, needs investigation
+    let runningInBrowser = false;
+
+    if (typeof window !== 'undefined') {
+      runningInBrowser = true;
+    }
+
+    return runningInBrowser;
+  }
+
+  /**
    * Build request headers to be sent by default with each request, combined (or overridden) by any additional headers
    * @param {object} additionalHeaders
    * @returns {object}
@@ -152,7 +171,7 @@ export default class API {
       ...additionalHeaders,
     };
 
-    if (typeof window === 'undefined') {
+    if (API.runningInBrowser()) {
       return headers;
     }
 
@@ -193,7 +212,9 @@ export default class API {
    * @returns {*}
    */
   async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
-    let request = this.agent[method](this.buildPath(path)).set(API.buildHeaders(headers));
+    const urlPath = this.buildPath(path);
+    const requestHeaders = API.buildHeaders(headers);
+    let request = this.agent[method](urlPath).set(requestHeaders);
 
     if (this.requestMiddleware) {
       request = this.requestMiddleware(request);
@@ -217,9 +238,9 @@ export default class API {
     } catch (error) {
       if (error.response && error.response.body) {
         throw new RequestError(error.response, path);
+      } else {
+        throw error;
       }
-
-      throw error;
     }
   }
 

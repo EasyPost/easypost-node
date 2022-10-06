@@ -1,4 +1,5 @@
 import T from 'proptypes';
+
 import base from './base';
 
 export const propTypes = {
@@ -76,7 +77,7 @@ export default (api) =>
         const userData = this.constructor.wrapJSON(this.toJSON());
         const url = `${this.constructor._url}/${userData.user.id}/brand`;
         const res = await api.patch(url, newParams);
-        return res.body;
+        return new api.Brand(res.body);
       } catch (e) {
         return Promise.reject(e);
       }

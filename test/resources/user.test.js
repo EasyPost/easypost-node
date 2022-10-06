@@ -1,8 +1,9 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
-import * as setupPolly from '../helpers/setup_polly';
+
 import EasyPost from '../../src/easypost';
 import NotImplementedError from '../../src/errors/not_implemented';
+import * as setupPolly from '../helpers/setup_polly';
 
 describe('User Resource', function () {
   setupPolly.startPolly();
@@ -79,8 +80,7 @@ describe('User Resource', function () {
       color,
     });
 
-    // TODO: This response isn't deserializing to an instance of Brand
-    // expect(brand).to.be.an.instanceOf(this.easypost.Brand);
+    expect(brand).to.be.an.instanceOf(this.easypost.Brand);
     expect(brand.id).to.match(/^brd_/);
     expect(brand.color).to.equal(color);
   });

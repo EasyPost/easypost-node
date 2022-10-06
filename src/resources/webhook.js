@@ -48,14 +48,20 @@ export default (api) =>
 
         const digest = `hmac-sha256-hex=${expectedSignature}`;
 
-        if (
-          crypto.timingSafeEqual(
-            Buffer.from(easypostHmacSignature, 'utf8'),
-            Buffer.from(digest, 'utf8'),
-          )
-        ) {
-          webhook = JSON.parse(eventBody.toString());
-        } else {
+        try {
+          if (
+            crypto.timingSafeEqual(
+              Buffer.from(easypostHmacSignature, 'utf8'),
+              Buffer.from(digest, 'utf8'),
+            )
+          ) {
+            webhook = JSON.parse(eventBody.toString());
+          } else {
+            throw new Error(
+              'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
+            );
+          }
+        } catch (e) {
           throw new Error(
             'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
           );

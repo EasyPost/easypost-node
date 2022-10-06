@@ -2,6 +2,7 @@ import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
 import NotImplementedError from '../../src/errors/not_implemented';
+import RequestError from '../../src/errors/request';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -97,6 +98,18 @@ describe('Address Resource', function () {
     expect(verifiedAddress).to.be.an.instanceOf(this.easypost.Address);
     expect(verifiedAddress.id).to.match(/^adr_/);
     expect(verifiedAddress.street1).to.equal('179 N Harbor Dr');
+  });
+
+  it('throws an error when we cannot verify an address', async function () {
+    const address = await new this.easypost.Address({ street1: 'invalid' }).save();
+
+    return address.verifyAddress().catch((err) => expect(err).to.be.an.instanceOf(RequestError));
+  });
+
+  it('throws an error when we cannot create and verify an address', async function () {
+    return this.easypost.Address.createAndVerify({ street1: 'invalid' }).catch((err) =>
+      expect(err).to.be.an.instanceOf(RequestError),
+    );
   });
 
   it('throws on delete', function () {

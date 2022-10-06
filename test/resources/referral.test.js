@@ -1,7 +1,7 @@
 /* eslint-disable func-names,jest/no-disabled-tests */
 import { expect } from 'chai';
 
-import EasyPost from '../../src/beta/easypost';
+import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 

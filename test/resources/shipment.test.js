@@ -132,9 +132,7 @@ describe('Shipment Resource', function () {
     expect(shipment.postage_label.label_zpl_url).to.not.be.undefined;
   });
 
-  // TODO: Skipped because the `insurance` field is not sending properly when scrubbing is enabled
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('insures a shipment', async function () {
+  it('insures a shipment', async function () {
     // If the shipment was purchased with a USPS rate, it must have its insurance set to `0` when bought
     // so that USPS doesn't automatically insure it so we could manually insure it here.
     const shipmentData = Fixture.oneCallBuyShipment();
@@ -253,9 +251,9 @@ describe('Shipment Resource', function () {
     const smartrates = await shipment.getSmartrates();
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
-    expect(function () {
+    expect(() => {
       this.easypost.Shipment.getLowestSmartrate(smartrates, 0, 'percentile_90');
-    }).to.throw(Error);
+    }).to.throw(Error, 'No rates found.');
   });
 
   it('raises an error for getLowestSmartrate when no rates are found due to deliveryAccuracy', async function () {
@@ -263,9 +261,12 @@ describe('Shipment Resource', function () {
     const smartrates = await shipment.getSmartrates();
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
-    expect(function () {
+    expect(() => {
       this.easypost.Shipment.getLowestSmartrate(smartrates, 3, 'BAD_ACCURACY');
-    }).to.throw(Error);
+    }).to.throw(
+      Error,
+      'Invalid deliveryAccuracy value, must be one of: percentile_50, percentile_75, percentile_85, percentile_90, percentile_95, percentile_97, percentile_99',
+    );
   });
 
   it('generates a form for a shipment', async function () {
@@ -327,5 +328,21 @@ describe('Shipment Resource', function () {
     newCarbonOffsetRates.rates.forEach((rate) => {
       expect(rate.carbon_offset).not.to.be.undefined;
     });
+  });
+
+  it('buys a shipment with insuranceAmount', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+    await shipment.buy(shipment.lowestRate(), 100);
+
+    expect(shipment.insurance).to.equal('100.00');
+  });
+
+  it('buys a shipment with end_shipper_id', async function () {
+    const endShipper = await new this.easypost.EndShipper(Fixture.caAddress1()).save();
+
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+    await shipment.buy(shipment.lowestRate(), null, null, endShipper.id);
+
+    expect(shipment.postage_label).to.not.be.undefined;
   });
 });

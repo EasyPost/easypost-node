@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import T from 'proptypes';
 import superagent from 'superagent';
 
