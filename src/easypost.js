@@ -136,11 +136,13 @@ export default class API {
    */
   static copyApi(api, options = {}) {
     const { apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
+    const agent = superagentMiddleware ? superagentMiddleware(api.agent) : api.agent;
+
     return new API(apiKey || api.key, {
       useProxy: useProxy || api.useProxy,
       timeout: timeout || api.timeout,
       baseUrl: baseUrl || api.baseUrl,
-      agent: superagentMiddleware(api.agent) || api.agent,
+      agent,
       requestMiddleware: requestMiddleware || api.requestMiddleware,
     });
   }
