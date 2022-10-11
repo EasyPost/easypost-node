@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
 import { Polly, setupMocha as setupPolly } from '@pollyjs/core';
@@ -32,7 +33,6 @@ function startPolly() {
 }
 
 function scrubHeaders(recording) {
-  // eslint-disable-next-line no-param-reassign
   recording.request.headers = recording.request.headers.filter(
     ({ name }) => !headerScrubbers.includes(name),
   );
@@ -67,7 +67,6 @@ function scrubResponseBodies(recording) {
       if (Array.isArray(response)) {
         response = response.map((item) => {
           if (item[scrubber]) {
-            // eslint-disable-next-line no-param-reassign
             item[scrubber] = scrubberValue;
           }
           return item;
@@ -78,7 +77,6 @@ function scrubResponseBodies(recording) {
     });
   }
 
-  // eslint-disable-next-line no-param-reassign
   recording.response.content.text = JSON.stringify(response);
 }
 

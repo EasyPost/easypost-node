@@ -1,4 +1,4 @@
-import NotImplementedError, { NAME, STATUS, createMessage } from '../../src/errors/not_implemented';
+import NotImplementedError, { createMessage, NAME, STATUS } from '../../src/errors/not_implemented';
 
 describe('NotImplemented', () => {
   const method = 'GET';
@@ -12,11 +12,11 @@ describe('NotImplemented', () => {
 
   it('provides a status code', () => {
     expect(new NotImplementedError(method, endpoint).status).to.equal(STATUS);
-    expect(new NotImplementedError(method, endpoint).status).to.not.be.undefined;
+    expect(new NotImplementedError(method, endpoint).status).to.exist;
   });
 
   it('has a name', () => {
     expect(new NotImplementedError(method, endpoint).name).to.equal(NAME);
-    expect(new NotImplementedError(method, endpoint).name).to.not.be.undefined;
+    expect(new NotImplementedError(method, endpoint).name).to.exist;
   });
 });

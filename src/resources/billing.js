@@ -1,4 +1,5 @@
 import T from 'proptypes';
+
 import { propTypes as paymentMethodPropTypes } from './payment_method';
 
 export const propTypes = {
@@ -9,7 +10,7 @@ export default (api) =>
   class Billing {
     static _name = 'Billing';
 
-    static _url = 'billing';
+    static _url = 'payment_methods';
 
     static key = 'billing';
 

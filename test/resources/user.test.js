@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
@@ -45,13 +46,15 @@ describe('User Resource', function () {
     expect(user.id).to.match(/^user_/);
   });
 
-  // TODO: Skipped because VCR cannot match the cassette properly
   // eslint-disable-next-line jest/no-disabled-tests
   it.skip('updates a user', async function () {
+    // TODO: Skipped because VCR cannot match the cassette properly due
+    // to how this library wraps params on PATCH requests, it's sending
+    // all the params regardless of only passing in one (eg: name) which
+    // is throwing various errors such as `recharge_amount` or `email` validation.
     const testName = 'Test User';
 
     return this.easypost.User.retrieveMe().then(async (user) => {
-      // eslint-disable-next-line no-param-reassign
       user.name = testName;
       await user.save();
 

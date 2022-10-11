@@ -47,7 +47,7 @@ describe('Tracker Resource', function () {
     const trackersArray = trackers.trackers;
 
     expect(trackersArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(trackers.has_more).to.not.be.undefined;
+    expect(trackers.has_more).to.exist;
     trackersArray.forEach((tracker) => {
       expect(tracker).to.be.an.instanceOf(this.easypost.Tracker);
     });

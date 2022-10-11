@@ -28,7 +28,7 @@ describe('Pickup Resource', function () {
 
     expect(pickup).to.be.an.instanceOf(this.easypost.Pickup);
     expect(pickup.id).to.match(/^pickup_/);
-    expect(pickup.pickup_rates).to.not.be.undefined;
+    expect(pickup.pickup_rates).to.exist;
   });
 
   it('retrieves a pickup', async function () {
@@ -58,7 +58,7 @@ describe('Pickup Resource', function () {
 
     expect(boughtPickup).to.be.an.instanceOf(this.easypost.Pickup);
     expect(boughtPickup.id).to.match(/^pickup_/);
-    expect(boughtPickup.confirmation).to.not.be.undefined;
+    expect(boughtPickup.confirmation).to.exist;
     expect(boughtPickup.status).to.equal('scheduled');
   });
 

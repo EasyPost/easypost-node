@@ -23,7 +23,7 @@ describe('Order Resource', function () {
 
     expect(order).to.be.an.instanceOf(this.easypost.Order);
     expect(order.id).to.match(/^order_/);
-    expect(order.rates).to.not.be.undefined;
+    expect(order.rates).to.exist;
   });
 
   it('retrieves an order', async function () {
@@ -57,7 +57,7 @@ describe('Order Resource', function () {
     const shipmentsArray = order.shipments;
 
     shipmentsArray.forEach((shipment) => {
-      expect(shipment.postage_label).to.not.be.undefined;
+      expect(shipment.postage_label).to.exist;
     });
   });
 

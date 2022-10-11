@@ -27,7 +27,7 @@ describe('Batch Resource', function () {
 
     expect(batch).to.be.an.instanceOf(this.easypost.Batch);
     expect(batch.id).to.match(/^batch_/);
-    expect(batch.shipments).to.not.be.undefined;
+    expect(batch.shipments).to.exist;
   });
 
   it('retrieves a batch', async function () {
@@ -47,7 +47,7 @@ describe('Batch Resource', function () {
     const addressesArray = batches.batches;
 
     expect(addressesArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(batches.has_more).to.not.be.undefined;
+    expect(batches.has_more).to.exist;
     addressesArray.forEach((batch) => {
       expect(batch).to.be.an.instanceOf(this.easypost.Batch);
     });

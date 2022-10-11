@@ -1,10 +1,11 @@
-/* eslint-disable func-names */
+/* eslint-disable no-shadow */
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
+/* eslint-disable func-names */
 describe('Webhook Resource', function () {
   setupPolly.startPolly();
 
@@ -62,11 +63,10 @@ describe('Webhook Resource', function () {
       url: Fixture.webhookUrl(),
     }).save();
 
-    await this.easypost.Webhook.retrieve(webhook.id).then(async (retrievedWebhook) => {
-      // eslint-disable-next-line no-param-reassign
-      await retrievedWebhook.save();
+    await this.easypost.Webhook.retrieve(webhook.id).then(async (webhook) => {
+      await webhook.save();
 
-      expect(retrievedWebhook).to.be.an.instanceOf(this.easypost.Webhook);
+      expect(webhook).to.be.an.instanceOf(this.easypost.Webhook);
     });
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
@@ -97,7 +97,7 @@ describe('Webhook Resource', function () {
       webhookSecret,
     );
 
-    expect(webhookBody.description).to.eq('batch.created');
+    expect(webhookBody.description).to.equal('batch.created');
   });
 
   it('throws an error when a webhook secret is a differing length', function () {

@@ -51,7 +51,7 @@ describe('ScanForm Resource', function () {
     const scanformsArray = scanforms.scan_forms;
 
     expect(scanformsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(scanforms.has_more).to.not.be.undefined;
+    expect(scanforms.has_more).to.exist;
     scanformsArray.forEach((scanform) => {
       expect(scanform).to.be.an.instanceOf(this.easypost.ScanForm);
     });

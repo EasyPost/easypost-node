@@ -10,13 +10,11 @@ export const propTypes = {
   email: T.string,
   phone_number: T.string,
   children: T.array,
-
-  // api sends back numbers as strings, even though we want numbers
-  balance: T.oneOfType([T.object, T.string]),
-  price_per_shipment: T.oneOfType([T.object, T.string]),
-  recharge_amount: T.oneOfType([T.object, T.string]),
-  secondary_recharge_amount: T.oneOfType([T.object, T.string]),
-  recharge_threshold: T.oneOfType([T.object, T.string]),
+  balance: T.string,
+  price_per_shipment: T.string,
+  recharge_amount: T.string,
+  secondary_recharge_amount: T.string,
+  recharge_threshold: T.string,
 };
 
 export default (api) =>

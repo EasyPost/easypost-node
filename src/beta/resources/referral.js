@@ -19,6 +19,7 @@ export const propTypes = Object.assign({}, userPropTypes, {
  * @returns {API} - An instance of the API client.
  */
 function getReferralApi(api, referralApiKey) {
+  // TODO: Deprecate this function
   return API.copyApi(api, {
     apiKey: referralApiKey,
   });
@@ -30,6 +31,7 @@ function getReferralApi(api, referralApiKey) {
  * @returns {string} - The Stripe API key.
  */
 async function getEasyPostStripeKey(api) {
+  // TODO: Deprecate this function
   const response = await api.get('partners/stripe_public_key');
 
   return response.body.public_key;
@@ -45,6 +47,7 @@ async function getEasyPostStripeKey(api) {
  * @returns {Promise<string>} - Stripe credit card token.
  */
 async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
+  // TODO: Deprecate this function
   // Stripe's endpoint requires form-encoded requests
   const request = superagent.post('https://api.stripe.com/v1/tokens').set({
     Authorization: `Bearer ${stripeKey}`,
@@ -77,6 +80,7 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
  * @returns {Object} - Response body (EasyPost payment method object).
  */
 async function sendCardDetailsToEasyPost(api, referralApiKey, stripeCreditCardToken, priority) {
+  // TODO: Deprecate this function
   const _api = getReferralApi(api, referralApiKey);
   const params = { credit_card: { stripe_object_id: stripeCreditCardToken, priority } };
   const response = await _api.post('credit_cards', params);
@@ -101,6 +105,7 @@ export default (api) =>
      * @returns {Promise<boolean>} - Returns true if the referral was updated successfully, false otherwise.
      */
     static async updateEmail(referralUserId, email) {
+      // TODO: Deprecate this function
       const newParams = { user: { email } };
       await api.put(`${this._url}/${referralUserId}`, newParams); // will throw if there's an error
 
@@ -125,6 +130,7 @@ export default (api) =>
       cvc,
       primaryOrSecondary = 'primary',
     ) {
+      // TODO: Deprecate this function
       const stripeKey = await getEasyPostStripeKey(api); // will throw if there's an error
 
       const stripeCreditCardId = await sendCardDetailsToStripe(
