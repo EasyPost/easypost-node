@@ -2,7 +2,7 @@
   "sourceMap": false,
   "instrument": false,
   "check-coverage": true,
-  "lines": 83,
+  "lines": 89,
   "reporter": [
     "lcov",
     "text"
