@@ -53,7 +53,7 @@ describe('Insurance Resource', function () {
     const insuranceArray = insurance.insurances;
 
     expect(insuranceArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(insurance.has_more).to.not.be.undefined;
+    expect(insurance.has_more).to.exist;
     insuranceArray.forEach((event) => {
       expect(event).to.be.an.instanceOf(this.easypost.Insurance);
     });

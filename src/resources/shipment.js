@@ -85,11 +85,7 @@ export default (api) =>
     async save(withCarbonOffset = false) {
       try {
         this.validateProperties();
-      } catch (e) {
-        return Promise.reject(e);
-      }
 
-      try {
         const wrappedParams = this.constructor.wrapJSON(this.toJSON());
         wrappedParams.carbon_offset = withCarbonOffset;
 
@@ -98,7 +94,7 @@ export default (api) =>
         this.mapProps(res.body);
         return this;
       } catch (e) {
-        throw e;
+        return Promise.reject(e);
       }
     }
 

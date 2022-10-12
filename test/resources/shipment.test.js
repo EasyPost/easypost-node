@@ -23,7 +23,7 @@ describe('Shipment Resource', function () {
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     expect(shipment.id).to.match(/^shp_/);
-    expect(shipment.rates).to.not.be.undefined;
+    expect(shipment.rates).to.exist;
     expect(shipment.options.label_format).to.equal('PNG');
     expect(shipment.options.invoice_number).to.equal('123');
     expect(shipment.reference).to.equal('123');
@@ -41,7 +41,7 @@ describe('Shipment Resource', function () {
 
     expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     expect(shipment.id).to.match(/^shp_/);
-    expect(shipment.options).to.not.be.undefined; // The EasyPost API populates some default values here
+    expect(shipment.options).to.exist; // The EasyPost API populates some default values here
     expect(shipment.customs_info).to.be.null;
     expect(shipment.reference).to.be.null;
     expect(shipment.tax_identifiers).to.be.undefined;
@@ -94,7 +94,7 @@ describe('Shipment Resource', function () {
     const shipmentsArray = shipments.shipments;
 
     expect(shipmentsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(shipments.has_more).to.not.be.undefined;
+    expect(shipments.has_more).to.exist;
     shipmentsArray.forEach((shipment) => {
       expect(shipment).to.be.an.instanceOf(this.easypost.Shipment);
     });
@@ -105,7 +105,7 @@ describe('Shipment Resource', function () {
 
     await shipment.buy(shipment.lowestRate());
 
-    expect(shipment.postage_label).to.not.be.undefined;
+    expect(shipment.postage_label).to.exist;
   });
 
   it('regenerates rates for a shipment', async function () {
@@ -129,12 +129,10 @@ describe('Shipment Resource', function () {
 
     await shipment.convertLabelFormat('ZPL');
 
-    expect(shipment.postage_label.label_zpl_url).to.not.be.undefined;
+    expect(shipment.postage_label.label_zpl_url).to.exist;
   });
 
-  // TODO: Skipped because the `insurance` field is not sending properly when scrubbing is enabled
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('insures a shipment', async function () {
+  it('insures a shipment', async function () {
     // If the shipment was purchased with a USPS rate, it must have its insurance set to `0` when bought
     // so that USPS doesn't automatically insure it so we could manually insure it here.
     const shipmentData = Fixture.oneCallBuyShipment();
@@ -161,17 +159,17 @@ describe('Shipment Resource', function () {
   it('retrieves smartrates of a shipment', async function () {
     const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
 
-    expect(shipment.rates).to.not.be.undefined;
+    expect(shipment.rates).to.exist;
 
     const smartrates = await shipment.getSmartrates();
 
-    expect(smartrates[0].time_in_transit.percentile_50).to.not.be.undefined;
-    expect(smartrates[0].time_in_transit.percentile_75).to.not.be.undefined;
-    expect(smartrates[0].time_in_transit.percentile_85).to.not.be.undefined;
-    expect(smartrates[0].time_in_transit.percentile_90).to.not.be.undefined;
-    expect(smartrates[0].time_in_transit.percentile_95).to.not.be.undefined;
-    expect(smartrates[0].time_in_transit.percentile_97).to.not.be.undefined;
-    expect(smartrates[0].time_in_transit.percentile_99).to.not.be.undefined;
+    expect(smartrates[0].time_in_transit.percentile_50).to.exist;
+    expect(smartrates[0].time_in_transit.percentile_75).to.exist;
+    expect(smartrates[0].time_in_transit.percentile_85).to.exist;
+    expect(smartrates[0].time_in_transit.percentile_90).to.exist;
+    expect(smartrates[0].time_in_transit.percentile_95).to.exist;
+    expect(smartrates[0].time_in_transit.percentile_97).to.exist;
+    expect(smartrates[0].time_in_transit.percentile_99).to.exist;
   });
 
   it('throws on delete', function () {
@@ -253,9 +251,9 @@ describe('Shipment Resource', function () {
     const smartrates = await shipment.getSmartrates();
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
-    expect(function () {
+    expect(() => {
       this.easypost.Shipment.getLowestSmartrate(smartrates, 0, 'percentile_90');
-    }).to.throw(Error);
+    }).to.throw(Error, 'No rates found.');
   });
 
   it('raises an error for getLowestSmartrate when no rates are found due to deliveryAccuracy', async function () {
@@ -263,9 +261,12 @@ describe('Shipment Resource', function () {
     const smartrates = await shipment.getSmartrates();
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
-    expect(function () {
+    expect(() => {
       this.easypost.Shipment.getLowestSmartrate(smartrates, 3, 'BAD_ACCURACY');
-    }).to.throw(Error);
+    }).to.throw(
+      Error,
+      'Invalid deliveryAccuracy value, must be one of: percentile_50, percentile_75, percentile_85, percentile_90, percentile_95, percentile_97, percentile_99',
+    );
   });
 
   it('generates a form for a shipment', async function () {
@@ -280,7 +281,7 @@ describe('Shipment Resource', function () {
     const form = shipment.forms[0];
 
     expect(form.form_type).to.equal(formType);
-    expect(form.form_url).to.not.be.undefined;
+    expect(form.form_url).to.exist;
   });
 
   it('create a shipment with carbon offset', async function () {
@@ -327,5 +328,21 @@ describe('Shipment Resource', function () {
     newCarbonOffsetRates.rates.forEach((rate) => {
       expect(rate.carbon_offset).not.to.be.undefined;
     });
+  });
+
+  it('buys a shipment with insuranceAmount', async function () {
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+    await shipment.buy(shipment.lowestRate(), 100);
+
+    expect(shipment.insurance).to.equal('100.00');
+  });
+
+  it('buys a shipment with end_shipper_id', async function () {
+    const endShipper = await new this.easypost.EndShipper(Fixture.caAddress1()).save();
+
+    const shipment = await new this.easypost.Shipment(Fixture.basicShipment()).save();
+    await shipment.buy(shipment.lowestRate(), null, null, endShipper.id);
+
+    expect(shipment.postage_label).to.exist;
   });
 });

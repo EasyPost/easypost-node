@@ -37,7 +37,7 @@ describe('Event Resource', function () {
     const eventsArray = events.events;
 
     expect(eventsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(events.has_more).to.not.be.undefined;
+    expect(events.has_more).to.exist;
     eventsArray.forEach((event) => {
       expect(event).to.be.an.instanceOf(this.easypost.Event);
     });

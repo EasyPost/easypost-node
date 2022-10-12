@@ -1,4 +1,5 @@
 import T from 'proptypes';
+
 import base from './base';
 
 export const propTypes = {
@@ -17,11 +18,11 @@ export const propTypes = {
 
 export default (api) =>
   class Brand extends base(api) {
-    static propTypes = propTypes;
-
     static _name = 'Brand';
 
-    static _url = 'brand';
+    static _url = 'users';
 
     static key = 'brand';
+
+    static propTypes = propTypes;
   };

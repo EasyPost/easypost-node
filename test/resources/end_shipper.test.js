@@ -9,7 +9,7 @@ describe('EndShipper Resource', function () {
   setupPolly.startPolly();
 
   before(function () {
-    this.easypost = new EasyPost(process.env.EASYPOST_PROD_API_KEY);
+    this.easypost = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
@@ -39,7 +39,7 @@ describe('EndShipper Resource', function () {
     const endShippersArray = endShippers.end_shippers;
 
     expect(endShippersArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(endShippers.has_more).to.not.be.undefined;
+    expect(endShippers.has_more).to.exist;
     endShippersArray.forEach((endShipper) => {
       expect(endShipper).to.be.an.instanceOf(this.easypost.EndShipper);
     });

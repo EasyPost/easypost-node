@@ -1,4 +1,4 @@
-import ValidationError, { NAME, STATUS, createMessage } from '../../src/errors/validation';
+import ValidationError, { createMessage, NAME, STATUS } from '../../src/errors/validation';
 
 describe('Validation Errors', () => {
   const errors = ['bad thing'];
@@ -7,7 +7,7 @@ describe('Validation Errors', () => {
   it('generates a helpful error message', () => {
     expect(new ValidationError(errors, className).message).to.equal(createMessage(className));
 
-    expect(new ValidationError(errors, className).message).to.not.be.undefined;
+    expect(new ValidationError(errors, className).message).to.exist;
   });
 
   it('adds a status 422 to errors', () => {

@@ -13,7 +13,7 @@ describe('Request Errors', () => {
 
   it('generates a helpful error message', () => {
     expect(new RequestError(error, url).message).to.equal(createMessage(error.status, url));
-    expect(new RequestError(error, url).message).to.not.be.undefined;
+    expect(new RequestError(error, url).message).to.exist;
   });
 
   it('maps code to status on sys errors', () => {

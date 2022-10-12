@@ -1,7 +1,7 @@
 /* eslint-disable func-names,jest/no-disabled-tests */
 import { expect } from 'chai';
 
-import EasyPost from '../../src/beta/easypost';
+import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -37,7 +37,7 @@ describe('Referral Resource', function () {
     const referralsArray = referrals.referral_customers;
 
     expect(referralsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(referrals.has_more).to.not.be.undefined;
+    expect(referrals.has_more).to.exist;
     referralsArray.forEach((referral) => {
       expect(referral).to.be.an.instanceOf(this.easypost.Referral);
     });
@@ -54,15 +54,15 @@ describe('Referral Resource', function () {
     expect(success).to.eql(true);
   });
 
-  // Skpping because Pollyjs doesn't know what to do with the form encoded data
-  it.skip('add a referral user credit card', async function () {
-    // TODO: Add support to scrub CC details from the request URL
+  it('add a referral user credit card', async function () {
+    const creditCardDetails = Fixture.creditCardDetails();
+
     const paymentMethod = await this.easypost.Referral.addCreditCard(
       this.referralUserProdApiKey,
-      Fixture.creditCardDetails.number,
-      Fixture.creditCardDetails.expirationMonth,
-      Fixture.creditCardDetails.expirationYear,
-      Fixture.creditCardDetails.cvc,
+      creditCardDetails.number,
+      creditCardDetails.expiration_month,
+      creditCardDetails.expiration_year,
+      creditCardDetails.cvc,
     );
 
     expect(paymentMethod.id).to.match(/^card_/);

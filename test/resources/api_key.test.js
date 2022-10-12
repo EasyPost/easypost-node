@@ -22,7 +22,7 @@ describe('ApiKey Resource', function () {
 
     // TODO: `api_keys` does not match the expectation or docs of the API and
     // should instead be `keys` and `children`.
-    expect(apiKeys.api_keys).to.not.be.undefined;
+    expect(apiKeys.api_keys).to.exist;
   });
 
   it('throws on save', function () {

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import T from 'proptypes';
 import superagent from 'superagent';
 
@@ -45,18 +46,14 @@ async function getEasyPostStripeKey(api) {
  */
 async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
   // Stripe's endpoint requires form-encoded requests
-  const request = superagent.post('https://api.stripe.com/v1/tokens').set({
-    Authorization: `Bearer ${stripeKey}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
-  });
-  request.send({
-    card: {
-      number,
-      exp_month: expirationMonth,
-      exp_year: expirationYear,
-      cvc,
-    },
-  });
+  const request = superagent
+    .post(
+      `https://api.stripe.com/v1/tokens?card[number]=${number}&card[exp_month]=${expirationMonth}&card[exp_year]=${expirationYear}&card[cvc]=${cvc}`,
+    )
+    .set({
+      Authorization: `Bearer ${stripeKey}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
 
   try {
     const response = await request;

@@ -77,7 +77,7 @@ describe('Report Resource', function () {
     const reportsArray = reports.reports;
 
     expect(reportsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(reports.has_more).to.not.be.undefined;
+    expect(reports.has_more).to.exist;
     reportsArray.forEach((report) => {
       expect(report).to.be.an.instanceOf(this.easypost.Report);
     });

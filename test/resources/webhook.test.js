@@ -1,10 +1,11 @@
-/* eslint-disable func-names */
+/* eslint-disable no-shadow */
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
+/* eslint-disable func-names */
 describe('Webhook Resource', function () {
   setupPolly.startPolly();
 
@@ -62,11 +63,10 @@ describe('Webhook Resource', function () {
       url: Fixture.webhookUrl(),
     }).save();
 
-    await this.easypost.Webhook.retrieve(webhook.id).then(async (retrievedWebhook) => {
-      // eslint-disable-next-line no-param-reassign
-      await retrievedWebhook.save();
+    await this.easypost.Webhook.retrieve(webhook.id).then(async (webhook) => {
+      await webhook.save();
 
-      expect(retrievedWebhook).to.be.an.instanceOf(this.easypost.Webhook);
+      expect(webhook).to.be.an.instanceOf(this.easypost.Webhook);
     });
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
@@ -97,18 +97,37 @@ describe('Webhook Resource', function () {
       webhookSecret,
     );
 
-    expect(webhookBody.description).to.eq('batch.created');
+    expect(webhookBody.description).to.equal('batch.created');
   });
 
-  it('throws an error when a webhook secret is invalid', function () {
+  it('throws an error when a webhook secret is a differing length', function () {
     const webhookSecret = 'invalid_secret';
     const headers = {
       'X-Hmac-Signature': 'some-signature',
     };
 
-    expect(function () {
+    expect(() => {
       this.easypost.Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
-    }).to.throw(Error);
+    }).to.throw(
+      Error,
+      'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
+    );
+  });
+
+  it('throws an error when a webhook signature is invalid', function () {
+    const webhookSecret = 'sécret';
+    const expectedHmacSignature =
+      'hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115aaaa'; // ending differs
+    const headers = {
+      'X-Hmac-Signature': expectedHmacSignature,
+    };
+
+    expect(() => {
+      this.easypost.Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+    }).to.throw(
+      Error,
+      'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
+    );
   });
 
   it('throws an error when webhook is missing a secret', function () {
@@ -117,8 +136,8 @@ describe('Webhook Resource', function () {
       'some-header': 'some-value',
     };
 
-    expect(function () {
+    expect(() => {
       this.easypost.Webhook.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
-    }).to.throw(Error);
+    }).to.throw(Error, 'Webhook received does not contain an HMAC signature.');
   });
 });

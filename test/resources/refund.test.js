@@ -41,7 +41,7 @@ describe('Refund Resource', function () {
     const refundsArray = refunds.refunds;
 
     expect(refundsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    expect(refunds.has_more).to.not.be.undefined;
+    expect(refunds.has_more).to.exist;
     refundsArray.forEach((address) => {
       expect(address).to.be.an.instanceOf(this.easypost.Refund);
     });

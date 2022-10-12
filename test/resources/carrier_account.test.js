@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-shadow */
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
@@ -53,18 +55,15 @@ describe('CarrierAccount Resource', function () {
 
   // eslint-disable-next-line jest/no-disabled-tests
   it.skip('updates a carrier account', async function () {
-    // TODO: Skipped because VCR cannot match the cassette properly
+    // TODO: Skipped because VCR cannot match the cassette properly due
+    // to it trying to delete an already deleted carrier account
     const testDescription = 'My custom description';
 
     const carrierAccount = await new this.easypost.CarrierAccount(
       Fixture.basicCarrierAccount(),
     ).save();
 
-    await this.easypost.CarrierAccount.retrieve(
-      carrierAccount.id,
-      // eslint-disable-next-line no-shadow
-    ).then(async (carrierAccount) => {
-      // eslint-disable-next-line no-param-reassign
+    await this.easypost.CarrierAccount.retrieve(carrierAccount.id).then(async (carrierAccount) => {
       carrierAccount.description = testDescription;
       await carrierAccount.save();
 
