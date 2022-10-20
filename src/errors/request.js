@@ -16,6 +16,7 @@ export default class RequestError extends FakeError {
       throw new Error('No url passed to RequestError');
     }
 
+    // TODO: concatenate the `error.message` field if it comes back from the API as an array since it should be a string
     const message = createMessage(
       response.status || response.statusCode || response.code || response.body.code,
       url,
