@@ -1,11 +1,12 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## v5.7.1 (2022-10-24)
 
 - Fixes multiple bugs that made the `addCreditCard` function unusable, adds tests
 - The response of the `updateBrand` function now properly becomes a `Brand` object
 - Insuring a shipment via `Shipment.insure` no longer improperly wraps the `amount` key in `id`. There may be other edge cases among other object/function calls that get corrected due to this change
 - Validating webhook signatures of differing byte sizes now throws a more meaningful error message
+- Removed the browser check when building request headers. Impact should be minimal since out of the box this library cannot be used in the browser
 
 ## v5.7.0 (2022-09-21)
 
