@@ -5,7 +5,7 @@
 
 EasyPost, the simple shipping solution. You can sign up for an account at <https://easypost.com>.
 
-This client library is intended to be used in a backend Node service and not in a frontend Javascript project via the browser.
+NOTE: This library is intended to be used in a backend Node service and not in a frontend Javascript project via the browser.
 
 ## Install
 
