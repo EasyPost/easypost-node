@@ -148,21 +148,6 @@ export default class API {
   }
 
   /**
-   * Returns true if this code is running in a browser.
-   * @returns bool
-   */
-  static runningInBrowser() {
-    // TODO: This function may not be necessary any longer as we may block browser based requests, needs investigation
-    let runningInBrowser = false;
-
-    if (typeof window !== 'undefined') {
-      runningInBrowser = true;
-    }
-
-    return runningInBrowser;
-  }
-
-  /**
    * Build request headers to be sent by default with each request, combined (or overridden) by any additional headers
    * @param {object} additionalHeaders
    * @returns {object}
@@ -173,12 +158,6 @@ export default class API {
       ...additionalHeaders,
     };
 
-    if (API.runningInBrowser()) {
-      return headers;
-    }
-
-    delete headers['User-Agent'];
-    delete headers['Accept-Encoding'];
     return headers;
   }
 
