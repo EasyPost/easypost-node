@@ -1,4 +1,5 @@
 import T from 'proptypes';
+
 import base from './base';
 
 export const propTypes = {
@@ -35,7 +36,7 @@ export default (api) =>
     /**
      * Construct the URL for the reports endpoint.
      * @param {string} type
-     * @returns
+     * @returns {string}
      */
     static constructUrl(type) {
       return `reports/${type}`;

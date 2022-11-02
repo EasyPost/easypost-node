@@ -1,4 +1,5 @@
 import T from 'proptypes';
+
 import base from './base';
 
 export const DEFAULT_LABEL_FORMAT = 'pdf';
@@ -59,7 +60,7 @@ export default (api) =>
     /**
      * Removes shipments from a batch.
      * @param {Array} shipmentIds
-     * @returns
+     * @returns {this}
      */
     removeShipments(shipmentIds) {
       this.verifyParameters(

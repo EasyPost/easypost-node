@@ -1,4 +1,9 @@
 * text=auto
 
+# Cassettes
 *.har -diff
 *.har linguist-generated
+
+# Docs
+docs/**/* -diff
+docs/**/* linguist-generated
