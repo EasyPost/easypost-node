@@ -20,7 +20,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: make install
       - run: make build
-      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test
+      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
+      - name: Coveralls
+        if: github.ref == 'refs/heads/master'
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - run: make lint
       - run: make format-check
       - run: make scan
