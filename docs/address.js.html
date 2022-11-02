@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: address.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: address.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import T from 'proptypes';
+
+import base from './base';
+import { baseAddress as baseAddressPropTypes } from './base_address';
+
+export const propTypes = Object.assign({}, baseAddressPropTypes, {
+  mode: T.string,
+  residential: T.bool,
+  carrier_facility: T.string,
+  federal_tax_id: T.string,
+  state_tax_id: T.string,
+  verify: T.oneOfType([T.bool, T.string, T.array]),
+  verify_strict: T.oneOfType([T.bool, T.string, T.array]),
+  verifications: T.object,
+});
+
+export default (api) =>
+  class Address extends base(api) {
+    static _name = 'Address';
+
+    static _url = 'addresses';
+
+    static key = 'address';
+
+    static propTypes = propTypes;
+
+    /**
+     * delete not implemented.
+     * @returns {this}
+     */
+    static delete() {
+      return this.notImplemented('delete');
+    }
+
+    /**
+     * Creates and verifies an address in a single call.
+     * @returns {this}
+     */
+    static async createAndVerify(params) {
+      const newParams = { address: params };
+
+      try {
+        const url = `${this._url}/create_and_verify`;
+        const response = await api.post(url, newParams);
+
+        return this.create(response.body.address);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Verify an address.
+     * Not titled `verify` because that's already a propType and causes conflicts.
+     * @returns {this}
+     */
+    async verifyAddress() {
+      this.verifyParameters({
+        this: ['id'],
+      });
+
+      return this.rpc('verify', undefined, undefined, 'get');
+    }
+
+    /**
+     * Object format is { address: { ... }, verify: [ ] }, so we need to pull
+     * the verify properties to the top level when wrapping.
+     * @param {object} json
+     * @returns {string}
+     */
+    static wrapJSON(json) {
+      const topLevelKeys = ['verify', 'verify_strict'];
+
+      return Object.keys(json).reduce(
+        (j, k) => {
+          /* eslint no-param-reassign: 0 */
+          if (topLevelKeys.includes(k)) {
+            j[k] = json[k];
+            return j;
+          }
+
+          j.address[k] = json[k];
+          return j;
+        },
+        { address: {} },
+      );
+    }
+  };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCreditCard">addCreditCard</a></li><li><a href="global.html#addShipments">addShipments</a></li><li><a href="global.html#all">all</a></li><li><a href="global.html#buy">buy</a></li><li><a href="global.html#cancel">cancel</a></li><li><a href="global.html#constructUrl">constructUrl</a></li><li><a href="global.html#convertKeyMap">convertKeyMap</a></li><li><a href="global.html#convertLabelFormat">convertLabelFormat</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#createAndBuy">createAndBuy</a></li><li><a href="global.html#createAndVerify">createAndVerify</a></li><li><a href="global.html#createList">createList</a></li><li><a href="global.html#createScanForm">createScanForm</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deletePaymentMethod">deletePaymentMethod</a></li><li><a href="global.html#fundWallet">fundWallet</a></li><li><a href="global.html#generateForm">generateForm</a></li><li><a href="global.html#generateLabel">generateLabel</a></li><li><a href="global.html#getEasyPostStripeKey">getEasyPostStripeKey</a></li><li><a href="global.html#getLowestSmartrate">getLowestSmartrate</a></li><li><a href="global.html#getPaymentInfo">getPaymentInfo</a></li><li><a href="global.html#getRates">getRates</a></li><li><a href="global.html#getReferralApi">getReferralApi</a></li><li><a href="global.html#getSmartrates">getSmartrates</a></li><li><a href="global.html#insure">insure</a></li><li><a href="global.html#lowestRate">lowestRate</a></li><li><a href="global.html#lowestSmartrate">lowestSmartrate</a></li><li><a href="global.html#mapProps">mapProps</a></li><li><a href="global.html#notImplemented">notImplemented</a></li><li><a href="global.html#refund">refund</a></li><li><a href="global.html#regenerateRates">regenerateRates</a></li><li><a href="global.html#removeShipments">removeShipments</a></li><li><a href="global.html#retrieve">retrieve</a></li><li><a href="global.html#retrieveMe">retrieveMe</a></li><li><a href="global.html#retrievePaymentMethods">retrievePaymentMethods</a></li><li><a href="global.html#rpc">rpc</a></li><li><a href="global.html#save">save</a></li><li><a href="global.html#sendCardDetailsToEasyPost">sendCardDetailsToEasyPost</a></li><li><a href="global.html#sendCardDetailsToStripe">sendCardDetailsToStripe</a></li><li><a href="global.html#toJSON">toJSON</a></li><li><a href="global.html#unwrapAll">unwrapAll</a></li><li><a href="global.html#updateBrand">updateBrand</a></li><li><a href="global.html#updateEmail">updateEmail</a></li><li><a href="global.html#validateProperties">validateProperties</a></li><li><a href="global.html#validateWebhook">validateWebhook</a></li><li><a href="global.html#verifyAddress">verifyAddress</a></li><li><a href="global.html#verifyParameters">verifyParameters</a></li><li><a href="global.html#wrapJSON">wrapJSON</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Wed Nov 02 2022 14:54:51 GMT-0600 (Mountain Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

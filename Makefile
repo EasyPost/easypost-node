@@ -14,6 +14,10 @@ clean:
 coverage:
 	npm run coverage
 
+## docs - Generate docs for the library
+docs:
+	npm run docs
+
 ## fix - Fix linting errors
 fix:
 	npm run fix
@@ -60,4 +64,4 @@ update:
 	git submodule update --remote
 	npm update
 
-.PHONY: help build clean coverage fix format format-check install lint publish release scan test update
+.PHONY: help build clean coverage docs fix format format-check install lint publish release scan test update

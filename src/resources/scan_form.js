@@ -1,6 +1,7 @@
 import T from 'proptypes';
-import base from './base';
+
 import { propTypes as addressPropTypes } from './address';
+import base from './base';
 
 export const propTypes = {
   id: T.string,
@@ -31,7 +32,7 @@ export default (api) =>
     /**
      * Override the wrapJSON function for this object.
      * @param {object} json
-     * @returns
+     * @returns {object}
      */
     static wrapJSON(json) {
       return json;
