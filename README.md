@@ -1,6 +1,7 @@
 # EasyPost Node Client Library
 
 [![CI](https://github.com/EasyPost/easypost-node/workflows/CI/badge.svg)](https://github.com/EasyPost/easypost-node/actions?query=workflow%3ACI)
+[![Coverage Status](https://coveralls.io/repos/github/EasyPost/easypost-node/badge.svg?branch=master)](https://coveralls.io/github/EasyPost/easypost-node?branch=master)
 [![npm version](https://badge.fury.io/js/%40easypost%2Fapi.svg)](https://badge.fury.io/js/%40easypost%2Fapi)
 
 EasyPost, the simple shipping solution. You can sign up for an account at <https://easypost.com>.
