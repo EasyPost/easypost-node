@@ -30,7 +30,7 @@ const EasyPost = require('@easypost/api');
 
 You can alternatively download the various built assets from this project's [releases page](https://github.com/EasyPost/easypost-node/releases).
 
-### Compatability
+### Compatibility
 
 By default, @easypost/api (prior to v5) works with Node v6 LTS. To include for other versions of node, you can use:
 
