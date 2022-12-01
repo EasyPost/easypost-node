@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- [ADDED] Support for creating/registering carrier accounts that require custom workflows (e.g. FedEx, UPS)
+
 ## v5.7.1 (2022-10-24)
 
 - Fixes multiple bugs that made the `addCreditCard` function unusable, adds tests
