@@ -1,5 +1,6 @@
 import T from 'proptypes';
 import base from './base';
+import Constants from '../constants';
 
 export const propTypes = {
   id: T.string,
@@ -14,6 +15,7 @@ export const propTypes = {
   test_credentials: T.object,
   created_at: T.oneOfType([T.object, T.string]),
   updated_at: T.oneOfType([T.object, T.string]),
+  registration_data: T.object,
 };
 
 export default (api) =>
@@ -42,5 +44,44 @@ export default (api) =>
       } catch (e) {
         return Promise.reject(e);
       }
+    }
+
+    /**
+     * Save (create or update) a carrier account.
+     * @returns {this|Promise<never>}
+     */
+    async save() {
+      try {
+        this.validateProperties();
+
+        const data = this.constructor.wrapJSON(this.toJSON());
+
+        let response;
+
+        if (this.id) {
+          response = await api.patch(`${this._url || this.constructor._url}/${this.id}`, data);
+        } else {
+          const carrierAccountType = this.type;
+
+          if (!carrierAccountType) {
+            throw new Error('CarrierAccount type is not set');
+          }
+
+          const endpoint = CarrierAccount.selectCarrierAccountCreationEndpoint(carrierAccountType);
+          response = await api.post(endpoint, data);
+        }
+
+        this.mapProps(response.body);
+        return this;
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static selectCarrierAccountCreationEndpoint(carrierAccountType) {
+      if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_WORKFLOWS.includes(carrierAccountType)) {
+        return 'carrier_accounts/register';
+      }
+      return 'carrier_accounts';
     }
   };

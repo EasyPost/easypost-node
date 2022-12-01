@@ -32,6 +32,30 @@ describe('CarrierAccount Resource', function () {
     await carrierAccount.delete();
   });
 
+  it('creates a carrier account with a custom workflow', async function () {
+    const data = {};
+    data.type = 'FedexAccount';
+    data.registration_data = {
+      some: 'data',
+    };
+
+    try {
+      const carrierAccount = await new this.easypost.CarrierAccount(data).save();
+      await carrierAccount.delete(); // clean up after test, should never get here
+    } catch (error) {
+      // We're sending bad data to the API, so we expect an error
+      expect(error.status).to.equal(422);
+      // We expect one of the sub-errors to be regarding a missing field
+      let errorFound = false;
+      error.errors.forEach((error) => {
+        if (error.field === 'account_number' && error.message === 'must be present and a string') {
+          errorFound = true;
+        }
+      });
+      expect(errorFound).to.equal(true);
+    }
+  });
+
   it('retrieves a carrier account', async function () {
     const carrierAccount = await new this.easypost.CarrierAccount(
       Fixture.basicCarrierAccount(),
