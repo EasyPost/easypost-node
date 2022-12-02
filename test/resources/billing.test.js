@@ -62,14 +62,12 @@ describe('Billing Resource', function () {
   });
 
   it('delete a payment method', async function () {
-    // Skipping due to the lack of an available real payment method in tests
     const deletedPaymentMethod = await this.easypost.Billing.deletePaymentMethod('primary');
 
     expect(deletedPaymentMethod).to.equal(true);
   });
 
   it('retrieves all payment methods', async function () {
-    // Skipping due to the lack of an available real payment method in tests
     const paymentMethods = await this.easypost.Billing.retrievePaymentMethods();
 
     expect(paymentMethods.primary_payment_method).to.exist;
