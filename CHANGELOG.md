@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Next Release
+## v5.8.0 (2022-12-07)
 
-- [ADDED] Support for creating/registering carrier accounts that require custom workflows (e.g. FedEx, UPS)
+- Routes requests for creating a carrier account with a custom workflow (eg: FedEx, UPS) to the correct endpoint when using the `save` function
 
 ## v5.7.1 (2022-10-24)
 
