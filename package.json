@@ -25,6 +25,7 @@
     "docs": "./node_modules/.bin/jsdoc src/resources -d docs",
     "fix": "eslint src types test --ext .js,.ts --fix",
     "format": "prettier --write .",
+    "formatCheck": "prettier --check .",
     "lint": "eslint src types test --ext .js,.ts",
     "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run check",
     "repl": "./repl.js --local easypost.js",
