@@ -28,7 +28,7 @@ format:
 
 ## format-check - Checks if the project is formatted correctly against all formatting rules
 format-check:
-	npm run format
+	npm run formatCheck
 
 ## install - Install project dependencies
 # TODO:  Remove the `--force` flag once we've dropped support for Node 10 and can modernize the dependency matrix

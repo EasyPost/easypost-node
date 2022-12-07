@@ -45,14 +45,10 @@ const middleware = (request) => {
 };
 
 describe('Billing Resource', function () {
-
   before(function () {
     this.easypost = new EasyPost(process.env.EASYPOST_TEST_API_KEY, {
       requestMiddleware: middleware,
     });
-  });
-
-  beforeEach(function () {
   });
 
   it('fund a wallet', async function () {
