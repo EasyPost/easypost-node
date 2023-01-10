@@ -10,7 +10,7 @@ describe('Referral Resource', function () {
 
   before(function () {
     const partnerUserProdApiKey = process.env.PARTNER_USER_PROD_API_KEY || '123';
-    this.referralUserProdApiKey = process.env.REFERRAL_USER_PROD_API_KEY || '123';
+    this.referralUserProdApiKey = process.env.REFERRAL_CUSTOMER_PROD_API_KEY || '123';
     this.easypost = new EasyPost(partnerUserProdApiKey);
   });
 
