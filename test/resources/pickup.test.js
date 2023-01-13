@@ -46,6 +46,18 @@ describe('Pickup Resource', function () {
     expect(retrievedPickup).to.deep.include(pickup);
   });
 
+  it('retrieves all pickup', async function () {
+    const pickups = await this.easypost.Pickup.all({ page_size: Fixture.pageSize() });
+
+    const pickupsArray = pickups.pickups;
+
+    expect(pickupsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
+    expect(pickups.has_more).to.exist;
+    pickupsArray.forEach((pickup) => {
+      expect(pickup).to.be.an.instanceOf(this.easypost.Pickup);
+    });
+  });
+
   it('buys a pickup', async function () {
     const shipment = await new this.easypost.Shipment(Fixture.oneCallBuyShipment()).save();
 
@@ -76,12 +88,6 @@ describe('Pickup Resource', function () {
     expect(cancelledPickup).to.be.an.instanceOf(this.easypost.Pickup);
     expect(cancelledPickup.id).to.match(/^pickup_/);
     expect(cancelledPickup.status).to.equal('canceled');
-  });
-
-  it('throws on all', function () {
-    return this.easypost.Pickup.all().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
   });
 
   it('throws on delete', function () {
