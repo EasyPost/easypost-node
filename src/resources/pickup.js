@@ -40,15 +40,7 @@ export default (api) =>
     static jsonIdKeys = ['address', 'shipment', 'batch'];
 
     /**
-     * all not implemented
-     * @returns {Promise<never>}
-     */
-    static all() {
-      return this.notImplemented('all');
-    }
-
-    /**
-     * all not implemented
+     * delete not implemented
      * @returns {Promise<never>}
      */
     static delete() {

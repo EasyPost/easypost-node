@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next release:
+
+- Add `all` for retrieve all pickups in Pickup class.
+
 ## v5.9.0 (2023-01-11)
 
 - Adds new beta billing functionality for ReferralCustomer users
