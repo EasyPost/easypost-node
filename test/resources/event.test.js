@@ -1,13 +1,13 @@
 /* eslint-disable func-names */
-import fs from "fs";
+import fs from 'fs';
 import { expect } from 'chai';
 
-import {resolve} from "path";
+import { resolve } from 'path';
 import EasyPost from '../../src/easypost';
 import NotImplementedError from '../../src/errors/not_implemented';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
-import {Payload} from "../../src/resources/payload";
+import { Payload } from '../../src/resources/payload';
 
 describe('Event Resource', function () {
   setupPolly.startPolly();
@@ -74,18 +74,18 @@ describe('Event Resource', function () {
     }).save();
 
     if (
-        !fs.existsSync(
-            resolve(
-                __dirname,
-                '../cassettes/Event-Resource_1173491181/retrieves-all-payloads-for-an-event_3292460230',
-            ),
-        )
+      !fs.existsSync(
+        resolve(
+          __dirname,
+          '../cassettes/Event-Resource_1173491181/retrieves-all-payloads-for-an-event_3292460230',
+        ),
+      )
     ) {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the event to be created
     }
 
     const events = await this.easypost.Event.all({
-        page_size: Fixture.pageSize(),
+      page_size: Fixture.pageSize(),
     });
 
     const event = events.events[0];
@@ -93,7 +93,7 @@ describe('Event Resource', function () {
     const payloads = await this.easypost.Event.retrieveAllPayloads(event.id);
 
     payloads.forEach((payload) => {
-        expect(payload).to.be.an.instanceOf(Payload);
+      expect(payload).to.be.an.instanceOf(Payload);
     });
 
     await webhook.delete();
@@ -111,12 +111,12 @@ describe('Event Resource', function () {
     }).save();
 
     if (
-        !fs.existsSync(
-            resolve(
-                __dirname,
-                '../cassettes/Event-Resource_1173491181/retrieves-a-payload-for-an-event_1410906611',
-            ),
-        )
+      !fs.existsSync(
+        resolve(
+          __dirname,
+          '../cassettes/Event-Resource_1173491181/retrieves-a-payload-for-an-event_1410906611',
+        ),
+      )
     ) {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the event to be created
     }
@@ -129,7 +129,10 @@ describe('Event Resource', function () {
 
     try {
       // Payload does not exist due to queueing, so this will throw an exception
-      await this.easypost.Event.retrievePayload(event.id, 'payload_11111111111111111111111111111111');
+      await this.easypost.Event.retrievePayload(
+        event.id,
+        'payload_11111111111111111111111111111111',
+      );
       // If we get here, the test failed, trigger a failed assertion
       expect(true).to.equal(false);
     } catch (e) {
