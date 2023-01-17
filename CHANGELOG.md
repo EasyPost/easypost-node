@@ -3,6 +3,8 @@
 ## Next release:
 
 - Add `all` for retrieve all pickups in Pickup class.
+- Add `retrievePayload` and `retrieveAllPayloads` functions to retrieve payloads for an Event.
+  - These are static functions on the Event class, so you can call them like `easypost.Event.retrieveAllPayloads(eventId)`.
 
 ## v5.9.0 (2023-01-11)
 

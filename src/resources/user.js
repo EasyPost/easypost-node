@@ -31,7 +31,7 @@ export default (api) =>
      * Retrieve a child user.
      * @param {string} id
      * @param {string} urlPrefix
-     * @returns {this}
+     * @returns {User}
      */
     static async retrieve(id, urlPrefix) {
       try {
@@ -49,7 +49,7 @@ export default (api) =>
 
     /**
      * Retrieve the authenticated user.
-     * @returns {this}
+     * @returns {User}
      */
     static async retrieveMe() {
       const response = await api.get(this._url);
@@ -67,7 +67,7 @@ export default (api) =>
     /**
      * Update the brand of a user.
      * @param {object} params
-     * @returns {object}
+     * @returns {Brand}
      */
     async updateBrand(params) {
       try {
