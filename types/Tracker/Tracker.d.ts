@@ -7,7 +7,7 @@ import { TTrackerStatus } from './TrackerStatus';
 import { ITrackingDetail } from './TrackingDetail';
 
 /**
- * A Tracker object contains all of the tracking information for a package.
+ * A Tracker object contains all the tracking information for a package.
  * A Tracker is created automatically whenever you buy a Shipment through EasyPost.
  * If you don't use EasyPost to purchase your shipping labels, you can still track packages through our API by creating a Tracker object directly.
  * Each Tracker is continually updated in the background as the package moves through its life cycle, regardless of whether or not the label was purchased through EasyPost.
@@ -16,12 +16,12 @@ import { ITrackingDetail } from './TrackingDetail';
  * This information can be consumed by using our webhooks infrastructure.
  * Every time a Tracker is updated a webhook Event will be sent.
  *
- * The Tracker object contains both the current information about the package as well as previous updates.
- * All of the previous updates are stored in the tracking_details array.
+ * The Tracker object contains both the current information about the package and previous updates.
+ * All the previous updates are stored in the tracking_details array.
  * Each TrackingDetail object contains the status, the message from the carrier, and a TrackingLocation.
  *
  * The TrackingLocation contains city, state, country, and zip information about the location where the package was scanned.
- * The information each carrier provides is different, so some carriers may not make use of all of these fields.
+ * The information each carrier provides is different, so some carriers may not make use of all these fields.
  *
  * Some Tracker objects may also contain a CarrierDetail, which stores some additional information about the Tracker that the carrier has made available to EasyPost.
  * The CarrierDetail object contains the service and container_type of the package.

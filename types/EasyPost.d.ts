@@ -1,14 +1,18 @@
 import { Address } from './Address';
 import { Batch } from './Batch';
 import { CarrierAccount, CarrierType } from './Carrier';
+import { CustomsInfo, CustomsItem } from './Customs';
 import { Event } from './Event';
 import { Insurance } from './Insurance';
 import { Order } from './Order';
 import { Parcel } from './Parcel';
 import { Pickup } from './Pickup';
+import { Referral } from './Referral';
 import { Report } from './Report';
+import { ScanForm } from './ScanForm';
 import { Shipment } from './Shipment';
 import { Tracker } from './Tracker';
+import { User } from './User';
 import { Webhook } from './Webhook';
 
 export interface IEasyPostOptions {
@@ -46,15 +50,20 @@ export default class EasyPost {
   public Batch: typeof Batch;
   public CarrierAccount: typeof CarrierAccount;
   public CarrierType: typeof CarrierType;
+  public CustomsInfo: typeof CustomsInfo;
+  public CustomsItem: typeof CustomsItem;
   public Event: typeof Event;
   public Insurance: typeof Insurance;
   public Order: typeof Order;
   public Parcel: typeof Parcel;
   public Pickup: typeof Pickup;
   public Report: typeof Report;
+  public Referral: typeof Referral;
+  public ScanForm: typeof ScanForm;
   public Shipment: typeof Shipment;
   public Tracker: typeof Tracker;
   public Webhook: typeof Webhook;
+  public User: typeof User;
 
   public constructor(apiKey: string, options?: IEasyPostOptions);
 }

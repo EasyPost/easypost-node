@@ -1,4 +1,6 @@
 import { IDatedObject, IObjectWithId } from '../../base';
+import { DeepPartial } from '../../utils';
+import { ICustomsItemCreateParameters } from './CustomsItemCreateParameters';
 
 /**
  * A CustomsItem object describes goods for international shipment and should be created then included in a CustomsInfo object.
@@ -50,4 +52,38 @@ export declare interface ICustomsItem extends IObjectWithId<'CustomsItem'>, IDat
    * 3 char currency code, default USD
    */
   currency?: string | null;
+}
+
+export declare class CustomsItem implements ICustomsItem {
+  public constructor(input: DeepPartial<ICustomsItemCreateParameters>);
+
+  id: string;
+  mode: 'test' | 'production';
+  object: 'CustomsItem';
+  description: string;
+  quantity: number;
+  value: number;
+  weight: number;
+  hs_tariff_number?: string | null;
+  code?: string | null;
+  origin_country: string;
+  currency?: string | null;
+  created_at: string;
+  updated_at: string;
+
+  /**
+   * A CustomsItem contains information relating to each product within the package. When creating a customs item, you may store the ID from the response for use later in CustomsInfo creation.
+   *
+   * @see https://www.easypost.com/docs/api#create-a-customs-item
+   */
+  public save(): Promise<CustomsItem>;
+
+  /**
+   * A CustomsItem can be retrieved by its id.
+   *
+   * @param CustomsItemId Unique, begins with "cstitem_"
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-customs-item
+   */
+  static retrieve(CustomsItemId: string): Promise<CustomsItem>;
 }

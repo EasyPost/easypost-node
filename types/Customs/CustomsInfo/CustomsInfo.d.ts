@@ -1,5 +1,7 @@
 import { IDatedObject, IObjectWithId } from '../../base';
+import { DeepPartial } from '../../utils';
 import { ICustomsItem } from '../CustomsItem/CustomsItem';
+import { ICustomsInfoCreateParameters } from './CustomsInfoCreateParameters';
 
 /**
  * CustomsInfo objects contain CustomsItem objects and all necessary information for the generation of customs forms required for international shipping.
@@ -61,4 +63,40 @@ export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDat
    * A customs declaration message, available for eligible carriers
    */
   declaration?: string | null;
+}
+
+export declare class CustomsInfo implements ICustomsInfo {
+  public constructor(input: DeepPartial<ICustomsInfoCreateParameters>);
+
+  id: string;
+  mode: 'test' | 'production';
+  object: 'CustomsInfo';
+  eel_pfc?: string | null;
+  contents_type?: string | null;
+  contents_explanation?: string | null;
+  customs_certify?: boolean | null;
+  customs_signer?: string | null;
+  non_delivery_option?: 'abandon' | 'return' | null;
+  restriction_type?: 'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection' | null;
+  restriction_comments?: string | null;
+  customs_items: ICustomsItem[];
+  declaration?: string | null;
+  created_at: string;
+  updated_at: string;
+
+  /**
+   * A CustomsInfo object contains all administrative information for processing customs, as well as a list of CustomsItems. When creating a CustomsInfo, you may store the ID from the response for use later in shipment creation.
+   *
+   * @see https://www.easypost.com/docs/api#create-a-customs-info
+   */
+  public save(): Promise<CustomsInfo>;
+
+  /**
+   * A CustomsInfo can be retrieved by its id.
+   *
+   * @param CustomsInfoId Unique, begins with "cstinfo_"
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-customs-info
+   */
+  static retrieve(CustomsInfoId: string): Promise<CustomsInfo>;
 }

@@ -140,4 +140,13 @@ export default (api) =>
 
       return paymentMethod;
     }
+
+    /**
+     * retrieve not implemented.
+     * @returns {this}
+     */
+    // eslint-disable-next-line no-unused-vars
+    static async retrieve(id, urlPrefix) {
+      return this.notImplemented('retrieve');
+    }
   };

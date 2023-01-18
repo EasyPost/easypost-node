@@ -1,8 +1,8 @@
 /**
  * The Billing class allow you to fund wallet by using primary or secondary payment method,
- * delete a exisiting payment method, and retrive all payment methods associated to the user.
+ * delete a existing payment method, and retrieve all payment methods associated to the user.
  *
- * TODO: Add link when the Billing API doc is updated
+ * @see https://www.easypost.com/docs/api/node#billing
  */
 export declare class Billing {
   /**
