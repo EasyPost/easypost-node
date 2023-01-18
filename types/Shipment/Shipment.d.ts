@@ -1,7 +1,7 @@
 import { IAddress } from '../Address';
 import { IDatedObject, IObjectWithId } from '../base';
 import { TBatchStatus } from '../Batch';
-import { ICustomsInfo } from '../Customs/CustomsInfo/CustomsInfo';
+import { ICustomsInfo } from '../Customs';
 import { IFee } from '../Fee';
 import { IInsurance } from '../Insurance';
 import { IParcel } from '../Parcel';
@@ -95,7 +95,7 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
   messages: IMessage[];
 
   /**
-   * All of the options passed to the shipment, discussed in more depth below
+   * All the options passed to the shipment, discussed in more depth below
    */
   options?: IOptions | null;
 
@@ -202,19 +202,19 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#create-a-shipment
    *
-   * @param carbonOffset
+   * @param carbonOffset indicate if the shipment should include a carbon offset fee.
    */
   public save(carbonOffset?: boolean): Promise<Shipment>;
 
   /**
    * The Shipment List is a paginated list of all Shipment objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
-   * The has_more attribute indicates whether or not additional pages can be requested.
+   * The has_more attribute indicates whether additional pages can be requested.
    * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
    *
-   * @param params
+   * @param params - The parameters to use for the request.
    */
   static all(
     params?: IShipmentListParameters,
@@ -222,11 +222,11 @@ export declare class Shipment implements IShipment {
 
   /**
    * A Shipment can be retrieved by either its id or reference.
-   * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
+   * However, it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-shipment
    *
-   * @param shipmentId Unique, begins with "shp_"
+   * @param {string} shipmentId Unique, begins with "shp_".
    */
   static retrieve(shipmentId: string): Promise<Shipment>;
 
@@ -242,9 +242,9 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#buy-a-shipment
    *
-   * @param rate rate id (begins with "rate_") or rate object
-   * @param insuranceAmount
-   * @param carbonOffset
+   * @param rate rate id (begins with "rate_") or rate object.
+   * @param insuranceAmount amount to insure the shipment for.
+   * @param carbonOffset indicate if the shipment should include a carbon offset fee.
    */
   public buy(
     rate: string | IRate,
@@ -268,8 +268,8 @@ export declare class Shipment implements IShipment {
 
   /**
    *
-   * @param carriers a list of carriers to filter rates for
-   * @param services a list of services to filter rates for
+   * @param carriers a list of carriers to filter rates for.
+   * @param services a list of services to filter rates for.
    */
   public lowestRate(carriers?: string[], services?: string[]): IRate;
 
@@ -287,7 +287,7 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment
    *
-   * @param carbonOffset
+   * @param carbonOffset indicate if the rates should include a carbon offset fee.
    */
   public regenerateRates(carbonOffset?: boolean): Promise<Shipment>;
 
@@ -300,7 +300,7 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#insure-a-shipment
    *
-   * @param amount
+   * @param amount amount to insure the shipment for.
    */
   public insure(amount: number): Promise<Shipment>;
 
