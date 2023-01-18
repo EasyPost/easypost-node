@@ -1,11 +1,11 @@
+import { IDatedObject, IObjectWithId } from '../base';
+import { CarbonOffset } from '../CarbonOffset';
+
 /**
  * The Rate class represents a summary of the price and details of a delivery service quote.
  *
  * @see https://www.easypost.com/docs/api/node#rates
  */
-import { IDatedObject, IObjectWithId } from '../base';
-import { CarbonOffset } from '../CarbonOffset';
-
 export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
   /**
    * The service level of the rate.

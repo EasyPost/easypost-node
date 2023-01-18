@@ -1,10 +1,10 @@
+import { IObjectWithId } from '../base';
+
 /**
  * The Brand class represents the public-accessible information about a user's brand, including logos, colors and themes.
  *
  * @see https://www.easypost.com/docs/api/node#brand
  */
-import { IObjectWithId } from '../base';
-
 export declare interface IBrand extends IObjectWithId<'Brand'> {
   /**
    * The background color of the brand, as a hex code.
