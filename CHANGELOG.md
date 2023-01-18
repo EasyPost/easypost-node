@@ -1,10 +1,11 @@
 # CHANGELOG
 
-## Next release:
+## v5.10.0 (2023-01-18)
 
-- Add `all` for retrieve all pickups in Pickup class.
-- Add `retrievePayload` and `retrieveAllPayloads` functions to retrieve payloads for an Event.
-  - These are static functions on the Event class, so you can call them like `easypost.Event.retrieveAllPayloads(eventId)`.
+- Adds `all` function to `Pickup` class to retrieve all pickups
+- Adds `retrievePayload` and `retrieveAllPayloads` functions to retrieve payloads for an Event
+  - These are static functions on the Event class, so you can call them like `easypost.Event.retrieveAllPayloads(eventId)`
+- Adds missing Typescript implementations for `CustomsInfo`, `CustomsItem`, `ScanForm`, `User`, `Referral`, `Rate`, `CarbonOffset`, and `Brand` (closes #328)
 
 ## v5.9.0 (2023-01-11)
 
