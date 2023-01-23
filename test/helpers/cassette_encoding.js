@@ -1,5 +1,5 @@
-import { text } from 'superagent/lib/node/parsers';
 import { gunzipSync, gzipSync } from 'zlib';
+import { text } from 'superagent/lib/node/parsers';
 
 const charset = 'utf8';
 const encoding = 'base64';

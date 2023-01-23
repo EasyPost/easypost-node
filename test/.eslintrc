@@ -17,7 +17,11 @@
   },
 
   "settings": {
-    "import/resolver": "webpack",
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.babel.js"
+      }
+    },
     "import/extensions": ["", ".js", ".json"]
   },
 

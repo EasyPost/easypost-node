@@ -19,9 +19,5 @@
     "import/extensions": ["", ".js", ".ejs", ".json", ".yml", ".jsx"],
     "import/ignore": [".ejs$", ".yml$", ".jsx", "node_modules"]
   },
-  "rules": {},
-  "globals": {
-    "window": true,
-    "$": true
-  }
+  "rules": {}
 }

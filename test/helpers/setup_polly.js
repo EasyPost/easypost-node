@@ -2,10 +2,10 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
+import { resolve } from 'path';
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
 import { Polly, setupMocha as setupPolly } from '@pollyjs/core';
 import FSPersister from '@pollyjs/persister-fs';
-import { resolve } from 'path';
 
 import { decodeCassetteResponseBodies, encodeCassetteResponseBodies } from './cassette_encoding';
 

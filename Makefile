@@ -31,11 +31,10 @@ format-check:
 	npm run formatCheck
 
 ## install - Install project dependencies
-# TODO:  Remove the `--force` flag once we've dropped support for Node 10 and can modernize the dependency matrix
 install:
 	git submodule init
 	git submodule update
-	npm install --force
+	npm install
 
 ## lint - Lint the project
 lint:
@@ -51,7 +50,6 @@ release:
 	gh release create ${tag} dist/*
 
 ## scan - Runs security analysis on the project with Brakeman
-# TODO: lower this to something closer to `-m` when we modernize our dependencies
 scan:
 	npm run scan
 

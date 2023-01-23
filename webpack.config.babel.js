@@ -10,13 +10,15 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'easypost.js',
-    libraryTarget: 'commonjs', // TODO: In Webpack 5, there is a new `library` property up one level
+    library: {
+      type: 'commonjs',
+    },
   },
   context: path.resolve(__dirname, 'src'),
   mode,
   cache: isDev,
   devtool: isDev ? 'source-map' : undefined,
-  target: 'node', // TODO: In Webpack 5, replace this line with `externalsPresets: { node: true },`
+  externalsPresets: { node: true },
   externals: [nodeExternals()],
   module: {
     rules: [

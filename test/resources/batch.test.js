@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 import fs from 'fs';
-import { expect } from 'chai';
 import { resolve } from 'path';
+import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
 import NotImplementedError from '../../src/errors/not_implemented';
