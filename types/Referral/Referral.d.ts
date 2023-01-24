@@ -67,13 +67,13 @@ export declare class Referral implements IReferral {
    *
    * @param {string} stripeCustomerId Stripe customer ID
    * @param {string} paymentMethodReference Reference for the Stripe payment method
-   * @param {string} primaryOrSecondary Whether the payment method is primary or secondary
+   * @param {string} priority Whether the payment method is primary or secondary
    * @returns {object} Object representing the newly-added payment method
    */
   static addPaymentMethod(
     stripeCustomerId: string,
     paymentMethodReference: string,
-    primaryOrSecondary?: string,
+    priority?: string,
   ): object;
 
   /**

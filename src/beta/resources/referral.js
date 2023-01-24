@@ -1,4 +1,3 @@
-/* eslint-disable no-dupe-class-members,no-unused-vars,class-methods-use-this */
 import T from 'proptypes';
 import superagent from 'superagent';
 
@@ -6,6 +5,7 @@ import API from '../../easypost';
 import base from '../../resources/base';
 import { propTypes as userPropTypes } from '../../resources/user';
 
+/* eslint-disable no-dupe-class-members,no-unused-vars,class-methods-use-this */
 export const propTypes = Object.assign({}, userPropTypes, {
   name: T.string.isRequired,
   email: T.string.isRequired,
@@ -119,7 +119,7 @@ export default (api) =>
      * @param {string} expirationMonth - The credit card expiration month.
      * @param {string} expirationYear - The credit card expiration year.
      * @param {string} cvc - The credit card CVC.
-     * @param {string} primaryOrSecondary - Whether to add the card as 'primary' or 'secondary' payment method (defaults to 'primary').
+     * @param {string} priority - Whether to add the card as 'primary' or 'secondary' payment method (defaults to 'primary').
      * @returns {Promise<never>} - Response body (EasyPost payment method object).
      */
     static async addCreditCard(
@@ -128,7 +128,7 @@ export default (api) =>
       expirationMonth,
       expirationYear,
       cvc,
-      primaryOrSecondary = 'primary',
+      priority = 'primary',
     ) {
       // TODO: Deprecate this function
       const stripeKey = await getEasyPostStripeKey(api); // will throw if there's an error
@@ -145,7 +145,7 @@ export default (api) =>
         api,
         referralApiKey,
         stripeCreditCardId,
-        primaryOrSecondary,
+        priority,
       ); // will throw if there's an error
 
       return paymentMethod;
@@ -155,19 +155,15 @@ export default (api) =>
      * Add Stripe payment method to referral customer.
      * @param {string} stripeCustomerId - The Stripe account's ID.
      * @param {string} paymentMethodReference - Reference of Stripe payment method.
-     * @param {string} primaryOrSecondary - Primary or secondary of this payment method.
+     * @param {string} priority - Primary or secondary of this payment method.
      * @returns {object} - Returns PaymentMethod object.
      */
-    static async addPaymentMethod(
-      stripeCustomerId,
-      paymentMethodReference,
-      primaryOrSecondary = 'primary',
-    ) {
+    static async addPaymentMethod(stripeCustomerId, paymentMethodReference, priority = 'primary') {
       const wrappedParams = {
         payment_method: {
           stripe_customer_id: stripeCustomerId,
           payment_method_reference: paymentMethodReference,
-          priority: primaryOrSecondary,
+          priority,
         },
       };
 
