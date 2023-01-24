@@ -1,13 +1,13 @@
 /* eslint-disable func-names */
 import fs from 'fs';
+import { resolve } from 'path';
 import { expect } from 'chai';
 
-import { resolve } from 'path';
 import EasyPost from '../../src/easypost';
 import NotImplementedError from '../../src/errors/not_implemented';
+import { Payload } from '../../src/resources/payload';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
-import { Payload } from '../../src/resources/payload';
 
 describe('Event Resource', function () {
   setupPolly.startPolly();
