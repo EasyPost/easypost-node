@@ -110,7 +110,7 @@ export default (api) =>
      * @param {string} expirationMonth - The credit card expiration month.
      * @param {string} expirationYear - The credit card expiration year.
      * @param {string} cvc - The credit card CVC.
-     * @param {string} primaryOrSecondary - Whether to add the card as 'primary' or 'secondary' payment method (defaults to 'primary').
+     * @param {string} priority - Whether to add the card as 'primary' or 'secondary' payment method (defaults to 'primary').
      * @returns {Promise<never>} - Response body (EasyPost payment method object).
      */
     static async addCreditCard(
@@ -119,7 +119,7 @@ export default (api) =>
       expirationMonth,
       expirationYear,
       cvc,
-      primaryOrSecondary = 'primary',
+      priority = 'primary',
     ) {
       const stripeKey = await getEasyPostStripeKey(api); // will throw if there's an error
 
@@ -135,7 +135,7 @@ export default (api) =>
         api,
         referralApiKey,
         stripeCreditCardId,
-        primaryOrSecondary,
+        priority,
       ); // will throw if there's an error
 
       return paymentMethod;

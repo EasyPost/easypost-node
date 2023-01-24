@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Next Major Release
+
+- Bumps minimum Node from 10 to 12
+- Bumps major versions of all dependencies
+- Changes the `primaryOrSecondary` parameter name to `priority` in billing functions to match the API
+
 ## v5.10.0 (2023-01-18)
 
 - Adds `all` function to `Pickup` class to retrieve all pickups

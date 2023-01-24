@@ -9,13 +9,13 @@ export declare class Billing {
    * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
    * TODO: Add the link to API doc when its updated
    */
-  static fundWallet(amount: string, primaryOrSecondary?: string): boolean;
+  static fundWallet(amount: string, priority?: string): boolean;
 
   /**
    * Delete a payment method from your account.
    * TODO: Add the link to API doc when its updated
    */
-  static deletePaymentMethod(primaryOrSecondary: string): boolean;
+  static deletePaymentMethod(priority: string): boolean;
 
   /**
    * Retrieve all payment methods.
