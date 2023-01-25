@@ -65,15 +65,15 @@ describe('User Resource', function () {
   });
 
   it('deletes a user', async function () {
-    await new this.easypost.User({
+    const user = await new this.easypost.User({
       name: 'Test User',
-    })
-      .save()
-      .then(
-        expect(async (user) => {
-          await user.delete();
-        }).not.to.throw(),
-      );
+    }).save();
+
+    await user.delete().then(
+      expect(function (result) {
+        result.not.to.throw();
+      }),
+    );
   });
 
   it("updates the authenticated user's brand", async function () {

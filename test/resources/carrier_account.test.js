@@ -105,8 +105,10 @@ describe('CarrierAccount Resource', function () {
       Fixture.basicCarrierAccount(),
     ).save();
 
-    expect(async (carrierAccount) => {
-      await carrierAccount.delete();
-    }).not.to.throw();
+    await carrierAccount.delete().then(
+      expect(function (result) {
+        result.not.to.throw();
+      }),
+    );
   });
 });

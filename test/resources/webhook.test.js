@@ -74,15 +74,15 @@ describe('Webhook Resource', function () {
   });
 
   it('deletes a webhook', async function () {
-    await new this.easypost.Webhook({
+    const webhook = await new this.easypost.Webhook({
       url: Fixture.webhookUrl(),
-    })
-      .save()
-      .then(async function (webhook) {
-        expect(async (webhook) => {
-          await webhook.delete();
-        }).not.to.throw();
-      });
+    }).save();
+
+    await webhook.delete().then(
+      expect(function (result) {
+        result.not.to.throw();
+      }),
+    );
   });
 
   it('validates a webhook secret', function () {

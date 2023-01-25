@@ -54,14 +54,16 @@ describe('Tracker Resource', function () {
   });
 
   it('creates trackers in bulk from a list of tracking codes', async function () {
-    expect(async () => {
-      await this.easypost.Tracker.createList({
-        0: { tracking_code: 'EZ1000000001' },
-        1: { tracking_code: 'EZ1000000002' },
-        2: { tracking_code: 'EZ1000000003' },
-        3: { tracking_code: 'EZ1000000004' },
-      });
-    }).not.to.throw();
+    await this.easypost.Tracker.createList({
+      0: { tracking_code: 'EZ1000000001' },
+      1: { tracking_code: 'EZ1000000002' },
+      2: { tracking_code: 'EZ1000000003' },
+      3: { tracking_code: 'EZ1000000004' },
+    }).then(
+      expect(function (result) {
+        result.not.to.throw();
+      }),
+    );
   });
 
   it('throws on delete', function () {
