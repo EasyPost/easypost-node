@@ -70,7 +70,7 @@ export declare class Webhook implements IWebhook {
    *
    * @see https://www.easypost.com/docs/api/node#delete-a-webhook
    */
-  static delete(webhookId: string): Promise<{}>;
+  static delete(webhookId: string): void;
 
   /**
    * Validate a webhook by comparing the HMAC signature header sent from EasyPost to your shared secret.

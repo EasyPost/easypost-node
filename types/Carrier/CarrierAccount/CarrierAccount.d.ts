@@ -112,5 +112,5 @@ export declare class CarrierAccount implements ICarrierAccount {
    * @see https://www.easypost.com/docs/api/node#delete-a-carrier-account
    * @requires production API Key.
    */
-  public delete(): Promise<{}>;
+  public delete(): void;
 }

@@ -213,11 +213,9 @@ export default (api) =>
 
     /**
      * Deletes an object from the API.
-     * @returns {this}
      */
     async delete() {
       await this.constructor.delete(this.id);
-      return this;
     }
 
     /**

@@ -1,4 +1,5 @@
 import T from 'proptypes';
+
 import base from './base';
 
 export const propTypes = {
@@ -38,17 +39,10 @@ export default (api) =>
     /**
      * Create trackers in bulk.
      * @param {object} params
-     * @returns {bool|Promise<never>}
      */
     static async createList(params = {}) {
       const newParams = { trackers: params };
-      try {
-        const url = 'trackers/create_list';
-        await api.post(url, newParams);
-        // This endpoint does not return anything so true is returned here
-        return true;
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      const url = 'trackers/create_list';
+      await api.post(url, newParams);
     }
   };

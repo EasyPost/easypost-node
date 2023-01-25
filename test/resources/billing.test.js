@@ -52,15 +52,15 @@ describe('Billing Resource', function () {
   });
 
   it('fund a wallet', async function () {
-    const fund = await this.easypost.Billing.fundWallet('2000', 'primary');
-
-    expect(fund).to.equal(true);
+    expect(async () => {
+      await this.easypost.Billing.fundWallet('2000', 'primary');
+    }).not.to.throw();
   });
 
   it('delete a payment method', async function () {
-    const deletedPaymentMethod = await this.easypost.Billing.deletePaymentMethod('primary');
-
-    expect(deletedPaymentMethod).to.equal(true);
+    expect(async () => {
+      await this.easypost.Billing.deletePaymentMethod('primary');
+    }).not.to.throw();
   });
 
   it('retrieves all payment methods', async function () {
