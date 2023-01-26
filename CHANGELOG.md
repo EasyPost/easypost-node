@@ -5,6 +5,7 @@
 - Bumps minimum Node from 10 to 12
 - Bumps major versions of all dependencies
 - Changes the `primaryOrSecondary` parameter name to `priority` in billing functions to match the API
+- Emptry response functions now return nothing (deleting records, funding a wallet, etc)
 
 ## v5.10.0 (2023-01-18)
 

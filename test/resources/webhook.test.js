@@ -78,9 +78,11 @@ describe('Webhook Resource', function () {
       url: Fixture.webhookUrl(),
     }).save();
 
-    const deletedWebhook = await webhook.delete();
-
-    expect(deletedWebhook).to.be.an.instanceOf(this.easypost.Webhook);
+    await webhook.delete().then(
+      expect(function (result) {
+        result.not.to.throw();
+      }),
+    );
   });
 
   it('validates a webhook secret', function () {

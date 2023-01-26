@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable no-shadow */
-/* eslint-disable func-names */
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
+/* eslint-disable no-shadow */
+/* eslint-disable func-names */
 describe('CarrierAccount Resource', function () {
   setupPolly.startPolly();
 
@@ -105,8 +105,10 @@ describe('CarrierAccount Resource', function () {
       Fixture.basicCarrierAccount(),
     ).save();
 
-    const response = await carrierAccount.delete();
-
-    expect(response).to.be.an.instanceOf(this.easypost.CarrierAccount);
+    await carrierAccount.delete().then(
+      expect(function (result) {
+        result.not.to.throw();
+      }),
+    );
   });
 });

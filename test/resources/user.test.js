@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable func-names */
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
 import NotImplementedError from '../../src/errors/not_implemented';
 import * as setupPolly from '../helpers/setup_polly';
 
+/* eslint-disable func-names */
 describe('User Resource', function () {
   setupPolly.startPolly();
 
@@ -69,9 +69,11 @@ describe('User Resource', function () {
       name: 'Test User',
     }).save();
 
-    const deletedUser = await user.delete();
-
-    expect(deletedUser).to.be.an.instanceOf(this.easypost.User);
+    await user.delete().then(
+      expect(function (result) {
+        result.not.to.throw();
+      }),
+    );
   });
 
   it("updates the authenticated user's brand", async function () {
