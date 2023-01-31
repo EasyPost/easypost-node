@@ -26,7 +26,7 @@ describe('Refund Resource', function () {
 
     const refundData = {
       carrier: Fixture.usps(),
-      tracking_codes: retrievedShipment.tracking_code,
+      tracking_codes: [retrievedShipment.tracking_code],
     };
 
     const refunds = await this.easypost.Refund.save(refundData);
