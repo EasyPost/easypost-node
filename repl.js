@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable import/no-dynamic-require */
 
 /* eslint import/no-extraneous-dependencies: 0, global-require: 0, import/no-unresolved: 0, no-console: 0, max-len: 0 */
 
@@ -13,27 +14,27 @@ process.on('unhandledRejection', (err) => {
 });
 
 let packageInfo;
-let API;
+let EasyPostClient;
 
 if (args.local) {
   packageInfo = require('./package.json');
-  API = require(`./${args.local}`).default;
+  EasyPostClient = require(`./${args.local}`).default;
 } else {
   packageInfo = require('@easypost/api/package.json');
-  API = require('@easypost/api');
+  EasyPostClient = require('@easypost/api');
 }
 
 console.log(`Starting ${packageInfo.name} v${packageInfo.version} repl`);
 console.log('Enter `help()` for information.');
 
-let api;
+let client;
 
 if (process.env.API_KEY) {
-  api = new API(process.env.API_KEY);
+  client = new EasyPostClient(process.env.API_KEY);
 } else {
   console.log(
     [
-      'Create an instance by using `api = new API(apikey)`, or restart',
+      'Create an instance by using `api = new EasyPostClient(apikey)`, or restart',
       'the repl with an API_KEY environment variable.',
     ].join(' '),
   );
@@ -43,7 +44,7 @@ const local = repl.start('$> ');
 
 function help() {
   const helpText = [
-    'To try out the API, use the available instance of `api` to make requests.',
+    'To try out the EasyPostClient, use the available instance of `api` to make requests.',
     'For example, try writing: `api.Address.all();`',
     'Sample data is also available: toAddress, fromAddress.',
   ].join(' ');
@@ -82,6 +83,6 @@ local.context.badAddress = {
   phone: '415-123-4567',
 };
 
-local.context.API = API;
-local.context.api = api;
+local.context.EasyPostClient = EasyPostClient;
+local.context.client = client;
 local.context.help = help;

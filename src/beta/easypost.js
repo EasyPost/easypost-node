@@ -1,28 +1,18 @@
-import BetaPaymentRefund, {
-  propTypes as betaPaymentRefundTypes,
-} from './resources/beta_payment_refund';
-import Referral, { propTypes as referralPropTypes } from './resources/referral';
-
-import API from '../easypost';
+import EasyPostClient from '../easypost';
+import BetaReferralCustomerService from './beta_referral_customer_service';
 
 export const DEFAULT_BASE_URL = 'https://api.easypost.com/beta/';
 
-export const RESOURCES = {
-  BetaPaymentRefund,
-  Referral,
+export const SERVICES = {
+  BetaReferralCustomerService,
 };
 
-export const PROP_TYPES = {
-  betaPaymentRefundTypes,
-  referralPropTypes,
-};
-
-export default class BetaAPI extends API {
+export default class BetaClient extends EasyPostClient {
   constructor(key, options = {}) {
     super(key, options);
     const { baseUrl } = options;
     this.baseUrl = baseUrl || DEFAULT_BASE_URL;
 
-    this.use(RESOURCES);
+    this.attachServices(SERVICES);
   }
 }

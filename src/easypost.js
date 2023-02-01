@@ -1,34 +1,33 @@
-/* eslint-disable import/no-cycle */
 import os from 'os';
 import superagent from 'superagent';
 
 import pkg from '../package.json';
+import BetaReferralCustomerService from './beta/beta_referral_customer_service';
 import RequestError from './errors/request';
-import Address, { propTypes as addressPropTypes } from './resources/address';
-import ApiKey, { propTypes as apiKeyPropTypes } from './resources/api_key';
-import Batch, { propTypes as batchPropTypes } from './resources/batch';
-import Billing, { propTypes as billingPropTypes } from './resources/billing';
-import Brand, { propTypes as brandPropTypes } from './resources/brand';
-import CarrierAccount, { propTypes as carrierAccountPropTypes } from './resources/carrier_account';
-import CarrierType, { propTypes as carrierTypePropTypes } from './resources/carrier_type';
-import CustomsInfo, { propTypes as customsInfoPropTypes } from './resources/customs_info';
-import CustomsItem, { propTypes as customsItemPropTypes } from './resources/customs_item';
-import EndShipper, { propTypes as endShipperPropTypes } from './resources/end_shipper';
-import Event, { propTypes as eventPropTypes } from './resources/event';
-import Insurance, { propTypes as insurancePropTypes } from './resources/insurance';
-import Order, { propTypes as orderPropTypes } from './resources/order';
-import Parcel, { propTypes as parcelPropTypes } from './resources/parcel';
-import PaymentMethod, { propTypes as paymentMethodPropTypes } from './resources/payment_method';
-import Pickup, { propTypes as pickupPropTypes } from './resources/pickup';
-import Rate, { propTypes as ratePropTypes } from './resources/rate';
-import Referral, { propTypes as referralPropTypes } from './resources/referral';
-import Refund, { propTypes as refundPropTypes } from './resources/refund';
-import Report, { propTypes as reportPropTypes } from './resources/report';
-import ScanForm, { propTypes as scanFormPropTypes } from './resources/scan_form';
-import Shipment, { propTypes as shipmentPropTypes } from './resources/shipment';
-import Tracker, { propTypes as trackerPropTypes } from './resources/tracker';
-import User, { propTypes as userPropTypes } from './resources/user';
-import Webhook, { propTypes as webhookPropTypes } from './resources/webhook';
+import AddressService from './services/address_service';
+import ApiKeyService from './services/api_key_service';
+import BatchService from './services/batch_service';
+import BillingService from './services/billing_service';
+import CarrierAccountService from './services/carrier_account_service';
+import CarrierTypeService from './services/carrier_type_service';
+import CustomsInfoService from './services/customs_info_service';
+import CustomsItemService from './services/customs_item_service';
+import EndShipperService from './services/end_shipper_service';
+import EventService from './services/event_service';
+import InsuranceService from './services/insurance_service';
+import OrderService from './services/order_service';
+import ParcelService from './services/parcel_service';
+import PickupService from './services/pickup_service';
+import RateService from './services/rate_service';
+// eslint-disable-next-line import/no-cycle
+import ReferralCustomerService from './services/referral_customer_service';
+import RefundService from './services/refund_service';
+import ReportService from './services/report_service';
+import ScanFormService from './services/scan_form_service';
+import ShipmentService from './services/shipment_service';
+import TrackerService from './services/tracker_service';
+import UserService from './services/user_service';
+import WebhookService from './services/webhook_service';
 
 export const MS_SECOND = 1000;
 export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
@@ -51,63 +50,34 @@ export const METHODS = {
   DELETE: 'del',
 };
 
-export const RESOURCES = {
-  Address,
-  ApiKey,
-  Batch,
-  Billing,
-  Brand,
-  CarrierAccount,
-  CarrierType,
-  CustomsInfo,
-  CustomsItem,
-  EndShipper,
-  Event,
-  Insurance,
-  Order,
-  Parcel,
-  PaymentMethod,
-  Pickup,
-  Rate,
-  Refund,
-  Referral,
-  Report,
-  ScanForm,
-  Shipment,
-  Tracker,
-  User,
-  Webhook,
+export const SERVICES = {
+  Address: AddressService,
+  ApiKey: ApiKeyService,
+  Batch: BatchService,
+  BetaReferralCustomer: BetaReferralCustomerService,
+  Billing: BillingService,
+  CarrierAccount: CarrierAccountService,
+  CarrierType: CarrierTypeService,
+  CustomsInfo: CustomsInfoService,
+  CustomsItem: CustomsItemService,
+  EndShipper: EndShipperService,
+  Event: EventService,
+  Insurance: InsuranceService,
+  Order: OrderService,
+  Parcel: ParcelService,
+  Pickup: PickupService,
+  Rate: RateService,
+  ReferralCustomer: ReferralCustomerService,
+  Refund: RefundService,
+  Report: ReportService,
+  ScanForm: ScanFormService,
+  Shipment: ShipmentService,
+  Tracker: TrackerService,
+  User: UserService,
+  Webhook: WebhookService,
 };
 
-export const PROP_TYPES = {
-  addressPropTypes,
-  apiKeyPropTypes,
-  batchPropTypes,
-  billingPropTypes,
-  brandPropTypes,
-  carrierAccountPropTypes,
-  carrierTypePropTypes,
-  customsInfoPropTypes,
-  customsItemPropTypes,
-  endShipperPropTypes,
-  eventPropTypes,
-  insurancePropTypes,
-  orderPropTypes,
-  parcelPropTypes,
-  paymentMethodPropTypes,
-  pickupPropTypes,
-  ratePropTypes,
-  referralPropTypes,
-  refundPropTypes,
-  reportPropTypes,
-  scanFormPropTypes,
-  shipmentPropTypes,
-  trackerPropTypes,
-  userPropTypes,
-  webhookPropTypes,
-};
-
-export default class API {
+export default class EasyPostClient {
   constructor(key, options = {}) {
     const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
 
@@ -125,7 +95,7 @@ export default class API {
       this.agent = superagentMiddleware(this.agent);
     }
 
-    this.use(RESOURCES);
+    this.attachServices(SERVICES);
   }
 
   /**
@@ -138,7 +108,7 @@ export default class API {
     const { apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
     const agent = superagentMiddleware ? superagentMiddleware(api.agent) : api.agent;
 
-    return new API(apiKey || api.key, {
+    return new EasyPostClient(apiKey || api.key, {
       useProxy: useProxy || api.useProxy,
       timeout: timeout || api.timeout,
       baseUrl: baseUrl || api.baseUrl,
@@ -162,12 +132,12 @@ export default class API {
   }
 
   /**
-   * Convert to an EasyPost resource.
-   * @param {*} resources
+   * Attach services to an EasyPostClient object.
+   * @param {*} services
    */
-  use(resources) {
-    Object.keys(resources).forEach((c) => {
-      this[c] = resources[c](this);
+  attachServices(services) {
+    Object.keys(services).forEach((c) => {
+      this[c] = services[c](this);
     });
   }
 
@@ -194,7 +164,7 @@ export default class API {
    */
   async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
     const urlPath = this.buildPath(path);
-    const requestHeaders = API.buildHeaders(headers);
+    const requestHeaders = EasyPostClient.buildHeaders(headers);
     let request = this.agent[method](urlPath).set(requestHeaders);
 
     if (this.requestMiddleware) {

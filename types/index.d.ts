@@ -15,6 +15,6 @@ export * from './Shipment';
 export * from './Tracker';
 export * from './User';
 export * from './Webhook';
-export * from './base';
+export * from './base_service';
 export * from './utils';
 export { default, IEasyPostOptions } from './EasyPost';
