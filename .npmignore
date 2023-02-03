@@ -4,6 +4,7 @@
 
 # These are the files that are allowed:
 !/CHANGELOG.md
+!/dist/**/*
 !/LICENSE
 !/package.json
 !/prop_types.js
