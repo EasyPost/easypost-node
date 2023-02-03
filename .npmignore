@@ -1,4 +1,18 @@
-test
-coverage
-circle.yml
-webpack.config.js
+# This file is written to be an allowlist instead of a disallow. Start by ignoring everything, 
+# then add back the files we want to be included in the final NPM package:
+*
+
+# These are the files that are allowed:
+!/CHANGELOG.md
+!/LICENSE
+!/package.json
+!/prop_types.js
+!/README.md
+!/src/**/*
+!/types/**/*
+!/UPGRADE_GUIDE.md
+
+# Here we exclude files that we pulled in from above that should be removed
+.DS_Store
+types/.eslintrc
+types/demo
