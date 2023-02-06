@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v5.10.1 (2023-02-03)
+
+- Fixes library packaging to exclude items that aren't needed for the final build including a subdirectory of `node_modules` that bloated the previous release (closes #343)
+
 ## v5.10.0 (2023-01-18)
 
 - Adds `all` function to `Pickup` class to retrieve all pickups
