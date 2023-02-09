@@ -17,7 +17,7 @@ export default (easypostClient) =>
     }
 
     /**
-     * save not implemented
+     * create not implemented
      * @returns {Promise<never>}
      */
     static create() {

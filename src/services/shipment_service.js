@@ -36,7 +36,8 @@ export default (easypostClient) =>
      * @param {object} rate
      * @param {number} insuranceAmount
      * @param {boolean} withCarbonOffset
-     * @returns {this}
+     * @param {string} endShipperId
+     * @returns {Shipment}
      */
     static async buy(
       id,
@@ -182,8 +183,8 @@ export default (easypostClient) =>
     /**
      * Get the lowest smartrate of this shipment.
      * @param {string} id
-     * @param {number} delivery_days
-     * @param {string} delivery_accuracy
+     * @param {number} deliveryDays
+     * @param {string} deliveryAccuracy
      * @returns {Object}
      */
     static async lowestSmartRate(id, deliveryDays, deliveryAccuracy) {

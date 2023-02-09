@@ -152,11 +152,11 @@ export default (easypostClient) =>
 
     /**
      * Creates a new NotImplementedError.
-     * @param {string} fnName
+     * @param {string} functionName
      * @returns {Promise<never>}
      */
-    static notImplemented(fnName) {
-      return Promise.reject(new NotImplementedError(fnName, this._url));
+    static notImplemented(functionName) {
+      return Promise.reject(new NotImplementedError(functionName, this._url));
     }
 
     /**

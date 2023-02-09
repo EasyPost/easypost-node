@@ -89,7 +89,7 @@ export default (easypostClient) =>
     }
 
     /**
-     * create not implemented
+     * retrieve not implemented
      * @returns {Promise<never>}
      */
     static retrieve() {
@@ -97,7 +97,7 @@ export default (easypostClient) =>
     }
 
     /**
-     * create not implemented
+     * all not implemented
      * @returns {Promise<never>}
      */
     static all() {

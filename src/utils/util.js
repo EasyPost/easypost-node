@@ -4,8 +4,8 @@ module.exports = class Util {
   /**
    * Get the lowest smartrate of this shipment.
    * @param {Object} smartrates
-   * @param {number} delivery_days
-   * @param {string} delivery_accuracy
+   * @param {number} deliveryDays
+   * @param {string} deliveryAccuracy
    * @returns {Object}
    */
   static getLowestSmartRate(smartrates, deliveryDays, deliveryAccuracy) {

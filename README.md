@@ -97,7 +97,7 @@ const shipment = await client.Shipment.create({
   },
 });
 
-const boughtShipment = await client.Shipment.buy(shipment.lowestRate());
+const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
 
 console.log(boughtShipment);
 ```
