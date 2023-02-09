@@ -8,7 +8,7 @@ export default class Shipment extends EasyPostObject {
    * @param {array} services
    * @returns {Object}
    */
-  lowestRate(carriers = [], services = []) {
+  lowestRate(carriers, services) {
     const lowestRate = InternalUtil.getLowestObjectRate(this, carriers, services);
 
     return lowestRate;
