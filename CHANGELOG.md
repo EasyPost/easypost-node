@@ -7,6 +7,8 @@
 - Overhauled the data flow of the library
   - Instead of creating a local object and then calling `.save()` on it to create/update it at the API level, you will pass in the same data as before but to one of either `create()` or `update()` functions on the service in question
   - Services no longer implement the `delete()` function by default but instead implement it on a service-by-service basis
+  - All instance functions (excluding `lowestRate`) previously called on an object are instead called on a service. (eg: `shipment.buy(shipment.lowest_rate())` is now `client.Shipment.buy(shipment.id, shipment.lowest_rate())`))
+    - All functions attached to a service are now async and must be awaited
 - Moved library structure around
   - Introduced `/models` that contain the EasyPost objects
   - Renamed `/resources` to `/services` to better reflect that a service called against an EasyPostClient differs from an API resource, now known as the `models`

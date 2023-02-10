@@ -31,10 +31,7 @@ export default (easypostClient) =>
 
         wrappedParams[this.key] = params;
 
-        const response = await easypostClient.post(
-          this._url || this.constructor._url,
-          wrappedParams,
-        );
+        const response = await easypostClient.post(this._url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {

@@ -136,8 +136,8 @@ export default class EasyPostClient {
    * @param {*} services
    */
   attachServices(services) {
-    Object.keys(services).forEach((c) => {
-      this[c] = services[c](this);
+    Object.keys(services).forEach((s) => {
+      this[s] = services[s](this);
     });
   }
 
