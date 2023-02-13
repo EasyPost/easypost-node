@@ -4,8 +4,8 @@ import EasyPostObject from './easypost_object';
 export default class Order extends EasyPostObject {
   /**
    * Get the lowest rate of an order.
-   * @param {string} carriers
-   * @param {string} services
+   * @param {array} carriers
+   * @param {array} services
    * @returns {Object}
    */
   lowestRate(carriers, services) {

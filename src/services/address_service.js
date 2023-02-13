@@ -41,6 +41,7 @@ export default (easypostClient) =>
 
     /**
      * Creates and verifies an address in a single call.
+     * @param {object} params
      * @returns {Address}
      */
     static async createAndVerify(params) {
