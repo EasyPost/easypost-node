@@ -32,13 +32,19 @@ You can alternatively download the various built assets from this project's [rel
 
 ### Compatibility
 
-By default, @easypost/api (prior to v5) works with Node v6 LTS. To include for other versions of node, you can use:
+#### v4 and Earlier
 
 - `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+)
 - `require('@easypost/api/easypost.6-lts.js')` (Node 6.9+)
 - `require('@easypost/api/easypost.legacy.js')` (Node 0.10+)
 
-If using @easypost/api v5 or later, you can simply require the base project which is built on Node v10+
+#### v5
+
+If using @easypost/api v5, you can require the base project which is built on Node v10 - v16
+
+#### v6
+
+If using @easypost/api v6, you can require the base project which is built on Node v12+
 
 ### Note on ES6 Usage
 
@@ -59,11 +65,11 @@ import '@easypost/api/easypost.legacy.js'; // (v0.10)
 A simple create & buy shipment example:
 
 ```javascript
-const EasyPost = require('@easypost/api');
+const EasyPostClient = require('@easypost/api');
 
-const api = new EasyPost(process.env.EASYPOST_API_KEY);
+const client = new EasyPostClient(process.env.EASYPOST_API_KEY);
 
-const shipment = new api.Shipment({
+const shipment = await client.Shipment.create({
   from_address: {
     street1: '417 MONTGOMERY ST',
     street2: 'FLOOR 5',
@@ -91,7 +97,9 @@ const shipment = new api.Shipment({
   },
 });
 
-shipment.save().then((s) => s.buy(shipment.lowestRate()).then(console.log).catch(console.log));
+const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
+
+console.log(boughtShipment);
 ```
 
 ### Options
@@ -99,7 +107,7 @@ shipment.save().then((s) => s.buy(shipment.lowestRate()).then(console.log).catch
 You can construct an API instance with certain options:
 
 ```javascript
-const api = new Api('mykey', {
+const client = new EasyPostClient(process.env.EASYPOST_API_KEY, {
   timeout: 120000,
   baseUrl: 'https://api.easypost.com/v2/',
   useProxy: false,
@@ -130,7 +138,7 @@ to wrap superagent in a function, such as many superagent libraries do.
 ```javascript
 import superagentLib from 'some-superagent-lib';
 
-const api = new Api('my-key', {
+const client = new EasyPostClient('my-key', {
   superagentMiddleware: (s) => superagentLib(s),
 });
 ```
@@ -143,7 +151,7 @@ you need to hook into a request:
 ```javascript
 import superagentLib from 'some-superagent-lib';
 
-const api = new Api('my-key', {
+const client = new EasyPostClient('my-key', {
   requestMiddleware: (r) => {
     r.someLibFunction(SOME_CONFIG_VALUE);
     return r;
@@ -220,6 +228,7 @@ Starting with v5.3.0, this project has bundled Typescript definitions included. 
 
 - Nullability for every field may need additional work
 - Error codes may not be comprehensive
+- Add missing definitions
 
 ### Testing
 

@@ -1,0 +1,61 @@
+/* eslint-disable func-names */
+import { expect } from 'chai';
+
+import EasyPostClient from '../../src/easypost';
+import Refund from '../../src/models/refund';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
+
+describe('Refund Service', function () {
+  setupPolly.startPolly();
+
+  before(function () {
+    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  });
+
+  beforeEach(function () {
+    const { server } = this.polly;
+    setupPolly.setupCassette(server);
+  });
+
+  it('creates a refund', async function () {
+    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+
+    // We need to retrieve the shipment so that the tracking_code has time to populate
+    const retrievedShipment = await this.client.Shipment.retrieve(shipment.id);
+
+    const refundData = {
+      carrier: Fixture.usps(),
+      tracking_codes: [retrievedShipment.tracking_code],
+    };
+
+    const refunds = await this.client.Refund.create(refundData);
+
+    refunds.forEach((pickup) => {
+      expect(pickup).to.be.an.instanceOf(Refund);
+    });
+    expect(refunds[0].id).to.match(/^rfnd_/);
+    expect(refunds[0].status).to.equal('submitted');
+  });
+
+  it('retrieves all refunds', async function () {
+    const refunds = await this.client.Refund.all({ page_size: Fixture.pageSize() });
+
+    const refundsArray = refunds.refunds;
+
+    expect(refundsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
+    expect(refunds.has_more).to.exist;
+    refundsArray.forEach((refund) => {
+      expect(refund).to.be.an.instanceOf(Refund);
+    });
+  });
+
+  it('retrieves a refund', async function () {
+    const refunds = await this.client.Refund.all({ page_size: Fixture.pageSize() });
+
+    const retrieveRefund = await this.client.Refund.retrieve(refunds.refunds[0].id);
+
+    expect(retrieveRefund).to.be.an.instanceOf(Refund);
+    expect(retrieveRefund).to.deep.include(refunds.refunds[0]);
+  });
+});

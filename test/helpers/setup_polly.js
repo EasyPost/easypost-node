@@ -1,7 +1,5 @@
 /* eslint-disable array-callback-return */
-/* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
-/* eslint-disable import/no-extraneous-dependencies */
 import { resolve } from 'path';
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
 import { Polly, setupMocha as setupPolly } from '@pollyjs/core';
@@ -18,13 +16,11 @@ const redactedString = '<REDACTED>';
 const redactedObject = {};
 const redactedArray = [];
 const scrubbers = {
-  api_keys: redactedArray,
   client_ip: redactedString,
   credentials: redactedObject,
   email: redactedString,
   fields: redactedArray,
   key: redactedString,
-  keys: redactedArray,
   phone_number: redactedString,
   phone: redactedString,
   test_credentials: redactedObject,

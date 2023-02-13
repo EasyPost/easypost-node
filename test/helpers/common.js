@@ -1,8 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import 'core-js/stable';
 
 import chai from 'chai';
 
+/* eslint-disable import/no-extraneous-dependencies */
 process.on('unhandledRejection', (err) => {
   console.error(err, err.stack);
 });

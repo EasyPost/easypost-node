@@ -3,6 +3,23 @@
 ## Next Major Release
 
 - Bumps minimum Node from 10 to 12
+- Renamed default export `API` to `EasyPostClient`
+- Overhauled the data flow of the library
+  - Instead of creating a local object and then calling `.save()` on it to create/update it at the API level, you will pass in the same data as before but to one of either `create()` or `update()` functions on the service in question
+  - Services no longer implement the `delete()` function by default but instead implement it on a service-by-service basis
+  - All instance functions (excluding `lowestRate`) previously called on an object are instead called on a service. (eg: `shipment.buy(shipment.lowest_rate())` is now `client.Shipment.buy(shipment.id, shipment.lowest_rate())`))
+    - All functions attached to a service are now async and must be awaited
+- Moved library structure around
+  - Introduced `/models` that contain the EasyPost objects
+  - Renamed `/resources` to `/services` to better reflect that a service called against an EasyPostClient differs from an API resource, now known as the `models`
+  - Each service file now has `_service` appended
+  - Added `/utils` which contains both `internal_util.js` which is not intended for user consumption and `util.js` which contains public utilities
+  - Moved `getLowestSmartRate` and `validateWebook` function to `util.js` as neither of them require the client object to function
+- References of `Referral` were changed to `ReferralCustomer` to match the API
+- Corrects references of `smartrate` to `SmartRate` and `smartRate` to match the API
+- Fixes the `verifyAddress` function to actually verify an address
+- Fixes a bug that could double wrap or unintentionally wrap the results of an `/all` API call with the name of the object in question
+- Completely overhauled deserialization process, nested objects (eg: rates of shipments, etc) now properly convert to their appropriate EasyPostObject
 - Bumps major versions of all dependencies
 - Changes the `primaryOrSecondary` parameter name to `priority` in billing functions to match the API
 - Emptry response functions now return nothing (deleting records, funding a wallet, etc)
