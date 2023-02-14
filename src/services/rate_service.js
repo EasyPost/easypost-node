@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class RateService extends baseService(easypostClient) {
+  class RateService extends baseService() {
     static _name = 'Rate';
 
     static _url = 'rates';
@@ -9,18 +9,18 @@ export default (easypostClient) =>
     static key = 'rate';
 
     /**
-     * all not implemented
-     * @returns {Promise<never>}
+     * Retrieve a rate from the API.
+     * @param {string} id
+     * @returns {Rate}
      */
-    static all() {
-      return this.notImplemented('all');
-    }
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
 
-    /**
-     * create not implemented
-     * @returns {Promise<never>}
-     */
-    static create() {
-      return this.notImplemented('create');
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
   };

@@ -2,7 +2,6 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import NotImplementedError from '../../src/errors/not_implemented';
 import CustomsInfo from '../../src/models/customs_info';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -33,11 +32,5 @@ describe('CustomsInfo Service', function () {
 
     expect(customsInfo).to.be.an.instanceOf(CustomsInfo);
     expect(retrievedCustomsInfo).to.deep.include(customsInfo);
-  });
-
-  it('throws on all', function () {
-    return this.client.CustomsInfo.all().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
   });
 });

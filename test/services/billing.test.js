@@ -2,7 +2,6 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import NotImplementedError from '../../src/errors/not_implemented';
 import {
   MockMiddleware,
   MockRequest,
@@ -69,23 +68,5 @@ describe('Billing Service', function () {
 
     expect(paymentMethods.primary_payment_method).to.exist;
     expect(paymentMethods.secondary_payment_method).to.exist;
-  });
-
-  it('throws on create', function () {
-    return this.client.Billing.create().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
-  });
-
-  it('throws on retrieve', function () {
-    return this.client.Billing.retrieve().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
-  });
-
-  it('throws on all', function () {
-    return this.client.Billing.all().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
   });
 });

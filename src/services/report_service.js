@@ -1,13 +1,13 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class ReportService extends baseService(easypostClient) {
+  class ReportService extends baseService() {
     static _url = 'reports';
 
     /**
      * Create a report.
-     * @param {object} prams
-     * @returns {Pickup}
+     * @param {object} params
+     * @returns {Report}
      */
     static async create(params) {
       try {
@@ -19,12 +19,35 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of reports.
+     * Retrieve a list of all reports associated with the API key.
      * @param {string} type
-     * @param {object} query
-     * @returns {this}
+     * @param {object} params
+     * @returns {Report[]}
      */
-    static async all(type, query = {}) {
-      return super.all(query, `reports/${type}`);
+    static async all(type, params = {}) {
+      try {
+        const url = `${this._url}/${type}`;
+        const response = await easypostClient.get(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a report from the API.
+     * @param {string} id
+     * @returns {Rate}
+     */
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
   };

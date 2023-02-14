@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class AddressService extends baseService(easypostClient) {
+  class AddressService extends baseService() {
     static _name = 'Address';
 
     static _url = 'addresses';
@@ -52,6 +52,38 @@ export default (easypostClient) =>
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body.address);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a list of all addresses associated with the API key.
+     * @param {object} params
+     * @returns {Address[]}
+     */
+    static async all(params = {}) {
+      try {
+        const url = this._url;
+        const response = await easypostClient.get(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve an address from the API.
+     * @param {string} id
+     * @returns {Address}
+     */
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
+
+        return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }

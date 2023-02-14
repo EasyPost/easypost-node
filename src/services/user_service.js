@@ -1,12 +1,30 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class UserService extends baseService(easypostClient) {
+  class UserService extends baseService() {
     static _name = 'User';
 
     static _url = 'users';
 
     static key = 'user';
+
+    /**
+     * Create a user.
+     * @param {object} params
+     * @returns {User}
+     */
+    static async create(params) {
+      try {
+        const wrappedParams = {};
+        wrappedParams[this.key] = params;
+
+        const response = await easypostClient.post(this._url, wrappedParams);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
 
     /**
      * Update a user.
@@ -61,14 +79,6 @@ export default (easypostClient) =>
     }
 
     /**
-     * all not implemented
-     * @returns {Promise<never>}
-     */
-    static all() {
-      return this.notImplemented('all');
-    }
-
-    /**
      * Delete a CarrierAccount.
      * @param {string} id
      * @returns {Promise|Promise<never>}
@@ -84,7 +94,7 @@ export default (easypostClient) =>
 
     /**
      * Update the brand of a user.
-     * @param {integer} id
+     * @param {number} id
      * @param {object} params
      * @returns {Brand}
      */

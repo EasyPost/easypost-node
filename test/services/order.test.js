@@ -2,7 +2,6 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import NotImplementedError from '../../src/errors/not_implemented';
 import Order from '../../src/models/order';
 import Rate from '../../src/models/rate';
 import Fixture from '../helpers/fixture';
@@ -63,12 +62,6 @@ describe('Order Service', function () {
 
     shipmentsArray.forEach((shipment) => {
       expect(shipment.postage_label).to.exist;
-    });
-  });
-
-  it('throws on all', function () {
-    return this.client.Order.all().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 

@@ -3,7 +3,7 @@ import baseService from './base_service';
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
 export default (easypostClient) =>
-  class BatchService extends baseService(easypostClient) {
+  class BatchService extends baseService() {
     static _name = 'Batch';
 
     static _url = 'batches';
@@ -11,8 +11,26 @@ export default (easypostClient) =>
     static key = 'batch';
 
     /**
+     * Create a batch.
+     * @param {*} params
+     * @returns {Batch}
+     */
+    static async create(params) {
+      try {
+        const wrappedParams = {};
+        wrappedParams[this.key] = params;
+
+        const response = await easypostClient.post(this._url, wrappedParams);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
      * Add shipments to a batch.
-     * @param {integer} id
+     * @param {number} id
      * @param {Array} shipmentIds
      * @returns {this}
      */
@@ -32,7 +50,7 @@ export default (easypostClient) =>
 
     /**
      * Removes shipments from a batch.
-     * @param {integer} id
+     * @param {number} id
      * @param {Array} shipmentIds
      * @returns {this}
      */
@@ -52,7 +70,7 @@ export default (easypostClient) =>
 
     /**
      * Convert the label of a batch.
-     * @param {integer} id
+     * @param {number} id
      * @param {string} fileFormat
      * @returns {this}
      */
@@ -70,7 +88,7 @@ export default (easypostClient) =>
 
     /**
      * Create a scanform for a batch.
-     * @param {integer} id
+     * @param {number} id
      * @returns {this}
      */
     static async createScanForm(id) {
@@ -103,13 +121,45 @@ export default (easypostClient) =>
 
     /**
      * Buy a batch.
-     * @param {integer} id
+     * @param {number} id
      * @returns {this}
      */
     static async buy(id) {
       try {
         const url = `${this._url}/${id}/buy`;
         const response = await easypostClient.post(url);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a list of all batches associated with the API key.
+     * @param {object} params
+     * @returns {Batch[]}
+     */
+    static async all(params = {}) {
+      try {
+        const url = this._url;
+        const response = await easypostClient.get(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a batch from the API.
+     * @param {string} id
+     * @returns {Batch}
+     */
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {

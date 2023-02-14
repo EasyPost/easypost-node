@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class BillingService extends baseService(easypostClient) {
+  class BillingService extends baseService() {
     static _name = 'Billing';
 
     static _url = 'payment_methods';
@@ -78,29 +78,5 @@ export default (easypostClient) =>
       }
 
       return [endpoint, paymentMethodID];
-    }
-
-    /**
-     * create not implemented
-     * @returns {Promise<never>}
-     */
-    static create() {
-      return this.notImplemented('create');
-    }
-
-    /**
-     * retrieve not implemented
-     * @returns {Promise<never>}
-     */
-    static retrieve() {
-      return this.notImplemented('retrieve');
-    }
-
-    /**
-     * all not implemented
-     * @returns {Promise<never>}
-     */
-    static all() {
-      return this.notImplemented('all');
     }
   };

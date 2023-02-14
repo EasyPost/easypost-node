@@ -1,20 +1,12 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class EventService extends baseService(easypostClient) {
+  class EventService extends baseService() {
     static _name = 'Event';
 
     static _url = 'events';
 
     static key = 'event';
-
-    /**
-     * create not implemented
-     * @returns {Promise<never>}
-     */
-    static create() {
-      return this.notImplemented('create');
-    }
 
     /**
      * Retrieve all payloads for an event.
@@ -39,6 +31,38 @@ export default (easypostClient) =>
     static async retrievePayload(id, payloadId) {
       try {
         const response = await easypostClient.get(`${this._url}/${id}/payloads/${payloadId}`);
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a list of all events associated with the API key.
+     * @param {object} params
+     * @returns {Event[]}
+     */
+    static async all(params = {}) {
+      try {
+        const url = this._url;
+        const response = await easypostClient.get(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve an event from the API.
+     * @param {string} id
+     * @returns {Event}
+     */
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);

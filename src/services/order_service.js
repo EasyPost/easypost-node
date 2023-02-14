@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class OrderService extends baseService(easypostClient) {
+  class OrderService extends baseService() {
     static _name = 'Order';
 
     static _url = 'orders';
@@ -9,11 +9,21 @@ export default (easypostClient) =>
     static key = 'order';
 
     /**
-     * all not implemented
-     * @returns {Promise<never>}
+     * Create an order.
+     * @param {*} params
+     * @returns {Order}
      */
-    static all() {
-      return this.notImplemented('all');
+    static async create(params) {
+      try {
+        const wrappedParams = {};
+        wrappedParams[this.key] = params;
+
+        const response = await easypostClient.post(this._url, wrappedParams);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
 
     /**
@@ -41,6 +51,22 @@ export default (easypostClient) =>
     static async getRates(id) {
       try {
         const response = await easypostClient.get(`${this._url}/${id}/rates`);
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve an order from the API.
+     * @param {string} id
+     * @returns {Order}
+     */
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);

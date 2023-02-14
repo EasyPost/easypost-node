@@ -2,7 +2,7 @@ import Constants from '../constants';
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class CarrierAccountService extends baseService(easypostClient) {
+  class CarrierAccountService extends baseService() {
     static _name = 'CarrierAccount';
 
     static _url = 'carrier_accounts';
@@ -11,6 +11,7 @@ export default (easypostClient) =>
 
     /**
      * Create a carrier account.
+     * @param {object} params
      * @returns {CarrierAccount}
      */
     static async create(params) {
@@ -18,7 +19,7 @@ export default (easypostClient) =>
         const carrierAccountType = params.type;
 
         if (!carrierAccountType) {
-          throw new Error('CarrierAccount type is not set');
+          throw new Error('CarrierAccount type is not set'); // this throw is caught by the catch block below, never returned to the user
         }
 
         const wrappedParams = { carrier_account: params };
@@ -74,5 +75,37 @@ export default (easypostClient) =>
         return 'carrier_accounts/register';
       }
       return 'carrier_accounts';
+    }
+
+    /**
+     * Retrieve a list of all carrier accounts associated with the API key.
+     * @param {object} params
+     * @returns {CarrierAccount[]}
+     */
+    static async all(params = {}) {
+      try {
+        const url = this._url;
+        const response = await easypostClient.get(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a carrier account from the API.
+     * @param {string} id
+     * @returns {CarrierAccount}
+     */
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
   };

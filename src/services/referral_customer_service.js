@@ -73,12 +73,30 @@ async function sendCardDetailsToEasyPost(client, referralApiKey, stripeCreditCar
 }
 
 export default (easypostClient) =>
-  class ReferralCustomerService extends baseService(easypostClient) {
+  class ReferralCustomerService extends baseService() {
     static _name = 'Referral';
 
     static _url = 'referral_customers';
 
     static key = 'user';
+
+    /**
+     * Create a referral customer.
+     * @param {*} params
+     * @returns {ReferralCustomer}
+     */
+    static async create(params) {
+      try {
+        const wrappedParams = {};
+        wrappedParams[this.key] = params;
+
+        const response = await easypostClient.post(this._url, wrappedParams);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
 
     /**
      * Update the referral's email address.
@@ -132,11 +150,18 @@ export default (easypostClient) =>
     }
 
     /**
-     * retrieve not implemented.
-     * @returns {this}
+     * Retrieve a list of all referral customers associated with the API key.
+     * @param {object} params
+     * @returns {ReferralCustomer[]}
      */
-    // eslint-disable-next-line no-unused-vars
-    static async retrieve(id, urlPrefix) {
-      return this.notImplemented('retrieve');
+    static async all(params = {}) {
+      try {
+        const url = this._url;
+        const response = await easypostClient.get(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
   };

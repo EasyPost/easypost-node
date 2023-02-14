@@ -1,26 +1,10 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class CarrierTypeService extends baseService(easypostClient) {
+  class CarrierTypeService extends baseService() {
     static _name = 'CarrierType';
 
     static _url = 'carrier_types';
-
-    /**
-     * retrieve not implemented.
-     * @returns {Promise<never>}
-     */
-    static retrieve() {
-      return super.notImplemented('retrieve');
-    }
-
-    /**
-     * create not implemented.
-     * @returns {Promise<never>}
-     */
-    static create() {
-      return super.notImplemented('create');
-    }
 
     /**
      * Retrieve a list of records from the API (overrides default behavior to unwrap response).

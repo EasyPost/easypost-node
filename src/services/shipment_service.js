@@ -2,7 +2,7 @@ import Util from '../utils/util';
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class ShipmentService extends baseService(easypostClient) {
+  class ShipmentService extends baseService() {
     static _name = 'Shipment';
 
     static _url = 'shipments';
@@ -196,5 +196,37 @@ export default (easypostClient) =>
       );
 
       return lowestSmartRate;
+    }
+
+    /**
+     * Retrieve a list of all shipments associated with the API key.
+     * @param {object} params
+     * @returns {Shipment[]}
+     */
+    static async all(params = {}) {
+      try {
+        const url = this._url;
+        const response = await easypostClient.get(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a shipment from the API.
+     * @param {string} id
+     * @returns {Shipment}
+     */
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
   };

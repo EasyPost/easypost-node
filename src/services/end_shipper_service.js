@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class EndShipperService extends baseService(easypostClient) {
+  class EndShipperService extends baseService() {
     static _name = 'EndShipper';
 
     static _url = 'end_shippers';
@@ -34,6 +34,38 @@ export default (easypostClient) =>
       try {
         const wrappedParams = { address: params };
         const response = await easypostClient.put(`${this._url}/${id}`, wrappedParams);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a EndShipper from the API.
+     * @param {string} id
+     * @returns {EndShipper}
+     */
+    static async retrieve(id) {
+      try {
+        const url = `${this._url}/${id}`;
+        const response = await easypostClient.get(url);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a list of all EndShippers associated with the API key.
+     * @param {object} params
+     * @returns {EndShipper[]}
+     */
+    static async all(params = {}) {
+      try {
+        const url = this._url;
+        const response = await easypostClient.get(url, params);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {

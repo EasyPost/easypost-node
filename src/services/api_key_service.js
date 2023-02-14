@@ -1,24 +1,24 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class ApiKeyService extends baseService(easypostClient) {
+  class ApiKeyService extends baseService() {
     static _name = 'ApiKey';
 
     static _url = 'api_keys';
 
     /**
-     * create not implemented.
-     * @returns {Promise<never>}
+     * Retrieve a list of all API keys associated with the API key.
+     * @param {object} params
+     * @returns {ApiKey[]}
      */
-    static create() {
-      return super.notImplemented('create');
-    }
+    static async all(params = {}) {
+      try {
+        const url = this._url;
+        const response = await easypostClient.get(url, params);
 
-    /**
-     * retrieve not implemented.
-     * @returns {Promise<never>}
-     */
-    static retrieve() {
-      return super.notImplemented('retrieve');
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
   };
