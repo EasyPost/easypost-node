@@ -2,6 +2,7 @@ import os from 'os';
 import superagent from 'superagent';
 
 import pkg from '../package.json';
+import BetaRateService from './beta/beta_rate_service';
 import BetaReferralCustomerService from './beta/beta_referral_customer_service';
 import Constants from './constants';
 import ErrorHandler from './errors/error_handler';
@@ -58,6 +59,7 @@ export const SERVICES = {
   Address: AddressService,
   ApiKey: ApiKeyService,
   Batch: BatchService,
+  BetaRate: BetaRateService,
   BetaReferralCustomer: BetaReferralCustomerService,
   Billing: BillingService,
   CarrierAccount: CarrierAccountService,

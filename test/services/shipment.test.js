@@ -218,7 +218,7 @@ describe('Shipment Service', function () {
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
     await expect(
       this.client.Shipment.lowestSmartRate(shipment.id, 0, 'percentile_90'),
-    ).to.be.rejectedWith(Error, 'No rates found.');
+    ).to.be.rejectedWith(FilteringError, 'No rates found.');
   });
 
   it('raises an error for lowestSmartRate when no rates are found due to deliveryAccuracy', async function () {
@@ -227,7 +227,7 @@ describe('Shipment Service', function () {
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
     await expect(
       this.client.Shipment.lowestSmartRate(shipment.id, 3, 'BAD_ACCURACY'),
-    ).to.be.rejectedWith(Error, /Invalid deliveryAccuracy value/);
+    ).to.be.rejectedWith(InvalidParameterError, /Invalid deliveryAccuracy value/);
   });
 
   it('gets the lowest smartrate from a list of smartRates', async function () {

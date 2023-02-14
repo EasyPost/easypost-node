@@ -27,6 +27,7 @@
 - Improves error handling
   - Specific error types for each category of error
   - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
+- Add `retrieveStatelessRates` and `getLowestStatelessRate` functions
 
 ## v5.10.0 (2023-01-18)
 

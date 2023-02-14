@@ -57,6 +57,39 @@ module.exports = class Util {
   }
 
   /**
+   * Get the lowest stateless rate of this shipment.
+   * @param {Rate[]} statelessRates
+   * @param {string[]} carriers
+   * @param {string[]} deliveryAccuracy
+   * @returns {Rate} Lowest rate
+   */
+  static getLowestStatelessRate(statelessRates, carriers, services) {
+    let rates = statelessRates;
+
+    if (carriers) {
+      const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
+      rates = rates.filter((rate) => carriersLower.includes(rate.carrier.toLowerCase()));
+    }
+
+    if (services) {
+      const servicesLower = services.map((service) => service.toLowerCase());
+      rates = rates.filter((rate) => servicesLower.includes(rate.service.toLowerCase()));
+    }
+
+    if (rates.length === 0) {
+      throw new FilteringError({ message: util.format(Constants.NO_OBJECT_FOUND, 'rates') });
+    }
+
+    return rates.reduce((lowest, rate) => {
+      if (parseFloat(rate.rate) < parseFloat(lowest.rate)) {
+        return rate;
+      }
+
+      return lowest;
+    }, rates[0]);
+  }
+
+  /**
    * Validate a webhook by comparing the HMAC signature header sent from EasyPost to your shared secret.
    * If the signatures do not match, an error will be raised signifying the webhook either did not originate
    * from EasyPost or the secrets do not match. If the signatures do match, the `event_body` will be returned
