@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class CustomsInfoService extends baseService() {
+  class CustomsInfoService extends baseService(easypostClient) {
     static _name = 'CustomsInfo';
 
     static _url = 'customs_infos';
@@ -14,16 +14,12 @@ export default (easypostClient) =>
      * @returns {CustomsInfo}
      */
     static async create(params) {
-      try {
+        const url = `${this._url}`;
+
         const wrappedParams = {};
         wrappedParams[this.key] = params;
 
-        const response = await easypostClient.post(this._url, wrappedParams);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._create(url, wrappedParams);
     }
 
     /**
@@ -32,13 +28,7 @@ export default (easypostClient) =>
      * @returns {CustomsInfo}
      */
     static async retrieve(id) {
-      try {
-        const url = `${this._url}/${id}`;
-        const response = await easypostClient.get(url);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      const url = `${this._url}/${id}`;
+        return this._retrieve(url);
     }
   };

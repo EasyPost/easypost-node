@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class EventService extends baseService() {
+  class EventService extends baseService(easypostClient) {
     static _name = 'Event';
 
     static _url = 'events';
@@ -43,14 +43,7 @@ export default (easypostClient) =>
      * @returns {Event[]}
      */
     static async all(params = {}) {
-      try {
-        const url = this._url;
-        const response = await easypostClient.get(url, params);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      return this._all(this._url, params);
     }
 
     /**
@@ -59,13 +52,7 @@ export default (easypostClient) =>
      * @returns {Event}
      */
     static async retrieve(id) {
-      try {
-        const url = `${this._url}/${id}`;
-        const response = await easypostClient.get(url);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      const url = `${this._url}/${id}`;
+        return this._retrieve(url);
     }
   };

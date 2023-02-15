@@ -2,7 +2,7 @@ import Constants from '../constants';
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class CarrierAccountService extends baseService() {
+  class CarrierAccountService extends baseService(easypostClient) {
     static _name = 'CarrierAccount';
 
     static _url = 'carrier_accounts';
@@ -15,7 +15,6 @@ export default (easypostClient) =>
      * @returns {CarrierAccount}
      */
     static async create(params) {
-      try {
         const carrierAccountType = params.type;
 
         if (!carrierAccountType) {
@@ -25,12 +24,9 @@ export default (easypostClient) =>
         const wrappedParams = { carrier_account: params };
 
         const endpoint = this.selectCarrierAccountCreationEndpoint(carrierAccountType);
-        const response = await easypostClient.post(endpoint, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+
+        return this._create(endpoint, wrappedParams);
     }
 
     /**
@@ -83,14 +79,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount[]}
      */
     static async all(params = {}) {
-      try {
-        const url = this._url;
-        const response = await easypostClient.get(url, params);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._all(this._url, params);
     }
 
     /**
@@ -99,13 +88,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount}
      */
     static async retrieve(id) {
-      try {
         const url = `${this._url}/${id}`;
-        const response = await easypostClient.get(url);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._retrieve(url);
     }
   };

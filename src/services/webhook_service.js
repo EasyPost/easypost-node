@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class WebhookService extends baseService() {
+  class WebhookService extends baseService(easypostClient) {
     static _name = 'Webhook';
 
     static _url = 'webhooks';
@@ -14,16 +14,12 @@ export default (easypostClient) =>
      * @returns {Webhook}
      */
     static async create(params) {
-      try {
+        const url = `${this._url}`;
+
         const wrappedParams = {};
         wrappedParams[this.key] = params;
 
-        const response = await easypostClient.post(this._url, wrappedParams);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._create(url, wrappedParams);
     }
 
     /**
@@ -64,14 +60,7 @@ export default (easypostClient) =>
      * @returns {Webhook[]}
      */
     static async all(params = {}) {
-      try {
-        const url = this._url;
-        const response = await easypostClient.get(url, params);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      return this._all(this._url, params);
     }
 
     /**
@@ -80,13 +69,7 @@ export default (easypostClient) =>
      * @returns {Webhook}
      */
     static async retrieve(id) {
-      try {
         const url = `${this._url}/${id}`;
-        const response = await easypostClient.get(url);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._retrieve(url);
     }
   };

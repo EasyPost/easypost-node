@@ -2,7 +2,7 @@ import Util from '../utils/util';
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class ShipmentService extends baseService() {
+  class ShipmentService extends baseService(easypostClient) {
     static _name = 'Shipment';
 
     static _url = 'shipments';
@@ -16,18 +16,14 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async create(params, withCarbonOffset = false) {
-      try {
+        const url = `${this._url}`;
+
         const wrappedParams = {
-          shipment: params,
-          carbon_offset: withCarbonOffset,
+            shipment: params,
+            carbon_offset: withCarbonOffset,
         };
 
-        const response = await easypostClient.post(this._url, wrappedParams);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._create(url, wrappedParams);
     }
 
     /**
@@ -204,14 +200,7 @@ export default (easypostClient) =>
      * @returns {Shipment[]}
      */
     static async all(params = {}) {
-      try {
-        const url = this._url;
-        const response = await easypostClient.get(url, params);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      return this._all(this._url, params);
     }
 
     /**
@@ -220,13 +209,7 @@ export default (easypostClient) =>
      * @returns {Shipment}
      */
     static async retrieve(id) {
-      try {
         const url = `${this._url}/${id}`;
-        const response = await easypostClient.get(url);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._retrieve(url);
     }
   };

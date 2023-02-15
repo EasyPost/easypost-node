@@ -88,7 +88,7 @@ const RESOURCES = {
   Webhook,
 };
 
-export default () =>
+export default (easypostClient) =>
   class BaseService {
     static _url = null;
 
@@ -147,6 +147,54 @@ export default () =>
       const convertedObject = this.mapProps(object, values);
 
       return convertedObject;
+    }
+
+    /**
+     * Creates an EasyPost Object via the API.
+     * @param {string} url
+     * @param {Object} params
+     * @returns {Base}
+     */
+    static async _create(url, params) {
+      try {
+        const response = await easypostClient.post(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a list of records from the API.
+     * @param {string} url
+     * @param {object} params
+     * @returns {object|Promise<never>}
+     */
+    static async _all(url, params = {}) {
+      try {
+        // eslint-disable-next-line no-param-reassign
+        const response = await easypostClient.get(url, params);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a record from the API.
+     * @param {string} url
+     * @returns {Base|Promise<never>}
+     */
+    static async _retrieve(url) {
+      try {
+        const response = await easypostClient.get(url);
+
+        return this.convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
 
     /**

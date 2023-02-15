@@ -1,7 +1,7 @@
 import baseService from '../services/base_service';
 
 export default (easypostClient) =>
-  class BetaReferralCustomerService extends baseService() {
+  class BetaReferralCustomerService extends baseService(easypostClient) {
     static _name = 'Referral';
 
     static _url = 'referral_customers';

@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class OrderService extends baseService() {
+  class OrderService extends baseService(easypostClient) {
     static _name = 'Order';
 
     static _url = 'orders';
@@ -14,16 +14,12 @@ export default (easypostClient) =>
      * @returns {Order}
      */
     static async create(params) {
-      try {
+        const url = `${this._url}`;
+
         const wrappedParams = {};
         wrappedParams[this.key] = params;
 
-        const response = await easypostClient.post(this._url, wrappedParams);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._create(url, wrappedParams);
     }
 
     /**
@@ -63,13 +59,7 @@ export default (easypostClient) =>
      * @returns {Order}
      */
     static async retrieve(id) {
-      try {
         const url = `${this._url}/${id}`;
-        const response = await easypostClient.get(url);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._retrieve(url);
     }
   };

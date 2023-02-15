@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class AddressService extends baseService() {
+  class AddressService extends baseService(easypostClient) {
     static _name = 'Address';
 
     static _url = 'addresses';
@@ -14,7 +14,6 @@ export default (easypostClient) =>
      * @returns {Address}
      */
     static async create(params) {
-      try {
         const wrappedParams = {};
 
         if (params.verify) {
@@ -31,12 +30,8 @@ export default (easypostClient) =>
 
         wrappedParams[this.key] = params;
 
-        const response = await easypostClient.post(this._url, wrappedParams);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        const url = `${this._url}`;
+        return this._create(url, wrappedParams);
     }
 
     /**
@@ -63,14 +58,7 @@ export default (easypostClient) =>
      * @returns {Address[]}
      */
     static async all(params = {}) {
-      try {
-        const url = this._url;
-        const response = await easypostClient.get(url, params);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._all(this._url, params);
     }
 
     /**
@@ -79,14 +67,8 @@ export default (easypostClient) =>
      * @returns {Address}
      */
     static async retrieve(id) {
-      try {
-        const url = `${this._url}/${id}`;
-        const response = await easypostClient.get(url);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      const url = `${this._url}/${id}`;
+        return this._retrieve(url);
     }
 
     /**

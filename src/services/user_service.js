@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class UserService extends baseService() {
+  class UserService extends baseService(easypostClient) {
     static _name = 'User';
 
     static _url = 'users';
@@ -14,16 +14,12 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async create(params) {
-      try {
+        const url = `${this._url}`;
+
         const wrappedParams = {};
         wrappedParams[this.key] = params;
 
-        const response = await easypostClient.post(this._url, wrappedParams);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._create(url, wrappedParams);
     }
 
     /**

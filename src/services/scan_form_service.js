@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class ScanFormService extends baseService() {
+  class ScanFormService extends baseService(easypostClient) {
     static _name = 'ScanForm';
 
     static _url = 'scan_forms';
@@ -12,14 +12,13 @@ export default (easypostClient) =>
      * @returns {ScanForm}
      */
     static async create(params) {
-      try {
         // TODO: We should re-implement the check here that wraps up params in `shipments` if the user didn't
-        const response = await easypostClient.post(this._url, params);
+        const url = `${this._url}`;
 
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        const wrappedParams = {};
+        wrappedParams[this.key] = params;
+
+        return this._create(url, wrappedParams);
     }
 
     /**
@@ -28,14 +27,7 @@ export default (easypostClient) =>
      * @returns {ScanForm[]}
      */
     static async all(params = {}) {
-      try {
-        const url = this._url;
-        const response = await easypostClient.get(url, params);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      return this._all(this._url, params);
     }
 
     /**
@@ -44,13 +36,7 @@ export default (easypostClient) =>
      * @returns {ScanForm}
      */
     static async retrieve(id) {
-      try {
         const url = `${this._url}/${id}`;
-        const response = await easypostClient.get(url);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+        return this._retrieve(url);
     }
   };

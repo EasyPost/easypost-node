@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class BillingService extends baseService() {
+  class BillingService extends baseService(easypostClient) {
     static _name = 'Billing';
 
     static _url = 'payment_methods';

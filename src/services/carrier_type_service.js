@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class CarrierTypeService extends baseService() {
+  class CarrierTypeService extends baseService(easypostClient) {
     static _name = 'CarrierType';
 
     static _url = 'carrier_types';
