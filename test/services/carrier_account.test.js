@@ -42,7 +42,7 @@ describe('CarrierAccount Service', function () {
       await this.client.CarrierAccount.delete(carrierAccount.id);
     } catch (error) {
       // We're sending bad data to the API, so we expect an error
-      expect(error.status).to.equal(422);
+      expect(error.statusCode).to.equal(422);
       // We expect one of the sub-errors to be regarding a missing field
       let errorFound = false;
       // eslint-disable-next-line no-shadow

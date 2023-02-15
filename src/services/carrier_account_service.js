@@ -1,5 +1,7 @@
-import Constants from '../constants';
 import baseService from './base_service';
+import Constants from '../constants';
+import InvalidParameterError from '../exceptions/General/invalid_parameter_error';
+const util = require('util');
 
 export default (easypostClient) =>
   class CarrierAccountService extends baseService(easypostClient) {
@@ -18,7 +20,9 @@ export default (easypostClient) =>
       const carrierAccountType = params.type;
 
       if (!carrierAccountType) {
-        throw new Error('CarrierAccount type is not set');
+        throw new InvalidParameterError({
+          message: util.format(Constants.MISSING_REQUIRED_PARAMETER, 'CarrierAccount type'),
+        });
       }
 
       const endpoint = this.selectCarrierAccountCreationEndpoint(carrierAccountType);

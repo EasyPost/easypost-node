@@ -1,4 +1,6 @@
 import baseService from './base_service';
+import Constants from '../constants';
+import InvalidObjectError from '../exceptions/General/invalid_object_error';
 
 export default (easypostClient) =>
   class BillingService extends baseService(easypostClient) {
@@ -47,7 +49,7 @@ export default (easypostClient) =>
       const res = await easypostClient.get(url);
 
       if (res.body.id == null) {
-        throw new Error('Billing has not been setup for this user. Please add a payment method.');
+        throw new InvalidObjectError({ message: Constants.NO_PAYMENT_METHODS });
       }
 
       return res.body;
@@ -77,10 +79,10 @@ export default (easypostClient) =>
         } else if (paymentMethodID.startsWith('bank_')) {
           endpoint = 'bank_accounts';
         } else {
-          throw new Error(errorString);
+          throw new InvalidObjectError({ message: errorString });
         }
       } else {
-        throw new Error(errorString);
+        throw new InvalidObjectError({ message: errorString });
       }
 
       return [endpoint, paymentMethodID];

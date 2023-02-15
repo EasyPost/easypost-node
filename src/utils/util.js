@@ -1,4 +1,9 @@
+import Constants from '../constants';
+import FilteringError from '../exceptions/General/filtering_error';
+import SignatureVerificationError from '../exceptions/General/signature_verification_error';
+import InvalidParameterError from '../exceptions/General/invalid_parameter_error';
 const crypto = require('crypto');
+const util = require('util');
 
 module.exports = class Util {
   /**
@@ -22,11 +27,11 @@ module.exports = class Util {
     const lowercaseDeliveryAccuracy = deliveryAccuracy.toLowerCase();
 
     if (validDeliveryAccuracyValues.has(lowercaseDeliveryAccuracy) === false) {
-      throw new Error(
-        `Invalid deliveryAccuracy value, must be one of: ${new Array(
+      throw new InvalidParameterError({
+        message: `Invalid deliveryAccuracy value, must be one of: ${new Array(
           ...validDeliveryAccuracyValues,
         ).join(', ')}`,
-      );
+      });
     }
 
     for (let i = 0; i < smartrates.length; i += 1) {
@@ -44,7 +49,7 @@ module.exports = class Util {
     }
 
     if (lowestSmartRate === null) {
-      throw new Error('No rates found.');
+      throw new FilteringError({ message: util.format(Constants.NO_OBJECT_FOUND, 'rates') });
     }
 
     return lowestSmartRate;
@@ -84,17 +89,13 @@ module.exports = class Util {
         ) {
           webhook = JSON.parse(eventBody.toString());
         } else {
-          throw new Error(
-            'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
-          );
+          throw new SignatureVerificationError({ message: Constants.WEBHOOK_DOES_NOT_MATCH });
         }
       } catch (e) {
-        throw new Error(
-          'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
-        );
+        throw new SignatureVerificationError({ message: Constants.WEBHOOK_DOES_NOT_MATCH });
       }
     } else {
-      throw new Error('Webhook received does not contain an HMAC signature.');
+      throw new SignatureVerificationError({ message: Constants.INVALID_WEBHOOK_SIGNATURE });
     }
 
     return webhook;

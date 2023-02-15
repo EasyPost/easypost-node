@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import RequestError from '../../src/errors/request';
+import InvalidRequestError from '../../src/exceptions/API/invalid_request_error';
 import Address from '../../src/models/address';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -103,13 +103,13 @@ describe('Address Service', function () {
     const address = await this.client.Address.create({ street1: 'invalid' });
 
     return this.client.Address.verifyAddress(address.id).catch((err) =>
-      expect(err).to.be.an.instanceOf(RequestError),
+      expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });
 
   it('throws an error when we cannot create and verify an address', async function () {
     return this.client.Address.createAndVerify({ street1: 'invalid' }).catch((err) =>
-      expect(err).to.be.an.instanceOf(RequestError),
+      expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });
 });

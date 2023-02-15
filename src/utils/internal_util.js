@@ -1,3 +1,7 @@
+import Constants from '../constants';
+import FilteringError from '../exceptions/General/filtering_error';
+const util = require('util');
+
 module.exports = class Util {
   /**
    * Get the lowest rate of an EasyPost object such as a Shipment, Order, or Pickup.
@@ -20,7 +24,7 @@ module.exports = class Util {
     }
 
     if (rates.length === 0) {
-      throw new Error('No rates found.');
+      throw new FilteringError({ message: util.format(Constants.NO_OBJECT_FOUND, 'rates') });
     }
 
     return rates.reduce((lowest, rate) => {

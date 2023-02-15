@@ -4,6 +4,7 @@ import EasyPostClient from '../../src/easypost';
 import Webhook from '../../src/models/webhook';
 import Util from '../../src/utils/util';
 import Fixture from '../helpers/fixture';
+import SignatureVerificationError from '../../src/exceptions/General/signature_verification_error';
 import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable no-shadow */
@@ -107,7 +108,7 @@ describe('Webhook Service', function () {
     expect(() => {
       Util.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
     }).to.throw(
-      Error,
+      SignatureVerificationError,
       'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
     );
   });
@@ -123,7 +124,7 @@ describe('Webhook Service', function () {
     expect(() => {
       Util.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
     }).to.throw(
-      Error,
+      SignatureVerificationError,
       'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
     );
   });
@@ -136,6 +137,6 @@ describe('Webhook Service', function () {
 
     expect(() => {
       Util.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
-    }).to.throw(Error, 'Webhook received does not contain an HMAC signature.');
+    }).to.throw(SignatureVerificationError, 'Webhook does not contain a valid HMAC signature.');
   });
 });

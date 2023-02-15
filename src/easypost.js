@@ -3,7 +3,9 @@ import superagent from 'superagent';
 
 import pkg from '../package.json';
 import BetaReferralCustomerService from './beta/beta_referral_customer_service';
-import RequestError from './errors/request';
+import Constants from './constants';
+import ErrorHandler from './exceptions/error_handler';
+import MissingParameterError from './exceptions/General/missing_parameter_error';
 import AddressService from './services/address_service';
 import ApiKeyService from './services/api_key_service';
 import BatchService from './services/batch_service';
@@ -28,6 +30,8 @@ import ShipmentService from './services/shipment_service';
 import TrackerService from './services/tracker_service';
 import UserService from './services/user_service';
 import WebhookService from './services/webhook_service';
+
+const util = require('util');
 
 export const MS_SECOND = 1000;
 export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
@@ -82,7 +86,9 @@ export default class EasyPostClient {
     const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
 
     if (!key && !useProxy) {
-      throw new Error('No API key supplied. Pass in an API key as the first argument.');
+      throw new MissingParameterError({
+        message: util.format(Constants.MISSING_REQUIRED_PARAMETER, 'API Key'),
+      });
     }
 
     this.key = key;
@@ -188,7 +194,7 @@ export default class EasyPostClient {
       return response;
     } catch (error) {
       if (error.response && error.response.body) {
-        throw new RequestError(error.response, path);
+        throw ErrorHandler.handleError(error.response);
       } else {
         throw error;
       }
