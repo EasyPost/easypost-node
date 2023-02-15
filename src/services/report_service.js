@@ -10,8 +10,8 @@ export default (easypostClient) =>
      * @returns {Report}
      */
     static async create(params) {
-        const url = `${this._url}/${params.type}`;
-        return this._create(url, params);
+      const url = `${this._url}/${params.type}`;
+      return this._create(url, params);
     }
 
     /**
@@ -37,7 +37,7 @@ export default (easypostClient) =>
      * @returns {Rate}
      */
     static async retrieve(id) {
-        const url = `${this._url}/${id}`;
-        return this._retrieve(url);
+      const url = `${this._url}/${id}`;
+      return this._retrieve(url);
     }
   };

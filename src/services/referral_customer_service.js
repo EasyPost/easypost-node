@@ -86,12 +86,12 @@ export default (easypostClient) =>
      * @returns {ReferralCustomer}
      */
     static async create(params) {
-        const url = `${this._url}`;
+      const url = `${this._url}`;
 
-        const wrappedParams = {};
-        wrappedParams[this.key] = params;
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
 
-        return this._create(url, wrappedParams);
+      return this._create(url, wrappedParams);
     }
 
     /**

@@ -14,24 +14,24 @@ export default (easypostClient) =>
      * @returns {Address}
      */
     static async create(params) {
-        const wrappedParams = {};
+      const wrappedParams = {};
 
-        if (params.verify) {
-          const clone = params;
-          wrappedParams.verify = params.verify;
-          delete clone.verify;
-        }
+      if (params.verify) {
+        const clone = params;
+        wrappedParams.verify = params.verify;
+        delete clone.verify;
+      }
 
-        if (params.verify_strict) {
-          const clone = params;
-          wrappedParams.verify_strict = params.verify_strict;
-          delete clone.verify_strict;
-        }
+      if (params.verify_strict) {
+        const clone = params;
+        wrappedParams.verify_strict = params.verify_strict;
+        delete clone.verify_strict;
+      }
 
-        wrappedParams[this.key] = params;
+      wrappedParams[this.key] = params;
 
-        const url = `${this._url}`;
-        return this._create(url, wrappedParams);
+      const url = `${this._url}`;
+      return this._create(url, wrappedParams);
     }
 
     /**
@@ -58,7 +58,7 @@ export default (easypostClient) =>
      * @returns {Address[]}
      */
     static async all(params = {}) {
-        return this._all(this._url, params);
+      return this._all(this._url, params);
     }
 
     /**
@@ -68,7 +68,7 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
-        return this._retrieve(url);
+      return this._retrieve(url);
     }
 
     /**

@@ -15,18 +15,17 @@ export default (easypostClient) =>
      * @returns {CarrierAccount}
      */
     static async create(params) {
-        const carrierAccountType = params.type;
+      const carrierAccountType = params.type;
 
-        if (!carrierAccountType) {
-          throw new Error('CarrierAccount type is not set'); // this throw is caught by the catch block below, never returned to the user
-        }
+      if (!carrierAccountType) {
+        throw new Error('CarrierAccount type is not set'); // this throw is caught by the catch block below, never returned to the user
+      }
 
-        const wrappedParams = { carrier_account: params };
+      const wrappedParams = { carrier_account: params };
 
-        const endpoint = this.selectCarrierAccountCreationEndpoint(carrierAccountType);
+      const endpoint = this.selectCarrierAccountCreationEndpoint(carrierAccountType);
 
-
-        return this._create(endpoint, wrappedParams);
+      return this._create(endpoint, wrappedParams);
     }
 
     /**
@@ -79,7 +78,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount[]}
      */
     static async all(params = {}) {
-        return this._all(this._url, params);
+      return this._all(this._url, params);
     }
 
     /**
@@ -88,7 +87,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount}
      */
     static async retrieve(id) {
-        const url = `${this._url}/${id}`;
-        return this._retrieve(url);
+      const url = `${this._url}/${id}`;
+      return this._retrieve(url);
     }
   };

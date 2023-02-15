@@ -12,6 +12,6 @@ export default (easypostClient) =>
      * @returns {ApiKey[]}
      */
     static async all(params = {}) {
-        return this._all(this._url, params);
+      return this._all(this._url, params);
     }
   };

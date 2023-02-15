@@ -16,14 +16,14 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async create(params, withCarbonOffset = false) {
-        const url = `${this._url}`;
+      const url = `${this._url}`;
 
-        const wrappedParams = {
-            shipment: params,
-            carbon_offset: withCarbonOffset,
-        };
+      const wrappedParams = {
+        shipment: params,
+        carbon_offset: withCarbonOffset,
+      };
 
-        return this._create(url, wrappedParams);
+      return this._create(url, wrappedParams);
     }
 
     /**
@@ -209,7 +209,7 @@ export default (easypostClient) =>
      * @returns {Shipment}
      */
     static async retrieve(id) {
-        const url = `${this._url}/${id}`;
-        return this._retrieve(url);
+      const url = `${this._url}/${id}`;
+      return this._retrieve(url);
     }
   };

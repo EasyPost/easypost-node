@@ -12,13 +12,13 @@ export default (easypostClient) =>
      * @returns {ScanForm}
      */
     static async create(params) {
-        // TODO: We should re-implement the check here that wraps up params in `shipments` if the user didn't
-        const url = `${this._url}`;
+      // TODO: We should re-implement the check here that wraps up params in `shipments` if the user didn't
+      const url = `${this._url}`;
 
-        const wrappedParams = {};
-        wrappedParams[this.key] = params;
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
 
-        return this._create(url, wrappedParams);
+      return this._create(url, wrappedParams);
     }
 
     /**
@@ -36,7 +36,7 @@ export default (easypostClient) =>
      * @returns {ScanForm}
      */
     static async retrieve(id) {
-        const url = `${this._url}/${id}`;
-        return this._retrieve(url);
+      const url = `${this._url}/${id}`;
+      return this._retrieve(url);
     }
   };

@@ -16,12 +16,12 @@ export default (easypostClient) =>
      * @returns {Batch}
      */
     static async create(params) {
-        const url = `${this._url}`;
+      const url = `${this._url}`;
 
-        const wrappedParams = {};
-        wrappedParams[this.key] = params;
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
 
-        return this._create(url, wrappedParams);
+      return this._create(url, wrappedParams);
     }
 
     /**
@@ -147,6 +147,6 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
-        return this._retrieve(url);
+      return this._retrieve(url);
     }
   };

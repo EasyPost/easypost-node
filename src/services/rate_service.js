@@ -15,6 +15,6 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
-        return this._retrieve(url);
+      return this._retrieve(url);
     }
   };
