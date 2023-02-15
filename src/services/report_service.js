@@ -6,7 +6,6 @@ export default (easypostClient) =>
 
     /**
      * Create a report.
-     * @param {string} type
      * @param {object} params
      * @returns {Report}
      */
