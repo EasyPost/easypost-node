@@ -12,6 +12,8 @@ export default (easypostClient) =>
      * @returns {ApiKey[]}
      */
     static async all(params = {}) {
-      return this._all(this._url, params);
+      const url = `${this._url}`;
+
+      return this._all(url, params);
     }
   };

@@ -30,9 +30,11 @@ export default (easypostClient) =>
      * @returns {Pickup}
      */
     static async buy(id, carrier, service) {
+      const url = `${this._url}/${id}/buy`;
+      const wrappedParams = { carrier, service };
       try {
-        const wrappedParams = { carrier, service };
-        const response = await easypostClient.post(`${this._url}/${id}/buy`, wrappedParams);
+        const response = await easypostClient.post(url, wrappedParams);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
@@ -45,8 +47,10 @@ export default (easypostClient) =>
      * @returns {Pickup}
      */
     static async cancel(id) {
+      const url = `${this._url}/${id}/cancel`;
       try {
-        const response = await easypostClient.post(`${this._url}/${id}/cancel`);
+        const response = await easypostClient.post(url);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
@@ -59,7 +63,9 @@ export default (easypostClient) =>
      * @returns {Pickup[]}
      */
     static async all(params = {}) {
-      return this._all(this._url, params);
+      const url = `${this._url}`;
+
+      return this._all(url, params);
     }
 
     /**
@@ -69,6 +75,7 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
+
       return this._retrieve(url);
     }
   };

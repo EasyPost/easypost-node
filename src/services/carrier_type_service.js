@@ -12,8 +12,10 @@ export default (easypostClient) =>
      * @returns {Array|Promise<never>}
      */
     static async all(query = {}) {
+      const url = `${this._url}`;
+
       try {
-        const response = await easypostClient.get(this._url, query);
+        const response = await easypostClient.get(url, query);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {

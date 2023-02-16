@@ -29,10 +29,13 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async update(id, params) {
+      const url = `${this._url}/${id}`;
+      const wrappedParams = {
+        user: params,
+      };
+
       try {
-        const response = await easypostClient.patch(`${this._url}/${id}`, {
-          user: params,
-        });
+        const response = await easypostClient.patch(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -46,8 +49,11 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>}
      */
     static async delete(id) {
+      const url = `${this._url}/${id}`;
+
       try {
-        await easypostClient.del(`${this._url}/${id}`);
+        await easypostClient.del(url);
+
         return Promise.resolve();
       } catch (e) {
         return Promise.reject(e);
@@ -60,7 +66,9 @@ export default (easypostClient) =>
      * @returns {Webhook[]}
      */
     static async all(params = {}) {
-      return this._all(this._url, params);
+      const url = `${this._url}`;
+
+      return this._all(url, params);
     }
 
     /**
@@ -70,6 +78,7 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
+
       return this._retrieve(url);
     }
   };

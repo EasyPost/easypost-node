@@ -17,9 +17,11 @@ export default (easypostClient) =>
       const paymentInfo = await this.getPaymentInfo(priority.toLowerCase());
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
+
+      const url = `${endpoint}/${paymentMethodID}/charges`;
       const wrappedParams = { amount };
 
-      await easypostClient.post(`${endpoint}/${paymentMethodID}/charges`, wrappedParams);
+      await easypostClient.post(url, wrappedParams);
     }
 
     /**
@@ -30,7 +32,9 @@ export default (easypostClient) =>
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
 
-      await easypostClient.del(`${endpoint}/${paymentMethodID}`);
+      const url = `${endpoint}/${paymentMethodID}`;
+
+      await easypostClient.del(url);
     }
 
     /**
@@ -38,7 +42,9 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>}
      */
     static async retrievePaymentMethods() {
-      const res = await easypostClient.get('payment_methods');
+      const url = 'payment_methods';
+
+      const res = await easypostClient.get(url);
 
       if (res.body.id == null) {
         throw new Error('Billing has not been setup for this user. Please add a payment method.');

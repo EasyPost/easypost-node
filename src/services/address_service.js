@@ -14,6 +14,8 @@ export default (easypostClient) =>
      * @returns {Address}
      */
     static async create(params) {
+      const url = `${this._url}`;
+
       const wrappedParams = {};
 
       if (params.verify) {
@@ -30,7 +32,6 @@ export default (easypostClient) =>
 
       wrappedParams[this.key] = params;
 
-      const url = `${this._url}`;
       return this._create(url, wrappedParams);
     }
 
@@ -40,10 +41,10 @@ export default (easypostClient) =>
      * @returns {Address}
      */
     static async createAndVerify(params) {
+      const url = `${this._url}/create_and_verify`;
       const wrappedParams = { address: params };
 
       try {
-        const url = `${this._url}/create_and_verify`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body.address);
@@ -58,7 +59,9 @@ export default (easypostClient) =>
      * @returns {Address[]}
      */
     static async all(params = {}) {
-      return this._all(this._url, params);
+      const url = `${this._url}`;
+
+      return this._all(url, params);
     }
 
     /**
@@ -68,6 +71,7 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
+
       return this._retrieve(url);
     }
 

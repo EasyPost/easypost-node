@@ -21,8 +21,9 @@ export default (easypostClient) =>
      * @returns {Report[]}
      */
     static async all(type, params = {}) {
+      const url = `${this._url}/${type}`;
+
       try {
-        const url = `${this._url}/${type}`;
         const response = await easypostClient.get(url, params);
 
         return this.convertToEasyPostObject(response.body);
@@ -38,6 +39,7 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
+
       return this._retrieve(url);
     }
   };

@@ -14,8 +14,9 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async create(params) {
-      const wrappedParams = { address: params };
       const url = `${this._url}`;
+      const wrappedParams = { address: params };
+
       return this._create(url, wrappedParams);
     }
 
@@ -26,8 +27,9 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async update(id, params) {
+      const wrappedParams = { address: params };
+
       try {
-        const wrappedParams = { address: params };
         const response = await easypostClient.put(`${this._url}/${id}`, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -43,6 +45,7 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
+
       return this._retrieve(url);
     }
 
@@ -52,6 +55,8 @@ export default (easypostClient) =>
      * @returns {EndShipper[]}
      */
     static async all(params = {}) {
-      return this._all(this._url, params);
+      const url = `${this._url}`;
+
+      return this._all(url, params);
     }
   };

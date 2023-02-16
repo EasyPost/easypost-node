@@ -31,11 +31,11 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async addShipments(id, shipmentIds) {
+      const url = `${this._url}/${id}/add_shipments`;
+      const wrappedParams = {
+        shipments: shipmentIds.map((s) => ({ id: s })),
+      };
       try {
-        const wrappedParams = {
-          shipments: shipmentIds.map((s) => ({ id: s })),
-        };
-        const url = `${this._url}/${id}/add_shipments`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -51,11 +51,12 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async removeShipments(id, shipmentIds) {
+      const url = `${this._url}/${id}/remove_shipments`;
+      const wrappedParams = {
+        shipments: shipmentIds.map((s) => ({ id: s })),
+      };
+
       try {
-        const wrappedParams = {
-          shipments: shipmentIds.map((s) => ({ id: s })),
-        };
-        const url = `${this._url}/${id}/remove_shipments`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -71,9 +72,10 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async generateLabel(id, fileFormat = DEFAULT_LABEL_FORMAT) {
+      const url = `${this._url}/${id}/label`;
+      const wrappedParams = { file_format: fileFormat };
+
       try {
-        const wrappedParams = { file_format: fileFormat };
-        const url = `${this._url}/${id}/label`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -88,8 +90,9 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async createScanForm(id) {
+      const url = `${this._url}/${id}/scan_form`;
+
       try {
-        const url = `${this._url}/${id}/scan_form`;
         const response = await easypostClient.post(url);
 
         return this.convertToEasyPostObject(response.body);
@@ -104,9 +107,10 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async createAndBuy(params) {
+      const url = `${this._url}/create_and_buy`;
+      const wrappedParams = { batch: params };
+
       try {
-        const wrappedParams = { batch: params };
-        const url = `${this._url}/create_and_buy`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -121,8 +125,9 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async buy(id) {
+      const url = `${this._url}/${id}/buy`;
+
       try {
-        const url = `${this._url}/${id}/buy`;
         const response = await easypostClient.post(url);
 
         return this.convertToEasyPostObject(response.body);
@@ -137,7 +142,9 @@ export default (easypostClient) =>
      * @returns {Batch[]}
      */
     static async all(params = {}) {
-      return this._all(this._url, params);
+      const url = `${this._url}`;
+
+      return this._all(url, params);
     }
 
     /**
@@ -147,6 +154,7 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
+
       return this._retrieve(url);
     }
   };

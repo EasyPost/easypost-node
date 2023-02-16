@@ -29,10 +29,13 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async update(id, params) {
+      const url = `${this._url}/${id}`;
+      const wrappedParams = {
+        user: params,
+      };
+
       try {
-        const response = await easypostClient.patch(`${this._url}/${id}`, {
-          user: params,
-        });
+        const response = await easypostClient.patch(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -47,12 +50,13 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async retrieve(id, urlPrefix) {
+      let url = urlPrefix || this._url; // retrieve self
+      if (id) {
+        // retrieve child users
+        url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
+      }
+
       try {
-        let url = urlPrefix || this._url; // retrieve self
-        if (id) {
-          // retrieve child users
-          url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
-        }
         const response = await easypostClient.get(url);
 
         return this.convertToEasyPostObject(response.body);
@@ -66,8 +70,11 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async retrieveMe() {
+      const url = `${this._url}`;
+
       try {
-        const response = await easypostClient.get(this._url);
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
@@ -80,8 +87,11 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>}
      */
     static async delete(id) {
+      const url = `${this._url}/${id}`;
+
       try {
-        await easypostClient.del(`${this._url}/${id}`);
+        await easypostClient.del(url);
+
         return Promise.resolve();
       } catch (e) {
         return Promise.reject(e);
@@ -95,10 +105,12 @@ export default (easypostClient) =>
      * @returns {Brand}
      */
     static async updateBrand(id, params) {
+      const url = `${this._url}/${id}/brand`;
+      const wrappedParams = { brand: params };
+
       try {
-        const wrappedParams = { brand: params };
-        const url = `${this._url}/${id}/brand`;
         const response = await easypostClient.patch(url, wrappedParams);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);

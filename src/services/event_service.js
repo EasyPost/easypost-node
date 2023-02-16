@@ -14,8 +14,11 @@ export default (easypostClient) =>
      * @returns {Promise<Array<Payload>>}
      */
     static async retrieveAllPayloads(id) {
+      const url = `${this._url}/${id}/payloads`;
+
       try {
-        const response = await easypostClient.get(`${this._url}/${id}/payloads`);
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body.payloads);
       } catch (e) {
         return Promise.reject(e);
@@ -29,8 +32,11 @@ export default (easypostClient) =>
      * @returns {Promise<Payload>}
      */
     static async retrievePayload(id, payloadId) {
+      const url = `${this._url}/${id}/payloads/${payloadId}`;
+
       try {
-        const response = await easypostClient.get(`${this._url}/${id}/payloads/${payloadId}`);
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
@@ -43,7 +49,9 @@ export default (easypostClient) =>
      * @returns {Event[]}
      */
     static async all(params = {}) {
-      return this._all(this._url, params);
+      const url = `${this._url}`;
+
+      return this._all(url, params);
     }
 
     /**
@@ -53,6 +61,7 @@ export default (easypostClient) =>
      */
     static async retrieve(id) {
       const url = `${this._url}/${id}`;
+
       return this._retrieve(url);
     }
   };

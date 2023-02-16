@@ -22,7 +22,9 @@ function getReferralApi(api, referralApiKey) {
  * @returns {string} - The Stripe API key.
  */
 async function getEasyPostStripeKey(easypostClient) {
-  const response = await easypostClient.get('partners/stripe_public_key');
+  const url = 'partners/stripe_public_key';
+
+  const response = await easypostClient.get(url);
 
   return response.body.public_key;
 }
@@ -38,14 +40,12 @@ async function getEasyPostStripeKey(easypostClient) {
  */
 async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
   // Stripe's endpoint requires form-encoded requests
-  const request = superagent
-    .post(
-      `https://api.stripe.com/v1/tokens?card[number]=${number}&card[exp_month]=${expirationMonth}&card[exp_year]=${expirationYear}&card[cvc]=${cvc}`,
-    )
-    .set({
-      Authorization: `Bearer ${stripeKey}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
+  const url = `https://api.stripe.com/v1/tokens?card[number]=${number}&card[exp_month]=${expirationMonth}&card[exp_year]=${expirationYear}&card[cvc]=${cvc}`;
+
+  const request = superagent.post(url).set({
+    Authorization: `Bearer ${stripeKey}`,
+    'Content-Type': 'application/x-www-form-urlencoded',
+  });
 
   try {
     const response = await request;
@@ -66,8 +66,10 @@ async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expir
  */
 async function sendCardDetailsToEasyPost(client, referralApiKey, stripeCreditCardToken, priority) {
   const _api = getReferralApi(client, referralApiKey);
+  const url = 'credit_cards';
   const params = { credit_card: { stripe_object_id: stripeCreditCardToken, priority } };
-  const response = await _api.post('credit_cards', params);
+
+  const response = await _api.post(url, params);
 
   return response.body;
 }
@@ -151,6 +153,8 @@ export default (easypostClient) =>
      * @returns {ReferralCustomer[]}
      */
     static async all(params = {}) {
-      return this._all(this._url, params);
+      const url = `${this._url}`;
+
+      return this._all(url, params);
     }
   };
