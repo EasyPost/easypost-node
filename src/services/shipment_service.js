@@ -16,7 +16,7 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async create(params, withCarbonOffset = false) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       const wrappedParams = {
         shipment: params,
@@ -214,7 +214,7 @@ export default (easypostClient) =>
      * @returns {Shipment[]}
      */
     static async all(params = {}) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       return this._all(url, params);
     }

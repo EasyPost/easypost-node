@@ -14,7 +14,7 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async create(params) {
-      const url = `${this._url}`;
+      const url = this._url;
       const wrappedParams = { address: params };
 
       return this._create(url, wrappedParams);
@@ -55,7 +55,7 @@ export default (easypostClient) =>
      * @returns {EndShipper[]}
      */
     static async all(params = {}) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       return this._all(url, params);
     }

@@ -12,12 +12,18 @@ export default (easypostClient) =>
      * @returns {ScanForm}
      */
     static async create(params) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       // wraps up params in `shipments` if the user didn't do it
-      if (!params.shipments) {
+      // turn a list of shipment objects into a map of shipment ids
+      if (params.shipments) {
         // eslint-disable-next-line no-param-reassign
-        params = { shipments: params };
+        params.shipments = params.shipments.map((s) => {
+          if (typeof s === 'string') {
+            return { id: s };
+          }
+          return { id: s.id };
+        });
       }
 
       const wrappedParams = {};
@@ -32,7 +38,7 @@ export default (easypostClient) =>
      * @returns {ScanForm[]}
      */
     static async all(params = {}) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       return this._all(url, params);
     }

@@ -14,7 +14,7 @@ export default (easypostClient) =>
      * @returns {CustomsItem}
      */
     static async create(params) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       const wrappedParams = {};
       wrappedParams[this.key] = params;

@@ -14,7 +14,7 @@ export default (easypostClient) =>
      * @returns {Tracker}
      */
     static async create(params) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       const wrappedParams = {};
       wrappedParams[this.key] = params;
@@ -38,7 +38,7 @@ export default (easypostClient) =>
      * @returns {Tracker[]}
      */
     static async all(params = {}) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       return this._all(url, params);
     }

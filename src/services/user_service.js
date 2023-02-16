@@ -14,7 +14,7 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async create(params) {
-      const url = `${this._url}`;
+      const url = this._url;
 
       const wrappedParams = {};
       wrappedParams[this.key] = params;
@@ -70,7 +70,7 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async retrieveMe() {
-      const url = `${this._url}`;
+      const url = this._url;
 
       try {
         const response = await easypostClient.get(url);
