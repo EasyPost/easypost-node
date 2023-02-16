@@ -22,6 +22,10 @@ export default (easypostClient) =>
     static async all(params = {}) {
       const url = `${this._url}/${params.type}`;
 
+      // delete "type" from params, so it doesn't get sent to the API
+      // eslint-disable-next-line no-param-reassign
+      delete params.type;
+
       try {
         const response = await easypostClient.get(url, params);
 
