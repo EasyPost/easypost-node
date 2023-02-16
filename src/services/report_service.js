@@ -16,12 +16,11 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a list of all reports associated with the API key.
-     * @param {string} type
      * @param {object} params
      * @returns {Report[]}
      */
-    static async all(type, params = {}) {
-      const url = `${this._url}/${type}`;
+    static async all(params = {}) {
+      const url = `${this._url}/${params.type}`;
 
       try {
         const response = await easypostClient.get(url, params);
