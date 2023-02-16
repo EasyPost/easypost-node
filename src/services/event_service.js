@@ -9,21 +9,16 @@ export default (easypostClient) =>
     static key = 'event';
 
     /**
-     * create not implemented
-     * @returns {Promise<never>}
-     */
-    static create() {
-      return this.notImplemented('create');
-    }
-
-    /**
      * Retrieve all payloads for an event.
      * @param {string} id - Event ID
      * @returns {Promise<Array<Payload>>}
      */
     static async retrieveAllPayloads(id) {
+      const url = `${this._url}/${id}/payloads`;
+
       try {
-        const response = await easypostClient.get(`${this._url}/${id}/payloads`);
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body.payloads);
       } catch (e) {
         return Promise.reject(e);
@@ -37,11 +32,36 @@ export default (easypostClient) =>
      * @returns {Promise<Payload>}
      */
     static async retrievePayload(id, payloadId) {
+      const url = `${this._url}/${id}/payloads/${payloadId}`;
+
       try {
-        const response = await easypostClient.get(`${this._url}/${id}/payloads/${payloadId}`);
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
+    }
+
+    /**
+     * Retrieve a list of all events associated with the API key.
+     * @param {object} params
+     * @returns {Event[]}
+     */
+    static async all(params = {}) {
+      const url = this._url;
+
+      return this._all(url, params);
+    }
+
+    /**
+     * Retrieve an event from the API.
+     * @param {string} id
+     * @returns {Event}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

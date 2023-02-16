@@ -2,7 +2,6 @@
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
-import NotImplementedError from '../../src/errors/not_implemented';
 import CustomsItem from '../../src/models/customs_item';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -33,11 +32,5 @@ describe('CustomsItem Service', function () {
 
     expect(customsItem).to.be.an.instanceOf(CustomsItem);
     expect(retrievedCustomsInfo).to.deep.include(customsItem);
-  });
-
-  it('throws on all', function () {
-    return this.client.CustomsItem.all().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
   });
 });

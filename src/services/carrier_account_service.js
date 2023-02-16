@@ -11,25 +11,21 @@ export default (easypostClient) =>
 
     /**
      * Create a carrier account.
+     * @param {object} params
      * @returns {CarrierAccount}
      */
     static async create(params) {
-      try {
-        const carrierAccountType = params.type;
+      const carrierAccountType = params.type;
 
-        if (!carrierAccountType) {
-          throw new Error('CarrierAccount type is not set');
-        }
-
-        const wrappedParams = { carrier_account: params };
-
-        const endpoint = this.selectCarrierAccountCreationEndpoint(carrierAccountType);
-        const response = await easypostClient.post(endpoint, wrappedParams);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
+      if (!carrierAccountType) {
+        throw new Error('CarrierAccount type is not set');
       }
+
+      const endpoint = this.selectCarrierAccountCreationEndpoint(carrierAccountType);
+
+      const wrappedParams = { carrier_account: params };
+
+      return this._create(endpoint, wrappedParams);
     }
 
     /**
@@ -39,10 +35,13 @@ export default (easypostClient) =>
      * @returns {CarrierAccount}
      */
     static async update(id, params) {
+      const url = `${this._url}/${id}`;
+      const wrappedParams = {
+        carrier_account: params,
+      };
+
       try {
-        const response = await easypostClient.patch(`${this._url}/${id}`, {
-          carrier_account: params,
-        });
+        const response = await easypostClient.patch(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -56,8 +55,11 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>}
      */
     static async delete(id) {
+      const url = `${this._url}/${id}`;
+
       try {
-        await easypostClient.del(`${this._url}/${id}`);
+        await easypostClient.del(url);
+
         return Promise.resolve();
       } catch (e) {
         return Promise.reject(e);
@@ -74,5 +76,27 @@ export default (easypostClient) =>
         return 'carrier_accounts/register';
       }
       return 'carrier_accounts';
+    }
+
+    /**
+     * Retrieve a list of all carrier accounts associated with the API key.
+     * @param {object} params
+     * @returns {CarrierAccount[]}
+     */
+    static async all(params = {}) {
+      const url = this._url;
+
+      return this._all(url, params);
+    }
+
+    /**
+     * Retrieve a carrier account from the API.
+     * @param {string} id
+     * @returns {CarrierAccount}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

@@ -9,10 +9,27 @@ export default (easypostClient) =>
     static key = 'customs_info';
 
     /**
-     * all not implemented.
-     * @returns {Promise<never>}
+     * Create a customs info record.
+     * @param {*} params
+     * @returns {CustomsInfo}
      */
-    static all() {
-      return super.notImplemented('all');
+    static async create(params) {
+      const url = this._url;
+
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
+
+      return this._create(url, wrappedParams);
+    }
+
+    /**
+     * Retrieve a customs info record from the API.
+     * @param {string} id
+     * @returns {CustomsInfo}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

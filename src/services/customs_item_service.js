@@ -9,10 +9,27 @@ export default (easypostClient) =>
     static key = 'customs_item';
 
     /**
-     * all not implemented.
-     * @returns {Promise<never>}
+     * Create a customs item.
+     * @param {*} params
+     * @returns {CustomsItem}
      */
-    static all() {
-      return this.notImplemented('all');
+    static async create(params) {
+      const url = this._url;
+
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
+
+      return this._create(url, wrappedParams);
+    }
+
+    /**
+     * Retrieve a customs item from the API.
+     * @param {string} id
+     * @returns {CustomsItem}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

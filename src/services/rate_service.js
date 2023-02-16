@@ -9,18 +9,13 @@ export default (easypostClient) =>
     static key = 'rate';
 
     /**
-     * all not implemented
-     * @returns {Promise<never>}
+     * Retrieve a rate from the API.
+     * @param {string} id
+     * @returns {Rate}
      */
-    static all() {
-      return this.notImplemented('all');
-    }
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
 
-    /**
-     * create not implemented
-     * @returns {Promise<never>}
-     */
-    static create() {
-      return this.notImplemented('create');
+      return this._retrieve(url);
     }
   };

@@ -70,8 +70,9 @@ describe('Report Service', function () {
   });
 
   it('retrieves all reports', async function () {
-    const reports = await this.client.Report.all(Fixture.reportType(), {
+    const reports = await this.client.Report.all({
       page_size: Fixture.pageSize(),
+      type: Fixture.reportType(),
     });
 
     const reportsArray = reports.reports;

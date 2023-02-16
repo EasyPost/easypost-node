@@ -2,7 +2,6 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import NotImplementedError from '../../src/errors/not_implemented';
 import Brand from '../../src/models/brand';
 import User from '../../src/models/user';
 import * as setupPolly from '../helpers/setup_polly';
@@ -84,11 +83,5 @@ describe('User Service', function () {
     expect(brand).to.be.an.instanceOf(Brand);
     expect(brand.id).to.match(/^brd_/);
     expect(brand.color).to.equal(color);
-  });
-
-  it('throws on all', function () {
-    return this.client.User.all().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
   });
 });

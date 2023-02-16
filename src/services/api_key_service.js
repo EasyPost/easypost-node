@@ -7,18 +7,13 @@ export default (easypostClient) =>
     static _url = 'api_keys';
 
     /**
-     * create not implemented.
-     * @returns {Promise<never>}
+     * Retrieve a list of all API keys associated with the API key.
+     * @param {object} params
+     * @returns {ApiKey[]}
      */
-    static create() {
-      return super.notImplemented('create');
-    }
+    static async all(params = {}) {
+      const url = this._url;
 
-    /**
-     * retrieve not implemented.
-     * @returns {Promise<never>}
-     */
-    static retrieve() {
-      return super.notImplemented('retrieve');
+      return this._all(url, params);
     }
   };

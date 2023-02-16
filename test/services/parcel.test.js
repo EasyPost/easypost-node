@@ -2,7 +2,6 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import NotImplementedError from '../../src/errors/not_implemented';
 import Parcel from '../../src/models/parcel';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -33,11 +32,5 @@ describe('Parcel Service', function () {
 
     expect(parcel).to.be.an.instanceOf(Parcel);
     expect(retrievedParcel).to.deep.include(parcel);
-  });
-
-  it('throws on all', function () {
-    return this.client.Parcel.all().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
-    });
   });
 });

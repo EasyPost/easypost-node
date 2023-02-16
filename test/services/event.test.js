@@ -4,7 +4,6 @@ import { resolve } from 'path';
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import NotImplementedError from '../../src/errors/not_implemented';
 import Event from '../../src/models/event';
 import Payload from '../../src/models/payload';
 import Fixture from '../helpers/fixture';
@@ -44,12 +43,6 @@ describe('Event Service', function () {
     expect(events.has_more).to.exist;
     eventsArray.forEach((event) => {
       expect(event).to.be.an.instanceOf(Event);
-    });
-  });
-
-  it('throws on create', function () {
-    return this.client.Event.create().catch((err) => {
-      expect(err).to.be.an.instanceOf(NotImplementedError);
     });
   });
 

@@ -9,16 +9,33 @@ export default (easypostClient) =>
     static key = 'user';
 
     /**
+     * Create a user.
+     * @param {object} params
+     * @returns {User}
+     */
+    static async create(params) {
+      const url = this._url;
+
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
+
+      return this._create(url, wrappedParams);
+    }
+
+    /**
      * Update a user.
      * @param {string} id
      * @param {object} params
      * @returns {User}
      */
     static async update(id, params) {
+      const url = `${this._url}/${id}`;
+      const wrappedParams = {
+        user: params,
+      };
+
       try {
-        const response = await easypostClient.patch(`${this._url}/${id}`, {
-          user: params,
-        });
+        const response = await easypostClient.patch(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -33,12 +50,13 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async retrieve(id, urlPrefix) {
+      let url = urlPrefix || this._url; // retrieve self
+      if (id) {
+        // retrieve child users
+        url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
+      }
+
       try {
-        let url = urlPrefix || this._url; // retrieve self
-        if (id) {
-          // retrieve child users
-          url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
-        }
         const response = await easypostClient.get(url);
 
         return this.convertToEasyPostObject(response.body);
@@ -52,20 +70,15 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async retrieveMe() {
+      const url = this._url;
+
       try {
-        const response = await easypostClient.get(this._url);
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
-    }
-
-    /**
-     * all not implemented
-     * @returns {Promise<never>}
-     */
-    static all() {
-      return this.notImplemented('all');
     }
 
     /**
@@ -74,8 +87,11 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>}
      */
     static async delete(id) {
+      const url = `${this._url}/${id}`;
+
       try {
-        await easypostClient.del(`${this._url}/${id}`);
+        await easypostClient.del(url);
+
         return Promise.resolve();
       } catch (e) {
         return Promise.reject(e);
@@ -84,15 +100,17 @@ export default (easypostClient) =>
 
     /**
      * Update the brand of a user.
-     * @param {integer} id
+     * @param {number} id
      * @param {object} params
      * @returns {Brand}
      */
     static async updateBrand(id, params) {
+      const url = `${this._url}/${id}/brand`;
+      const wrappedParams = { brand: params };
+
       try {
-        const wrappedParams = { brand: params };
-        const url = `${this._url}/${id}/brand`;
         const response = await easypostClient.patch(url, wrappedParams);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);

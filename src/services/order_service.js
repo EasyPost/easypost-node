@@ -9,11 +9,17 @@ export default (easypostClient) =>
     static key = 'order';
 
     /**
-     * all not implemented
-     * @returns {Promise<never>}
+     * Create an order.
+     * @param {*} params
+     * @returns {Order}
      */
-    static all() {
-      return this.notImplemented('all');
+    static async create(params) {
+      const url = this._url;
+
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
+
+      return this._create(url, wrappedParams);
     }
 
     /**
@@ -24,9 +30,11 @@ export default (easypostClient) =>
      * @returns {Order}
      */
     static async buy(id, carrier, service) {
+      const url = `${this._url}/${id}/buy`;
+      const wrappedParams = { carrier, service };
       try {
-        const wrappedParams = { carrier, service };
-        const response = await easypostClient.post(`${this._url}/${id}/buy`, wrappedParams);
+        const response = await easypostClient.post(url, wrappedParams);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
@@ -39,11 +47,25 @@ export default (easypostClient) =>
      * @returns {Order}
      */
     static async getRates(id) {
+      const url = `${this._url}/${id}/rates`;
+
       try {
-        const response = await easypostClient.get(`${this._url}/${id}/rates`);
+        const response = await easypostClient.get(url);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
+    }
+
+    /**
+     * Retrieve an order from the API.
+     * @param {string} id
+     * @returns {Order}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

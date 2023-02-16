@@ -14,29 +14,25 @@ export default (easypostClient) =>
      * @returns {Address}
      */
     static async create(params) {
-      try {
-        const wrappedParams = {};
+      const url = this._url;
 
-        if (params.verify) {
-          const clone = params;
-          wrappedParams.verify = params.verify;
-          delete clone.verify;
-        }
+      const wrappedParams = {};
 
-        if (params.verify_strict) {
-          const clone = params;
-          wrappedParams.verify_strict = params.verify_strict;
-          delete clone.verify_strict;
-        }
-
-        wrappedParams[this.key] = params;
-
-        const response = await easypostClient.post(this._url, wrappedParams);
-
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
+      if (params.verify) {
+        const clone = params;
+        wrappedParams.verify = params.verify;
+        delete clone.verify;
       }
+
+      if (params.verify_strict) {
+        const clone = params;
+        wrappedParams.verify_strict = params.verify_strict;
+        delete clone.verify_strict;
+      }
+
+      wrappedParams[this.key] = params;
+
+      return this._create(url, wrappedParams);
     }
 
     /**
@@ -45,16 +41,38 @@ export default (easypostClient) =>
      * @returns {Address}
      */
     static async createAndVerify(params) {
+      const url = `${this._url}/create_and_verify`;
       const wrappedParams = { address: params };
 
       try {
-        const url = `${this._url}/create_and_verify`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body.address);
       } catch (e) {
         return Promise.reject(e);
       }
+    }
+
+    /**
+     * Retrieve a list of all addresses associated with the API key.
+     * @param {object} params
+     * @returns {Address[]}
+     */
+    static async all(params = {}) {
+      const url = this._url;
+
+      return this._all(url, params);
+    }
+
+    /**
+     * Retrieve an address from the API.
+     * @param {string} id
+     * @returns {Address}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
 
     /**

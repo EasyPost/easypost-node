@@ -9,10 +9,27 @@ export default (easypostClient) =>
     static key = 'parcel';
 
     /**
-     * all not implemented
-     * @returns {Promise<never>}
+     * Create a parcel.
+     * @param {*} params
+     * @returns {Parcel}
      */
-    static all() {
-      return this.notImplemented('all');
+    static async create(params) {
+      const url = this._url;
+
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
+
+      return this._create(url, wrappedParams);
+    }
+
+    /**
+     * Retrieve a parcel from the API.
+     * @param {string} id
+     * @returns {Parcel}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

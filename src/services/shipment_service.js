@@ -16,18 +16,14 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async create(params, withCarbonOffset = false) {
-      try {
-        const wrappedParams = {
-          shipment: params,
-          carbon_offset: withCarbonOffset,
-        };
+      const url = this._url;
 
-        const response = await easypostClient.post(this._url, wrappedParams);
+      const wrappedParams = {
+        shipment: params,
+        carbon_offset: withCarbonOffset,
+      };
 
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      return this._create(url, wrappedParams);
     }
 
     /**
@@ -52,6 +48,8 @@ export default (easypostClient) =>
         rateId = rate.id;
       }
 
+      const url = `${this._url}/${id}/buy`;
+
       const wrappedParams = {
         rate: {
           id: rateId,
@@ -68,7 +66,7 @@ export default (easypostClient) =>
       }
 
       try {
-        const response = await easypostClient.post(`${this._url}/${id}/buy`, wrappedParams);
+        const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -83,9 +81,11 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async convertLabelFormat(id, format) {
+      const url = `${this._url}/${id}/label`;
+      const wrappedParams = { file_format: format };
+
       try {
-        const wrappedParams = { file_format: format };
-        const response = await easypostClient.get(`${this._url}/${id}/label`, wrappedParams);
+        const response = await easypostClient.get(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -100,9 +100,11 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async regenerateRates(id, withCarbonOffset = false) {
+      const url = `${this._url}/${id}/rerate`;
+      const wrappedParams = { carbon_offset: withCarbonOffset };
+
       try {
-        const wrappedParams = { carbon_offset: withCarbonOffset };
-        const response = await easypostClient.post(`${this._url}/${id}/rerate`, wrappedParams);
+        const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -116,8 +118,10 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async getSmartRates(id) {
+      const url = `${this._url}/${id}/smartrate`;
+
       try {
-        const response = await easypostClient.get(`${this._url}/${id}/smartrate`);
+        const response = await easypostClient.get(url);
 
         return this.convertToEasyPostObject(response.body.result);
       } catch (e) {
@@ -132,9 +136,11 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async insure(id, amount) {
+      const url = `${this._url}/${id}/insure`;
+      const wrappedParams = { amount };
+
       try {
-        const wrappedParams = { amount };
-        const response = await easypostClient.post(`${this._url}/${id}/insure`, wrappedParams);
+        const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -150,14 +156,16 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async generateForm(id, formType, formOptions = {}) {
+      const url = `${this._url}/${id}/forms`;
+      const wrappedParams = {
+        form: {
+          ...formOptions,
+          type: formType,
+        },
+      };
+
       try {
-        const wrappedParams = {
-          form: {
-            ...formOptions,
-            type: formType,
-          },
-        };
-        const response = await easypostClient.post(`${this._url}/${id}/forms`, wrappedParams);
+        const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -171,8 +179,10 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async refund(id) {
+      const url = `${this._url}/${id}/refund`;
+
       try {
-        const response = await easypostClient.post(`${this._url}/${id}/refund`);
+        const response = await easypostClient.post(url);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -196,5 +206,27 @@ export default (easypostClient) =>
       );
 
       return lowestSmartRate;
+    }
+
+    /**
+     * Retrieve a list of all shipments associated with the API key.
+     * @param {object} params
+     * @returns {Shipment[]}
+     */
+    static async all(params = {}) {
+      const url = this._url;
+
+      return this._all(url, params);
+    }
+
+    /**
+     * Retrieve a shipment from the API.
+     * @param {string} id
+     * @returns {Shipment}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

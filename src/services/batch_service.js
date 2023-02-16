@@ -11,17 +11,31 @@ export default (easypostClient) =>
     static key = 'batch';
 
     /**
+     * Create a batch.
+     * @param {*} params
+     * @returns {Batch}
+     */
+    static async create(params) {
+      const url = this._url;
+
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
+
+      return this._create(url, wrappedParams);
+    }
+
+    /**
      * Add shipments to a batch.
-     * @param {integer} id
+     * @param {number} id
      * @param {Array} shipmentIds
      * @returns {this}
      */
     static async addShipments(id, shipmentIds) {
+      const url = `${this._url}/${id}/add_shipments`;
+      const wrappedParams = {
+        shipments: shipmentIds.map((s) => ({ id: s })),
+      };
       try {
-        const wrappedParams = {
-          shipments: shipmentIds.map((s) => ({ id: s })),
-        };
-        const url = `${this._url}/${id}/add_shipments`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -32,16 +46,17 @@ export default (easypostClient) =>
 
     /**
      * Removes shipments from a batch.
-     * @param {integer} id
+     * @param {number} id
      * @param {Array} shipmentIds
      * @returns {this}
      */
     static async removeShipments(id, shipmentIds) {
+      const url = `${this._url}/${id}/remove_shipments`;
+      const wrappedParams = {
+        shipments: shipmentIds.map((s) => ({ id: s })),
+      };
+
       try {
-        const wrappedParams = {
-          shipments: shipmentIds.map((s) => ({ id: s })),
-        };
-        const url = `${this._url}/${id}/remove_shipments`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -52,14 +67,15 @@ export default (easypostClient) =>
 
     /**
      * Convert the label of a batch.
-     * @param {integer} id
+     * @param {number} id
      * @param {string} fileFormat
      * @returns {this}
      */
     static async generateLabel(id, fileFormat = DEFAULT_LABEL_FORMAT) {
+      const url = `${this._url}/${id}/label`;
+      const wrappedParams = { file_format: fileFormat };
+
       try {
-        const wrappedParams = { file_format: fileFormat };
-        const url = `${this._url}/${id}/label`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -70,12 +86,13 @@ export default (easypostClient) =>
 
     /**
      * Create a scanform for a batch.
-     * @param {integer} id
+     * @param {number} id
      * @returns {this}
      */
     static async createScanForm(id) {
+      const url = `${this._url}/${id}/scan_form`;
+
       try {
-        const url = `${this._url}/${id}/scan_form`;
         const response = await easypostClient.post(url);
 
         return this.convertToEasyPostObject(response.body);
@@ -90,9 +107,10 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async createAndBuy(params) {
+      const url = `${this._url}/create_and_buy`;
+      const wrappedParams = { batch: params };
+
       try {
-        const wrappedParams = { batch: params };
-        const url = `${this._url}/create_and_buy`;
         const response = await easypostClient.post(url, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
@@ -103,17 +121,40 @@ export default (easypostClient) =>
 
     /**
      * Buy a batch.
-     * @param {integer} id
+     * @param {number} id
      * @returns {this}
      */
     static async buy(id) {
+      const url = `${this._url}/${id}/buy`;
+
       try {
-        const url = `${this._url}/${id}/buy`;
         const response = await easypostClient.post(url);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
+    }
+
+    /**
+     * Retrieve a list of all batches associated with the API key.
+     * @param {object} params
+     * @returns {Batch[]}
+     */
+    static async all(params = {}) {
+      const url = this._url;
+
+      return this._all(url, params);
+    }
+
+    /**
+     * Retrieve a batch from the API.
+     * @param {string} id
+     * @returns {Batch}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

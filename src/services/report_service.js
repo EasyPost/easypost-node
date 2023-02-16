@@ -6,12 +6,29 @@ export default (easypostClient) =>
 
     /**
      * Create a report.
-     * @param {object} prams
-     * @returns {Pickup}
+     * @param {object} params
+     * @returns {Report}
      */
     static async create(params) {
+      const url = `${this._url}/${params.type}`;
+      return this._create(url, params);
+    }
+
+    /**
+     * Retrieve a list of all reports associated with the API key.
+     * @param {object} params
+     * @returns {Report[]}
+     */
+    static async all(params = {}) {
+      const url = `${this._url}/${params.type}`;
+
+      // delete "type" from params, so it doesn't get sent to the API
+      // eslint-disable-next-line no-param-reassign
+      delete params.type;
+
       try {
-        const response = await easypostClient.post(`${this._url}/${params.type}`, params);
+        const response = await easypostClient.get(url, params);
+
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
@@ -19,12 +36,13 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of reports.
-     * @param {string} type
-     * @param {object} query
-     * @returns {this}
+     * Retrieve a report from the API.
+     * @param {string} id
+     * @returns {Rate}
      */
-    static async all(type, query = {}) {
-      return super.all(query, `reports/${type}`);
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
     }
   };

@@ -14,14 +14,10 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async create(params) {
-      try {
-        const wrappedParams = { address: params };
-        const response = await easypostClient.post(this._url, wrappedParams);
+      const url = this._url;
+      const wrappedParams = { address: params };
 
-        return this.convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
+      return this._create(url, wrappedParams);
     }
 
     /**
@@ -31,13 +27,36 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async update(id, params) {
+      const wrappedParams = { address: params };
+
       try {
-        const wrappedParams = { address: params };
         const response = await easypostClient.put(`${this._url}/${id}`, wrappedParams);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
+    }
+
+    /**
+     * Retrieve a EndShipper from the API.
+     * @param {string} id
+     * @returns {EndShipper}
+     */
+    static async retrieve(id) {
+      const url = `${this._url}/${id}`;
+
+      return this._retrieve(url);
+    }
+
+    /**
+     * Retrieve a list of all EndShippers associated with the API key.
+     * @param {object} params
+     * @returns {EndShipper[]}
+     */
+    static async all(params = {}) {
+      const url = this._url;
+
+      return this._all(url, params);
     }
   };

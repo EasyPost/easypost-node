@@ -22,7 +22,8 @@
 - Completely overhauled deserialization process, nested objects (eg: rates of shipments, etc) now properly convert to their appropriate EasyPostObject
 - Bumps major versions of all dependencies
 - Changes the `primaryOrSecondary` parameter name to `priority` in billing functions to match the API
-- Emptry response functions now return nothing (deleting records, funding a wallet, etc)
+- Empty response functions now return nothing (deleting records, funding a wallet, etc)
+- Explicit `type` parameter for retrieving all reports removed, include `type` in generic `params` dictionary instead.
 
 ## v5.10.0 (2023-01-18)
 

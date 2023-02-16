@@ -1,4 +1,3 @@
-import NotImplementedError from '../errors/not_implemented';
 import Address from '../models/address';
 import ApiKey from '../models/api_key';
 import Batch from '../models/batch';
@@ -151,25 +150,14 @@ export default (easypostClient) =>
     }
 
     /**
-     * Creates a new NotImplementedError.
-     * @param {string} functionName
-     * @returns {Promise<never>}
-     */
-    static notImplemented(functionName) {
-      return Promise.reject(new NotImplementedError(functionName, this._url));
-    }
-
-    /**
      * Creates an EasyPost Object via the API.
-     * @param {*} params
+     * @param {string} url
+     * @param {Object} params
      * @returns {Base}
      */
-    static async create(params) {
+    static async _create(url, params) {
       try {
-        const wrappedParams = {};
-        wrappedParams[this.key] = params;
-
-        const response = await easypostClient.post(this._url, wrappedParams);
+        const response = await easypostClient.post(url, params);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -179,15 +167,14 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a list of records from the API.
-     * @param {object} query
      * @param {string} url
+     * @param {object} params
      * @returns {object|Promise<never>}
      */
-    static async all(query = {}, url) {
+    static async _all(url, params = {}) {
       try {
         // eslint-disable-next-line no-param-reassign
-        url = url || this._url;
-        const response = await easypostClient.get(url, query);
+        const response = await easypostClient.get(url, params);
 
         return this.convertToEasyPostObject(response.body);
       } catch (e) {
@@ -197,13 +184,11 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a record from the API.
-     * @param {string} id
-     * @param {string} urlPrefix
+     * @param {string} url
      * @returns {Base|Promise<never>}
      */
-    static async retrieve(id, urlPrefix) {
+    static async _retrieve(url) {
       try {
-        const url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
         const response = await easypostClient.get(url);
 
         return this.convertToEasyPostObject(response.body);
