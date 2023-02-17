@@ -90,11 +90,11 @@ const RESOURCES = {
 
 export default (easypostClient) =>
   class BaseService {
-    static _url = null;
+    static #url = null;
 
-    static _name = null;
+    static #name = null;
 
-    static key = null;
+    static #key = null;
 
     /**
      * Converts a response and all its nested elements to its associated EasyPostObject.
