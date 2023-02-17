@@ -13,6 +13,6 @@ export default class BetaClient extends EasyPostClient {
     const { baseUrl } = options;
     this.baseUrl = baseUrl || DEFAULT_BASE_URL;
 
-    this.attachServices(SERVICES);
+    this._attachServices(SERVICES);
   }
 }

@@ -4,11 +4,11 @@ export const DEFAULT_LABEL_FORMAT = 'pdf';
 
 export default (easypostClient) =>
   class BatchService extends baseService(easypostClient) {
-    static _name = 'Batch';
+    static #name = 'Batch';
 
-    static _url = 'batches';
+    static #url = 'batches';
 
-    static key = 'batch';
+    static #key = 'batch';
 
     /**
      * Create a batch.
@@ -16,10 +16,10 @@ export default (easypostClient) =>
      * @returns {Batch}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -31,14 +31,14 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async addShipments(id, shipmentIds) {
-      const url = `${this._url}/${id}/add_shipments`;
+      const url = `${this.#url}/${id}/add_shipments`;
       const wrappedParams = {
         shipments: shipmentIds.map((s) => ({ id: s })),
       };
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -51,7 +51,7 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async removeShipments(id, shipmentIds) {
-      const url = `${this._url}/${id}/remove_shipments`;
+      const url = `${this.#url}/${id}/remove_shipments`;
       const wrappedParams = {
         shipments: shipmentIds.map((s) => ({ id: s })),
       };
@@ -59,7 +59,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -72,13 +72,13 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async generateLabel(id, fileFormat = DEFAULT_LABEL_FORMAT) {
-      const url = `${this._url}/${id}/label`;
+      const url = `${this.#url}/${id}/label`;
       const wrappedParams = { file_format: fileFormat };
 
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -90,12 +90,12 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async createScanForm(id) {
-      const url = `${this._url}/${id}/scan_form`;
+      const url = `${this.#url}/${id}/scan_form`;
 
       try {
         const response = await easypostClient.post(url);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -107,13 +107,13 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async createAndBuy(params) {
-      const url = `${this._url}/create_and_buy`;
+      const url = `${this.#url}/create_and_buy`;
       const wrappedParams = { batch: params };
 
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -125,12 +125,12 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async buy(id) {
-      const url = `${this._url}/${id}/buy`;
+      const url = `${this.#url}/${id}/buy`;
 
       try {
         const response = await easypostClient.post(url);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -142,7 +142,7 @@ export default (easypostClient) =>
      * @returns {Batch[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }
@@ -153,7 +153,7 @@ export default (easypostClient) =>
      * @returns {Batch}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

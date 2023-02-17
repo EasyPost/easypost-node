@@ -2,11 +2,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class PickupService extends baseService(easypostClient) {
-    static _name = 'Pickup';
+    static #name = 'Pickup';
 
-    static _url = 'pickups';
+    static #url = 'pickups';
 
-    static key = 'pickup';
+    static #key = 'pickup';
 
     /**
      * Create a pickup.
@@ -14,10 +14,10 @@ export default (easypostClient) =>
      * @returns {Pickup}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -30,12 +30,12 @@ export default (easypostClient) =>
      * @returns {Pickup}
      */
     static async buy(id, carrier, service) {
-      const url = `${this._url}/${id}/buy`;
+      const url = `${this.#url}/${id}/buy`;
       const wrappedParams = { carrier, service };
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -47,11 +47,11 @@ export default (easypostClient) =>
      * @returns {Pickup}
      */
     static async cancel(id) {
-      const url = `${this._url}/${id}/cancel`;
+      const url = `${this.#url}/${id}/cancel`;
       try {
         const response = await easypostClient.post(url);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -63,7 +63,7 @@ export default (easypostClient) =>
      * @returns {Pickup[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }
@@ -74,7 +74,7 @@ export default (easypostClient) =>
      * @returns {Pickup}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

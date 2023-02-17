@@ -95,7 +95,7 @@ export default class EasyPostClient {
       this.agent = superagentMiddleware(this.agent);
     }
 
-    this.attachServices(SERVICES);
+    this._attachServices(SERVICES);
   }
 
   /**
@@ -122,7 +122,7 @@ export default class EasyPostClient {
    * @param {object} additionalHeaders
    * @returns {object}
    */
-  static buildHeaders(additionalHeaders = {}) {
+  static _buildHeaders(additionalHeaders = {}) {
     const headers = {
       ...DEFAULT_HEADERS,
       ...additionalHeaders,
@@ -135,7 +135,7 @@ export default class EasyPostClient {
    * Attach services to an EasyPostClient object.
    * @param {*} services
    */
-  attachServices(services) {
+  _attachServices(services) {
     Object.keys(services).forEach((s) => {
       this[s] = services[s](this);
     });
@@ -146,7 +146,7 @@ export default class EasyPostClient {
    * @param {string} path
    * @returns {string}
    */
-  buildPath(path = '') {
+  _buildPath(path = '') {
     if (path.indexOf('http') === 0) {
       return path;
     }
@@ -162,9 +162,9 @@ export default class EasyPostClient {
    * @param {object} headers
    * @returns {*}
    */
-  async request(path = '', method = METHODS.GET, params = {}, headers = {}) {
-    const urlPath = this.buildPath(path);
-    const requestHeaders = EasyPostClient.buildHeaders(headers);
+  async _request(path = '', method = METHODS.GET, params = {}, headers = {}) {
+    const urlPath = this._buildPath(path);
+    const requestHeaders = EasyPostClient._buildHeaders(headers);
     let request = this.agent[method](urlPath).set(requestHeaders);
 
     if (this.requestMiddleware) {
@@ -203,7 +203,7 @@ export default class EasyPostClient {
    * @returns {*}
    */
   get(path, params = {}, headers = {}) {
-    return this.request(path, METHODS.GET, params, headers);
+    return this._request(path, METHODS.GET, params, headers);
   }
 
   /**
@@ -214,7 +214,7 @@ export default class EasyPostClient {
    * @returns {*}
    */
   post(path, params = {}, headers = {}) {
-    return this.request(path, METHODS.POST, params, headers);
+    return this._request(path, METHODS.POST, params, headers);
   }
 
   /**
@@ -225,7 +225,7 @@ export default class EasyPostClient {
    * @returns {*}
    */
   put(path, params = {}, headers = {}) {
-    return this.request(path, METHODS.PUT, params, headers);
+    return this._request(path, METHODS.PUT, params, headers);
   }
 
   /**
@@ -236,7 +236,7 @@ export default class EasyPostClient {
    * @returns {*}
    */
   patch(path, params = {}, headers = {}) {
-    return this.request(path, METHODS.PATCH, params, headers);
+    return this._request(path, METHODS.PATCH, params, headers);
   }
 
   /**
@@ -247,6 +247,6 @@ export default class EasyPostClient {
    * @returns {*}
    */
   del(path, params = {}, headers = {}) {
-    return this.request(path, METHODS.DELETE, params, headers);
+    return this._request(path, METHODS.DELETE, params, headers);
   }
 }

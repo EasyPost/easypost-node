@@ -2,11 +2,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class BillingService extends baseService(easypostClient) {
-    static _name = 'Billing';
+    static #name = 'Billing';
 
-    static _url = 'payment_methods';
+    static #url = 'payment_methods';
 
-    static key = 'billing';
+    static #key = 'billing';
 
     /**
      * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
@@ -14,7 +14,7 @@ export default (easypostClient) =>
      * @param {String} priority
      */
     static async fundWallet(amount, priority = 'primary') {
-      const paymentInfo = await this.getPaymentInfo(priority.toLowerCase());
+      const paymentInfo = await this._getPaymentInfo(priority.toLowerCase());
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
 
@@ -26,9 +26,10 @@ export default (easypostClient) =>
 
     /**
      * Delete a payment method
+     * @param {String} priority
      */
     static async deletePaymentMethod(priority) {
-      const paymentInfo = await this.getPaymentInfo(priority.toLowerCase());
+      const paymentInfo = await this._getPaymentInfo(priority.toLowerCase());
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
 
@@ -56,9 +57,10 @@ export default (easypostClient) =>
     /**
      * Get payment info (type of the payment method and ID of the payment method)
      * This function is intended for internal use only, please avoid using this function
+     * @param {String} priority
      * @returns {Promise<never>}
      */
-    static async getPaymentInfo(priority) {
+    static async _getPaymentInfo(priority) {
       const paymentMethods = await this.retrievePaymentMethods();
       const paymentMethodMap = {
         primary: 'primary_payment_method',

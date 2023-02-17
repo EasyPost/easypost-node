@@ -2,11 +2,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class EventService extends baseService(easypostClient) {
-    static _name = 'Event';
+    static #name = 'Event';
 
-    static _url = 'events';
+    static #url = 'events';
 
-    static key = 'event';
+    static #key = 'event';
 
     /**
      * Retrieve all payloads for an event.
@@ -14,12 +14,12 @@ export default (easypostClient) =>
      * @returns {Promise<Array<Payload>>}
      */
     static async retrieveAllPayloads(id) {
-      const url = `${this._url}/${id}/payloads`;
+      const url = `${this.#url}/${id}/payloads`;
 
       try {
         const response = await easypostClient.get(url);
 
-        return this.convertToEasyPostObject(response.body.payloads);
+        return this._convertToEasyPostObject(response.body.payloads);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -32,12 +32,12 @@ export default (easypostClient) =>
      * @returns {Promise<Payload>}
      */
     static async retrievePayload(id, payloadId) {
-      const url = `${this._url}/${id}/payloads/${payloadId}`;
+      const url = `${this.#url}/${id}/payloads/${payloadId}`;
 
       try {
         const response = await easypostClient.get(url);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -49,7 +49,7 @@ export default (easypostClient) =>
      * @returns {Event[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }
@@ -60,7 +60,7 @@ export default (easypostClient) =>
      * @returns {Event}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }
