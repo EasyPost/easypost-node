@@ -1,3 +1,3 @@
-import EasyPostException from '../easypost_exception';
+import ApiException from './api_exception';
 
-export default class InternalServerError extends EasyPostException {}
+export default class InternalServerError extends ApiException {}

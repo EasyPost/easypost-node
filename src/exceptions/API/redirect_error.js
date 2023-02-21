@@ -1,3 +1,3 @@
-import EasyPostException from '../easypost_exception';
+import ApiException from './api_exception';
 
-export default class RedirectError extends EasyPostException {}
+export default class RedirectError extends ApiException {}
