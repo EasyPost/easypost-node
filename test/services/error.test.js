@@ -52,7 +52,7 @@ describe('Error Service', function () {
     };
 
     try {
-      ErrorHandler.handleError(fakeErrorResponse);
+      ErrorHandler.handleApiError(fakeErrorResponse);
     } catch (error) {
       expect(error).to.be.an.instanceOf(NotFoundError);
       expect(error.message).to.be.equal('ERROR_MESSAGE_1, ERROR_MESSAGE_2');
@@ -93,7 +93,7 @@ describe('Error Service', function () {
       };
 
       try {
-        ErrorHandler.handleError(fakeErrorResponse);
+        ErrorHandler.handleApiError(fakeErrorResponse);
       } catch (error) {
         expect(error).to.be.an.instanceOf(value);
         expect(error.message).to.be.equal('API did not return error details.');

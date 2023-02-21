@@ -24,7 +24,7 @@
 - Changes the `primaryOrSecondary` parameter name to `priority` in billing functions to match the API
 - Empty response functions now return nothing (deleting records, funding a wallet, etc)
 - Explicit `type` parameter for retrieving all reports removed, include `type` in generic `params` dictionary instead.
-- Improves error exception handling
+- Improves error handling
   - Specific error types for each category of error
   - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
 

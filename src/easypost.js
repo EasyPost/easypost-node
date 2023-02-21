@@ -194,7 +194,7 @@ export default class EasyPostClient {
       return response;
     } catch (error) {
       if (error.response && error.response.body) {
-        throw ErrorHandler.handleError(error.response);
+        throw ErrorHandler.handleApiError(error.response);
       } else {
         throw error;
       }

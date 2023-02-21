@@ -13,7 +13,7 @@ import GatewayTimeoutError from './api/gateway_timeout_error';
 import ForbiddenError from './api/forbidden_error';
 
 export default class ErrorHandler {
-  static handleError(error) {
+  static handleApiError(error) {
     const { statusCode } = error;
     const { code, message, errors } = error.body.error;
     const errorParams = {
