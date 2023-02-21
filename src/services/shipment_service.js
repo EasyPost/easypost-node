@@ -3,11 +3,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class ShipmentService extends baseService(easypostClient) {
-    static _name = 'Shipment';
+    static #name = 'Shipment';
 
-    static _url = 'shipments';
+    static #url = 'shipments';
 
-    static key = 'shipment';
+    static #key = 'shipment';
 
     /**
      * Create a shipment.
@@ -16,7 +16,7 @@ export default (easypostClient) =>
      * @returns {this|Promise<never>}
      */
     static async create(params, withCarbonOffset = false) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {
         shipment: params,
@@ -48,7 +48,7 @@ export default (easypostClient) =>
         rateId = rate.id;
       }
 
-      const url = `${this._url}/${id}/buy`;
+      const url = `${this.#url}/${id}/buy`;
 
       const wrappedParams = {
         rate: {
@@ -68,7 +68,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -81,13 +81,13 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async convertLabelFormat(id, format) {
-      const url = `${this._url}/${id}/label`;
+      const url = `${this.#url}/${id}/label`;
       const wrappedParams = { file_format: format };
 
       try {
         const response = await easypostClient.get(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -100,13 +100,13 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async regenerateRates(id, withCarbonOffset = false) {
-      const url = `${this._url}/${id}/rerate`;
+      const url = `${this.#url}/${id}/rerate`;
       const wrappedParams = { carbon_offset: withCarbonOffset };
 
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -118,12 +118,12 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async getSmartRates(id) {
-      const url = `${this._url}/${id}/smartrate`;
+      const url = `${this.#url}/${id}/smartrate`;
 
       try {
         const response = await easypostClient.get(url);
 
-        return this.convertToEasyPostObject(response.body.result);
+        return this._convertToEasyPostObject(response.body.result);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -136,13 +136,13 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async insure(id, amount) {
-      const url = `${this._url}/${id}/insure`;
+      const url = `${this.#url}/${id}/insure`;
       const wrappedParams = { amount };
 
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -156,7 +156,7 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async generateForm(id, formType, formOptions = {}) {
-      const url = `${this._url}/${id}/forms`;
+      const url = `${this.#url}/${id}/forms`;
       const wrappedParams = {
         form: {
           ...formOptions,
@@ -167,7 +167,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.post(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -179,12 +179,12 @@ export default (easypostClient) =>
      * @returns {this}
      */
     static async refund(id) {
-      const url = `${this._url}/${id}/refund`;
+      const url = `${this.#url}/${id}/refund`;
 
       try {
         const response = await easypostClient.post(url);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -214,7 +214,7 @@ export default (easypostClient) =>
      * @returns {Shipment[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }
@@ -225,7 +225,7 @@ export default (easypostClient) =>
      * @returns {Shipment}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

@@ -2,11 +2,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class UserService extends baseService(easypostClient) {
-    static _name = 'User';
+    static #name = 'User';
 
-    static _url = 'users';
+    static #url = 'users';
 
-    static key = 'user';
+    static #key = 'user';
 
     /**
      * Create a user.
@@ -14,10 +14,10 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -29,7 +29,7 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async update(id, params) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
       const wrappedParams = {
         user: params,
       };
@@ -37,7 +37,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.patch(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -50,16 +50,16 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async retrieve(id, urlPrefix) {
-      let url = urlPrefix || this._url; // retrieve self
+      let url = urlPrefix || this.#url; // retrieve self
       if (id) {
         // retrieve child users
-        url = urlPrefix ? `${urlPrefix}/${id}` : `${this._url}/${id}`;
+        url = urlPrefix ? `${urlPrefix}/${id}` : `${this.#url}/${id}`;
       }
 
       try {
         const response = await easypostClient.get(url);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -70,12 +70,12 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async retrieveMe() {
-      const url = this._url;
+      const url = this.#url;
 
       try {
         const response = await easypostClient.get(url);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -87,7 +87,7 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>}
      */
     static async delete(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       try {
         await easypostClient.del(url);
@@ -105,13 +105,13 @@ export default (easypostClient) =>
      * @returns {Brand}
      */
     static async updateBrand(id, params) {
-      const url = `${this._url}/${id}/brand`;
+      const url = `${this.#url}/${id}/brand`;
       const wrappedParams = { brand: params };
 
       try {
         const response = await easypostClient.patch(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }

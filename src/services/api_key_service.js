@@ -2,9 +2,9 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class ApiKeyService extends baseService(easypostClient) {
-    static _name = 'ApiKey';
+    static #name = 'ApiKey';
 
-    static _url = 'api_keys';
+    static #url = 'api_keys';
 
     /**
      * Retrieve a list of all API keys associated with the API key.
@@ -12,7 +12,7 @@ export default (easypostClient) =>
      * @returns {ApiKey[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }

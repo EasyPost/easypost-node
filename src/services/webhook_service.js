@@ -2,11 +2,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class WebhookService extends baseService(easypostClient) {
-    static _name = 'Webhook';
+    static #name = 'Webhook';
 
-    static _url = 'webhooks';
+    static #url = 'webhooks';
 
-    static key = 'webhook';
+    static #key = 'webhook';
 
     /**
      * Create a webhook.
@@ -14,10 +14,10 @@ export default (easypostClient) =>
      * @returns {Webhook}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -29,7 +29,7 @@ export default (easypostClient) =>
      * @returns {User}
      */
     static async update(id, params) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
       const wrappedParams = {
         user: params,
       };
@@ -37,7 +37,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.patch(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -49,7 +49,7 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>}
      */
     static async delete(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       try {
         await easypostClient.del(url);
@@ -66,7 +66,7 @@ export default (easypostClient) =>
      * @returns {Webhook[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }
@@ -77,7 +77,7 @@ export default (easypostClient) =>
      * @returns {Webhook}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

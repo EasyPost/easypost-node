@@ -2,9 +2,9 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class ScanFormService extends baseService(easypostClient) {
-    static _name = 'ScanForm';
+    static #name = 'ScanForm';
 
-    static _url = 'scan_forms';
+    static #url = 'scan_forms';
 
     /**
      * Create a ScanForm.
@@ -12,7 +12,7 @@ export default (easypostClient) =>
      * @returns {ScanForm}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       // wraps up params in `shipments` if the user didn't do it
       // turn a list of shipment objects into a map of shipment ids
@@ -38,7 +38,7 @@ export default (easypostClient) =>
      * @returns {ScanForm[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }
@@ -49,7 +49,7 @@ export default (easypostClient) =>
      * @returns {ScanForm}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

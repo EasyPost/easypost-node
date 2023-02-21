@@ -2,11 +2,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class RefundService extends baseService(easypostClient) {
-    static _name = 'Refund';
+    static #name = 'Refund';
 
-    static _url = 'refunds';
+    static #url = 'refunds';
 
-    static key = 'refund';
+    static #key = 'refund';
 
     /**
      * Create a refund.
@@ -14,10 +14,10 @@ export default (easypostClient) =>
      * @returns {Refund}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -28,7 +28,7 @@ export default (easypostClient) =>
      * @returns {Refund[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }
@@ -39,7 +39,7 @@ export default (easypostClient) =>
      * @returns {Refund}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

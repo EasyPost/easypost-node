@@ -3,11 +3,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class CarrierAccountService extends baseService(easypostClient) {
-    static _name = 'CarrierAccount';
+    static #name = 'CarrierAccount';
 
-    static _url = 'carrier_accounts';
+    static #url = 'carrier_accounts';
 
-    static key = 'carrier_account';
+    static #key = 'carrier_account';
 
     /**
      * Create a carrier account.
@@ -21,7 +21,7 @@ export default (easypostClient) =>
         throw new Error('CarrierAccount type is not set');
       }
 
-      const endpoint = this.selectCarrierAccountCreationEndpoint(carrierAccountType);
+      const endpoint = this._selectCarrierAccountCreationEndpoint(carrierAccountType);
 
       const wrappedParams = { carrier_account: params };
 
@@ -35,7 +35,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount}
      */
     static async update(id, params) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
       const wrappedParams = {
         carrier_account: params,
       };
@@ -43,7 +43,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.patch(url, wrappedParams);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -55,7 +55,7 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>}
      */
     static async delete(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       try {
         await easypostClient.del(url);
@@ -71,7 +71,7 @@ export default (easypostClient) =>
      * @param {string} carrierAccountType
      * @returns {string}
      */
-    static selectCarrierAccountCreationEndpoint(carrierAccountType) {
+    static _selectCarrierAccountCreationEndpoint(carrierAccountType) {
       if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_WORKFLOWS.includes(carrierAccountType)) {
         return 'carrier_accounts/register';
       }
@@ -84,7 +84,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }
@@ -95,7 +95,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

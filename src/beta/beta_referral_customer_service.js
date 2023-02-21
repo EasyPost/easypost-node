@@ -2,11 +2,11 @@ import baseService from '../services/base_service';
 
 export default (easypostClient) =>
   class BetaReferralCustomerService extends baseService(easypostClient) {
-    static _name = 'Referral';
+    static #name = 'Referral';
 
-    static _url = 'referral_customers';
+    static #url = 'referral_customers';
 
-    static key = 'user';
+    static #key = 'user';
 
     /**
      * Add Stripe payment method to referral customer.

@@ -2,9 +2,9 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class CarrierTypeService extends baseService(easypostClient) {
-    static _name = 'CarrierType';
+    static #name = 'CarrierType';
 
-    static _url = 'carrier_types';
+    static #url = 'carrier_types';
 
     /**
      * Retrieve a list of records from the API (overrides default behavior to unwrap response).
@@ -12,12 +12,12 @@ export default (easypostClient) =>
      * @returns {Array|Promise<never>}
      */
     static async all(query = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       try {
         const response = await easypostClient.get(url, query);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }

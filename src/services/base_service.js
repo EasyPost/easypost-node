@@ -90,18 +90,18 @@ const RESOURCES = {
 
 export default (easypostClient) =>
   class BaseService {
-    static _url = null;
+    static #url = null;
 
-    static _name = null;
+    static #name = null;
 
-    static key = null;
+    static #key = null;
 
     /**
      * Converts a response and all its nested elements to its associated EasyPostObject.
      * @param {*} response
      * @returns {*}
      */
-    static convertToEasyPostObject(response) {
+    static _convertToEasyPostObject(response) {
       if (Array.isArray(response)) {
         const mapped = [];
         response.forEach((value, object) => {
@@ -109,7 +109,7 @@ export default (easypostClient) =>
             // eslint-disable-next-line no-param-reassign
             value.object = object;
           }
-          mapped.push(this.convertToEasyPostObject(value));
+          mapped.push(this._convertToEasyPostObject(value));
         });
 
         return mapped;
@@ -131,7 +131,7 @@ export default (easypostClient) =>
         } else {
           className = 'EasyPostObject';
         }
-        return this.constructFrom(response, className);
+        return this._constructFrom(response, className);
       }
       return response;
     }
@@ -142,9 +142,9 @@ export default (easypostClient) =>
      * @param {*} className
      * @returns
      */
-    static constructFrom(values, className) {
+    static _constructFrom(values, className) {
       const object = new RESOURCES[className.name !== undefined ? className.name : className]();
-      const convertedObject = this.mapProps(object, values);
+      const convertedObject = this._mapProps(object, values);
 
       return convertedObject;
     }
@@ -159,7 +159,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.post(url, params);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -176,7 +176,7 @@ export default (easypostClient) =>
         // eslint-disable-next-line no-param-reassign
         const response = await easypostClient.get(url, params);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -191,7 +191,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.get(url);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -203,10 +203,10 @@ export default (easypostClient) =>
      * @param {object} object
      * @param {*} data
      */
-    static mapProps(object, data) {
+    static _mapProps(object, data) {
       Object.keys(data).forEach((key) => {
         // eslint-disable-next-line no-param-reassign
-        object[key] = this.convertToEasyPostObject(data[key]);
+        object[key] = this._convertToEasyPostObject(data[key]);
       });
 
       return object;

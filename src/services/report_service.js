@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class ReportService extends baseService(easypostClient) {
-    static _url = 'reports';
+    static #url = 'reports';
 
     /**
      * Create a report.
@@ -10,7 +10,7 @@ export default (easypostClient) =>
      * @returns {Report}
      */
     static async create(params) {
-      const url = `${this._url}/${params.type}`;
+      const url = `${this.#url}/${params.type}`;
       return this._create(url, params);
     }
 
@@ -20,7 +20,7 @@ export default (easypostClient) =>
      * @returns {Report[]}
      */
     static async all(params = {}) {
-      const url = `${this._url}/${params.type}`;
+      const url = `${this.#url}/${params.type}`;
 
       // delete "type" from params, so it doesn't get sent to the API
       // eslint-disable-next-line no-param-reassign
@@ -29,7 +29,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient.get(url, params);
 
-        return this.convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -41,7 +41,7 @@ export default (easypostClient) =>
      * @returns {Rate}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

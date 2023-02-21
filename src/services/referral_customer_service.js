@@ -21,7 +21,7 @@ function getReferralApi(api, referralApiKey) {
  * @param {EasyPostClient} easypostClient - The EasyPostClient to use.
  * @returns {string} - The Stripe API key.
  */
-async function getEasyPostStripeKey(easypostClient) {
+async function _getEasyPostStripeKey(easypostClient) {
   const url = 'partners/stripe_public_key';
 
   const response = await easypostClient.get(url);
@@ -38,7 +38,7 @@ async function getEasyPostStripeKey(easypostClient) {
  * @param {string} cvc - Credit card CVC.
  * @returns {Promise<string>} - Stripe credit card token.
  */
-async function sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
+async function _sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
   // Stripe's endpoint requires form-encoded requests
   const url = `https://api.stripe.com/v1/tokens?card[number]=${number}&card[exp_month]=${expirationMonth}&card[exp_year]=${expirationYear}&card[cvc]=${cvc}`;
 
@@ -76,11 +76,11 @@ async function sendCardDetailsToEasyPost(client, referralApiKey, stripeCreditCar
 
 export default (easypostClient) =>
   class ReferralCustomerService extends baseService(easypostClient) {
-    static _name = 'Referral';
+    static #name = 'Referral';
 
-    static _url = 'referral_customers';
+    static #url = 'referral_customers';
 
-    static key = 'user';
+    static #key = 'user';
 
     /**
      * Create a referral customer.
@@ -88,10 +88,10 @@ export default (easypostClient) =>
      * @returns {ReferralCustomer}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -104,7 +104,7 @@ export default (easypostClient) =>
      */
     static async updateEmail(referralUserId, email) {
       const newParams = { user: { email } };
-      await easypostClient.put(`${this._url}/${referralUserId}`, newParams); // will throw if there's an error
+      await easypostClient.put(`${this.#url}/${referralUserId}`, newParams); // will throw if there's an error
 
       return true;
     }
@@ -127,9 +127,9 @@ export default (easypostClient) =>
       cvc,
       priority = 'primary',
     ) {
-      const stripeKey = await getEasyPostStripeKey(easypostClient); // will throw if there's an error
+      const stripeKey = await _getEasyPostStripeKey(easypostClient); // will throw if there's an error
 
-      const stripeCreditCardId = await sendCardDetailsToStripe(
+      const stripeCreditCardId = await _sendCardDetailsToStripe(
         stripeKey,
         number,
         expirationMonth,
@@ -153,7 +153,7 @@ export default (easypostClient) =>
      * @returns {ReferralCustomer[]}
      */
     static async all(params = {}) {
-      const url = this._url;
+      const url = this.#url;
 
       return this._all(url, params);
     }

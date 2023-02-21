@@ -2,11 +2,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class ParcelService extends baseService(easypostClient) {
-    static _name = 'Parcel';
+    static #name = 'Parcel';
 
-    static _url = 'parcels';
+    static #url = 'parcels';
 
-    static key = 'parcel';
+    static #key = 'parcel';
 
     /**
      * Create a parcel.
@@ -14,10 +14,10 @@ export default (easypostClient) =>
      * @returns {Parcel}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -28,7 +28,7 @@ export default (easypostClient) =>
      * @returns {Parcel}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }

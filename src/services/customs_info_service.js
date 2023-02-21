@@ -2,11 +2,11 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   class CustomsInfoService extends baseService(easypostClient) {
-    static _name = 'CustomsInfo';
+    static #name = 'CustomsInfo';
 
-    static _url = 'customs_infos';
+    static #url = 'customs_infos';
 
-    static key = 'customs_info';
+    static #key = 'customs_info';
 
     /**
      * Create a customs info record.
@@ -14,10 +14,10 @@ export default (easypostClient) =>
      * @returns {CustomsInfo}
      */
     static async create(params) {
-      const url = this._url;
+      const url = this.#url;
 
       const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -28,7 +28,7 @@ export default (easypostClient) =>
      * @returns {CustomsInfo}
      */
     static async retrieve(id) {
-      const url = `${this._url}/${id}`;
+      const url = `${this.#url}/${id}`;
 
       return this._retrieve(url);
     }
