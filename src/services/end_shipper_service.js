@@ -50,7 +50,7 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all EndShippers associated with the API #.
+     * Retrieve a list of all EndShippers associated with the API key.
      * @param {object} params
      * @returns {EndShipper[]}
      */
