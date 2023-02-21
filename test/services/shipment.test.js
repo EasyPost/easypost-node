@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import FilteringError from '../../src/exceptions/General/filtering_error';
-import InvalidParameterError from '../../src/exceptions/General/invalid_parameter_error';
+import FilteringError from '../../src/errors/General/filtering_error';
+import InvalidParameterError from '../../src/errors/General/invalid_parameter_error';
 import Rate from '../../src/models/rate';
 import Shipment from '../../src/models/shipment';
 import Util from '../../src/utils/util';

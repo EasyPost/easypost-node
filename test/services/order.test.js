@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import FilteringError from '../../src/exceptions/General/filtering_error';
+import FilteringError from '../../src/errors/General/filtering_error';
 import Order from '../../src/models/order';
 import Rate from '../../src/models/rate';
 import Fixture from '../helpers/fixture';

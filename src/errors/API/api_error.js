@@ -1,6 +1,6 @@
-import EasyPostException from '../easypost_exception';
+import EasyPostException from '../easypost_error';
 
-export default class ApiException extends EasyPostException {
+export default class ApiError extends EasyPostException {
   constructor({ message, code, statusCode, errors } = {}) {
     super({ message });
     this.code = code;

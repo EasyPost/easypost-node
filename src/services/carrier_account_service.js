@@ -1,6 +1,6 @@
 import baseService from './base_service';
 import Constants from '../constants';
-import InvalidParameterError from '../exceptions/General/invalid_parameter_error';
+import InvalidParameterError from '../errors/General/invalid_parameter_error';
 const util = require('util');
 
 export default (easypostClient) =>

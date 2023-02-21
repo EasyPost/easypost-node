@@ -1,4 +1,4 @@
-export default class EasyPostException extends Error {
+export default class EasyPostError extends Error {
   constructor({ message } = {}) {
     super(message);
   }

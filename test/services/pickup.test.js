@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import EasyPostClient from '../../src/easypost';
 import Pickup from '../../src/models/pickup';
 import Fixture from '../helpers/fixture';
-import FilteringError from '../../src/exceptions/General/filtering_error';
+import FilteringError from '../../src/errors/General/filtering_error';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Pickup Service', function () {

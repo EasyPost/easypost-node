@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
-import MissingParameterError from '../../src/exceptions/General/missing_parameter_error';
+import MissingParameterError from '../../src/errors/General/missing_parameter_error';
 
 /* eslint-disable func-names */
 describe('EasyPost', function () {
