@@ -1,5 +1,5 @@
 import Constants from '../constants';
-import FilteringError from '../errors/General/filtering_error';
+import FilteringError from '../errors/general/filtering_error';
 const util = require('util');
 
 module.exports = class Util {

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import InvalidRequestError from '../../src/errors/API/invalid_request_error';
+import InvalidRequestError from '../../src/errors/api/invalid_request_error';
 import Address from '../../src/models/address';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';

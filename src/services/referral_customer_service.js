@@ -4,7 +4,7 @@ import superagent from 'superagent';
 import EasyPostClient from '../easypost';
 import baseService from './base_service';
 import Constants from '../constants';
-import ExternalApiError from '../errors/API/external_api_error';
+import ExternalApiError from '../errors/api/external_api_error';
 const util = require('util');
 
 /**

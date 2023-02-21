@@ -1,6 +1,6 @@
 import baseService from './base_service';
 import Constants from '../constants';
-import InvalidObjectError from '../errors/General/invalid_object_error';
+import InvalidObjectError from '../errors/general/invalid_object_error';
 
 export default (easypostClient) =>
   class BillingService extends baseService(easypostClient) {

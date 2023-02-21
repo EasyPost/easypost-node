@@ -4,7 +4,7 @@ import EasyPostClient from '../../src/easypost';
 import Webhook from '../../src/models/webhook';
 import Util from '../../src/utils/util';
 import Fixture from '../helpers/fixture';
-import SignatureVerificationError from '../../src/errors/General/signature_verification_error';
+import SignatureVerificationError from '../../src/errors/general/signature_verification_error';
 import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable no-shadow */

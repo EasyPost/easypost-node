@@ -5,7 +5,7 @@ import pkg from '../package.json';
 import BetaReferralCustomerService from './beta/beta_referral_customer_service';
 import Constants from './constants';
 import ErrorHandler from './errors/error_handler';
-import MissingParameterError from './errors/General/missing_parameter_error';
+import MissingParameterError from './errors/general/missing_parameter_error';
 import AddressService from './services/address_service';
 import ApiKeyService from './services/api_key_service';
 import BatchService from './services/batch_service';

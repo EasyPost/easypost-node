@@ -1,7 +1,7 @@
 import Constants from '../constants';
-import FilteringError from '../errors/General/filtering_error';
-import SignatureVerificationError from '../errors/General/signature_verification_error';
-import InvalidParameterError from '../errors/General/invalid_parameter_error';
+import FilteringError from '../errors/general/filtering_error';
+import SignatureVerificationError from '../errors/general/signature_verification_error';
+import InvalidParameterError from '../errors/general/invalid_parameter_error';
 const crypto = require('crypto');
 const util = require('util');
 

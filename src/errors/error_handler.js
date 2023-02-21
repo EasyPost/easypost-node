@@ -1,16 +1,16 @@
-import RedirectError from './API/redirect_error';
-import UnauthorizedError from './API/unauthorized_error';
-import UnknownApiError from './API/unknown_api_error';
-import PaymentError from './API/payment_error';
-import NotFoundError from './API/not_found_error';
-import MethodNotAllowedError from './API/method_not_allowed_error';
-import TimeoutError from './API/timeout_error';
-import InvalidRequestError from './API/invalid_request_error';
-import RateLimitError from './API/rate_limit_error';
-import InternalServerError from './API/internal_server_error';
-import ServiceUnavailableError from './API/service_unavailable_error';
-import GatewayTimeoutError from './API/gateway_timeout_error';
-import ForbiddenError from './API/forbidden_error';
+import RedirectError from './api/redirect_error';
+import UnauthorizedError from './api/unauthorized_error';
+import UnknownApiError from './api/unknown_api_error';
+import PaymentError from './api/payment_error';
+import NotFoundError from './api/not_found_error';
+import MethodNotAllowedError from './api/method_not_allowed_error';
+import TimeoutError from './api/timeout_error';
+import InvalidRequestError from './api/invalid_request_error';
+import RateLimitError from './api/rate_limit_error';
+import InternalServerError from './api/internal_server_error';
+import ServiceUnavailableError from './api/service_unavailable_error';
+import GatewayTimeoutError from './api/gateway_timeout_error';
+import ForbiddenError from './api/forbidden_error';
 
 export default class ErrorHandler {
   static handleError(error) {

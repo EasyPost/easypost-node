@@ -1,20 +1,20 @@
 import { assert, expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
-import PaymentError from '../../src/errors/API/payment_error';
-import RedirectError from '../../src/errors/API/redirect_error';
-import UnauthorizedError from '../../src/errors/API/unauthorized_error';
-import ForbiddenError from '../../src/errors/API/forbidden_error';
-import MethodNotAllowedError from '../../src/errors/API/method_not_allowed_error';
+import PaymentError from '../../src/errors/api/payment_error';
+import RedirectError from '../../src/errors/api/redirect_error';
+import UnauthorizedError from '../../src/errors/api/unauthorized_error';
+import ForbiddenError from '../../src/errors/api/forbidden_error';
+import MethodNotAllowedError from '../../src/errors/api/method_not_allowed_error';
 import * as setupPolly from '../helpers/setup_polly';
-import NotFoundError from '../../src/errors/API/not_found_error';
-import TimeoutError from '../../src/errors/API/timeout_error';
-import InvalidRequestError from '../../src/errors/API/invalid_request_error';
-import RateLimitError from '../../src/errors/API/rate_limit_error';
-import UnknownApiError from '../../src/errors/API/unknown_api_error';
-import InternalServerError from '../../src/errors/API/internal_server_error';
-import ServiceUnavailableError from '../../src/errors/API/service_unavailable_error';
-import GatewayTimeoutError from '../../src/errors/API/gateway_timeout_error';
+import NotFoundError from '../../src/errors/api/not_found_error';
+import TimeoutError from '../../src/errors/api/timeout_error';
+import InvalidRequestError from '../../src/errors/api/invalid_request_error';
+import RateLimitError from '../../src/errors/api/rate_limit_error';
+import UnknownApiError from '../../src/errors/api/unknown_api_error';
+import InternalServerError from '../../src/errors/api/internal_server_error';
+import ServiceUnavailableError from '../../src/errors/api/service_unavailable_error';
+import GatewayTimeoutError from '../../src/errors/api/gateway_timeout_error';
 import ErrorHandler from '../../src/errors/error_handler';
 
 /* eslint-disable func-names,jest/no-disabled-tests */

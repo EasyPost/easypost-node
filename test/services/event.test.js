@@ -8,7 +8,7 @@ import Event from '../../src/models/event';
 import Payload from '../../src/models/payload';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
-import NotFoundError from '../../src/errors/API/not_found_error';
+import NotFoundError from '../../src/errors/api/not_found_error';
 
 describe('Event Service', function () {
   setupPolly.startPolly();
