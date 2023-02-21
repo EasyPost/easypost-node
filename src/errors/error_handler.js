@@ -13,6 +13,11 @@ import GatewayTimeoutError from './api/gateway_timeout_error';
 import ForbiddenError from './api/forbidden_error';
 
 export default class ErrorHandler {
+  /**
+   * Handle API error based on the status code.
+   * @param {*} error
+   * @returns {Error}
+   */
   static handleApiError(error) {
     const { statusCode } = error;
     const { code, message, errors } = error.body.error;
