@@ -1,7 +1,8 @@
 import Constants from '../constants';
 import FilteringError from '../errors/general/filtering_error';
-import SignatureVerificationError from '../errors/general/signature_verification_error';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
+import SignatureVerificationError from '../errors/general/signature_verification_error';
+
 const crypto = require('crypto');
 const util = require('util');
 
@@ -26,7 +27,7 @@ module.exports = class Util {
     let lowestSmartRate = null;
     const lowercaseDeliveryAccuracy = deliveryAccuracy.toLowerCase();
 
-    if (validDeliveryAccuracyValues.has(lowercaseDeliveryAccuracy) === false) {
+    if (!validDeliveryAccuracyValues.has(lowercaseDeliveryAccuracy)) {
       throw new InvalidParameterError({
         message: `Invalid deliveryAccuracy value, must be one of: ${new Array(
           ...validDeliveryAccuracyValues,
