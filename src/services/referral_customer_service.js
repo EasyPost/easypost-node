@@ -3,6 +3,9 @@ import superagent from 'superagent';
 // eslint-disable-next-line import/no-cycle
 import EasyPostClient from '../easypost';
 import baseService from './base_service';
+import Constants from '../constants';
+import ExternalApiError from '../errors/api/external_api_error';
+const util = require('util');
 
 /**
  * Get an instance of the EasyPostClient using the referral user's API key.
@@ -52,7 +55,9 @@ async function _sendCardDetailsToStripe(stripeKey, number, expirationMonth, expi
 
     return response.body.id;
   } catch (error) {
-    throw new Error('Could not send card details to Stripe, please try again later');
+    throw new ExternalApiError({
+      message: util.format(Constants.EXTERNAL_API_CALL_FAILED, 'Stripe'),
+    });
   }
 }
 

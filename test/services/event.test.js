@@ -8,6 +8,7 @@ import Event from '../../src/models/event';
 import Payload from '../../src/models/payload';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+import NotFoundError from '../../src/errors/api/not_found_error';
 
 describe('Event Service', function () {
   setupPolly.startPolly();
@@ -117,8 +118,10 @@ describe('Event Service', function () {
       await this.client.Event.retrievePayload(event.id, 'payload_11111111111111111111111111111111');
       // If we get here, the test failed, trigger a failed assertion
       expect(true).to.equal(false);
-    } catch (e) {
-      expect(e.status).to.equal(404);
+    } catch (error) {
+      expect(error).to.be.an.instanceOf(NotFoundError);
+      expect(error.code).to.equal('PAYLOAD.NOT_FOUND');
+      expect(error.statusCode).to.equal(404);
     }
 
     // Remove the webhook once we are done testing

@@ -2,6 +2,7 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
+import FilteringError from '../../src/errors/general/filtering_error';
 import Order from '../../src/models/order';
 import Rate from '../../src/models/rate';
 import Fixture from '../helpers/fixture';
@@ -83,6 +84,6 @@ describe('Order Service', function () {
     // Test lowest rate with carrier filter (should error due to bad carrier)
     expect(function () {
       order.lowestRate(['BAD CARRIER'], null);
-    }).to.throw(Error, 'No rates found.');
+    }).to.throw(FilteringError, 'No rates found.');
   });
 });

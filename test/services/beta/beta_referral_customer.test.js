@@ -19,17 +19,17 @@ describe('BetaReferralCustomer Service', function () {
 
   it('add payment method to a referral customer account', async function () {
     await this.client.BetaReferralCustomer.addPaymentMethod('cus_123', 'ba_123').catch((error) => {
-      expect(error.status).to.equal(422);
-      expect(error.error.error.code).to.equal('BILLING.INVALID_PAYMENT_GATEWAY_REFERENCE');
-      expect(error.detail).to.equal('Invalid Payment Gateway Reference.');
+      expect(error.statusCode).to.equal(422);
+      expect(error.code).to.equal('BILLING.INVALID_PAYMENT_GATEWAY_REFERENCE');
+      expect(error.message).to.equal('Invalid Payment Gateway Reference.');
     });
   });
 
   it('Refund by amount for a recent payment', async function () {
     await this.client.BetaReferralCustomer.refundByAmount(2000).catch((error) => {
-      expect(error.status).to.equal(422);
-      expect(error.error.error.code).to.equal('TRANSACTION.AMOUNT_INVALID');
-      expect(error.detail).to.equal(
+      expect(error.statusCode).to.equal(422);
+      expect(error.code).to.equal('TRANSACTION.AMOUNT_INVALID');
+      expect(error.message).to.equal(
         'Refund amount is invalid. Please use a valid amount or escalate to finance.',
       );
     });
@@ -37,9 +37,9 @@ describe('BetaReferralCustomer Service', function () {
 
   it('Refund a payment by a payment log ID', async function () {
     await this.client.BetaReferralCustomer.refundByPaymentLog('paylog_...').catch((error) => {
-      expect(error.status).to.equal(422);
-      expect(error.error.error.code).to.equal('TRANSACTION.DOES_NOT_EXIST');
-      expect(error.detail).to.equal('We could not find a transaction with that id.');
+      expect(error.statusCode).to.equal(422);
+      expect(error.code).to.equal('TRANSACTION.DOES_NOT_EXIST');
+      expect(error.message).to.equal('We could not find a transaction with that id.');
     });
   });
 });

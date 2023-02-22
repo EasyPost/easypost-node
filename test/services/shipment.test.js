@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
+import FilteringError from '../../src/errors/general/filtering_error';
+import InvalidParameterError from '../../src/errors/general/invalid_parameter_error';
 import Rate from '../../src/models/rate';
 import Shipment from '../../src/models/shipment';
 import Util from '../../src/utils/util';
@@ -246,7 +248,7 @@ describe('Shipment Service', function () {
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
     expect(() => {
       Util.getLowestSmartRate(smartRates, 0, 'percentile_90');
-    }).to.throw(Error, 'No rates found.');
+    }).to.throw(FilteringError, 'No rates found.');
   });
 
   it('raises an error for getLowestSmartRate when no rates are found due to deliveryAccuracy', async function () {
@@ -257,7 +259,7 @@ describe('Shipment Service', function () {
     expect(() => {
       Util.getLowestSmartRate(smartRates, 3, 'BAD_ACCURACY');
     }).to.throw(
-      Error,
+      InvalidParameterError,
       'Invalid deliveryAccuracy value, must be one of: percentile_50, percentile_75, percentile_85, percentile_90, percentile_95, percentile_97, percentile_99',
     );
   });
