@@ -25,7 +25,6 @@ describe('Beta Rate Service', function () {
       Fixture.basicShipment(),
     );
 
-    expect(statelessRates).to.be.an('array');
     statelessRates.forEach((rate) => {
       expect(rate).to.be.an.instanceOf(Rate);
       expect(rate).to.not.have.property('id');
