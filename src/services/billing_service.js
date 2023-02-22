@@ -1,6 +1,6 @@
-import baseService from './base_service';
 import Constants from '../constants';
 import InvalidObjectError from '../errors/general/invalid_object_error';
+import baseService from './base_service';
 
 export default (easypostClient) =>
   class BillingService extends baseService(easypostClient) {
@@ -49,7 +49,7 @@ export default (easypostClient) =>
 
       const res = await easypostClient.get(url);
 
-      if (res.body.id == null) {
+      if (res.body.id === null) {
         throw new InvalidObjectError({ message: Constants.NO_PAYMENT_METHODS });
       }
 
