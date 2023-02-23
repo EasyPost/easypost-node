@@ -120,7 +120,7 @@ New EasyPostError (extends the builtin Error):
 - `errors/general/missing_parameter_error`
 - `errors/general/signature_verification_error`
 
-ApiErrors will behave like the previous Error class did. They will include a `message`, `errors`, `code`, and `statusCode`. This class extends the builtin Error which only contains a message, used for exceptions thrown directly from this library.
+ApiErrors will behave like the previous Error class did. They will include a `message`, `errors`, `code`, and `statusCode`. This class extends EasyPostError which only contains a message, used for exceptions thrown directly from this library.
 
 ## 6.0 Corrected Names & Namespaces
 
