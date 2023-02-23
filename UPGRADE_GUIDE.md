@@ -73,7 +73,7 @@ The `.lowestRate()` method of a Shipment, Order, or Pickup is an error and is st
 // Old approach (buy function called on a local shipment object)
 const api = new Easypost(process.env.EASYPOST_API_KEY);
 api.Shipment.retrieve('shp_123...').then((shipment) => {
-    shipment.buy(shipment.lowestRate()).then(console.log);
+  shipment.buy(shipment.lowestRate()).then(console.log);
 });
 
 // New approach (buy function called against the Shipment service, of a client object, with the shipment ID passed in)
@@ -136,10 +136,10 @@ Previously, the `type` parameter when creating a Report was a standalone paramet
 
 ```javascript
 // Old approach
-const report = api.Report('payment_log', {more_params: 'here'}).save();
+const report = api.Report('payment_log', { more_params: 'here' }).save();
 
 // New approach
-const report = await client.Report.create({type: 'payment_log', more_params: 'here'});
+const report = await client.Report.create({ type: 'payment_log', more_params: 'here' });
 ```
 
 ## 6.0 Empty Response Return Types
