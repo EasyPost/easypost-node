@@ -1,3 +1,4 @@
 import EasyPostObject from './easypost_object';
 
-export default class CustomsInfo extends EasyPostObject {}
+export default class CustomsInfo extends EasyPostObject {
+}

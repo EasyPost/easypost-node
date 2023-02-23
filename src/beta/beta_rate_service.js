@@ -1,28 +1,48 @@
 import baseService from '../services/base_service';
 
+/**
+ * @extends baseService
+ */
 export default (easypostClient) =>
-  class BetaRateService extends baseService(easypostClient) {
-    static #name = 'Rate';
+    class BetaRateService extends baseService(easypostClient) {
+        /**
+         * The {@link EasyPostObject} class associated with this service.
+         * @override
+         * @type {string}
+         */
+        static #name = 'Rate';
 
-    static #url = 'rates';
+        /**
+         * The EasyPost API endpoint associated with this service.
+         * @override
+         * @type {string}
+         */
+        static #url = 'rates';
 
-    static #key = 'rate';
+        /**
+         * The top-level JSON key associated with this service.
+         * @override
+         * @type {string}
+         */
+        static #key = 'rate';
 
-    /**
-     * Retrieve stateless rates
-     * @param {Object} params
-     * @returns {Rate[]} List of rates
-     */
-    static async retrieveStatelessRates(params) {
-      try {
-        const wrappedParams = {
-          shipment: params,
-        };
-        const response = await easypostClient.post('rates', wrappedParams);
+        /**
+         * Retrieve a list of stateless {@link Rate}s based on the provided parameters.
+         * @param {Object} params - Map of parameters for the API call
+         * @returns {Rate[]} - List of stateless rates
+         */
+        static async retrieveStatelessRates(params) {
+            const url = 'rates';
+            const wrappedParams = {
+                shipment: params,
+            };
 
-        return this._convertToEasyPostObject(response.body.rates);
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-  };
+            try {
+                const response = await easypostClient._post(url, wrappedParams);
+
+                return this._convertToEasyPostObject(response.body.rates);
+            } catch (e) {
+                return Promise.reject(e);
+            }
+        }
+    };

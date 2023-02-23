@@ -13,54 +13,54 @@ import GatewayTimeoutError from './api/gateway_timeout_error';
 import ForbiddenError from './api/forbidden_error';
 
 export default class ErrorHandler {
-  /**
-   * Handle API error based on the status code.
-   * @param {*} error
-   * @returns {Error}
-   */
-  static handleApiError(error) {
-    const { statusCode } = error;
-    const { code, message, errors } = error.body.error;
-    const errorParams = {
-      message,
-      code,
-      statusCode,
-      errors,
-    };
+    /**
+     * Calculate and generate the appropriate {@link ApiError} based on a received HTTP response error.
+     * @param {*} error - The errored HTTP response.
+     * @returns {ApiError} The `ApiError`-based error corresponding to the HTTP status code.
+     */
+    static handleApiError(error) {
+        const {statusCode} = error;
+        const {code, message, errors} = error.body.error;
+        const errorParams = {
+            message,
+            code,
+            statusCode,
+            errors,
+        };
 
-    if (Array.isArray(errorParams.message)) {
-      errorParams.message = errorParams.message.join(', ');
-    }
+        if (Array.isArray(errorParams.message)) {
+            errorParams.message = errorParams.message.join(', ');
+        }
 
-    if (statusCode >= 300 && statusCode < 400) {
-      throw new RedirectError(errorParams);
-    }
+        if (statusCode >= 300 && statusCode < 400) {
+            return new RedirectError(errorParams);
+        }
 
-    switch (statusCode) {
-      case 401:
-        throw new UnauthorizedError(errorParams);
-      case 402:
-        throw new PaymentError(errorParams);
-      case 403:
-        throw new ForbiddenError(errorParams);
-      case 404:
-        throw new NotFoundError(errorParams);
-      case 405:
-        throw new MethodNotAllowedError(errorParams);
-      case 408:
-        throw new TimeoutError(errorParams);
-      case 422:
-        throw new InvalidRequestError(errorParams);
-      case 429:
-        throw new RateLimitError(errorParams);
-      case 500:
-        throw new InternalServerError(errorParams);
-      case 503:
-        throw new ServiceUnavailableError(errorParams);
-      case 504:
-        throw new GatewayTimeoutError(errorParams);
-      default:
-        throw new UnknownApiError(errorParams);
+        switch (statusCode) {
+            case 401:
+                return new UnauthorizedError(errorParams);
+            case 402:
+                return new PaymentError(errorParams);
+            case 403:
+                return new ForbiddenError(errorParams);
+            case 404:
+                return new NotFoundError(errorParams);
+            case 405:
+                return new MethodNotAllowedError(errorParams);
+            case 408:
+                return new TimeoutError(errorParams);
+            case 422:
+                return new InvalidRequestError(errorParams);
+            case 429:
+                return new RateLimitError(errorParams);
+            case 500:
+                return new InternalServerError(errorParams);
+            case 503:
+                return new ServiceUnavailableError(errorParams);
+            case 504:
+                return new GatewayTimeoutError(errorParams);
+            default:
+                return new UnknownApiError(errorParams);
+        }
     }
-  }
 }

@@ -1,25 +1,35 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class CarrierTypeService extends baseService(easypostClient) {
-    static #name = 'CarrierType';
+    class CarrierTypeService extends baseService(easypostClient) {
+        /**
+         * The {@link EasyPostObject} class associated with this service.
+         * @override
+         * @type {string}
+         */
+        static #name = 'CarrierType';
 
-    static #url = 'carrier_types';
+        /**
+         * The EasyPost API endpoint associated with this service.
+         * @override
+         * @type {string}
+         */
+        static #url = 'carrier_types';
 
-    /**
-     * Retrieve a list of records from the API (overrides default behavior to unwrap response).
-     * @param {object} query
-     * @returns {Array|Promise<never>}
-     */
-    static async all(query = {}) {
-      const url = this.#url;
+        /**
+         * Retrieve a list of records from the API (overrides default behavior to unwrap response).
+         * @param {Map} [query]
+         * @returns {Array|Promise<never>}
+         */
+        static async all(query = {}) {
+            const url = this.#url;
 
-      try {
-        const response = await easypostClient.get(url, query);
+            try {
+                const response = await easypostClient._get(url, query);
 
-        return this._convertToEasyPostObject(response.body);
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-  };
+                return this._convertToEasyPostObject(response.body);
+            } catch (e) {
+                return Promise.reject(e);
+            }
+        }
+    };

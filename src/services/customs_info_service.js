@@ -1,35 +1,50 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
-  class CustomsInfoService extends baseService(easypostClient) {
-    static #name = 'CustomsInfo';
+    class CustomsInfoService extends baseService(easypostClient) {
+        /**
+         * The {@link EasyPostObject} class associated with this service.
+         * @override
+         * @type {string}
+         */
+        static #name = 'CustomsInfo';
 
-    static #url = 'customs_infos';
+        /**
+         * The EasyPost API endpoint associated with this service.
+         * @override
+         * @type {string}
+         */
+        static #url = 'customs_infos';
 
-    static #key = 'customs_info';
+        /**
+         * The top-level JSON key associated with this service.
+         * @override
+         * @type {string}
+         */
+        static #key = 'customs_info';
 
-    /**
-     * Create a customs info record.
-     * @param {*} params
-     * @returns {CustomsInfo}
-     */
-    static async create(params) {
-      const url = this.#url;
+        /**
+         * Create a customs info record.
+         * @param {*} params
+         * @returns {CustomsInfo}
+         */
+        static async create(params) {
+            const url = this.#url;
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+            const wrappedParams = {};
+            wrappedParams[this.#key] = params;
 
-      return this._create(url, wrappedParams);
-    }
+            return this._create(url, wrappedParams);
+        }
 
-    /**
-     * Retrieve a customs info record from the API.
-     * @param {string} id
-     * @returns {CustomsInfo}
-     */
-    static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+        /**
+         * Retrieve a customs info record from the API.
+         * @param {string} id
+         * @returns {CustomsInfo}
+         */
+        static async retrieve(id) {
+            const url = `${this.#url}/${id}`;
 
-      return this._retrieve(url);
-    }
-  };
+            return this._retrieve(url);
+        }
+    };

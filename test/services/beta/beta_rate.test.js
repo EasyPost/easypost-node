@@ -6,6 +6,7 @@ import FilteringError from '../../../src/errors/general/filtering_error';
 import Fixture from '../../helpers/fixture';
 import Rate from '../../../src/models/rate';
 import Util from '../../../src/utils/util';
+import Utils from "../../../src/utils/util";
 
 /* eslint-disable func-names */
 describe('Beta Rate Service', function () {
@@ -36,7 +37,7 @@ describe('Beta Rate Service', function () {
       Fixture.basicShipment(),
     );
 
-    const lowestStatelessRate = Util.getLowestStatelessRate(statelessRates);
+    const lowestStatelessRate = Utils.getLowestRate(statelessRates);
 
     expect(lowestStatelessRate.service).to.be.equal('First');
     expect(lowestStatelessRate.rate).to.be.equal('6.07');
@@ -48,7 +49,7 @@ describe('Beta Rate Service', function () {
     );
 
     expect(() => {
-      Util.getLowestStatelessRate(statelessRates, ['invalid_carrier'], ['invalid_service']);
+      Utils.getLowestRate(statelessRates, ['invalid_carrier'], ['invalid_service']);
     }).to.throw(FilteringError, 'No rates found.');
   });
 });
