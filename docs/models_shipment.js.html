@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: models/shipment.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,41 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: models/shipment.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Utils from '../utils/util';
+import EasyPostObject from './easypost_object';
 
+/**
+ * A {@link https://www.easypost.com/docs/api/node#shipments Shipment} represents a physical {@link Parcel}, the origin and destination {@link Address Addresses}, and any associated {@link CustomsInfo}.
+ * @public
+ * @extends EasyPostObject
+ */
+export default class Shipment extends EasyPostObject {
+  /**
+   * Get the lowest rate for this {@link Shipment}.
+   * @public
+   * @param {string[]} [carriers] - List of allowed carriers to filter by
+   * @param {string[]} [services] - List of allowed services to filter by
+   * @returns {Rate} - The lowest rate
+   * @throws {FilteringError} - If no applicable rates are found
+   */
+  lowestRate(carriers, services) {
+    const rates = this.rates || [];
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    return Utils.getLowestRate(rates, carriers, services);
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

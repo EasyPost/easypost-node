@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: services/carrier_type_service.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,57 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: services/carrier_type_service.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import baseService from './base_service';
 
+export default (easypostClient) =>
+  /**
+   * The CarrierTypeService class provides methods for interacting with EasyPost CarrierType objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
+  class CarrierTypeService extends baseService(easypostClient) {
+    /**
+     * The {@link EasyPostObject} class associated with this service.
+     * @override
+     * @type {string}
+     */
+    static #name = 'CarrierType';
 
-    <h3> </h3>
+    /**
+     * The EasyPost API endpoint associated with this service.
+     * @override
+     * @type {string}
+     */
+    static #url = 'carrier_types';
 
+    /**
+     * Retrieve a list of records from the API (overrides default behavior to unwrap response).
+     * @param {Map} [query]
+     * @returns {Array|Promise&lt;never>}
+     */
+    static async all(query = {}) {
+      const url = this.#url;
 
+      try {
+        const response = await easypostClient._get(url, query);
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+        return this._convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+  };
+</code></pre>
+        </article>
+    </section>
 
 
 
