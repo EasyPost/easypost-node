@@ -1,6 +1,10 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+    /**
+     * The ApiKeyService class provides methods for interacting with EasyPost ApiKey objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class ApiKeyService extends baseService(easypostClient) {
         /**
          * The {@link EasyPostObject} class associated with this service.

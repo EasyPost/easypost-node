@@ -81,6 +81,10 @@ async function sendCardDetailsToEasyPost(client, referralApiKey, stripeCreditCar
 }
 
 export default (easypostClient) =>
+    /**
+     * The ReferralCustomerService class provides methods for interacting with EasyPost referral customer objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class ReferralCustomerService extends baseService(easypostClient) {
         /**
          * The {@link EasyPostObject} class associated with this service.

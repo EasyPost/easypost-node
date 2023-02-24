@@ -1,6 +1,11 @@
 import Utils from '../utils/util';
 import EasyPostObject from './easypost_object';
 
+/**
+ * A {@link https://www.easypost.com/docs/api/node#shipments Shipment} represents a physical {@link Parcel}, the origin and destination {@link Address Addresses}, and any associated {@link CustomsInfo}.
+ * @public
+ * @extends EasyPostObject
+ */
 export default class Shipment extends EasyPostObject {
     /**
      * Get the lowest rate for this {@link Shipment}.

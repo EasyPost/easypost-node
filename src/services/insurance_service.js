@@ -1,6 +1,10 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+    /**
+     * The InsuranceService class provides methods for interacting with EasyPost Insurance objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class InsuranceService extends baseService(easypostClient) {
         /**
          * The {@link EasyPostObject} class associated with this service.

@@ -1,6 +1,10 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+    /**
+     * The ParcelService class provides methods for interacting with EasyPost Parcel objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class ParcelService extends baseService(easypostClient) {
         /**
          * The {@link EasyPostObject} class associated with this service.

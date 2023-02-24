@@ -1,6 +1,11 @@
 import Utils from '../utils/util';
 import EasyPostObject from './easypost_object';
 
+/**
+ * A {@link https://www.easypost.com/docs/api/node#pickups Pickup} represents a scheduled carrier pickup of packages from an {@link https://www.easypost.com/docs/api/node#addresses Address}.
+ * @public
+ * @extends EasyPostObject
+ */
 export default class Pickup extends EasyPostObject {
     /**
      * Get the lowest rate for this {@link Pickup}.

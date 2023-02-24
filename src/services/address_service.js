@@ -1,6 +1,10 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+    /**
+     * The AddressService class provides methods for interacting with EasyPost Address objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class AddressService extends baseService(easypostClient) {
         /**
          * The {@link EasyPostObject} class associated with this service.

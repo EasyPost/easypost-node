@@ -1,6 +1,11 @@
 import Utils from '../utils/util';
 import EasyPostObject from './easypost_object';
 
+/**
+ * An {@link https://www.easypost.com/docs/api/node#orders Order} represents a collection of packages, intended only for multi-parcel shipments.
+ * @public
+ * @extends EasyPostObject
+ */
 export default class Order extends EasyPostObject {
     /**
      * Get the lowest rate for this {@link Order}.

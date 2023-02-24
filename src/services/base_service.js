@@ -94,11 +94,11 @@ const RESOURCES = {
     Webhook,
 };
 
-/**
- * The base class for all EasyPost client library services.
- * @param {EasyPostClient} easypostClient The {@link EasyPostClient} instance to use for API calls.
- */
 export default (easypostClient) =>
+    /**
+     * The base class for all EasyPost client library services.
+     * @param {EasyPostClient} easypostClient The {@link EasyPostClient} instance to use for API calls.
+     */
     class BaseService {
         /**
          * The EasyPost API endpoint associated with this service.

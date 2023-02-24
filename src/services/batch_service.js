@@ -3,6 +3,10 @@ import baseService from './base_service';
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
 export default (easypostClient) =>
+    /**
+     * The BatchService class provides methods for interacting with EasyPost Batch objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class BatchService extends baseService(easypostClient) {
         /**
          * The {@link EasyPostObject} class associated with this service.

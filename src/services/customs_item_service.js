@@ -1,6 +1,10 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+    /**
+     * The CustomsItemService class provides methods for interacting with EasyPost CustomsItem objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class CustomsItemService extends baseService(easypostClient) {
         /**
          * The {@link EasyPostObject} class associated with this service.

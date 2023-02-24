@@ -5,6 +5,10 @@ import InvalidParameterError from '../errors/general/invalid_parameter_error';
 const util = require('util');
 
 export default (easypostClient) =>
+    /**
+     * The CarrierAccountService class provides methods for interacting with EasyPost CarrierAccount objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class CarrierAccountService extends baseService(easypostClient) {
         /**
          * The {@link EasyPostObject} class associated with this service.

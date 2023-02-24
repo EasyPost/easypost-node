@@ -1,6 +1,10 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+    /**
+     * The ReportService class provides methods for interacting with EasyPost Report objects.
+     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     */
     class ReportService extends baseService(easypostClient) {
         /**
          * The EasyPost API endpoint associated with this service.
