@@ -88,8 +88,11 @@ export declare class CustomsInfo implements ICustomsInfo {
    * A CustomsInfo object contains all administrative information for processing customs, as well as a list of CustomsItems. When creating a CustomsInfo, you may store the ID from the response for use later in shipment creation.
    *
    * @see https://www.easypost.com/docs/api#create-a-customs-info
+   *
+   * @param {Object} params The parameters to create an {@link CustomsInfo} with.
+   * @returns {Promise<CustomsInfo>} The {@link CustomsInfo}.
    */
-  public save(): Promise<CustomsInfo>;
+  static create(params: Object): Promise<CustomsInfo>;
 
   /**
    * A CustomsInfo can be retrieved by its id.
@@ -97,6 +100,8 @@ export declare class CustomsInfo implements ICustomsInfo {
    * @param CustomsInfoId Unique, begins with "cstinfo_"
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-customs-info
+   *
+   * @returns {Promise<CustomsInfo>} The {@link CustomsInfo}.
    */
   static retrieve(CustomsInfoId: string): Promise<CustomsInfo>;
 }

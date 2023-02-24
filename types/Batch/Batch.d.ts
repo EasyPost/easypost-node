@@ -30,6 +30,9 @@ export declare interface IBatch extends IObjectWithId<'Batch'>, IDatedObject {
    */
   num_shipments: number;
 
+  /**
+   * An array of batch shipments
+   */
   shipments: IBatchShipment[];
 
   /**
@@ -77,15 +80,20 @@ export declare class Batch implements IBatch {
    * When created with no Shipments the initial state will be created and webhook will be sent.
    *
    * @see https://www.easypost.com/docs/api/node#create-a-batch
+   *
+   * @param {Object} params The parameters to create an {@link Batch} with.
+   * @returns {Promise<Batch>} The {@link Batch}.
    */
-  public save(): Promise<Batch>;
+  static create(params: Object): Promise<Batch>;
 
   /**
    * A Batch can be retrieved by its id.
    *
-   * TODO: Add documentation link when available
+   * @see https://www.easypost.com/docs/api/node#retrieve-batch
    *
    * @param batchId Unique, begins with "batch_"
+   *
+   * @returns {Promise<Batch>} The {@link Batch}.
    */
   static retrieve(batchId: string): Promise<Batch>;
 
@@ -94,16 +102,29 @@ export declare class Batch implements IBatch {
    * Just remember that the state change of a Batch is asynchronous and will fire a webhook Event when the state change is completed.
    *
    * @see https://www.easypost.com/docs/api/node#add-shipments-to-a-batch
+   *
+   * @param id Unique, begins with "trk_"
+   * @param shipments An array of shipments
+   *
+   * @returns {Promise<Batch>} The {@link Batch}.
    */
-  public addShipments(shipments: IBatchCreateParameters['shipments']): Promise<Batch>;
+  static addShipments(id: string, shipments: IBatchCreateParameters['shipments']): Promise<Batch>;
 
   /**
    * There could be times when a Shipment needs to be removed from the Batch during its life cycle.
    * Removing a Shipment does not remove it from the consolidated label or ScanForm.
    *
    * @see https://www.easypost.com/docs/api/node#remove-shipments-from-a-batch
+   *
+   * @param id Unique, begins with "trk_"
+   * @param shipments An array of shipments
+   *
+   * @returns {Promise<Batch>} The {@link Batch}.
    */
-  public removeShipments(shipments: IBatchCreateParameters['shipments']): Promise<Batch>;
+  static removeShipments(
+    id: string,
+    shipments: IBatchCreateParameters['shipments'],
+  ): Promise<Batch>;
 
   /**
    * One of the advantages of processing Shipments in batches is the ability to consolidate the PostageLabel into one file.
@@ -113,13 +134,34 @@ export declare class Batch implements IBatch {
    * Like converting a PostageLabel format, if this process will change the format of the labels they must have been created as PNGs.
    *
    * @see https://www.easypost.com/docs/api/node#batch-labels
+   *
+   * @param id Unique, begins with "trk_"
+   * @param labelFormat The format of label
+   *
+   * @returns {Promise<Batch>} The {@link Batch}.
    */
-  public generateLabel(labelFormat: LabelFormat): Promise<Batch>;
+  static generateLabel(id: string, labelFormat: LabelFormat): Promise<Batch>;
 
   /**
    * See [Scan Form](https://www.easypost.com/docs/api/node#scan-form) rules and [Object Definition](https://www.easypost.com/docs/api/node#scan-form-object).
    *
    * @see https://www.easypost.com/docs/api/node#manifesting-scan-form
+   *
+   * @param id Unique, begins with "trk_"
+   *
+   * @returns {Promise<Batch>} The {@link Batch}.
    */
-  public createScanForm(): Promise<Batch>;
+  static createScanForm(id: string): Promise<Batch>;
+
+  /**
+   * Once you have added all of your Shipments to a Batch, issue a buy request to enqueue a background job to purchase the shipments and generate all necessary labels.
+   * Purchasing may take anywhere from a few seconds to an hour, depending on the size of the batch, the carrier, and Internet weather.
+   *
+   * @see https://www.easypost.com/docs/api/node#buy-a-batch
+   *
+   * @param id Unique, begins with "trk_"
+   *
+   * @returns {Promise<Batch>} The {@link Batch}.
+   */
+  static buy(id: string): Promise<Batch>;
 }

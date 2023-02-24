@@ -3,7 +3,7 @@ import { IFee } from '../Fee';
 import { ICarrierDetail } from './CarrierDetail';
 import { ITrackerCreateParameters } from './TrackerCreateParameters';
 import { ITrackerListParameters } from './TrackerListParameters';
-import { TTrackerStatus } from './TrackerStatus';
+import { ITrackerStatus } from './TrackerStatus';
 import { ITrackingDetail } from './TrackingDetail';
 
 /**
@@ -43,7 +43,7 @@ export declare interface ITracker extends IObjectWithId<'Tracker'>, IDatedObject
   /**
    * The current status of the package, possible values are "unknown", "pre_transit", "in_transit", "out_for_delivery", "delivered", "available_for_pickup", "return_to_sender", "failure", "cancelled" or "error"
    */
-  status: TTrackerStatus;
+  status: ITrackerStatus;
 
   /**
    * The name of the person who signed for the package (if available)
@@ -99,7 +99,7 @@ export declare class Tracker implements ITracker {
   mode: 'test' | 'production';
   object: 'Tracker';
   tracking_code: string;
-  status: TTrackerStatus;
+  status: ITrackerStatus;
   signed_by: string;
   weight: number;
   est_delivery_date: string;
@@ -124,8 +124,11 @@ export declare class Tracker implements ITracker {
    * In the case where a duplicate request is submitted, the original Tracker will be returned.
    *
    * @see https://www.easypost.com/docs/api/node#create-a-tracker
+   *
+   * @param {Object} params The parameters to create an {@link Tracker} with.
+   * @returns {Promise<Tracker>} The {@link Tracker}.
    */
-  public save(): Promise<Tracker>;
+  static create(params: Object): Promise<Tracker>;
 
   /**
    * The Tracker List is a paginated list of all Tracker objects associated with the given API Key.
@@ -138,6 +141,8 @@ export declare class Tracker implements ITracker {
    * Normally, you'll only have one Tracker with a given tracking_code, but it is also possible to further filter those results by including the carrier parameter in your request.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers
+   *
+   * @param params - The parameters to use for the request.
    */
   static all(params?: ITrackerListParameters): Promise<{ trackers: Tracker[]; has_more: boolean }>;
 
@@ -147,6 +152,9 @@ export declare class Tracker implements ITracker {
    * @param trackerId Unique, starts with "trk_"
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-tracker
+   *
+   * @param trackerId The id of tracker, starts with "trk_"
+   * @returns {Promise<Tracker>} The retrieved {@link Tracker}.
    */
   static retrieve(trackerId: string): Promise<Tracker>;
 }

@@ -24,4 +24,9 @@ export declare interface IObjectWithId<ObjectName> extends IBaseObject<ObjectNam
    * Set based on which api-key you used, either "test" or "production"
    */
   mode: 'test' | 'production';
+
+  /**
+   * The object name, e.g. "Address", "Rate", "Shipment", etc
+   */
+  object: ObjectName;
 }

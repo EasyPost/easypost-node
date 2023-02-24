@@ -32,9 +32,10 @@ export declare class Referral implements IReferral {
    *
    * @see https://www.easypost.com/docs/api/node#create-a-referral-customer
    *
+   * @param {Object} params The parameters to create an {@link Referral} with.
    * @returns {Promise<Referral>} The created Referral.
    */
-  public save(): Promise<Referral>;
+  static create(params: Object): Promise<Referral>;
 
   /**
    * The Referral List is a paginated list of all Referral objects associated with the given API Key.
@@ -63,7 +64,8 @@ export declare class Referral implements IReferral {
 
   /**
    * Add Stripe payment method to referral customer.
-   * TODO: Add the link to API doc when its updated
+   *
+   * @see https://www.easypost.com/docs/api/node#add-payment-method-to-referral-user
    *
    * @param {string} stripeCustomerId Stripe customer ID
    * @param {string} paymentMethodReference Reference for the Stripe payment method
@@ -78,7 +80,7 @@ export declare class Referral implements IReferral {
 
   /**
    * Refund by amount for a recent payment.
-   * TODO: Add the link to API doc when its updated
+   * @see https://www.easypost.com/docs/api/node#refund-a-referral-user
    *
    * @param {number} refundAmount Amount to refund
    * @returns {object} Object representing the newly-added payment method
@@ -87,7 +89,7 @@ export declare class Referral implements IReferral {
 
   /**
    * Refund a payment by a payment log ID.
-   * TODO: Add the link to API doc when its updated
+   * @see https://www.easypost.com/docs/api/node#refund-a-referral-user
    *
    * @param {string} paymentLogId ID of the payment log to refund
    * @returns {object} Object representing the newly-added payment method

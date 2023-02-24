@@ -9,19 +9,17 @@ import { IPickupListParameters } from './PickupListParameters';
 /**
  * The Pickup object allows you to schedule a pickup from your carrier from your customer's residence or place of business.
  * Supported carriers include:
- *  - Asendia Europe
  *  - Canada Post
  *  - Canpar
  *  - DHL Express
- *  - Endicia
  *  - FedEx
- *  - GSO
  *  - Lasership
+ *  - Loomis Express
  *  - LSO
  *  - Ontrac
- *  - Purolator
  *  - UPS
  *  - USPS
+ *  - Veho
  *
  * After a Pickup is successfully created, it will automatically fetch PickupRates for each CarrierAccount specified that supports scheduled pickups.
  * Then a PickupRate must be selected and purchased before the pickup can be successfully scheduled.
@@ -119,8 +117,11 @@ export declare class Pickup implements IPickup {
    * The examples below assume that a shipment and address have both already been created.
    *
    * @see https://www.easypost.com/docs/api/node#create-a-pickup
+   *
+   * @param {Object} params The parameters to create an {@link Pickup} with.
+   * @returns {Promise<Pickup>} The created and verified {@link Pickup}.
    */
-  public save(): Promise<Pickup>;
+  static create(params: Object): Promise<Pickup>;
 
   /**
    * The Pickup List is a paginated list of all Pickup objects associated with the given API Key.
@@ -139,9 +140,10 @@ export declare class Pickup implements IPickup {
    * A Pickup object can be retrieved by either an id or reference.
    * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
    *
-   * @param pickupId Unique, starts with "pickup_"
-   *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-pickup
+   *
+   * @param pickupId Unique, starts with "pickup_"
+   * @returns {Promise<Pickup>} The created and verified {@link Pickup}.
    */
   static retrieve(pickupId: string): Promise<Pickup>;
 
@@ -150,8 +152,13 @@ export declare class Pickup implements IPickup {
    * The client libraries will handle this automatically if a PickupRate is provided.
    *
    * @see https://www.easypost.com/docs/api/node#buy-a-pickup
+   *
+   * @param orderId Unique, begins with "pickup_"
+   * @param carrier Carrier (UPS, FedEx, USPS)
+   * @param service Service of the carrier
+   * @returns {Promise<Pickup>} The created and verified {@link Pickup}.
    */
-  public buy(carrier: string, service: string): Promise<Pickup>;
+  static buy(pickupId: string, carrier: string, service: string): Promise<Pickup>;
 
   /**
    * You may cancel a Pickup anytime before it has been completed.
@@ -159,6 +166,9 @@ export declare class Pickup implements IPickup {
    * The status will change to "canceled" on success.
    *
    * @see https://www.easypost.com/docs/api/node#cancel-a-pickup
+   *
+   * @param orderId Unique, begins with "pickup_"
+   * @returns {Promise<Pickup>} The created and verified {@link Pickup}.
    */
-  public cancel(): Promise<Pickup>;
+  static cancel(pickupId: string): Promise<Pickup>;
 }

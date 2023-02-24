@@ -77,8 +77,11 @@ export declare class ScanForm implements IScanForm {
    * @see https://www.easypost.com/docs/api/node#scan-form
    *
    * @returns {Promise<ScanForm>} The created ScanForm
+   *
+   * @param {Object} params The parameters to create an {@link ScanForm} with.
+   * @returns {Promise<ScanForm>} The created and verified {@link ScanForm}.
    */
-  public save(): Promise<ScanForm>;
+  static create(params: Object): Promise<ScanForm>;
 
   /**
    * The ScanForm List is a paginated list of all ScanForm objects associated with the given API Key.
@@ -89,6 +92,7 @@ export declare class ScanForm implements IScanForm {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-scan-forms
    *
    * @param {object} params The parameters to use for the request.
+   * @returns An array of {@link ScanForm} objects.
    */
   static all(
     params?: IScanFormListParameters,

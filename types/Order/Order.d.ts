@@ -85,16 +85,20 @@ export declare class Order implements IOrder {
    * You can limit the CarrierAccounts to use for rating by passing the carrier_accounts parameter.
    *
    * @see https://www.easypost.com/docs/api/node#create-an-order
+   *
+   * @param {Object} params The parameters to create an {@link Order} with.
+   * @returns {Promise<Order>} The created and verified {@link Order}.
    */
-  public save(): Promise<Order>;
+  static create(params: Object): Promise<Order>;
 
   /**
    * An Order can be retrieved by either its id or reference.
    * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
    *
-   * @param orderId Unique, begins with "order_"
-   *
    * @see https://www.easypost.com/docs/api/node#retrieve-an-order
+   *
+   * @param orderId Unique, begins with "order_"
+   * @returns {Promise<Order>} The retrieved {@link Order}.
    */
   static retrieve(orderId: string): Promise<Order>;
 
@@ -103,11 +107,20 @@ export declare class Order implements IOrder {
    * This operation populates the tracking_code and postage_label attributes of each Shipment.
    *
    * @see https://www.easypost.com/docs/api/node#buy-an-order
+   *
+   * @param orderId Unique, begins with "order_"
+   * @param carrier Carrier (UPS, FedEx, USPS)
+   * @param service Service of the carrier
+   *
+   * @returns {Promise<Order>} The {@link Order} object.
    */
-  public buy(carrier: string, service: string): Promise<Order>;
+  static buy(orderId: string, carrier: string, service: string): Promise<Order>;
 
   /**
    * Returns the rates of an Order.
+   *
+   * @param orderId Unique, begins with "order_"
+   * @returns {Promise<Irate[]>} The list of {@link IRate[]}.
    */
-  public getRates(): Promise<IRate[]>;
+  static getRates(orderId: string): Promise<IRate[]>;
 }

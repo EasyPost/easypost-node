@@ -60,6 +60,11 @@ export declare interface IOptions {
   cod_address_id?: string | null;
 
   /**
+   * A description of the content of the shipment.
+   */
+  content_description?: string | null;
+
+  /**
    * Which currency this shipment will show for rates if carrier allows.
    */
   currency?: string | null;
@@ -72,6 +77,11 @@ export declare interface IOptions {
    *  - USPS - additional options
    *    - "ADULT_SIGNATURE_RESTRICTED"
    *    - "SIGNATURE_RESTRICTED"
+   *  - Canada Post - "DO_NOT_SAFE_DROP" - Tells the carrier to not hide the package ("safe drop").
+   *  - GSO - "STANDARD_SIGNATURE".
+   *  - DHL Express - option mapping
+   *    - "SIGNATURE" - DHL Express Direct Signature
+   *    - "NO_SIGNATURE" - DHL Express Signature Release
    */
   delivery_confirmation?:
     | 'ADULT_SIGNATURE'
@@ -127,6 +137,16 @@ export declare interface IOptions {
   dry_ice_weight?: string | null;
 
   /**
+   * Setting duty_payment type to bill the correct account for purchasing postage.
+   * This option is only available with FedEx and UPS.
+   *  - type - (string) Supported values are "THIRD_PARTY", and "RECEIVER".
+   *  - account - (string) Setting account number.
+   *  - country - (string) Setting country code that the account is based in.
+   *  - postal_code - (string) Setting postal code that the account is based in.
+   */
+  duty_payment: object | null;
+
+  /**
    * Possible values "ADDRESS_SERVICE_REQUESTED", "FORWARDING_SERVICE_REQUESTED", "CHANGE_SERVICE_REQUESTED", "RETURN_SERVICE_REQUESTED", "LEAVE_IF_NO_RESPONSE"
    */
   endorsement?:
@@ -136,6 +156,11 @@ export declare interface IOptions {
     | 'RETURN_SERVICE_REQUESTED'
     | 'LEAVE_IF_NO_RESPONSE'
     | null;
+
+  /**
+   * Specify the responsible EndShipper for the shipment by passing in an EndShipper ID.
+   */
+  end_shipper_id: string | null;
 
   /**
    * Additional cost to be added to the invoice of this shipment.
@@ -241,6 +266,16 @@ export declare interface IOptions {
      */
     postal_code?: string | null;
   };
+
+  /**
+   * The earliest a package should be picked up. Supported carriers vary.
+   */
+  pickup_min_datetime: string | null;
+
+  /**
+   * The latest a package should be picked up. Supported carriers vary.
+   */
+  pickup_man_datetime: string | null;
 
   /**
    * You can optionally print custom messages on labels.

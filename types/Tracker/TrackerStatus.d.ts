@@ -1,4 +1,4 @@
-export declare type TTrackerStatus =
+export declare type ITrackerStatus =
   | 'unknown'
   | 'pre_transit'
   | 'in_transit'

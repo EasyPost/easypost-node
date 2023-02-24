@@ -32,15 +32,15 @@ export declare interface IParcel extends IObjectWithId<'Parcel'>, IDatedObject {
   height?: number | null;
 
   /**
-   * Optional, one of our predefined_packages
-   */
-  predefined_package?: string | null;
-
-  /**
    * Always required
    * float (oz)
    */
   weight: number;
+
+  /**
+   * Optional, one of our predefined_packages
+   */
+  predefined_package?: string | null;
 }
 
 export declare class Parcel implements IParcel {
@@ -61,8 +61,11 @@ export declare class Parcel implements IParcel {
    * Include the weight, and either a predefined_package or length, width and height if applicable.
    *
    * @see https://www.easypost.com/docs/api/node#create-a-parcel
+   *
+   * @param {Object} params The parameters to create an {@link Parcel} with.
+   * @returns {Promise<Parcel>} The created and verified {@link Parcel}.
    */
-  public save(): Promise<Parcel>;
+  static create(params: Object): Promise<Parcel>;
 
   /**
    * Get a Parcel by its id.
@@ -73,6 +76,7 @@ export declare class Parcel implements IParcel {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-parcel
    *
    * @param parcelId Unique, begins with "prcl_"
+   * @returns {Promise<Parcel>} The retrieved {@link Parcel}.
    */
   static retrieve(parcelId: string): Promise<Parcel>;
 }

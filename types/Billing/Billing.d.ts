@@ -7,19 +7,29 @@
 export declare class Billing {
   /**
    * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
-   * TODO: Add the link to API doc when its updated
+   *
+   * @see https://www.easypost.com/docs/api/node#add-funds-to-your-wallet-one-time-charge
+   * @requires production API Key.
+   *
+   * @param amount Amount in cents to be deposited into the user's wallet. Amount must be greater than or equal to the user's current balance.
+   * @param priority The payment method from your account, either primary or secondary.
    */
   static fundWallet(amount: string, priority?: string): void;
 
   /**
    * Delete a payment method from your account.
-   * TODO: Add the link to API doc when its updated
+   * @see https://www.easypost.com/docs/api/node#delete-a-payment-method
+   * @requires production API Key.
+   *
+   * @param priority The payment method from your account, either primary or secondary.
    */
   static deletePaymentMethod(priority: string): void;
 
   /**
    * Retrieve all payment methods.
-   * TODO: Add the link to API doc when its updated
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-payment-methods
+   * @requires production API Key.
    */
   static retrievePaymentMethods(): object;
 }

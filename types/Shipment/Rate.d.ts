@@ -1,4 +1,5 @@
 import { IDatedObject, IObjectWithId } from '../base';
+import { ICarbonOffset } from '../CarbonOffset';
 
 /**
  * After a Shipment is successfully created, it will automatically fetch Rates.
@@ -78,5 +79,5 @@ export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
   /**
    * Indicate if a rate includes a carbon offset fee
    */
-  carbon_offset: object;
+  carbon_offset: ICarbonOffset;
 }

@@ -116,8 +116,11 @@ export declare class Insurance implements IInsurance {
    * In addition, not having to auto-match the carrier will significantly speed up the response time.
    *
    * @see https://www.easypost.com/docs/api/node#create-an-insurance
+   *
+   * @param {Object} params The parameters to create an {@link Insurance} with.
+   * @returns {Promise<Insurance>} The created and verified {@link Insurance}.
    */
-  public save(): Promise<Insurance>;
+  static create(params: Object): Promise<Insurance>;
 
   /**
    * The Insurance List is a paginated list of all Insurance objects associated with the given API Key.
@@ -126,6 +129,8 @@ export declare class Insurance implements IInsurance {
    * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
+   *
+   * @returns {Promise<Insurance[]>} The list of {@link Insurance}s.
    */
   static all(
     params?: IAllMethodParameters,
@@ -134,9 +139,10 @@ export declare class Insurance implements IInsurance {
   /**
    * Retrieve an Insurance by id.
    *
-   * @param insuranceId Unique, starts with "ins_"
-   *
    * @see https://www.easypost.com/docs/api/node#retrieve-an-insurance
+   *
+   * @param insuranceId Unique, starts with "ins_"
+   * @returns {Promise<Insurance>} The retrieved {@link Insurance}.
    */
   static retrieve(insuranceId: string): Promise<Insurance>;
 }

@@ -1,5 +1,6 @@
 import { IDatedObject, IObjectWithId } from '../base';
 import { IReportCreateParameters } from './ReportCreateParameters';
+import { IReportListParameters } from './ReportListParameters';
 import { TReportObjectType } from './ReportObjectType';
 
 /**
@@ -11,6 +12,7 @@ import { TReportObjectType } from './ReportObjectType';
  * The Report api can be categorized into several types.
  * These types determine which EasyPost Object to produce a Report for, and should be passed as the type in our libraries:
  *  - cash_flow
+ *  - insurance
  *  - payment_log
  *  - refund
  *  - shipment
@@ -84,8 +86,11 @@ export declare class Report implements IReport {
    * When a Report's status changes, a webhook will be created. See our Webhooks Guide for help on Event handling.
    *
    * @see https://www.easypost.com/docs/api/node#create-a-report
+   *
+   * @param {Object} params The parameters to create an {@link Report} with.
+   * @returns {Promise<Report>} The created and verified {@link Report}.
    */
-  public save(): Promise<Report>;
+  static create(params: Object): Promise<Report>;
 
   /**
    * The Report List is a paginated list of all Report objects associated with the given API Key. It accepts a variety of
@@ -94,8 +99,11 @@ export declare class Report implements IReport {
    * the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-reports
+   *
+   * @param params - The parameters to use for the request.
+   * @returns {Promise<Report>} The created and verified {@link Report}.
    */
-  public all(): Promise<Report>;
+  static all(params?: IReportListParameters): Promise<Report>;
 
   /**
    * Retrieve a Report by id.
