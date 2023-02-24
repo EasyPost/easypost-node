@@ -1,82 +1,82 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+  /**
+   * The EndShipperService class provides methods for interacting with EasyPost EndShipper objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
+  class EndShipperService extends baseService(easypostClient) {
     /**
-     * The EndShipperService class provides methods for interacting with EasyPost EndShipper objects.
-     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     * The {@link EasyPostObject} class associated with this service.
+     * @override
+     * @type {string}
      */
-    class EndShipperService extends baseService(easypostClient) {
-        /**
-         * The {@link EasyPostObject} class associated with this service.
-         * @override
-         * @type {string}
-         */
-        static #name = 'EndShipper';
+    static #name = 'EndShipper';
 
-        /**
-         * The EasyPost API endpoint associated with this service.
-         * @override
-         * @type {string}
-         */
-        static #url = 'end_shippers';
+    /**
+     * The EasyPost API endpoint associated with this service.
+     * @override
+     * @type {string}
+     */
+    static #url = 'end_shippers';
 
-        /**
-         * The top-level JSON key associated with this service.
-         * @override
-         * @type {string}
-         */
-        static #key = 'address';
+    /**
+     * The top-level JSON key associated with this service.
+     * @override
+     * @type {string}
+     */
+    static #key = 'address';
 
-        /**
-         * Create an EndShipper.
-         * @param {Object} params
-         * @returns {this|Promise<never>}
-         */
-        static async create(params) {
-            const url = this.#url;
-            const wrappedParams = {address: params};
+    /**
+     * Create an EndShipper.
+     * @param {Object} params
+     * @returns {this|Promise<never>}
+     */
+    static async create(params) {
+      const url = this.#url;
+      const wrappedParams = { address: params };
 
-            return this._create(url, wrappedParams);
-        }
+      return this._create(url, wrappedParams);
+    }
 
-        /**
-         * Update an EndShipper.
-         * @param {string} id
-         * @param {Object} params
-         * @returns {this|Promise<never>}
-         */
-        static async update(id, params) {
-            const url = `${this.#url}/${id}`;
-            const wrappedParams = {address: params};
+    /**
+     * Update an EndShipper.
+     * @param {string} id
+     * @param {Object} params
+     * @returns {this|Promise<never>}
+     */
+    static async update(id, params) {
+      const url = `${this.#url}/${id}`;
+      const wrappedParams = { address: params };
 
-            try {
-                const response = await easypostClient._put(url, wrappedParams);
+      try {
+        const response = await easypostClient._put(url, wrappedParams);
 
-                return this._convertToEasyPostObject(response.body);
-            } catch (e) {
-                return Promise.reject(e);
-            }
-        }
+        return this._convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
 
-        /**
-         * Retrieve a EndShipper from the API.
-         * @param {string} id
-         * @returns {EndShipper}
-         */
-        static async retrieve(id) {
-            const url = `${this.#url}/${id}`;
+    /**
+     * Retrieve a EndShipper from the API.
+     * @param {string} id
+     * @returns {EndShipper}
+     */
+    static async retrieve(id) {
+      const url = `${this.#url}/${id}`;
 
-            return this._retrieve(url);
-        }
+      return this._retrieve(url);
+    }
 
-        /**
-         * Retrieve a list of all EndShippers associated with the API key.
-         * @param {Object} [params]
-         * @returns {EndShipper[]}
-         */
-        static async all(params = {}) {
-            const url = this.#url;
+    /**
+     * Retrieve a list of all EndShippers associated with the API key.
+     * @param {Object} [params]
+     * @returns {EndShipper[]}
+     */
+    static async all(params = {}) {
+      const url = this.#url;
 
-            return this._all(url, params);
-        }
-    };
+      return this._all(url, params);
+    }
+  };

@@ -1,57 +1,57 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+  /**
+   * The ReportService class provides methods for interacting with EasyPost Report objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
+  class ReportService extends baseService(easypostClient) {
     /**
-     * The ReportService class provides methods for interacting with EasyPost Report objects.
-     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     * The EasyPost API endpoint associated with this service.
+     * @override
+     * @type {string}
      */
-    class ReportService extends baseService(easypostClient) {
-        /**
-         * The EasyPost API endpoint associated with this service.
-         * @override
-         * @type {string}
-         */
-        static #url = 'reports';
+    static #url = 'reports';
 
-        /**
-         * Create a report.
-         * @param {Object} params
-         * @returns {Report}
-         */
-        static async create(params) {
-            const url = `${this.#url}/${params.type}`;
-            return this._create(url, params);
-        }
+    /**
+     * Create a report.
+     * @param {Object} params
+     * @returns {Report}
+     */
+    static async create(params) {
+      const url = `${this.#url}/${params.type}`;
+      return this._create(url, params);
+    }
 
-        /**
-         * Retrieve a list of all reports associated with the API key.
-         * @param {Object} [params]
-         * @returns {Report[]}
-         */
-        static async all(params = {}) {
-            const url = `${this.#url}/${params.type}`;
+    /**
+     * Retrieve a list of all reports associated with the API key.
+     * @param {Object} [params]
+     * @returns {Report[]}
+     */
+    static async all(params = {}) {
+      const url = `${this.#url}/${params.type}`;
 
-            // delete "type" from params, so it doesn't get sent to the API
-            // eslint-disable-next-line no-param-reassign
-            delete params.type;
+      // delete "type" from params, so it doesn't get sent to the API
+      // eslint-disable-next-line no-param-reassign
+      delete params.type;
 
-            try {
-                const response = await easypostClient._get(url, params);
+      try {
+        const response = await easypostClient._get(url, params);
 
-                return this._convertToEasyPostObject(response.body);
-            } catch (e) {
-                return Promise.reject(e);
-            }
-        }
+        return this._convertToEasyPostObject(response.body);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
 
-        /**
-         * Retrieve a report from the API.
-         * @param {string} id
-         * @returns {Rate}
-         */
-        static async retrieve(id) {
-            const url = `${this.#url}/${id}`;
+    /**
+     * Retrieve a report from the API.
+     * @param {string} id
+     * @returns {Rate}
+     */
+    static async retrieve(id) {
+      const url = `${this.#url}/${id}`;
 
-            return this._retrieve(url);
-        }
-    };
+      return this._retrieve(url);
+    }
+  };

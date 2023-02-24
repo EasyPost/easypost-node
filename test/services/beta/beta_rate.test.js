@@ -5,8 +5,7 @@ import EasyPostClient from '../../../src/beta/easypost';
 import FilteringError from '../../../src/errors/general/filtering_error';
 import Fixture from '../../helpers/fixture';
 import Rate from '../../../src/models/rate';
-import Util from '../../../src/utils/util';
-import Utils from "../../../src/utils/util";
+import Utils from '../../../src/utils/util';
 
 /* eslint-disable func-names */
 describe('Beta Rate Service', function () {

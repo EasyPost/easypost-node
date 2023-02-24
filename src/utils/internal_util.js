@@ -4,5 +4,4 @@
  * @internal
  * @type {InternalUtils}
  */
-export default class InternalUtils {
-};
+export default class InternalUtils {}

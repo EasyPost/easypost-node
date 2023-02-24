@@ -9,5 +9,4 @@ import ApiError from './api_error';
  * @param {string} [code] - The EasyPost-related error code returned by the EasyPost API.
  * @param {Array} [errors] - An array of sub-errors returned by the EasyPost API.
  */
-export default class RateLimitError extends ApiError {
-}
+export default class RateLimitError extends ApiError {}

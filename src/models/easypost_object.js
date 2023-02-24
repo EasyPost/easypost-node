@@ -3,5 +3,4 @@
  * @internal
  * @abstract
  */
-export default class EasyPostObject {
-}
+export default class EasyPostObject {}

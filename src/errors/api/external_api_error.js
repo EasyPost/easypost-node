@@ -7,5 +7,4 @@ import ApiError from './api_error';
  * @param {string} [message] - The message to be displayed when the error is logged.
  * @param {number} [statusCode] - The HTTP status code returned by the HTTP request.
  */
-export default class ExternalApiError extends ApiError {
-}
+export default class ExternalApiError extends ApiError {}

@@ -5,5 +5,4 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class CustomsItem extends EasyPostObject {
-}
+export default class CustomsItem extends EasyPostObject {}

@@ -1,75 +1,75 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+  /**
+   * The TrackerService class provides methods for interacting with EasyPost Tracker objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
+  class TrackerService extends baseService(easypostClient) {
     /**
-     * The TrackerService class provides methods for interacting with EasyPost Tracker objects.
-     * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+     * The {@link EasyPostObject} class associated with this service.
+     * @override
+     * @type {string}
      */
-    class TrackerService extends baseService(easypostClient) {
-        /**
-         * The {@link EasyPostObject} class associated with this service.
-         * @override
-         * @type {string}
-         */
-        static #name = 'Tracker';
+    static #name = 'Tracker';
 
-        /**
-         * The EasyPost API endpoint associated with this service.
-         * @override
-         * @type {string}
-         */
-        static #url = 'trackers';
+    /**
+     * The EasyPost API endpoint associated with this service.
+     * @override
+     * @type {string}
+     */
+    static #url = 'trackers';
 
-        /**
-         * The top-level JSON key associated with this service.
-         * @override
-         * @type {string}
-         */
-        static #key = 'tracker';
+    /**
+     * The top-level JSON key associated with this service.
+     * @override
+     * @type {string}
+     */
+    static #key = 'tracker';
 
-        /**
-         * Create a tracker.
-         * @param {*} params
-         * @returns {Tracker}
-         */
-        static async create(params) {
-            const url = this.#url;
+    /**
+     * Create a tracker.
+     * @param {*} params
+     * @returns {Tracker}
+     */
+    static async create(params) {
+      const url = this.#url;
 
-            const wrappedParams = {};
-            wrappedParams[this.#key] = params;
+      const wrappedParams = {};
+      wrappedParams[this.#key] = params;
 
-            return this._create(url, wrappedParams);
-        }
+      return this._create(url, wrappedParams);
+    }
 
-        /**
-         * Create trackers in bulk.
-         * @param {Object} [params]
-         */
-        static async createList(params = {}) {
-            const newParams = {trackers: params};
-            const url = 'trackers/create_list';
-            await easypostClient._post(url, newParams);
-        }
+    /**
+     * Create trackers in bulk.
+     * @param {Object} [params]
+     */
+    static async createList(params = {}) {
+      const newParams = { trackers: params };
+      const url = 'trackers/create_list';
+      await easypostClient._post(url, newParams);
+    }
 
-        /**
-         * Retrieve a list of all trackers associated with the API key.
-         * @param {Object} [params]
-         * @returns {Tracker[]}
-         */
-        static async all(params = {}) {
-            const url = this.#url;
+    /**
+     * Retrieve a list of all trackers associated with the API key.
+     * @param {Object} [params]
+     * @returns {Tracker[]}
+     */
+    static async all(params = {}) {
+      const url = this.#url;
 
-            return this._all(url, params);
-        }
+      return this._all(url, params);
+    }
 
-        /**
-         * Retrieve a tracker from the API.
-         * @param {string} id
-         * @returns {Tracker}
-         */
-        static async retrieve(id) {
-            const url = `${this.#url}/${id}`;
+    /**
+     * Retrieve a tracker from the API.
+     * @param {string} id
+     * @returns {Tracker}
+     */
+    static async retrieve(id) {
+      const url = `${this.#url}/${id}`;
 
-            return this._retrieve(url);
-        }
-    };
+      return this._retrieve(url);
+    }
+  };

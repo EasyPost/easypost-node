@@ -13,8 +13,8 @@ export const DEFAULT_BASE_URL = 'https://api.easypost.com/beta/';
  * @type {Map}
  */
 export const SERVICES = {
-    BetaReferralCustomerService,
-    BetaRateService,
+  BetaReferralCustomerService,
+  BetaRateService,
 };
 
 /**
@@ -25,11 +25,11 @@ export const SERVICES = {
  * @param {Object} [options] Additional options to use for the underlying HTTP client (e.g. superagent, middleware, proxy configuration).
  */
 export default class BetaClient extends EasyPostClient {
-    constructor(key, options = {}) {
-        super(key, options);
-        const {baseUrl} = options;
-        this.baseUrl = baseUrl || DEFAULT_BASE_URL;
+  constructor(key, options = {}) {
+    super(key, options);
+    const { baseUrl } = options;
+    this.baseUrl = baseUrl || DEFAULT_BASE_URL;
 
-        this._attachServices(SERVICES);
-    }
+    this._attachServices(SERVICES);
+  }
 }

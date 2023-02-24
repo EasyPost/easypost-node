@@ -6,5 +6,4 @@ import EasyPostError from '../easypost_error';
  * @extends EasyPostError
  * @param {string} [message] - The message to be displayed when the error is logged.
  */
-export default class InvalidObjectError extends EasyPostError {
-}
+export default class InvalidObjectError extends EasyPostError {}

@@ -5,5 +5,4 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class Tracker extends EasyPostObject {
-}
+export default class Tracker extends EasyPostObject {}
