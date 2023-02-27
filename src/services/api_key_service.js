@@ -6,18 +6,8 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ApiKeyService extends baseService(easypostClient) {
-    /**
-     * The {@link EasyPostObject} class associated with this service.
-     * @override
-     * @type {string}
-     */
     static #name = 'ApiKey';
 
-    /**
-     * The EasyPost API endpoint associated with this service.
-     * @override
-     * @type {string}
-     */
     static #url = 'api_keys';
 
     /**

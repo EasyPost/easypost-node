@@ -7,25 +7,10 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ShipmentService extends baseService(easypostClient) {
-    /**
-     * The {@link EasyPostObject} class associated with this service.
-     * @override
-     * @type {string}
-     */
     static #name = 'Shipment';
 
-    /**
-     * The EasyPost API endpoint associated with this service.
-     * @override
-     * @type {string}
-     */
     static #url = 'shipments';
 
-    /**
-     * The top-level JSON key associated with this service.
-     * @override
-     * @type {string}
-     */
     static #key = 'shipment';
 
     /**
@@ -48,10 +33,10 @@ export default (easypostClient) =>
     /**
      * Buy a shipment.
      * @param {string} id
-     * @param {Map} rate
-     * @param {number} insuranceAmount
+     * @param {Rate} rate
+     * @param {number|null} insuranceAmount
      * @param {boolean} withCarbonOffset
-     * @param {string} endShipperId
+     * @param {string|null} endShipperId
      * @returns {Shipment}
      */
     static async buy(

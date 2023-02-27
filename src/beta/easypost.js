@@ -1,6 +1,6 @@
 import EasyPostClient from '../easypost';
-import BetaRateService from './beta_rate_service';
-import BetaReferralCustomerService from './beta_referral_customer_service';
+import RateService from './beta_rate_service';
+import ReferralCustomerService from './beta_referral_customer_service';
 
 /**
  * The default base URL for beta features of the EasyPost API.
@@ -13,8 +13,8 @@ export const DEFAULT_BASE_URL = 'https://api.easypost.com/beta/';
  * @type {Map}
  */
 export const SERVICES = {
-  BetaReferralCustomerService,
-  BetaRateService,
+  ReferralCustomer: ReferralCustomerService,
+  Rate: RateService,
 };
 
 /**
@@ -24,7 +24,7 @@ export const SERVICES = {
  * @param {string} key The API key to use for API requests made by this client.
  * @param {Object} [options] Additional options to use for the underlying HTTP client (e.g. superagent, middleware, proxy configuration).
  */
-export default class BetaClient extends EasyPostClient {
+export default class EasyPostBetaClient extends EasyPostClient {
   constructor(key, options = {}) {
     super(key, options);
     const { baseUrl } = options;

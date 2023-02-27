@@ -6,25 +6,10 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ParcelService extends baseService(easypostClient) {
-    /**
-     * The {@link EasyPostObject} class associated with this service.
-     * @override
-     * @type {string}
-     */
     static #name = 'Parcel';
 
-    /**
-     * The EasyPost API endpoint associated with this service.
-     * @override
-     * @type {string}
-     */
     static #url = 'parcels';
 
-    /**
-     * The top-level JSON key associated with this service.
-     * @override
-     * @type {string}
-     */
     static #key = 'parcel';
 
     /**

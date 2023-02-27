@@ -48,6 +48,7 @@ export default class Utils {
 
       if (rate.time_in_transit[lowercaseDeliveryAccuracy] > parseInt(deliveryDays, 10)) {
         // eslint-disable-next-line no-continue
+        continue;
       } else if (
         lowestSmartRate === null ||
         parseFloat(rate.rate) < parseFloat(lowestSmartRate.rate)
@@ -64,7 +65,7 @@ export default class Utils {
   }
 
   /**
-   * Get the lowest rate from a provided list of stateless rates.
+   * Get the lowest rate from a provided list of rates.
    * @public
    * @param {Rate[]} rates - List of rates to filter through
    * @param {string[]} [carriers] - List of allowed carriers to filter by

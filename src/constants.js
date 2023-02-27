@@ -17,12 +17,6 @@ export default class Constants {
   static EXTERNAL_API_CALL_FAILED = 'Communication with %s failed, please try again later';
 
   /**
-   * The template for the error message when encoding fails.
-   * @type {string}
-   */
-  static ENCODED_ERROR = 'Encode error for %s';
-
-  /**
    * The template for the error message when an invalid API key is provided.
    * @type {string}
    */

@@ -8,25 +8,10 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class BillingService extends baseService(easypostClient) {
-    /**
-     * The {@link EasyPostObject} class associated with this service.
-     * @override
-     * @type {string}
-     */
     static #name = 'Billing';
 
-    /**
-     * The EasyPost API endpoint associated with this service.
-     * @override
-     * @type {string}
-     */
     static #url = 'payment_methods';
 
-    /**
-     * The top-level JSON key associated with this service.
-     * @override
-     * @type {string}
-     */
     static #key = 'billing';
 
     /**

@@ -4,26 +4,11 @@ import baseService from '../services/base_service';
  * @extends baseService
  */
 export default (easypostClient) =>
-  class BetaRateService extends baseService(easypostClient) {
-    /**
-     * The {@link EasyPostObject} class associated with this service.
-     * @override
-     * @type {string}
-     */
+  class RateService extends baseService(easypostClient) {
     static #name = 'Rate';
 
-    /**
-     * The EasyPost API endpoint associated with this service.
-     * @override
-     * @type {string}
-     */
     static #url = 'rates';
 
-    /**
-     * The top-level JSON key associated with this service.
-     * @override
-     * @type {string}
-     */
     static #key = 'rate';
 
     /**

@@ -1,26 +1,11 @@
 import baseService from '../services/base_service';
 
 export default (easypostClient) =>
-  class BetaReferralCustomerService extends baseService(easypostClient) {
-    /**
-     * The {@link EasyPostObject} class associated with this service.
-     * @override
-     * @type {string}
-     */
+  class ReferralCustomerService extends baseService(easypostClient) {
     static #name = 'Referral';
 
-    /**
-     * The EasyPost API endpoint associated with this service.
-     * @override
-     * @type {string}
-     */
     static #url = 'referral_customers';
 
-    /**
-     * The top-level JSON key associated with this service.
-     * @override
-     * @type {string}
-     */
     static #key = 'user';
 
     /**

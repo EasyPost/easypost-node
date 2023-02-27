@@ -6,14 +6,14 @@ import EasyPostError from '../easypost_error';
  * @internal
  * @abstract
  * @extends EasyPostError
- * @param {string} [message] - The message to be displayed when the error is logged.
- * @param {string} [code] - The EasyPost-related error code returned by the EasyPost API.
- * @param {number} [statusCode] - The HTTP status code returned by the HTTP request to the EasyPost API.
- * @param {Array} [errors] - An array of sub-errors returned by the EasyPost API.
+ * @property {string} [message] - The message to be displayed when the error is logged.
+ * @property {string} [code] - The EasyPost-related error code returned by the EasyPost API.
+ * @property {number} [statusCode] - The HTTP status code returned by the HTTP request to the EasyPost API.
+ * @property {EasyPostError[]} [errors] - An array of sub-errors returned by the EasyPost API.
  */
 export default class ApiError extends EasyPostError {
   constructor({ message, code, statusCode, errors } = {}) {
-    super(message);
+    super({ message });
     this.code = code;
     this.errors = errors;
     this.message = message;
