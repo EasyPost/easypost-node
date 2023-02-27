@@ -29,7 +29,7 @@ export declare class Payload implements IPayload {
    *
    * @param eventId the ID of the event object.
    * @param payloadId the ID of the payload.
-   * @returns {Promise<Payload>} The retrieved {@link Payload}.
+   * @returns {Promise<Payload>} The retrieved {@link Payload payload}.
    */
   static retrieve(eventId: string, payloadId: string): Promise<Payload>;
 
@@ -39,7 +39,7 @@ export declare class Payload implements IPayload {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-payloads
    *
    * @param params - The parameters to use for the request.
-   * @returns {Promise<Payload[]>} The retrieved {@link Payload}s.
+   * @returns {Promise<Payload[]>} The retrieved {@link Payload payload}.
    */
   static all(params: IPayloadListParameters): Promise<{ payloads: Payload[] }>;
 }

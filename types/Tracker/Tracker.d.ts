@@ -25,11 +25,11 @@ import { ITrackingDetail } from './TrackingDetail';
  *
  * Some Tracker objects may also contain a CarrierDetail, which stores some additional information about the Tracker that the carrier has made available to EasyPost.
  * The CarrierDetail object contains the service and container_type of the package.
- * Additionally, it also stores the est_delivery_date_local and est_delivery_time_local, which provide information about the local delivery time.
+ * Additionally, it also stores the `est_delivery_date_local` and `est_delivery_time_local`, which provide information about the local delivery time.
  *
  * It's worth noting that tracking_codes are not globally unique.
- * Each carrier promises uniqueness for a given tracking_code for a certain period of time, but the length of time varies greatly based on the specific carrier and service level.
- * The carriers do eventually recycle tracking_codes, and for this reason enforcing uniqueness on the tracking_code field is not recommended.
+ * Each carrier promises uniqueness for a given `tracking_code` for a certain period of time, but the length of time varies greatly based on the specific carrier and service level.
+ * The carriers do eventually recycle `tracking_codes`, and for this reason enforcing uniqueness on the `tracking_code` field is not recommended.
  * EasyPost does, however, prevent the creation of duplicate Trackers based on tracking_code and carrier; duplicate requests by the same User will simply return the original Tracker.
  *
  * @see https://www.easypost.com/docs/api/node#tracker-object
@@ -133,12 +133,12 @@ export declare class Tracker implements ITracker {
   /**
    * The Tracker List is a paginated list of all Tracker objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
-   * The has_more attribute indicates whether or not additional pages can be requested.
-   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * The `has_more` attribute indicates whether or not additional pages can be requested.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
-   * Using the Tracker List endpoint is the recommended way of retrieving a Tracker by tracking_code or carrier.
+   * Using the Tracker List endpoint is the recommended way of retrieving a Tracker by `tracking_code` or `carrier`.
    * Unlike the retrieving a Tracker using the Retrieve endpoint, which accepts an id, the List endpoint accepts the tracking_code as the search parameter.
-   * Normally, you'll only have one Tracker with a given tracking_code, but it is also possible to further filter those results by including the carrier parameter in your request.
+   * Normally, you'll only have one Tracker with a given `tracking_code`, but it is also possible to further filter those results by including the carrier parameter in your request.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers
    *

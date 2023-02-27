@@ -86,8 +86,8 @@ export declare class ScanForm implements IScanForm {
   /**
    * The ScanForm List is a paginated list of all ScanForm objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
-   * The has_more attribute indicates whether additional pages can be requested.
-   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * The `has_more` attribute indicates whether additional pages can be requested.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-scan-forms
    *

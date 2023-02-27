@@ -120,8 +120,8 @@ export declare class Address implements IAddress {
    *
    * Verify an Address
    *  - Verifying an Address before you ship is a great way to reduce issues with delivery.
-   *    Creating a verified Address is as simple as including an enumerated list of the verifications you'd like EasyPost to perform in the verify or verify_strict url parameters.
-   *    If any of the verification checks included in the verify_strict list fail an error will be returned from the API.
+   *    Creating a verified Address is as simple as including an enumerated list of the verifications you'd like EasyPost to perform in the verify or `verify_strict url` parameters.
+   *    If any of the verification checks included in the `verify_strict` list fail an error will be returned from the API.
    *    The example below demonstrates the most common verification: "delivery", which checks that the address is deliverable and sets its residential delivery indicator.
    *
    *  - The most effective time to perform address verification is when your customer, or the person entering the delivery address, is present.
@@ -141,7 +141,7 @@ export declare class Address implements IAddress {
    * The Address List is a paginated list of all {@link Address} objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
    * The has_more attribute indicates whether additional pages can be requested.
-   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-addresses
    *
@@ -155,7 +155,7 @@ export declare class Address implements IAddress {
    * Verify an {@link Address}
    *  - Verifying an {@link Address} before you ship is a great way to reduce issues with delivery.
    *    Creating a verified Address is as simple as including an enumerated list of the verifications you'd like EasyPost to perform in the `verify` or `verify_strict` url parameters.
-   *    If any of the verification checks included in the verify_strict list fail an error will be returned from the API.
+   *    If any of the verification checks included in the `verify_strict` list fail an error will be returned from the API.
    *    The example below demonstrates the most common verification: "delivery", which checks that the address is deliverable and sets its residential delivery indicator.
    *
    *  - The most effective time to perform address verification is when your customer, or the person entering the delivery address, is present.
@@ -185,7 +185,7 @@ export declare class Address implements IAddress {
    * @see https://www.easypost.com/docs/api/node#retrieve-an-address
    *
    * @param addressId Unique, begins with "adr_"
-   * @returns {Promise<Address>} The verified {@link Address}.
+   * @returns {Promise<Address>} The verified {@link Address} address.
    */
   static retrieve(addressId: string): Promise<Address>;
 }

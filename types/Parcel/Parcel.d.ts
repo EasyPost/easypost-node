@@ -58,7 +58,7 @@ export declare class Parcel implements IParcel {
   updated_at: string;
 
   /**
-   * Include the weight, and either a predefined_package or length, width and height if applicable.
+   * Include the `weight`, and either a `predefined_package` or `length`, `width` and `height` if applicable.
    *
    * @see https://www.easypost.com/docs/api/node#create-a-parcel
    *

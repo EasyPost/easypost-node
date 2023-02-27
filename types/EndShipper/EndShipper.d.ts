@@ -122,7 +122,7 @@ export declare class EndShipper implements IEndshipper {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-endshippers
    *
    * @param params - The parameters to use for the request.
-   * @returns {Promise<EndShipper[]>} The list of {@link EndShipper}s.
+   * @returns {Promise<EndShipper[]>} The list of {@link EndShipper}.
    */
   public all(
     params: IEndShipperListParameters,

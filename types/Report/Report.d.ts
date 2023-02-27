@@ -76,7 +76,7 @@ export declare class Report implements IReport {
   updated_at: string;
 
   /**
-   * To create a Report, provide a start_date and end_date that are less than 31 days apart along with any other
+   * To create a Report, provide a `start_date` and `end_date` that are less than 31 days apart along with any other
    * optional parameter that you would like to specify. A detailed list of Report Object attributes are provided below.
    *
    * The expiry on url is 30 seconds. The default status on each new Report is "new". It changes to "available" if the
@@ -94,8 +94,8 @@ export declare class Report implements IReport {
 
   /**
    * The Report List is a paginated list of all Report objects associated with the given API Key. It accepts a variety of
-   * parameters which can be used to modify the scope. The has_more attribute indicates whether or not additional pages can
-   * be requested. The recommended way of paginating is to use either the before_id or after_id parameter to specify where
+   * parameters which can be used to modify the scope. The `has_more` attribute indicates whether or not additional pages can
+   * be requested. The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where
    * the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-reports

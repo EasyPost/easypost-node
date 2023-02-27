@@ -109,7 +109,7 @@ export declare class Insurance implements IInsurance {
   /**
    * An Insurance created via this endpoint must belong to a shipment purchased outside of EasyPost.
    * Insurance for Shipments created within EasyPost must be created via the Shipment Buy or Insure endpoints.
-   * When creating Insurance for a non-EasyPost shipment, you must provide to_address, from_address, tracking_code, and amount information.
+   * When creating Insurance for a non-EasyPost shipment, you must provide `to_address`, `from_address`, `tracking_code`, and `amount` information.
    * Optionally, you can provide the carrier parameter, which will help EasyPost identify the carrier the package was shipped with.
    * If no carrier is provided, EasyPost will attempt to determine the carrier based on the tracking_code provided.
    * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier.
@@ -126,11 +126,11 @@ export declare class Insurance implements IInsurance {
    * The Insurance List is a paginated list of all Insurance objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
    * The has_more attribute indicates whether or not additional pages can be requested.
-   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
    *
-   * @returns {Promise<Insurance[]>} The list of {@link Insurance}s.
+   * @returns {Promise<Insurance[]>} The list of {@link Insurance}.
    */
   static all(
     params?: IAllMethodParameters,

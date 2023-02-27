@@ -104,7 +104,7 @@ export declare class Order implements IOrder {
 
   /**
    * To purchase an Order you only need to specify the carrier and service to purchase.
-   * This operation populates the tracking_code and postage_label attributes of each Shipment.
+   * This operation populates the `tracking_code` and `postage_label` attributes of each Shipment.
    *
    * @see https://www.easypost.com/docs/api/node#buy-an-order
    *

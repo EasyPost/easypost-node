@@ -11,7 +11,7 @@ import { ICarrierAccountFields } from './CarrierAccountFields';
  *
  * Other operations, such as Shipment creation, can reference CarrierAccounts to reduce the scope of data returned.
  * For instance, you may have multiple warehouses that need to use distinct FedEx SmartPost credentials to request the correct rates.
- * Rate objects will include a carrier_account_id field which can be used to determine the account used for rating.
+ * Rate objects will include a `carrier_account_id` field which can be used to determine the account used for rating.
  *
  * @see https://www.easypost.com/docs/api/node#carrier-account-object
  */
@@ -110,7 +110,7 @@ export declare class CarrierAccount implements ICarrierAccount {
    * @see https://www.easypost.com/docs/api/node#list-all-carrier-accounts
    * @requires production API Key.
    *
-   * @returns {Promise<CarrierAccount[]>} An array of {@link CarrierAccount}s.
+   * @returns {Promise<CarrierAccount[]>} An array of {@link CarrierAccount}.
    */
   static all(): Promise<CarrierAccount[]>;
 

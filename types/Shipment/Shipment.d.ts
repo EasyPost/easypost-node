@@ -210,8 +210,8 @@ export declare class Shipment implements IShipment {
   /**
    * The Shipment List is a paginated list of all Shipment objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
-   * The has_more attribute indicates whether additional pages can be requested.
-   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * The `has_more` attribute indicates whether additional pages can be requested.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
    *
@@ -235,7 +235,7 @@ export declare class Shipment implements IShipment {
 
   /**
    * To purchase a Shipment you only need to specify the Rate to purchase.
-   * This operation populates the tracking_code and postage_label attributes.
+   * This operation populates the `tracking_code` and `postage_label` attributes.
    * The default image format of the associated PostageLabel is PNG.
    * To change this default see the label_format option.
    *
@@ -262,7 +262,7 @@ export declare class Shipment implements IShipment {
    * Refunding a Shipment is available for many carriers supported by EasyPost.
    * Once the refund has been submitted, refund_status attribute of the Shipment will be populated with one of the possible values: "submitted", "refunded", "rejected".
    * The most common initial status is "submitted".
-   * Many carriers require that the refund be processed before the refund_status will move to "refunded".
+   * Many carriers require that the refund be processed before the `refund_status` will move to "refunded".
    * The length of this process depends on the carrier, but no greater than 30 days.
    *
    * Refunds created very shortly after a label is generated may be improperly flagged as invalid, but you may retry a refund with the "rejected" status by submitting the same request again.
@@ -297,7 +297,7 @@ export declare class Shipment implements IShipment {
 
   /**
    * You can update the Rates of a Shipment at any time.
-   * This operation respects the carrier_accounts attribute.
+   * This operation respects the `carrier_accounts` attribute.
    *
    * @see https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment
    *
