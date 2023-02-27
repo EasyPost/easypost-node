@@ -211,11 +211,7 @@ export default (easypostClient) =>
      */
     static async lowestSmartRate(id, deliveryDays, deliveryAccuracy) {
       const smartRates = await this.getSmartRates(id);
-      return Util.getLowestSmartRate(
-          smartRates,
-          deliveryDays,
-          deliveryAccuracy.toLowerCase(),
-      );
+      return Util.getLowestSmartRate(smartRates, deliveryDays, deliveryAccuracy.toLowerCase());
     }
 
     /**
