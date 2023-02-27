@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   /**
-   * The CarrierTypeService class provides methods for interacting with EasyPost CarrierType objects.
+   * The CarrierTypeService class provides methods for interacting with EasyPost {@link CarrierType} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class CarrierTypeService extends baseService(easypostClient) {
@@ -11,9 +11,10 @@ export default (easypostClient) =>
     static #url = 'carrier_types';
 
     /**
-     * Retrieve a list of records from the API (overrides default behavior to unwrap response).
-     * @param {Map} [query]
-     * @returns {Array|Promise<never>}
+     * Retrieve all {@link CarrierType carrier types} available to the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-available-carrier-types EasyPost API Documentation} for more information.
+     * @param {Object} [query] - Parameters to filter the list of carrier types.
+     * @returns {CarrierType[]} - A list of {@link CarrierType carrier types}.
      */
     static async all(query = {}) {
       const url = this.#url;

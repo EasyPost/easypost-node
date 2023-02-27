@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   /**
-   * The AddressService class provides methods for interacting with EasyPost Address objects.
+   * The AddressService class provides methods for interacting with EasyPost {@link Address} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class AddressService extends baseService(easypostClient) {
@@ -13,9 +13,10 @@ export default (easypostClient) =>
     static #key = 'address';
 
     /**
-     * Create an address.
-     * @param {*} params
-     * @returns {Address}
+     * Create an {@link Address address}.
+     * See {@link https://www.easypost.com/docs/api/node#addresses EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters for the address to be created.
+     * @returns {Address} - The created address.
      */
     static async create(params) {
       const url = this.#url;
@@ -40,9 +41,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Creates and verifies an address in a single call.
-     * @param {Object} params
-     * @returns {Address}
+     * Create and verify an {@link Address address} in a single request.
+     * See {@link https://www.easypost.com/docs/api/node#create-and-verify-addresses EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters for the address to be created.
+     * @returns {Address} - The created and verified address.
      */
     static async createAndVerify(params) {
       const url = `${this.#url}/create_and_verify`;
@@ -58,9 +60,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all addresses associated with the API key.
-     * @param {Object} [params]
-     * @returns {Address[]}
+     * Retrieve all {@link Address addresses} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-addresses EasyPost API Documentation} for more information.
+     * @param {Object} [params] - Parameters to filter the list of addresses.
+     * @returns {Object} - An object containing a list of {@link Address addresses} and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;
@@ -69,9 +72,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve an address from the API.
-     * @param {string} id
-     * @returns {Address}
+     * Retrieve an {@link Address address} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-an-address EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the address to retrieve.
+     * @returns {Address} - The retrieved address.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;
@@ -80,10 +84,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Verify an address.
-     * Not titled `verify` because that's already a propType and causes conflicts.
-     * @param {string} id
-     * @returns {Address}
+     * Verify an {@link Address address} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#create-and-verify-addresses EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the address to verify.
+     * @returns {Address} - The verified address.
      */
     static async verifyAddress(id) {
       try {

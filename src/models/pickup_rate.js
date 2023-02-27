@@ -1,7 +1,7 @@
 import EasyPostObject from './easypost_object';
 
 /**
- * A {@link PickupRate} represents a {@link Rate} for a {@link Pickup}.
+ * A {@link PickupRate} represents a {@link Rate rate} for a {@link Pickup pickup}.
  * @public
  * @extends EasyPostObject
  */

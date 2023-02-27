@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   /**
-   * The UserService class provides methods for interacting with EasyPost User objects.
+   * The UserService class provides methods for interacting with EasyPost {@link User} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class UserService extends baseService(easypostClient) {
@@ -13,9 +13,10 @@ export default (easypostClient) =>
     static #key = 'user';
 
     /**
-     * Create a user.
-     * @param {Object} params
-     * @returns {User}
+     * Create a {@link User child user}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-child-user EasyPost API Documentation} for more information.
+     * @param {Object} params - The parameters to create a child user with.
+     * @returns {User} - The created child user.
      */
     static async create(params) {
       const url = this.#url;
@@ -27,10 +28,11 @@ export default (easypostClient) =>
     }
 
     /**
-     * Update a user.
-     * @param {string} id
-     * @param {Object} params
-     * @returns {User}
+     * Update a {@link User user}.
+     * See {@link https://www.easypost.com/docs/api/node#update-a-user EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the user to update (either the current authenticated user or a child user).
+     * @param {Object} params - The parameters to update the user with.
+     * @returns {User} - The updated user.
      */
     static async update(id, params) {
       const url = `${this.#url}/${id}`;
@@ -48,17 +50,13 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a child user.
-     * @param {string} id
-     * @param {string} urlPrefix
-     * @returns {User}
+     * Retrieve a {@link User child user}.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-user EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the child user to retrieve.
+     * @returns {User} - The retrieved child user.
      */
-    static async retrieve(id, urlPrefix) {
-      let url = urlPrefix || this.#url; // retrieve self
-      if (id) {
-        // retrieve child users
-        url = urlPrefix ? `${urlPrefix}/${id}` : `${this.#url}/${id}`;
-      }
+    static async retrieve(id) {
+      const url = `${this.#url}/${id}`;
 
       try {
         const response = await easypostClient._get(url);
@@ -70,8 +68,9 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve the authenticated user.
-     * @returns {User}
+     * Retrieve the {@link User current authenticated user}.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-user EasyPost API Documentation} for more information.
+     * @returns {User} - The retrieved user.
      */
     static async retrieveMe() {
       const url = this.#url;
@@ -86,9 +85,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Delete a CarrierAccount.
-     * @param {string} id
-     * @returns {Promise|Promise<never>}
+     * Delete a {@link User child user}.
+     * See {@link https://www.easypost.com/docs/api/node#delete-a-child-user EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the child user to delete.
+     * @returns {Promise|Promise<never>} - A promise that resolves when the child user is deleted successfully.
      */
     static async delete(id) {
       const url = `${this.#url}/${id}`;
@@ -103,10 +103,11 @@ export default (easypostClient) =>
     }
 
     /**
-     * Update the brand of a user.
-     * @param {number} id
-     * @param {Object} params
-     * @returns {Brand}
+     * Update the brand of a {@link User user}.
+     * See {@link https://www.easypost.com/docs/api/node#update-a-brand EasyPost API Documentation} for more information.
+     * @param {number} id - The ID of the user to update the brand of.
+     * @param {Object} params - The parameters to update the brand with.
+     * @returns {Brand} - The updated brand.
      */
     static async updateBrand(id, params) {
       const url = `${this.#url}/${id}/brand`;

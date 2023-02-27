@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   /**
-   * The EndShipperService class provides methods for interacting with EasyPost EndShipper objects.
+   * The EndShipperService class provides methods for interacting with EasyPost {@link EndShipper} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class EndShipperService extends baseService(easypostClient) {
@@ -13,9 +13,10 @@ export default (easypostClient) =>
     static #key = 'address';
 
     /**
-     * Create an EndShipper.
-     * @param {Object} params
-     * @returns {this|Promise<never>}
+     * Create an {@link EndShipper end shipper}.
+     * See {@link https://www.easypost.com/docs/api/node#create-an-endshipper EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters for the end shipper to be created.
+     * @returns {EndShipper} - The created end shipper.
      */
     static async create(params) {
       const url = this.#url;
@@ -25,10 +26,11 @@ export default (easypostClient) =>
     }
 
     /**
-     * Update an EndShipper.
-     * @param {string} id
-     * @param {Object} params
-     * @returns {this|Promise<never>}
+     * Update an {@link EndShipper end shipper}.
+     * See {@link https://www.easypost.com/docs/api/node#update-an-endshipper EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the end shipper to update.
+     * @param {Object} params - Parameters for the end shipper to be updated.
+     * @returns {EndShipper} - The updated end shipper.
      */
     static async update(id, params) {
       const url = `${this.#url}/${id}`;
@@ -44,9 +46,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a EndShipper from the API.
-     * @param {string} id
-     * @returns {EndShipper}
+     * Retrieve an {@link EndShipper end shipper} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-an-endshipper EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the end shipper to retrieve.
+     * @returns {EndShipper} - The retrieved end shipper.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;
@@ -55,9 +58,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all EndShippers associated with the API key.
-     * @param {Object} [params]
-     * @returns {EndShipper[]}
+     * Retrieve all {@link EndShipper end shippers} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-endshippers EasyPost API Documentation} for more information.
+     * @param {Object} [params] - Parameters to filter the list of end shippers.
+     * @returns {Object} - An object containing a list of {@link EndShipper end shippers} and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;

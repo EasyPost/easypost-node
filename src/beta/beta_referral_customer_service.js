@@ -9,7 +9,7 @@ export default (easypostClient) =>
     static #key = 'user';
 
     /**
-     * Add an existing Stripe payment method to a referral customer's account.
+     * Add an existing Stripe payment method to a {@link User referral customer's} account.
      * @param {string} stripeCustomerId - The Stripe account's ID.
      * @param {string} paymentMethodReference - Reference of Stripe payment method.
      * @param {string} [priority] - Which priority to set the payment method to ('primary' or 'secondary').

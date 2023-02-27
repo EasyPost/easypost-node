@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   /**
-   * The OrderService class provides methods for interacting with EasyPost Order objects.
+   * The OrderService class provides methods for interacting with EasyPost {@link Order} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class OrderService extends baseService(easypostClient) {
@@ -13,9 +13,10 @@ export default (easypostClient) =>
     static #key = 'order';
 
     /**
-     * Create an order.
-     * @param {*} params
-     * @returns {Order}
+     * Create an {@link Order order}.
+     * See {@link https://www.easypost.com/docs/api/node#create-an-order EasyPost API Documentation} for more information.
+     * @param {Object} params - The parameters to create an order with.
+     * @returns {Order} - The created order.
      */
     static async create(params) {
       const url = this.#url;
@@ -27,11 +28,12 @@ export default (easypostClient) =>
     }
 
     /**
-     * Buy an order.
-     * @param {string} id
-     * @param {string} carrier
-     * @param {string} service
-     * @returns {Order}
+     * Purchase an {@link Order order}.
+     * See {@link https://www.easypost.com/docs/api/node#buy-an-order EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the order to buy.
+     * @param {string} carrier - The carrier to use for the order purchase.
+     * @param {string} service - The service to use for the order purchase.
+     * @returns {Order} - The purchased order.
      */
     static async buy(id, carrier, service) {
       const url = `${this.#url}/${id}/buy`;
@@ -46,9 +48,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Get the rates of an order.
-     * @param {string} id
-     * @returns {Order}
+     * Get updated rates for an {@link Order order}.
+     * See {@link https://www.easypost.com/docs/api/node#orders EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the order to get rates for.
+     * @returns {Order} - The order with rates.
      */
     static async getRates(id) {
       const url = `${this.#url}/${id}/rates`;
@@ -63,9 +66,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve an order from the API.
-     * @param {string} id
-     * @returns {Order}
+     * Retrieve an {@link Order order} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-an-order EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the order to retrieve.
+     * @returns {Order} - The retrieved order.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;

@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   /**
-   * The PickupService class provides methods for interacting with EasyPost Pickup objects.
+   * The PickupService class provides methods for interacting with EasyPost {@link Pickup} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class PickupService extends baseService(easypostClient) {
@@ -13,9 +13,10 @@ export default (easypostClient) =>
     static #key = 'pickup';
 
     /**
-     * Create a pickup.
-     * @param {*} params
-     * @returns {Pickup}
+     * Create a {@link Pickup pickup}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-pickup EasyPost API Documentation} for more information.
+     * @param {Object} params - The parameters to create a pickup with.
+     * @returns {Pickup} - The created pickup.
      */
     static async create(params) {
       const url = this.#url;
@@ -27,11 +28,12 @@ export default (easypostClient) =>
     }
 
     /**
-     * Buy a pickup.
-     * @param {string} id
-     * @param {string} carrier
-     * @param {string} service
-     * @returns {Pickup}
+     * Purchase a {@link Pickup pickup}.
+     * See {@link https://www.easypost.com/docs/api/node#buy-a-pickup EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the pickup to purchase.
+     * @param {string} carrier - The carrier to purchase the pickup with.
+     * @param {string} service - The service to purchase the pickup with.
+     * @returns {Pickup} - The purchased pickup.
      */
     static async buy(id, carrier, service) {
       const url = `${this.#url}/${id}/buy`;
@@ -46,9 +48,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Cancel a pickup.
-     * @param {string} id
-     * @returns {Pickup}
+     * Cancel a {@link Pickup pickup}.
+     * See {@link https://www.easypost.com/docs/api/node#cancel-a-pickup EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the pickup to cancel.
+     * @returns {Pickup} - The cancelled pickup.
      */
     static async cancel(id) {
       const url = `${this.#url}/${id}/cancel`;
@@ -62,9 +65,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all pickups associated with the API key.
-     * @param {Object} [params]
-     * @returns {Pickup[]}
+     * Retrieve all {@link Pickup pickups} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-pickups EasyPost API Documentation} for more information.
+     * @param {Object} [params] - The parameters to filter the pickups by.
+     * @returns {Object} - An object containing a list of {@link Pickup pickups} and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;
@@ -73,9 +77,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a pickup from the API.
-     * @param {string} id
-     * @returns {Pickup}
+     * Retrieve a {@link Pickup pickup} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-pickup EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the pickup to retrieve.
+     * @returns {Pickup} - The retrieved pickup.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;

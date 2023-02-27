@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   /**
-   * The InsuranceService class provides methods for interacting with EasyPost Insurance objects.
+   * The InsuranceService class provides methods for interacting with EasyPost {@link Insurance} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class InsuranceService extends baseService(easypostClient) {
@@ -13,9 +13,10 @@ export default (easypostClient) =>
     static #key = 'insurance';
 
     /**
-     * Create insurance.
-     * @param {*} params
-     * @returns {Insurance}
+     * Create an {@link Insurance insurance} record.
+     * See {@link https://www.easypost.com/docs/api/node#create-an-insurance EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters for the insurance to be created.
+     * @returns {Insurance} - The created insurance.
      */
     static async create(params) {
       const url = this.#url;
@@ -27,9 +28,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all insurances associated with the API key.
-     * @param {Object} [params]
-     * @returns {Insurance[]}
+     * Retrieve all {@link Insurance} records associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances EasyPost API Documentation} for more information.
+     * @param {Object} [params] - Parameters to filter the insurance records.
+     * @returns {Object} - An object containing the list of {@link Insurance insurance} records and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;
@@ -38,9 +40,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve an insurance record from the API.
-     * @param {string} id
-     * @returns {Insurance}
+     * Retrieve an {@link Insurance insurance} record by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-an-insurance EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the insurance to retrieve.
+     * @returns {Insurance} - The retrieved insurance.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;

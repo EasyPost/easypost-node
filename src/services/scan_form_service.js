@@ -2,7 +2,7 @@ import baseService from './base_service';
 
 export default (easypostClient) =>
   /**
-   * The ScanFormService class provides methods for interacting with EasyPost ScanForm objects.
+   * The ScanFormService class provides methods for interacting with EasyPost {@link ScanForm} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ScanFormService extends baseService(easypostClient) {
@@ -11,9 +11,10 @@ export default (easypostClient) =>
     static #url = 'scan_forms';
 
     /**
-     * Create a ScanForm.
-     * @param {Object} params
-     * @returns {ScanForm}
+     * Create a {@link ScanForm scan form}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-scanform EasyPost API Documentation} for more information.
+     * @param {Object} params - The parameters to create a scan form with.
+     * @returns {ScanForm} - The created scan form.
      */
     static async create(params) {
       const url = this.#url;
@@ -37,9 +38,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all scan forms associated with the API key.
-     * @param {Object} [params]
-     * @returns {ScanForm[]}
+     * Retrieve all {@link ScanForm scan forms} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-scanforms EasyPost API Documentation} for more information.
+     * @param {Object} [params] - The parameters to filter the scan forms by.
+     * @returns {Object} - An object containing the list of {@link ScanForm scan forms} and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;
@@ -48,9 +50,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a scan form from the API.
-     * @param {string} id
-     * @returns {ScanForm}
+     * Retrieve a {@link ScanForm scan form} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-scanform EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the scan form to retrieve.
+     * @returns {ScanForm} - The retrieved scan form.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;

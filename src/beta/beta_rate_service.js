@@ -12,7 +12,7 @@ export default (easypostClient) =>
     static #key = 'rate';
 
     /**
-     * Retrieve a list of stateless {@link Rate}s based on the provided parameters.
+     * Retrieve a list of stateless {@link Rate rates} based on the provided parameters.
      * @param {Object} params - Map of parameters for the API call
      * @returns {Rate[]} - List of stateless rates
      */
