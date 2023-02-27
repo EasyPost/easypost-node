@@ -14,7 +14,7 @@ export default (easypostClient) =>
 
     /**
      * Create an {@link Address address}.
-     * See {@link https://www.easypost.com/docs/api/node#addresses EasyPost API Documentation} for more information.
+     * See {@link https://www.easypost.com/docs/api/node#create-an-address EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the address to be created.
      * @returns {Address} - The created address.
      */

@@ -105,7 +105,7 @@ export default (easypostClient) =>
     /**
      * Update the brand of a {@link User user}.
      * See {@link https://www.easypost.com/docs/api/node#update-a-brand EasyPost API Documentation} for more information.
-     * @param {number} id - The ID of the user to update the brand of.
+     * @param {string} id - The ID of the user to update the brand of.
      * @param {Object} params - The parameters to update the brand with.
      * @returns {Brand} - The updated brand.
      */

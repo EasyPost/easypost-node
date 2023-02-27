@@ -32,7 +32,7 @@ export default (easypostClient) =>
     /**
      * Add {@link Shipment shipments} to a {@link Batch batch}.
      * See {@link https://www.easypost.com/docs/api/node#add-shipments-to-a-batch EasyPost API Documentation} for more information.
-     * @param {number} id - The id of the batch to add shipments to.
+     * @param {string} id - The id of the batch to add shipments to.
      * @param {Array} shipmentIds - The ids of the shipments to add to the batch.
      * @returns {Batch} - The updated batch.
      */
@@ -53,7 +53,7 @@ export default (easypostClient) =>
     /**
      * Removes {@link Shipment shipments} from a {@link Batch batch}.
      * See {@link https://www.easypost.com/docs/api/node#remove-shipments-from-a-batch EasyPost API Documentation} for more information.
-     * @param {number} id - The id of the batch to remove shipments from.
+     * @param {string} id - The id of the batch to remove shipments from.
      * @param {Array} shipmentIds - The ids of the shipments to remove from the batch.
      * @returns {Batch} - The updated batch.
      */
@@ -75,7 +75,7 @@ export default (easypostClient) =>
     /**
      * Generate a label for a {@link Batch batch}.
      * See {@link https://www.easypost.com/docs/api/node#batch-labels EasyPost API Documentation} for more information.
-     * @param {number} id - The id of the batch to generate a label for.
+     * @param {string} id - The id of the batch to generate a label for.
      * @param {string} fileFormat - The format of the label to generate. Defaults to 'pdf'.
      * @returns {Batch} - The updated batch.
      */
@@ -95,7 +95,7 @@ export default (easypostClient) =>
     /**
      * Create a {@link ScanForm scan form} for a {@link Batch batch}.
      * See {@link https://www.easypost.com/docs/api/node#manifesting-scan-form EasyPost API Documentation} for more information.
-     * @param {number} id - The id of the batch to create a scan form for.
+     * @param {string} id - The id of the batch to create a scan form for.
      * @returns {Batch} - The updated batch.
      */
     static async createScanForm(id) {
@@ -132,7 +132,7 @@ export default (easypostClient) =>
     /**
      * Purchase a {@link Batch batch}.
      * See {@link https://www.easypost.com/docs/api/node#buy-a-batch EasyPost API Documentation} for more information.
-     * @param {number} id - The id of the batch to purchase.
+     * @param {string} id - The id of the batch to purchase.
      * @returns {Batch} - The purchased batch.
      */
     static async buy(id) {
