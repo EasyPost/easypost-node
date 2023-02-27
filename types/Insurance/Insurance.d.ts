@@ -130,7 +130,7 @@ export declare class Insurance implements IInsurance {
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
    *
-   * @returns {Promise<Insurance[]>} The list of {@link Insurance}.
+   * @returns {Promise<Insurance[]>} The list of {@link Insurance insurance records}.
    */
   static all(
     params?: IAllMethodParameters,
