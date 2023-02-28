@@ -121,10 +121,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Get smart rates for a {@link Shipment shipment}.
+     * Get SmartRates for a {@link Shipment shipment}.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-time-in-transit-statistics-across-all-rates-for-a-shipment EasyPost API Documentation} for more information.
-     * @param {string} id - The ID of the shipment to get smart rates for.
-     * @returns {Rate[]} - The smart rates for the shipment.
+     * @param {string} id - The ID of the shipment to get SmartRates for.
+     * @returns {Rate[]} - The SmartRates for the shipment.
      */
     static async getSmartRates(id) {
       const url = `${this.#url}/${id}/smartrate`;
@@ -203,11 +203,11 @@ export default (easypostClient) =>
     }
 
     /**
-     * Get the lowest smart rate of a shipment.
-     * @param {string} id - The ID of the shipment to get the lowest smart rate of.
+     * Get the lowest SmartRate of a shipment.
+     * @param {string} id - The ID of the shipment to get the lowest SmartRate of.
      * @param {number} deliveryDays - The number of days the shipment will take to deliver.
      * @param {string} deliveryAccuracy - The accuracy of the delivery days.
-     * @returns {Rate} - The lowest smart rate of the shipment.
+     * @returns {Rate} - The lowest SmartRate of the shipment.
      */
     static async lowestSmartRate(id, deliveryDays, deliveryAccuracy) {
       const smartRates = await this.getSmartRates(id);

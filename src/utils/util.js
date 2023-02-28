@@ -13,12 +13,12 @@ const util = require('util');
  */
 export default class Utils {
   /**
-   * Get the lowest Smart Rate from a provided list of Smart Rates.
+   * Get the lowest SmartRate from a provided list of SmartRates.
    * @public
-   * @param {Rate[]} smartrates - List of Smart Rates to filter through
+   * @param {Rate[]} smartrates - List of SmartRates to filter through
    * @param {number} deliveryDays - The maximum number of days allowed for delivery
    * @param {string} deliveryAccuracy - The target level of accuracy for the delivery days (e.g. 'percentile_50')
-   * @returns {Rate} - The lowest Smart Rate
+   * @returns {Rate} - The lowest SmartRate
    * @throws {FilteringError} - If no applicable rates are found
    * @throws {InvalidParameterError} - If the deliveryAccuracy value is invalid
    */
