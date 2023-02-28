@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: errors/error_handler.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: errors/error_handler.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import RedirectError from './api/redirect_error';
+import UnauthorizedError from './api/unauthorized_error';
+import UnknownApiError from './api/unknown_api_error';
+import PaymentError from './api/payment_error';
+import NotFoundError from './api/not_found_error';
+import MethodNotAllowedError from './api/method_not_allowed_error';
+import TimeoutError from './api/timeout_error';
+import InvalidRequestError from './api/invalid_request_error';
+import RateLimitError from './api/rate_limit_error';
+import InternalServerError from './api/internal_server_error';
+import ServiceUnavailableError from './api/service_unavailable_error';
+import GatewayTimeoutError from './api/gateway_timeout_error';
+import ForbiddenError from './api/forbidden_error';
+
+export default class ErrorHandler {
+  /**
+   * Calculate and generate the appropriate {@link ApiError} based on a received HTTP response error.
+   * @param {*} error - The errored HTTP response.
+   * @returns {ApiError} The `ApiError`-based error corresponding to the HTTP status code.
+   */
+  static handleApiError(error) {
+    const { statusCode } = error;
+    const { code, message, errors } = error.body.error;
+    const errorParams = {
+      message,
+      code,
+      statusCode,
+      errors,
+    };
+
+    if (Array.isArray(errorParams.message)) {
+      errorParams.message = errorParams.message.join(', ');
+    }
+
+    if (statusCode >= 300 &amp;&amp; statusCode &lt; 400) {
+      return new RedirectError(errorParams);
+    }
+
+    switch (statusCode) {
+      case 401:
+        return new UnauthorizedError(errorParams);
+      case 402:
+        return new PaymentError(errorParams);
+      case 403:
+        return new ForbiddenError(errorParams);
+      case 404:
+        return new NotFoundError(errorParams);
+      case 405:
+        return new MethodNotAllowedError(errorParams);
+      case 408:
+        return new TimeoutError(errorParams);
+      case 422:
+        return new InvalidRequestError(errorParams);
+      case 429:
+        return new RateLimitError(errorParams);
+      case 500:
+        return new InternalServerError(errorParams);
+      case 503:
+        return new ServiceUnavailableError(errorParams);
+      case 504:
+        return new GatewayTimeoutError(errorParams);
+      default:
+        return new UnknownApiError(errorParams);
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_BASE_URL">DEFAULT_BASE_URL</a></li><li><a href="global.html#EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP">EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP</a></li><li><a href="global.html#RESOURCES">RESOURCES</a></li><li><a href="global.html#SERVICES">SERVICES</a></li><li><a href="global.html#_all">_all</a></li><li><a href="global.html#_convertToEasyPostObject">_convertToEasyPostObject</a></li><li><a href="global.html#_create">_create</a></li><li><a href="global.html#_retrieve">_retrieve</a></li><li><a href="global.html#addCreditCard">addCreditCard</a></li><li><a href="global.html#addPaymentMethod">addPaymentMethod</a></li><li><a href="global.html#addShipments">addShipments</a></li><li><a href="global.html#all">all</a></li><li><a href="global.html#buy">buy</a></li><li><a href="global.html#cancel">cancel</a></li><li><a href="global.html#convertLabelFormat">convertLabelFormat</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#createAndBuy">createAndBuy</a></li><li><a href="global.html#createAndVerify">createAndVerify</a></li><li><a href="global.html#createList">createList</a></li><li><a href="global.html#createScanForm">createScanForm</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deletePaymentMethod">deletePaymentMethod</a></li><li><a href="global.html#fundWallet">fundWallet</a></li><li><a href="global.html#generateForm">generateForm</a></li><li><a href="global.html#generateLabel">generateLabel</a></li><li><a href="global.html#getLowestRate">getLowestRate</a></li><li><a href="global.html#getLowestSmartRate">getLowestSmartRate</a></li><li><a href="global.html#getRates">getRates</a></li><li><a href="global.html#getSmartRates">getSmartRates</a></li><li><a href="global.html#handleApiError">handleApiError</a></li><li><a href="global.html#insure">insure</a></li><li><a href="global.html#lowestRate">lowestRate</a></li><li><a href="global.html#lowestSmartRate">lowestSmartRate</a></li><li><a href="global.html#refund">refund</a></li><li><a href="global.html#refundByAmount">refundByAmount</a></li><li><a href="global.html#refundByPaymentLog">refundByPaymentLog</a></li><li><a href="global.html#regenerateRates">regenerateRates</a></li><li><a href="global.html#removeShipments">removeShipments</a></li><li><a href="global.html#retrieve">retrieve</a></li><li><a href="global.html#retrieveAllPayloads">retrieveAllPayloads</a></li><li><a href="global.html#retrieveMe">retrieveMe</a></li><li><a href="global.html#retrievePayload">retrievePayload</a></li><li><a href="global.html#retrievePaymentMethods">retrievePaymentMethods</a></li><li><a href="global.html#retrieveStatelessRates">retrieveStatelessRates</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateBrand">updateBrand</a></li><li><a href="global.html#updateEmail">updateEmail</a></li><li><a href="global.html#validateWebhook">validateWebhook</a></li><li><a href="global.html#verifyAddress">verifyAddress</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Feb 28 2023 11:10:10 GMT-0700 (Mountain Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

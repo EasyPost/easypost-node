@@ -1,7 +1,10 @@
 import baseService from '../services/base_service';
 
+/**
+ * @extends baseService
+ */
 export default (easypostClient) =>
-  class BetaRateService extends baseService(easypostClient) {
+  class RateService extends baseService(easypostClient) {
     static #name = 'Rate';
 
     static #url = 'rates';
@@ -9,16 +12,18 @@ export default (easypostClient) =>
     static #key = 'rate';
 
     /**
-     * Retrieve stateless rates
-     * @param {Object} params
-     * @returns {Rate[]} List of rates
+     * Retrieve a list of stateless {@link Rate rates} based on the provided parameters.
+     * @param {Object} params - Map of parameters for the API call
+     * @returns {Rate[]} - List of stateless rates
      */
     static async retrieveStatelessRates(params) {
+      const url = 'rates';
+      const wrappedParams = {
+        shipment: params,
+      };
+
       try {
-        const wrappedParams = {
-          shipment: params,
-        };
-        const response = await easypostClient.post('rates', wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body.rates);
       } catch (e) {

@@ -14,9 +14,9 @@ import ForbiddenError from './api/forbidden_error';
 
 export default class ErrorHandler {
   /**
-   * Handle API error based on the status code.
-   * @param {*} error
-   * @returns {Error}
+   * Calculate and generate the appropriate {@link ApiError} based on a received HTTP response error.
+   * @param {*} error - The errored HTTP response.
+   * @returns {ApiError} The `ApiError`-based error corresponding to the HTTP status code.
    */
   static handleApiError(error) {
     const { statusCode } = error;
@@ -33,34 +33,34 @@ export default class ErrorHandler {
     }
 
     if (statusCode >= 300 && statusCode < 400) {
-      throw new RedirectError(errorParams);
+      return new RedirectError(errorParams);
     }
 
     switch (statusCode) {
       case 401:
-        throw new UnauthorizedError(errorParams);
+        return new UnauthorizedError(errorParams);
       case 402:
-        throw new PaymentError(errorParams);
+        return new PaymentError(errorParams);
       case 403:
-        throw new ForbiddenError(errorParams);
+        return new ForbiddenError(errorParams);
       case 404:
-        throw new NotFoundError(errorParams);
+        return new NotFoundError(errorParams);
       case 405:
-        throw new MethodNotAllowedError(errorParams);
+        return new MethodNotAllowedError(errorParams);
       case 408:
-        throw new TimeoutError(errorParams);
+        return new TimeoutError(errorParams);
       case 422:
-        throw new InvalidRequestError(errorParams);
+        return new InvalidRequestError(errorParams);
       case 429:
-        throw new RateLimitError(errorParams);
+        return new RateLimitError(errorParams);
       case 500:
-        throw new InternalServerError(errorParams);
+        return new InternalServerError(errorParams);
       case 503:
-        throw new ServiceUnavailableError(errorParams);
+        return new ServiceUnavailableError(errorParams);
       case 504:
-        throw new GatewayTimeoutError(errorParams);
+        return new GatewayTimeoutError(errorParams);
       default:
-        throw new UnknownApiError(errorParams);
+        return new UnknownApiError(errorParams);
     }
   }
 }

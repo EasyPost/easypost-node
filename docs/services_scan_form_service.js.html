@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/scan_form_service.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/scan_form_service.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import baseService from './base_service';
+
+export default (easypostClient) =>
+  /**
+   * The ScanFormService class provides methods for interacting with EasyPost {@link ScanForm} objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
+  class ScanFormService extends baseService(easypostClient) {
+    static #name = 'ScanForm';
+
+    static #url = 'scan_forms';
+
+    /**
+     * Create a {@link ScanForm scan form}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-scanform EasyPost API Documentation} for more information.
+     * @param {Object} params - The parameters to create a scan form with.
+     * @returns {ScanForm} - The created scan form.
+     */
+    static async create(params) {
+      const url = this.#url;
+
+      // wraps up params in `shipments` if the user didn't do it
+      // turn a list of shipment objects into a map of shipment ids
+      if (params.shipments) {
+        // eslint-disable-next-line no-param-reassign
+        params.shipments = params.shipments.map((s) => {
+          if (typeof s === 'string') {
+            return { id: s };
+          }
+          return { id: s.id };
+        });
+      }
+
+      const wrappedParams = {};
+      wrappedParams[this.key] = params;
+
+      return this._create(url, wrappedParams);
+    }
+
+    /**
+     * Retrieve all {@link ScanForm scan forms} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-scanforms EasyPost API Documentation} for more information.
+     * @param {Object} [params] - The parameters to filter the scan forms by.
+     * @returns {Object} - An object containing the list of {@link ScanForm scan forms} and pagination information.
+     */
+    static async all(params = {}) {
+      const url = this.#url;
+
+      return this._all(url, params);
+    }
+
+    /**
+     * Retrieve a {@link ScanForm scan form} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-scanform EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the scan form to retrieve.
+     * @returns {ScanForm} - The retrieved scan form.
+     */
+    static async retrieve(id) {
+      const url = `${this.#url}/${id}`;
+
+      return this._retrieve(url);
+    }
+  };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_BASE_URL">DEFAULT_BASE_URL</a></li><li><a href="global.html#EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP">EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP</a></li><li><a href="global.html#RESOURCES">RESOURCES</a></li><li><a href="global.html#SERVICES">SERVICES</a></li><li><a href="global.html#_all">_all</a></li><li><a href="global.html#_convertToEasyPostObject">_convertToEasyPostObject</a></li><li><a href="global.html#_create">_create</a></li><li><a href="global.html#_retrieve">_retrieve</a></li><li><a href="global.html#addCreditCard">addCreditCard</a></li><li><a href="global.html#addPaymentMethod">addPaymentMethod</a></li><li><a href="global.html#addShipments">addShipments</a></li><li><a href="global.html#all">all</a></li><li><a href="global.html#buy">buy</a></li><li><a href="global.html#cancel">cancel</a></li><li><a href="global.html#convertLabelFormat">convertLabelFormat</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#createAndBuy">createAndBuy</a></li><li><a href="global.html#createAndVerify">createAndVerify</a></li><li><a href="global.html#createList">createList</a></li><li><a href="global.html#createScanForm">createScanForm</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deletePaymentMethod">deletePaymentMethod</a></li><li><a href="global.html#fundWallet">fundWallet</a></li><li><a href="global.html#generateForm">generateForm</a></li><li><a href="global.html#generateLabel">generateLabel</a></li><li><a href="global.html#getLowestRate">getLowestRate</a></li><li><a href="global.html#getLowestSmartRate">getLowestSmartRate</a></li><li><a href="global.html#getRates">getRates</a></li><li><a href="global.html#getSmartRates">getSmartRates</a></li><li><a href="global.html#handleApiError">handleApiError</a></li><li><a href="global.html#insure">insure</a></li><li><a href="global.html#lowestRate">lowestRate</a></li><li><a href="global.html#lowestSmartRate">lowestSmartRate</a></li><li><a href="global.html#refund">refund</a></li><li><a href="global.html#refundByAmount">refundByAmount</a></li><li><a href="global.html#refundByPaymentLog">refundByPaymentLog</a></li><li><a href="global.html#regenerateRates">regenerateRates</a></li><li><a href="global.html#removeShipments">removeShipments</a></li><li><a href="global.html#retrieve">retrieve</a></li><li><a href="global.html#retrieveAllPayloads">retrieveAllPayloads</a></li><li><a href="global.html#retrieveMe">retrieveMe</a></li><li><a href="global.html#retrievePayload">retrievePayload</a></li><li><a href="global.html#retrievePaymentMethods">retrievePaymentMethods</a></li><li><a href="global.html#retrieveStatelessRates">retrieveStatelessRates</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateBrand">updateBrand</a></li><li><a href="global.html#updateEmail">updateEmail</a></li><li><a href="global.html#validateWebhook">validateWebhook</a></li><li><a href="global.html#verifyAddress">verifyAddress</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Feb 28 2023 11:10:10 GMT-0700 (Mountain Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

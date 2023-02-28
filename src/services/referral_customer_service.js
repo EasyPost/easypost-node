@@ -5,35 +5,39 @@ import EasyPostClient from '../easypost';
 import baseService from './base_service';
 import Constants from '../constants';
 import ExternalApiError from '../errors/api/external_api_error';
+
 const util = require('util');
 
 /**
  * Get an instance of the EasyPostClient using the referral user's API key.
- * @param {EasyPostClient} api - The EasyPostClient to copy.
+ * @private
+ * @param {EasyPostClient} client - The EasyPostClient to copy.
  * @param {string} referralApiKey - The referral user's API key.
  * @returns {EasyPostClient} - An instance of the EasyPostClient.
  */
-function getReferralApi(api, referralApiKey) {
-  return EasyPostClient.copyApi(api, {
+function _getReferralClient(client, referralApiKey) {
+  return EasyPostClient.copyClient(client, {
     apiKey: referralApiKey,
   });
 }
 
 /**
  * Get EasyPost's Stripe API key used to create credit cards on Stripe's servers.
+ * @private
  * @param {EasyPostClient} easypostClient - The EasyPostClient to use.
  * @returns {string} - The Stripe API key.
  */
 async function _getEasyPostStripeKey(easypostClient) {
   const url = 'partners/stripe_public_key';
 
-  const response = await easypostClient.get(url);
+  const response = await easypostClient._get(url);
 
   return response.body.public_key;
 }
 
 /**
  * Send the credit card details to Stripe to get a Stripe credit card token.
+ * @private
  * @param {string} stripeKey - The Stripe API key.
  * @param {string} number - Credit card number.
  * @param {string} expirationMonth - Credit card expiration month.
@@ -63,23 +67,28 @@ async function _sendCardDetailsToStripe(stripeKey, number, expirationMonth, expi
 
 /**
  * Send the Stripe credit card token to EasyPost to add the card to the user's account.
+ * @private
  * @param {EasyPostClient} client - The EasyPostClient to use.
  * @param {string} referralApiKey - The referral user's production API key.
  * @param {string} stripeCreditCardToken - Stripe credit card token.
  * @param {string} priority - Whether to add the card as the 'primary' or 'secondary' card.
  * @returns {Object} - Response body (EasyPost payment method object).
  */
-async function sendCardDetailsToEasyPost(client, referralApiKey, stripeCreditCardToken, priority) {
-  const _api = getReferralApi(client, referralApiKey);
+async function _sendCardDetailsToEasyPost(client, referralApiKey, stripeCreditCardToken, priority) {
+  const _client = _getReferralClient(client, referralApiKey);
   const url = 'credit_cards';
   const params = { credit_card: { stripe_object_id: stripeCreditCardToken, priority } };
 
-  const response = await _api.post(url, params);
+  const response = await _client._post(url, params);
 
   return response.body;
 }
 
 export default (easypostClient) =>
+  /**
+   * The ReferralCustomerService class provides methods for interacting with EasyPost {@link User referral customer} objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
   class ReferralCustomerService extends baseService(easypostClient) {
     static #name = 'Referral';
 
@@ -88,9 +97,10 @@ export default (easypostClient) =>
     static #key = 'user';
 
     /**
-     * Create a referral customer.
-     * @param {*} params
-     * @returns {ReferralCustomer}
+     * Create a {@link User referral customer}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-referral-customer EasyPost API Documentation} for more information.
+     * @param {Object} params - The referral customer's information.
+     * @returns {User} - The newly created referral customer.
      */
     static async create(params) {
       const url = this.#url;
@@ -102,27 +112,31 @@ export default (easypostClient) =>
     }
 
     /**
-     * Update the referral's email address.
-     * @param {string} referralUserId - The referral user's ID.
+     * Update a {@link User referral customer's} email address.
+     * See {@link https://www.easypost.com/docs/api/node#update-a-referral-customer EasyPost API Documentation} for more information.
+     * @param {string} referralUserId - The ID of the referral customer to update.
      * @param {string} email - The new email address.
-     * @returns {Promise<boolean>} - Returns true if the referral was updated successfully, false otherwise.
+     * @returns {boolean} - Returns true if the referral was updated successfully, false otherwise.
      */
     static async updateEmail(referralUserId, email) {
-      const newParams = { user: { email } };
-      await easypostClient.put(`${this.#url}/${referralUserId}`, newParams); // will throw if there's an error
+      const url = `${this.#url}/${referralUserId}`;
+      const wrappedParams = { user: { email } };
+
+      await easypostClient._put(url, wrappedParams); // will throw if there's an error
 
       return true;
     }
 
     /**
-     * Add a credit card to the referral's account
-     * @param {string} referralApiKey - The referral user's production API key.
+     * Add a credit card to a {@link User referral customer's} account.
+     * See {@link https://www.easypost.com/docs/api/node#create-credit-card EasyPost API Documentation} for more information.
+     * @param {string} referralApiKey - The referral customer's production API key.
      * @param {string} number - The credit card number.
      * @param {string} expirationMonth - The credit card expiration month.
      * @param {string} expirationYear - The credit card expiration year.
      * @param {string} cvc - The credit card CVC.
      * @param {string} priority - Whether to add the card as 'primary' or 'secondary' payment method (defaults to 'primary').
-     * @returns {Promise<never>} - Response body (EasyPost payment method object).
+     * @returns {Object} - An object representing the newly-added credit card.
      */
     static async addCreditCard(
       referralApiKey,
@@ -142,7 +156,7 @@ export default (easypostClient) =>
         cvc,
       ); // will throw if there's an error
 
-      const paymentMethod = await sendCardDetailsToEasyPost(
+      const paymentMethod = await _sendCardDetailsToEasyPost(
         easypostClient,
         referralApiKey,
         stripeCreditCardId,
@@ -153,9 +167,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all referral customers associated with the API key.
-     * @param {object} params
-     * @returns {ReferralCustomer[]}
+     * Retrieve all {@link User referral customers} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-referral-customers EasyPost API Documentation} for more information.
+     * @param {Object} [params] - Parameters to filter the referral customers by.
+     * @returns {Object} - An object containing a list of {@link User referral customers} and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;

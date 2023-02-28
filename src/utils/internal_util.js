@@ -1,38 +1,7 @@
-import Constants from '../constants';
-import FilteringError from '../errors/general/filtering_error';
-const util = require('util');
-
-module.exports = class Util {
-  /**
-   * Get the lowest rate of an EasyPost object such as a Shipment, Order, or Pickup.
-   * @param {Object} easypostObject
-   * @param {Array} carriers
-   * @param {Array} services
-   * @returns {Object}
-   */
-  static getLowestObjectRate(easypostObject, carriers, services, ratesKey = 'rates') {
-    let rates = easypostObject[ratesKey] || [];
-
-    if (carriers) {
-      const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
-      rates = rates.filter((rate) => carriersLower.includes(rate.carrier.toLowerCase()));
-    }
-
-    if (services) {
-      const servicesLower = services.map((service) => service.toLowerCase());
-      rates = rates.filter((rate) => servicesLower.includes(rate.service.toLowerCase()));
-    }
-
-    if (rates.length === 0) {
-      throw new FilteringError({ message: util.format(Constants.NO_OBJECT_FOUND, 'rates') });
-    }
-
-    return rates.reduce((lowest, rate) => {
-      if (parseFloat(rate.rate) < parseFloat(lowest.rate)) {
-        return rate;
-      }
-
-      return lowest;
-    }, rates[0]);
-  }
-};
+/**
+ * Utility class of various internal helper functions.
+ * This class is not designed to be used directly by consumers of the library.
+ * @internal
+ * @type {InternalUtils}
+ */
+export default class InternalUtils {}

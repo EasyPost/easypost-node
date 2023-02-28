@@ -1,7 +1,7 @@
 import baseService from '../services/base_service';
 
 export default (easypostClient) =>
-  class BetaReferralCustomerService extends baseService(easypostClient) {
+  class ReferralCustomerService extends baseService(easypostClient) {
     static #name = 'Referral';
 
     static #url = 'referral_customers';
@@ -9,11 +9,11 @@ export default (easypostClient) =>
     static #key = 'user';
 
     /**
-     * Add Stripe payment method to referral customer.
+     * Add an existing Stripe payment method to a {@link User referral customer's} account.
      * @param {string} stripeCustomerId - The Stripe account's ID.
      * @param {string} paymentMethodReference - Reference of Stripe payment method.
-     * @param {string} priority - Primary or secondary of this payment method.
-     * @returns {object} - Returns PaymentMethod object.
+     * @param {string} [priority] - Which priority to set the payment method to ('primary' or 'secondary').
+     * @returns {Object} - A JSON object representing the payment method.
      */
     static async addPaymentMethod(stripeCustomerId, paymentMethodReference, priority = 'primary') {
       const wrappedParams = {
@@ -24,24 +24,27 @@ export default (easypostClient) =>
         },
       };
 
-      const response = await easypostClient.post(
-        'referral_customers/payment_method',
-        wrappedParams,
-      );
+      const url = 'referral_customers/payment_method';
+
+      const response = await easypostClient._post(url, wrappedParams);
+
       return response;
     }
 
     /**
      * Refund by amount for a recent payment.
      * @param {number} refundAmount - Amount to be refunded by cents.
-     * @returns {object} - Returns BetaPaymentRefund object.
+     * @returns {Object} - A JSON object representing the refund.
      */
     static async refundByAmount(refundAmount) {
       const params = {
         refund_amount: refundAmount,
       };
 
-      const response = await easypostClient.post('referral_customers/refunds', params);
+      const url = 'referral_customers/refunds';
+
+      const response = await easypostClient._post(url, params);
+
       return response;
     }
 
@@ -55,7 +58,10 @@ export default (easypostClient) =>
         payment_log_id: paymentLogId,
       };
 
-      const response = await easypostClient.post('referral_customers/refunds', params);
+      const url = 'referral_customers/refunds';
+
+      const response = await easypostClient._post(url, params);
+
       return response;
     }
   };

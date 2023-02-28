@@ -2,6 +2,10 @@ import Util from '../utils/util';
 import baseService from './base_service';
 
 export default (easypostClient) =>
+  /**
+   * The ShipmentService class provides methods for interacting with EasyPost {@link Shipment} objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
   class ShipmentService extends baseService(easypostClient) {
     static #name = 'Shipment';
 
@@ -10,10 +14,11 @@ export default (easypostClient) =>
     static #key = 'shipment';
 
     /**
-     * Create a shipment.
-     * @param {object} params
-     * @param {boolean} withCarbonOffset
-     * @returns {this|Promise<never>}
+     * Create a {@link Shipment shipment}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-shipment EasyPost API Documentation} for more information.
+     * @param {Object} params - The parameters to create a shipment with.
+     * @param {boolean} withCarbonOffset - Whether to include a carbon offset for the shipment.
+     * @returns {Shipment} - The created shipment.
      */
     static async create(params, withCarbonOffset = false) {
       const url = this.#url;
@@ -27,13 +32,14 @@ export default (easypostClient) =>
     }
 
     /**
-     * Buy a shipment.
-     * @param {string} id
-     * @param {object} rate
-     * @param {number} insuranceAmount
-     * @param {boolean} withCarbonOffset
-     * @param {string} endShipperId
-     * @returns {Shipment}
+     * Purchase a {@link Shipment shipment}.
+     * See {@link https://www.easypost.com/docs/api/node#buy-a-shipment EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the shipment to purchase.
+     * @param {Rate} rate - The rate to purchase the shipment with.
+     * @param {number|null} [insuranceAmount] - The amount of insurance to purchase for the shipment.
+     * @param {boolean} [withCarbonOffset] - Whether to purchase a carbon offset for the shipment.
+     * @param {string|null} [endShipperId] - The ID of the end shipper to purchase the shipment with.
+     * @returns {Shipment} - The purchased shipment.
      */
     static async buy(
       id,
@@ -66,7 +72,7 @@ export default (easypostClient) =>
       }
 
       try {
-        const response = await easypostClient.post(url, wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -75,17 +81,18 @@ export default (easypostClient) =>
     }
 
     /**
-     * Convert the label format of a shipment.
-     * @param {string} id
-     * @param {string} format
-     * @returns {this}
+     * Convert the label format of a {@link Shipment shipment}.
+     * See {@link https://www.easypost.com/docs/api/node#convert-the-label-format-of-a-shipment EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the shipment to convert the label format of.
+     * @param {string} format - The format to convert the label to.
+     * @returns {Shipment} - The shipment with the converted label format.
      */
     static async convertLabelFormat(id, format) {
       const url = `${this.#url}/${id}/label`;
       const wrappedParams = { file_format: format };
 
       try {
-        const response = await easypostClient.get(url, wrappedParams);
+        const response = await easypostClient._get(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -94,17 +101,18 @@ export default (easypostClient) =>
     }
 
     /**
-     * Regenerate rates of a shipment.
-     * @param {string} id
-     * @param {boolean} withCarbonOffset
-     * @returns {this}
+     * Regenerate {@link Rate rates} for a {@link Shipment shipment}.
+     * See {@link https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the shipment to regenerate rates for.
+     * @param {boolean} withCarbonOffset - Whether to include a carbon offset for the shipment.
+     * @returns {Shipment} - The shipment with regenerated rates.
      */
     static async regenerateRates(id, withCarbonOffset = false) {
       const url = `${this.#url}/${id}/rerate`;
       const wrappedParams = { carbon_offset: withCarbonOffset };
 
       try {
-        const response = await easypostClient.post(url, wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -113,15 +121,16 @@ export default (easypostClient) =>
     }
 
     /**
-     * Get the smartrates of a shipment.
-     * @param {string} id
-     * @returns {this}
+     * Get SmartRates for a {@link Shipment shipment}.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-time-in-transit-statistics-across-all-rates-for-a-shipment EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the shipment to get SmartRates for.
+     * @returns {Rate[]} - The SmartRates for the shipment.
      */
     static async getSmartRates(id) {
       const url = `${this.#url}/${id}/smartrate`;
 
       try {
-        const response = await easypostClient.get(url);
+        const response = await easypostClient._get(url);
 
         return this._convertToEasyPostObject(response.body.result);
       } catch (e) {
@@ -130,17 +139,18 @@ export default (easypostClient) =>
     }
 
     /**
-     * Insure a shipment.
-     * @param {string} id
-     * @param {number|string} amount
-     * @returns {this}
+     * Insure a {@link Shipment shipment}.
+     * See {@link https://www.easypost.com/docs/api/node#insure-a-shipment EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the shipment to insure.
+     * @param {number|string} amount - The amount to insure the shipment for.
+     * @returns {Shipment} - The insured shipment.
      */
     static async insure(id, amount) {
       const url = `${this.#url}/${id}/insure`;
       const wrappedParams = { amount };
 
       try {
-        const response = await easypostClient.post(url, wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -149,11 +159,12 @@ export default (easypostClient) =>
     }
 
     /**
-     * Generate a form for a shipment.
-     * @param {string} id
-     * @param {string} formType
-     * @param {object} formOptions
-     * @returns {this}
+     * Generate a form for a {@link Shipment shipment}.
+     * See {@link https://www.easypost.com/docs/api/node#create-form EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the shipment to generate a form for.
+     * @param {string} formType - The type of form to generate.
+     * @param {Map} [formOptions] - Options for the form.
+     * @returns {Shipment} - The shipment with the generated form attached.
      */
     static async generateForm(id, formType, formOptions = {}) {
       const url = `${this.#url}/${id}/forms`;
@@ -165,7 +176,7 @@ export default (easypostClient) =>
       };
 
       try {
-        const response = await easypostClient.post(url, wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -174,15 +185,16 @@ export default (easypostClient) =>
     }
 
     /**
-     * Refund a shipment.
-     * @param {string} id
-     * @returns {this}
+     * Refund a {@link Shipment shipment}.
+     * See {@link https://www.easypost.com/docs/api/node#refund-a-shipment EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the shipment to refund.
+     * @returns {Shipment} - The refunded shipment.
      */
     static async refund(id) {
       const url = `${this.#url}/${id}/refund`;
 
       try {
-        const response = await easypostClient.post(url);
+        const response = await easypostClient._post(url);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -191,27 +203,22 @@ export default (easypostClient) =>
     }
 
     /**
-     * Get the lowest smartrate of this shipment.
-     * @param {string} id
-     * @param {number} deliveryDays
-     * @param {string} deliveryAccuracy
-     * @returns {Object}
+     * Get the lowest SmartRate of a shipment.
+     * @param {string} id - The ID of the shipment to get the lowest SmartRate of.
+     * @param {number} deliveryDays - The number of days the shipment will take to deliver.
+     * @param {string} deliveryAccuracy - The accuracy of the delivery days.
+     * @returns {Rate} - The lowest SmartRate of the shipment.
      */
     static async lowestSmartRate(id, deliveryDays, deliveryAccuracy) {
       const smartRates = await this.getSmartRates(id);
-      const lowestSmartRate = Util.getLowestSmartRate(
-        smartRates,
-        deliveryDays,
-        deliveryAccuracy.toLowerCase(),
-      );
-
-      return lowestSmartRate;
+      return Util.getLowestSmartRate(smartRates, deliveryDays, deliveryAccuracy.toLowerCase());
     }
 
     /**
-     * Retrieve a list of all shipments associated with the API key.
-     * @param {object} params
-     * @returns {Shipment[]}
+     * Retrieve all {@link Shipment shipments} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments EasyPost API Documentation} for more information.
+     * @param {Object} [params] - Parameters to filter the shipments by.
+     * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;
@@ -220,9 +227,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a shipment from the API.
-     * @param {string} id
-     * @returns {Shipment}
+     * Retrieve a {@link Shipment shipment} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-shipment EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the shipment to retrieve.
+     * @returns {Shipment} - The shipment with the given ID.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;

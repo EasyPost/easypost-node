@@ -1,9 +1,14 @@
 import baseService from './base_service';
 import Constants from '../constants';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
+
 const util = require('util');
 
 export default (easypostClient) =>
+  /**
+   * The CarrierAccountService class provides methods for interacting with EasyPost @{link CarrierAccount} objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
   class CarrierAccountService extends baseService(easypostClient) {
     static #name = 'CarrierAccount';
 
@@ -12,9 +17,10 @@ export default (easypostClient) =>
     static #key = 'carrier_account';
 
     /**
-     * Create a carrier account.
-     * @param {object} params
-     * @returns {CarrierAccount}
+     * Create a {@link CarrierAccount carrier account}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-carrier-account EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters for the carrier account to be created.
+     * @returns {CarrierAccount} - The created carrier account.
      */
     static async create(params) {
       const carrierAccountType = params.type;
@@ -33,10 +39,11 @@ export default (easypostClient) =>
     }
 
     /**
-     * Update a carrier account.
-     * @param {string} id
-     * @param {object} params
-     * @returns {CarrierAccount}
+     * Update a {@link CarrierAccount carrier account}.
+     * See {@link https://www.easypost.com/docs/api/node#update-a-carrieraccount EasyPost API Documentation} for more information.
+     * @param {string} id - The id of the carrier account to be updated.
+     * @param {Object} params - Parameters for the carrier account to be updated.
+     * @returns {CarrierAccount} - The updated carrier account.
      */
     static async update(id, params) {
       const url = `${this.#url}/${id}`;
@@ -45,7 +52,7 @@ export default (easypostClient) =>
       };
 
       try {
-        const response = await easypostClient.patch(url, wrappedParams);
+        const response = await easypostClient._patch(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -54,15 +61,16 @@ export default (easypostClient) =>
     }
 
     /**
-     * Delete a CarrierAccount.
-     * @param {string} id
-     * @returns {Promise|Promise<never>}
+     * Delete a {@link CarrierAccount carrier account}.
+     * See {@link https://www.easypost.com/docs/api/node#delete-a-carrier-account EasyPost API Documentation} for more information.
+     * @param {string} id - The id of the carrier account to be deleted.
+     * @returns {Promise|Promise<never>} - A promise that resolves when the carrier account has been deleted.
      */
     static async delete(id) {
       const url = `${this.#url}/${id}`;
 
       try {
-        await easypostClient.del(url);
+        await easypostClient._delete(url);
 
         return Promise.resolve();
       } catch (e) {
@@ -72,8 +80,9 @@ export default (easypostClient) =>
 
     /**
      * Returns the correct carrier_account endpoint when creating a record based on the type.
-     * @param {string} carrierAccountType
-     * @returns {string}
+     * @private
+     * @param {string} carrierAccountType - The type of carrier account to be created.
+     * @returns {string} - The endpoint to be used for the carrier account creation request.
      */
     static _selectCarrierAccountCreationEndpoint(carrierAccountType) {
       if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_WORKFLOWS.includes(carrierAccountType)) {
@@ -83,9 +92,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all carrier accounts associated with the API key.
-     * @param {object} params
-     * @returns {CarrierAccount[]}
+     * Retrieve all {@link CarrierAccount carrier accounts} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#list-all-carrier-accounts EasyPost API Documentation} for more information.
+     * @param {Object} [params] - Parameters to filter the list of carrier accounts.
+     * @returns {Object} - An object containing a list of {@link CarrierAccount carrier accounts} and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;
@@ -94,9 +104,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a carrier account from the API.
-     * @param {string} id
-     * @returns {CarrierAccount}
+     * Retrieve a {@link CarrierAccount carrier account} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-carrieraccount EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the carrier account to retrieve.
+     * @returns {CarrierAccount} - The retrieved carrier account.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;

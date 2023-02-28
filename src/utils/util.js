@@ -6,13 +6,21 @@ import SignatureVerificationError from '../errors/general/signature_verification
 const crypto = require('crypto');
 const util = require('util');
 
-module.exports = class Util {
+/**
+ * Utility class of various publicly-available helper functions.
+ * @public
+ * @type {Utils}
+ */
+export default class Utils {
   /**
-   * Get the lowest smartrate of this shipment.
-   * @param {Object} smartrates
-   * @param {number} deliveryDays
-   * @param {string} deliveryAccuracy
-   * @returns {Object}
+   * Get the lowest SmartRate from a provided list of SmartRates.
+   * @public
+   * @param {Rate[]} smartrates - List of SmartRates to filter through
+   * @param {number} deliveryDays - The maximum number of days allowed for delivery
+   * @param {string} deliveryAccuracy - The target level of accuracy for the delivery days (e.g. 'percentile_50')
+   * @returns {Rate} - The lowest SmartRate
+   * @throws {FilteringError} - If no applicable rates are found
+   * @throws {InvalidParameterError} - If the deliveryAccuracy value is invalid
    */
   static getLowestSmartRate(smartrates, deliveryDays, deliveryAccuracy) {
     const validDeliveryAccuracyValues = new Set([
@@ -57,22 +65,24 @@ module.exports = class Util {
   }
 
   /**
-   * Get the lowest stateless rate of this shipment.
-   * @param {Rate[]} statelessRates
-   * @param {string[]} carriers
-   * @param {string[]} deliveryAccuracy
-   * @returns {Rate} Lowest rate
+   * Get the lowest rate from a provided list of rates.
+   * @public
+   * @param {Rate[]} rates - List of rates to filter through
+   * @param {string[]} [carriers] - List of allowed carriers to filter by
+   * @param {string[]} [services] - List of allowed services to filter by
+   * @returns {Rate} - The lowest rate
+   * @throws {FilteringError} - If no applicable rates are found
    */
-  static getLowestStatelessRate(statelessRates, carriers, services) {
-    let rates = statelessRates;
-
+  static getLowestRate(rates, carriers = null, services = null) {
     if (carriers) {
       const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
+      // eslint-disable-next-line no-param-reassign
       rates = rates.filter((rate) => carriersLower.includes(rate.carrier.toLowerCase()));
     }
 
     if (services) {
       const servicesLower = services.map((service) => service.toLowerCase());
+      // eslint-disable-next-line no-param-reassign
       rates = rates.filter((rate) => servicesLower.includes(rate.service.toLowerCase()));
     }
 
@@ -94,10 +104,12 @@ module.exports = class Util {
    * If the signatures do not match, an error will be raised signifying the webhook either did not originate
    * from EasyPost or the secrets do not match. If the signatures do match, the `event_body` will be returned
    * as JSON.
-   * @param {buffer} eventBody
-   * @param {object} headers
-   * @param {string} webhookSecret
-   * @returns {object}
+   * @public
+   * @param {buffer} eventBody - The raw body of the webhook event
+   * @param {Object} headers - The headers of the webhook HTTP request
+   * @param {string} webhookSecret - The webhook secret shared between EasyPost and your application
+   * @returns {object} - The JSON-parsed webhook event body if the signature could be verified
+   * @throws {SignatureVerificationError} - If the signature could not be verified
    */
   static validateWebhook(eventBody, headers, webhookSecret) {
     let webhook = {};
@@ -134,4 +146,4 @@ module.exports = class Util {
 
     return webhook;
   }
-};
+}

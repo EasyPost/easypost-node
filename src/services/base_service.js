@@ -26,6 +26,9 @@ import Tracker from '../models/tracker';
 import User from '../models/user';
 import Webhook from '../models/webhook';
 
+/**
+ * A map of EasyPost object ID prefixes to their associated class names.
+ */
 const EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP = {
   adr: 'Address',
   ak: 'ApiKey',
@@ -58,6 +61,9 @@ const EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP = {
   user: 'User',
 };
 
+/**
+ * A map of EasyPost services available to the client.
+ */
 const RESOURCES = {
   Address,
   ApiKey,
@@ -89,17 +95,34 @@ const RESOURCES = {
 };
 
 export default (easypostClient) =>
+  /**
+   * The base class for all EasyPost client library services.
+   * @param {EasyPostClient} easypostClient The {@link EasyPostClient} instance to use for API calls.
+   */
   class BaseService {
+    /**
+     * The EasyPost API endpoint associated with this service.
+     * @type {string|null}
+     */
     static #url = null;
 
+    /**
+     * The {@link EasyPostObject} class associated with this service.
+     * @type {string|null}
+     */
     static #name = null;
 
+    /**
+     * The top-level JSON key associated with this service.
+     * @type {string|null}
+     */
     static #key = null;
 
     /**
-     * Converts a response and all its nested elements to its associated EasyPostObject.
-     * @param {*} response
-     * @returns {*}
+     * Converts a JSON response and all its nested elements to associated {@link EasyPostObject}-based class instances.
+     * @internal
+     * @param {*} response The JSON response to convert (usually a `Map` or `Array`).
+     * @returns {*} An {@link EasyPostObject}-based class instance or an `Array` of {@link EasyPostObject}-based class instances.
      */
     static _convertToEasyPostObject(response) {
       if (Array.isArray(response)) {
@@ -131,33 +154,28 @@ export default (easypostClient) =>
         } else {
           className = 'EasyPostObject';
         }
-        return this._constructFrom(response, className);
+        const object = new RESOURCES[className.name !== undefined ? className.name : className]();
+
+        Object.keys(response).forEach((key) => {
+          // eslint-disable-next-line no-param-reassign
+          object[key] = this._convertToEasyPostObject(response[key]);
+        });
+
+        return object;
       }
       return response;
     }
 
     /**
-     * Construct an EasyPostObject from the various properties of a response.
-     * @param {*} values
-     * @param {*} className
-     * @returns
-     */
-    static _constructFrom(values, className) {
-      const object = new RESOURCES[className.name !== undefined ? className.name : className]();
-      const convertedObject = this._mapProps(object, values);
-
-      return convertedObject;
-    }
-
-    /**
      * Creates an EasyPost Object via the API.
-     * @param {string} url
-     * @param {Object} params
-     * @returns {Base}
+     * @internal
+     * @param {string} url The URL to send the API request to.
+     * @param {Object} params The parameters to send with the API request.
+     * @returns {EasyPostObject|Promise<never>} The created {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async _create(url, params) {
       try {
-        const response = await easypostClient.post(url, params);
+        const response = await easypostClient._post(url, params);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -167,14 +185,15 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a list of records from the API.
-     * @param {string} url
-     * @param {object} params
-     * @returns {object|Promise<never>}
+     * @internal
+     * @param {string} url The URL to send the API request to.
+     * @param {Object} [params] The parameters to send with the API request.
+     * @returns {EasyPostObject|EasyPostObject[]|Promise<never>} The retrieved {@link EasyPostObject}-based class instance(s), or a `Promise` that rejects with an error.
      */
     static async _all(url, params = {}) {
       try {
         // eslint-disable-next-line no-param-reassign
-        const response = await easypostClient.get(url, params);
+        const response = await easypostClient._get(url, params);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -184,31 +203,17 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a record from the API.
-     * @param {string} url
-     * @returns {Base|Promise<never>}
+     * @internal
+     * @param {string} url The URL to send the API request to.
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async _retrieve(url) {
       try {
-        const response = await easypostClient.get(url);
+        const response = await easypostClient._get(url);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
         return Promise.reject(e);
       }
-    }
-
-    /**
-     * Map data props to an EasyPostObject.
-     *
-     * @param {object} object
-     * @param {*} data
-     */
-    static _mapProps(object, data) {
-      Object.keys(data).forEach((key) => {
-        // eslint-disable-next-line no-param-reassign
-        object[key] = this._convertToEasyPostObject(data[key]);
-      });
-
-      return object;
     }
   };

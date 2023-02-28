@@ -2,8 +2,6 @@ import os from 'os';
 import superagent from 'superagent';
 
 import pkg from '../package.json';
-import BetaRateService from './beta/beta_rate_service';
-import BetaReferralCustomerService from './beta/beta_referral_customer_service';
 import Constants from './constants';
 import ErrorHandler from './errors/error_handler';
 import MissingParameterError from './errors/general/missing_parameter_error';
@@ -34,10 +32,28 @@ import WebhookService from './services/webhook_service';
 
 const util = require('util');
 
+/**
+ * How many milliseconds in a second.
+ * @type {number}
+ */
 export const MS_SECOND = 1000;
+
+/**
+ * The default timeout for all EasyPost API requests.
+ * @type {number}
+ */
 export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
+
+/**
+ * The default base URL for all production EasyPost API requests.
+ * @type {string}
+ */
 export const DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
 
+/**
+ * The default headers used for all EasyPost API requests.
+ * @type {{'Accept': string, 'Content-Type': string, 'User-Agent': string}}
+ */
 export const DEFAULT_HEADERS = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
@@ -46,7 +62,10 @@ export const DEFAULT_HEADERS = {
   } OS/${os.platform()} OSVersion/${os.release()} OSArch/${os.arch()}`,
 };
 
-// Map HTTP methods to superagent methods.
+/**
+ * A map of HTTP methods to their corresponding string values (for use with superagent).
+ * @type {{DELETE: string, POST: string, GET: string, PUT: string, PATCH: string}}
+ */
 export const METHODS = {
   GET: 'get',
   POST: 'post',
@@ -55,12 +74,14 @@ export const METHODS = {
   DELETE: 'del',
 };
 
+/**
+ * The services available for the client (end-user-facing name corresponding to a `BaseService`-based class).
+ * @type {Map}
+ */
 export const SERVICES = {
   Address: AddressService,
   ApiKey: ApiKeyService,
   Batch: BatchService,
-  BetaRate: BetaRateService,
-  BetaReferralCustomer: BetaReferralCustomerService,
   Billing: BillingService,
   CarrierAccount: CarrierAccountService,
   CarrierType: CarrierTypeService,
@@ -83,6 +104,12 @@ export const SERVICES = {
   Webhook: WebhookService,
 };
 
+/**
+ * The client used to access services of the EasyPost API.
+ * This client is configured to use the latest production version of the EasyPost API.
+ * @param {string} key The API key to use for API requests made by this client.
+ * @param {Object} [options] Additional options to use for the underlying HTTP client (e.g. superagent, middleware, proxy configuration).
+ */
 export default class EasyPostClient {
   constructor(key, options = {}) {
     const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
@@ -107,41 +134,39 @@ export default class EasyPostClient {
   }
 
   /**
-   * Create a copy of an API instance with overridden options.
-   * @param {API} api The API instance to clone.
-   * @param {Object} options The options to override.
-   * @returns {API} A new API instance.
+   * Create a copy of an {@link EasyPostClient} with overridden options.
+   * @param {EasyPostClient} client The `EasyPostClient` instance to clone.
+   * @param {Object} [options] The options to override.
+   * @returns {EasyPostClient} A new `EasyPostClient` instance.
    */
-  static copyApi(api, options = {}) {
+  static copyClient(client, options = {}) {
     const { apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
-    const agent = superagentMiddleware ? superagentMiddleware(api.agent) : api.agent;
+    const agent = superagentMiddleware ? superagentMiddleware(client.agent) : client.agent;
 
-    return new EasyPostClient(apiKey || api.key, {
-      useProxy: useProxy || api.useProxy,
-      timeout: timeout || api.timeout,
-      baseUrl: baseUrl || api.baseUrl,
+    return new EasyPostClient(apiKey || client.key, {
+      useProxy: useProxy || client.useProxy,
+      timeout: timeout || client.timeout,
+      baseUrl: baseUrl || client.baseUrl,
       agent,
-      requestMiddleware: requestMiddleware || api.requestMiddleware,
+      requestMiddleware: requestMiddleware || client.requestMiddleware,
     });
   }
 
   /**
-   * Build request headers to be sent by default with each request, combined (or overridden) by any additional headers
-   * @param {object} additionalHeaders
-   * @returns {object}
+   * Build request headers to be sent with each EasyPost API request, combined (or overridden) by any additional headers
+   * @param {Object} [additionalHeaders] Additional headers to combine or override with the default headers.
+   * @returns {Object} The headers to use for the request.
    */
   static _buildHeaders(additionalHeaders = {}) {
-    const headers = {
+    return {
       ...DEFAULT_HEADERS,
       ...additionalHeaders,
     };
-
-    return headers;
   }
 
   /**
-   * Attach services to an EasyPostClient object.
-   * @param {*} services
+   * Attach services to an {@link EasyPostClient} instance.
+   * @param {Map} services - A map of {@link BaseService}-based service classes to construct and attach to the client.
    */
   _attachServices(services) {
     Object.keys(services).forEach((s) => {
@@ -151,8 +176,8 @@ export default class EasyPostClient {
 
   /**
    * If the path passed in is a full URI, use it; otherwise, prepend the base url from the api.
-   * @param {string} path
-   * @returns {string}
+   * @param {string} path - The path to build.
+   * @returns {string} The full path to use for the HTTP request.
    */
   _buildPath(path = '') {
     if (path.indexOf('http') === 0) {
@@ -164,11 +189,12 @@ export default class EasyPostClient {
 
   /**
    * Make an HTTP request.
-   * @param {string} path
-   * @param {string} method
-   * @param {object} params
-   * @param {object} headers
-   * @returns {*}
+   * @param {string} [path] - The partial path to append to the base url for the request.
+   * @param {string} [method] - The HTTP method to use for the request, defaults to GET.
+   * @param {Object} [params] - The parameters to send with the request.
+   * @param {Object} [headers] - Additional headers to send with the request.
+   * @returns {*} The response from the HTTP request.
+   * @throws {ApiError} If the request fails.
    */
   async _request(path = '', method = METHODS.GET, params = {}, headers = {}) {
     const urlPath = this._buildPath(path);
@@ -205,56 +231,56 @@ export default class EasyPostClient {
 
   /**
    * Make a GET HTTP request.
-   * @param {string} path
-   * @param {object} params
-   * @param {object} headers
-   * @returns {*}
+   * @param {string} path - The partial path to append to the base url for the request.
+   * @param {Object} [params] - The parameters to send with the request.
+   * @param {Object} [headers] - Additional headers to send with the request.
+   * @returns {*} The response from the HTTP request.
    */
-  get(path, params = {}, headers = {}) {
+  _get(path, params = {}, headers = {}) {
     return this._request(path, METHODS.GET, params, headers);
   }
 
   /**
    * Make a POST HTTP request.
-   * @param {string} path
-   * @param {object} params
-   * @param {object} headers
-   * @returns {*}
+   * @param {string} path - The partial path to append to the base url for the request.
+   * @param {Object} [params] - The parameters to send with the request.
+   * @param {Object} [headers] - Additional headers to send with the request.
+   * @returns {*} The response from the HTTP request.
    */
-  post(path, params = {}, headers = {}) {
+  _post(path, params = {}, headers = {}) {
     return this._request(path, METHODS.POST, params, headers);
   }
 
   /**
    * Make a PUT HTTP request.
-   * @param {string} path
-   * @param {object} params
-   * @param {object} headers
-   * @returns {*}
+   * @param {string} path - The partial path to append to the base url for the request.
+   * @param {Object} [params] - The parameters to send with the request.
+   * @param {Object} [headers] - Additional headers to send with the request.
+   * @returns {*} The response from the HTTP request.
    */
-  put(path, params = {}, headers = {}) {
+  _put(path, params = {}, headers = {}) {
     return this._request(path, METHODS.PUT, params, headers);
   }
 
   /**
    * Make a PATCH HTTP request.
-   * @param {string} path
-   * @param {object} params
-   * @param {object} headers
-   * @returns {*}
+   * @param {string} path - The partial path to append to the base url for the request.
+   * @param {Object} [params] - The parameters to send with the request.
+   * @param {Object} [headers] - Additional headers to send with the request.
+   * @returns {*} The response from the HTTP request.
    */
-  patch(path, params = {}, headers = {}) {
+  _patch(path, params = {}, headers = {}) {
     return this._request(path, METHODS.PATCH, params, headers);
   }
 
   /**
    * Make a DELETE HTTP request.
-   * @param {string} path
-   * @param {object} params
-   * @param {object} headers
-   * @returns {*}
+   * @param {string} path - The partial path to append to the base url for the request.
+   * @param {Object} [params] - The parameters to send with the request.
+   * @param {Object} [headers] - Additional headers to send with the request.
+   * @returns {*} The response from the HTTP request.
    */
-  del(path, params = {}, headers = {}) {
+  _delete(path, params = {}, headers = {}) {
     return this._request(path, METHODS.DELETE, params, headers);
   }
 }

@@ -3,6 +3,10 @@ import baseService from './base_service';
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
 export default (easypostClient) =>
+  /**
+   * The BatchService class provides methods for interacting with EasyPost {@link Batch} objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
   class BatchService extends baseService(easypostClient) {
     static #name = 'Batch';
 
@@ -11,9 +15,10 @@ export default (easypostClient) =>
     static #key = 'batch';
 
     /**
-     * Create a batch.
-     * @param {*} params
-     * @returns {Batch}
+     * Create a {@link Batch batch}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-batch EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters for the batch to be created.
+     * @returns {Batch} - The created batch.
      */
     static async create(params) {
       const url = this.#url;
@@ -25,10 +30,11 @@ export default (easypostClient) =>
     }
 
     /**
-     * Add shipments to a batch.
-     * @param {number} id
-     * @param {Array} shipmentIds
-     * @returns {this}
+     * Add {@link Shipment shipments} to a {@link Batch batch}.
+     * See {@link https://www.easypost.com/docs/api/node#add-shipments-to-a-batch EasyPost API Documentation} for more information.
+     * @param {string} id - The id of the batch to add shipments to.
+     * @param {Array} shipmentIds - The ids of the shipments to add to the batch.
+     * @returns {Batch} - The updated batch.
      */
     static async addShipments(id, shipmentIds) {
       const url = `${this.#url}/${id}/add_shipments`;
@@ -36,7 +42,7 @@ export default (easypostClient) =>
         shipments: shipmentIds.map((s) => ({ id: s })),
       };
       try {
-        const response = await easypostClient.post(url, wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -45,10 +51,11 @@ export default (easypostClient) =>
     }
 
     /**
-     * Removes shipments from a batch.
-     * @param {number} id
-     * @param {Array} shipmentIds
-     * @returns {this}
+     * Removes {@link Shipment shipments} from a {@link Batch batch}.
+     * See {@link https://www.easypost.com/docs/api/node#remove-shipments-from-a-batch EasyPost API Documentation} for more information.
+     * @param {string} id - The id of the batch to remove shipments from.
+     * @param {Array} shipmentIds - The ids of the shipments to remove from the batch.
+     * @returns {Batch} - The updated batch.
      */
     static async removeShipments(id, shipmentIds) {
       const url = `${this.#url}/${id}/remove_shipments`;
@@ -57,7 +64,7 @@ export default (easypostClient) =>
       };
 
       try {
-        const response = await easypostClient.post(url, wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -66,17 +73,18 @@ export default (easypostClient) =>
     }
 
     /**
-     * Convert the label of a batch.
-     * @param {number} id
-     * @param {string} fileFormat
-     * @returns {this}
+     * Generate a label for a {@link Batch batch}.
+     * See {@link https://www.easypost.com/docs/api/node#batch-labels EasyPost API Documentation} for more information.
+     * @param {string} id - The id of the batch to generate a label for.
+     * @param {string} fileFormat - The format of the label to generate. Defaults to 'pdf'.
+     * @returns {Batch} - The updated batch.
      */
     static async generateLabel(id, fileFormat = DEFAULT_LABEL_FORMAT) {
       const url = `${this.#url}/${id}/label`;
       const wrappedParams = { file_format: fileFormat };
 
       try {
-        const response = await easypostClient.post(url, wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -85,15 +93,16 @@ export default (easypostClient) =>
     }
 
     /**
-     * Create a scanform for a batch.
-     * @param {number} id
-     * @returns {this}
+     * Create a {@link ScanForm scan form} for a {@link Batch batch}.
+     * See {@link https://www.easypost.com/docs/api/node#manifesting-scan-form EasyPost API Documentation} for more information.
+     * @param {string} id - The id of the batch to create a scan form for.
+     * @returns {Batch} - The updated batch.
      */
     static async createScanForm(id) {
       const url = `${this.#url}/${id}/scan_form`;
 
       try {
-        const response = await easypostClient.post(url);
+        const response = await easypostClient._post(url);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -102,16 +111,17 @@ export default (easypostClient) =>
     }
 
     /**
-     * Creates and buys a batch in a single call.
-     * @param {object} params
-     * @returns {this}
+     * Create and purchase a {@link Batch batch} in a single request.
+     * See {@link https://www.easypost.com/docs/api/node#batches EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters for the batch to be created and purchased.
+     * @returns {Batch} - The created and purchased batch.
      */
     static async createAndBuy(params) {
       const url = `${this.#url}/create_and_buy`;
       const wrappedParams = { batch: params };
 
       try {
-        const response = await easypostClient.post(url, wrappedParams);
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -120,15 +130,16 @@ export default (easypostClient) =>
     }
 
     /**
-     * Buy a batch.
-     * @param {number} id
-     * @returns {this}
+     * Purchase a {@link Batch batch}.
+     * See {@link https://www.easypost.com/docs/api/node#buy-a-batch EasyPost API Documentation} for more information.
+     * @param {string} id - The id of the batch to purchase.
+     * @returns {Batch} - The purchased batch.
      */
     static async buy(id) {
       const url = `${this.#url}/${id}/buy`;
 
       try {
-        const response = await easypostClient.post(url);
+        const response = await easypostClient._post(url);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -137,9 +148,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all batches associated with the API key.
-     * @param {object} params
-     * @returns {Batch[]}
+     * Retrieve all {@link Batch batches} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#list-all-batches EasyPost API Documentation} for more information.
+     * @param {Object} [params] - Parameters to filter the list of batches.
+     * @returns {Object} - An object containing a list of {@link Batch batches} and pagination information.
      */
     static async all(params = {}) {
       const url = this.#url;
@@ -148,9 +160,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a batch from the API.
-     * @param {string} id
-     * @returns {Batch}
+     * Retrieve a {@link Batch batch} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-batch EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the batch to retrieve.
+     * @returns {Batch} - The retrieved batch.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;

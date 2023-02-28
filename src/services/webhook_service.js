@@ -1,6 +1,10 @@
 import baseService from './base_service';
 
 export default (easypostClient) =>
+  /**
+   * The WebhookService class provides methods for interacting with EasyPost {@link Webhook} objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
   class WebhookService extends baseService(easypostClient) {
     static #name = 'Webhook';
 
@@ -9,9 +13,10 @@ export default (easypostClient) =>
     static #key = 'webhook';
 
     /**
-     * Create a webhook.
-     * @param {*} params
-     * @returns {Webhook}
+     * Create a {@link Webhook webhook}.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-webhook EasyPost API Documentation} for more information.
+     * @param {Object} params - The parameters to create a webhook with.
+     * @returns {Webhook} - The created webhook.
      */
     static async create(params) {
       const url = this.#url;
@@ -23,19 +28,17 @@ export default (easypostClient) =>
     }
 
     /**
-     * Update a Webhook.
-     * @param {string} id
-     * @param {object} params
-     * @returns {User}
+     * Update a {@link Webhook webhook}.
+     * A disabled webhook will be re-enabled if it is updated.
+     * See {@link https://www.easypost.com/docs/api/node#update-a-webhook EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the webhook to update.
+     * @param {Object} params - The parameters to update the webhook with.
+     * @returns {Webhook} - The updated webhook.
      */
     static async update(id, params) {
       const url = `${this.#url}/${id}`;
-      const wrappedParams = {
-        user: params,
-      };
-
       try {
-        const response = await easypostClient.patch(url, wrappedParams);
+        const response = await easypostClient._patch(url, params);
 
         return this._convertToEasyPostObject(response.body);
       } catch (e) {
@@ -44,15 +47,16 @@ export default (easypostClient) =>
     }
 
     /**
-     * Delete a Webhook.
-     * @param {string} id
-     * @returns {Promise|Promise<never>}
+     * Delete a {@link Webhook webhook}.
+     * See {@link https://www.easypost.com/docs/api/node#delete-a-webhook EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the webhook to delete.
+     * @returns {Promise|Promise<never>} - A promise that resolves if the webhook was successfully deleted.
      */
     static async delete(id) {
       const url = `${this.#url}/${id}`;
 
       try {
-        await easypostClient.del(url);
+        await easypostClient._delete(url);
 
         return Promise.resolve();
       } catch (e) {
@@ -61,8 +65,9 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a list of all webhooks associated with the API key.
-     * @param {object} params
+     * Retrieve all {@link Webhook webhooks} associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#list-a-webhooks EasyPost API Documentation} for more information.
+     * @param {Object} [params]
      * @returns {Webhook[]}
      */
     static async all(params = {}) {
@@ -72,9 +77,10 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve a webhook from the API.
-     * @param {string} id
-     * @returns {Webhook}
+     * Retrieve a {@link Webhook webhook} by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-webhook EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the webhook to retrieve.
+     * @returns {Webhook} - The retrieved webhook.
      */
     static async retrieve(id) {
       const url = `${this.#url}/${id}`;
