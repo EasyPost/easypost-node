@@ -38,6 +38,8 @@ export declare class CarrierType implements ICarrierType {
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-available-carrier-types
    * @requires production API Key.
+   *
+   * @returns {Object} - An object containing a list of {@link CarrierType carrier types}.
    */
   static all(): Promise<CarrierType[]>;
 }

@@ -109,23 +109,28 @@ export declare class Insurance implements IInsurance {
   /**
    * An Insurance created via this endpoint must belong to a shipment purchased outside of EasyPost.
    * Insurance for Shipments created within EasyPost must be created via the Shipment Buy or Insure endpoints.
-   * When creating Insurance for a non-EasyPost shipment, you must provide to_address, from_address, tracking_code, and amount information.
+   * When creating Insurance for a non-EasyPost shipment, you must provide `to_address`, `from_address`, `tracking_code`, and `amount` information.
    * Optionally, you can provide the carrier parameter, which will help EasyPost identify the carrier the package was shipped with.
    * If no carrier is provided, EasyPost will attempt to determine the carrier based on the tracking_code provided.
    * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier.
    * In addition, not having to auto-match the carrier will significantly speed up the response time.
    *
    * @see https://www.easypost.com/docs/api/node#create-an-insurance
+   *
+   * @param {Object} params The parameters to create an {@link Insurance} with.
+   * @returns {Promise<Insurance>} The created and verified {@link Insurance}.
    */
-  public save(): Promise<Insurance>;
+  static create(params: Object): Promise<Insurance>;
 
   /**
    * The Insurance List is a paginated list of all Insurance objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
    * The has_more attribute indicates whether or not additional pages can be requested.
-   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
+   *
+   * @returns {Object} - An object containing a list of {@link Insurance insurance} and pagination information.
    */
   static all(
     params?: IAllMethodParameters,
@@ -134,9 +139,10 @@ export declare class Insurance implements IInsurance {
   /**
    * Retrieve an Insurance by id.
    *
-   * @param insuranceId Unique, starts with "ins_"
-   *
    * @see https://www.easypost.com/docs/api/node#retrieve-an-insurance
+   *
+   * @param insuranceId Unique, starts with "ins_"
+   * @returns {Promise<Insurance>} The retrieved {@link Insurance}.
    */
   static retrieve(insuranceId: string): Promise<Insurance>;
 }

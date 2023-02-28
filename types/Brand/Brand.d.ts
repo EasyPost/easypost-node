@@ -60,4 +60,14 @@ export declare class Brand implements IBrand {
   logo_href: string;
   theme: 'theme1' | 'theme2';
   user_id: string;
+
+  /**
+   * Update the brand of the current authenticated user.
+   *
+   * @see https://www.easypost.com/docs/api/node#update-a-brand
+   *
+   * @param params The parameters to update the {@link Brand} with
+   * @returns {Promise<Brand>} The updated Brand.
+   */
+  static updateBrand(params: object): Promise<Brand>;
 }

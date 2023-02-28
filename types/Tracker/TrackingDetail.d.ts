@@ -1,5 +1,5 @@
 import { IBaseObject } from '../base';
-import { TTrackerStatus } from './TrackerStatus';
+import { ITrackerStatus } from './TrackerStatus';
 import { ITrackingLocation } from './TrackingLocation';
 
 /**
@@ -14,7 +14,7 @@ export declare interface ITrackingDetail extends IBaseObject<'TrackingDetail'> {
   /**
    * Status of the package at the time of the scan event, possible values are "unknown", "pre_transit", "in_transit", "out_for_delivery", "delivered", "available_for_pickup", "return_to_sender", "failure", "cancelled" or "error"
    */
-  status: TTrackerStatus;
+  status: ITrackerStatus;
 
   /**
    * The timestamp when the tracking scan occurred

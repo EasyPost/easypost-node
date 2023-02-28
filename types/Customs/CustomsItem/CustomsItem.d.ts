@@ -75,8 +75,11 @@ export declare class CustomsItem implements ICustomsItem {
    * A CustomsItem contains information relating to each product within the package. When creating a customs item, you may store the ID from the response for use later in CustomsInfo creation.
    *
    * @see https://www.easypost.com/docs/api#create-a-customs-item
+   *
+   * @param {Object} params The parameters to create an {@link CustomsItem} with.
+   * @returns {Promise<CustomsItem>} The {@link CustomsItem}.
    */
-  public save(): Promise<CustomsItem>;
+  static create(params: Object): Promise<CustomsItem>;
 
   /**
    * A CustomsItem can be retrieved by its id.
@@ -84,6 +87,8 @@ export declare class CustomsItem implements ICustomsItem {
    * @param CustomsItemId Unique, begins with "cstitem_"
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-customs-item
+   *
+   * @returns {Promise<CustomsItem>} The {@link CustomsItem}.
    */
   static retrieve(CustomsItemId: string): Promise<CustomsItem>;
 }

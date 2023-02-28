@@ -202,19 +202,22 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#create-a-shipment
    *
+   * @param {Object} params The parameters to create an {@link Shipment} with.
    * @param carbonOffset indicate if the shipment should include a carbon offset fee.
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  public save(carbonOffset?: boolean): Promise<Shipment>;
+  static create(params: Object, carbonOffset?: boolean): Promise<Shipment>;
 
   /**
    * The Shipment List is a paginated list of all Shipment objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
-   * The has_more attribute indicates whether additional pages can be requested.
-   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * The `has_more` attribute indicates whether additional pages can be requested.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
    *
    * @param params - The parameters to use for the request.
+   * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
    */
   static all(
     params?: IShipmentListParameters,
@@ -226,13 +229,14 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-shipment
    *
-   * @param {string} shipmentId Unique, begins with "shp_".
+   * @param {string} id Unique, begins with "shp_".
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  static retrieve(shipmentId: string): Promise<Shipment>;
+  static retrieve(id: string): Promise<Shipment>;
 
   /**
    * To purchase a Shipment you only need to specify the Rate to purchase.
-   * This operation populates the tracking_code and postage_label attributes.
+   * This operation populates the `tracking_code` and `postage_label` attributes.
    * The default image format of the associated PostageLabel is PNG.
    * To change this default see the label_format option.
    *
@@ -242,11 +246,14 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#buy-a-shipment
    *
+   * @param id shipment id (begins with "shp_").
    * @param rate rate id (begins with "rate_") or rate object.
    * @param insuranceAmount amount to insure the shipment for.
    * @param carbonOffset indicate if the shipment should include a carbon offset fee.
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  public buy(
+  static buy(
+    id: string,
     rate: string | IRate,
     insuranceAmount?: number,
     carbonOffset?: boolean,
@@ -256,40 +263,50 @@ export declare class Shipment implements IShipment {
    * Refunding a Shipment is available for many carriers supported by EasyPost.
    * Once the refund has been submitted, refund_status attribute of the Shipment will be populated with one of the possible values: "submitted", "refunded", "rejected".
    * The most common initial status is "submitted".
-   * Many carriers require that the refund be processed before the refund_status will move to "refunded".
+   * Many carriers require that the refund be processed before the `refund_status` will move to "refunded".
    * The length of this process depends on the carrier, but no greater than 30 days.
    *
    * Refunds created very shortly after a label is generated may be improperly flagged as invalid, but you may retry a refund with the "rejected" status by submitting the same request again.
    * Carriers that are bill-on-scan tend to have refunds attempts return as "not_applicable", which will not change with multiple retries.
    *
    * @see https://www.easypost.com/docs/api/node#refund-a-shipment
+   *
+   * @param id shipment id (begins with "shp_").
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  public refund(): Promise<Shipment>;
+  static refund(id: string): Promise<Shipment>;
 
   /**
    *
    * @param carriers a list of carriers to filter rates for.
    * @param services a list of services to filter rates for.
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  public lowestRate(carriers?: string[], services?: string[]): IRate;
+  static lowestRate(carriers?: string[], services?: string[]): IRate;
 
   /**
    * A Shipment's PostageLabel can be converted from PNG to other formats.
    * If the PostageLabel was originally generated in a format other than PNG it cannot be converted.
    *
    * @see https://www.easypost.com/docs/api/node#convert-the-label-format-of-a-shipment
+   *
+   * @param id shipment id (begins with "shp_").
+   * @param format Format of the label ("PNG", "PDF", "ZPL", and "EPL2").
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  public convertLabelFormat(format: LabelFormat): Promise<Shipment>;
+  static convertLabelFormat(id: string, format: LabelFormat): Promise<Shipment>;
 
   /**
    * You can update the Rates of a Shipment at any time.
-   * This operation respects the carrier_accounts attribute.
+   * This operation respects the `carrier_accounts` attribute.
    *
    * @see https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment
    *
+   * @param id shipment id (begins with "shp_").
    * @param carbonOffset indicate if the rates should include a carbon offset fee.
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  public regenerateRates(carbonOffset?: boolean): Promise<Shipment>;
+  static regenerateRates(id: string, carbonOffset?: boolean): Promise<Shipment>;
 
   /**
    * Insuring your Shipment is as simple as sending us the value of the contents.
@@ -300,15 +317,19 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#insure-a-shipment
    *
+   * @param id shipment id (begins with "shp_").
    * @param amount amount to insure the shipment for.
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  public insure(amount: number): Promise<Shipment>;
+  static insure(id: string, amount: number): Promise<Shipment>;
 
   /**
    * Generate a specific type of form for the Shipment, using the provided form options.
    *
+   * @param id shipment id (begins with "shp_").
    * @param formType The type of form to generate.
    * @param formOptions Additional options to use when generating the form.
+   * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  public generateForm(formType: string, formOptions?: object): Promise<Shipment>;
+  static generateForm(id: string, formType: string, formOptions?: object): Promise<Shipment>;
 }

@@ -5,14 +5,18 @@ import { IDatedObject, IObjectWithId } from '../base';
  */
 export declare interface IForm extends IObjectWithId<'Form'>, IDatedObject {
   /**
-   * The type of form that we returned, can be one of "high_value_report", "commercial_invoice", "cod_return_label", "order_summary", "cn22"
+   * The type of form that we returned, can be one of "cn22", "cod_return_label", "commercial_invoice", "high_value_report", "label_qr_code", "nafta_certificate_of_origin", "order_summary", "return_packing_slip", "rma_qr_code"
    */
   form_type:
-    | 'high_value_report'
-    | 'commercial_invoice'
+    | 'cn22'
     | 'cod_return_label'
+    | 'commercial_invoice'
+    | 'high_value_report'
+    | 'label_qr_code'
+    | 'nafta_certificate_of_origin'
     | 'order_summary'
-    | 'cn22';
+    | 'return_packing_slip'
+    | 'rma_qr_code';
 
   /**
    * The address we return the form back at

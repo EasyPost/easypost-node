@@ -77,18 +77,22 @@ export declare class ScanForm implements IScanForm {
    * @see https://www.easypost.com/docs/api/node#scan-form
    *
    * @returns {Promise<ScanForm>} The created ScanForm
+   *
+   * @param {Object} params The parameters to create an {@link ScanForm} with.
+   * @returns {Promise<ScanForm>} The created and verified {@link ScanForm}.
    */
-  public save(): Promise<ScanForm>;
+  static create(params: Object): Promise<ScanForm>;
 
   /**
    * The ScanForm List is a paginated list of all ScanForm objects associated with the given API Key.
    * It accepts a variety of parameters which can be used to modify the scope.
-   * The has_more attribute indicates whether additional pages can be requested.
-   * The recommended way of paginating is to use either the before_id or after_id parameter to specify where the next page begins.
+   * The `has_more` attribute indicates whether additional pages can be requested.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-scan-forms
    *
    * @param {object} params The parameters to use for the request.
+   * @returns {Object} - An object containing a list of {@link ScanForm scanforms} and pagination information.
    */
   static all(
     params?: IScanFormListParameters,

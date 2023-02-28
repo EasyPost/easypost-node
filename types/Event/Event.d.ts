@@ -1,4 +1,5 @@
 import { IDatedObject, IObjectWithId } from '../base';
+import { IEventListParameters } from './EventListParameters';
 
 /**
  * Webhook Events are triggered by changes in objects you've created via the API.
@@ -6,7 +7,6 @@ import { IDatedObject, IObjectWithId } from '../base';
  * For this reason, we strongly encourage your webhook handler to be idempotent.
  * See the webhooks guide for more information.
  *
- * @see [webhooks guide] https://www.easypost.com/webhooks-guide
  * @see https://www.easypost.com/docs/api/node#events
  */
 export declare interface IEvent extends IObjectWithId<'Event'>, IDatedObject {
@@ -62,11 +62,15 @@ export declare class Event implements IEvent {
    * Events can be retrieved by their ID.
    *
    * @param eventId the ID of the event object.
+   * @returns {Promise<Event>} The retrieved {@link Event}.
    */
   static retrieve(eventId: string): Promise<Event>;
 
   /**
    * Retrieve all event objects.
+   *
+   * @param {Object} params - The parameters to use for the request.
+   * @returns {Object} - An object containing a list of {@link Event events} and pagination information.
    */
-  static all(): Promise<Event[]>;
+  static all(params: IEventListParameters): Promise<{ events: Event[]; has_more: boolean }>;
 }
