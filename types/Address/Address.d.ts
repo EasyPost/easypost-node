@@ -112,26 +112,10 @@ export declare class Address implements IAddress {
   verifications: IVerifications;
 
   /**
-   * Depending on your use case an Address can be used in many different ways.
-   * Certain carriers allow rating between two zip codes, but full addresses are required to purchase postage.
-   * It is recommended to provide as much information as possible during creation and to reuse these objects whenever possible.
-   *
-   * Address objects can also be created inline while creating another object, for example during Shipment Creation.
-   *
-   * Verify an Address
-   *  - Verifying an Address before you ship is a great way to reduce issues with delivery.
-   *    Creating a verified Address is as simple as including an enumerated list of the verifications you'd like EasyPost to perform in the verify or `verify_strict url` parameters.
-   *    If any of the verification checks included in the `verify_strict` list fail an error will be returned from the API.
-   *    The example below demonstrates the most common verification: "delivery", which checks that the address is deliverable and sets its residential delivery indicator.
-   *
-   *  - The most effective time to perform address verification is when your customer, or the person entering the delivery address, is present.
-   *    When designing a shopping cart it is recommended to ask the shopper for their address and verify it on the spot.
-   *    If verification fails, ask them to double check their input; if they confirm that their data is correct, assume they know their address more correctly than the verification process.
-   *
-   * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
-   *
-   * @param {Object} params The parameters to create an {@link Address} with.
-   * @returns {Promise<Address>} The created and verified {@link Address}.
+   * Create an {@link Address address}.
+   * See {@link https://www.easypost.com/docs/api/node#create-an-address EasyPost API Documentation} for more information.
+   * @param {Object} params - Parameters for the address to be created.
+   * @returns {Address} - The created address.
    */
   public create(params: Object): Promise<Address>;
 

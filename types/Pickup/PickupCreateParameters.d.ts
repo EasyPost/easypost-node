@@ -1,14 +1,20 @@
+import PickupRate from '../../src/models/pickup_rate';
+import { Address } from '../Address';
 import { Batch } from '../Batch';
 import { CarrierAccount } from '../Carrier';
 import { Shipment } from '../Shipment';
 
 interface BasePickupCreateParameters {
+  address: Address | string;
   carrier_accounts?: CarrierAccount[] | null;
+  confirmation?: string | null;
   instructions?: string | null;
-  reference?: string | null;
   is_account_address?: boolean | null;
-  min_datetime: string;
   max_datetime: string;
+  min_datetime: string;
+  pickup_rates: PickupRate;
+  reference?: string | null;
+  status: string;
 }
 
 interface ShipmentPickupCreateParameters extends BasePickupCreateParameters {

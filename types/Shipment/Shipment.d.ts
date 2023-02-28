@@ -202,10 +202,11 @@ export declare class Shipment implements IShipment {
    *
    * @see https://www.easypost.com/docs/api/node#create-a-shipment
    *
+   * @param {Object} params The parameters to create an {@link Shipment} with.
    * @param carbonOffset indicate if the shipment should include a carbon offset fee.
    * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  static create(carbonOffset?: boolean): Promise<Shipment>;
+  static create(params: Object, carbonOffset?: boolean): Promise<Shipment>;
 
   /**
    * The Shipment List is a paginated list of all Shipment objects associated with the given API Key.

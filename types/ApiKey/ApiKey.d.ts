@@ -32,7 +32,7 @@ export declare class ApiKey implements IApiKey {
    *
    * @see https://www.easypost.com/docs/api/node#retrieve-an-api-key
    *
-   * @param addressId Unique, begins with "adr_"
+   * @param apiKeyId Unique, begins with "user_"
    * @returns {Promise<ApiKey>} The verified {@link ApiKey}.
    */
   static retrieve(apiKeyId: string): Promise<ApiKey>;

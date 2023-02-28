@@ -1,4 +1,4 @@
-import { IDatedObject, IObjectWithId } from '../base';
+import { IObjectWithId } from '../base';
 import { DeepPartial } from '../utils';
 import { IEndShipperCreateParameters } from './EndShipperCreateParameters';
 import { IEndShipperListParameters } from './EndShipperListParameters';

@@ -104,7 +104,7 @@ export declare class Batch implements IBatch {
    *
    * @see https://www.easypost.com/docs/api/node#add-shipments-to-a-batch
    *
-   * @param id Unique, begins with "trk_"
+   * @param id Unique, begins with "batch_"
    * @param shipments An array of shipments
    *
    * @returns {Promise<Batch>} The {@link Batch}.
@@ -117,7 +117,7 @@ export declare class Batch implements IBatch {
    *
    * @see https://www.easypost.com/docs/api/node#remove-shipments-from-a-batch
    *
-   * @param id Unique, begins with "trk_"
+   * @param id Unique, begins with "batch_"
    * @param shipments An array of shipments
    *
    * @returns {Promise<Batch>} The {@link Batch}.
@@ -136,7 +136,7 @@ export declare class Batch implements IBatch {
    *
    * @see https://www.easypost.com/docs/api/node#batch-labels
    *
-   * @param id Unique, begins with "trk_"
+   * @param id Unique, begins with "batch_"
    * @param labelFormat The format of label
    *
    * @returns {Promise<Batch>} The {@link Batch}.
@@ -148,7 +148,7 @@ export declare class Batch implements IBatch {
    *
    * @see https://www.easypost.com/docs/api/node#manifesting-scan-form
    *
-   * @param id Unique, begins with "trk_"
+   * @param id Unique, begins with "batch_"
    *
    * @returns {Promise<Batch>} The {@link Batch}.
    */
@@ -160,7 +160,7 @@ export declare class Batch implements IBatch {
    *
    * @see https://www.easypost.com/docs/api/node#buy-a-batch
    *
-   * @param id Unique, begins with "trk_"
+   * @param id Unique, begins with "batch_"
    * @returns {Promise<Batch>} The {@link Batch}.
    */
   static buy(id: string): Promise<Batch>;

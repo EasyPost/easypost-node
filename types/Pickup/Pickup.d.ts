@@ -153,7 +153,7 @@ export declare class Pickup implements IPickup {
    *
    * @see https://www.easypost.com/docs/api/node#buy-a-pickup
    *
-   * @param orderId Unique, begins with "pickup_"
+   * @param pickupId Unique, begins with "pickup_"
    * @param carrier Carrier (UPS, FedEx, USPS)
    * @param service Service of the carrier
    * @returns {Promise<Pickup>} The created and verified {@link Pickup}.
@@ -167,7 +167,7 @@ export declare class Pickup implements IPickup {
    *
    * @see https://www.easypost.com/docs/api/node#cancel-a-pickup
    *
-   * @param orderId Unique, begins with "pickup_"
+   * @param pickupId Unique, begins with "pickup_"
    * @returns {Promise<Pickup>} The created and verified {@link Pickup}.
    */
   static cancel(pickupId: string): Promise<Pickup>;
