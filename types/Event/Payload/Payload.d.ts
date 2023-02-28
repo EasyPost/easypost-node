@@ -39,7 +39,7 @@ export declare class Payload implements IPayload {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-payloads
    *
    * @param params - The parameters to use for the request.
-   * @returns {Promise<Payload[]>} The retrieved {@link Payload payload}.
+   * @returns {Object} - An object containing a list of {@link Payload payloads} and pagination information.
    */
   static all(params: IPayloadListParameters): Promise<{ payloads: Payload[] }>;
 }

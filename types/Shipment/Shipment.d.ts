@@ -216,7 +216,7 @@ export declare class Shipment implements IShipment {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
    *
    * @param params - The parameters to use for the request.
-   * @returns {Promise<Shipment>} The created {@link Shipment}.
+   * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
    */
   static all(
     params?: IShipmentListParameters,

@@ -66,7 +66,7 @@ export declare class Webhook implements IWebhook {
    *
    * @see https://www.easypost.com/docs/api/node#list-a-webhooks
    *
-   * @returns An array of {@link Webhook} objects.
+   * @returns {Object} - An object containing a list of {@link Webhook webhooks} and pagination information.
    */
   static all(params?: IWebhookListParameters): Promise<{ webhooks: Webhook[] }>;
 

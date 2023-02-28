@@ -46,6 +46,7 @@ export declare class Referral implements IReferral {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-referral-customers
    *
    * @param params - The parameters to use for the request.
+   * @returns {Object} - An object containing a list of {@link Referral referral customers} and pagination information.
    */
   static all(
     params?: IReferralListParameters,

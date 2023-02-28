@@ -143,6 +143,7 @@ export declare class Tracker implements ITracker {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers
    *
    * @param params - The parameters to use for the request.
+   * @returns {Object} - An object containing a list of {@link Tracker trackers} and pagination information.
    */
   static all(params?: ITrackerListParameters): Promise<{ trackers: Tracker[]; has_more: boolean }>;
 

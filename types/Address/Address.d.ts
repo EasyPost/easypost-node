@@ -146,7 +146,7 @@ export declare class Address implements IAddress {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-addresses
    *
    * @param {Object} params - The parameters to use for the request.
-   * @returns {Promise<Address>} The list of {@link Address addresses}.
+   * @returns {Object} - An object containing a list of {@link Address addresses} and pagination information.
    */
   static all(params?: IAddressListParameters): Promise<{ addresses: Address[]; has_more: boolean }>;
 

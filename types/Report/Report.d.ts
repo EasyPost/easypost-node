@@ -101,9 +101,9 @@ export declare class Report implements IReport {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-reports
    *
    * @param params - The parameters to use for the request.
-   * @returns {Promise<Report>} The created and verified {@link Report}.
+   * @returns {Object} - An object containing a list of {@link Report reports} and pagination information.
    */
-  static all(params?: IReportListParameters): Promise<Report>;
+  static all(params?: IReportListParameters): Promise<{ reports: Report[]; has_more: boolean }>;
 
   /**
    * Retrieve a Report by id.

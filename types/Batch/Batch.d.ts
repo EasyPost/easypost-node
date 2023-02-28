@@ -3,6 +3,7 @@ import { IPickup } from '../Pickup';
 import { IScanForm } from '../ScanForm';
 import { LabelFormat } from '../Shipment';
 import { IBatchCreateParameters } from './BatchCreateParameters';
+import { IBatchListParameters } from './BatchListParameters';
 import { IBatchShipment } from './BatchShipment';
 import { TBatchState } from './BatchState';
 import { TBatchStatuses } from './BatchStatuses';
@@ -160,8 +161,19 @@ export declare class Batch implements IBatch {
    * @see https://www.easypost.com/docs/api/node#buy-a-batch
    *
    * @param id Unique, begins with "trk_"
-   *
    * @returns {Promise<Batch>} The {@link Batch}.
    */
   static buy(id: string): Promise<Batch>;
+
+  /**
+   * The Batch List is a paginated list of all Batch objects associated with the given API Key.
+   * See the Pagination section of our docs for more details on retrieving all records when
+   * multiple pages are available.
+   *
+   * @see https://www.easypost.com/docs/api/node#list-all-batches
+   *
+   * @param {Object} params - The parameters to use for the request.
+   * @returns {Object} - An object containing a list of {@link Batch batches} and pagination information.
+   */
+  static all(params?: IBatchListParameters): Promise<{ batches: Batch[]; has_more: boolean }>;
 }

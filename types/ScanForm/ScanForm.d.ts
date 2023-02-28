@@ -92,7 +92,7 @@ export declare class ScanForm implements IScanForm {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-scan-forms
    *
    * @param {object} params The parameters to use for the request.
-   * @returns An array of {@link ScanForm} objects.
+   * @returns {Object} - An object containing a list of {@link ScanForm scanforms} and pagination information.
    */
   static all(
     params?: IScanFormListParameters,

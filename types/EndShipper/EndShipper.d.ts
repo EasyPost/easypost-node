@@ -122,9 +122,9 @@ export declare class EndShipper implements IEndshipper {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-endshippers
    *
    * @param params - The parameters to use for the request.
-   * @returns {Promise<EndShipper[]>} The list of {@link EndShipper}.
+   * @returns {Object} - An object containing a list of {@link EndShipper endshippers} and pagination information.
    */
   public all(
     params: IEndShipperListParameters,
-  ): Promise<{ addresses: EndShipper[]; has_more: boolean }>;
+  ): Promise<{ endshippers: EndShipper[]; has_more: boolean }>;
 }

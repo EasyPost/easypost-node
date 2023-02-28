@@ -70,7 +70,7 @@ export declare class Event implements IEvent {
    * Retrieve all event objects.
    *
    * @param {Object} params - The parameters to use for the request.
-   * @returns {Promise<Event>} The list of {@link Event events}.
+   * @returns {Object} - An object containing a list of {@link Event events} and pagination information.
    */
-  static all(params: IEventListParameters): Promise<{ addresses: Event[]; has_more: boolean }>;
+  static all(params: IEventListParameters): Promise<{ events: Event[]; has_more: boolean }>;
 }

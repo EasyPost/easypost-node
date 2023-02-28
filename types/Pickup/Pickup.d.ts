@@ -132,9 +132,9 @@ export declare class Pickup implements IPickup {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-pickups
    *
    * @param params - The parameters to use for the request.
-   * @returns An array of {@link Pickup} objects.
+   * @returns {Object} - An object containing a list of {@link Pickup pickups} and pagination information.
    */
-  static all(params?: IPickupListParameters): Promise<Pickup[]>;
+  static all(params?: IPickupListParameters): Promise<{ pickups: Pickup[]; has_more: boolean }>;
 
   /**
    * A Pickup object can be retrieved by either an id or reference.

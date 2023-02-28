@@ -110,7 +110,7 @@ export declare class CarrierAccount implements ICarrierAccount {
    * @see https://www.easypost.com/docs/api/node#list-all-carrier-accounts
    * @requires production API Key.
    *
-   * @returns {Promise<CarrierAccount[]>} An array of {@link CarrierAccount}.
+   * @returns {Object} - An object containing a list of {@link CarrierAccount carrier accounts}.
    */
   static all(): Promise<CarrierAccount[]>;
 

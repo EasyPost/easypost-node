@@ -68,9 +68,9 @@ export declare class Refund implements IRefund {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-refunds
    *
    * @param params - The parameters to use for the request.
-   * @returns An array of {@link Refund} objects.
+   * @returns {Object} - An object containing a list of {@link Refund refunds} and pagination information.
    */
-  static all(params?: IRefundListParameters): Promise<Refund[]>;
+  static all(params?: IRefundListParameters): Promise<{ refunds: Refund[]; has_more: boolean }>;
 
   /**
    * Retrieve a Refund by id.
