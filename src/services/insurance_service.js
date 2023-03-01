@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class InsuranceService extends baseService(easypostClient) {
     static #name = 'Insurance';
 
-    static #key = 'insurance';
-
     /**
      * Create an {@link Insurance insurance} record.
      * See {@link https://www.easypost.com/docs/api/node#create-an-insurance EasyPost API Documentation} for more information.
@@ -19,8 +17,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "insurances";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        insurance: params
+      };
 
       return this._create(url, wrappedParams);
     }

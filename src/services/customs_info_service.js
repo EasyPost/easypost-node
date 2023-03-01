@@ -8,10 +8,6 @@ export default (easypostClient) =>
   class CustomsInfoService extends baseService(easypostClient) {
     static #name = 'CustomsInfo';
 
-    static #url = 'customs_infos';
-
-    static #key = 'customs_info';
-
     /**
      * Create a {@link CustomsInfo customs info} record.
      * See {@link https://www.easypost.com/docs/api/node#create-a-customsinfo EasyPost API Documentation} for more information.
@@ -21,8 +17,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "customs_infos";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        customs_info: params
+      };
 
       return this._create(url, wrappedParams);
     }

@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class WebhookService extends baseService(easypostClient) {
     static #name = 'Webhook';
 
-    static #key = 'webhook';
-
     /**
      * Create a {@link Webhook webhook}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-webhook EasyPost API Documentation} for more information.
@@ -19,8 +17,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "webhooks";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        webhook: params
+      };
 
       return this._create(url, wrappedParams);
     }

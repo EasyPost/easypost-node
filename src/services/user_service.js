@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class UserService extends baseService(easypostClient) {
     static #name = 'User';
 
-    static #key = 'user';
-
     /**
      * Create a {@link User child user}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-child-user EasyPost API Documentation} for more information.
@@ -19,8 +17,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "users";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        user: params
+      };
 
       return this._create(url, wrappedParams);
     }

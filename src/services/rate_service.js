@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class RateService extends baseService(easypostClient) {
     static #name = 'Rate';
 
-    static #key = 'rate';
-
     /**
      * Retrieve a {@link Rate rate} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#rates EasyPost API Documentation} for more information.

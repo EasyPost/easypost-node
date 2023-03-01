@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class EventService extends baseService(easypostClient) {
     static #name = 'Event';
 
-    static #key = 'event';
-
     /**
      * Retrieve all {@link Payload payloads} for an {@link Event event}.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-payloads EasyPost API Documentation} for more information.

@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class EndShipperService extends baseService(easypostClient) {
     static #name = 'EndShipper';
 
-    static #key = 'address';
-
     /**
      * Create an {@link EndShipper end shipper}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-endshipper EasyPost API Documentation} for more information.

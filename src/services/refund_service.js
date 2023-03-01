@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class RefundService extends baseService(easypostClient) {
     static #name = 'Refund';
 
-    static #key = 'refund';
-
     /**
      * Create a {@link Refund refund}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-refund EasyPost API Documentation} for more information.
@@ -19,8 +17,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "refunds";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        refund: params
+      };
 
       return this._create(url, wrappedParams);
     }

@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class TrackerService extends baseService(easypostClient) {
     static #name = 'Tracker';
 
-    static #key = 'tracker';
-
     /**
      * Create a {@link Tracker tracker}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-tracker EasyPost API Documentation} for more information.
@@ -19,8 +17,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "trackers";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        tracker: params
+      };
 
       return this._create(url, wrappedParams);
     }

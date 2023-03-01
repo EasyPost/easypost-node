@@ -7,9 +7,6 @@ export default (easypostClient) =>
    */
   class CustomsItemService extends baseService(easypostClient) {
     static #name = 'CustomsItem';
-
-    static #key = 'customs_item';
-
     /**
      * Create a {@link CustomsItem customs item}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-customsitem EasyPost API Documentation} for more information.
@@ -19,8 +16,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "customs_items";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        customs_item: params
+      };
 
       return this._create(url, wrappedParams);
     }

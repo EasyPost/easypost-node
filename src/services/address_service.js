@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class AddressService extends baseService(easypostClient) {
     static #name = 'Address';
 
-    static #key = 'address';
-
     /**
      * Create an {@link Address address}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-address EasyPost API Documentation} for more information.
@@ -19,7 +17,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "addresses";
 
-      const wrappedParams = {};
+      const wrappedParams = {
+        address: params,
+      };
 
       if (params.verify) {
         const clone = params;
@@ -32,8 +32,6 @@ export default (easypostClient) =>
         wrappedParams.verify_strict = params.verify_strict;
         delete clone.verify_strict;
       }
-
-      wrappedParams[this.#key] = params;
 
       return this._create(url, wrappedParams);
     }

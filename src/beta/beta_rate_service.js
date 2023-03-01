@@ -7,10 +7,6 @@ export default (easypostClient) =>
   class RateService extends baseService(easypostClient) {
     static #name = 'Rate';
 
-    static #url = 'rates';
-
-    static #key = 'rate';
-
     /**
      * Retrieve a list of stateless {@link Rate rates} based on the provided parameters.
      * @param {Object} params - Map of parameters for the API call

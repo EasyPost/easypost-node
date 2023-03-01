@@ -10,10 +10,6 @@ export default (easypostClient) =>
   class BatchService extends baseService(easypostClient) {
     static #name = 'Batch';
 
-    static #url = 'batches';
-
-    static #key = 'batch';
-
     /**
      * Create a {@link Batch batch}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-batch EasyPost API Documentation} for more information.
@@ -23,8 +19,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "batches";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        batch: params,
+      };
 
       return this._create(url, wrappedParams);
     }

@@ -12,10 +12,6 @@ export default (easypostClient) =>
   class CarrierAccountService extends baseService(easypostClient) {
     static #name = 'CarrierAccount';
 
-    static #url = 'carrier_accounts';
-
-    static #key = 'carrier_account';
-
     /**
      * Create a {@link CarrierAccount carrier account}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-carrier-account EasyPost API Documentation} for more information.

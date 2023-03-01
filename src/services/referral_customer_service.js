@@ -92,8 +92,6 @@ export default (easypostClient) =>
   class ReferralCustomerService extends baseService(easypostClient) {
     static #name = 'Referral';
 
-    static #key = 'user';
-
     /**
      * Create a {@link User referral customer}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-referral-customer EasyPost API Documentation} for more information.
@@ -103,8 +101,9 @@ export default (easypostClient) =>
     static async create(params) {
       const url = "referral_customers";
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        user: params
+      };
 
       return this._create(url, wrappedParams);
     }
