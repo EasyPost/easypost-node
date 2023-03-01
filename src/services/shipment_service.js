@@ -9,10 +9,6 @@ export default (easypostClient) =>
   class ShipmentService extends baseService(easypostClient) {
     static #name = 'Shipment';
 
-    static #url = 'shipments';
-
-    static #key = 'shipment';
-
     /**
      * Create a {@link Shipment shipment}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-shipment EasyPost API Documentation} for more information.
@@ -21,7 +17,7 @@ export default (easypostClient) =>
      * @returns {Shipment} - The created shipment.
      */
     static async create(params, withCarbonOffset = false) {
-      const url = this.#url;
+      const url = "shipments";
 
       const wrappedParams = {
         shipment: params,
@@ -54,7 +50,7 @@ export default (easypostClient) =>
         rateId = rate.id;
       }
 
-      const url = `${this.#url}/${id}/buy`;
+      const url = `shipments/${id}/buy`;
 
       const wrappedParams = {
         rate: {
@@ -88,7 +84,7 @@ export default (easypostClient) =>
      * @returns {Shipment} - The shipment with the converted label format.
      */
     static async convertLabelFormat(id, format) {
-      const url = `${this.#url}/${id}/label`;
+      const url = `shipments/${id}/label`;
       const wrappedParams = { file_format: format };
 
       try {
@@ -108,7 +104,7 @@ export default (easypostClient) =>
      * @returns {Shipment} - The shipment with regenerated rates.
      */
     static async regenerateRates(id, withCarbonOffset = false) {
-      const url = `${this.#url}/${id}/rerate`;
+      const url = `shipments/${id}/rerate`;
       const wrappedParams = { carbon_offset: withCarbonOffset };
 
       try {
@@ -127,7 +123,7 @@ export default (easypostClient) =>
      * @returns {Rate[]} - The SmartRates for the shipment.
      */
     static async getSmartRates(id) {
-      const url = `${this.#url}/${id}/smartrate`;
+      const url = `shipments/${id}/smartrate`;
 
       try {
         const response = await easypostClient._get(url);
@@ -146,7 +142,7 @@ export default (easypostClient) =>
      * @returns {Shipment} - The insured shipment.
      */
     static async insure(id, amount) {
-      const url = `${this.#url}/${id}/insure`;
+      const url = `shipments/${id}/insure`;
       const wrappedParams = { amount };
 
       try {
@@ -167,7 +163,7 @@ export default (easypostClient) =>
      * @returns {Shipment} - The shipment with the generated form attached.
      */
     static async generateForm(id, formType, formOptions = {}) {
-      const url = `${this.#url}/${id}/forms`;
+      const url = `shipments/${id}/forms`;
       const wrappedParams = {
         form: {
           ...formOptions,
@@ -191,7 +187,7 @@ export default (easypostClient) =>
      * @returns {Shipment} - The refunded shipment.
      */
     static async refund(id) {
-      const url = `${this.#url}/${id}/refund`;
+      const url = `shipments/${id}/refund`;
 
       try {
         const response = await easypostClient._post(url);
@@ -221,7 +217,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = "shipments";
 
       return this._all(url, params);
     }
@@ -233,7 +229,7 @@ export default (easypostClient) =>
      * @returns {Shipment} - The shipment with the given ID.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `shipments/${id}`;
 
       return this._retrieve(url);
     }

@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class RateService extends baseService(easypostClient) {
     static #name = 'Rate';
 
-    static #url = 'rates';
-
     static #key = 'rate';
 
     /**
@@ -19,7 +17,7 @@ export default (easypostClient) =>
      * @returns {Rate} - The retrieved rate.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `rates/${id}`;
 
       return this._retrieve(url);
     }

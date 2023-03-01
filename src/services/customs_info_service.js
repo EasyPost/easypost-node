@@ -19,7 +19,7 @@ export default (easypostClient) =>
      * @returns {CustomsInfo} - The created customs info.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = "customs_infos";
 
       const wrappedParams = {};
       wrappedParams[this.#key] = params;
@@ -34,7 +34,7 @@ export default (easypostClient) =>
      * @returns {CustomsInfo} - The retrieved customs info.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `customs_infos/${id}`;
 
       return this._retrieve(url);
     }

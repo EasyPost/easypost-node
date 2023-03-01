@@ -10,10 +10,6 @@ export default (easypostClient) =>
   class BillingService extends baseService(easypostClient) {
     static #name = 'Billing';
 
-    static #url = 'payment_methods';
-
-    static #key = 'billing';
-
     /**
      * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
      * See {@link https://www.easypost.com/docs/api/node#add-funds-to-your-wallet-one-time-charge EasyPost API Documentation} for more information.

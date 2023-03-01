@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class OrderService extends baseService(easypostClient) {
     static #name = 'Order';
 
-    static #url = 'orders';
-
     static #key = 'order';
 
     /**
@@ -19,7 +17,7 @@ export default (easypostClient) =>
      * @returns {Order} - The created order.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = "orders";
 
       const wrappedParams = {};
       wrappedParams[this.#key] = params;
@@ -36,7 +34,7 @@ export default (easypostClient) =>
      * @returns {Order} - The purchased order.
      */
     static async buy(id, carrier, service) {
-      const url = `${this.#url}/${id}/buy`;
+      const url = `orders/${id}/buy`;
       const wrappedParams = { carrier, service };
       try {
         const response = await easypostClient._post(url, wrappedParams);
@@ -54,7 +52,7 @@ export default (easypostClient) =>
      * @returns {Order} - The order with rates.
      */
     static async getRates(id) {
-      const url = `${this.#url}/${id}/rates`;
+      const url = `orders/${id}/rates`;
 
       try {
         const response = await easypostClient._get(url);
@@ -72,7 +70,7 @@ export default (easypostClient) =>
      * @returns {Order} - The retrieved order.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `orders/${id}`;
 
       return this._retrieve(url);
     }

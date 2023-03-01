@@ -21,7 +21,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The created batch.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = "batches";
 
       const wrappedParams = {};
       wrappedParams[this.#key] = params;
@@ -37,7 +37,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The updated batch.
      */
     static async addShipments(id, shipmentIds) {
-      const url = `${this.#url}/${id}/add_shipments`;
+      const url = `batches/${id}/add_shipments`;
       const wrappedParams = {
         shipments: shipmentIds.map((s) => ({ id: s })),
       };
@@ -58,7 +58,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The updated batch.
      */
     static async removeShipments(id, shipmentIds) {
-      const url = `${this.#url}/${id}/remove_shipments`;
+      const url = `batches/${id}/remove_shipments`;
       const wrappedParams = {
         shipments: shipmentIds.map((s) => ({ id: s })),
       };
@@ -80,7 +80,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The updated batch.
      */
     static async generateLabel(id, fileFormat = DEFAULT_LABEL_FORMAT) {
-      const url = `${this.#url}/${id}/label`;
+      const url = `batches/${id}/label`;
       const wrappedParams = { file_format: fileFormat };
 
       try {
@@ -99,7 +99,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The updated batch.
      */
     static async createScanForm(id) {
-      const url = `${this.#url}/${id}/scan_form`;
+      const url = `batches/${id}/scan_form`;
 
       try {
         const response = await easypostClient._post(url);
@@ -117,7 +117,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The created and purchased batch.
      */
     static async createAndBuy(params) {
-      const url = `${this.#url}/create_and_buy`;
+      const url = `batches/create_and_buy`;
       const wrappedParams = { batch: params };
 
       try {
@@ -136,7 +136,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The purchased batch.
      */
     static async buy(id) {
-      const url = `${this.#url}/${id}/buy`;
+      const url = `batches/${id}/buy`;
 
       try {
         const response = await easypostClient._post(url);
@@ -154,7 +154,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link Batch batches} and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = "batches";
 
       return this._all(url, params);
     }
@@ -166,7 +166,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The retrieved batch.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `batches/${id}`;
 
       return this._retrieve(url);
     }

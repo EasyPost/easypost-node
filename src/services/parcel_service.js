@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class ParcelService extends baseService(easypostClient) {
     static #name = 'Parcel';
 
-    static #url = 'parcels';
-
     static #key = 'parcel';
 
     /**
@@ -19,7 +17,7 @@ export default (easypostClient) =>
      * @returns {Parcel} - The created parcel.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = "parcels";
 
       const wrappedParams = {};
       wrappedParams[this.#key] = params;
@@ -34,7 +32,7 @@ export default (easypostClient) =>
      * @returns {Parcel} - The retrieved parcel.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `parcels/${id}`;
 
       return this._retrieve(url);
     }

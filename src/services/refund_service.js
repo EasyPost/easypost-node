@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class RefundService extends baseService(easypostClient) {
     static #name = 'Refund';
 
-    static #url = 'refunds';
-
     static #key = 'refund';
 
     /**
@@ -19,7 +17,7 @@ export default (easypostClient) =>
      * @returns {Refund} - The created refund.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = "refunds";
 
       const wrappedParams = {};
       wrappedParams[this.#key] = params;
@@ -34,7 +32,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Refund refunds} and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = "refunds";
 
       return this._all(url, params);
     }
@@ -46,7 +44,7 @@ export default (easypostClient) =>
      * @returns {Refund} - The retrieved refund.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `refunds/${id}`;
 
       return this._retrieve(url);
     }

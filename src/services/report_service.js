@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ReportService extends baseService(easypostClient) {
-    static #url = 'reports';
 
     /**
      * Create a {@link Report report}.
@@ -15,7 +14,7 @@ export default (easypostClient) =>
      * @returns {Report} - The created report.
      */
     static async create(params) {
-      const url = `${this.#url}/${params.type}`;
+      const url = `reports/${params.type}`;
       return this._create(url, params);
     }
 
@@ -26,7 +25,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Report reports} and pagination information.
      */
     static async all(params = {}) {
-      const url = `${this.#url}/${params.type}`;
+      const url = `reports/${params.type}`;
 
       // delete "type" from params, so it doesn't get sent to the API
       // eslint-disable-next-line no-param-reassign
@@ -48,7 +47,7 @@ export default (easypostClient) =>
      * @returns {Report} - The retrieved report.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `reports/${id}`;
 
       return this._retrieve(url);
     }

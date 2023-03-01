@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class CustomsItemService extends baseService(easypostClient) {
     static #name = 'CustomsItem';
 
-    static #url = 'customs_items';
-
     static #key = 'customs_item';
 
     /**
@@ -19,7 +17,7 @@ export default (easypostClient) =>
      * @returns {CustomsItem} - The created customs item.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = "customs_items";
 
       const wrappedParams = {};
       wrappedParams[this.#key] = params;
@@ -34,7 +32,7 @@ export default (easypostClient) =>
      * @returns {CustomsItem} - The retrieved customs item.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `customs_items/${id}`;
 
       return this._retrieve(url);
     }

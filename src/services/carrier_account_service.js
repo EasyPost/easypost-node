@@ -46,7 +46,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount} - The updated carrier account.
      */
     static async update(id, params) {
-      const url = `${this.#url}/${id}`;
+      const url = `carrier_accounts/${id}`;
       const wrappedParams = {
         carrier_account: params,
       };
@@ -67,7 +67,7 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>} - A promise that resolves when the carrier account has been deleted.
      */
     static async delete(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `carrier_accounts/${id}`;
 
       try {
         await easypostClient._delete(url);
@@ -98,7 +98,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link CarrierAccount carrier accounts} and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = "carrier_accounts";
 
       return this._all(url, params);
     }
@@ -110,7 +110,7 @@ export default (easypostClient) =>
      * @returns {CarrierAccount} - The retrieved carrier account.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `carrier_accounts/${id}`;
 
       return this._retrieve(url);
     }

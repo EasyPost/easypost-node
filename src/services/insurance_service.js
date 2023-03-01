@@ -8,8 +8,6 @@ export default (easypostClient) =>
   class InsuranceService extends baseService(easypostClient) {
     static #name = 'Insurance';
 
-    static #url = 'insurances';
-
     static #key = 'insurance';
 
     /**
@@ -19,7 +17,7 @@ export default (easypostClient) =>
      * @returns {Insurance} - The created insurance.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = "insurances";
 
       const wrappedParams = {};
       wrappedParams[this.#key] = params;
@@ -34,7 +32,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Insurance insurance} records and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = "insurances";
 
       return this._all(url, params);
     }
@@ -46,7 +44,7 @@ export default (easypostClient) =>
      * @returns {Insurance} - The retrieved insurance.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `insurances/${id}`;
 
       return this._retrieve(url);
     }
