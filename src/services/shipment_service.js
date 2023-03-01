@@ -7,8 +7,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ShipmentService extends baseService(easypostClient) {
-    static #name = 'Shipment';
-
+    
     /**
      * Create a {@link Shipment shipment}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-shipment EasyPost API Documentation} for more information.

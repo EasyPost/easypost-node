@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class AddressService extends baseService(easypostClient) {
-    static #name = 'Address';
-
+    
     /**
      * Create an {@link Address address}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-address EasyPost API Documentation} for more information.

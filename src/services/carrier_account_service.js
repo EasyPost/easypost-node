@@ -10,8 +10,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class CarrierAccountService extends baseService(easypostClient) {
-    static #name = 'CarrierAccount';
-
+    
     /**
      * Create a {@link CarrierAccount carrier account}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-carrier-account EasyPost API Documentation} for more information.

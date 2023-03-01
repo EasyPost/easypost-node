@@ -90,8 +90,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ReferralCustomerService extends baseService(easypostClient) {
-    static #name = 'Referral';
-
+    
     /**
      * Create a {@link User referral customer}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-referral-customer EasyPost API Documentation} for more information.

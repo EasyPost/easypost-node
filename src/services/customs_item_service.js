@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class CustomsItemService extends baseService(easypostClient) {
-    static #name = 'CustomsItem';
-    /**
+        /**
      * Create a {@link CustomsItem customs item}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-customsitem EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the customs item to be created.

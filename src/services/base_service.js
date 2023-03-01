@@ -100,12 +100,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient The {@link EasyPostClient} instance to use for API calls.
    */
   class BaseService {
-    /**
-     * The {@link EasyPostObject} class associated with this service.
-     * @type {string|null}
-     */
-    static #name = null;
-
+    
     /**
      * Converts a JSON response and all its nested elements to associated {@link EasyPostObject}-based class instances.
      * @internal

@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class RefundService extends baseService(easypostClient) {
-    static #name = 'Refund';
-
+    
     /**
      * Create a {@link Refund refund}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-refund EasyPost API Documentation} for more information.

@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class InsuranceService extends baseService(easypostClient) {
-    static #name = 'Insurance';
-
+    
     /**
      * Create an {@link Insurance insurance} record.
      * See {@link https://www.easypost.com/docs/api/node#create-an-insurance EasyPost API Documentation} for more information.

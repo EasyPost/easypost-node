@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class CustomsInfoService extends baseService(easypostClient) {
-    static #name = 'CustomsInfo';
-
+    
     /**
      * Create a {@link CustomsInfo customs info} record.
      * See {@link https://www.easypost.com/docs/api/node#create-a-customsinfo EasyPost API Documentation} for more information.

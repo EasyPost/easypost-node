@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class EventService extends baseService(easypostClient) {
-    static #name = 'Event';
-
+    
     /**
      * Retrieve all {@link Payload payloads} for an {@link Event event}.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-payloads EasyPost API Documentation} for more information.

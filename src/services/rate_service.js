@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class RateService extends baseService(easypostClient) {
-    static #name = 'Rate';
-
+    
     /**
      * Retrieve a {@link Rate rate} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#rates EasyPost API Documentation} for more information.

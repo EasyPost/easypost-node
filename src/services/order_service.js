@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class OrderService extends baseService(easypostClient) {
-    static #name = 'Order';
-    /**
+        /**
      * Create an {@link Order order}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-order EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create an order with.

@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ParcelService extends baseService(easypostClient) {
-    static #name = 'Parcel';
-
+    
     /**
      * Create a {@link Parcel parcel}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-parcel EasyPost API Documentation} for more information.

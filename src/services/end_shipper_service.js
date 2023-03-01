@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class EndShipperService extends baseService(easypostClient) {
-    static #name = 'EndShipper';
-
+    
     /**
      * Create an {@link EndShipper end shipper}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-endshipper EasyPost API Documentation} for more information.

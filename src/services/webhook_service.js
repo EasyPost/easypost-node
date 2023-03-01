@@ -6,8 +6,7 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class WebhookService extends baseService(easypostClient) {
-    static #name = 'Webhook';
-
+    
     /**
      * Create a {@link Webhook webhook}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-webhook EasyPost API Documentation} for more information.
