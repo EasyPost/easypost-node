@@ -44,6 +44,10 @@ lint:
 publish:
 	npm publish
 
+## publish-next - Publish the built assets to NPM for a release candidate
+publish-next:
+	npm publish --tag next
+
 ## release - Cuts a release for the project on GitHub (requires GitHub CLI)
 # tag = The associated tag title of the release
 release:

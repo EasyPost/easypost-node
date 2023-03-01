@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## Next Major Release
+## v6.0.0-rc1 (2023-03-01)
+
+### Breaking Changes
 
 - Bumps minimum Node from 10 to 12
 - Renamed default export `API` to `EasyPostClient`
@@ -16,10 +18,6 @@
   - Added `/utils` which contains both `internal_util.js` which is not intended for user consumption and `util.js` which contains public utilities
   - Moved `getLowestSmartRate` and `validateWebook` function to `util.js` as neither of them require the client object to function
 - References of `Referral` were changed to `ReferralCustomer` to match the API
-- Corrects references of `smartrate` to `SmartRate` and `smartRate` to match the API
-- Fixes the `verifyAddress` function to actually verify an address
-- Fixes a bug that could double wrap or unintentionally wrap the results of an `/all` API call with the name of the object in question
-- Completely overhauled deserialization process, nested objects (eg: rates of shipments, etc) now properly convert to their appropriate EasyPostObject
 - Bumps major versions of all dependencies
 - Changes the `primaryOrSecondary` parameter name to `priority` in billing functions to match the API
 - Empty response functions now return nothing (deleting records, funding a wallet, etc)
@@ -27,7 +25,17 @@
 - Improves error handling
   - Specific error types for each category of error
   - API error message may be an array rather than a string. Arrays will be concatenated (by comma) and returned as a string.
+- Corrects references of `smartrate` to `SmartRate` and `smartRate` to match the API
+
+### New Features
+
 - Add `retrieveStatelessRates` and `getLowestStatelessRate` functions
+
+### Bug Fixes
+
+- Completely overhauled deserialization process, nested objects (eg: rates of shipments, etc) now properly convert to their appropriate EasyPostObject
+- Fixes the `verifyAddress` function to actually verify an address
+- Fixes a bug that could double wrap or unintentionally wrap the results of an `/all` API call with the name of the object in question
 
 ## v5.10.0 (2023-01-18)
 
