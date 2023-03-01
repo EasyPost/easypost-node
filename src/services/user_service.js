@@ -6,12 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class UserService extends baseService(easypostClient) {
-    static #name = 'User';
-
-    static #url = 'users';
-
-    static #key = 'user';
-
     /**
      * Create a {@link User child user}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-child-user EasyPost API Documentation} for more information.
@@ -19,10 +13,11 @@ export default (easypostClient) =>
      * @returns {User} - The created child user.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = 'users';
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        user: params,
+      };
 
       return this._create(url, wrappedParams);
     }
@@ -35,7 +30,7 @@ export default (easypostClient) =>
      * @returns {User} - The updated user.
      */
     static async update(id, params) {
-      const url = `${this.#url}/${id}`;
+      const url = `users/${id}`;
       const wrappedParams = {
         user: params,
       };
@@ -56,7 +51,7 @@ export default (easypostClient) =>
      * @returns {User} - The retrieved child user.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `users/${id}`;
 
       try {
         const response = await easypostClient._get(url);
@@ -73,7 +68,7 @@ export default (easypostClient) =>
      * @returns {User} - The retrieved user.
      */
     static async retrieveMe() {
-      const url = this.#url;
+      const url = 'users';
 
       try {
         const response = await easypostClient._get(url);
@@ -91,7 +86,7 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>} - A promise that resolves when the child user is deleted successfully.
      */
     static async delete(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `users/${id}`;
 
       try {
         await easypostClient._delete(url);
@@ -110,7 +105,7 @@ export default (easypostClient) =>
      * @returns {Brand} - The updated brand.
      */
     static async updateBrand(id, params) {
-      const url = `${this.#url}/${id}/brand`;
+      const url = `users/${id}/brand`;
       const wrappedParams = { brand: params };
 
       try {

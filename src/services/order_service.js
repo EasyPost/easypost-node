@@ -6,12 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class OrderService extends baseService(easypostClient) {
-    static #name = 'Order';
-
-    static #url = 'orders';
-
-    static #key = 'order';
-
     /**
      * Create an {@link Order order}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-order EasyPost API Documentation} for more information.
@@ -19,10 +13,11 @@ export default (easypostClient) =>
      * @returns {Order} - The created order.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = 'orders';
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        order: params,
+      };
 
       return this._create(url, wrappedParams);
     }
@@ -36,7 +31,7 @@ export default (easypostClient) =>
      * @returns {Order} - The purchased order.
      */
     static async buy(id, carrier, service) {
-      const url = `${this.#url}/${id}/buy`;
+      const url = `orders/${id}/buy`;
       const wrappedParams = { carrier, service };
       try {
         const response = await easypostClient._post(url, wrappedParams);
@@ -54,7 +49,7 @@ export default (easypostClient) =>
      * @returns {Order} - The order with rates.
      */
     static async getRates(id) {
-      const url = `${this.#url}/${id}/rates`;
+      const url = `orders/${id}/rates`;
 
       try {
         const response = await easypostClient._get(url);
@@ -72,7 +67,7 @@ export default (easypostClient) =>
      * @returns {Order} - The retrieved order.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `orders/${id}`;
 
       return this._retrieve(url);
     }

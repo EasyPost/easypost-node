@@ -6,12 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class EventService extends baseService(easypostClient) {
-    static #name = 'Event';
-
-    static #url = 'events';
-
-    static #key = 'event';
-
     /**
      * Retrieve all {@link Payload payloads} for an {@link Event event}.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-payloads EasyPost API Documentation} for more information.
@@ -19,7 +13,7 @@ export default (easypostClient) =>
      * @returns {Payload[]} - A list of {@link Payload payloads} for the event.
      */
     static async retrieveAllPayloads(id) {
-      const url = `${this.#url}/${id}/payloads`;
+      const url = `events/${id}/payloads`;
 
       try {
         const response = await easypostClient._get(url);
@@ -38,7 +32,7 @@ export default (easypostClient) =>
      * @returns {Payload} - The {@link Payload payload} for the event.
      */
     static async retrievePayload(id, payloadId) {
-      const url = `${this.#url}/${id}/payloads/${payloadId}`;
+      const url = `events/${id}/payloads/${payloadId}`;
 
       try {
         const response = await easypostClient._get(url);
@@ -56,7 +50,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Event events} and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = 'events';
 
       return this._all(url, params);
     }
@@ -68,7 +62,7 @@ export default (easypostClient) =>
      * @returns {Event} - The retrieved event.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `events/${id}`;
 
       return this._retrieve(url);
     }

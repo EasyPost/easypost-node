@@ -101,24 +101,6 @@ export default (easypostClient) =>
    */
   class BaseService {
     /**
-     * The EasyPost API endpoint associated with this service.
-     * @type {string|null}
-     */
-    static #url = null;
-
-    /**
-     * The {@link EasyPostObject} class associated with this service.
-     * @type {string|null}
-     */
-    static #name = null;
-
-    /**
-     * The top-level JSON key associated with this service.
-     * @type {string|null}
-     */
-    static #key = null;
-
-    /**
      * Converts a JSON response and all its nested elements to associated {@link EasyPostObject}-based class instances.
      * @internal
      * @param {*} response The JSON response to convert (usually a `Map` or `Array`).

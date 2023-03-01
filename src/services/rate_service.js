@@ -6,12 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class RateService extends baseService(easypostClient) {
-    static #name = 'Rate';
-
-    static #url = 'rates';
-
-    static #key = 'rate';
-
     /**
      * Retrieve a {@link Rate rate} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#rates EasyPost API Documentation} for more information.
@@ -19,7 +13,7 @@ export default (easypostClient) =>
      * @returns {Rate} - The retrieved rate.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `rates/${id}`;
 
       return this._retrieve(url);
     }

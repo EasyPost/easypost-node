@@ -6,12 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class TrackerService extends baseService(easypostClient) {
-    static #name = 'Tracker';
-
-    static #url = 'trackers';
-
-    static #key = 'tracker';
-
     /**
      * Create a {@link Tracker tracker}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-tracker EasyPost API Documentation} for more information.
@@ -19,10 +13,11 @@ export default (easypostClient) =>
      * @returns {Tracker} - The created tracker.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = 'trackers';
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        tracker: params,
+      };
 
       return this._create(url, wrappedParams);
     }
@@ -45,7 +40,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Tracker trackers} and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = 'trackers';
 
       return this._all(url, params);
     }
@@ -57,7 +52,7 @@ export default (easypostClient) =>
      * @returns {Tracker} - The retrieved tracker.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `trackers/${id}`;
 
       return this._retrieve(url);
     }

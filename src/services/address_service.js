@@ -6,12 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class AddressService extends baseService(easypostClient) {
-    static #name = 'Address';
-
-    static #url = 'addresses';
-
-    static #key = 'address';
-
     /**
      * Create an {@link Address address}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-address EasyPost API Documentation} for more information.
@@ -19,9 +13,11 @@ export default (easypostClient) =>
      * @returns {Address} - The created address.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = 'addresses';
 
-      const wrappedParams = {};
+      const wrappedParams = {
+        address: params,
+      };
 
       if (params.verify) {
         const clone = params;
@@ -35,8 +31,6 @@ export default (easypostClient) =>
         delete clone.verify_strict;
       }
 
-      wrappedParams[this.#key] = params;
-
       return this._create(url, wrappedParams);
     }
 
@@ -47,7 +41,7 @@ export default (easypostClient) =>
      * @returns {Address} - The created and verified address.
      */
     static async createAndVerify(params) {
-      const url = `${this.#url}/create_and_verify`;
+      const url = `addresses/create_and_verify`;
       const wrappedParams = { address: params };
 
       try {
@@ -66,7 +60,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link Address addresses} and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = 'addresses';
 
       return this._all(url, params);
     }
@@ -78,7 +72,7 @@ export default (easypostClient) =>
      * @returns {Address} - The retrieved address.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `addresses/${id}`;
 
       return this._retrieve(url);
     }
@@ -91,7 +85,7 @@ export default (easypostClient) =>
      */
     static async verifyAddress(id) {
       try {
-        const url = `${this.#url}/${id}/verify`;
+        const url = `addresses/${id}/verify`;
         const response = await easypostClient._get(url);
 
         return this._convertToEasyPostObject(response.body.address);

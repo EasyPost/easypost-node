@@ -90,12 +90,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ReferralCustomerService extends baseService(easypostClient) {
-    static #name = 'Referral';
-
-    static #url = 'referral_customers';
-
-    static #key = 'user';
-
     /**
      * Create a {@link User referral customer}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-referral-customer EasyPost API Documentation} for more information.
@@ -103,10 +97,11 @@ export default (easypostClient) =>
      * @returns {User} - The newly created referral customer.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = 'referral_customers';
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        user: params,
+      };
 
       return this._create(url, wrappedParams);
     }
@@ -119,7 +114,7 @@ export default (easypostClient) =>
      * @returns {boolean} - Returns true if the referral was updated successfully, false otherwise.
      */
     static async updateEmail(referralUserId, email) {
-      const url = `${this.#url}/${referralUserId}`;
+      const url = `referral_customers/${referralUserId}`;
       const wrappedParams = { user: { email } };
 
       await easypostClient._put(url, wrappedParams); // will throw if there's an error
@@ -173,7 +168,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link User referral customers} and pagination information.
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = 'referral_customers';
 
       return this._all(url, params);
     }

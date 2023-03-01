@@ -6,12 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class WebhookService extends baseService(easypostClient) {
-    static #name = 'Webhook';
-
-    static #url = 'webhooks';
-
-    static #key = 'webhook';
-
     /**
      * Create a {@link Webhook webhook}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-webhook EasyPost API Documentation} for more information.
@@ -19,10 +13,11 @@ export default (easypostClient) =>
      * @returns {Webhook} - The created webhook.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = 'webhooks';
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        webhook: params,
+      };
 
       return this._create(url, wrappedParams);
     }
@@ -36,7 +31,7 @@ export default (easypostClient) =>
      * @returns {Webhook} - The updated webhook.
      */
     static async update(id, params) {
-      const url = `${this.#url}/${id}`;
+      const url = `webhooks/${id}`;
       try {
         const response = await easypostClient._patch(url, params);
 
@@ -53,7 +48,7 @@ export default (easypostClient) =>
      * @returns {Promise|Promise<never>} - A promise that resolves if the webhook was successfully deleted.
      */
     static async delete(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `webhooks/${id}`;
 
       try {
         await easypostClient._delete(url);
@@ -71,7 +66,7 @@ export default (easypostClient) =>
      * @returns {Webhook[]}
      */
     static async all(params = {}) {
-      const url = this.#url;
+      const url = 'webhooks';
 
       return this._all(url, params);
     }
@@ -83,7 +78,7 @@ export default (easypostClient) =>
      * @returns {Webhook} - The retrieved webhook.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `webhooks/${id}`;
 
       return this._retrieve(url);
     }

@@ -6,12 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ParcelService extends baseService(easypostClient) {
-    static #name = 'Parcel';
-
-    static #url = 'parcels';
-
-    static #key = 'parcel';
-
     /**
      * Create a {@link Parcel parcel}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-parcel EasyPost API Documentation} for more information.
@@ -19,10 +13,11 @@ export default (easypostClient) =>
      * @returns {Parcel} - The created parcel.
      */
     static async create(params) {
-      const url = this.#url;
+      const url = 'parcels';
 
-      const wrappedParams = {};
-      wrappedParams[this.#key] = params;
+      const wrappedParams = {
+        parcel: params,
+      };
 
       return this._create(url, wrappedParams);
     }
@@ -34,7 +29,7 @@ export default (easypostClient) =>
      * @returns {Parcel} - The retrieved parcel.
      */
     static async retrieve(id) {
-      const url = `${this.#url}/${id}`;
+      const url = `parcels/${id}`;
 
       return this._retrieve(url);
     }
