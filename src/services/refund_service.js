@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class RefundService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link Refund refund}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-refund EasyPost API Documentation} for more information.
@@ -14,10 +13,10 @@ export default (easypostClient) =>
      * @returns {Refund} - The created refund.
      */
     static async create(params) {
-      const url = "refunds";
+      const url = 'refunds';
 
       const wrappedParams = {
-        refund: params
+        refund: params,
       };
 
       return this._create(url, wrappedParams);
@@ -30,7 +29,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Refund refunds} and pagination information.
      */
     static async all(params = {}) {
-      const url = "refunds";
+      const url = 'refunds';
 
       return this._all(url, params);
     }

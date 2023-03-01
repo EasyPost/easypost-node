@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class WebhookService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link Webhook webhook}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-webhook EasyPost API Documentation} for more information.
@@ -14,10 +13,10 @@ export default (easypostClient) =>
      * @returns {Webhook} - The created webhook.
      */
     static async create(params) {
-      const url = "webhooks";
+      const url = 'webhooks';
 
       const wrappedParams = {
-        webhook: params
+        webhook: params,
       };
 
       return this._create(url, wrappedParams);
@@ -67,7 +66,7 @@ export default (easypostClient) =>
      * @returns {Webhook[]}
      */
     static async all(params = {}) {
-      const url = "webhooks";
+      const url = 'webhooks';
 
       return this._all(url, params);
     }

@@ -8,7 +8,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class BillingService extends baseService(easypostClient) {
-    
     /**
      * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
      * See {@link https://www.easypost.com/docs/api/node#add-funds-to-your-wallet-one-time-charge EasyPost API Documentation} for more information.

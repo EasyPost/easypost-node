@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class EventService extends baseService(easypostClient) {
-    
     /**
      * Retrieve all {@link Payload payloads} for an {@link Event event}.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-payloads EasyPost API Documentation} for more information.
@@ -51,7 +50,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Event events} and pagination information.
      */
     static async all(params = {}) {
-      const url = "events";
+      const url = 'events';
 
       return this._all(url, params);
     }

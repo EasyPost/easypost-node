@@ -2,7 +2,6 @@ import baseService from '../services/base_service';
 
 export default (easypostClient) =>
   class ReferralCustomerService extends baseService(easypostClient) {
-    
     /**
      * Add an existing Stripe payment method to a {@link User referral customer's} account.
      * @param {string} stripeCustomerId - The Stripe account's ID.

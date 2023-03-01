@@ -6,17 +6,17 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class OrderService extends baseService(easypostClient) {
-        /**
+    /**
      * Create an {@link Order order}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-order EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create an order with.
      * @returns {Order} - The created order.
      */
     static async create(params) {
-      const url = "orders";
+      const url = 'orders';
 
       const wrappedParams = {
-        order: params
+        order: params,
       };
 
       return this._create(url, wrappedParams);

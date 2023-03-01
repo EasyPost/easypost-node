@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class PickupService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link Pickup pickup}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-pickup EasyPost API Documentation} for more information.
@@ -14,10 +13,10 @@ export default (easypostClient) =>
      * @returns {Pickup} - The created pickup.
      */
     static async create(params) {
-      const url = "pickups";
+      const url = 'pickups';
 
       const wrappedParams = {
-        pickup: params
+        pickup: params,
       };
 
       return this._create(url, wrappedParams);
@@ -67,7 +66,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link Pickup pickups} and pagination information.
      */
     static async all(params = {}) {
-      const url = "pickups";
+      const url = 'pickups';
 
       return this._all(url, params);
     }

@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ReportService extends baseService(easypostClient) {
-
     /**
      * Create a {@link Report report}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-report EasyPost API Documentation} for more information.

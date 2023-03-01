@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class UserService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link User child user}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-child-user EasyPost API Documentation} for more information.
@@ -14,10 +13,10 @@ export default (easypostClient) =>
      * @returns {User} - The created child user.
      */
     static async create(params) {
-      const url = "users";
+      const url = 'users';
 
       const wrappedParams = {
-        user: params
+        user: params,
       };
 
       return this._create(url, wrappedParams);
@@ -69,7 +68,7 @@ export default (easypostClient) =>
      * @returns {User} - The retrieved user.
      */
     static async retrieveMe() {
-      const url = "users";
+      const url = 'users';
 
       try {
         const response = await easypostClient._get(url);

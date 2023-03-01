@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class AddressService extends baseService(easypostClient) {
-    
     /**
      * Create an {@link Address address}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-address EasyPost API Documentation} for more information.
@@ -14,7 +13,7 @@ export default (easypostClient) =>
      * @returns {Address} - The created address.
      */
     static async create(params) {
-      const url = "addresses";
+      const url = 'addresses';
 
       const wrappedParams = {
         address: params,
@@ -61,7 +60,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link Address addresses} and pagination information.
      */
     static async all(params = {}) {
-      const url = "addresses";
+      const url = 'addresses';
 
       return this._all(url, params);
     }

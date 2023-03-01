@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class CustomsInfoService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link CustomsInfo customs info} record.
      * See {@link https://www.easypost.com/docs/api/node#create-a-customsinfo EasyPost API Documentation} for more information.
@@ -14,10 +13,10 @@ export default (easypostClient) =>
      * @returns {CustomsInfo} - The created customs info.
      */
     static async create(params) {
-      const url = "customs_infos";
+      const url = 'customs_infos';
 
       const wrappedParams = {
-        customs_info: params
+        customs_info: params,
       };
 
       return this._create(url, wrappedParams);

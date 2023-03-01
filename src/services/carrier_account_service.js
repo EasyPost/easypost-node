@@ -10,7 +10,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class CarrierAccountService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link CarrierAccount carrier account}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-carrier-account EasyPost API Documentation} for more information.
@@ -93,7 +92,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link CarrierAccount carrier accounts} and pagination information.
      */
     static async all(params = {}) {
-      const url = "carrier_accounts";
+      const url = 'carrier_accounts';
 
       return this._all(url, params);
     }

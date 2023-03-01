@@ -90,7 +90,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ReferralCustomerService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link User referral customer}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-referral-customer EasyPost API Documentation} for more information.
@@ -98,10 +97,10 @@ export default (easypostClient) =>
      * @returns {User} - The newly created referral customer.
      */
     static async create(params) {
-      const url = "referral_customers";
+      const url = 'referral_customers';
 
       const wrappedParams = {
-        user: params
+        user: params,
       };
 
       return this._create(url, wrappedParams);
@@ -169,7 +168,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link User referral customers} and pagination information.
      */
     static async all(params = {}) {
-      const url = "referral_customers";
+      const url = 'referral_customers';
 
       return this._all(url, params);
     }

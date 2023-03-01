@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class InsuranceService extends baseService(easypostClient) {
-    
     /**
      * Create an {@link Insurance insurance} record.
      * See {@link https://www.easypost.com/docs/api/node#create-an-insurance EasyPost API Documentation} for more information.
@@ -14,10 +13,10 @@ export default (easypostClient) =>
      * @returns {Insurance} - The created insurance.
      */
     static async create(params) {
-      const url = "insurances";
+      const url = 'insurances';
 
       const wrappedParams = {
-        insurance: params
+        insurance: params,
       };
 
       return this._create(url, wrappedParams);
@@ -30,7 +29,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Insurance insurance} records and pagination information.
      */
     static async all(params = {}) {
-      const url = "insurances";
+      const url = 'insurances';
 
       return this._all(url, params);
     }

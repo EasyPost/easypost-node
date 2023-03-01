@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class EndShipperService extends baseService(easypostClient) {
-    
     /**
      * Create an {@link EndShipper end shipper}.
      * See {@link https://www.easypost.com/docs/api/node#create-an-endshipper EasyPost API Documentation} for more information.
@@ -14,7 +13,7 @@ export default (easypostClient) =>
      * @returns {EndShipper} - The created end shipper.
      */
     static async create(params) {
-      const url = "end_shippers";
+      const url = 'end_shippers';
       const wrappedParams = { address: params };
 
       return this._create(url, wrappedParams);
@@ -59,7 +58,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link EndShipper end shippers} and pagination information.
      */
     static async all(params = {}) {
-      const url = "end_shippers";
+      const url = 'end_shippers';
 
       return this._all(url, params);
     }

@@ -7,7 +7,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ShipmentService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link Shipment shipment}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-shipment EasyPost API Documentation} for more information.
@@ -16,7 +15,7 @@ export default (easypostClient) =>
      * @returns {Shipment} - The created shipment.
      */
     static async create(params, withCarbonOffset = false) {
-      const url = "shipments";
+      const url = 'shipments';
 
       const wrappedParams = {
         shipment: params,
@@ -216,7 +215,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
      */
     static async all(params = {}) {
-      const url = "shipments";
+      const url = 'shipments';
 
       return this._all(url, params);
     }

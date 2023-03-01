@@ -8,7 +8,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class BatchService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link Batch batch}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-batch EasyPost API Documentation} for more information.
@@ -16,7 +15,7 @@ export default (easypostClient) =>
      * @returns {Batch} - The created batch.
      */
     static async create(params) {
-      const url = "batches";
+      const url = 'batches';
 
       const wrappedParams = {
         batch: params,
@@ -150,7 +149,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link Batch batches} and pagination information.
      */
     static async all(params = {}) {
-      const url = "batches";
+      const url = 'batches';
 
       return this._all(url, params);
     }

@@ -6,7 +6,6 @@ export default (easypostClient) =>
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
    */
   class ScanFormService extends baseService(easypostClient) {
-    
     /**
      * Create a {@link ScanForm scan form}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-scanform EasyPost API Documentation} for more information.
@@ -14,7 +13,7 @@ export default (easypostClient) =>
      * @returns {ScanForm} - The created scan form.
      */
     static async create(params) {
-      const url = "scan_forms";
+      const url = 'scan_forms';
 
       // wraps up params in `shipments` if the user didn't do it
       // turn a list of shipment objects into a map of shipment ids
@@ -41,7 +40,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link ScanForm scan forms} and pagination information.
      */
     static async all(params = {}) {
-      const url = "scan_forms";
+      const url = 'scan_forms';
 
       return this._all(url, params);
     }
