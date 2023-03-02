@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,13 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class CustomsItem extends EasyPostObject {}
+export default class CustomsItem extends EasyPostObject {
+  static code;
+  static currency;
+  static description;
+  static hs_tariff_number;
+  static origin_country;
+  static quantity;
+  static value;
+  static weight;
+}

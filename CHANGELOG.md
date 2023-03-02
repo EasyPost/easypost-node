@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Add class properties to each model
+
 ## v6.0.0-rc1 (2023-03-01)
 
 ### Breaking Changes

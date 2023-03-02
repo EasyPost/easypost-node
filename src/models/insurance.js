@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,17 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class Insurance extends EasyPostObject {}
+export default class Insurance extends EasyPostObject {
+  static amount;
+  static fee;
+  static from_address;
+  static messages;
+  static provider_id;
+  static provider;
+  static reference;
+  static shipment_id;
+  static status;
+  static to_address;
+  static tracking_code;
+  static trakcer;
+}

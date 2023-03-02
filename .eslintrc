@@ -19,5 +19,7 @@
     "import/extensions": ["", ".js", ".ejs", ".json", ".yml", ".jsx"],
     "import/ignore": [".ejs$", ".yml$", ".jsx", "node_modules"]
   },
-  "rules": {}
+  "rules": {
+    "lines-between-class-members": "off"
+  }
 }

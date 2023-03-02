@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import Utils from '../utils/util';
 import EasyPostObject from './easypost_object';
 
@@ -7,6 +8,32 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Shipment extends EasyPostObject {
+  static batch_id;
+  static batch_message;
+  static batch_status;
+  static buyer_address;
+  static customs_info;
+  static fees;
+  static forms;
+  static from_address;
+  static insurance;
+  static is_return;
+  static messages;
+  static options;
+  static parcel;
+  static postage_label;
+  static rates;
+  static reference;
+  static refund_status;
+  static return_address;
+  static scan_form;
+  static selected_rate;
+  static status;
+  static to_address;
+  static tracker;
+  static tracking_code;
+  static usps_zone;
+
   /**
    * Get the lowest rate for this {@link Shipment}.
    * @public
