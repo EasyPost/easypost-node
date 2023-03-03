@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,14 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class PostageLabel extends EasyPostObject {}
+export default class PostageLabel extends EasyPostObject {
+  static label_date;
+  static label_epl2_url;
+  static label_file_type;
+  static label_pdf_url;
+  static label_resolution;
+  static label_size;
+  static label_type;
+  static label_url;
+  static label_zpl_url;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import Utils from '../utils/util';
 import EasyPostObject from './easypost_object';
 
@@ -7,6 +8,16 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Order extends EasyPostObject {
+  static buyer_address;
+  static from_address;
+  static is_return;
+  static messages;
+  static rates;
+  static reference;
+  static return_address;
+  static shipments;
+  static to_address;
+
   /**
    * Get the lowest rate for this {@link Order}.
    * @public

@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,6 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class Payload extends EasyPostObject {}
+export default class Payload extends EasyPostObject {
+  static response_body;
+}

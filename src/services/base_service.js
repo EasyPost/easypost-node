@@ -30,35 +30,35 @@ import Webhook from '../models/webhook';
  * A map of EasyPost object ID prefixes to their associated class names.
  */
 const EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP = {
-  adr: 'Address',
-  ak: 'ApiKey',
-  batch: 'Batch',
-  brd: 'Brand',
-  ca: 'CarrierAccount',
-  cfrep: 'Report',
-  cstinfo: 'CustomsInfo',
-  cstitem: 'CustomsItem',
-  es: 'EndShipper',
-  evt: 'Event',
-  hook: 'Webhook',
-  ins: 'Insurance',
-  order: 'Order',
-  payload: 'Payload',
-  pickup: 'Pickup',
-  pickuprate: 'PickupRate',
-  pl: 'PostageLabel',
-  plrep: 'Report',
-  prcl: 'Parcel',
-  rate: 'Rate',
-  refrep: 'Report',
-  rfnd: 'Refund',
-  sf: 'ScanForm',
-  shp: 'Shipment',
-  shpinvrep: 'Report',
-  shprep: 'Report',
-  trk: 'Tracker',
-  trkrep: 'Report',
-  user: 'User',
+  adr: Address,
+  ak: ApiKey,
+  batch: Batch,
+  brd: Brand,
+  ca: CarrierAccount,
+  cfrep: Report,
+  cstinfo: CustomsInfo,
+  cstitem: CustomsItem,
+  es: EndShipper,
+  evt: Event,
+  hook: Webhook,
+  ins: Insurance,
+  order: Order,
+  payload: Payload,
+  pickup: Pickup,
+  pickuprate: PickupRate,
+  pl: PostageLabel,
+  plrep: Report,
+  prcl: Parcel,
+  rate: Rate,
+  refrep: Report,
+  rfnd: Refund,
+  sf: ScanForm,
+  shp: Shipment,
+  shpinvrep: Report,
+  shprep: Report,
+  trk: Tracker,
+  trkrep: Report,
+  user: User,
 };
 
 /**
@@ -108,42 +108,35 @@ export default (easypostClient) =>
      */
     static _convertToEasyPostObject(response) {
       if (Array.isArray(response)) {
-        const mapped = [];
-        response.forEach((value, object) => {
-          if (typeof object === 'string' && RESOURCES[value] !== undefined) {
-            // eslint-disable-next-line no-param-reassign
-            value.object = object;
+        return response.map((value) => {
+          if (typeof value === 'object') {
+            return this._convertToEasyPostObject(value);
           }
-          mapped.push(this._convertToEasyPostObject(value));
+          return value;
         });
+      }
 
-        return mapped;
-        // eslint-disable-next-line no-else-return
-      } else if (typeof response === 'object' && response !== null) {
-        let className;
+      if (typeof response === 'object' && response !== null) {
+        let classObject;
         if (RESOURCES[response.object] !== undefined) {
-          className = RESOURCES[response.object];
+          classObject = new RESOURCES[response.object]();
         } else if (
           response.id !== undefined &&
           EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP[
             response.id.substr(0, response.id.indexOf('_'))
           ] !== undefined
         ) {
-          className =
-            EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP[
-              response.id.substr(0, response.id.indexOf('_'))
-            ];
+          const className = response.id.substr(0, response.id.indexOf('_'));
+          classObject = new EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP[className]();
         } else {
-          className = 'EasyPostObject';
+          classObject = new EasyPostObject();
         }
-        const object = new RESOURCES[className.name !== undefined ? className.name : className]();
 
         Object.keys(response).forEach((key) => {
-          // eslint-disable-next-line no-param-reassign
-          object[key] = this._convertToEasyPostObject(response[key]);
+          classObject[key] = this._convertToEasyPostObject(response[key]);
         });
 
-        return object;
+        return classObject;
       }
       return response;
     }

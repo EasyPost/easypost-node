@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,12 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class ScanForm extends EasyPostObject {}
+export default class ScanForm extends EasyPostObject {
+  static address;
+  static batch_id;
+  static form_file_type;
+  static form_url;
+  static message;
+  static status;
+  static tracking_codes;
+}

@@ -94,7 +94,6 @@ Introduced ~2 dozen new error types that extend from either `ApiError` or `EasyP
 New ApiError (extends EasyPostError):
 
 - `errors/api/api_error`
-- `errors/api/encoding_error`
 - `errors/api/external_api_error`
 - `errors/api/forbidden_error`
 - `errors/api/gateway_timeout_error`

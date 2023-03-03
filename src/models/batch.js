@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,13 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class Batch extends EasyPostObject {}
+export default class Batch extends EasyPostObject {
+  static label_url;
+  static num_shipments;
+  static pickup;
+  static reference;
+  static scan_form;
+  static shipments;
+  static state;
+  static status;
+}

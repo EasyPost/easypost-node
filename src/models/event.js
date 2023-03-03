@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,11 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class Event extends EasyPostObject {}
+export default class Event extends EasyPostObject {
+  static completed_urls;
+  static description;
+  static pending_urls;
+  static previous_attributes;
+  static result;
+  static status;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,7 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class Webhook extends EasyPostObject {}
+export default class Webhook extends EasyPostObject {
+  static disabled_at;
+  static url;
+}

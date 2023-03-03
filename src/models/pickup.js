@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import Utils from '../utils/util';
 import EasyPostObject from './easypost_object';
 
@@ -7,6 +8,19 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Pickup extends EasyPostObject {
+  static address;
+  static carrier_accounts;
+  static confirmation;
+  static instructions;
+  static is_account_address;
+  static max_datetime;
+  static messages;
+  static min_datetime;
+  static pickup_rates;
+  static reference;
+  static shipment;
+  static status;
+
   /**
    * Get the lowest rate for this {@link Pickup}.
    * @public

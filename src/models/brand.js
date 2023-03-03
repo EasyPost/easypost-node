@@ -1,3 +1,4 @@
+/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**
@@ -5,4 +6,14 @@ import EasyPostObject from './easypost_object';
  * @public
  * @extends EasyPostObject
  */
-export default class Brand extends EasyPostObject {}
+export default class Brand extends EasyPostObject {
+  static ad_href;
+  static ad;
+  static background_color;
+  static color;
+  static logo_href;
+  static logo;
+  static name;
+  static theme;
+  static user_id;
+}
