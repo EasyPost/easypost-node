@@ -18,5 +18,5 @@ export default class Insurance extends EasyPostObject {
   static status;
   static to_address;
   static tracking_code;
-  static trakcer;
+  static tracker;
 }
