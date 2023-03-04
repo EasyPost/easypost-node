@@ -34,7 +34,7 @@ format-check:
 install:
 	git submodule init
 	git submodule update
-	npm install
+	npm install --force
 
 ## lint - Lint the project
 lint:

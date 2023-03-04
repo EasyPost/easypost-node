@@ -180,8 +180,6 @@ Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_G
 ```bash
 # Install dependencies
 make install
-# You may need to install dependencies by forcing the install since some of our dev dependencies have conflicts
-npm install --force
 
 # Update dependencies
 make update
