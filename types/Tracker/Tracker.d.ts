@@ -4,6 +4,7 @@ import { ICarrierDetail } from './CarrierDetail';
 import { ITrackerCreateParameters } from './TrackerCreateParameters';
 import { ITrackerListParameters } from './TrackerListParameters';
 import { ITrackerStatus } from './TrackerStatus';
+import { ITrackerStatusDetail } from './TrackerStatusDetail';
 import { ITrackingDetail } from './TrackingDetail';
 
 /**
@@ -44,6 +45,11 @@ export declare interface ITracker extends IObjectWithId<'Tracker'>, IDatedObject
    * The current status of the package, possible values are "unknown", "pre_transit", "in_transit", "out_for_delivery", "delivered", "available_for_pickup", "return_to_sender", "failure", "cancelled" or "error"
    */
   status: ITrackerStatus;
+
+  /**
+   * Additional details about the current status, possible values are "unknown", "status_update", "departed_facility", "arrived_at_facility", "out_for_delivery", "arrived_at_destination"
+   */
+  status_detail: ITrackerStatusDetail;
 
   /**
    * The name of the person who signed for the package (if available)
@@ -100,6 +106,7 @@ export declare class Tracker implements ITracker {
   object: 'Tracker';
   tracking_code: string;
   status: ITrackerStatus;
+  status_detail: ITrackerStatusDetail;
   signed_by: string;
   weight: number;
   est_delivery_date: string;

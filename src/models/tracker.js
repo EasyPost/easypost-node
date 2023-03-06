@@ -15,6 +15,7 @@ export default class Tracker extends EasyPostObject {
   static shipment_id;
   static signed_by;
   static status;
+  static status_detail;
   static tracking_code;
   static tracking_details;
   static weight;
