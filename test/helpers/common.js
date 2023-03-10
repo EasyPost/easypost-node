@@ -3,6 +3,7 @@ import 'core-js/stable';
 import chai from 'chai';
 
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
 process.on('unhandledRejection', (err) => {
   console.error(err, err.stack);
 });

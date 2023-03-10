@@ -1,6 +1,6 @@
 {
   "extends": [
-    "@easypost/eslint-config-easypost-base",
+    "eslint:recommended",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/babel",
@@ -20,6 +20,15 @@
     "import/ignore": [".ejs$", ".yml$", ".jsx", "node_modules"]
   },
   "rules": {
-    "lines-between-class-members": "off"
+    "lines-between-class-members": "off",
+    "global-require": "off"
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 13
+  },
+  "env": {
+    "node": true,
+    "es6": true
   }
 }
