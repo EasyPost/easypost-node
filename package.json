@@ -34,6 +34,7 @@
     "watch": "webpack --config webpack.config.babel.js --watch"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.19.1",
     "core-js": "~3.27.2",
     "nodent-runtime": "~3.2.1",
     "proptypes": "~1.1.0",
@@ -53,7 +54,6 @@
     "@babel/plugin-transform-react-inline-elements": "^7.18.6",
     "@babel/preset-env": "^7.20.2",
     "@babel/register": "^7.18.9",
-    "@easypost/eslint-config-easypost-base": "~2.2.3",
     "@pollyjs/adapter-node-http": "^6.0.5",
     "@pollyjs/core": "^6.0.5",
     "@pollyjs/persister-fs": "^6.0.5",

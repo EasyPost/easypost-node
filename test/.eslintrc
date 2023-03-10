@@ -1,6 +1,6 @@
 {
   "extends": [
-    "@easypost/eslint-config-easypost-base",
+    "eslint:recommended",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/babel",
@@ -33,10 +33,16 @@
 
     // @easypost/eslint-config-easypost-base assumes all tests are jest. so turn these rules off
     "jest/consistent-test-it": 0,
-    "jest/valid-expect": 0
+    "jest/valid-expect": 0,
+    "global-require": "off"
   },
 
   "globals": {
     "expect": true
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   }
 }
