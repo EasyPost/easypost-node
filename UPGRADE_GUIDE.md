@@ -147,6 +147,10 @@ Previously, functions that got an empty response from the API would return `true
 
 ## Upgrading from 4.x to 5.0
 
+**NOTICE:** v5 is deprecated.
+
+[v5 Docs](https://github.com/EasyPost/examples/tree/master/official/docs/node/v5)
+
 ### 5.0 High Impact Changes
 
 - [Updating Dependencies](#50-updating-dependencies)
@@ -242,6 +246,8 @@ Likelihood of Impact: Medium
 The `enable` and `disable` methods for API keys have been removed as they did not work properly and this functionality is better supported directly via our website.
 
 ## Upgrading from 3.x to 4.0
+
+**NOTICE:** v4 is deprecated.
 
 ### 4.0 High Impact Changes
 
