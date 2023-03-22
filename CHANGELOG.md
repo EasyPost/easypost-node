@@ -1,8 +1,11 @@
 # CHANGELOG
 
-## Next Release
+## v6.0.0 (2023-03-22)
 
-- Add class properties to each model
+Includes all of the changes made in v6.0.0-rc1 below plus the following:
+
+- Adds class properties to each model for autocomplete and explicit deserialization
+- Adds missing `status_detail` to trackers
 
 ## v6.0.0-rc1 (2023-03-01)
 
