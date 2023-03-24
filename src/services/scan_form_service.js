@@ -46,6 +46,18 @@ export default (easypostClient) =>
     }
 
     /**
+     * Retrieve the next page of specific collection of object
+     * @param {Object} scanforms An object containing a list of {@link ScanForm scanforms} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(scanforms, pageSize) {
+      const url = 'scan_forms';
+      const scanformsArray = scanforms.scan_forms;
+      return this._getNextPage(url, scanformsArray, pageSize);
+    }
+
+    /**
      * Retrieve a {@link ScanForm scan form} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-scanform EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the scan form to retrieve.

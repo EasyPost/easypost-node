@@ -40,6 +40,19 @@ export default (easypostClient) =>
     }
 
     /**
+     * Retrieve the next page of specific collection of object
+     * @param {Object} reports An object containing a list of {@link Report reports} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @param {string} type The type of report to be retrieved
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(reports, type, pageSize) {
+      const url = `reports/${type}`;
+      const reportsArray = reports.reports;
+      return this._getNextPage(url, reportsArray, pageSize);
+    }
+
+    /**
      * Retrieve a {@link Report report} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-report EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the report to retrieve.

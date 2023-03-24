@@ -221,6 +221,18 @@ export default (easypostClient) =>
     }
 
     /**
+     * Retrieve the next page of specific collection of object
+     * @param {Object} shipments An object containing a list of {@link Shipment shipments} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(shipments, pageSize) {
+      const url = 'shipments';
+      const shipmentsArray = shipments.shipments;
+      return this._getNextPage(url, shipmentsArray, pageSize);
+    }
+
+    /**
      * Retrieve a {@link Shipment shipment} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-shipment EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to retrieve.

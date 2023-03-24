@@ -46,6 +46,18 @@ export default (easypostClient) =>
     }
 
     /**
+     * Retrieve the next page of specific collection of object
+     * @param {Object} trackers An object containing a list of {@link Address trackers} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(trackers, pageSize) {
+      const url = 'trackers';
+      const trackersArray = trackers.trackers;
+      return this._getNextPage(url, trackersArray, pageSize);
+    }
+
+    /**
      * Retrieve a {@link Tracker tracker} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-tracker EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the tracker to retrieve.

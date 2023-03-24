@@ -35,6 +35,18 @@ export default (easypostClient) =>
     }
 
     /**
+     * Retrieve the next page of specific collection of object
+     * @param {Object} refunds An object containing a list of {@link Refund refunds} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(refunds, pageSize) {
+      const url = 'refunds';
+      const refundsArray = refunds.refunds;
+      return this._getNextPage(url, refundsArray, pageSize);
+    }
+
+    /**
      * Retrieve a {@link Refund refund} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-refund EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the refund to retrieve.

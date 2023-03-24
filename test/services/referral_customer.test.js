@@ -2,6 +2,7 @@
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import User from '../../src/models/user';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -42,6 +43,22 @@ describe('ReferralCustomer Service', function () {
     referralsArray.forEach((referral) => {
       expect(referral).to.be.an.instanceOf(User);
     });
+  });
+
+  it('retrieves next page of referral customer', async function () {
+    try {
+      const referrals = await this.client.ReferralCustomer.all({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.ReferralCustomer.getNextPage(referrals);
+
+      const firstIdOfFirstPage = referrals.referral_customers[0].id;
+      const firstIdOfSecondPage = nextPage.referral_customers[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 
   it('updates a referral user', async function () {

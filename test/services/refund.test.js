@@ -2,6 +2,7 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import Refund from '../../src/models/refund';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -48,6 +49,22 @@ describe('Refund Service', function () {
     refundsArray.forEach((refund) => {
       expect(refund).to.be.an.instanceOf(Refund);
     });
+  });
+
+  it('retrieves next page of refunds', async function () {
+    try {
+      const refunds = await this.client.Refund.all({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.Refund.getNextPage(refunds);
+
+      const firstIdOfFirstPage = refunds.refunds[0].id;
+      const firstIdOfSecondPage = nextPage.refunds[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 
   it('retrieves a refund', async function () {
