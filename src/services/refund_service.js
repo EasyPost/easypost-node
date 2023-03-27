@@ -42,8 +42,7 @@ export default (easypostClient) =>
      */
     static async getNextPage(refunds, pageSize) {
       const url = 'refunds';
-      const refundsArray = refunds.refunds;
-      return this._getNextPage(url, refundsArray, pageSize);
+      return this._getNextPage(url, refunds, pageSize);
     }
 
     /**

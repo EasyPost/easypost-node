@@ -197,17 +197,14 @@ export default (easypostClient) =>
      * Retrieve the next page of specific collection of object
      * @internal
      * @param {string} url The URL to send the API request to.
-     * @param {Object} collectionArray The array of specific object.
+     * @param {Object} collectionArray The collection of a specific object.
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      * TODO: Implement this function in EndShippers and Batches once the API supports them properly.
      */
-    static async _getNextPage(url, collectionArray, pageSize) {
-      if (
-        collectionArray == undefined ||
-        collectionArray.length == 0 ||
-        !collectionArray.has_more
-      ) {
+    static async _getNextPage(url, collection, pageSize) {
+      const collectionArray = collection[url];
+      if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();
       }
 

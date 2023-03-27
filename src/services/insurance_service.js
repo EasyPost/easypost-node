@@ -42,8 +42,7 @@ export default (easypostClient) =>
      */
     static async getNextPage(insurances, pageSize) {
       const url = 'insurances';
-      const insurancesArray = insurances.insurances;
-      return this._getNextPage(url, insurancesArray, pageSize);
+      return this._getNextPage(url, insurances, pageSize);
     }
 
     /**

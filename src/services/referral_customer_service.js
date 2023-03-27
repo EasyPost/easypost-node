@@ -181,7 +181,6 @@ export default (easypostClient) =>
      */
     static async getNextPage(referralCustomers, pageSize) {
       const url = 'referral_customers';
-      const referralCustomersArray = referralCustomers.referral_customers;
-      return this._getNextPage(url, referralCustomersArray, pageSize);
+      return this._getNextPage(url, referralCustomers, pageSize);
     }
   };

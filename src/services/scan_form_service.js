@@ -53,8 +53,7 @@ export default (easypostClient) =>
      */
     static async getNextPage(scanforms, pageSize) {
       const url = 'scan_forms';
-      const scanformsArray = scanforms.scan_forms;
-      return this._getNextPage(url, scanformsArray, pageSize);
+      return this._getNextPage(url, scanforms, pageSize);
     }
 
     /**

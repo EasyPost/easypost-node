@@ -48,8 +48,7 @@ export default (easypostClient) =>
      */
     static async getNextPage(reports, type, pageSize) {
       const url = `reports/${type}`;
-      const reportsArray = reports.reports;
-      return this._getNextPage(url, reportsArray, pageSize);
+      return this._getNextPage(url, reports, pageSize);
     }
 
     /**

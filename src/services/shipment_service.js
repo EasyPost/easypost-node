@@ -228,8 +228,7 @@ export default (easypostClient) =>
      */
     static async getNextPage(shipments, pageSize) {
       const url = 'shipments';
-      const shipmentsArray = shipments.shipments;
-      return this._getNextPage(url, shipmentsArray, pageSize);
+      return this._getNextPage(url, shipments, pageSize);
     }
 
     /**

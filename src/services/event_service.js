@@ -63,8 +63,7 @@ export default (easypostClient) =>
      */
     static async getNextPage(events, pageSize) {
       const url = 'events';
-      const eventsArray = events.events;
-      return this._getNextPage(url, eventsArray, pageSize);
+      return this._getNextPage(url, events, pageSize);
     }
 
     /**
