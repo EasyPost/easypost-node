@@ -200,6 +200,7 @@ export default (easypostClient) =>
      * @param {Object} collectionArray The array of specific object.
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     * TODO: Implement this function in EndShippers and Batches once the API supports them properly.
      */
     static async _getNextPage(url, collectionArray, pageSize) {
       if (
