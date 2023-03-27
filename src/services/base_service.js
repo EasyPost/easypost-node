@@ -197,7 +197,7 @@ export default (easypostClient) =>
      * Retrieve the next page of specific collection of object
      * @internal
      * @param {string} url The URL to send the API request to.
-     * @param {Object} collectionArray The collection of a specific object.
+     * @param {Object} collection The collection of a specific object.
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      * TODO: Implement this function in EndShippers and Batches once the API supports them properly.
