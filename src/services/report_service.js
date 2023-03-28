@@ -41,7 +41,7 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve the next page of specific collection of object
+     * Retrieve the next page of Report collection.
      * @param {Object} reports An object containing a list of {@link Report reports} and pagination information.
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
@@ -75,6 +75,13 @@ export default (easypostClient) =>
       return this._retrieve(url);
     }
 
+    /**
+     * Converts a string in PascalCase format to snake_case format and removes the suffix "_report".
+     * e.g ShipmentReport -> shipment, ShipmentInvoiceReport -> shipment_invoice
+     *
+     * @param {string} reportType
+     * @returns {string} - The report type in snake case.
+     */
     static _getReportType(reportType) {
       const snakeCaseType = reportType.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
       const snakeCaseTypeWithoutSuffix = snakeCaseType.replace(/_report$/, '');

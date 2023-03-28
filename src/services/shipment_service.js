@@ -221,7 +221,7 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieve the next page of specific collection of object
+     * Retrieve the next page of Shipment collection.
      * @param {Object} shipments An object containing a list of {@link Shipment shipments} and pagination information.
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
