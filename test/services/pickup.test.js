@@ -62,7 +62,7 @@ describe('Pickup Service', function () {
   it('retrieves next page of pickups', async function () {
     try {
       const pickups = await this.client.Pickup.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Pickup.getNextPage(pickups);
+      const nextPage = await this.client.Pickup.getNextPage(pickups, Fixture.pageSize());
 
       const firstIdOfFirstPage = pickups.pickups[0].id;
       const firstIdOfSecondPage = nextPage.pickups[0].id;

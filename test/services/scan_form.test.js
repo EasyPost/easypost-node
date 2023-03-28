@@ -62,7 +62,7 @@ describe('ScanForm Service', function () {
   it('retrieves next page of scanforms', async function () {
     try {
       const scanforms = await this.client.ScanForm.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.ScanForm.getNextPage(scanforms);
+      const nextPage = await this.client.ScanForm.getNextPage(scanforms, Fixture.pageSize());
 
       const firstIdOfFirstPage = scanforms.scan_forms[0].id;
       const firstIdOfSecondPage = nextPage.scan_forms[0].id;

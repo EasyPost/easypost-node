@@ -84,7 +84,7 @@ describe('Address Service', function () {
   it('retrieves next page of addresses', async function () {
     try {
       const addresses = await this.client.Address.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Address.getNextPage(addresses);
+      const nextPage = await this.client.Address.getNextPage(addresses, Fixture.pageSize());
 
       const firstIdOfFirstPage = addresses.addresses[0].id;
       const firstIdOfSecondPage = nextPage.addresses[0].id;

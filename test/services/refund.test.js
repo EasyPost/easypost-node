@@ -54,7 +54,7 @@ describe('Refund Service', function () {
   it('retrieves next page of refunds', async function () {
     try {
       const refunds = await this.client.Refund.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Refund.getNextPage(refunds);
+      const nextPage = await this.client.Refund.getNextPage(refunds, Fixture.pageSize());
 
       const firstIdOfFirstPage = refunds.refunds[0].id;
       const firstIdOfSecondPage = nextPage.refunds[0].id;

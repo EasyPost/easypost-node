@@ -1,3 +1,4 @@
+import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 import baseService from './base_service';
 
 export default (easypostClient) =>
@@ -43,12 +44,23 @@ export default (easypostClient) =>
      * Retrieve the next page of specific collection of object
      * @param {Object} reports An object containing a list of {@link Report reports} and pagination information.
      * @param {Number} pageSize The number of records to return on each page
-     * @param {string} type The type of report to be retrieved
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(reports, type, pageSize) {
+    static async getNextPage(reports, pageSize) {
+      const type = this._getReportType(reports.reports[0].object);
       const url = `reports/${type}`;
-      return this._getNextPage(url, reports, pageSize);
+      const reportArray = reports.reports;
+      let params = {
+        page_size: pageSize,
+        before_id: reportArray[reportArray.length - 1].id,
+      };
+
+      const response = await this._all(url, params);
+      if (response == undefined || response.reports.length == 0 || !response.has_more) {
+        throw new EndOfPaginationError();
+      }
+
+      return response;
     }
 
     /**
@@ -61,5 +73,11 @@ export default (easypostClient) =>
       const url = `reports/${id}`;
 
       return this._retrieve(url);
+    }
+
+    static _getReportType(reportType) {
+      const snakeCaseType = reportType.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+      const snakeCaseTypeWithoutSuffix = snakeCaseType.replace(/_report$/, '');
+      return snakeCaseTypeWithoutSuffix;
     }
   };

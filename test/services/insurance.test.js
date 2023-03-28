@@ -63,7 +63,7 @@ describe('Insurance Service', function () {
   it('retrieves next page of insurances', async function () {
     try {
       const insurances = await this.client.Insurance.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Insurance.getNextPage(insurances);
+      const nextPage = await this.client.Insurance.getNextPage(insurances, Fixture.pageSize());
 
       const firstIdOfFirstPage = insurances.insurances[0].id;
       const firstIdOfSecondPage = nextPage.insurances[0].id;

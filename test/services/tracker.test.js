@@ -57,7 +57,7 @@ describe('Tracker Service', function () {
   it('retrieves next page of trackers', async function () {
     try {
       const trackers = await this.client.Tracker.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Tracker.getNextPage(trackers);
+      const nextPage = await this.client.Tracker.getNextPage(trackers, Fixture.pageSize());
 
       const firstIdOfFirstPage = trackers.trackers[0].id;
       const firstIdOfSecondPage = nextPage.trackers[0].id;

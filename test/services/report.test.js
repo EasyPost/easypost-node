@@ -91,7 +91,7 @@ describe('Report Service', function () {
         page_size: Fixture.pageSize(),
         type: Fixture.reportType(),
       });
-      const nextPage = await this.client.Report.getNextPage(reports);
+      const nextPage = await this.client.Report.getNextPage(reports, Fixture.pageSize());
 
       const firstIdOfFirstPage = reports.reports[0].id;
       const firstIdOfSecondPage = nextPage.reports[0].id;

@@ -48,7 +48,10 @@ describe('ReferralCustomer Service', function () {
   it('retrieves next page of referral customer', async function () {
     try {
       const referrals = await this.client.ReferralCustomer.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.ReferralCustomer.getNextPage(referrals);
+      const nextPage = await this.client.ReferralCustomer.getNextPage(
+        referrals,
+        Fixture.pageSize(),
+      );
 
       const firstIdOfFirstPage = referrals.referral_customers[0].id;
       const firstIdOfSecondPage = nextPage.referral_customers[0].id;

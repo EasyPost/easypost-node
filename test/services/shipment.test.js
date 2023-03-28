@@ -107,7 +107,7 @@ describe('Shipment Service', function () {
   it('retrieves next page of shipments', async function () {
     try {
       const shipments = await this.client.Shipment.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Shipment.getNextPage(shipments);
+      const nextPage = await this.client.Shipment.getNextPage(shipments, Fixture.pageSize());
 
       const firstIdOfFirstPage = shipments.shipments[0].id;
       const firstIdOfSecondPage = nextPage.shipments[0].id;

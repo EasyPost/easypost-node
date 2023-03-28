@@ -51,7 +51,7 @@ describe('Event Service', function () {
   it('retrieves next page of events', async function () {
     try {
       const events = await this.client.Event.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Event.getNextPage(events);
+      const nextPage = await this.client.Event.getNextPage(events, Fixture.pageSize());
 
       const firstIdOfFirstPage = events.events[0].id;
       const firstIdOfSecondPage = nextPage.events[0].id;
