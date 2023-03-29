@@ -25,6 +25,7 @@ import Shipment from '../models/shipment';
 import Tracker from '../models/tracker';
 import User from '../models/user';
 import Webhook from '../models/webhook';
+import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 
 /**
  * A map of EasyPost object ID prefixes to their associated class names.
@@ -190,5 +191,35 @@ export default (easypostClient) =>
       } catch (e) {
         return Promise.reject(e);
       }
+    }
+
+    /**
+     * Retrieve the next page of specific collection of object
+     * @internal
+     * @param {string} url The URL to send the API request to.
+     * @param {Object} collection The collection of a specific object.
+     * @param {Number} pageSize The number of records to return on each page.
+     * @param {Object} optionalParams The optional param for additional value in the query string.
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     * TODO: Implement this function in EndShippers and Batches once the API supports them properly.
+     */
+    static async _getNextPage(url, collection, pageSize = null, optionalParams = {}) {
+      const collectionArray = collection[url];
+      if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
+        throw new EndOfPaginationError();
+      }
+
+      let params = {
+        page_size: pageSize,
+        before_id: collectionArray[collectionArray.length - 1].id,
+        ...optionalParams,
+      };
+
+      const response = await this._all(url, params);
+      if (response == undefined || response[url].length == 0 || !response.has_more) {
+        throw new EndOfPaginationError();
+      }
+
+      return response;
     }
   };

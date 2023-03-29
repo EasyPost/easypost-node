@@ -9,6 +9,7 @@ import Payload from '../../src/models/payload';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import NotFoundError from '../../src/errors/api/not_found_error';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 
 describe('Event Service', function () {
   setupPolly.startPolly();
@@ -45,6 +46,22 @@ describe('Event Service', function () {
     eventsArray.forEach((event) => {
       expect(event).to.be.an.instanceOf(Event);
     });
+  });
+
+  it('retrieves next page of events', async function () {
+    try {
+      const events = await this.client.Event.all({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.Event.getNextPage(events, Fixture.pageSize());
+
+      const firstIdOfFirstPage = events.events[0].id;
+      const firstIdOfSecondPage = nextPage.events[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 
   it('retrieves all payloads for an event', async function () {

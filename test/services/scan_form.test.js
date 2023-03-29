@@ -2,6 +2,7 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import ScanForm from '../../src/models/scan_form';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -56,5 +57,21 @@ describe('ScanForm Service', function () {
     scanformsArray.forEach((scanform) => {
       expect(scanform).to.be.an.instanceOf(ScanForm);
     });
+  });
+
+  it('retrieves next page of scanforms', async function () {
+    try {
+      const scanforms = await this.client.ScanForm.all({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.ScanForm.getNextPage(scanforms, Fixture.pageSize());
+
+      const firstIdOfFirstPage = scanforms.scan_forms[0].id;
+      const firstIdOfSecondPage = nextPage.scan_forms[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 });

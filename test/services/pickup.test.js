@@ -6,6 +6,7 @@ import Pickup from '../../src/models/pickup';
 import Fixture from '../helpers/fixture';
 import FilteringError from '../../src/errors/general/filtering_error';
 import * as setupPolly from '../helpers/setup_polly';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 
 describe('Pickup Service', function () {
   setupPolly.startPolly();
@@ -56,6 +57,22 @@ describe('Pickup Service', function () {
     pickupsArray.forEach((pickup) => {
       expect(pickup).to.be.an.instanceOf(Pickup);
     });
+  });
+
+  it('retrieves next page of pickups', async function () {
+    try {
+      const pickups = await this.client.Pickup.all({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.Pickup.getNextPage(pickups, Fixture.pageSize());
+
+      const firstIdOfFirstPage = pickups.pickups[0].id;
+      const firstIdOfSecondPage = nextPage.pickups[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 
   it('buys a pickup', async function () {

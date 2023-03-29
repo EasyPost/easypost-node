@@ -2,6 +2,7 @@ import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
 import InvalidRequestError from '../../src/errors/api/invalid_request_error';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import Address from '../../src/models/address';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -78,6 +79,22 @@ describe('Address Service', function () {
     addressesArray.forEach((address) => {
       expect(address).to.be.an.instanceOf(Address);
     });
+  });
+
+  it('retrieves next page of addresses', async function () {
+    try {
+      const addresses = await this.client.Address.all({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.Address.getNextPage(addresses, Fixture.pageSize());
+
+      const firstIdOfFirstPage = addresses.addresses[0].id;
+      const firstIdOfSecondPage = nextPage.addresses[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 
   it('creates a verified address', async function () {

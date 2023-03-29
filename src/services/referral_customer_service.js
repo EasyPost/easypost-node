@@ -172,4 +172,15 @@ export default (easypostClient) =>
 
       return this._all(url, params);
     }
+
+    /**
+     * Retrieve the next page of Referral Customer collection.
+     * @param {Object} referralCustomers An object containing a list of {@link referral referralCustomers} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(referralCustomers, pageSize = null) {
+      const url = 'referral_customers';
+      return this._getNextPage(url, referralCustomers, pageSize);
+    }
   };

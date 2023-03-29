@@ -71,4 +71,10 @@ export default class Constants {
    */
   static WEBHOOK_DOES_NOT_MATCH =
     'Webhook received did not originate from EasyPost or had a webhook secret mismatch.';
+
+  /**
+   * The template for the error message when a pagination list has reached its end
+   * @type {string}
+   */
+  static END_OF_PAGINATION = 'There are no more pages to retrieve.';
 }

@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import FilteringError from '../../src/errors/general/filtering_error';
 import InvalidParameterError from '../../src/errors/general/invalid_parameter_error';
 import Rate from '../../src/models/rate';
@@ -101,6 +102,22 @@ describe('Shipment Service', function () {
     shipmentsArray.forEach((shipment) => {
       expect(shipment).to.be.an.instanceOf(Shipment);
     });
+  });
+
+  it('retrieves next page of shipments', async function () {
+    try {
+      const shipments = await this.client.Shipment.all({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.Shipment.getNextPage(shipments, Fixture.pageSize());
+
+      const firstIdOfFirstPage = shipments.shipments[0].id;
+      const firstIdOfSecondPage = nextPage.shipments[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 
   it('buys a shipment', async function () {

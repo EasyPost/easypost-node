@@ -24,7 +24,8 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Report reports} and pagination information.
      */
     static async all(params = {}) {
-      const url = `reports/${params.type}`;
+      const type = params.type;
+      const url = `reports/${type}`;
 
       // delete "type" from params, so it doesn't get sent to the API
       // eslint-disable-next-line no-param-reassign
@@ -32,11 +33,24 @@ export default (easypostClient) =>
 
       try {
         const response = await easypostClient._get(url, params);
+        const responseObject = this._convertToEasyPostObject(response.body);
+        responseObject.type = type;
 
-        return this._convertToEasyPostObject(response.body);
+        return responseObject;
       } catch (e) {
         return Promise.reject(e);
       }
+    }
+
+    /**
+     * Retrieve the next page of Report collection.
+     * @param {Object} reports An object containing a list of {@link Report reports} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(reports, pageSize = null) {
+      const url = `reports/${reports.type}`;
+      return this._getNextPage(url, reports, pageSize);
     }
 
     /**

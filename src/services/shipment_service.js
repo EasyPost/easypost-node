@@ -217,7 +217,27 @@ export default (easypostClient) =>
     static async all(params = {}) {
       const url = 'shipments';
 
-      return this._all(url, params);
+      const response = await this._all(url, params);
+      response.purchased = params.purchased;
+      response.include_children = params.include_children;
+
+      return response;
+    }
+
+    /**
+     * Retrieve the next page of Shipment collection.
+     * @param {Object} shipments An object containing a list of {@link Shipment shipments} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(shipments, pageSize = null) {
+      const url = 'shipments';
+      const params = {
+        purchased: shipments.purchased ?? true,
+        include_children: shipments.include_children ?? false,
+      };
+
+      return this._getNextPage(url, shipments, pageSize, params);
     }
 
     /**

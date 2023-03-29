@@ -66,6 +66,17 @@ export default (easypostClient) =>
     }
 
     /**
+     * Retrieve the next page of Address collection.
+     * @param {Object} addresses An object containing a list of {@link Address addresses} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(addresses, pageSize = null) {
+      const url = 'addresses';
+      return this._getNextPage(url, addresses, pageSize);
+    }
+
+    /**
      * Retrieve an {@link Address address} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-an-address EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the address to retrieve.

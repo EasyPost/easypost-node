@@ -72,6 +72,17 @@ export default (easypostClient) =>
     }
 
     /**
+     * Retrieve the next page of Pickup collection.
+     * @param {Object} pickups An object containing a list of {@link Pickup pickups} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(pickups, pageSize = null) {
+      const url = 'pickups';
+      return this._getNextPage(url, pickups, pageSize);
+    }
+
+    /**
      * Retrieve a {@link Pickup pickup} by its ID.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-pickup EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the pickup to retrieve.

@@ -2,6 +2,7 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import Tracker from '../../src/models/tracker';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -51,6 +52,22 @@ describe('Tracker Service', function () {
     trackersArray.forEach((tracker) => {
       expect(tracker).to.be.an.instanceOf(Tracker);
     });
+  });
+
+  it('retrieves next page of trackers', async function () {
+    try {
+      const trackers = await this.client.Tracker.all({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.Tracker.getNextPage(trackers, Fixture.pageSize());
+
+      const firstIdOfFirstPage = trackers.trackers[0].id;
+      const firstIdOfSecondPage = nextPage.trackers[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 
   it('creates trackers in bulk from a list of tracking codes', async function () {
