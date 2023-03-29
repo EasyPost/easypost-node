@@ -42,7 +42,11 @@ export default (easypostClient) =>
     static async all(params = {}) {
       const url = 'trackers';
 
-      return this._all(url, params);
+      const response = await this._all(url, params);
+      response.tracking_code = params.tracking_code;
+      response.carrier = params.carrier;
+
+      return response;
     }
 
     /**
@@ -51,9 +55,14 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(trackers, pageSize) {
+    static async getNextPage(trackers, pageSize = null) {
       const url = 'trackers';
-      return this._getNextPage(url, trackers, pageSize);
+      const params = {
+        tracking_code: trackers.tracking_code ?? null,
+        carrier: trackers.carrier ?? null,
+      };
+
+      return this._getNextPage(url, trackers, pageSize, params);
     }
 
     /**

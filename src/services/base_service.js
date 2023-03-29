@@ -198,11 +198,12 @@ export default (easypostClient) =>
      * @internal
      * @param {string} url The URL to send the API request to.
      * @param {Object} collection The collection of a specific object.
-     * @param {Number} pageSize The number of records to return on each page
+     * @param {Number} pageSize The number of records to return on each page.
+     * @param {Object} optionalParams The optional param for additional value in the query string.
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      * TODO: Implement this function in EndShippers and Batches once the API supports them properly.
      */
-    static async _getNextPage(url, collection, pageSize) {
+    static async _getNextPage(url, collection, pageSize = null, optionalParams = {}) {
       const collectionArray = collection[url];
       if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();
@@ -211,6 +212,7 @@ export default (easypostClient) =>
       let params = {
         page_size: pageSize,
         before_id: collectionArray[collectionArray.length - 1].id,
+        ...optionalParams,
       };
 
       const response = await this._all(url, params);

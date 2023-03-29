@@ -1,4 +1,3 @@
-import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 import baseService from './base_service';
 
 export default (easypostClient) =>
@@ -25,7 +24,8 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Report reports} and pagination information.
      */
     static async all(params = {}) {
-      const url = `reports/${params.type}`;
+      const type = params.type;
+      const url = `reports/${type}`;
 
       // delete "type" from params, so it doesn't get sent to the API
       // eslint-disable-next-line no-param-reassign
@@ -33,8 +33,10 @@ export default (easypostClient) =>
 
       try {
         const response = await easypostClient._get(url, params);
+        const responseObject = this._convertToEasyPostObject(response.body);
+        responseObject.type = type;
 
-        return this._convertToEasyPostObject(response.body);
+        return responseObject;
       } catch (e) {
         return Promise.reject(e);
       }
@@ -46,21 +48,9 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(reports, pageSize) {
-      const type = this._getReportType(reports.reports[0].object);
-      const url = `reports/${type}`;
-      const reportArray = reports.reports;
-      let params = {
-        page_size: pageSize,
-        before_id: reportArray[reportArray.length - 1].id,
-      };
-
-      const response = await this._all(url, params);
-      if (response == undefined || response.reports.length == 0 || !response.has_more) {
-        throw new EndOfPaginationError();
-      }
-
-      return response;
+    static async getNextPage(reports, pageSize = null) {
+      const url = `reports/${reports.type}`;
+      return this._getNextPage(url, reports, pageSize);
     }
 
     /**
@@ -73,18 +63,5 @@ export default (easypostClient) =>
       const url = `reports/${id}`;
 
       return this._retrieve(url);
-    }
-
-    /**
-     * Converts a string in PascalCase format to snake_case format and removes the suffix "_report".
-     * e.g ShipmentReport -> shipment, ShipmentInvoiceReport -> shipment_invoice
-     *
-     * @param {string} reportType
-     * @returns {string} - The report type in snake case.
-     */
-    static _getReportType(reportType) {
-      const snakeCaseType = reportType.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
-      const snakeCaseTypeWithoutSuffix = snakeCaseType.replace(/_report$/, '');
-      return snakeCaseTypeWithoutSuffix;
     }
   };
