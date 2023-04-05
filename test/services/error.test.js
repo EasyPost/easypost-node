@@ -51,7 +51,9 @@ describe('Error Service', function () {
       },
     };
 
-    expect(() => ErrorHandler.handleApiError(fakeErrorResponse))
+    expect(() => {
+      throw ErrorHandler.handleApiError(fakeErrorResponse);
+    })
       .to.throw(NotFoundError)
       .and.satisfy((error) => {
         expect(error.message).to.be.equal('ERROR_MESSAGE_1, ERROR_MESSAGE_2');
@@ -75,7 +77,9 @@ describe('Error Service', function () {
       },
     };
 
-    expect(() => ErrorHandler.handleApiError(fakeErrorResponse))
+    expect(() => {
+      throw ErrorHandler.handleApiError(fakeErrorResponse);
+    })
       .to.throw(NotFoundError)
       .and.satisfy((error) => {
         expect(error.message).to.be.equal('bad error., second bad error.');
@@ -106,7 +110,9 @@ describe('Error Service', function () {
       },
     };
 
-    expect(() => ErrorHandler.handleApiError(fakeErrorResponse))
+    expect(() => {
+      throw ErrorHandler.handleApiError(fakeErrorResponse);
+    })
       .to.throw(NotFoundError)
       .and.satisfy((error) => {
         expect(error.message).to.be.equal(
