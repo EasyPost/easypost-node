@@ -28,8 +28,8 @@ export default class ErrorHandler {
         this.traverseJsonElement(value, messagesList);
       }
     } else if (errorMessage instanceof Array) {
-      for (const element of errorMessage) {
-        this.traverseJsonElement(element, messagesList);
+      for (const value of errorMessage) {
+        this.traverseJsonElement(value, messagesList);
       }
     } else {
       messagesList.push(errorMessage.toString());
