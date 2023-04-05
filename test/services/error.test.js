@@ -51,14 +51,71 @@ describe('Error Service', function () {
       },
     };
 
-    try {
-      ErrorHandler.handleApiError(fakeErrorResponse);
-    } catch (error) {
-      expect(error).to.be.an.instanceOf(NotFoundError);
-      expect(error.message).to.be.equal('ERROR_MESSAGE_1, ERROR_MESSAGE_2');
-      expect(error.code).to.be.equal('NO RESPONSE CODE');
-      expect(error.errors).to.be.an('array').that.is.empty;
-    }
+    expect(() => ErrorHandler.handleApiError(fakeErrorResponse))
+      .to.throw(NotFoundError)
+      .and.satisfy((error) => {
+        expect(error.message).to.be.equal('ERROR_MESSAGE_1, ERROR_MESSAGE_2');
+        expect(error.code).to.be.equal('NO RESPONSE CODE');
+        expect(error.errors).to.be.an('array').that.is.empty;
+        return true;
+      });
+  });
+
+  it('test error object parsing,', () => {
+    const fakeErrorResponse = {
+      statusCode: 404,
+      body: {
+        error: {
+          message: {
+            errors: ['bad error.', 'second bad error.'],
+          },
+          code: 'NO RESPONSE CODE',
+          errors: [],
+        },
+      },
+    };
+
+    expect(() => ErrorHandler.handleApiError(fakeErrorResponse))
+      .to.throw(NotFoundError)
+      .and.satisfy((error) => {
+        expect(error.message).to.be.equal('bad error., second bad error.');
+        expect(error.code).to.be.equal('NO RESPONSE CODE');
+        expect(error.errors).to.be.an('array').that.is.empty;
+        return true;
+      });
+  });
+
+  it('test really bad error object format parsing', () => {
+    const fakeErrorResponse = {
+      statusCode: 404,
+      body: {
+        error: {
+          message: {
+            errors: ['Bad format 1', 'Bad format 2'],
+            bad_data: [
+              {
+                first_message: 'Bad format 3',
+                second_message: 'Bad format 4',
+                thrid_message: 'Bad format 5',
+              },
+            ],
+          },
+          code: 'NO RESPONSE CODE',
+          errors: [],
+        },
+      },
+    };
+
+    expect(() => ErrorHandler.handleApiError(fakeErrorResponse))
+      .to.throw(NotFoundError)
+      .and.satisfy((error) => {
+        expect(error.message).to.be.equal(
+          'Bad format 1, Bad format 2, Bad format 3, Bad format 4, Bad format 5',
+        );
+        expect(error.code).to.be.equal('NO RESPONSE CODE');
+        expect(error.errors).to.be.an('array').that.is.empty;
+        return true;
+      });
   });
 
   it('test error with varity HTTP status code', () => {
