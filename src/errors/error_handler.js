@@ -11,8 +11,30 @@ import InternalServerError from './api/internal_server_error';
 import ServiceUnavailableError from './api/service_unavailable_error';
 import GatewayTimeoutError from './api/gateway_timeout_error';
 import ForbiddenError from './api/forbidden_error';
+import EasyPostError from './easypost_error';
+import Constants from '../constants';
 
 export default class ErrorHandler {
+  /**
+   * Recursively traverses a JSON object or array and extracts error messages
+   * as strings. Adds the extracted messages to the specified messagesList array.
+   *
+   * @param {object|array|string} errorMessage - The JSON object or array to traverse.
+   * @param {array} messagesList - The array to which extracted error messages will be added.
+   */
+  static traverseJsonElement(errorMessage, messagesList) {
+    if (errorMessage instanceof Object) {
+      for (const value of Object.values(errorMessage)) {
+        this.traverseJsonElement(value, messagesList);
+      }
+    } else if (errorMessage instanceof Array) {
+      for (const value of errorMessage) {
+        this.traverseJsonElement(value, messagesList);
+      }
+    } else {
+      messagesList.push(errorMessage.toString());
+    }
+  }
   /**
    * Calculate and generate the appropriate {@link ApiError} based on a received HTTP response error.
    * @param {*} error - The errored HTTP response.
@@ -28,8 +50,16 @@ export default class ErrorHandler {
       errors,
     };
 
-    if (Array.isArray(errorParams.message)) {
-      errorParams.message = errorParams.message.join(', ');
+    try {
+      const messages = [];
+      this.traverseJsonElement(errorParams.message, messages);
+      errorParams.message = messages.join(', ');
+    } catch (e) {
+      const errorParams = {
+        message: Constants.ERROR_DESERIALIZATION,
+        code: 'ERROR_DESERIALIZATION_ERROR',
+      };
+      return new EasyPostError(errorParams);
     }
 
     if (statusCode >= 300 && statusCode < 400) {
