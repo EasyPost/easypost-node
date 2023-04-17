@@ -7,6 +7,7 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class User extends EasyPostObject {
+  static api_keys;
   static balance;
   static cc_fee_rate;
   static children;
