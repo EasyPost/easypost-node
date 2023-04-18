@@ -1,4 +1,5 @@
 import EasyPostClient from '../easypost';
+import CarrierMetadataService from './beta_carrier_metadata';
 import RateService from './beta_rate_service';
 import ReferralCustomerService from './beta_referral_customer_service';
 
@@ -13,8 +14,9 @@ export const DEFAULT_BASE_URL = 'https://api.easypost.com/beta/';
  * @type {Map}
  */
 export const SERVICES = {
-  ReferralCustomer: ReferralCustomerService,
+  CarrierMetadata: CarrierMetadataService,
   Rate: RateService,
+  ReferralCustomer: ReferralCustomerService,
 };
 
 /**
