@@ -4,6 +4,7 @@
 
 - Improves Error Deserialization to dynamically handle edge cases that have a bad format
 - Adds missing `api_keys` property to `User`
+- Adds a helper function to retrieve carrier metadata
 
 ## v6.1.0 (2023-04-04)
 
