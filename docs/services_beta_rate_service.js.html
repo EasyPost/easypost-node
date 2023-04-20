@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: models/brand.js</title>
+    <title>JSDoc: Source: services/beta_rate_service.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: models/brand.js</h1>
+    <h1 class="page-title">Source: services/beta_rate_service.js</h1>
 
     
 
@@ -26,25 +26,33 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/* eslint-disable babel/camelcase */
-import EasyPostObject from './easypost_object';
+            <pre class="prettyprint source linenums"><code>import baseService from './base_service';
 
 /**
- * A {@link https://www.easypost.com/docs/api/node#brand Brand} represents custom branding for an EasyPost user's public-facing tracking details page.
- * @public
- * @extends EasyPostObject
+ * @extends baseService
  */
-export default class Brand extends EasyPostObject {
-  static ad_href;
-  static ad;
-  static background_color;
-  static color;
-  static logo_href;
-  static logo;
-  static name;
-  static theme;
-  static user_id;
-}
+export default (easypostClient) =>
+  class BetaRateService extends baseService(easypostClient) {
+    /**
+     * Retrieve a list of stateless {@link Rate rates} based on the provided parameters.
+     * @param {Object} params - Map of parameters for the API call
+     * @returns {Rate[]} - List of stateless rates
+     */
+    static async retrieveStatelessRates(params) {
+      const url = 'beta/rates';
+      const wrappedParams = {
+        shipment: params,
+      };
+
+      try {
+        const response = await easypostClient._post(url, wrappedParams);
+
+        return this._convertToEasyPostObject(response.body.rates);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+  };
 </code></pre>
         </article>
     </section>
