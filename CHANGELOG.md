@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v6.3.0 (2023-04-24)
+
+- Fixes the Beta client, previously the beta functions were not accessible due to how they were exported. This has now changed so each service is prepended with `Beta` (eg: `BetaCarrierMetadata`)
+- Adds `CarrierMetadata` typescript definitions
+
 ## v6.2.0 (2023-04-18)
 
 - Adds beta `retrieveCarrierMetadata` function
