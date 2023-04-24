@@ -1,14 +1,14 @@
 import { expect } from 'chai';
 
-import * as setupPolly from '../../helpers/setup_polly';
-import EasyPostBetaClient from '../../../src/beta/easypost';
+import EasyPostClient from '../../src/easypost';
+import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable func-names */
-describe('Carrier Metadata Service', function () {
+describe('BetaCarrierMetadataService', function () {
   setupPolly.startPolly();
 
   before(function () {
-    this.client = new EasyPostBetaClient(process.env.EASYPOST_TEST_API_KEY);
+    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
@@ -17,14 +17,14 @@ describe('Carrier Metadata Service', function () {
   });
 
   it('retrieve all carriers metadata from without params', async function () {
-    const carrierMetadata = await this.client.CarrierMetadata.retrieveCarrierMetadata();
+    const carrierMetadata = await this.client.BetaCarrierMetadata.retrieveCarrierMetadata();
 
     expect(carrierMetadata.some((carrier) => carrier.name === 'usps')).to.be.true;
     expect(carrierMetadata.some((carrier) => carrier.name === 'fedex')).to.be.true;
   });
 
   it('retrieve metadata based on the filters provided', async function () {
-    const carrierMetadata = await this.client.CarrierMetadata.retrieveCarrierMetadata(
+    const carrierMetadata = await this.client.BetaCarrierMetadata.retrieveCarrierMetadata(
       ['usps'],
       ['service_levels', 'predefined_packages'],
     );

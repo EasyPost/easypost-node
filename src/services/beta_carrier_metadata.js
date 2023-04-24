@@ -1,10 +1,10 @@
-import baseService from '../services/base_service';
+import baseService from './base_service';
 
 /**
  * @extends baseService
  */
 export default (easypostClient) =>
-  class CarrierMetadataService extends baseService(easypostClient) {
+  class BetaCarrierMetadataService extends baseService(easypostClient) {
     /**
      * Retrieve a list of carrier metadata based on the provided parameters.
      * @param {Array} carriers - List of carrier in string
@@ -12,7 +12,7 @@ export default (easypostClient) =>
      * @returns {Object[]} - List of carrier metadata
      */
     static async retrieveCarrierMetadata(carriers = null, types = null) {
-      const url = 'metadata';
+      const url = 'beta/metadata';
       const params = {
         ...(carriers && carriers.length > 0 && { carriers: carriers.join(',') }),
         ...(types && types.length > 0 && { types: types.join(',') }),

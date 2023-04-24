@@ -1,18 +1,18 @@
 import { expect } from 'chai';
 
-import * as setupPolly from '../../helpers/setup_polly';
-import EasyPostBetaClient from '../../../src/beta/easypost';
-import FilteringError from '../../../src/errors/general/filtering_error';
-import Fixture from '../../helpers/fixture';
-import Rate from '../../../src/models/rate';
-import Utils from '../../../src/utils/util';
+import EasyPostClient from '../../src/easypost';
+import FilteringError from '../../src/errors/general/filtering_error';
+import Rate from '../../src/models/rate';
+import Utils from '../../src/utils/util';
+import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable func-names */
-describe('Beta Rate Service', function () {
+describe('BetaRateService', function () {
   setupPolly.startPolly();
 
   before(function () {
-    this.client = new EasyPostBetaClient(process.env.EASYPOST_TEST_API_KEY);
+    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
@@ -21,7 +21,9 @@ describe('Beta Rate Service', function () {
   });
 
   it('retrieves a list of stateless rates', async function () {
-    const statelessRates = await this.client.Rate.retrieveStatelessRates(Fixture.basicShipment());
+    const statelessRates = await this.client.BetaRate.retrieveStatelessRates(
+      Fixture.basicShipment(),
+    );
 
     statelessRates.forEach((rate) => {
       expect(rate).to.be.an.instanceOf(Rate);
@@ -30,7 +32,9 @@ describe('Beta Rate Service', function () {
   });
 
   it('retrieve the lowest rate', async function () {
-    const statelessRates = await this.client.Rate.retrieveStatelessRates(Fixture.basicShipment());
+    const statelessRates = await this.client.BetaRate.retrieveStatelessRates(
+      Fixture.basicShipment(),
+    );
 
     const lowestStatelessRate = Utils.getLowestRate(statelessRates);
 
@@ -39,7 +43,9 @@ describe('Beta Rate Service', function () {
   });
 
   it('retrieve invalid lowest rate', async function () {
-    const statelessRates = await this.client.Rate.retrieveStatelessRates(Fixture.basicShipment());
+    const statelessRates = await this.client.BetaRate.retrieveStatelessRates(
+      Fixture.basicShipment(),
+    );
 
     expect(() => {
       Utils.getLowestRate(statelessRates, ['invalid_carrier'], ['invalid_service']);

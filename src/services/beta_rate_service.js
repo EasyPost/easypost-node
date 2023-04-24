@@ -1,17 +1,17 @@
-import baseService from '../services/base_service';
+import baseService from './base_service';
 
 /**
  * @extends baseService
  */
 export default (easypostClient) =>
-  class RateService extends baseService(easypostClient) {
+  class BetaRateService extends baseService(easypostClient) {
     /**
      * Retrieve a list of stateless {@link Rate rates} based on the provided parameters.
      * @param {Object} params - Map of parameters for the API call
      * @returns {Rate[]} - List of stateless rates
      */
     static async retrieveStatelessRates(params) {
-      const url = 'rates';
+      const url = 'beta/rates';
       const wrappedParams = {
         shipment: params,
       };

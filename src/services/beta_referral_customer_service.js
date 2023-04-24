@@ -1,7 +1,7 @@
-import baseService from '../services/base_service';
+import baseService from './base_service';
 
 export default (easypostClient) =>
-  class ReferralCustomerService extends baseService(easypostClient) {
+  class BetaReferralCustomerService extends baseService(easypostClient) {
     /**
      * Add an existing Stripe payment method to a {@link User referral customer's} account.
      * @param {string} stripeCustomerId - The Stripe account's ID.
@@ -18,7 +18,7 @@ export default (easypostClient) =>
         },
       };
 
-      const url = 'referral_customers/payment_method';
+      const url = 'beta/referral_customers/payment_method';
 
       const response = await easypostClient._post(url, wrappedParams);
 
@@ -35,7 +35,7 @@ export default (easypostClient) =>
         refund_amount: refundAmount,
       };
 
-      const url = 'referral_customers/refunds';
+      const url = 'beta/referral_customers/refunds';
 
       const response = await easypostClient._post(url, params);
 
@@ -52,7 +52,7 @@ export default (easypostClient) =>
         payment_log_id: paymentLogId,
       };
 
-      const url = 'referral_customers/refunds';
+      const url = 'beta/referral_customers/refunds';
 
       const response = await easypostClient._post(url, params);
 
