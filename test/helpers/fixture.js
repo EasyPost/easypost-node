@@ -138,4 +138,8 @@ export default class Fixture {
 
     return Buffer.from(JSON.stringify(eventBody), 'utf8');
   }
+
+  static plannedShipDate() {
+    return '2023-04-28';
+  }
 }

@@ -369,4 +369,15 @@ describe('Shipment Service', function () {
 
     expect(boughtShipment.postage_label).to.exist;
   });
+
+  it('retrieve time-in-transit data for each of the Rates of a shipment', async function () {
+    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
+    const estimatedDeliveryDates = await this.client.Shipment.retrieveEstimatedDeliveryDate(
+      shipment.id,
+      Fixture.plannedShipDate(),
+    );
+
+    expect(estimatedDeliveryDates.every((entry) => entry.easypost_time_in_transit_data)).to.not.be
+      .null;
+  });
 });
