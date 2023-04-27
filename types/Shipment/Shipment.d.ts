@@ -332,4 +332,13 @@ export declare class Shipment implements IShipment {
    * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
   static generateForm(id: string, formType: string, formOptions?: object): Promise<Shipment>;
+
+  /**
+   * Retrieves the estimated delivery date of each Rate via SmartRate.
+   *
+   * @param id shipment id (begins with "shp_").
+   * @param plannedShipDate The planned ship date in format YYYY-MM-DD
+   *  @returns {Promise<Array<Object>>} The array of estimated delivery dates and rates.
+   */
+  static retrieveEstimatedDeliveryDate(id: string, plannedShipDate: string): Promise<Array<Object>>;
 }

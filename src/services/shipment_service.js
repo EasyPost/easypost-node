@@ -251,4 +251,26 @@ export default (easypostClient) =>
 
       return this._retrieve(url);
     }
+
+    /**
+     * Retrieves the estimated delivery date of each Rate via SmartRate.
+     * @param {string} id
+     * @param {string} plannedShipDate
+     * @returns {Array} - An array of the estimated delivery date and rates.
+     */
+    static async retrieveEstimatedDeliveryDate(id, plannedShipDate) {
+      const url = `shipments/${id}/smartrate/delivery_date`;
+
+      const params = {
+        planned_ship_date: plannedShipDate,
+      };
+
+      try {
+        const response = await easypostClient._get(url, params);
+
+        return this._convertToEasyPostObject(response.body.rates ?? []);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   };
