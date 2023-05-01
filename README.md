@@ -171,7 +171,7 @@ API_KEY=yourkey ./repl.js --local easypost.js
 
 API documentation can be found at: <https://easypost.com/docs/api>.
 
-Library documentation can be found on the web at: <https://easypost.github.io/easypost-node/> or locally in the `docs` directory.
+Library documentation can be found on the web at: <https://easypost.github.io/easypost-node/> or by building them locally via the `make docs` command.
 
 Upgrading major versions of this project? Refer to the [Upgrade Guide](UPGRADE_GUIDE.md).
 

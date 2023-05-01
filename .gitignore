@@ -10,6 +10,7 @@
 build.tar.gz
 coverage
 dist
+docs
 Icon
 node_modules
 npm-debug.log
