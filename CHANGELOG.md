@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next release
+## v6.4.0 (2023-05-02)
 
 - Adds `retrieveEstimatedDeliveryDate` in Shipment service
 
