@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/util.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/util.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Constants from '../constants';
+import FilteringError from '../errors/general/filtering_error';
+import InvalidParameterError from '../errors/general/invalid_parameter_error';
+import SignatureVerificationError from '../errors/general/signature_verification_error';
+
+const crypto = require('crypto');
+const util = require('util');
+
+/**
+ * Utility class of various publicly-available helper functions.
+ * @public
+ * @type {Utils}
+ */
+export default class Utils {
+  /**
+   * Get the lowest SmartRate from a provided list of SmartRates.
+   * @public
+   * @param {Rate[]} smartrates - List of SmartRates to filter through
+   * @param {number} deliveryDays - The maximum number of days allowed for delivery
+   * @param {string} deliveryAccuracy - The target level of accuracy for the delivery days (e.g. 'percentile_50')
+   * @returns {Rate} - The lowest SmartRate
+   * @throws {FilteringError} - If no applicable rates are found
+   * @throws {InvalidParameterError} - If the deliveryAccuracy value is invalid
+   */
+  static getLowestSmartRate(smartrates, deliveryDays, deliveryAccuracy) {
+    const validDeliveryAccuracyValues = new Set([
+      'percentile_50',
+      'percentile_75',
+      'percentile_85',
+      'percentile_90',
+      'percentile_95',
+      'percentile_97',
+      'percentile_99',
+    ]);
+    let lowestSmartRate = null;
+    const lowercaseDeliveryAccuracy = deliveryAccuracy.toLowerCase();
+
+    if (!validDeliveryAccuracyValues.has(lowercaseDeliveryAccuracy)) {
+      throw new InvalidParameterError({
+        message: `Invalid deliveryAccuracy value, must be one of: ${new Array(
+          ...validDeliveryAccuracyValues,
+        ).join(', ')}`,
+      });
+    }
+
+    for (let i = 0; i &lt; smartrates.length; i += 1) {
+      const rate = smartrates[i];
+
+      if (rate.time_in_transit[lowercaseDeliveryAccuracy] > parseInt(deliveryDays, 10)) {
+        // eslint-disable-next-line no-continue
+        continue;
+      } else if (
+        lowestSmartRate === null ||
+        parseFloat(rate.rate) &lt; parseFloat(lowestSmartRate.rate)
+      ) {
+        lowestSmartRate = rate;
+      }
+    }
+
+    if (lowestSmartRate === null) {
+      throw new FilteringError({ message: util.format(Constants.NO_OBJECT_FOUND, 'rates') });
+    }
+
+    return lowestSmartRate;
+  }
+
+  /**
+   * Get the lowest rate from a provided list of rates.
+   * @public
+   * @param {Rate[]} rates - List of rates to filter through
+   * @param {string[]} [carriers] - List of allowed carriers to filter by
+   * @param {string[]} [services] - List of allowed services to filter by
+   * @returns {Rate} - The lowest rate
+   * @throws {FilteringError} - If no applicable rates are found
+   */
+  static getLowestRate(rates, carriers = null, services = null) {
+    if (carriers) {
+      const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
+      // eslint-disable-next-line no-param-reassign
+      rates = rates.filter((rate) => carriersLower.includes(rate.carrier.toLowerCase()));
+    }
+
+    if (services) {
+      const servicesLower = services.map((service) => service.toLowerCase());
+      // eslint-disable-next-line no-param-reassign
+      rates = rates.filter((rate) => servicesLower.includes(rate.service.toLowerCase()));
+    }
+
+    if (rates.length === 0) {
+      throw new FilteringError({ message: util.format(Constants.NO_OBJECT_FOUND, 'rates') });
+    }
+
+    return rates.reduce((lowest, rate) => {
+      if (parseFloat(rate.rate) &lt; parseFloat(lowest.rate)) {
+        return rate;
+      }
+
+      return lowest;
+    }, rates[0]);
+  }
+
+  /**
+   * Validate a webhook by comparing the HMAC signature header sent from EasyPost to your shared secret.
+   * If the signatures do not match, an error will be raised signifying the webhook either did not originate
+   * from EasyPost or the secrets do not match. If the signatures do match, the `event_body` will be returned
+   * as JSON.
+   * @public
+   * @param {buffer} eventBody - The raw body of the webhook event
+   * @param {Object} headers - The headers of the webhook HTTP request
+   * @param {string} webhookSecret - The webhook secret shared between EasyPost and your application
+   * @returns {object} - The JSON-parsed webhook event body if the signature could be verified
+   * @throws {SignatureVerificationError} - If the signature could not be verified
+   */
+  static validateWebhook(eventBody, headers, webhookSecret) {
+    let webhook = {};
+    const easypostHmacSignature = headers['X-Hmac-Signature'] ?? null;
+
+    if (easypostHmacSignature != null) {
+      const normalizedSecret = webhookSecret.normalize('NFKD');
+      const encodedSecret = Buffer.from(normalizedSecret, 'utf8');
+
+      const expectedSignature = crypto
+        .createHmac('sha256', encodedSecret)
+        .update(eventBody, 'utf-8')
+        .digest('hex');
+
+      const digest = `hmac-sha256-hex=${expectedSignature}`;
+
+      try {
+        if (
+          crypto.timingSafeEqual(
+            Buffer.from(easypostHmacSignature, 'utf8'),
+            Buffer.from(digest, 'utf8'),
+          )
+        ) {
+          webhook = JSON.parse(eventBody.toString());
+        } else {
+          throw new SignatureVerificationError({ message: Constants.WEBHOOK_DOES_NOT_MATCH });
+        }
+      } catch (e) {
+        throw new SignatureVerificationError({ message: Constants.WEBHOOK_DOES_NOT_MATCH });
+      }
+    } else {
+      throw new SignatureVerificationError({ message: Constants.INVALID_WEBHOOK_SIGNATURE });
+    }
+
+    return webhook;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP">EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP</a></li><li><a href="global.html#RESOURCES">RESOURCES</a></li><li><a href="global.html#_all">_all</a></li><li><a href="global.html#_convertToEasyPostObject">_convertToEasyPostObject</a></li><li><a href="global.html#_create">_create</a></li><li><a href="global.html#_getNextPage">_getNextPage</a></li><li><a href="global.html#_retrieve">_retrieve</a></li><li><a href="global.html#addCreditCard">addCreditCard</a></li><li><a href="global.html#addPaymentMethod">addPaymentMethod</a></li><li><a href="global.html#addShipments">addShipments</a></li><li><a href="global.html#all">all</a></li><li><a href="global.html#buy">buy</a></li><li><a href="global.html#cancel">cancel</a></li><li><a href="global.html#convertLabelFormat">convertLabelFormat</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#createAndBuy">createAndBuy</a></li><li><a href="global.html#createAndVerify">createAndVerify</a></li><li><a href="global.html#createList">createList</a></li><li><a href="global.html#createScanForm">createScanForm</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deletePaymentMethod">deletePaymentMethod</a></li><li><a href="global.html#fundWallet">fundWallet</a></li><li><a href="global.html#generateForm">generateForm</a></li><li><a href="global.html#generateLabel">generateLabel</a></li><li><a href="global.html#getLowestRate">getLowestRate</a></li><li><a href="global.html#getLowestSmartRate">getLowestSmartRate</a></li><li><a href="global.html#getNextPage">getNextPage</a></li><li><a href="global.html#getRates">getRates</a></li><li><a href="global.html#getSmartRates">getSmartRates</a></li><li><a href="global.html#handleApiError">handleApiError</a></li><li><a href="global.html#insure">insure</a></li><li><a href="global.html#lowestRate">lowestRate</a></li><li><a href="global.html#lowestSmartRate">lowestSmartRate</a></li><li><a href="global.html#refund">refund</a></li><li><a href="global.html#refundByAmount">refundByAmount</a></li><li><a href="global.html#refundByPaymentLog">refundByPaymentLog</a></li><li><a href="global.html#regenerateRates">regenerateRates</a></li><li><a href="global.html#removeShipments">removeShipments</a></li><li><a href="global.html#retrieve">retrieve</a></li><li><a href="global.html#retrieveAllPayloads">retrieveAllPayloads</a></li><li><a href="global.html#retrieveCarrierMetadata">retrieveCarrierMetadata</a></li><li><a href="global.html#retrieveEstimatedDeliveryDate">retrieveEstimatedDeliveryDate</a></li><li><a href="global.html#retrieveMe">retrieveMe</a></li><li><a href="global.html#retrievePayload">retrievePayload</a></li><li><a href="global.html#retrievePaymentMethods">retrievePaymentMethods</a></li><li><a href="global.html#retrieveStatelessRates">retrieveStatelessRates</a></li><li><a href="global.html#traverseJsonElement">traverseJsonElement</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateBrand">updateBrand</a></li><li><a href="global.html#updateEmail">updateEmail</a></li><li><a href="global.html#validateWebhook">validateWebhook</a></li><li><a href="global.html#verifyAddress">verifyAddress</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon May 01 2023 21:39:54 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
