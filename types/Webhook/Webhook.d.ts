@@ -90,16 +90,4 @@ export declare class Webhook implements IWebhook {
    * @see https://www.easypost.com/docs/api/node#delete-a-webhook
    */
   static delete(webhookId: string): void;
-
-  /**
-   * Validate a webhook by comparing the HMAC signature header sent from EasyPost to your shared secret.
-   * If the signatures do not match, an error will be raised signifying the webhook either did not originate
-   * from EasyPost or the secrets do not match. If the signatures do match, the `event_body` will be returned
-   * as JSON.
-   *
-   * @param eventBody The event body of the webhook sent from EasyPost.
-   * @param headers The headers of the webhook sent from EasyPost.
-   * @param webhookSecret The local webhook secret that should match what is stored with EasyPost for this webhook.
-   */
-  static validateWebhook(eventBody: Buffer, headers: object, webhookSecret: string): object;
 }
