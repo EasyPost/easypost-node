@@ -9,7 +9,7 @@ export declare class Utils {
    * @public
    * @param smartrates List of SmartRates to filter through
    * @param deliveryDays The maximum number of days allowed for delivery
-   * @param deliveryAccuracy The target level of accuracy for the delivery days (e.g. 'percentile_50')
+   * @param deliveryAccuracy The target level of accuracy for the delivery days (e.g. 'percentile_95')
    * @returns The lowest SmartRate
    * @throws FilteringError If no applicable rates are found
    * @throws InvalidParameterError If the deliveryAccuracy value is invalid
@@ -24,8 +24,8 @@ export declare class Utils {
    * Get the lowest rate from a provided list of rates.
    * @public
    * @param rates List of rates to filter through
-   * @param carriers List of allowed carriers to filter by
-   * @param services List of allowed services to filter by
+   * @param carriers List of carriers to filter by
+   * @param services List of services to filter by
    * @returns The lowest rate
    * @throws FilteringError If no applicable rates are found
    */
