@@ -13,6 +13,7 @@ import { ScanForm } from './ScanForm';
 import { Shipment } from './Shipment';
 import { Tracker } from './Tracker';
 import { User } from './User';
+import { Utils } from './Utility';
 import { Webhook } from './Webhook';
 
 export interface IEasyPostOptions {
@@ -64,6 +65,7 @@ export default class EasyPost {
   public Tracker: typeof Tracker;
   public Webhook: typeof Webhook;
   public User: typeof User;
+  public Utils: typeof Utils;
 
   public constructor(apiKey: string, options?: IEasyPostOptions);
 }
