@@ -92,7 +92,7 @@ export declare class EndShipper implements IEndshipper {
    * @param {Object} params The parameters to create an {@link EndShipper} with.
    * @returns {Promise<EndShipper>} The created and verified {@link EndShipper}.
    */
-  public create(params: Object): Promise<EndShipper>;
+  static create(params: Object): Promise<EndShipper>;
 
   /**
    * An EndShipper object may be updated using the EndShipper API.
@@ -104,7 +104,7 @@ export declare class EndShipper implements IEndshipper {
    * @param params The parameters to update an {@link EndShipper} with.
    * @returns {Promise<EndShipper>} The updated {@link EndShipper}.
    */
-  public update(id: string, params: Object): Promise<EndShipper>;
+  static update(id: string, params: Object): Promise<EndShipper>;
 
   /**
    * Similar to retrieving a list of EndShippers, you can retrieve an individual EndShipper.
@@ -114,7 +114,7 @@ export declare class EndShipper implements IEndshipper {
    * @param id Unique, start with "es_".
    * @returns {Promise<EndShipper>} The retrieved {@link EndShipper}.
    */
-  public retrieve(id: string): Promise<EndShipper>;
+  static retrieve(id: string): Promise<EndShipper>;
 
   /**
    * List the EndShippers that have been created.
@@ -124,7 +124,7 @@ export declare class EndShipper implements IEndshipper {
    * @param params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link EndShipper endshippers} and pagination information.
    */
-  public all(
+  static all(
     params: IEndShipperListParameters,
   ): Promise<{ endshippers: EndShipper[]; has_more: boolean }>;
 }

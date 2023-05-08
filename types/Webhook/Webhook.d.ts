@@ -48,7 +48,7 @@ export declare class Webhook implements IWebhook {
    * @param {Object} params The parameters to create an {@link Webhook} with
    * @returns {Promise<Webhook>} The created and verified {@link Webhook}
    */
-  public create(params: Object): Promise<Webhook>;
+  static create(params: Object): Promise<Webhook>;
 
   /**
    * Enables a Webhook that has been disabled. You can also secure your webhook by adding a webhook_secret.
