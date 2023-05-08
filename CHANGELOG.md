@@ -3,6 +3,7 @@
 ## Next Release
 
 - Adds missing typescript definitions for `Utility` class
+- Fixs incorrect typescript definitions for `Address`, `EndShipper`m and `Webhook` classes methods
 
 ## v6.4.0 (2023-05-02)
 

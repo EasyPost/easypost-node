@@ -117,7 +117,7 @@ export declare class Address implements IAddress {
    * @param {Object} params - Parameters for the address to be created.
    * @returns {Address} - The created address.
    */
-  public create(params: Object): Promise<Address>;
+  static create(params: Object): Promise<Address>;
 
   /**
    * Retrieve a list of all Addresses.
