@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds missing typescript definitions for `Utility` class
+
 ## v6.4.0 (2023-05-02)
 
 - Adds `retrieveEstimatedDeliveryDate` in Shipment service

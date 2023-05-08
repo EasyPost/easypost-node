@@ -22,5 +22,6 @@ export * from './Shipment';
 export * from './Tracker';
 export * from './User';
 export * from './utils';
+export * from './Utility';
 export * from './Webhook';
 export { default, IEasyPostOptions } from './EasyPost';
