@@ -19,7 +19,6 @@ describe('ScanForm Service', function () {
     setupPolly.setupCassette(server);
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('creates a scanform', async function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 
@@ -31,7 +30,6 @@ describe('ScanForm Service', function () {
     expect(scanform.id).to.match(/^sf_/);
   });
 
-  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('retrieves a scanform', async function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 

@@ -1,10 +1,9 @@
 import superagent from 'superagent';
 
-// eslint-disable-next-line import/no-cycle
-import EasyPostClient from '../easypost';
-import baseService from './base_service';
 import Constants from '../constants';
+import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
+import baseService from './base_service';
 
 const util = require('util');
 

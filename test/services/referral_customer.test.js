@@ -1,4 +1,3 @@
-/* eslint-disable func-names,jest/no-disabled-tests */
 import { expect } from 'chai';
 
 import EasyPost from '../../src/easypost';

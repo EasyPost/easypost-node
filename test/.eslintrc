@@ -1,15 +1,5 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/babel",
-    "prettier/flowtype",
-    "prettier/react",
-    "prettier/standard",
-    "prettier/unicorn",
-    "prettier/vue"
-  ],
+  "extends": ["eslint:recommended", "prettier"],
 
   "env": {
     "node": true,

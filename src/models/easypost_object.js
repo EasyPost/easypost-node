@@ -1,4 +1,3 @@
-/* eslint-disable babel/camelcase */
 /**
  * An EasyPostObject is the base class for all EasyPost API resources.
  * @internal

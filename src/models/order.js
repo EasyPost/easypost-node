@@ -1,4 +1,3 @@
-/* eslint-disable babel/camelcase */
 import Constants from '../constants';
 import EasyPostObject from './easypost_object';
 
