@@ -1,5 +1,5 @@
 /* eslint-disable babel/camelcase */
-import EasyPostClient from '../easypost';
+import Constants from '../constants';
 import EasyPostObject from './easypost_object';
 
 /**
@@ -45,6 +45,6 @@ export default class Shipment extends EasyPostObject {
   lowestRate(carriers, services) {
     const rates = this.rates || [];
 
-    return new EasyPostClient('fake_api_key').Utils.getLowestRate(rates, carriers, services);
+    return Constants.Utils.getLowestRate(rates, carriers, services);
   }
 }

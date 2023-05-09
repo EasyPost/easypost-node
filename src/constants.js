@@ -1,3 +1,5 @@
+import Utils from './utils/util';
+
 /**
  * A class containing constants used throughout the EasyPost Node.js client library.
  */
@@ -19,4 +21,5 @@ export default class Constants {
     'Webhook received did not originate from EasyPost or had a webhook secret mismatch.';
   static END_OF_PAGINATION = 'There are no more pages to retrieve.';
   static ERROR_DESERIALIZATION = 'Error deserializing JSON response';
+  static Utils = new Utils();
 }
