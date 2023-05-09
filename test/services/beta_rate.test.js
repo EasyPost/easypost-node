@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import EasyPostClient from '../../src/easypost';
 import FilteringError from '../../src/errors/general/filtering_error';
 import Rate from '../../src/models/rate';
-import Utils from '../../src/utils/util';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -36,7 +35,7 @@ describe('BetaRateService', function () {
       Fixture.basicShipment(),
     );
 
-    const lowestStatelessRate = Utils.getLowestRate(statelessRates);
+    const lowestStatelessRate = this.client.Utils.getLowestRate(statelessRates);
 
     expect(lowestStatelessRate.service).to.be.equal('First');
     expect(lowestStatelessRate.rate).to.be.equal('6.07');
@@ -48,7 +47,7 @@ describe('BetaRateService', function () {
     );
 
     expect(() => {
-      Utils.getLowestRate(statelessRates, ['invalid_carrier'], ['invalid_service']);
+      this.client.Utils.getLowestRate(statelessRates, ['invalid_carrier'], ['invalid_service']);
     }).to.throw(FilteringError, 'No rates found.');
   });
 });

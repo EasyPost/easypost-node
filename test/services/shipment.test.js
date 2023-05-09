@@ -6,7 +6,6 @@ import FilteringError from '../../src/errors/general/filtering_error';
 import InvalidParameterError from '../../src/errors/general/invalid_parameter_error';
 import Rate from '../../src/models/rate';
 import Shipment from '../../src/models/shipment';
-import Util from '../../src/utils/util';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -252,7 +251,7 @@ describe('Shipment Service', function () {
     const smartRates = await this.client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with valid filters
-    const lowestSmartRate = Util.getLowestSmartRate(smartRates, 2, 'percentile_90');
+    const lowestSmartRate = this.client.Utils.getLowestSmartRate(smartRates, 2, 'percentile_90');
     expect(lowestSmartRate.service).to.equal('First');
     expect(lowestSmartRate.rate).to.equal(6.07);
     expect(lowestSmartRate.carrier).to.equal('USPS');
@@ -264,7 +263,7 @@ describe('Shipment Service', function () {
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
     expect(() => {
-      Util.getLowestSmartRate(smartRates, 0, 'percentile_90');
+      this.client.Utils.getLowestSmartRate(smartRates, 0, 'percentile_90');
     }).to.throw(FilteringError, 'No rates found.');
   });
 
@@ -274,7 +273,7 @@ describe('Shipment Service', function () {
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
     expect(() => {
-      Util.getLowestSmartRate(smartRates, 3, 'BAD_ACCURACY');
+      this.client.Utils.getLowestSmartRate(smartRates, 3, 'BAD_ACCURACY');
     }).to.throw(
       InvalidParameterError,
       'Invalid deliveryAccuracy value, must be one of: percentile_50, percentile_75, percentile_85, percentile_90, percentile_95, percentile_97, percentile_99',

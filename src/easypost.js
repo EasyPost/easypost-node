@@ -32,6 +32,7 @@ import ShipmentService from './services/shipment_service';
 import TrackerService from './services/tracker_service';
 import UserService from './services/user_service';
 import WebhookService from './services/webhook_service';
+import Utils from './utils/util';
 
 const util = require('util');
 
@@ -108,6 +109,7 @@ export const SERVICES = {
   Tracker: TrackerService,
   User: UserService,
   Webhook: WebhookService,
+  Utils: Utils,
 };
 
 /**
