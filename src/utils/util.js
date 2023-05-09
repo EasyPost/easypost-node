@@ -22,7 +22,7 @@ export default class Utils {
    * @throws {FilteringError} - If no applicable rates are found
    * @throws {InvalidParameterError} - If the deliveryAccuracy value is invalid
    */
-  static getLowestSmartRate(smartrates, deliveryDays, deliveryAccuracy) {
+  getLowestSmartRate(smartrates, deliveryDays, deliveryAccuracy) {
     const validDeliveryAccuracyValues = new Set([
       'percentile_50',
       'percentile_75',
@@ -73,7 +73,7 @@ export default class Utils {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  static getLowestRate(rates, carriers = null, services = null) {
+  getLowestRate(rates, carriers = null, services = null) {
     if (carriers) {
       const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
       // eslint-disable-next-line no-param-reassign
@@ -111,7 +111,7 @@ export default class Utils {
    * @returns {object} - The JSON-parsed webhook event body if the signature could be verified
    * @throws {SignatureVerificationError} - If the signature could not be verified
    */
-  static validateWebhook(eventBody, headers, webhookSecret) {
+  validateWebhook(eventBody, headers, webhookSecret) {
     let webhook = {};
     const easypostHmacSignature = headers['X-Hmac-Signature'] ?? null;
 

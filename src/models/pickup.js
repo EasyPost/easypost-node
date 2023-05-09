@@ -1,5 +1,5 @@
 /* eslint-disable babel/camelcase */
-import Utils from '../utils/util';
+import Constants from '../constants';
 import EasyPostObject from './easypost_object';
 
 /**
@@ -32,6 +32,6 @@ export default class Pickup extends EasyPostObject {
   lowestRate(carriers, services) {
     const rates = this.pickup_rates || [];
 
-    return Utils.getLowestRate(rates, carriers, services);
+    return Constants.Utils.getLowestRate(rates, carriers, services);
   }
 }

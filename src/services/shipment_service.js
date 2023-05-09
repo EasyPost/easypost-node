@@ -1,4 +1,4 @@
-import Util from '../utils/util';
+import Constants from '../constants';
 import baseService from './base_service';
 
 export default (easypostClient) =>
@@ -205,7 +205,11 @@ export default (easypostClient) =>
      */
     static async lowestSmartRate(id, deliveryDays, deliveryAccuracy) {
       const smartRates = await this.getSmartRates(id);
-      return Util.getLowestSmartRate(smartRates, deliveryDays, deliveryAccuracy.toLowerCase());
+      return Constants.Utils.getLowestSmartRate(
+        smartRates,
+        deliveryDays,
+        deliveryAccuracy.toLowerCase(),
+      );
     }
 
     /**

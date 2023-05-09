@@ -31,6 +31,7 @@ import ScanFormService from './services/scan_form_service';
 import ShipmentService from './services/shipment_service';
 import TrackerService from './services/tracker_service';
 import UserService from './services/user_service';
+import Utils from './utils/util';
 import WebhookService from './services/webhook_service';
 
 const util = require('util');
@@ -131,6 +132,7 @@ export default class EasyPostClient {
     this.baseUrl = baseUrl || DEFAULT_BASE_URL;
     this.agent = superagent;
     this.requestMiddleware = requestMiddleware;
+    this.Utils = new Utils();
 
     if (superagentMiddleware) {
       this.agent = superagentMiddleware(this.agent);

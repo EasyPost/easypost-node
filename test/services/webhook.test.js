@@ -2,7 +2,6 @@ import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
 import Webhook from '../../src/models/webhook';
-import Util from '../../src/utils/util';
 import Fixture from '../helpers/fixture';
 import SignatureVerificationError from '../../src/errors/general/signature_verification_error';
 import * as setupPolly from '../helpers/setup_polly';
@@ -94,7 +93,11 @@ describe('Webhook Service', function () {
       'X-Hmac-Signature': expectedHmacSignature,
     };
 
-    const webhookBody = Util.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+    const webhookBody = this.client.Utils.validateWebhook(
+      Fixture.eventBody(),
+      headers,
+      webhookSecret,
+    );
 
     expect(webhookBody.description).to.equal('batch.created');
   });
@@ -106,7 +109,7 @@ describe('Webhook Service', function () {
     };
 
     expect(() => {
-      Util.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+      this.client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
     }).to.throw(
       SignatureVerificationError,
       'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
@@ -122,7 +125,7 @@ describe('Webhook Service', function () {
     };
 
     expect(() => {
-      Util.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+      this.client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
     }).to.throw(
       SignatureVerificationError,
       'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
@@ -136,7 +139,7 @@ describe('Webhook Service', function () {
     };
 
     expect(() => {
-      Util.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+      this.client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
     }).to.throw(SignatureVerificationError, 'Webhook does not contain a valid HMAC signature.');
   });
 });
