@@ -1,4 +1,4 @@
-import EasyPostClient from '../easypost';
+import Constants from '../constants';
 import baseService from './base_service';
 
 export default (easypostClient) =>
@@ -205,7 +205,7 @@ export default (easypostClient) =>
      */
     static async lowestSmartRate(id, deliveryDays, deliveryAccuracy) {
       const smartRates = await this.getSmartRates(id);
-      return new EasyPostClient('fake_api_key').Utils.getLowestSmartRate(
+      return Constants.Utils.getLowestSmartRate(
         smartRates,
         deliveryDays,
         deliveryAccuracy.toLowerCase(),
