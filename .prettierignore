@@ -1,4 +1,5 @@
 .nyc_output
+cassettes
 coverage
 dist
 docs

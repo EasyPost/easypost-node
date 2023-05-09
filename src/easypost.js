@@ -23,7 +23,6 @@ import OrderService from './services/order_service';
 import ParcelService from './services/parcel_service';
 import PickupService from './services/pickup_service';
 import RateService from './services/rate_service';
-// eslint-disable-next-line import/no-cycle
 import ReferralCustomerService from './services/referral_customer_service';
 import RefundService from './services/refund_service';
 import ReportService from './services/report_service';
@@ -31,8 +30,8 @@ import ScanFormService from './services/scan_form_service';
 import ShipmentService from './services/shipment_service';
 import TrackerService from './services/tracker_service';
 import UserService from './services/user_service';
-import Utils from './utils/util';
 import WebhookService from './services/webhook_service';
+import Utils from './utils/util';
 
 const util = require('util');
 

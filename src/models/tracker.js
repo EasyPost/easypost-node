@@ -1,4 +1,3 @@
-/* eslint-disable babel/camelcase */
 import EasyPostObject from './easypost_object';
 
 /**

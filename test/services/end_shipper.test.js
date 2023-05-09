@@ -5,7 +5,6 @@ import EndShipper from '../../src/models/end_shipper';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
-/* eslint-disable func-names,jest/no-disabled-tests */
 describe('EndShipper Service', function () {
   setupPolly.startPolly();
 
