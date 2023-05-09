@@ -93,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_address.js.html">models/address.js</a>, <a href="models_address.js.html#line9">line 9</a>
+        <a href="models_address.js.html">models/address.js</a>, <a href="models_address.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -235,7 +235,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_api_key.js.html">models/api_key.js</a>, <a href="models_api_key.js.html#line9">line 9</a>
+        <a href="models_api_key.js.html">models/api_key.js</a>, <a href="models_api_key.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -377,7 +377,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_batch.js.html">models/batch.js</a>, <a href="models_batch.js.html#line9">line 9</a>
+        <a href="models_batch.js.html">models/batch.js</a>, <a href="models_batch.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -519,7 +519,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_brand.js.html">models/brand.js</a>, <a href="models_brand.js.html#line9">line 9</a>
+        <a href="models_brand.js.html">models/brand.js</a>, <a href="models_brand.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -661,7 +661,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_carrier_account.js.html">models/carrier_account.js</a>, <a href="models_carrier_account.js.html#line9">line 9</a>
+        <a href="models_carrier_account.js.html">models/carrier_account.js</a>, <a href="models_carrier_account.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -945,7 +945,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_customs_info.js.html">models/customs_info.js</a>, <a href="models_customs_info.js.html#line9">line 9</a>
+        <a href="models_customs_info.js.html">models/customs_info.js</a>, <a href="models_customs_info.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -1087,7 +1087,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_customs_item.js.html">models/customs_item.js</a>, <a href="models_customs_item.js.html#line9">line 9</a>
+        <a href="models_customs_item.js.html">models/customs_item.js</a>, <a href="models_customs_item.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -1229,7 +1229,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_easypost_object.js.html">models/easypost_object.js</a>, <a href="models_easypost_object.js.html#line7">line 7</a>
+        <a href="models_easypost_object.js.html">models/easypost_object.js</a>, <a href="models_easypost_object.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -1502,7 +1502,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_event.js.html">models/event.js</a>, <a href="models_event.js.html#line9">line 9</a>
+        <a href="models_event.js.html">models/event.js</a>, <a href="models_event.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -1644,7 +1644,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_form.js.html">models/form.js</a>, <a href="models_form.js.html#line9">line 9</a>
+        <a href="models_form.js.html">models/form.js</a>, <a href="models_form.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -1786,7 +1786,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_insurance.js.html">models/insurance.js</a>, <a href="models_insurance.js.html#line9">line 9</a>
+        <a href="models_insurance.js.html">models/insurance.js</a>, <a href="models_insurance.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -1928,7 +1928,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_order.js.html">models/order.js</a>, <a href="models_order.js.html#line10">line 10</a>
+        <a href="models_order.js.html">models/order.js</a>, <a href="models_order.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -2070,7 +2070,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_parcel.js.html">models/parcel.js</a>, <a href="models_parcel.js.html#line9">line 9</a>
+        <a href="models_parcel.js.html">models/parcel.js</a>, <a href="models_parcel.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -2212,7 +2212,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_payload.js.html">models/payload.js</a>, <a href="models_payload.js.html#line9">line 9</a>
+        <a href="models_payload.js.html">models/payload.js</a>, <a href="models_payload.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -2354,7 +2354,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_pickup.js.html">models/pickup.js</a>, <a href="models_pickup.js.html#line10">line 10</a>
+        <a href="models_pickup.js.html">models/pickup.js</a>, <a href="models_pickup.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -2496,7 +2496,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_pickup_rate.js.html">models/pickup_rate.js</a>, <a href="models_pickup_rate.js.html#line9">line 9</a>
+        <a href="models_pickup_rate.js.html">models/pickup_rate.js</a>, <a href="models_pickup_rate.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -2638,7 +2638,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_postage_label.js.html">models/postage_label.js</a>, <a href="models_postage_label.js.html#line9">line 9</a>
+        <a href="models_postage_label.js.html">models/postage_label.js</a>, <a href="models_postage_label.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -2780,7 +2780,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_rate.js.html">models/rate.js</a>, <a href="models_rate.js.html#line9">line 9</a>
+        <a href="models_rate.js.html">models/rate.js</a>, <a href="models_rate.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -2922,7 +2922,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_refund.js.html">models/refund.js</a>, <a href="models_refund.js.html#line9">line 9</a>
+        <a href="models_refund.js.html">models/refund.js</a>, <a href="models_refund.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -3064,7 +3064,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_report.js.html">models/report.js</a>, <a href="models_report.js.html#line9">line 9</a>
+        <a href="models_report.js.html">models/report.js</a>, <a href="models_report.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -3206,7 +3206,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_scan_form.js.html">models/scan_form.js</a>, <a href="models_scan_form.js.html#line9">line 9</a>
+        <a href="models_scan_form.js.html">models/scan_form.js</a>, <a href="models_scan_form.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -3348,7 +3348,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_shipment.js.html">models/shipment.js</a>, <a href="models_shipment.js.html#line10">line 10</a>
+        <a href="models_shipment.js.html">models/shipment.js</a>, <a href="models_shipment.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -3490,7 +3490,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_tracker.js.html">models/tracker.js</a>, <a href="models_tracker.js.html#line9">line 9</a>
+        <a href="models_tracker.js.html">models/tracker.js</a>, <a href="models_tracker.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -3632,7 +3632,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_user.js.html">models/user.js</a>, <a href="models_user.js.html#line9">line 9</a>
+        <a href="models_user.js.html">models/user.js</a>, <a href="models_user.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -3774,7 +3774,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_webhook.js.html">models/webhook.js</a>, <a href="models_webhook.js.html#line9">line 9</a>
+        <a href="models_webhook.js.html">models/webhook.js</a>, <a href="models_webhook.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -4320,7 +4320,7 @@ This class is not designed to be used directly by consumers of the library.</div
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 09 2023 20:52:46 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 09 2023 22:16:05 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
