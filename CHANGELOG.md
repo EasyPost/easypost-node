@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Next Release
+
+- Bumps and modernizes all dependencies which no longer requires a force install/update
+- Adds support for Typescript 5
+- Typescript definitions graduated from beta to GA
+
 ## v6.5.0 (2023-05-09)
 
 - Adds missing typescript definitions for `Utility` class
