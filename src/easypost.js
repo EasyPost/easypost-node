@@ -13,6 +13,7 @@ import BetaRateService from './services/beta_rate_service';
 import BetaReferralCustomerService from './services/beta_referral_customer_service';
 import BillingService from './services/billing_service';
 import CarrierAccountService from './services/carrier_account_service';
+import CarrierMetadataService from './services/carrier_metadata_service';
 import CarrierTypeService from './services/carrier_type_service';
 import CustomsInfoService from './services/customs_info_service';
 import CustomsItemService from './services/customs_item_service';
@@ -90,6 +91,7 @@ export const SERVICES = {
   BetaReferralCustomer: BetaReferralCustomerService,
   Billing: BillingService,
   CarrierAccount: CarrierAccountService,
+  CarrierMetadata: CarrierMetadataService,
   CarrierType: CarrierTypeService,
   CustomsInfo: CustomsInfoService,
   CustomsItem: CustomsItemService,
