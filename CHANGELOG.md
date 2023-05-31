@@ -4,6 +4,7 @@
 
 - Bumps and modernizes all dependencies which no longer requires a force install/update
 - Adds support for Typescript 5
+- Retrieving carrier metadata is now generally available via `client.carrierMetadata.retrieve`
 - Typescript definitions graduated from beta to GA
 
 ## v6.5.0 (2023-05-09)

@@ -4,7 +4,7 @@ import EasyPostClient from '../../src/easypost';
 import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable func-names */
-describe('BetaCarrierMetadataService', function () {
+describe('CarrierMetadataService', function () {
   setupPolly.startPolly();
 
   before(function () {
@@ -17,14 +17,14 @@ describe('BetaCarrierMetadataService', function () {
   });
 
   it('retrieves all carrier metadata', async function () {
-    const carrierMetadata = await this.client.BetaCarrierMetadata.retrieveCarrierMetadata();
+    const carrierMetadata = await this.client.CarrierMetadata.retrieve();
 
     expect(carrierMetadata.some((carrier) => carrier.name === 'usps')).to.be.true;
     expect(carrierMetadata.some((carrier) => carrier.name === 'fedex')).to.be.true;
   });
 
   it('retrieves carrier metadata based on the filters provided', async function () {
-    const carrierMetadata = await this.client.BetaCarrierMetadata.retrieveCarrierMetadata(
+    const carrierMetadata = await this.client.CarrierMetadata.retrieve(
       ['usps'],
       ['service_levels', 'predefined_packages'],
     );
