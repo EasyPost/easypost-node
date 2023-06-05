@@ -30,8 +30,14 @@ format:
 format-check:
 	npm run formatCheck
 
+# TODO: Change branch to master once examples are updated
+## install-style - Download style guides
+install-style:
+	curl -LJs https://raw.githubusercontent.com/EasyPost/examples/style_guides/.prettierrc.yml -o .prettierrc.yml
+	curl -LJs https://raw.githubusercontent.com/EasyPost/examples/style_guides/.eslintrc_node_cl -o .eslintrc
+
 ## install - Install project dependencies
-install:
+install: | install-style
 	git submodule init
 	git submodule update
 	npm install
@@ -66,4 +72,4 @@ update:
 	git submodule update --remote
 	npm update
 
-.PHONY: help build clean coverage docs fix format format-check install lint publish release scan test update
+.PHONY: help build clean coverage docs fix format format-check install install-style lint publish release scan test update
