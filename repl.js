@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable import/no-dynamic-require */
-
-/* eslint import/no-extraneous-dependencies: 0, global-require: 0, import/no-unresolved: 0, no-console: 0, max-len: 0 */
-
 require('source-map-support').install();
 require('core-js/stable');
 
