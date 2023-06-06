@@ -65,7 +65,7 @@
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.40.0",
+    "eslint": "8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-webpack": "^0.13.2",
     "eslint-plugin-babel": "^5.3.1",
