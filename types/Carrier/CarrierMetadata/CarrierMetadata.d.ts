@@ -57,8 +57,5 @@ export declare class CarrierMetadata implements ICarrierMetadata {
    *
    * @returns {Promise<CarrierMetadata[]>} The {@link CarrierMetadata} object.
    */
-  static retrieveCarrierMetadata(
-    carriers: Array<string>,
-    types: Array<string>,
-  ): Promise<CarrierMetadata>;
+  static retrieve(carriers: Array<string>, types: Array<string>): Promise<CarrierMetadata>;
 }
