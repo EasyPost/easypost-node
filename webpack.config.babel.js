@@ -1,4 +1,3 @@
-/* eslint import/no-extraneous-dependencies: 0 */
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
