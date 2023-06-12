@@ -14,5 +14,8 @@ docs
 Icon
 node_modules
 npm-debug.log
-/.prettierrc.yml
 /.eslintrc
+/.eslintignore
+/.babelrc
+/.prettierrc.yml
+/.prettierignore

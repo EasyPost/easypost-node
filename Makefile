@@ -30,17 +30,18 @@ format:
 format-check:
 	npm run formatCheck
 
-# TODO: Change branch to master once examples are updated
-## install-style - Download style guides
-install-style:
-	curl -LJs https://raw.githubusercontent.com/EasyPost/examples/style_guides/.prettierrc.yml -o .prettierrc.yml
-	curl -LJs https://raw.githubusercontent.com/EasyPost/examples/style_guides/.eslintrc_node_cl -o .eslintrc
+## install-styleguide - Import style guides (Unix only)
+install-styleguide:
+	sh examples/symlink_directory_files.sh examples/style_guides/node .
 
-## install - Install project dependencies
-install: | install-style
-	git submodule init
-	git submodule update
+## install - Install project dependencies (Unix only)
+install: | update-examples-submodule install-styleguide
 	npm install
+
+## update-examples-submodule - Update the examples submodule
+update-examples-submodule:
+	git submodule init
+	git submodule update --remote
 
 ## lint - Lint the project
 lint:
@@ -67,9 +68,8 @@ scan:
 test:
 	npm run test
 
-## update - Update dependencies
-update:
-	git submodule update --remote
+## update - Update dependencies (Unix only)
+update: | update-examples-submodule
 	npm update
 
-.PHONY: help build clean coverage docs fix format format-check install install-style lint publish release scan test update
+.PHONY: help build clean coverage docs fix format format-check install install-styleguide lint publish release scan test update update-examples-submodule
