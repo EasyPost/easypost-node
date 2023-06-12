@@ -16,6 +16,5 @@ node_modules
 npm-debug.log
 /.eslintrc
 /.eslintignore
-/.babelrc
 /.prettierrc.yml
 /.prettierignore
