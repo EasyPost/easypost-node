@@ -30,6 +30,10 @@ format:
 format-check:
 	npm run formatCheck
 
+## install-styleguide - Install the styleguide (Unix only)
+install-styleguide: | update-examples-submodule
+	sh examples/symlink_directory_files.sh examples/style_guides/node .
+
 ## install - Install project dependencies (Unix only)
 install: | update-examples-submodule
 	npm install
