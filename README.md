@@ -187,6 +187,9 @@ For additional support, see our [org-wide support policy](https://github.com/Eas
 # Install dependencies
 make install
 
+# Install style guides (Unix only)
+make install-styleguide
+
 # Update dependencies
 make update
 

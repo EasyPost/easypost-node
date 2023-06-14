@@ -30,11 +30,18 @@ format:
 format-check:
 	npm run formatCheck
 
-## install - Install project dependencies
-install:
-	git submodule init
-	git submodule update
+## install-styleguide - Install the styleguide (Unix only)
+install-styleguide: | update-examples-submodule
+	sh examples/symlink_directory_files.sh examples/style_guides/node .
+
+## install - Install project dependencies (Unix only)
+install: | update-examples-submodule
 	npm install
+
+## update-examples-submodule - Update the examples submodule
+update-examples-submodule:
+	git submodule init
+	git submodule update --remote
 
 ## lint - Lint the project
 lint:
@@ -61,9 +68,8 @@ scan:
 test:
 	npm run test
 
-## update - Update dependencies
-update:
-	git submodule update --remote
+## update - Update dependencies (Unix only)
+update: | update-examples-submodule
 	npm update
 
-.PHONY: help build clean coverage docs fix format format-check install lint publish release scan test update
+.PHONY: help build clean coverage docs fix format format-check install lint publish release scan test update update-examples-submodule
