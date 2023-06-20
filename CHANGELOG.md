@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.6.1 (2023-06-20)
+
+- Fixes the `pickup_rates` Typescript property of a Pickup
+
 ## v6.6.0 (2023-06-06)
 
 - Retrieving carrier metadata is now generally available via `client.carrierMetadata.retrieve`
