@@ -26,7 +26,7 @@
     "format": "prettier --write .",
     "formatCheck": "prettier --check .",
     "lint": "eslint --ext .js,.ts .",
-    "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run check",
+    "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run formatCheck",
     "repl": "./repl.js --local easypost.js",
     "scan": "npx audit-ci -m",
     "test": "cross-env NODE_ENV=test mocha --timeout 10000 --require @babel/register --require ./test/helpers/common.js --recursive ./test",
