@@ -1,4 +1,4 @@
-import PickupRate from '../../src/models/pickup_rate';
+import { IPickupRate } from './PickupRate';
 import { Address } from '../Address';
 import { Batch } from '../Batch';
 import { CarrierAccount } from '../Carrier';
@@ -12,7 +12,7 @@ interface BasePickupCreateParameters {
   is_account_address?: boolean | null;
   max_datetime: string;
   min_datetime: string;
-  pickup_rates: PickupRate;
+  pickup_rates: IPickupRate;
   reference?: string | null;
   status: string;
 }
