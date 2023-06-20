@@ -18,17 +18,13 @@ coverage:
 docs:
 	npm run docs
 
-## fix - Fix linting errors
-fix:
-	npm run fix
+## eslint - Lint the project
+eslint:
+	npm run lint
 
-## format - Runs all formatting tools against the project
-format:
-	npm run format
-
-## format-check - Checks if the project is formatted correctly against all formatting rules
-format-check:
-	npm run formatCheck
+## eslint-fix - Fixes the lint
+eslint-fix:
+	npm run lintFix
 
 ## install-styleguide - Install the styleguide (Unix only)
 install-styleguide: | update-examples-submodule
@@ -38,14 +34,11 @@ install-styleguide: | update-examples-submodule
 install: | update-examples-submodule
 	npm install
 
-## update-examples-submodule - Update the examples submodule
-update-examples-submodule:
-	git submodule init
-	git submodule update --remote
-
 ## lint - Lint the project
-lint:
-	npm run lint
+lint: eslint prettier scan
+
+## fix - Fix linting errors
+lint-fix: eslint-fix prettier-fix
 
 ## publish - Publish the built assets to NPM
 publish:
@@ -54,6 +47,14 @@ publish:
 ## publish-next - Publish the built assets to NPM for a release candidate
 publish-next:
 	npm publish --tag next
+
+## prettier - Checks the format with prettier
+prettier:
+	npm run formatCheck
+
+## prettier-fix - Fixes the format with prettier
+prettier-fix:
+	npm run format
 
 ## release - Cuts a release for the project on GitHub (requires GitHub CLI)
 # tag = The associated tag title of the release
@@ -72,4 +73,9 @@ test:
 update: | update-examples-submodule
 	npm update
 
-.PHONY: help build clean coverage docs fix format format-check install lint publish release scan test update update-examples-submodule
+## update-examples-submodule - Update the examples submodule
+update-examples-submodule:
+	git submodule init
+	git submodule update --remote
+
+.PHONY: help build clean coverage docs install lint lint-fix publish release scan test update update-examples-submodule

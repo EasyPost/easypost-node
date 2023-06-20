@@ -198,17 +198,10 @@ make build
 
 # Lint the project
 make lint
-
-# Fix lint errors
-make fix
-
-# Format the project
-make format
+make lint-fix
 
 # Run tests (these will be transpiled on the fly)
 EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make test
-
-# Run tests with coverage (these will be transpiled on the fly)
 EASYPOST_TEST_API_KEY=123... EASYPOST_PROD_API_KEY=123... make coverage
 
 # Run security analysis
@@ -218,8 +211,7 @@ make scan
 make docs
 
 # Update submodules
-git submodule init
-git submodule update --remote
+make update-examples-submodule
 ```
 
 ### Typescript Definitions
