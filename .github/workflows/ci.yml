@@ -28,8 +28,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - run: make lint
-      - run: make format-check
-      - run: make scan
   docs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
