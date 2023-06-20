@@ -34,11 +34,6 @@ install-styleguide: | update-examples-submodule
 install: | update-examples-submodule
 	npm install
 
-## update-examples-submodule - Update the examples submodule
-update-examples-submodule:
-	git submodule init
-	git submodule update --remote
-
 ## lint - Lint the project
 lint: eslint prettier scan
 
@@ -77,5 +72,10 @@ test:
 ## update - Update dependencies (Unix only)
 update: | update-examples-submodule
 	npm update
+
+## update-examples-submodule - Update the examples submodule
+update-examples-submodule:
+	git submodule init
+	git submodule update --remote
 
 .PHONY: help build clean coverage docs install lint lint-fix publish release scan test update update-examples-submodule
