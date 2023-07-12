@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## v6.7 (2023-07-12)
+## v6.7 (Next release)
 
-- Adds `requestHook` and `responseHook` config options
+- Adds `requestHook` and `responseHook` config options in easypost client
 
 ## v6.6.1 (2023-06-20)
 

@@ -121,15 +121,7 @@ export const SERVICES = {
  */
 export default class EasyPostClient {
   constructor(key, options = {}) {
-    const {
-      useProxy,
-      timeout,
-      baseUrl,
-      superagentMiddleware,
-      requestMiddleware,
-      requestHook,
-      responseHook,
-    } = options;
+    const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
 
     if (!key && !useProxy) {
       throw new MissingParameterError({
@@ -142,8 +134,8 @@ export default class EasyPostClient {
     this.baseUrl = baseUrl || DEFAULT_BASE_URL;
     this.agent = superagent;
     this.requestMiddleware = requestMiddleware;
-    this.requestHook = requestHook;
-    this.responseHook = responseHook;
+    this.requestHooks = [];
+    this.responseHooks = [];
     this.Utils = new Utils();
 
     if (superagentMiddleware) {
@@ -151,6 +143,48 @@ export default class EasyPostClient {
     }
 
     this._attachServices(SERVICES);
+  }
+
+  /**
+   * Add a request hook function.
+   * @param {(config: object) => void} hook
+   */
+  addRequestHook(hook) {
+    this.requestHooks = [...this.requestHooks, hook];
+  }
+  /**
+   * Remove a request hook function.
+   * @param {(config: object) => void} hook
+   */
+  removeRequestHook(hook) {
+    this.requestHooks = this.requestHooks.filter((h) => h !== hook);
+  }
+  /**
+   * Clear all request hooks.
+   */
+  clearRequestHooks() {
+    this.requestHooks = [];
+  }
+
+  /**
+   * Add a response hook function.
+   * @param {(config: object) => void} hook
+   */
+  addResponseHook(hook) {
+    this.responseHooks = [...this.responseHooks, hook];
+  }
+  /**
+   * Remove a response hook function.
+   * @param {(config: object) => void} hook
+   */
+  removeResponseHook(hook) {
+    this.responseHooks = this.responseHooks.filter((h) => h !== hook);
+  }
+  /**
+   * Clear all response hooks.
+   */
+  clearResponseHooks() {
+    this.responseHooks = [];
   }
 
   /**
@@ -256,26 +290,37 @@ export default class EasyPostClient {
       requestUUID: uuid(),
     };
 
-    if (this.requestHook) {
-      this.requestHook(baseHooksValue);
+    if (this.requestHooks.length > 0) {
+      this.requestHooks.forEach((fn) => fn(baseHooksValue));
     }
 
     try {
       const response = await request;
 
-      if (this.responseHook) {
-        this.responseHook({
-          ...baseHooksValue,
-          httpStatus: response.status,
-          responseBody: response.body,
-          responseHeaders: response.headers,
-          responseTimestamp: Date.now(),
-        });
+      if (this.responseHooks.length > 0) {
+        this.responseHooks.forEach((fn) =>
+          fn({
+            ...baseHooksValue,
+            httpStatus: response.status,
+            responseBody: response.body,
+            responseHeaders: response.headers,
+            responseTimestamp: Date.now(),
+          }),
+        );
       }
 
       return response;
     } catch (error) {
       if (error.response && error.response.body) {
+        this.responseHooks.forEach((fn) =>
+          fn({
+            ...baseHooksValue,
+            httpStatus: error.response.status,
+            responseBody: error.response.body,
+            responseHeaders: error.response.headers,
+            responseTimestamp: Date.now(),
+          }),
+        );
         throw ErrorHandler.handleApiError(error.response);
       } else {
         throw error;

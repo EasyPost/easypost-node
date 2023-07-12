@@ -22,10 +22,10 @@ describe('EasyPost', function () {
     let responseConfig;
     const responseHook = (response) => (responseConfig = response);
 
-    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY, {
-      requestHook,
-      responseHook,
-    });
+    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
+
+    client.addRequestHook(requestHook);
+    client.addResponseHook(responseHook);
 
     await client.Address.create(Fixture.caAddress1());
 
@@ -53,5 +53,98 @@ describe('EasyPost', function () {
     expect(responseConfig.responseTimestamp).to.be.greaterThanOrEqual(
       responseConfig.requestTimestamp,
     );
+  });
+
+  it('will add more than one request and response hook', async function () {
+    let requestConfig1;
+    const requestHook1 = (response) => (requestConfig1 = response);
+    let requestConfig2;
+    const requestHook2 = (response) => (requestConfig2 = response);
+    let responseConfig1;
+    const responseHook1 = (response) => (responseConfig1 = response);
+    let responseConfig2;
+    const responseHook2 = (response) => (responseConfig2 = response);
+
+    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
+
+    client.addRequestHook(requestHook1);
+    client.addRequestHook(requestHook2);
+    client.addResponseHook(responseHook1);
+    client.addResponseHook(responseHook2);
+
+    await client.Address.create(Fixture.caAddress1());
+
+    expect(requestConfig1).to.be.an('object');
+    expect(requestConfig2).to.be.an('object');
+    expect(responseConfig1).to.be.an('object');
+    expect(responseConfig2).to.be.an('object');
+  });
+
+  it('will unsubscribe from requests and responses', async function () {
+    let requestConfig;
+    const requestHook = (response) => (requestConfig = response);
+    let responseConfig;
+    const responseHook = (response) => (responseConfig = response);
+
+    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
+
+    client.addRequestHook(requestHook);
+    client.addResponseHook(responseHook);
+
+    await client.Address.create(Fixture.caAddress1());
+
+    expect(requestConfig).to.be.an('object');
+    expect(responseConfig).to.be.an('object');
+
+    client.removeRequestHook(requestHook);
+    client.removeResponseHook(responseHook);
+
+    requestConfig = null;
+    responseConfig = null;
+
+    await client.Address.create(Fixture.caAddress1());
+
+    expect(requestConfig).to.be.null;
+    expect(responseConfig).to.be.null;
+  });
+
+  it('will clear all request and response hooks', async function () {
+    let requestConfig1;
+    const requestHook1 = (response) => (requestConfig1 = response);
+    let requestConfig2;
+    const requestHook2 = (response) => (requestConfig2 = response);
+    let responseConfig1;
+    const responseHook1 = (response) => (responseConfig1 = response);
+    let responseConfig2;
+    const responseHook2 = (response) => (responseConfig2 = response);
+
+    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
+
+    client.addRequestHook(requestHook1);
+    client.addRequestHook(requestHook2);
+    client.addResponseHook(responseHook1);
+    client.addResponseHook(responseHook2);
+
+    await client.Address.create(Fixture.caAddress1());
+
+    expect(requestConfig1).to.be.an('object');
+    expect(requestConfig2).to.be.an('object');
+    expect(responseConfig1).to.be.an('object');
+    expect(responseConfig2).to.be.an('object');
+
+    client.clearRequestHooks();
+    client.clearResponseHooks();
+
+    requestConfig1 = null;
+    requestConfig2 = null;
+    responseConfig1 = null;
+    responseConfig2 = null;
+
+    await client.Address.create(Fixture.caAddress1());
+
+    expect(requestConfig1).to.be.null;
+    expect(requestConfig2).to.be.null;
+    expect(responseConfig1).to.be.null;
+    expect(responseConfig2).to.be.null;
   });
 });
