@@ -32,16 +32,14 @@ describe('EasyPost', function () {
     expect(requestConfig).to.be.an('object');
     expect(requestConfig.method).to.equal(METHODS.POST);
     expect(requestConfig.path).to.equal('https://api.easypost.com/v2/addresses');
-    expect(requestConfig.requestHeaders).to.be.an('object');
-    expect(requestConfig.requestHeaders['Content-Type']).to.equal('application/json');
+    expect(requestConfig.headers).to.be.an('object');
+    expect(requestConfig.headers['Content-Type']).to.equal('application/json');
     expect(requestConfig.requestTimestamp).to.be.a('number');
     expect(requestConfig.requestUUID).to.be.a('string');
 
     expect(responseConfig).to.be.an('object');
     expect(responseConfig.method).to.equal(METHODS.POST);
     expect(responseConfig.path).to.equal('https://api.easypost.com/v2/addresses');
-    expect(responseConfig.requestHeaders).to.be.an('object');
-    expect(responseConfig.requestHeaders['Content-Type']).to.equal('application/json');
     expect(responseConfig.requestTimestamp).to.be.a('number');
     expect(responseConfig.requestUUID).to.be.a('string');
     expect(responseConfig.httpStatus).to.be.a('number');

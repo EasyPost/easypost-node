@@ -285,7 +285,7 @@ export default class EasyPostClient {
       method,
       path: url.toString(),
       requestBody: request._data,
-      requestHeaders,
+      headers: requestHeaders,
       requestTimestamp: Date.now(),
       requestUUID: uuid(),
     };
@@ -298,15 +298,16 @@ export default class EasyPostClient {
       const response = await request;
 
       if (this.responseHooks.length > 0) {
-        this.responseHooks.forEach((fn) =>
-          fn({
-            ...baseHooksValue,
-            httpStatus: response.status,
-            responseBody: response.body,
-            responseHeaders: response.headers,
-            responseTimestamp: Date.now(),
-          }),
-        );
+        const responseHooksValue = {
+          ...baseHooksValue,
+          httpStatus: response.status,
+          responseBody: response.body,
+          responseHeaders: response.headers,
+          responseTimestamp: Date.now(),
+        };
+        delete responseHooksValue.headers;
+
+        this.responseHooks.forEach((fn) => fn(responseHooksValue));
       }
 
       return response;

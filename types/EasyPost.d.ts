@@ -20,11 +20,11 @@ export interface IEasyPostRequest {
   method: 'get' | 'post' | 'put' | 'patch' | 'del';
   path: string;
   requestBody: any;
-  requestHeaders: Record<string, any>;
+  headers: Record<string, any>;
   requestTimestamp: number;
   requestUUID: string;
 }
-export interface IEasyPostResponse extends IEasyPostRequest {
+export interface IEasyPostResponse extends Omit<IEasyPostRequest, 'headers'> {
   httpStatus: number;
   responseBody: any;
   responseHeaders: Record<string, any>;
