@@ -3,9 +3,12 @@ import { expect } from 'chai';
 import EasyPost, { METHODS } from '../../src/easypost';
 import MissingParameterError from '../../src/errors/general/missing_parameter_error';
 import Fixture from '../helpers/fixture';
+import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable func-names */
 describe('EasyPost', function () {
+  setupPolly.startPolly();
+
   it('throws an error when no API key is provided', async function () {
     expect(() => new EasyPost()).to.throw(
       MissingParameterError,
