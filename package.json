@@ -1,7 +1,7 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "6.6.1",
+  "version": "6.7",
   "author": "Easypost Engineering <oss@easypost.com>",
   "homepage": "https://easypost.com",
   "bin": {
@@ -38,6 +38,7 @@
     "regenerator-runtime": "~0.13.11",
     "source-map-support": "~0.5.21",
     "superagent": "~8.0.9",
+    "uuid": "^9.0.0",
     "yargs": "~17.7.2",
     "yargs-parser": "~21.1.1"
   },

@@ -16,6 +16,21 @@ import { User } from './User';
 import { Utils } from './Utility';
 import { Webhook } from './Webhook';
 
+export interface IEasyPostRequest {
+  method: 'get' | 'post' | 'put' | 'patch' | 'del';
+  path: string;
+  requestBody: any;
+  requestHeaders: Record<string, any>;
+  requestTimestamp: number;
+  requestUUID: string;
+}
+export interface IEasyPostResponse extends IEasyPostRequest {
+  httpStatus: number;
+  responseBody: any;
+  responseHeaders: Record<string, any>;
+  responseTimestamp: number;
+}
+
 export interface IEasyPostOptions {
   /**
    * Time in milliseconds that should fail requests.
@@ -44,6 +59,18 @@ export interface IEasyPostOptions {
    * Useful if you need to hook into a request:
    */
   requestMiddleware?: (request: any) => any;
+
+  /**
+   * Function that provides information about the current outgoing request.
+   * Useful for logging or debugging.
+   */
+  requestHook?: (request: IEasyPostRequest) => void;
+
+  /**
+   * Function that provides information about the current outgoing response.
+   * Useful for logging or debugging.
+   */
+  responseHook?: (response: IEasyPostResponse) => void;
 }
 
 export default class EasyPost {

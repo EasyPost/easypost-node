@@ -1,5 +1,6 @@
 import os from 'os';
 import superagent from 'superagent';
+import { v4 as uuid } from 'uuid';
 
 import pkg from '../package.json';
 import Constants from './constants';
@@ -120,7 +121,15 @@ export const SERVICES = {
  */
 export default class EasyPostClient {
   constructor(key, options = {}) {
-    const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
+    const {
+      useProxy,
+      timeout,
+      baseUrl,
+      superagentMiddleware,
+      requestMiddleware,
+      requestHook,
+      responseHook,
+    } = options;
 
     if (!key && !useProxy) {
       throw new MissingParameterError({
@@ -133,6 +142,8 @@ export default class EasyPostClient {
     this.baseUrl = baseUrl || DEFAULT_BASE_URL;
     this.agent = superagent;
     this.requestMiddleware = requestMiddleware;
+    this.requestHook = requestHook;
+    this.responseHook = responseHook;
     this.Utils = new Utils();
 
     if (superagentMiddleware) {
@@ -221,16 +232,47 @@ export default class EasyPostClient {
       request.auth(this.key);
     }
 
-    if (params !== {} && params !== undefined) {
+    // it would be ideal if this "full url with params" could be gotten from superagent directly,
+    // but it doesn't seem to be possible
+    const url = new URL(urlPath);
+
+    if (params !== undefined) {
       if (method === METHODS.GET || method === METHODS.DELETE) {
         request.query(params);
+        Object.entries(params).forEach(([key, value]) => {
+          url.searchParams.append(key, value);
+        });
       } else {
         request.send(params);
       }
     }
 
+    const baseHooksValue = {
+      method,
+      path: url.toString(),
+      requestBody: request._data,
+      requestHeaders,
+      requestTimestamp: Date.now(),
+      requestUUID: uuid(),
+    };
+
+    if (this.requestHook) {
+      this.requestHook(baseHooksValue);
+    }
+
     try {
       const response = await request;
+
+      if (this.responseHook) {
+        this.responseHook({
+          ...baseHooksValue,
+          httpStatus: response.status,
+          responseBody: response.body,
+          responseHeaders: response.headers,
+          responseTimestamp: Date.now(),
+        });
+      }
+
       return response;
     } catch (error) {
       if (error.response && error.response.body) {

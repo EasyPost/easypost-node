@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.7 (2023-07-12)
+
+- Adds `requestHook` and `responseHook` config options
+
 ## v6.6.1 (2023-06-20)
 
 - Fixes the `pickup_rates` Typescript property of a Pickup
