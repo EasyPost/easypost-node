@@ -2,7 +2,13 @@
 
 ## v6.7 (Next release)
 
-- Adds `requestHook` and `responseHook` config options in easypost client
+- Adds methods to the easypost client for subscribing and unsubscribing from requests and responses being sent to the API
+  - `addRequestHook`: Adds a request hook to the EasyPost client. Useful for logging or debugging.
+  - `removeRequestHook`: Removes a request hook from the EasyPost client.
+  - `clearRequestHooks`: Clears all request hooks from the EasyPost client.
+  - `addResponseHook`: Adds a response hook to the EasyPost client. Useful for logging or debugging.
+  - `removeResponseHook`: Removes a response hook from the EasyPost client.
+  - `clearResponseHooks`: Clears all response hooks from the EasyPost client.
 
 ## v6.6.1 (2023-06-20)
 
