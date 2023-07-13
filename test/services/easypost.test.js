@@ -45,8 +45,8 @@ describe('EasyPost', function () {
     expect(responseConfig.httpStatus).to.be.a('number');
     expect(responseConfig.responseBody).to.be.an('object');
     expect(responseConfig.responseBody.object).to.equal('Address');
-    expect(responseConfig.responseHeaders).to.be.an('object');
-    expect(responseConfig.responseHeaders['content-type']).to.contain('application/json');
+    expect(responseConfig.headers).to.be.an('object');
+    expect(responseConfig.headers['content-type']).to.contain('application/json');
     expect(responseConfig.responseTimestamp).to.be.a('number');
     expect(responseConfig.responseTimestamp).to.be.greaterThanOrEqual(
       responseConfig.requestTimestamp,

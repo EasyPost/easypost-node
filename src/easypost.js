@@ -245,6 +245,23 @@ export default class EasyPostClient {
   }
 
   /**
+   * Create a value to be passed to the responseHooks, based on the requestHooks
+   * value and the response.
+   * @param {Object} baseHooksValue - the value being passed the requestHooks
+   * @param {Object} response - the response from the superagent request
+   * @returns {Object} - the value to be passed to the responseHooks
+   */
+  _createResponseHooksValue(baseHooksValue, response) {
+    return {
+      ...baseHooksValue,
+      httpStatus: response.status,
+      responseBody: response.body,
+      headers: response.headers,
+      responseTimestamp: Date.now(),
+    };
+  }
+
+  /**
    * Make an HTTP request.
    * @param {string} [path] - The partial path to append to the base url for the request.
    * @param {string} [method] - The HTTP method to use for the request, defaults to GET.
@@ -290,38 +307,21 @@ export default class EasyPostClient {
       requestUUID: uuid(),
     };
 
-    if (this.requestHooks.length > 0) {
-      this.requestHooks.forEach((fn) => fn(baseHooksValue));
-    }
+    this.requestHooks.forEach((fn) => fn(baseHooksValue));
 
     try {
       const response = await request;
 
       if (this.responseHooks.length > 0) {
-        const responseHooksValue = {
-          ...baseHooksValue,
-          httpStatus: response.status,
-          responseBody: response.body,
-          responseHeaders: response.headers,
-          responseTimestamp: Date.now(),
-        };
-        delete responseHooksValue.headers;
-
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, response);
         this.responseHooks.forEach((fn) => fn(responseHooksValue));
       }
 
       return response;
     } catch (error) {
       if (error.response && error.response.body) {
-        this.responseHooks.forEach((fn) =>
-          fn({
-            ...baseHooksValue,
-            httpStatus: error.response.status,
-            responseBody: error.response.body,
-            responseHeaders: error.response.headers,
-            responseTimestamp: Date.now(),
-          }),
-        );
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, error.response);
+        this.responseHooks.forEach((fn) => fn(responseHooksValue));
         throw ErrorHandler.handleApiError(error.response);
       } else {
         throw error;
