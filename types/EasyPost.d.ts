@@ -24,10 +24,9 @@ export interface IEasyPostRequest {
   requestTimestamp: number;
   requestUUID: string;
 }
-export interface IEasyPostResponse extends Omit<IEasyPostRequest, 'headers'> {
+export interface IEasyPostResponse extends IEasyPostRequest {
   httpStatus: number;
   responseBody: any;
-  responseHeaders: Record<string, any>;
   responseTimestamp: number;
 }
 
