@@ -16,6 +16,20 @@ import { User } from './User';
 import { Utils } from './Utility';
 import { Webhook } from './Webhook';
 
+export interface IEasyPostRequest {
+  method: 'get' | 'post' | 'put' | 'patch' | 'del';
+  path: string;
+  requestBody: any;
+  headers: Record<string, any>;
+  requestTimestamp: number;
+  requestUUID: string;
+}
+export interface IEasyPostResponse extends IEasyPostRequest {
+  httpStatus: number;
+  responseBody: any;
+  responseTimestamp: number;
+}
+
 export interface IEasyPostOptions {
   /**
    * Time in milliseconds that should fail requests.
@@ -68,4 +82,29 @@ export default class EasyPost {
   public Utils: typeof Utils;
 
   public constructor(apiKey: string, options?: IEasyPostOptions);
+
+  /**
+   * Adds a request hook to the EasyPost client. Useful for logging or debugging.
+   */
+  public addRequestHook(fn: (config: IEasyPostRequest) => void): void;
+  /**
+   * Removes a request hook from the EasyPost client.
+   */
+  public removeRequestHook(fn: (config: IEasyPostRequest) => void): void;
+  /**
+   * Clears all request hooks from the EasyPost client.
+   */
+  public clearRequestHooks(): void;
+  /**
+   * Adds a response hook to the EasyPost client. Useful for logging or debugging.
+   */
+  public addResponseHook(fn: (config: IEasyPostResponse) => void): void;
+  /**
+   * Removes a response hook from the EasyPost client.
+   */
+  public removeResponseHook(fn: (config: IEasyPostResponse) => void): void;
+  /**
+   * Clears all response hooks from the EasyPost client.
+   */
+  public clearResponseHooks(): void;
 }

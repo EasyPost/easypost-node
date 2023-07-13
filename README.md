@@ -161,11 +161,39 @@ const client = new EasyPostClient('my-key', {
 
 ### Interactive CLI
 
-Replace `easypost.js` with whatever compatabile version you wish, as defined under `Compatibility`.
+Replace `easypost.js` with whatever compatible version you wish, as defined under `Compatibility`.
 
 ```bash
 API_KEY=yourkey ./repl.js --local easypost.js
 ```
+
+### Subscribing to internal requests and responses
+
+If you would need or want to view what requests are being made to the EasyPost API behind the scenes, you can provide functions to listen for the request and/or responses. This can be done with helper functions on the created client.
+
+```javascript
+const client = new EasyPostClient('my-key');
+
+const logOutgoingRequest = (request) => console.log("Outgoing:", request);
+const logResponse = (response) => console.log("Response:", response)
+
+// optionally add your hook to listen for outgoing requests
+client.addRequestHook(logOutgoingRequest);
+// and optionally the hook for the response
+client.addResponseHook(logResponse)
+
+// ...do other stuff
+
+// remove that request hook
+client.removeRequestHook(logOutgoingRequest);
+// and the response one
+client.removeResponseHook(logResponse);
+// or clear all the hooks at once
+client.clearRequestHooks();
+client.clearResponseHooks();
+```
+
+**Note:** You cannot edit or otherwise affect the requests using these hooks. They are purely for debugging or logging purposes.
 
 ## Documentation
 

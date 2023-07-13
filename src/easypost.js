@@ -1,5 +1,6 @@
 import os from 'os';
 import superagent from 'superagent';
+import { v4 as uuid } from 'uuid';
 
 import pkg from '../package.json';
 import Constants from './constants';
@@ -133,6 +134,8 @@ export default class EasyPostClient {
     this.baseUrl = baseUrl || DEFAULT_BASE_URL;
     this.agent = superagent;
     this.requestMiddleware = requestMiddleware;
+    this.requestHooks = [];
+    this.responseHooks = [];
     this.Utils = new Utils();
 
     if (superagentMiddleware) {
@@ -140,6 +143,48 @@ export default class EasyPostClient {
     }
 
     this._attachServices(SERVICES);
+  }
+
+  /**
+   * Add a request hook function.
+   * @param {(config: object) => void} hook
+   */
+  addRequestHook(hook) {
+    this.requestHooks = [...this.requestHooks, hook];
+  }
+  /**
+   * Remove a request hook function.
+   * @param {(config: object) => void} hook
+   */
+  removeRequestHook(hook) {
+    this.requestHooks = this.requestHooks.filter((h) => h !== hook);
+  }
+  /**
+   * Clear all request hooks.
+   */
+  clearRequestHooks() {
+    this.requestHooks = [];
+  }
+
+  /**
+   * Add a response hook function.
+   * @param {(config: object) => void} hook
+   */
+  addResponseHook(hook) {
+    this.responseHooks = [...this.responseHooks, hook];
+  }
+  /**
+   * Remove a response hook function.
+   * @param {(config: object) => void} hook
+   */
+  removeResponseHook(hook) {
+    this.responseHooks = this.responseHooks.filter((h) => h !== hook);
+  }
+  /**
+   * Clear all response hooks.
+   */
+  clearResponseHooks() {
+    this.responseHooks = [];
   }
 
   /**
@@ -200,6 +245,23 @@ export default class EasyPostClient {
   }
 
   /**
+   * Create a value to be passed to the responseHooks, based on the requestHooks
+   * value and the response.
+   * @param {Object} baseHooksValue - the value being passed the requestHooks
+   * @param {Object} response - the response from the superagent request
+   * @returns {Object} - the value to be passed to the responseHooks
+   */
+  _createResponseHooksValue(baseHooksValue, response) {
+    return {
+      ...baseHooksValue,
+      httpStatus: response.status,
+      responseBody: response.body,
+      headers: response.headers,
+      responseTimestamp: Date.now(),
+    };
+  }
+
+  /**
    * Make an HTTP request.
    * @param {string} [path] - The partial path to append to the base url for the request.
    * @param {string} [method] - The HTTP method to use for the request, defaults to GET.
@@ -221,19 +283,45 @@ export default class EasyPostClient {
       request.auth(this.key);
     }
 
-    if (params !== {} && params !== undefined) {
+    // it would be ideal if this "full url with params" could be gotten from superagent directly,
+    // but it doesn't seem to be possible
+    const url = new URL(urlPath);
+
+    if (params !== undefined) {
       if (method === METHODS.GET || method === METHODS.DELETE) {
         request.query(params);
+        Object.entries(params).forEach(([key, value]) => {
+          url.searchParams.append(key, value);
+        });
       } else {
         request.send(params);
       }
     }
 
+    const baseHooksValue = {
+      method,
+      path: url.toString(),
+      requestBody: request._data,
+      headers: requestHeaders,
+      requestTimestamp: Date.now(),
+      requestUUID: uuid(),
+    };
+
+    this.requestHooks.forEach((fn) => fn(baseHooksValue));
+
     try {
       const response = await request;
+
+      if (this.responseHooks.length > 0) {
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, response);
+        this.responseHooks.forEach((fn) => fn(responseHooksValue));
+      }
+
       return response;
     } catch (error) {
       if (error.response && error.response.body) {
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, error.response);
+        this.responseHooks.forEach((fn) => fn(responseHooksValue));
         throw ErrorHandler.handleApiError(error.response);
       } else {
         throw error;
