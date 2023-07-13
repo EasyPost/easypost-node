@@ -9,6 +9,12 @@ import * as setupPolly from '../helpers/setup_polly';
 describe('EasyPost', function () {
   setupPolly.startPolly();
 
+  let client;
+
+  before(function () {
+    client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
+  });
+
   it('throws an error when no API key is provided', async function () {
     expect(() => new EasyPost()).to.throw(
       MissingParameterError,
@@ -21,8 +27,6 @@ describe('EasyPost', function () {
     const requestHook = (response) => (requestConfig = response);
     let responseConfig;
     const responseHook = (response) => (responseConfig = response);
-
-    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
 
     client.addRequestHook(requestHook);
     client.addResponseHook(responseHook);
@@ -63,8 +67,6 @@ describe('EasyPost', function () {
     let responseConfig2;
     const responseHook2 = (response) => (responseConfig2 = response);
 
-    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
-
     client.addRequestHook(requestHook1);
     client.addRequestHook(requestHook2);
     client.addResponseHook(responseHook1);
@@ -83,8 +85,6 @@ describe('EasyPost', function () {
     const requestHook = (response) => (requestConfig = response);
     let responseConfig;
     const responseHook = (response) => (responseConfig = response);
-
-    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
 
     client.addRequestHook(requestHook);
     client.addResponseHook(responseHook);
@@ -115,8 +115,6 @@ describe('EasyPost', function () {
     const responseHook1 = (response) => (responseConfig1 = response);
     let responseConfig2;
     const responseHook2 = (response) => (responseConfig2 = response);
-
-    const client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
 
     client.addRequestHook(requestHook1);
     client.addRequestHook(requestHook2);
