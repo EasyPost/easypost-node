@@ -2,11 +2,6 @@
 
 ## Next Release
 
-- Adds new `requestHook` and `responseHook` events. (un)subscribe to them with the new `addRequestHook`, `addResponseHook`, `removeRequestHook`, or `removeResponseHook` methods of an `EasyPostClient`
-- Maps 400 status codes to new `BadRequestError` class
-
-## v6.7 (Next release)
-
 - Adds methods to the easypost client for subscribing and unsubscribing from requests and responses being sent to the API
   - `addRequestHook`: Adds a request hook to the EasyPost client. Useful for logging or debugging.
   - `removeRequestHook`: Removes a request hook from the EasyPost client.
@@ -14,6 +9,7 @@
   - `addResponseHook`: Adds a response hook to the EasyPost client. Useful for logging or debugging.
   - `removeResponseHook`: Removes a response hook from the EasyPost client.
   - `clearResponseHooks`: Clears all response hooks from the EasyPost client.
+- Maps 400 status codes to new `BadRequestError` class
 
 ## v6.6.1 (2023-06-20)
 
