@@ -167,7 +167,7 @@ Replace `easypost.js` with whatever compatible version you wish, as defined unde
 API_KEY=yourkey ./repl.js --local easypost.js
 ```
 
-### Subscribing to internal requests and responses
+### HTTP Hooks
 
 If you would need or want to view what requests are being made to the EasyPost API behind the scenes, you can provide functions to listen for the request and/or responses. This can be done with helper functions on the created client.
 

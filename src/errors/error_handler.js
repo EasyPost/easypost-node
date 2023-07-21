@@ -1,18 +1,19 @@
+import Constants from '../constants';
+import BadRequestError from './api/bad_request_error';
+import ForbiddenError from './api/forbidden_error';
+import GatewayTimeoutError from './api/gateway_timeout_error';
+import InternalServerError from './api/internal_server_error';
+import InvalidRequestError from './api/invalid_request_error';
+import MethodNotAllowedError from './api/method_not_allowed_error';
+import NotFoundError from './api/not_found_error';
+import PaymentError from './api/payment_error';
+import RateLimitError from './api/rate_limit_error';
 import RedirectError from './api/redirect_error';
+import ServiceUnavailableError from './api/service_unavailable_error';
+import TimeoutError from './api/timeout_error';
 import UnauthorizedError from './api/unauthorized_error';
 import UnknownApiError from './api/unknown_api_error';
-import PaymentError from './api/payment_error';
-import NotFoundError from './api/not_found_error';
-import MethodNotAllowedError from './api/method_not_allowed_error';
-import TimeoutError from './api/timeout_error';
-import InvalidRequestError from './api/invalid_request_error';
-import RateLimitError from './api/rate_limit_error';
-import InternalServerError from './api/internal_server_error';
-import ServiceUnavailableError from './api/service_unavailable_error';
-import GatewayTimeoutError from './api/gateway_timeout_error';
-import ForbiddenError from './api/forbidden_error';
 import EasyPostError from './easypost_error';
-import Constants from '../constants';
 
 export default class ErrorHandler {
   /**
@@ -67,6 +68,8 @@ export default class ErrorHandler {
     }
 
     switch (statusCode) {
+      case 400:
+        return new BadRequestError(errorParams);
       case 401:
         return new UnauthorizedError(errorParams);
       case 402:
