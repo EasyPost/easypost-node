@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v6.7.0 (2023-07-28)
 
 - Adds methods to the easypost client for subscribing and unsubscribing from requests and responses being sent to the API
   - `addRequestHook`: Adds a request hook to the EasyPost client. Useful for logging or debugging.
