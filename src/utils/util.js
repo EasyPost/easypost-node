@@ -113,7 +113,8 @@ export default class Utils {
    */
   validateWebhook(eventBody, headers, webhookSecret) {
     let webhook = {};
-    const easypostHmacSignature = headers['X-Hmac-Signature'] ?? null;
+    const easypostHmacSignature =
+      headers['X-Hmac-Signature'] ?? headers['x-hmac-signature'] ?? null;
 
     if (easypostHmacSignature != null) {
       const normalizedSecret = webhookSecret.normalize('NFKD');
