@@ -1,6 +1,6 @@
 import { Address } from './Address';
 import { Batch } from './Batch';
-import { CarrierAccount, CarrierType } from './Carrier';
+import { CarrierAccount, CarrierType, CarrierMetadata } from './Carrier';
 import { CustomsInfo, CustomsItem } from './Customs';
 import { Event } from './Event';
 import { Insurance } from './Insurance';
@@ -64,6 +64,7 @@ export default class EasyPost {
   public Address: typeof Address;
   public Batch: typeof Batch;
   public CarrierAccount: typeof CarrierAccount;
+  public CarrierMetadata: typeof CarrierMetadata;
   public CarrierType: typeof CarrierType;
   public CustomsInfo: typeof CustomsInfo;
   public CustomsItem: typeof CustomsItem;
