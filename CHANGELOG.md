@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.7.1 (2023-08-07)
+
+- Checks for `X-Hmac-Signature` header during webhook validation regardless of casing (closes #399)
+
 ## v6.7.0 (2023-07-28)
 
 - Adds methods to the easypost client for subscribing and unsubscribing from requests and responses being sent to the API
