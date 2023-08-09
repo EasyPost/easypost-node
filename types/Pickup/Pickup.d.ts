@@ -177,7 +177,7 @@ export declare class Pickup implements IPickup {
    *
    * @param carriers a list of carriers to filter rates for.
    * @param services a list of services to filter rates for.
-   * @returns {Promise<Rate>} The lowest {@link Rate}.
+   * @returns {Rate} The lowest {@link Rate}.
    */
   lowestRate(carriers?: string[], services?: string[]): IRate;
 }
