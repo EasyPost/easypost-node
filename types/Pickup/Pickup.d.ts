@@ -1,10 +1,11 @@
 import { IAddress } from '../Address';
-import { IMessage, IShipment } from '../Shipment';
 import { IDatedObject, IObjectWithId } from '../base';
 import { ICarrierAccount } from '../Carrier';
+import { IRate } from '../Rate';
+import { IMessage, IShipment } from '../Shipment';
 import { IPickupCreateParameters } from './PickupCreateParameters';
-import { IPickupRate } from './PickupRate';
 import { IPickupListParameters } from './PickupListParameters';
+import { IPickupRate } from './PickupRate';
 
 /**
  * The Pickup object allows you to schedule a pickup from your carrier from your customer's residence or place of business.
@@ -171,4 +172,12 @@ export declare class Pickup implements IPickup {
    * @returns {Promise<Pickup>} The created and verified {@link Pickup}.
    */
   static cancel(pickupId: string): Promise<Pickup>;
+
+  /**
+   *
+   * @param carriers a list of carriers to filter rates for.
+   * @param services a list of services to filter rates for.
+   * @returns {Rate} The lowest {@link Rate}.
+   */
+  lowestRate(carriers?: string[], services?: string[]): IRate;
 }

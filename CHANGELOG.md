@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.7.2 (2023-08-09)
+
+- Corrects the Typescript definition for `lowestRate` of Shipment, Order, and Pickup objects
+
 ## v6.7.1 (2023-08-07)
 
 - Checks for `X-Hmac-Signature` header during webhook validation regardless of casing (closes #399)
