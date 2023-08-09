@@ -1,6 +1,7 @@
 import { IAddress } from '../Address';
 import { IDatedObject, IObjectWithId } from '../base';
-import { IMessage, IRate, IShipment } from '../Shipment';
+import { IRate } from '../Rate';
+import { IMessage, IShipment } from '../Shipment';
 import { IOrderCreateParameters } from './OrderCreateParameters';
 
 /**
@@ -123,4 +124,12 @@ export declare class Order implements IOrder {
    * @returns {Promise<Irate[]>} The list of {@link IRate[]}.
    */
   static getRates(orderId: string): Promise<IRate[]>;
+
+  /**
+   *
+   * @param carriers a list of carriers to filter rates for.
+   * @param services a list of services to filter rates for.
+   * @returns {Promise<Rate>} The lowest {@link Rate}.
+   */
+  lowestRate(carriers?: string[], services?: string[]): IRate;
 }
