@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Fix endpoint for creating a FedEx Smartpost carrier account
+
 ## v6.7.2 (2023-08-09)
 
 - Corrects the Typescript definition for `lowestRate` of Shipment, Order, and Pickup objects

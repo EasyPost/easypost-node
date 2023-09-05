@@ -5,7 +5,7 @@ import Utils from './utils/util';
  */
 export default class Constants {
   static get CARRIER_ACCOUNTS_WITH_CUSTOM_WORKFLOWS() {
-    return ['FedexAccount', 'UpsAccount'];
+    return ['FedexAccount', 'FedexSmartpostAccount', 'UpsAccount'];
   }
   static EXTERNAL_API_CALL_FAILED = 'Communication with %s failed, please try again later';
   static INVALID_API_KEY_TYPE = 'Invalid API key type.';
