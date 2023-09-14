@@ -87,7 +87,7 @@ describe('ReferralCustomer Service', function () {
       creditCardDetails.cvc,
     );
 
-    expect(paymentMethod.public_id).to.match(/^card_/);
+    expect(paymentMethod.id).to.match(/^card_/);
     expect(paymentMethod.last4).to.equal('6170');
   });
 });
