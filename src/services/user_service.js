@@ -125,7 +125,7 @@ export default (easypostClient) =>
      * Retrieve API Keys for a specified {@link User user}.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-an-api-key EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the user to retrieve keys for.
-     * @returns {Array[ApiKey]} - List of associated API Keys.
+     * @returns {Array} - List of associated API Keys.
      * @throws {FilteringError} If user or API Keys are not found.
      */
     static async apiKeys(id) {
