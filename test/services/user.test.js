@@ -5,6 +5,7 @@ import EasyPostClient from '../../src/easypost';
 import Brand from '../../src/models/brand';
 import User from '../../src/models/user';
 import * as setupPolly from '../helpers/setup_polly';
+import FilteringError from '../../src/errors/general/filtering_error';
 
 /* eslint-disable func-names */
 describe('User Service', function () {
@@ -83,5 +84,23 @@ describe('User Service', function () {
     expect(brand).to.be.an.instanceOf(Brand);
     expect(brand.id).to.match(/^brd_/);
     expect(brand.color).to.equal(color);
+  });
+
+  it("retrieves parent user's API keys", async function () {
+    const user = await this.client.User.retrieveMe();
+    const keys = await this.client.User.apiKeys(user.id);
+
+    expect(keys).to.be.an.instanceOf(Array);
+  });
+
+  it("throws FilteringError when trying to retrieve child user's API keys", async function () {
+    const fakeChildId = 'user_blah';
+
+    try {
+      await this.client.User.apiKeys(fakeChildId);
+      throw new Error('Test did not throw the expected error.');
+    } catch (error) {
+      expect(error).to.be.an.instanceOf(FilteringError, 'No child found.');
+    }
   });
 });
