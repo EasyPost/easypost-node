@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Add `apiKeys` method to `User` service
+
 ## v6.7.3 (2023-09-05)
 
 - Fix endpoint for creating a FedEx Smartpost carrier account
