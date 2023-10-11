@@ -3,6 +3,7 @@
 ## v6.8.0 (2023-10-11)
 
 - Adds `apiKeys` method to `User` service allowing you to retrieve parent or child API keys by user ID
+- Adds all possible `ITrackerStatusDetail` values to the Typescript definitions
 
 ## v6.7.3 (2023-09-05)
 
