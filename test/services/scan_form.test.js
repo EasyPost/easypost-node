@@ -19,7 +19,7 @@ describe('ScanForm Service', function () {
     setupPolly.setupCassette(server);
   });
 
-  it.skip('creates a scanform', async function () {
+  it('creates a scanform', async function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const scanform = await this.client.ScanForm.create({
@@ -30,7 +30,7 @@ describe('ScanForm Service', function () {
     expect(scanform.id).to.match(/^sf_/);
   });
 
-  it.skip('retrieves a scanform', async function () {
+  it('retrieves a scanform', async function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const scanform = await this.client.ScanForm.create({
