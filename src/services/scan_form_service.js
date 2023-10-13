@@ -27,8 +27,9 @@ export default (easypostClient) =>
         });
       }
 
-      const wrappedParams = {};
-      wrappedParams[this.key] = params;
+      const wrappedParams = {
+        scan_form: params,
+      };
 
       return this._create(url, wrappedParams);
     }
