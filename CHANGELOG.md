@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.8.1 (2023-10-13)
+
+- Fixes a bug causing `ScanForm` creation to fail
+
 ## v6.8.0 (2023-10-11)
 
 - Adds `apiKeys` method to `User` service allowing you to retrieve parent or child API keys by user ID
