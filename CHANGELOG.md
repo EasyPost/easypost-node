@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Bump all dependencies
+
 ## v6.8.1 (2023-10-13)
 
 - Fixes a bug causing `ScanForm` creation to fail
