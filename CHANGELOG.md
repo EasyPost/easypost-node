@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Next Release
+## v6.8.2 (2023-10-20)
 
-- Bump all dependencies
+- Bump all dependencies to address security vulnerabilities in Babel
 
 ## v6.8.1 (2023-10-13)
 
