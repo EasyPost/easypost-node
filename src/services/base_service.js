@@ -216,7 +216,7 @@ export default (easypostClient) =>
       };
 
       const response = await this._all(url, params);
-      if (response == undefined || response[url].length == 0 || !response.has_more) {
+      if (response == undefined || response[url].length == 0) {
         throw new EndOfPaginationError();
       }
 
