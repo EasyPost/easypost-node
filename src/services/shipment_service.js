@@ -68,7 +68,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -88,7 +88,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._get(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -108,7 +108,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -146,7 +146,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -172,7 +172,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -272,7 +272,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._get(url, params);
 
-        return this._convertToEasyPostObject(response.body.rates ?? []);
+        return this._convertToEasyPostObject(response.body.rates ?? [], params);
       } catch (e) {
         return Promise.reject(e);
       }

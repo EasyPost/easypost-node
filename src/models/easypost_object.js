@@ -9,4 +9,5 @@ export default class EasyPostObject {
   static mode;
   static created_at;
   static updated_at;
+  static _params;
 }

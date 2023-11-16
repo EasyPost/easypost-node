@@ -6,6 +6,7 @@ import EndOfPaginationError from '../../src/errors/general/end_of_pagination_err
 import ScanForm from '../../src/models/scan_form';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+import { withoutParams } from '../helpers/utils';
 
 describe('ScanForm Service', function () {
   setupPolly.startPolly();
@@ -40,7 +41,7 @@ describe('ScanForm Service', function () {
     const retrievedScanform = await this.client.ScanForm.retrieve(scanform.id);
 
     expect(retrievedScanform).to.be.an.instanceOf(ScanForm);
-    expect(retrievedScanform).to.deep.include(scanform);
+    expect(withoutParams(retrievedScanform)).to.deep.include(withoutParams(scanform));
   });
 
   it('retrieves all scanforms', async function () {

@@ -5,6 +5,7 @@ import EasyPostClient from '../../src/easypost';
 import CarrierAccount from '../../src/models/carrier_account';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+import { withoutParams } from '../helpers/utils';
 
 /* eslint-disable func-names */
 describe('CarrierAccount Service', function () {
@@ -60,7 +61,7 @@ describe('CarrierAccount Service', function () {
     const retrievedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
 
     expect(retrievedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
-    expect(retrievedCarrierAccount).to.deep.include(carrierAccount);
+    expect(withoutParams(retrievedCarrierAccount)).to.deep.include(withoutParams(carrierAccount));
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
     await this.client.CarrierAccount.delete(carrierAccount.id);

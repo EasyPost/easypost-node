@@ -19,7 +19,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body.rates);
+        return this._convertToEasyPostObject(response.body.rates, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }

@@ -5,6 +5,7 @@ import Webhook from '../../src/models/webhook';
 import Fixture from '../helpers/fixture';
 import SignatureVerificationError from '../../src/errors/general/signature_verification_error';
 import * as setupPolly from '../helpers/setup_polly';
+import { withoutParams } from '../helpers/utils';
 
 /* eslint-disable no-shadow */
 /* eslint-disable func-names */
@@ -41,7 +42,7 @@ describe('Webhook Service', function () {
     const retrievedWebhook = await this.client.Webhook.retrieve(webhook.id);
 
     expect(retrievedWebhook).to.be.an.instanceOf(Webhook);
-    expect(retrievedWebhook).to.deep.include(webhook);
+    expect(withoutParams(retrievedWebhook)).to.deep.include(withoutParams(webhook));
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
     await this.client.Webhook.delete(webhook.id);

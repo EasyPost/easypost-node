@@ -33,7 +33,7 @@ export default (easypostClient) =>
 
       try {
         const response = await easypostClient._get(url, params);
-        const responseObject = this._convertToEasyPostObject(response.body);
+        const responseObject = this._convertToEasyPostObject(response.body, params);
         responseObject.type = type;
 
         return responseObject;

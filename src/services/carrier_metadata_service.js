@@ -20,7 +20,7 @@ export default (easypostClient) =>
 
       try {
         const response = await easypostClient._get(url, params);
-        return this._convertToEasyPostObject(response.body.carriers || []);
+        return this._convertToEasyPostObject(response.body.carriers || [], params);
       } catch (e) {
         return Promise.reject(e);
       }

@@ -5,6 +5,7 @@ import EasyPostClient from '../../src/easypost';
 import Parcel from '../../src/models/parcel';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+import { withoutParams } from '../helpers/utils';
 
 describe('Parcel Service', function () {
   setupPolly.startPolly();
@@ -31,6 +32,6 @@ describe('Parcel Service', function () {
     const retrievedParcel = await this.client.Parcel.retrieve(parcel.id);
 
     expect(parcel).to.be.an.instanceOf(Parcel);
-    expect(retrievedParcel).to.deep.include(parcel);
+    expect(withoutParams(retrievedParcel)).to.deep.include(withoutParams(parcel));
   });
 });
