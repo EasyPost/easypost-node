@@ -42,11 +42,7 @@ export default (easypostClient) =>
     static async all(params = {}) {
       const url = 'trackers';
 
-      const response = await this._all(url, params);
-      response.tracking_code = params.tracking_code;
-      response.carrier = params.carrier;
-
-      return response;
+      return this._all(url, params);
     }
 
     /**
@@ -57,12 +53,8 @@ export default (easypostClient) =>
      */
     static async getNextPage(trackers, pageSize = null) {
       const url = 'trackers';
-      const params = {
-        tracking_code: trackers.tracking_code ?? null,
-        carrier: trackers.carrier ?? null,
-      };
 
-      return this._getNextPage(url, trackers, pageSize, params);
+      return this._getNextPage(url, 'trackers', trackers, pageSize);
     }
 
     /**

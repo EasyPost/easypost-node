@@ -73,7 +73,7 @@ export default (easypostClient) =>
      */
     static async getNextPage(addresses, pageSize = null) {
       const url = 'addresses';
-      return this._getNextPage(url, addresses, pageSize);
+      return this._getNextPage(url, 'addresses', addresses, pageSize);
     }
 
     /**

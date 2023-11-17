@@ -33,8 +33,9 @@ export default (easypostClient) =>
 
       try {
         const response = await easypostClient._get(url, params);
-        const responseObject = this._convertToEasyPostObject(response.body, params);
-        responseObject.type = type;
+        // we want to add it back in here so that it can be used in the
+        // "getNextPage" call below
+        const responseObject = this._convertToEasyPostObject(response.body, { ...params, type });
 
         return responseObject;
       } catch (e) {
@@ -49,8 +50,8 @@ export default (easypostClient) =>
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async getNextPage(reports, pageSize = null) {
-      const url = `reports/${reports.type}`;
-      return this._getNextPage(url, reports, pageSize);
+      const url = `reports/${reports.reports[0]._params.type}`;
+      return this._getNextPage(url, 'reports', reports, pageSize);
     }
 
     /**

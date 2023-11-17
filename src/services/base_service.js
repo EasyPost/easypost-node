@@ -206,21 +206,23 @@ export default (easypostClient) =>
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      * TODO: Implement this function in EndShippers and Batches once the API supports them properly.
      */
-    static async _getNextPage(url, collection, pageSize = null, optionalParams = {}) {
-      const collectionArray = collection[url];
+    static async _getNextPage(url, key, collection, pageSize = null, optionalParams = {}) {
+      const collectionArray = collection[key];
       if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();
       }
 
+      const defaultParams = collection._params ?? collectionArray[0]._params ?? {};
+
       const params = {
-        ...(collection._params ?? collectionArray[0]._params ?? {}),
-        page_size: pageSize,
+        ...defaultParams,
+        page_size: defaultParams.page_size ?? pageSize,
         before_id: collectionArray[collectionArray.length - 1].id,
         ...optionalParams,
       };
 
       const response = await this._all(url, params);
-      if (response == undefined || response[url].length == 0) {
+      if (response == undefined || response[key].length == 0) {
         throw new EndOfPaginationError();
       }
 

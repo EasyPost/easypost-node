@@ -221,11 +221,7 @@ export default (easypostClient) =>
     static async all(params = {}) {
       const url = 'shipments';
 
-      const response = await this._all(url, params);
-      response.purchased = params.purchased;
-      response.include_children = params.include_children;
-
-      return response;
+      return this._all(url, params);
     }
 
     /**
@@ -236,12 +232,8 @@ export default (easypostClient) =>
      */
     static async getNextPage(shipments, pageSize = null) {
       const url = 'shipments';
-      const params = {
-        purchased: shipments.purchased ?? true,
-        include_children: shipments.include_children ?? false,
-      };
 
-      return this._getNextPage(url, shipments, pageSize, params);
+      return this._getNextPage(url, 'shipments', shipments, pageSize);
     }
 
     /**

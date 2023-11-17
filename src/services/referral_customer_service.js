@@ -180,6 +180,6 @@ export default (easypostClient) =>
      */
     static async getNextPage(referralCustomers, pageSize = null) {
       const url = 'referral_customers';
-      return this._getNextPage(url, referralCustomers, pageSize);
+      return this._getNextPage(url, 'referral_customers', referralCustomers, pageSize);
     }
   };
