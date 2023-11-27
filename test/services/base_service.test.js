@@ -116,4 +116,64 @@ describe('Base Service', function () {
       expect(error).instanceOf(EndOfPaginationError);
     }
   });
+
+  it('getNextPage reuses params passed into all', async function () {
+    const pageSize = 1; // Doesn't matter what this is, we're mocking the response
+
+    let previousPage = null;
+
+    // Using scanforms as an example, but this should work for any service since it's a base class method
+    // Mock the initial "get all scanforms" call
+    const firstPageResponse = {
+      scan_forms: [
+        {
+          id: 'sf_123',
+        },
+      ],
+      has_more: true,
+    };
+    let middleware = (request) => {
+      return new MockMiddleware(request, [
+        new MockRequest(
+          new MockRequestMatchRule('GET', 'v2\\/scan_forms'),
+          new MockRequestResponseInfo(200, firstPageResponse),
+        ),
+      ]);
+    };
+    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+      requestMiddleware: middleware,
+    });
+
+    const firstPage = await this.client.ScanForm.all({ page_size: pageSize, foo: 'foo' });
+    previousPage = firstPage;
+
+    // Mock the first "get next page" call with more to collect after
+    // (current page "has_more" = True, next page "has_more" = True)
+    const secondPageResponse = {
+      scan_forms: [
+        {
+          id: 'sf_456',
+        },
+      ],
+      has_more: true,
+    };
+    middleware = (request) => {
+      return new MockMiddleware(request, [
+        new MockRequest(
+          new MockRequestMatchRule('GET', 'v2\\/scan_forms'),
+          new MockRequestResponseInfo(200, secondPageResponse),
+        ),
+      ]);
+    };
+    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+      requestMiddleware: middleware,
+    });
+
+    const secondPage = await this.client.ScanForm.getNextPage(previousPage);
+
+    expect(secondPage._params.foo).to.equal('foo');
+    expect(secondPage.scan_forms[0]._params.foo).to.equal('foo');
+    expect(secondPage._params.page_size).to.equal(pageSize);
+    expect(secondPage.scan_forms[0]._params.page_size).to.equal(pageSize);
+  });
 });

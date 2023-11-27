@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT
+
+- Fixes a pagination issue by passing along additional params used when fetching first page
+
 ## v6.8.2 (2023-10-20)
 
 - Bump all dependencies to address security vulnerabilities in Babel

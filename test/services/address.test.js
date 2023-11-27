@@ -6,6 +6,7 @@ import EndOfPaginationError from '../../src/errors/general/end_of_pagination_err
 import Address from '../../src/models/address';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+import { withoutParams } from '../helpers/utils';
 
 /* eslint-disable func-names */
 describe('Address Service', function () {
@@ -66,7 +67,7 @@ describe('Address Service', function () {
     const retrievedAddress = await this.client.Address.retrieve(address.id);
 
     expect(retrievedAddress).to.be.an.instanceOf(Address);
-    expect(retrievedAddress).to.deep.include(address);
+    expect(withoutParams(retrievedAddress)).to.deep.include(withoutParams(address));
   });
 
   it('retrieves all addresses', async function () {

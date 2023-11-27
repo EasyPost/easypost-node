@@ -6,6 +6,7 @@ import EndOfPaginationError from '../../src/errors/general/end_of_pagination_err
 import Refund from '../../src/models/refund';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+import { withoutParams } from '../helpers/utils';
 
 describe('Refund Service', function () {
   setupPolly.startPolly();
@@ -73,6 +74,6 @@ describe('Refund Service', function () {
     const retrieveRefund = await this.client.Refund.retrieve(refunds.refunds[0].id);
 
     expect(retrieveRefund).to.be.an.instanceOf(Refund);
-    expect(retrieveRefund).to.deep.include(refunds.refunds[0]);
+    expect(withoutParams(retrieveRefund)).to.deep.include(withoutParams(refunds.refunds[0]));
   });
 });

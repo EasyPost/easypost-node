@@ -5,6 +5,7 @@ import EasyPost from '../../src/easypost';
 import CustomsItem from '../../src/models/customs_item';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+import { withoutParams } from '../helpers/utils';
 
 describe('CustomsItem Service', function () {
   setupPolly.startPolly();
@@ -31,6 +32,6 @@ describe('CustomsItem Service', function () {
     const retrievedCustomsInfo = await this.client.CustomsItem.retrieve(customsItem.id);
 
     expect(customsItem).to.be.an.instanceOf(CustomsItem);
-    expect(retrievedCustomsInfo).to.deep.include(customsItem);
+    expect(withoutParams(retrievedCustomsInfo)).to.deep.include(withoutParams(customsItem));
   });
 });

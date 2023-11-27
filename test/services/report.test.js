@@ -87,10 +87,11 @@ describe('Report Service', function () {
 
   it('retrieves next page of reports', async function () {
     try {
-      const reports = await this.client.Report.all({
+      const params = {
         page_size: Fixture.pageSize(),
         type: Fixture.reportType(),
-      });
+      };
+      const reports = await this.client.Report.all(params);
       const nextPage = await this.client.Report.getNextPage(reports, Fixture.pageSize());
 
       const firstIdOfFirstPage = reports.reports[0].id;

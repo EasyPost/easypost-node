@@ -105,13 +105,14 @@ export default (easypostClient) =>
      * Converts a JSON response and all its nested elements to associated {@link EasyPostObject}-based class instances.
      * @internal
      * @param {*} response The JSON response to convert (usually a `Map` or `Array`).
+     * @param {*} params The parameters passed when fetching the response
      * @returns {*} An {@link EasyPostObject}-based class instance or an `Array` of {@link EasyPostObject}-based class instances.
      */
-    static _convertToEasyPostObject(response) {
+    static _convertToEasyPostObject(response, params) {
       if (Array.isArray(response)) {
         return response.map((value) => {
           if (typeof value === 'object') {
-            return this._convertToEasyPostObject(value);
+            return this._convertToEasyPostObject(value, params);
           }
           return value;
         });
@@ -134,8 +135,10 @@ export default (easypostClient) =>
         }
 
         Object.keys(response).forEach((key) => {
-          classObject[key] = this._convertToEasyPostObject(response[key]);
+          classObject[key] = this._convertToEasyPostObject(response[key], params);
         });
+
+        classObject._params = params;
 
         return classObject;
       }
@@ -153,7 +156,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._post(url, params);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, params);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -171,7 +174,7 @@ export default (easypostClient) =>
         // eslint-disable-next-line no-param-reassign
         const response = await easypostClient._get(url, params);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, params);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -203,20 +206,23 @@ export default (easypostClient) =>
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      * TODO: Implement this function in EndShippers and Batches once the API supports them properly.
      */
-    static async _getNextPage(url, collection, pageSize = null, optionalParams = {}) {
-      const collectionArray = collection[url];
+    static async _getNextPage(url, key, collection, pageSize = null, optionalParams = {}) {
+      const collectionArray = collection[key];
       if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();
       }
 
-      let params = {
-        page_size: pageSize,
+      const defaultParams = collection._params ?? collectionArray[0]._params ?? {};
+
+      const params = {
+        ...defaultParams,
+        page_size: defaultParams.page_size ?? pageSize,
         before_id: collectionArray[collectionArray.length - 1].id,
         ...optionalParams,
       };
 
       const response = await this._all(url, params);
-      if (response == undefined || response[url].length == 0) {
+      if (response == undefined || response[key].length == 0) {
         throw new EndOfPaginationError();
       }
 

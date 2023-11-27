@@ -7,6 +7,7 @@ import Fixture from '../helpers/fixture';
 import FilteringError from '../../src/errors/general/filtering_error';
 import * as setupPolly from '../helpers/setup_polly';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
+import { withoutParams } from '../helpers/utils';
 
 describe('Pickup Service', function () {
   setupPolly.startPolly();
@@ -24,7 +25,7 @@ describe('Pickup Service', function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
-    pickupData.shipment = shipment;
+    pickupData.shipment = withoutParams(shipment);
 
     const pickup = await this.client.Pickup.create(pickupData);
 
@@ -37,14 +38,14 @@ describe('Pickup Service', function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
-    pickupData.shipment = shipment;
+    pickupData.shipment = withoutParams(shipment);
 
     const pickup = await this.client.Pickup.create(pickupData);
 
     const retrievedPickup = await this.client.Pickup.retrieve(pickup.id);
 
     expect(retrievedPickup).to.be.an.instanceOf(Pickup);
-    expect(retrievedPickup).to.deep.include(pickup);
+    expect(withoutParams(retrievedPickup)).to.deep.include(withoutParams(pickup));
   });
 
   it('retrieves all pickup', async function () {
@@ -79,7 +80,7 @@ describe('Pickup Service', function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
-    pickupData.shipment = shipment;
+    pickupData.shipment = withoutParams(shipment);
 
     const pickup = await this.client.Pickup.create(pickupData);
 
@@ -99,7 +100,7 @@ describe('Pickup Service', function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
-    pickupData.shipment = shipment;
+    pickupData.shipment = withoutParams(shipment);
 
     const pickup = await this.client.Pickup.create(pickupData);
     const boughtPickup = await this.client.Pickup.buy(
@@ -119,7 +120,7 @@ describe('Pickup Service', function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
-    pickupData.shipment = shipment;
+    pickupData.shipment = withoutParams(shipment);
 
     const pickup = await this.client.Pickup.create(pickupData);
 

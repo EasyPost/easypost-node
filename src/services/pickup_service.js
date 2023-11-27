@@ -36,7 +36,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -79,7 +79,7 @@ export default (easypostClient) =>
      */
     static async getNextPage(pickups, pageSize = null) {
       const url = 'pickups';
-      return this._getNextPage(url, pickups, pageSize);
+      return this._getNextPage(url, 'pickups', pickups, pageSize);
     }
 
     /**
