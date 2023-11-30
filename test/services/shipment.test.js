@@ -199,7 +199,7 @@ describe('Shipment Service', function () {
     // Test lowest rate with no filters
     const lowestRate = shipment.lowestRate();
     expect(lowestRate.service).to.equal('GroundAdvantage');
-    expect(lowestRate.rate).to.equal('6.07');
+    expect(lowestRate.rate).to.equal('5.93');
     expect(lowestRate.carrier).to.equal('USPS');
 
     // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
@@ -220,11 +220,11 @@ describe('Shipment Service', function () {
     // Test lowest smartrate with valid filters
     const lowestSmartRate = await this.client.Shipment.lowestSmartRate(
       shipment.id,
-      2,
+      3,
       'percentile_90',
     );
     expect(lowestSmartRate.service).to.equal('GroundAdvantage');
-    expect(lowestSmartRate.rate).to.equal(6.07);
+    expect(lowestSmartRate.rate).to.equal(5.93);
     expect(lowestSmartRate.carrier).to.equal('USPS');
   });
 
@@ -251,9 +251,9 @@ describe('Shipment Service', function () {
     const smartRates = await this.client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with valid filters
-    const lowestSmartRate = this.client.Utils.getLowestSmartRate(smartRates, 2, 'percentile_90');
+    const lowestSmartRate = this.client.Utils.getLowestSmartRate(smartRates, 3, 'percentile_90');
     expect(lowestSmartRate.service).to.equal('GroundAdvantage');
-    expect(lowestSmartRate.rate).to.equal(6.07);
+    expect(lowestSmartRate.rate).to.equal(5.93);
     expect(lowestSmartRate.carrier).to.equal('USPS');
   });
 
@@ -297,54 +297,6 @@ describe('Shipment Service', function () {
 
     expect(form.form_type).to.equal(formType);
     expect(form.form_url).to.exist;
-  });
-
-  it('create a shipment with carbon offset', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment(), true);
-
-    expect(shipment).to.be.an.instanceOf(Shipment);
-    shipment.rates.forEach((rate) => {
-      expect(rate.carbon_offset).not.to.be.undefined;
-    });
-  });
-
-  it('buy a shipment with carbon offset', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-    const boughtShipment = await this.client.Shipment.buy(
-      shipment.id,
-      shipment.lowestRate(),
-      null,
-      true,
-    );
-
-    let foundCarbonOffset = false;
-
-    expect(boughtShipment).to.be.an.instanceOf(Shipment);
-    boughtShipment.fees.forEach((fee) => {
-      if (fee.type === 'CarbonOffsetFee') {
-        foundCarbonOffset = true;
-      }
-    });
-    expect(foundCarbonOffset).to.be.true;
-  });
-
-  it('one call buy a shipment with carbon offset', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment(), true);
-
-    expect(shipment).to.be.an.instanceOf(Shipment);
-    shipment.rates.forEach((rate) => {
-      expect(rate.carbon_offset).not.to.be.undefined;
-    });
-  });
-
-  it('rerate a shipment with carbon offset', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-
-    const newCarbonOffsetRates = await this.client.Shipment.regenerateRates(shipment.id, true);
-
-    newCarbonOffsetRates.rates.forEach((rate) => {
-      expect(rate.carbon_offset).not.to.be.undefined;
-    });
   });
 
   it('buys a shipment with insuranceAmount', async function () {

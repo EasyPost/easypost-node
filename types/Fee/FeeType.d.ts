@@ -1,6 +1,1 @@
-export declare type TFeeType =
-  | 'CarbonOffsetFee'
-  | 'InsuranceFee'
-  | 'LabelFee'
-  | 'PostageFee'
-  | 'TrackerFee';
+export declare type TFeeType = 'InsuranceFee' | 'LabelFee' | 'PostageFee' | 'TrackerFee';
