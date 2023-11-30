@@ -92,9 +92,10 @@ export default (easypostClient) =>
      */
     static async regenerateRates(id) {
       const url = `shipments/${id}/rerate`;
+      const wrappedParams = {};
 
       try {
-        const response = await easypostClient._post(url, {});
+        const response = await easypostClient._post(url, wrappedParams);
 
         return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
