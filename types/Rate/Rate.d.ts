@@ -1,5 +1,4 @@
 import { IDatedObject, IObjectWithId } from '../base';
-import { CarbonOffset } from '../CarbonOffset';
 
 /**
  * The Rate class represents a summary of the price and details of a delivery service quote.
@@ -68,15 +67,10 @@ export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
    * The billing type of the rate.
    */
   billing_type: string;
-  /**
-   * The associated {@link CarbonOffset}, if requested.
-   */
-  carbon_offset: CarbonOffset;
 }
 
 export declare class Rate implements IRate {
   billing_type: string;
-  carbon_offset: CarbonOffset;
   carrier: string;
   carrier_account_id: string;
   created_at: string;

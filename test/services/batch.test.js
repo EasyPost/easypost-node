@@ -100,7 +100,7 @@ describe('Batch Service', function () {
 
   it('adds and removes shipments from a batch', async function () {
     const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
-    const batch = await this.client.Batch.create();
+    const batch = await this.client.Batch.create({});
 
     const addShipmentsResponse = await this.client.Batch.addShipments(batch.id, [shipment.id]);
     expect(addShipmentsResponse.num_shipments).to.equal(1);

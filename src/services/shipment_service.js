@@ -11,15 +11,13 @@ export default (easypostClient) =>
      * Create a {@link Shipment shipment}.
      * See {@link https://www.easypost.com/docs/api/node#create-a-shipment EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a shipment with.
-     * @param {boolean} withCarbonOffset - Whether to include a carbon offset for the shipment.
      * @returns {Shipment} - The created shipment.
      */
-    static async create(params, withCarbonOffset = false) {
+    static async create(params) {
       const url = 'shipments';
 
       const wrappedParams = {
         shipment: params,
-        carbon_offset: withCarbonOffset,
       };
 
       return this._create(url, wrappedParams);
@@ -31,17 +29,10 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the shipment to purchase.
      * @param {Rate} rate - The rate to purchase the shipment with.
      * @param {number|null} [insuranceAmount] - The amount of insurance to purchase for the shipment.
-     * @param {boolean} [withCarbonOffset] - Whether to purchase a carbon offset for the shipment.
      * @param {string|null} [endShipperId] - The ID of the end shipper to purchase the shipment with.
      * @returns {Shipment} - The purchased shipment.
      */
-    static async buy(
-      id,
-      rate,
-      insuranceAmount = null,
-      withCarbonOffset = false,
-      endShipperId = null,
-    ) {
+    static async buy(id, rate, insuranceAmount = null, endShipperId = null) {
       let rateId = rate;
 
       if (typeof rate === 'object') {
@@ -54,7 +45,6 @@ export default (easypostClient) =>
         rate: {
           id: rateId,
         },
-        carbon_offset: withCarbonOffset,
       };
 
       if (insuranceAmount) {
@@ -98,15 +88,13 @@ export default (easypostClient) =>
      * Regenerate {@link Rate rates} for a {@link Shipment shipment}.
      * See {@link https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to regenerate rates for.
-     * @param {boolean} withCarbonOffset - Whether to include a carbon offset for the shipment.
      * @returns {Shipment} - The shipment with regenerated rates.
      */
-    static async regenerateRates(id, withCarbonOffset = false) {
+    static async regenerateRates(id) {
       const url = `shipments/${id}/rerate`;
-      const wrappedParams = { carbon_offset: withCarbonOffset };
 
       try {
-        const response = await easypostClient._post(url, wrappedParams);
+        const response = await easypostClient._post(url, {});
 
         return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {

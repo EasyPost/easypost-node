@@ -1,7 +1,9 @@
 # CHANGELOG
 
-## NEXT
+## Next Release (Major Version)
 
+- Remove `withCarbonOffset` parameter from shipment create and buy functions
+- Remove `carbon_offset` property of `Rate` object
 - Fixes a pagination issue by passing along additional params used when fetching first page
 
 ## v6.8.2 (2023-10-20)

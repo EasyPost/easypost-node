@@ -148,11 +148,6 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
    * The current message of the associated BatchShipment
    */
   batch_message: string;
-
-  /**
-   * Indicate if the shipment includes a carbon offset fee
-   */
-  carbon_offset: boolean;
 }
 
 export declare class Shipment implements IShipment {
@@ -186,7 +181,6 @@ export declare class Shipment implements IShipment {
   batch_id: string;
   batch_status: TBatchStatus;
   batch_message: string;
-  carbon_offset: boolean;
   created_at: string;
   updated_at: string;
 
@@ -203,10 +197,9 @@ export declare class Shipment implements IShipment {
    * @see https://www.easypost.com/docs/api/node#create-a-shipment
    *
    * @param {Object} params The parameters to create an {@link Shipment} with.
-   * @param carbonOffset indicate if the shipment should include a carbon offset fee.
    * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  static create(params: Object, carbonOffset?: boolean): Promise<Shipment>;
+  static create(params: Object): Promise<Shipment>;
 
   /**
    * The Shipment List is a paginated list of all Shipment objects associated with the given API Key.
@@ -249,15 +242,9 @@ export declare class Shipment implements IShipment {
    * @param id shipment id (begins with "shp_").
    * @param rate rate id (begins with "rate_") or rate object.
    * @param insuranceAmount amount to insure the shipment for.
-   * @param carbonOffset indicate if the shipment should include a carbon offset fee.
    * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  static buy(
-    id: string,
-    rate: string | IRate,
-    insuranceAmount?: number,
-    carbonOffset?: boolean,
-  ): Promise<Shipment>;
+  static buy(id: string, rate: string | IRate, insuranceAmount?: number): Promise<Shipment>;
 
   /**
    * Refunding a Shipment is available for many carriers supported by EasyPost.
@@ -303,10 +290,9 @@ export declare class Shipment implements IShipment {
    * @see https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment
    *
    * @param id shipment id (begins with "shp_").
-   * @param carbonOffset indicate if the rates should include a carbon offset fee.
    * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  static regenerateRates(id: string, carbonOffset?: boolean): Promise<Shipment>;
+  static regenerateRates(id: string): Promise<Shipment>;
 
   /**
    * Insuring your Shipment is as simple as sending us the value of the contents.

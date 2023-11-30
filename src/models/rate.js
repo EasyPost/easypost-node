@@ -7,7 +7,6 @@ import EasyPostObject from './easypost_object';
  */
 export default class Rate extends EasyPostObject {
   static billing_type;
-  static carbon_offset;
   static carrier_account_id;
   static carrier;
   static currency;
