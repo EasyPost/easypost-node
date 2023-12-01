@@ -5,6 +5,7 @@
 - Remove `withCarbonOffset` parameter from shipment create and buy functions
 - Remove `carbon_offset` property of `Rate` object
 - Fixes a pagination issue by passing along additional params used when fetching first page
+- Remove `createAndBuy` function from `Batch` service (deprecated endpoint server-side)
 
 ## v6.8.2 (2023-10-20)
 

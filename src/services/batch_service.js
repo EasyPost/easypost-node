@@ -106,25 +106,6 @@ export default (easypostClient) =>
     }
 
     /**
-     * Create and purchase a {@link Batch batch} in a single request.
-     * See {@link https://www.easypost.com/docs/api/node#batches EasyPost API Documentation} for more information.
-     * @param {Object} params - Parameters for the batch to be created and purchased.
-     * @returns {Batch} - The created and purchased batch.
-     */
-    static async createAndBuy(params) {
-      const url = `batches/create_and_buy`;
-      const wrappedParams = { batch: params };
-
-      try {
-        const response = await easypostClient._post(url, wrappedParams);
-
-        return this._convertToEasyPostObject(response.body, wrappedParams);
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-
-    /**
      * Purchase a {@link Batch batch}.
      * See {@link https://www.easypost.com/docs/api/node#buy-a-batch EasyPost API Documentation} for more information.
      * @param {string} id - The id of the batch to purchase.
