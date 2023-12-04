@@ -27,6 +27,8 @@ The `createAndBuy` Batch endpoint has been deprecated and removed from the libra
 
 ## Upgrading from 5.x to 6.0
 
+**NOTICE:** v6 is deprecated.
+
 ### 6.0 High Impact Changes
 
 - [Updating Dependencies](#60-updating-dependencies)
