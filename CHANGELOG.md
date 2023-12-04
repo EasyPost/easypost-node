@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release (Major Version)
+## v7.0.0 (2023-12-06)
 
 - Remove `withCarbonOffset` parameter from shipment create and buy functions
 - Remove `carbon_offset` property of `Rate` object
