@@ -2,10 +2,11 @@
 
 ## v7.0.0 (2023-12-06)
 
-- Remove `withCarbonOffset` parameter from shipment create and buy functions
-- Remove `carbon_offset` property of `Rate` object
+- Removes `withCarbonOffset` parameter from shipment create and buy functions
+- Removes `carbon_offset` property of `Rate` object
 - Fixes a pagination issue by passing along additional params used when fetching first page
-- Remove `createAndBuy` function from `Batch` service (deprecated endpoint server-side)
+- Removes `createAndBuy` function from `Batch` service (deprecated endpoint server-side)
+- Removes the `beta_carrier_metadata` service as it is deprecated, please use the `carrier_metadata` GA service instead
 
 ## v6.8.2 (2023-10-20)
 
