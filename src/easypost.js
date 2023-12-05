@@ -9,7 +9,6 @@ import MissingParameterError from './errors/general/missing_parameter_error';
 import AddressService from './services/address_service';
 import ApiKeyService from './services/api_key_service';
 import BatchService from './services/batch_service';
-import BetaCarrierMetadataService from './services/beta_carrier_metadata';
 import BetaRateService from './services/beta_rate_service';
 import BetaReferralCustomerService from './services/beta_referral_customer_service';
 import BillingService from './services/billing_service';
@@ -87,7 +86,6 @@ export const SERVICES = {
   Address: AddressService,
   ApiKey: ApiKeyService,
   Batch: BatchService,
-  BetaCarrierMetadata: BetaCarrierMetadataService,
   BetaRate: BetaRateService,
   BetaReferralCustomer: BetaReferralCustomerService,
   Billing: BillingService,
