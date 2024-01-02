@@ -81,4 +81,20 @@ export declare class Refund implements IRefund {
    * @returns {Promise<Refund>} The created and verified {@link Refund}.
    */
   static retrieve(refundId: string): Promise<Refund>;
+
+  /**
+   * Retrieve the next page of {@link Refund refunds}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Refund.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-refunds
+   *
+   * @param {Object} refunds - The previous page of refunds (the response from the last {@link Refund.getNextPage} or {@link Refund.all} call).
+   * @param {number} [pageSize] - The number of refunds to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Refund refunds} and pagination information.
+   */
+  static getNextPage(
+    refunds: Object,
+    pageSize?: number,
+  ): Promise<{ refunds: Refund[]; has_more: boolean }>;
 }

@@ -145,4 +145,20 @@ export declare class Insurance implements IInsurance {
    * @returns {Promise<Insurance>} The retrieved {@link Insurance}.
    */
   static retrieve(insuranceId: string): Promise<Insurance>;
+
+  /**
+   * Retrieve the next page of {@link Insurance insurances}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Insurance.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
+   *
+   * @param {Object} insurances - The previous page of insurances (the response from the last {@link Insurance.getNextPage} or {@link Insurance.all} call).
+   * @param {number} [pageSize] - The number of insurances to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Insurance insurances} and pagination information.
+   */
+  static getNextPage(
+    insurances: Object,
+    pageSize?: number,
+  ): Promise<{ insurances: Insurance[]; has_more: boolean }>;
 }

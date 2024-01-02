@@ -174,6 +174,22 @@ export declare class Pickup implements IPickup {
   static cancel(pickupId: string): Promise<Pickup>;
 
   /**
+   * Retrieve the next page of {@link Pickup pickups}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Pickup.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-pickups
+   *
+   * @param {Object} pickups - The previous page of pickups (the response from the last {@link Pickup.getNextPage} or {@link Pickup.all} call).
+   * @param {number} [pageSize] - The number of pickups to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Pickup pickups} and pagination information.
+   */
+  static getNextPage(
+    pickups: Object,
+    pageSize?: number,
+  ): Promise<{ pickups: Pickup[]; has_more: boolean }>;
+
+  /**
    *
    * @param carriers a list of carriers to filter rates for.
    * @param services a list of services to filter rates for.

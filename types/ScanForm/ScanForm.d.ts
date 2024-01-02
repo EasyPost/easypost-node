@@ -107,4 +107,20 @@ export declare class ScanForm implements IScanForm {
    * @param {string} scanFormId Unique, begins with "sf_".
    */
   static retrieve(scanFormId: string): Promise<ScanForm>;
+
+  /**
+   * Retrieve the next page of {@link ScanForm scan forms}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link ScanForm.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-scanforms
+   *
+   * @param {Object} scanforms - The previous page of scan forms (the response from the last {@link ScanForm.getNextPage} or {@link ScanForm.all} call).
+   * @param {number} [pageSize] - The number of scan forms to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link ScanForm scan forms} and pagination information.
+   */
+  static getNextPage(
+    scanforms: Object,
+    pageSize?: number,
+  ): Promise<{ scanforms: ScanForm[]; has_more: boolean }>;
 }

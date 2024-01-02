@@ -73,4 +73,20 @@ export declare class Event implements IEvent {
    * @returns {Object} - An object containing a list of {@link Event events} and pagination information.
    */
   static all(params: IEventListParameters): Promise<{ events: Event[]; has_more: boolean }>;
+
+  /**
+   * Retrieve the next page of {@link Event events}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Event.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-events
+   *
+   * @param {Object} events - The previous page of events (the response from the last {@link Event.getNextPage} or {@link Event.all} call).
+   * @param {number} [pageSize] - The number of events to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Event events} and pagination information.
+   */
+  static getNextPage(
+    events: Object,
+    pageSize?: number,
+  ): Promise<{ events: Event[]; has_more: boolean }>;
 }

@@ -173,4 +173,20 @@ export declare class Address implements IAddress {
    * @returns {Promise<Address>} The verified {@link Address} address.
    */
   static retrieve(addressId: string): Promise<Address>;
+
+  /**
+   * Retrieve the next page of {@link Address addresses}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Address.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-addresses
+   *
+   * @param {Object} addresses - The previous page of addresses (the response from the last {@link Address.getNextPage} or {@link Address.all} call).
+   * @param {number} [pageSize] - The number of addresses to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Address addresses} and pagination information.
+   */
+  static getNextPage(
+    addresses: Object,
+    pageSize?: number,
+  ): Promise<{ addresses: Address[]; has_more: boolean }>;
 }

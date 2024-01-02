@@ -96,4 +96,20 @@ export declare class Referral implements IReferral {
    * @returns {object} Object representing the newly-added payment method
    */
   static refundByPaymentLog(paymentLogId: string): object;
+
+  /**
+   * Retrieve the next page of {@link Referral referrals}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Referral.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-referral-customers
+   *
+   * @param {Object} referralCustomers - The previous page of referrals (the response from the last {@link Referral.getNextPage} or {@link Referral.all} call).
+   * @param {number} [pageSize] - The number of referrals to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Referral referrals} and pagination information.
+   */
+  static getNextPage(
+    referralCustomers: Object,
+    pageSize?: number,
+  ): Promise<{ referrals: Referral[]; has_more: boolean }>;
 }
