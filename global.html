@@ -4643,6 +4643,166 @@ See <a href="https://www.easypost.com/docs/api/node#list-a-webhooks">EasyPost AP
     
 
     
+    <h4 class="name" id="allChildren"><span class="type-signature">(async) </span>allChildren<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retrieve a paginated list of children user user.
+See <a href="https://www.easypost.com/docs/api/node#child-users">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Parameters to filter the list of children users.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_user_service.js.html">services/user_service.js</a>, <a href="services_user_service.js.html#line126">line 126</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - An object containing a list of User and pagination information.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="buy"><span class="type-signature">(async) </span>buy<span class="signature">(id)</span><span class="type-signature"> &rarr; {Batch}</span></h4>
     
 
@@ -12873,6 +13033,203 @@ See <a href="https://www.easypost.com/docs/api/node#batch-labels">EasyPost API D
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="services_tracker_service.js.html">services/tracker_service.js</a>, <a href="services_tracker_service.js.html#line54">line 54</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The retrieved EasyPostObject-based class instance, or a `Promise` that rejects with an error.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">EasyPostObject</span>
+|
+
+<span class="param-type">Promise.&lt;never></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getNextPage"><span class="type-signature">(async) </span>getNextPage<span class="signature">(children, pageSize)</span><span class="type-signature"> &rarr; {EasyPostObject|Promise.&lt;never>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retrieve the next page of children collection.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>children</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">An object containing a list of children and pagination information.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pageSize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last">The number of records to return on each page</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_user_service.js.html">services/user_service.js</a>, <a href="services_user_service.js.html#line144">line 144</a>
     </li></ul></dd>
     
 
@@ -21325,13 +21682,13 @@ See <a href="https://www.easypost.com/docs/api/node#create-and-verify-addresses"
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP">EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP</a></li><li><a href="global.html#RESOURCES">RESOURCES</a></li><li><a href="global.html#_all">_all</a></li><li><a href="global.html#_convertToEasyPostObject">_convertToEasyPostObject</a></li><li><a href="global.html#_create">_create</a></li><li><a href="global.html#_getNextPage">_getNextPage</a></li><li><a href="global.html#_retrieve">_retrieve</a></li><li><a href="global.html#addCreditCard">addCreditCard</a></li><li><a href="global.html#addPaymentMethod">addPaymentMethod</a></li><li><a href="global.html#addShipments">addShipments</a></li><li><a href="global.html#all">all</a></li><li><a href="global.html#buy">buy</a></li><li><a href="global.html#cancel">cancel</a></li><li><a href="global.html#convertLabelFormat">convertLabelFormat</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#createAndVerify">createAndVerify</a></li><li><a href="global.html#createList">createList</a></li><li><a href="global.html#createScanForm">createScanForm</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deletePaymentMethod">deletePaymentMethod</a></li><li><a href="global.html#fundWallet">fundWallet</a></li><li><a href="global.html#generateForm">generateForm</a></li><li><a href="global.html#generateLabel">generateLabel</a></li><li><a href="global.html#getLowestRate">getLowestRate</a></li><li><a href="global.html#getLowestSmartRate">getLowestSmartRate</a></li><li><a href="global.html#getNextPage">getNextPage</a></li><li><a href="global.html#getRates">getRates</a></li><li><a href="global.html#getSmartRates">getSmartRates</a></li><li><a href="global.html#handleApiError">handleApiError</a></li><li><a href="global.html#insure">insure</a></li><li><a href="global.html#lowestRate">lowestRate</a></li><li><a href="global.html#lowestSmartRate">lowestSmartRate</a></li><li><a href="global.html#refund">refund</a></li><li><a href="global.html#refundByAmount">refundByAmount</a></li><li><a href="global.html#refundByPaymentLog">refundByPaymentLog</a></li><li><a href="global.html#regenerateRates">regenerateRates</a></li><li><a href="global.html#removeShipments">removeShipments</a></li><li><a href="global.html#retrieve">retrieve</a></li><li><a href="global.html#retrieveAllPayloads">retrieveAllPayloads</a></li><li><a href="global.html#retrieveApiKeysForUser">retrieveApiKeysForUser</a></li><li><a href="global.html#retrieveEstimatedDeliveryDate">retrieveEstimatedDeliveryDate</a></li><li><a href="global.html#retrieveMe">retrieveMe</a></li><li><a href="global.html#retrievePayload">retrievePayload</a></li><li><a href="global.html#retrievePaymentMethods">retrievePaymentMethods</a></li><li><a href="global.html#retrieveStatelessRates">retrieveStatelessRates</a></li><li><a href="global.html#traverseJsonElement">traverseJsonElement</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateBrand">updateBrand</a></li><li><a href="global.html#updateEmail">updateEmail</a></li><li><a href="global.html#validateWebhook">validateWebhook</a></li><li><a href="global.html#verifyAddress">verifyAddress</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP">EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP</a></li><li><a href="global.html#RESOURCES">RESOURCES</a></li><li><a href="global.html#_all">_all</a></li><li><a href="global.html#_convertToEasyPostObject">_convertToEasyPostObject</a></li><li><a href="global.html#_create">_create</a></li><li><a href="global.html#_getNextPage">_getNextPage</a></li><li><a href="global.html#_retrieve">_retrieve</a></li><li><a href="global.html#addCreditCard">addCreditCard</a></li><li><a href="global.html#addPaymentMethod">addPaymentMethod</a></li><li><a href="global.html#addShipments">addShipments</a></li><li><a href="global.html#all">all</a></li><li><a href="global.html#allChildren">allChildren</a></li><li><a href="global.html#buy">buy</a></li><li><a href="global.html#cancel">cancel</a></li><li><a href="global.html#convertLabelFormat">convertLabelFormat</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#createAndVerify">createAndVerify</a></li><li><a href="global.html#createList">createList</a></li><li><a href="global.html#createScanForm">createScanForm</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deletePaymentMethod">deletePaymentMethod</a></li><li><a href="global.html#fundWallet">fundWallet</a></li><li><a href="global.html#generateForm">generateForm</a></li><li><a href="global.html#generateLabel">generateLabel</a></li><li><a href="global.html#getLowestRate">getLowestRate</a></li><li><a href="global.html#getLowestSmartRate">getLowestSmartRate</a></li><li><a href="global.html#getNextPage">getNextPage</a></li><li><a href="global.html#getRates">getRates</a></li><li><a href="global.html#getSmartRates">getSmartRates</a></li><li><a href="global.html#handleApiError">handleApiError</a></li><li><a href="global.html#insure">insure</a></li><li><a href="global.html#lowestRate">lowestRate</a></li><li><a href="global.html#lowestSmartRate">lowestSmartRate</a></li><li><a href="global.html#refund">refund</a></li><li><a href="global.html#refundByAmount">refundByAmount</a></li><li><a href="global.html#refundByPaymentLog">refundByPaymentLog</a></li><li><a href="global.html#regenerateRates">regenerateRates</a></li><li><a href="global.html#removeShipments">removeShipments</a></li><li><a href="global.html#retrieve">retrieve</a></li><li><a href="global.html#retrieveAllPayloads">retrieveAllPayloads</a></li><li><a href="global.html#retrieveApiKeysForUser">retrieveApiKeysForUser</a></li><li><a href="global.html#retrieveEstimatedDeliveryDate">retrieveEstimatedDeliveryDate</a></li><li><a href="global.html#retrieveMe">retrieveMe</a></li><li><a href="global.html#retrievePayload">retrievePayload</a></li><li><a href="global.html#retrievePaymentMethods">retrievePaymentMethods</a></li><li><a href="global.html#retrieveStatelessRates">retrieveStatelessRates</a></li><li><a href="global.html#traverseJsonElement">traverseJsonElement</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateBrand">updateBrand</a></li><li><a href="global.html#updateEmail">updateEmail</a></li><li><a href="global.html#validateWebhook">validateWebhook</a></li><li><a href="global.html#verifyAddress">verifyAddress</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Dec 05 2023 18:01:22 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jan 04 2024 20:43:57 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
