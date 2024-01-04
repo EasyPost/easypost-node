@@ -124,7 +124,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing a list of {@link Children User} and pagination information.
      */
     static async allChildren(params) {
-      const url = 'beta/users/children'; // TODO: Use GA endpoint
+      const url = 'users/children';
 
       try {
         const response = await easypostClient._get(url, params);
@@ -142,7 +142,7 @@ export default (easypostClient) =>
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async getNextPage(children, pageSize = null) {
-      const url = 'beta/users/children'; // TODO: Use GA endpoint
+      const url = 'users/children';
       return this._getNextPage(url, 'children', children, pageSize);
     }
   };
