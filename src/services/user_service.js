@@ -116,4 +116,33 @@ export default (easypostClient) =>
         return Promise.reject(e);
       }
     }
+
+    /**
+     * Retrieve a paginated list of children user {@link User user}.
+     * See {@link https://www.easypost.com/docs/api/node#child-users EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters to filter the list of children users.
+     * @returns {Object} - An object containing a list of {@link Children User} and pagination information.
+     */
+    static async allChildren(params) {
+      const url = 'users/children';
+
+      try {
+        const response = await easypostClient._get(url, params);
+
+        return this._convertToEasyPostObject(response.body, params);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve the next page of children collection.
+     * @param {Object} children An object containing a list of {@link Children children} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(children, pageSize = null) {
+      const url = 'users/children';
+      return this._getNextPage(url, 'children', children, pageSize);
+    }
   };

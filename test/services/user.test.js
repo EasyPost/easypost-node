@@ -5,6 +5,8 @@ import EasyPostClient from '../../src/easypost';
 import Brand from '../../src/models/brand';
 import User from '../../src/models/user';
 import * as setupPolly from '../helpers/setup_polly';
+import Fixture from '../helpers/fixture';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 
 /* eslint-disable func-names */
 describe('User Service', function () {
@@ -83,5 +85,33 @@ describe('User Service', function () {
     expect(brand).to.be.an.instanceOf(Brand);
     expect(brand.id).to.match(/^brd_/);
     expect(brand.color).to.equal(color);
+  });
+
+  it('retrieves a paginated list of children', async function () {
+    const response = await this.client.User.allChildren({ page_size: Fixture.pageSize() });
+
+    const childrenArray = response.children;
+
+    expect(childrenArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
+    expect(response.has_more).to.exist;
+    childrenArray.forEach((children) => {
+      expect(children).to.be.an.instanceOf(User);
+    });
+  });
+
+  it('retrieves next page of children', async function () {
+    try {
+      const children = await this.client.User.allChildren({ page_size: Fixture.pageSize() });
+      const nextPage = await this.client.User.getNextPage(children, Fixture.pageSize());
+
+      const firstIdOfFirstPage = children.children[0].id;
+      const firstIdOfSecondPage = nextPage.children[0].id;
+
+      expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
+    } catch (error) {
+      if (!(error instanceof EndOfPaginationError)) {
+        throw new Error('Test failed intentionally');
+      }
+    }
   });
 });

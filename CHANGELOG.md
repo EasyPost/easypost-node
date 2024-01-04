@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Next release
+
+- Adds `allChildren` function in User service to get a paginated list of children
+- Adds `getNextPage` function in User service to get next paginated list of children
+
 ## v7.0.0 (2023-12-06)
 
 - Removes `withCarbonOffset` parameter from shipment create and buy functions

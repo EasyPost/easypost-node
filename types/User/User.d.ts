@@ -156,4 +156,19 @@ export declare class User implements IUser {
    * @requires production API Key.
    */
   static delete(id: string): void;
+
+  /**
+   * Retrieve a list of all children user.
+   *
+   * The Children List is a paginated list of all {@link User} objects associated with the given API Key.
+   * It accepts a variety of parameters which can be used to modify the scope.
+   * The has_more attribute indicates whether additional pages can be requested.
+   * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
+   *
+   * @see https://www.easypost.com/docs/api/node#child-users
+   *
+   * @param {Object} params - The parameters to use for the request.
+   * @returns {Object} - An object containing a list of {@link Children children} and pagination information.
+   */
+  static allChildren(params: Object): Promise<{ children: User[]; has_more: boolean }>;
 }
