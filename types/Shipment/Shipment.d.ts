@@ -327,4 +327,20 @@ export declare class Shipment implements IShipment {
    *  @returns {Promise<Array<Object>>} The array of estimated delivery dates and rates.
    */
   static retrieveEstimatedDeliveryDate(id: string, plannedShipDate: string): Promise<Array<Object>>;
+
+  /**
+   * Retrieve the next page of {@link Shipment shipments}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Shipment.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
+   *
+   * @param {Object} shipments - The previous page of shipments (the response from the last {@link Shipment.getNextPage} or {@link Shipment.all} call).
+   * @param {number} [pageSize] - The number of shipments to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
+   */
+  static getNextPage(
+    shipments: Object,
+    pageSize?: number,
+  ): Promise<{ shipments: Shipment[]; has_more: boolean }>;
 }

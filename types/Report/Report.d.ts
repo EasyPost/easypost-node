@@ -114,4 +114,20 @@ export declare class Report implements IReport {
    * @see https://www.easypost.com/docs/api/node#retrieve-a-report
    */
   static retrieve(reportId: string): Promise<Report>;
+
+  /**
+   * Retrieve the next page of {@link Report reports}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Report.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-reports
+   *
+   * @param {Object} reports - The previous page of reports (the response from the last {@link Report.getNextPage} or {@link Report.all} call).
+   * @param {number} [pageSize] - The number of reports to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Report reports} and pagination information.
+   */
+  static getNextPage(
+    reports: Object,
+    pageSize?: number,
+  ): Promise<{ reports: Report[]; has_more: boolean }>;
 }

@@ -165,4 +165,20 @@ export declare class Tracker implements ITracker {
    * @returns {Promise<Tracker>} The retrieved {@link Tracker}.
    */
   static retrieve(trackerId: string): Promise<Tracker>;
+
+  /**
+   * Retrieve the next page of {@link Tracker trackers}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link Tracker.all} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers
+   *
+   * @param {Object} trackers - The previous page of trackers (the response from the last {@link Tracker.getNextPage} or {@link Tracker.all} call).
+   * @param {number} [pageSize] - The number of trackers to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link Tracker trackers} and pagination information.
+   */
+  static getNextPage(
+    trackers: Object,
+    pageSize?: number,
+  ): Promise<{ trackers: Tracker[]; has_more: boolean }>;
 }
