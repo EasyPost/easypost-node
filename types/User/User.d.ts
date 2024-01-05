@@ -171,4 +171,20 @@ export declare class User implements IUser {
    * @returns {Object} - An object containing a list of {@link Children children} and pagination information.
    */
   static allChildren(params: Object): Promise<{ children: User[]; has_more: boolean }>;
+
+  /**
+   * Retrieve the next page of {@link User child users}.
+   *
+   * This automatically reuses the parameters from the previous call or the original {@link User.allChildren} call.
+   *
+   * @see https://www.easypost.com/docs/api/node#child-users
+   *
+   * @param {Object} children - The previous page of child users (the response from the last {@link User.getNextPage} or {@link User.allChildren} call).
+   * @param {number} [pageSize] - The number of child users to retrieve per page, optional. Defaults to server-side default.
+   * @returns {Object} - An object containing a list of {@link User child users} and pagination information.
+   */
+  static getNextPage(
+    children: Object,
+    pageSize?: number,
+  ): Promise<{ children: User[]; has_more: boolean }>;
 }
