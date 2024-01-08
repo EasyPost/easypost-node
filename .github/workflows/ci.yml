@@ -21,13 +21,36 @@ jobs:
       - run: make install
       - run: make install-styleguide
       - run: make build
+      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: make install
+      - run: make install-styleguide
+      - run: make build
+      - run: make lint
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: make install
+      - run: make install-styleguide
+      - run: make build
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
       - name: Coveralls
         if: github.ref == 'refs/heads/master'
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - run: make lint
   docs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
