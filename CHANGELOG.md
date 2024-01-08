@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next release
+## v7.1.0 (2024-01-08)
 
 - Adds `allChildren` function in User service to get a paginated list of children
 - Adds `getNextPage` function in User service to get next paginated list of children
