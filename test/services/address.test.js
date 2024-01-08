@@ -31,13 +31,19 @@ describe('Address Service', function () {
 
   it('creates an address with verify param', async function () {
     const addressData = Fixture.incorrectAddress();
-    addressData.verify = true;
 
-    const address = await this.client.Address.create(addressData);
+    // Creating normally (without specifying "verify") will make the address, perform no verifications
+    let address = await this.client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
-    expect(address.id).to.match(/^adr_/);
-    expect(address.street1).to.equal('417 MONTGOMERY ST FL 5');
+    expect(address.verifications.delivery).to.be.undefined;
+
+    // Creating with verify = true will make the address, perform verifications
+    addressData.verify = true;
+    address = await this.client.Address.create(addressData);
+
+    expect(address).to.be.an.instanceOf(Address);
+    expect(address.verifications.delivery.success).to.be.false;
   });
 
   it('creates an address with verify_strict param', async function () {
@@ -53,13 +59,19 @@ describe('Address Service', function () {
 
   it('creates an address with an array verify param', async function () {
     const addressData = Fixture.incorrectAddress();
-    addressData.verify = [true];
 
-    const address = await this.client.Address.create(addressData);
+    // Creating normally (without specifying "verify") will make the address, perform no verifications
+    let address = await this.client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
-    expect(address.id).to.match(/^adr_/);
-    expect(address.street1).to.equal('417 MONTGOMERY ST FL 5');
+    expect(address.verifications.delivery).to.be.undefined;
+
+    // Creating with verify = true will make the address, perform verifications
+    addressData.verify = [true];
+    address = await this.client.Address.create(addressData);
+
+    expect(address).to.be.an.instanceOf(Address);
+    expect(address.verifications.delivery.success).to.be.false;
   });
 
   it('retrieves an address', async function () {
@@ -99,13 +111,22 @@ describe('Address Service', function () {
   });
 
   it('creates a verified address', async function () {
-    const addressData = Fixture.incorrectAddress();
+    const addressData = Fixture.caAddress2();
 
     const address = await this.client.Address.createAndVerify(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.id).to.match(/^adr_/);
-    expect(address.street1).to.equal('417 MONTGOMERY ST FL 5');
+    expect(address.street1).to.equal('179 N HARBOR DR');
+  });
+
+  it('throws an error when we cannot create and verify an address', async function () {
+    const addressData = Fixture.incorrectAddress();
+
+    // Creates with verify = true behind the scenes, will throw an error if the address cannot be verified
+    return this.client.Address.createAndVerify(addressData).catch((err) =>
+      expect(err).to.be.an.instanceOf(InvalidRequestError),
+    );
   });
 
   it('verifies an address', async function () {
@@ -121,12 +142,6 @@ describe('Address Service', function () {
     const address = await this.client.Address.create({ street1: 'invalid' });
 
     return this.client.Address.verifyAddress(address.id).catch((err) =>
-      expect(err).to.be.an.instanceOf(InvalidRequestError),
-    );
-  });
-
-  it('throws an error when we cannot create and verify an address', async function () {
-    return this.client.Address.createAndVerify({ street1: 'invalid' }).catch((err) =>
       expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });
