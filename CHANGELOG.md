@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v7.2.0 (2024-01-22)
 
 - Adds missing exports to Typescript definitions (ApiKey, Billing, Brand, EndShipper, Fee, PaymentMethod, Rate, Refund) - closes #433
 
