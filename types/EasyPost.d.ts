@@ -1,13 +1,21 @@
 import { Address } from './Address';
+import { ApiKey } from './ApiKey';
 import { Batch } from './Batch';
-import { CarrierAccount, CarrierType, CarrierMetadata } from './Carrier';
+import { Billing } from './Billing';
+import { Brand } from './Brand';
+import { CarrierAccount, CarrierMetadata, CarrierType } from './Carrier';
 import { CustomsInfo, CustomsItem } from './Customs';
+import { EndShipper } from './EndShipper';
 import { Event } from './Event';
+import { Fee } from './Fee';
 import { Insurance } from './Insurance';
 import { Order } from './Order';
 import { Parcel } from './Parcel';
+import { PaymentMethod } from './PaymentMethod';
 import { Pickup } from './Pickup';
+import { Rate } from './Rate';
 import { Referral } from './Referral';
+import { Refund } from './Refund';
 import { Report } from './Report';
 import { ScanForm } from './ScanForm';
 import { Shipment } from './Shipment';
@@ -62,25 +70,33 @@ export interface IEasyPostOptions {
 
 export default class EasyPost {
   public Address: typeof Address;
+  public ApiKey: typeof ApiKey;
   public Batch: typeof Batch;
+  public Billing: typeof Billing;
+  public Brand: typeof Brand;
   public CarrierAccount: typeof CarrierAccount;
   public CarrierMetadata: typeof CarrierMetadata;
   public CarrierType: typeof CarrierType;
   public CustomsInfo: typeof CustomsInfo;
   public CustomsItem: typeof CustomsItem;
+  public EndShipper: typeof EndShipper;
   public Event: typeof Event;
+  public Fee: typeof Fee; // TODO: Fix IFee
   public Insurance: typeof Insurance;
   public Order: typeof Order;
   public Parcel: typeof Parcel;
+  public PaymentMethod: typeof PaymentMethod;
   public Pickup: typeof Pickup;
-  public Report: typeof Report;
+  public Rate: typeof Rate;
   public Referral: typeof Referral;
+  public Refund: typeof Refund;
+  public Report: typeof Report;
   public ScanForm: typeof ScanForm;
   public Shipment: typeof Shipment;
   public Tracker: typeof Tracker;
-  public Webhook: typeof Webhook;
   public User: typeof User;
   public Utils: typeof Utils;
+  public Webhook: typeof Webhook;
 
   public constructor(apiKey: string, options?: IEasyPostOptions);
 

@@ -1,4 +1,4 @@
-import { IObjectWithId } from '../base';
+import { IBaseObject } from '../base';
 import { TFeeType } from './FeeType';
 
 /**
@@ -12,7 +12,7 @@ import { TFeeType } from './FeeType';
  *
  * @see https://www.easypost.com/docs/api/node#fee-object
  */
-export declare interface IFee extends IObjectWithId<'Fee'> {
+export declare interface IFee extends IBaseObject<'Fee'> {
   /**
    * The name of the category of fee. Possible types are "LabelFee", "PostageFee", "InsuranceFee", and "TrackerFee"
    */
@@ -31,5 +31,13 @@ export declare interface IFee extends IObjectWithId<'Fee'> {
   /**
    * Whether the Fee has been refunded successfully
    */
+  refunded: boolean;
+}
+
+export declare class Fee implements IFee {
+  object: 'Fee';
+  type: TFeeType;
+  amount: string;
+  charged: boolean;
   refunded: boolean;
 }

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds missing exports to Typescript definitions (ApiKey, Billing, Brand, EndShipper, Fee, PaymentMethod, Rate, Refund) - closes #433
+
 ## v7.1.0 (2024-01-08)
 
 - Adds `allChildren` function in User service to get a paginated list of children
