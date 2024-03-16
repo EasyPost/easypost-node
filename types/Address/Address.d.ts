@@ -36,7 +36,7 @@ export declare interface IAddress extends IObjectWithId<'Address'> {
   /**
    * ZIP or postal code the address is located in
    */
-  zip: string;
+  zip?: string;
 
   /**
    * ISO 3166 country code for the country the address is located in
@@ -99,7 +99,7 @@ export declare class Address implements IAddress {
   street2?: string | null;
   city?: string | null;
   state?: string | null;
-  zip: string;
+  zip?: string;
   country: string;
   residential?: boolean | null;
   carrier_facility?: string | null;
