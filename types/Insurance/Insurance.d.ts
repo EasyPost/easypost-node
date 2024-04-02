@@ -161,4 +161,14 @@ export declare class Insurance implements IInsurance {
     insurances: Object,
     pageSize?: number,
   ): Promise<{ insurances: Insurance[]; has_more: boolean }>;
+
+  /**
+   * Refund an Insurance by id.
+   *
+   * @see https://www.easypost.com/docs/api/node#refund-an-insurance
+   *
+   * @param insuranceId Unique, starts with "ins_"
+   * @returns {Promise<Insurance>} The refunded {@link Insurance}.
+   */
+  static refund(insuranceId: string): Promise<Insurance>;
 }
