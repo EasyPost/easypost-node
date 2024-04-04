@@ -64,7 +64,7 @@ export default (easypostClient) =>
      * @returns {Insurance} - The refunded insurance.
      */
     static async refund(id) {
-      const url = `beta/insurances/${id}/refund`;
+      const url = `insurances/${id}/refund`;
       const response = await easypostClient._post(url);
 
       return this._convertToEasyPostObject(response.body);
