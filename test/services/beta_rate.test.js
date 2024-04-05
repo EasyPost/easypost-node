@@ -38,7 +38,7 @@ describe('BetaRateService', function () {
     const lowestStatelessRate = this.client.Utils.getLowestRate(statelessRates);
 
     expect(lowestStatelessRate.service).to.be.equal('GroundAdvantage');
-    expect(lowestStatelessRate.rate).to.be.equal('6.07');
+    expect(lowestStatelessRate.rate).to.be.equal('5.93');
   });
 
   it('retrieve invalid lowest rate', async function () {
