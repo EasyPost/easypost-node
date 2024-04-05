@@ -82,7 +82,10 @@ export default (easypostClient) =>
         paymentMethodObjectType = paymentMethods[paymentMethodToUse].object;
         if (paymentMethodID.startsWith('card_') || paymentMethodObjectType === 'CreditCard') {
           endpoint = 'credit_cards';
-        } else if (paymentMethodID.startsWith('bank_') || paymentMethodObjectType === 'BankAccount') {
+        } else if (
+          paymentMethodID.startsWith('bank_') ||
+          paymentMethodObjectType === 'BankAccount'
+        ) {
           endpoint = 'bank_accounts';
         } else {
           throw new InvalidObjectError({ message: errorString });
