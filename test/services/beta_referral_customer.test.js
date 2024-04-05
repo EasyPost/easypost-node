@@ -20,7 +20,7 @@ describe('BetaReferralCustomerService', function () {
     await this.client.BetaReferralCustomer.addPaymentMethod('cus_123', 'ba_123').catch((error) => {
       expect(error.statusCode).to.equal(422);
       expect(error.code).to.equal('BILLING.INVALID_PAYMENT_GATEWAY_REFERENCE');
-      expect(error.message).to.equal('Invalid Payment Gateway Reference.');
+      expect(error.message).to.equal('Invalid connect integration.');
     });
   });
 
