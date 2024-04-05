@@ -1,5 +1,5 @@
-import { ParametersToOmitOnCreate } from '../utils';
-import { IAddress } from './Address';
+import type { ParametersToOmitOnCreate } from '../utils';
+import type { IAddress } from './Address';
 
 /**
  * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
