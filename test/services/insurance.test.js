@@ -86,6 +86,6 @@ describe('Insurance Service', function () {
     expect(cancelledInsurance).to.be.an.instanceOf(Insurance);
     expect(cancelledInsurance.id).to.match(/^ins_/);
     expect(cancelledInsurance.status).to.equal('cancelled');
-    expect(cancelledInsurance.messages[0]).to.equal('Insurance was cancelled by the user.')
+    expect(cancelledInsurance.messages[0]).to.equal('Insurance was cancelled by the user.');
   });
 });
