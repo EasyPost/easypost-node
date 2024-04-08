@@ -32,12 +32,14 @@ const middleware = (request) => {
       new MockRequestResponseInfo(200, {
         id: 'summary_123',
         primary_payment_method: {
-          id: 'card_123',
+          id: 'pm_123',
           last4: '1234',
+          object: 'CreditCard',
         },
         secondary_payment_method: {
-          id: 'bank_123',
+          id: 'pm_123',
           bank_name: 'Mock Bank',
+          object: 'BankAccount',
         },
       }),
     ),
@@ -68,5 +70,48 @@ describe('Billing Service', function () {
 
     expect(paymentMethods.primary_payment_method).to.exist;
     expect(paymentMethods.secondary_payment_method).to.exist;
+  });
+
+  it('get payment info', async function () {
+    const paymentInfo = await this.client.Billing._getPaymentInfo('primary');
+
+    expect(paymentInfo).to.deep.equal(['credit_cards', 'pm_123']);
+
+    const paymentInfo2 = await this.client.Billing._getPaymentInfo('secondary');
+
+    expect(paymentInfo2).to.deep.equal(['bank_accounts', 'pm_123']);
+  });
+
+  it('get payment info with legacy prefix', async function () {
+    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+      requestMiddleware: (request) => {
+        return new MockMiddleware(request, [
+          new MockRequest(
+            new MockRequestMatchRule('GET', 'v2\\/payment_methods$'),
+            new MockRequestResponseInfo(200, {
+              id: 'summary_123',
+              primary_payment_method: {
+                id: 'card_123',
+                last4: '1234',
+                // No object field, force use of id prefix to determine type
+              },
+              secondary_payment_method: {
+                id: 'bank_123',
+                bank_name: 'Mock Bank',
+                // No object field, force use of id prefix to determine type
+              },
+            }),
+          ),
+        ]);
+      },
+    });
+
+    const paymentInfo = await this.client.Billing._getPaymentInfo('primary');
+
+    expect(paymentInfo).to.deep.equal(['credit_cards', 'card_123']);
+
+    const paymentInfo2 = await this.client.Billing._getPaymentInfo('secondary');
+
+    expect(paymentInfo2).to.deep.equal(['bank_accounts', 'bank_123']);
   });
 });
