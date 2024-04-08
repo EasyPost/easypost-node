@@ -87,22 +87,23 @@ describe('Billing Service', function () {
       requestMiddleware: (request) => {
         return new MockMiddleware(request, [
           new MockRequest(
-              new MockRequestMatchRule('GET', 'v2\\/payment_methods$'),
-              new MockRequestResponseInfo(200, {
-                id: 'summary_123',
-                primary_payment_method: {
-                  id: 'card_123',
-                  last4: '1234',
-                  // No object field, force use of id prefix to determine type
-                },
-                secondary_payment_method: {
-                  id: 'bank_123',
-                  bank_name: 'Mock Bank',
-                  // No object field, force use of id prefix to determine type
-                },
-              }),
+            new MockRequestMatchRule('GET', 'v2\\/payment_methods$'),
+            new MockRequestResponseInfo(200, {
+              id: 'summary_123',
+              primary_payment_method: {
+                id: 'card_123',
+                last4: '1234',
+                // No object field, force use of id prefix to determine type
+              },
+              secondary_payment_method: {
+                id: 'bank_123',
+                bank_name: 'Mock Bank',
+                // No object field, force use of id prefix to determine type
+              },
+            }),
           ),
-        ])}
+        ]);
+      },
     });
 
     const paymentInfo = await this.client.Billing._getPaymentInfo('primary');
