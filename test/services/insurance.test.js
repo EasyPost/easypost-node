@@ -75,4 +75,17 @@ describe('Insurance Service', function () {
       }
     }
   });
+
+  it('refunds a standalone insurance', async function () {
+    const insuranceData = Fixture.basicInsurance();
+    insuranceData.tracking_code = 'EZ1000000001';
+
+    const insurance = await this.client.Insurance.create(insuranceData);
+    const cancelledInsurance = await this.client.Insurance.refund(insurance.id);
+
+    expect(cancelledInsurance).to.be.an.instanceOf(Insurance);
+    expect(cancelledInsurance.id).to.match(/^ins_/);
+    expect(cancelledInsurance.status).to.equal('cancelled');
+    expect(cancelledInsurance.messages[0]).to.equal('Insurance was cancelled by the user.');
+  });
 });
