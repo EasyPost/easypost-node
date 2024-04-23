@@ -1,0 +1,13 @@
+{
+  "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
+  "critical": true, // Only fail the audit if there are critical vulnerabilities.
+  "allowlist": [
+    {
+      "GHSA-8cp3-66vr-3r4c": {
+        "active": true,
+        "expiry": "2024-10-22", // Re-evaluate this vulnerability after this date.
+        "notes": "Transitive dependency of `superagent`, awaiting new `superagent` release." // https://github.com/ladjs/superagent/issues/1799
+      }
+    }
+  ]
+}
