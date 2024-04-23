@@ -28,7 +28,7 @@
     "lintFix": "eslint --ext .js,.ts --fix .",
     "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run formatCheck",
     "repl": "./repl.js --local easypost.js",
-    "scan": "npx audit-ci -m",
+    "scan": "npx audit-ci -m --config ./audit-ci.jsonc",
     "test": "cross-env NODE_ENV=test mocha --timeout 10000 --require @babel/register --require ./test/helpers/common.js --recursive ./test",
     "watch": "webpack --config webpack.config.babel.js --watch"
   },
