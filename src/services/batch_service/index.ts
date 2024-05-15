@@ -144,7 +144,7 @@ export default (easypostClient: EasyPost) =>
     static async all(params: IBatchListParameters = {}) {
       const url = 'batches';
 
-      return this._all<IBatch>(url, params);
+      return this._all<{ batches: IBatch[] }>(url, params);
     }
 
     /**

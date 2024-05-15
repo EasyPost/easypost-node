@@ -41,7 +41,7 @@ export default (easypostClient: EasyPost) =>
     static async all(params: IAllMethodParameters = {}) {
       const url = 'insurances';
 
-      return this._all<IInsurance[]>(url, params);
+      return this._all<{ insurances: IInsurance[] }>(url, params);
     }
 
     /**
@@ -50,7 +50,7 @@ export default (easypostClient: EasyPost) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(insurances: any, pageSize: number | null = null) {
+    static async getNextPage(insurances: { insurances: any[] }, pageSize: number | null = null) {
       const url = 'insurances';
       return this._getNextPage<{ insurances: IInsurance[] }>(
         url,

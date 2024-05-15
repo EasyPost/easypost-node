@@ -21,7 +21,7 @@ export default (easypostClient: EasyPost) =>
     static async all(params = {}) {
       const url = 'api_keys';
 
-      return this._all<IApiKey>(url, params);
+      return this._all<{ api_keys: IApiKey[] }>(url, params);
     }
 
     /**

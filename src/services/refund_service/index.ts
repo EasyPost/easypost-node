@@ -48,7 +48,7 @@ export default (easypostClient: EasyPost) =>
      * @param pageSize The number of records to return on each page
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(refunds: any, pageSize: number | null = null) {
+    static async getNextPage(refunds: { refunds: any[] }, pageSize: number | null = null) {
       const url = 'refunds';
       return this._getNextPage<{ refunds: IRefund[] }>(url, 'refunds', refunds, pageSize);
     }

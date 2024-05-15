@@ -101,7 +101,7 @@ export default (easypostClient: EasyPost) =>
     static async all(params = {}) {
       const url = 'carrier_accounts';
 
-      return this._all<ICarrierAccount>(url, params);
+      return this._all<{ carrier_accounts: ICarrierAccount[] }>(url, params);
     }
 
     /**

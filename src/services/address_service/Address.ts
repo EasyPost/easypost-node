@@ -1,5 +1,5 @@
 import { IVerifications } from './Verifications';
-import { IObjectWithId } from '../../utils/types';
+import { IObjectWithId, IDatedObject } from '../../utils/types';
 
 /**
  * Address objects are used to represent people, places, and organizations in a number of contexts.
@@ -9,79 +9,80 @@ import { IObjectWithId } from '../../utils/types';
  *
  * @see https://www.easypost.com/docs/api/node#address-object
  */
-export type IAddress = IObjectWithId<'Address'> & {
-  /**
-   * First line of the address
-   */
-  street1?: string | null;
+export type IAddress = IObjectWithId<'Address'> &
+  IDatedObject & {
+    /**
+     * First line of the address
+     */
+    street1?: string | null;
 
-  /**
-   * Second line of the address
-   */
-  street2?: string | null;
+    /**
+     * Second line of the address
+     */
+    street2?: string | null;
 
-  /**
-   * City the address is located in
-   */
-  city?: string | null;
+    /**
+     * City the address is located in
+     */
+    city?: string | null;
 
-  /**
-   * State or province the address is located in
-   */
-  state?: string | null;
+    /**
+     * State or province the address is located in
+     */
+    state?: string | null;
 
-  /**
-   * ZIP or postal code the address is located in
-   */
-  zip: string;
+    /**
+     * ZIP or postal code the address is located in
+     */
+    zip: string;
 
-  /**
-   * ISO 3166 country code for the country the address is located in
-   */
-  country: string;
+    /**
+     * ISO 3166 country code for the country the address is located in
+     */
+    country: string;
 
-  /**
-   * Whether or not this address would be considered residential
-   */
-  residential?: boolean | null;
+    /**
+     * Whether or not this address would be considered residential
+     */
+    residential?: boolean | null;
 
-  /**
-   * The specific designation for the address (only relevant if the address is a carrier facility)
-   */
-  carrier_facility?: string | null;
+    /**
+     * The specific designation for the address (only relevant if the address is a carrier facility)
+     */
+    carrier_facility?: string | null;
 
-  /**
-   * Name of the person. Both name and company can be included
-   */
-  name?: string | null;
+    /**
+     * Name of the person. Both name and company can be included
+     */
+    name?: string | null;
 
-  /**
-   * Name of the organization. Both name and company can be included
-   */
-  company?: string | null;
+    /**
+     * Name of the organization. Both name and company can be included
+     */
+    company?: string | null;
 
-  /**
-   * Phone number to reach the person or organization
-   */
-  phone?: string | null;
+    /**
+     * Phone number to reach the person or organization
+     */
+    phone?: string | null;
 
-  /**
-   * Email to reach the person or organization
-   */
-  email?: string | null;
+    /**
+     * Email to reach the person or organization
+     */
+    email?: string | null;
 
-  /**
-   * Federal tax identifier of the person or organization
-   */
-  federal_tax_id?: string | null;
+    /**
+     * Federal tax identifier of the person or organization
+     */
+    federal_tax_id?: string | null;
 
-  /**
-   * State tax identifier of the person or organization
-   */
-  state_tax_id?: string | null;
+    /**
+     * State tax identifier of the person or organization
+     */
+    state_tax_id?: string | null;
 
-  /**
-   * The result of any verifications requested
-   */
-  verifications: IVerifications;
-};
+    /**
+     * The result of any verifications requested
+     */
+    verifications: IVerifications;
+  };

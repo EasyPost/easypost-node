@@ -20,20 +20,20 @@ export type ICarrierMetadata = {
   /**
    * A list of service level objects for this carrier
    */
-  service_levels?: Array<Object> | null;
+  service_levels?: Object[] | null;
 
   /**
    * A list of predefined package objects for this carrier
    */
-  predefined_packages?: Array<Object> | null;
+  predefined_packages?: Object[] | null;
 
   /**
    * A list of supported feature objects for this carrier
    */
-  supported_features?: Array<Object> | null;
+  supported_features?: Object[] | null;
 
   /**
    * A list of shipment option objects for this carrier
    */
-  shipment_options?: Array<Object> | null;
+  shipment_options?: Object[] | null;
 };

@@ -190,7 +190,7 @@ export default (easypostClient: EasyPost) =>
     static async all(params: IReferralListParameters = {}) {
       const url = 'referral_customers';
 
-      return this._all<IReferral[]>(url, params);
+      return this._all<{ referral_customers: IReferral[] }>(url, params);
     }
 
     /**
@@ -199,7 +199,10 @@ export default (easypostClient: EasyPost) =>
      * @param pageSize The number of records to return on each page
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(referralCustomers: any, pageSize: number | null = null) {
+    static async getNextPage(
+      referralCustomers: { referral_customers: any[] },
+      pageSize: number | null = null,
+    ) {
       const url = 'referral_customers';
       return this._getNextPage<{ referral_customers: IReferral[] }>(
         url,
