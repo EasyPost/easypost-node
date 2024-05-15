@@ -63,12 +63,25 @@ export default (easypostClient: EasyPost) =>
     /**
      * Retrieve an {@link Insurance insurance} record by its ID.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-an-insurance EasyPost API Documentation} for more information.
-     * @param {string} id - The ID of the insurance to retrieve.
-     * @returns {Insurance} - The retrieved insurance.
+     * @param id - The ID of the insurance to retrieve.
+     * @returns - The retrieved insurance.
      */
     static async retrieve(id: string) {
       const url = `insurances/${id}`;
 
       return this._retrieve<IInsurance>(url);
+    }
+
+    /**
+     * Refund an {@link Insurance insurance} record by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#refund-an-insurance EasyPost API Documentation} for more information.
+     * @param id - The ID of the insurance to be refunded.
+     * @returns - The refunded insurance.
+     */
+    static async refund(id: string) {
+      const url = `insurances/${id}/refund`;
+      const response = await easypostClient._post(url);
+
+      return this._convertToEasyPostObject<IInsurance>(response.body);
     }
   };

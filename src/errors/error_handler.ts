@@ -21,41 +21,32 @@ export type RawAPIError = {
   body: {
     error: {
       code: string;
-      message: JSONParsableError;
+      message: any;
       errors: EasyPostError[];
     };
   };
 };
-
-type JSONParsableError = string | number | JSONObject | JSONArray;
-type JSONObject = {
-  [key: string]: JSONParsableError;
-};
-type JSONArray = JSONParsableError[];
 
 export default class ErrorHandler {
   /**
    * Recursively traverses a JSON object or array and extracts error messages
    * as strings. Adds the extracted messages to the specified messagesList array.
    *
-   * @param {JSONParsableError} errorMessage - The JSON object or array to traverse.
+   * @param {object|array|string} errorMessage - The JSON object or array to traverse.
+   * @param {array} messagesList - The array to which extracted error messages will be added.
    */
-  static traverseJsonElement(errorMessage: JSONParsableError): string[] {
-    let messages: string[] = [];
-
-    if (errorMessage instanceof Array) {
-      for (const value of errorMessage) {
-        messages = messages.concat(this.traverseJsonElement(value));
-      }
-    } else if (errorMessage instanceof Object) {
+  static traverseJsonElement(errorMessage: any, messagesList: string[]) {
+    if (errorMessage instanceof Object) {
       for (const value of Object.values(errorMessage)) {
-        messages = messages.concat(this.traverseJsonElement(value));
+        this.traverseJsonElement(value, messagesList);
+      }
+    } else if (errorMessage instanceof Array) {
+      for (const value of errorMessage) {
+        this.traverseJsonElement(value, messagesList);
       }
     } else {
-      messages.push(errorMessage.toString());
+      messagesList.push(errorMessage.toString());
     }
-
-    return messages;
   }
 
   static isAPIError(error: any): error is RawAPIError {
@@ -79,14 +70,15 @@ export default class ErrorHandler {
     const { statusCode } = error;
     const { code, message, errors } = error.body.error;
     const errorParams = {
-      message: '',
+      message,
       code,
       statusCode,
       errors,
     };
 
     try {
-      const messages = this.traverseJsonElement(message);
+      const messages: string[] = [];
+      this.traverseJsonElement(errorParams.message, messages);
       errorParams.message = messages.join(', ');
     } catch (e) {
       const errorParams = {

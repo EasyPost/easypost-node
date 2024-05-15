@@ -19,10 +19,26 @@ export default (easypostClient: EasyPostClient) =>
      * @returns {*} An {@link EasyPostObject}-based class instance or an `Array` of {@link EasyPostObject}-based class instances.
      */
     static _convertToEasyPostObject<A extends any>(response: A, params?: any): EasyPostObject<A> {
-      const newResponse = response as EasyPostObject<A>;
-      newResponse._params = params;
+      if (Array.isArray(response)) {
+        return response.map((value) => {
+          if (typeof value === 'object') {
+            return this._convertToEasyPostObject(value, params);
+          }
+          return value;
+        }) as EasyPostObject<A>;
+      }
 
-      return newResponse;
+      if (typeof response === 'object' && response !== null) {
+        const classObject = {} as EasyPostObject<A>;
+        Object.entries(response).forEach(([key, value]) => {
+          classObject[key as keyof A] = this._convertToEasyPostObject(value, params);
+        });
+
+        classObject._params = params;
+
+        return classObject;
+      }
+      return response as EasyPostObject<A>;
     }
 
     /**

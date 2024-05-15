@@ -1,3 +1,4 @@
+import Constants from '../../constants';
 import EasyPost from '../../easypost';
 import baseService from '../base_service';
 import { IRate } from '../rate_service';
@@ -6,6 +7,16 @@ import { IOrderCreateParameters } from './OrderCreateParameters';
 
 export * from './Order';
 export * from './OrderCreateParameters';
+
+export type IOrderWithLowestRate = IOrder & {
+  lowestRate: (carriers?: string[], services?: string[]) => IRate;
+};
+
+const addLowestRateToOrder = (order: IOrder): IOrderWithLowestRate => ({
+  ...order,
+  lowestRate: (carriers?: string[], services?: string[]) =>
+    Constants.Utils.getLowestRate(order.rates, carriers, services),
+});
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -26,7 +37,8 @@ export default (easypostClient: EasyPost) =>
         order: params,
       };
 
-      return this._create<IOrder>(url, wrappedParams);
+      const order = await this._create<IOrder>(url, wrappedParams);
+      return addLowestRateToOrder(order);
     }
 
     /**
@@ -43,7 +55,8 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IOrder>(response.body, wrappedParams);
+        const order = this._convertToEasyPostObject<IOrder>(response.body, wrappedParams);
+        return addLowestRateToOrder(order);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -76,6 +89,7 @@ export default (easypostClient: EasyPost) =>
     static async retrieve(id: string) {
       const url = `orders/${id}`;
 
-      return this._retrieve<IOrder>(url);
+      const order = await this._retrieve<IOrder>(url);
+      return addLowestRateToOrder(order);
     }
   };

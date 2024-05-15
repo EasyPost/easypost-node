@@ -1,8 +1,25 @@
+import Constants from '../../constants';
 import EasyPost from '../../easypost';
 import baseService from '../base_service';
 import { IPickup } from './Pickup';
 import { IPickupCreateParameters } from './PickupCreateParameters';
 import { IPickupListParameters } from './PickupListParameters';
+import { IPickupRate } from './PickupRate';
+
+export * from './Pickup';
+export * from './PickupCreateParameters';
+export * from './PickupListParameters';
+export * from './PickupRate';
+
+export type IPickupWithLowestRate = IPickup & {
+  lowestRate: (carriers?: string[], services?: string[]) => IPickupRate;
+};
+
+const addLowestRateToPickup = (pickup: IPickup): IPickupWithLowestRate => ({
+  ...pickup,
+  lowestRate: (carriers?: string[], services?: string[]) =>
+    Constants.Utils.getLowestRate(pickup.pickup_rates, carriers, services),
+});
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -23,7 +40,8 @@ export default (easypostClient: EasyPost) =>
         pickup: params,
       };
 
-      return this._create<IPickup>(url, wrappedParams);
+      const pickup = await this._create<IPickup>(url, wrappedParams);
+      return addLowestRateToPickup(pickup);
     }
 
     /**
@@ -40,7 +58,8 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IPickup>(response.body, wrappedParams);
+        const pickup = this._convertToEasyPostObject<IPickup>(response.body, wrappedParams);
+        return addLowestRateToPickup(pickup);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -57,7 +76,8 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url);
 
-        return this._convertToEasyPostObject<IPickup>(response.body);
+        const pickup = this._convertToEasyPostObject<IPickup>(response.body);
+        return addLowestRateToPickup(pickup);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -72,7 +92,11 @@ export default (easypostClient: EasyPost) =>
     static async all(params: IPickupListParameters = {}) {
       const url = 'pickups';
 
-      return this._all<IPickup[]>(url, params);
+      const result = await this._all<{ pickups: IPickup[] }>(url, params);
+      return {
+        ...result,
+        pickups: result.pickups.map(addLowestRateToPickup),
+      };
     }
 
     /**
@@ -83,7 +107,16 @@ export default (easypostClient: EasyPost) =>
      */
     static async getNextPage(pickups: any, pageSize: number | null = null) {
       const url = 'pickups';
-      return this._getNextPage<{ pickups: IPickup[] }>(url, 'pickups', pickups, pageSize);
+      const result = await this._getNextPage<{ pickups: IPickup[] }>(
+        url,
+        'pickups',
+        pickups,
+        pageSize,
+      );
+      return {
+        ...result,
+        pickups: result.pickups.map(addLowestRateToPickup),
+      };
     }
 
     /**
@@ -95,6 +128,7 @@ export default (easypostClient: EasyPost) =>
     static async retrieve(id: string) {
       const url = `pickups/${id}`;
 
-      return this._retrieve<IPickup>(url);
+      const pickup = await this._retrieve<IPickup>(url);
+      return addLowestRateToPickup(pickup);
     }
   };

@@ -43,9 +43,7 @@ export default (easypostClient: EasyPost) =>
 
         const response = await easypostClient._get(url, apiParams);
 
-        const responseObject = this._convertToEasyPostObject(response.body, params);
-
-        return responseObject;
+        return this._convertToEasyPostObject<IReport>(response.body, params);
       } catch (e) {
         return Promise.reject(e);
       }

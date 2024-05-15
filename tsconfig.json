@@ -6,6 +6,9 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false,
     "downlevelIteration": true,
+    "target": "ES6",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "./out-tmp",
     "declaration": true,
     "declarationDir": "./types-tmp"

@@ -98,6 +98,7 @@ describe('Report Service', function () {
 
       expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
     } catch (error) {
+      console.log(error, error instanceof EndOfPaginationError);
       if (!(error instanceof EndOfPaginationError)) {
         throw new Error('Test failed intentionally');
       }

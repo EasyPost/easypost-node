@@ -77,14 +77,16 @@ export default (easypostClient: EasyPost) =>
 
       const paymentMethodToUse = paymentMethodMap[priority];
       let paymentMethodID;
+      let paymentMethodObjectType;
       let endpoint;
       const errorString = 'The chosen payment method is not valid. Please try again.';
 
       if (paymentMethodToUse !== undefined && paymentMethods[paymentMethodToUse] !== null) {
         paymentMethodID = paymentMethods[paymentMethodToUse].id;
-        if (paymentMethodID.startsWith('card_')) {
+        paymentMethodObjectType = paymentMethods[paymentMethodToUse].object;
+        if (paymentMethodObjectType === 'CreditCard') {
           endpoint = 'credit_cards';
-        } else if (paymentMethodID.startsWith('bank_')) {
+        } else if (paymentMethodObjectType === 'BankAccount') {
           endpoint = 'bank_accounts';
         } else {
           throw new InvalidObjectError({ message: errorString });

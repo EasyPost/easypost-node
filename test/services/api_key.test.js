@@ -29,7 +29,7 @@ describe('ApiKey Service', function () {
     const user = await this.client.User.retrieveMe();
     const keys = await this.client.ApiKey.retrieveApiKeysForUser(user.id);
 
-    expect(keys.object).to.be.equal('Array');
+    expect(keys).to.be.instanceOf(Array);
   });
 
   it("throws FilteringError when trying to retrieve child user's API keys", async function () {

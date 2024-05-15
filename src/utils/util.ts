@@ -78,11 +78,11 @@ export default class Utils {
    * @returns - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  getLowestRate(
-    rates: IRate[],
+  getLowestRate<A extends { carrier: string; service: string; rate: string }>(
+    rates: A[],
     carriers: string[] | null = null,
     services: string[] | null = null,
-  ): IRate {
+  ): A {
     if (carriers) {
       const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
       // eslint-disable-next-line no-param-reassign
