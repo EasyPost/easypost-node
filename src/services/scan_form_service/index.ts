@@ -1,12 +1,12 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IScanForm } from "./ScanForm";
-import { IScanFormCreateParameters } from "./ScanFormCreateParameters";
-import { IScanFormListParameters } from "./ScanFormListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IScanForm } from './ScanForm';
+import { IScanFormCreateParameters } from './ScanFormCreateParameters';
+import { IScanFormListParameters } from './ScanFormListParameters';
 
-export * from "./ScanForm";
-export * from "./ScanFormCreateParameters";
-export * from "./ScanFormListParameters";
+export * from './ScanForm';
+export * from './ScanFormCreateParameters';
+export * from './ScanFormListParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -21,14 +21,14 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created scan form.
      */
     static async create(params: IScanFormCreateParameters) {
-      const url = "scan_forms";
+      const url = 'scan_forms';
 
       // wraps up params in `shipments` if the user didn't do it
       // turn a list of shipment objects into a map of shipment ids
       if (params.shipments) {
         // eslint-disable-next-line no-param-reassign
         params.shipments = params.shipments.map((s) => {
-          if (typeof s === "string") {
+          if (typeof s === 'string') {
             return { id: s };
           }
           return { id: s.id };
@@ -49,7 +49,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing the list of {@link ScanForm scan forms} and pagination information.
      */
     static async all(params: IScanFormListParameters = {}) {
-      const url = "scan_forms";
+      const url = 'scan_forms';
 
       return this._all<{ scan_forms: IScanForm[] }>(url, params);
     }
@@ -60,17 +60,9 @@ export default (easypostClient: EasyPost) =>
      * @param pageSize The number of records to return on each page
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(
-      scanForms: { scan_forms: any[] },
-      pageSize: number | null = null
-    ) {
-      const url = "scan_forms";
-      return this._getNextPage<{ scan_forms: IScanForm[] }>(
-        url,
-        "scan_forms",
-        scanForms,
-        pageSize
-      );
+    static async getNextPage(scanForms: { scan_forms: any[] }, pageSize: number | null = null) {
+      const url = 'scan_forms';
+      return this._getNextPage<{ scan_forms: IScanForm[] }>(url, 'scan_forms', scanForms, pageSize);
     }
 
     /**

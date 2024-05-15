@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The ServiceUnavailableError class is used to represent a 503 error that occurred while communicating with the EasyPost API.

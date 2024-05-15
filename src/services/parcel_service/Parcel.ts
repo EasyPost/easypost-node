@@ -1,4 +1,4 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
 
 /**
  * Parcel objects represent the physical container being shipped.
@@ -10,7 +10,7 @@ import { IDatedObject, IObjectWithId } from "../../utils/types";
  *
  * @see https://www.easypost.com/docs/api/node#parcel-object
  */
-export type IParcel = IObjectWithId<"Parcel"> &
+export type IParcel = IObjectWithId<'Parcel'> &
   IDatedObject & {
     /**
      * Required if width and/or height are present

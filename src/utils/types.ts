@@ -2,12 +2,7 @@ export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
 };
 
-export type ParametersToOmitOnCreate =
-  | "id"
-  | "object"
-  | "mode"
-  | "created_at"
-  | "updated_at";
+export type ParametersToOmitOnCreate = 'id' | 'object' | 'mode' | 'created_at' | 'updated_at';
 
 export type IAllMethodParameters = {
   /**
@@ -68,7 +63,7 @@ export type IObjectWithId<ObjectName> = IBaseObject<ObjectName> & {
   /**
    * Set based on which api-key you used, either "test" or "production"
    */
-  mode: "test" | "production";
+  mode: 'test' | 'production';
 
   /**
    * The object name, e.g. "Address", "Rate", "Shipment", etc

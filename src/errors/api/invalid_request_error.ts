@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The InvalidRequestError class is used to represent a 422 error that occurred while communicating with the EasyPost API.

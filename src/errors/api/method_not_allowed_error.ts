@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The MethodNotAllowedError class is used to represent a 405 error that occurred while communicating with the EasyPost API.

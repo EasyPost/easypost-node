@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../out/src/easypost';
+import EasyPostClient from '../../out/easypost';
 import {
   MockMiddleware,
   MockRequest,

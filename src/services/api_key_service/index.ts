@@ -1,11 +1,11 @@
-import util from "node:util";
-import baseService from "../base_service";
-import Constants from "../../constants";
-import FilteringError from "../../errors/general/filtering_error";
-import EasyPost from "../..";
-import { IApiKey, UserAPIKeys } from "./ApiKey";
+import util from 'node:util';
+import baseService from '../base_service';
+import Constants from '../../constants';
+import FilteringError from '../../errors/general/filtering_error';
+import EasyPost from '../..';
+import { IApiKey, UserAPIKeys } from './ApiKey';
 
-export * from "./ApiKey";
+export * from './ApiKey';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -19,7 +19,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing the API keys associated with the current authenticated user and its child users.
      */
     static async all(params = {}) {
-      const url = "api_keys";
+      const url = 'api_keys';
 
       return this._all<IApiKey>(url, params);
     }
@@ -52,7 +52,7 @@ export default (easypostClient: EasyPost) =>
       }
 
       throw new FilteringError({
-        message: util.format(Constants.NO_OBJECT_FOUND, "child"),
+        message: util.format(Constants.NO_OBJECT_FOUND, 'child'),
       });
     }
   };

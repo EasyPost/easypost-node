@@ -1,6 +1,6 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IRate } from "../rate_service/Rate";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IRate } from '../rate_service/Rate';
 
 /**
  * @extends baseService
@@ -13,7 +13,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - List of stateless rates
      */
     static async retrieveStatelessRates(params: any) {
-      const url = "beta/rates";
+      const url = 'beta/rates';
       const wrappedParams = {
         shipment: params,
       };
@@ -21,10 +21,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IRate[]>(
-          response.body.rates,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IRate[]>(response.body.rates, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }

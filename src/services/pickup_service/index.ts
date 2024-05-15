@@ -1,8 +1,8 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IPickup } from "./Pickup";
-import { IPickupCreateParameters } from "./PickupCreateParameters";
-import { IPickupListParameters } from "./PickupListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IPickup } from './Pickup';
+import { IPickupCreateParameters } from './PickupCreateParameters';
+import { IPickupListParameters } from './PickupListParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -17,7 +17,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created pickup.
      */
     static async create(params: IPickupCreateParameters) {
-      const url = "pickups";
+      const url = 'pickups';
 
       const wrappedParams = {
         pickup: params,
@@ -40,10 +40,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IPickup>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IPickup>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -73,7 +70,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing a list of {@link Pickup pickups} and pagination information.
      */
     static async all(params: IPickupListParameters = {}) {
-      const url = "pickups";
+      const url = 'pickups';
 
       return this._all<IPickup[]>(url, params);
     }
@@ -85,13 +82,8 @@ export default (easypostClient: EasyPost) =>
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async getNextPage(pickups: any, pageSize: number | null = null) {
-      const url = "pickups";
-      return this._getNextPage<{ pickups: IPickup[] }>(
-        url,
-        "pickups",
-        pickups,
-        pageSize
-      );
+      const url = 'pickups';
+      return this._getNextPage<{ pickups: IPickup[] }>(url, 'pickups', pickups, pageSize);
     }
 
     /**

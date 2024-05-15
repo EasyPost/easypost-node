@@ -1,5 +1,5 @@
-import { LabelFormat } from "./LabelFormat";
-import { TPrintCustomCode } from "./PrintCustomCode";
+import { LabelFormat } from './LabelFormat';
+import { TPrintCustomCode } from './PrintCustomCode';
 
 /**
  * Shipments can have a variety of additional options which you can specify when creating a shipment.
@@ -50,7 +50,7 @@ export type IOptions = {
   /**
    * Method for payment. "CASH", "CHECK", "MONEY_ORDER"
    */
-  cod_method?: "CASH" | "CHECK" | "MONEY_ORDER" | null;
+  cod_method?: 'CASH' | 'CHECK' | 'MONEY_ORDER' | null;
 
   /**
    * The ID of the Address to which the COD payment should be returned.
@@ -84,12 +84,12 @@ export type IOptions = {
    *    - "NO_SIGNATURE" - DHL Express Signature Release
    */
   delivery_confirmation?:
-    | "ADULT_SIGNATURE"
-    | "SIGNATURE"
-    | "NO_SIGNATURE"
-    | "INDIRECT_SIGNATURE"
-    | "ADULT_SIGNATURE_RESTRICTED"
-    | "SIGNATURE_RESTRICTED"
+    | 'ADULT_SIGNATURE'
+    | 'SIGNATURE'
+    | 'NO_SIGNATURE'
+    | 'INDIRECT_SIGNATURE'
+    | 'ADULT_SIGNATURE_RESTRICTED'
+    | 'SIGNATURE_RESTRICTED'
     | null;
 
   /**
@@ -104,13 +104,13 @@ export type IOptions = {
    *    - "DROP_BOX" - "DROP_BOX"
    */
   dropoff_type?:
-    | "REGULAR_PICKUP"
-    | "SCHEDULED_PICKUP"
-    | "RETAIL_LOCATION"
-    | "STATION"
-    | "DROP_BOX"
-    | "REQUEST_COURIER"
-    | "BUSINESS_SERVICE_CENTER"
+    | 'REGULAR_PICKUP'
+    | 'SCHEDULED_PICKUP'
+    | 'RETAIL_LOCATION'
+    | 'STATION'
+    | 'DROP_BOX'
+    | 'REQUEST_COURIER'
+    | 'BUSINESS_SERVICE_CENTER'
     | null;
 
   /**
@@ -150,11 +150,11 @@ export type IOptions = {
    * Possible values "ADDRESS_SERVICE_REQUESTED", "FORWARDING_SERVICE_REQUESTED", "CHANGE_SERVICE_REQUESTED", "RETURN_SERVICE_REQUESTED", "LEAVE_IF_NO_RESPONSE"
    */
   endorsement?:
-    | "ADDRESS_SERVICE_REQUESTED"
-    | "FORWARDING_SERVICE_REQUESTED"
-    | "CHANGE_SERVICE_REQUESTED"
-    | "RETURN_SERVICE_REQUESTED"
-    | "LEAVE_IF_NO_RESPONSE"
+    | 'ADDRESS_SERVICE_REQUESTED'
+    | 'FORWARDING_SERVICE_REQUESTED'
+    | 'CHANGE_SERVICE_REQUESTED'
+    | 'RETURN_SERVICE_REQUESTED'
+    | 'LEAVE_IF_NO_RESPONSE'
     | null;
 
   /**
@@ -179,15 +179,15 @@ export type IOptions = {
    * Applies to USPS, FedEx and DHL eCommerce.
    */
   hazmat?:
-    | "PRIMARY_CONTAINED"
-    | "PRIMARY_PACKED"
-    | "PRIMARY"
-    | "SECONDARY_CONTAINED"
-    | "SECONDARY_PACKED"
-    | "SECONDARY"
-    | "ORMD"
-    | "LIMITED_QUANTITY"
-    | "LITHIUM"
+    | 'PRIMARY_CONTAINED'
+    | 'PRIMARY_PACKED'
+    | 'PRIMARY'
+    | 'SECONDARY_CONTAINED'
+    | 'SECONDARY_PACKED'
+    | 'SECONDARY'
+    | 'ORMD'
+    | 'LIMITED_QUANTITY'
+    | 'LITHIUM'
     | null;
 
   /**
@@ -201,17 +201,17 @@ export type IOptions = {
    * Setting this value to anything other than "DDP" will pass the cost and responsibility of duties on to the recipient of the package(s), as specified by Incoterms rules
    */
   incoterm?:
-    | "EXW"
-    | "FCA"
-    | "CPT"
-    | "CIP"
-    | "DAT"
-    | "DAP"
-    | "DDP"
-    | "FAS"
-    | "FOB"
-    | "CFR"
-    | "CIF"
+    | 'EXW'
+    | 'FCA'
+    | 'CPT'
+    | 'CIP'
+    | 'DAT'
+    | 'DAP'
+    | 'DDP'
+    | 'FAS'
+    | 'FOB'
+    | 'CFR'
+    | 'CIF'
     | null;
 
   /**
@@ -246,7 +246,7 @@ export type IOptions = {
     /**
      * Supported values are "SENDER", "THIRD_PARTY", "RECEIVER", "COLLECT". Defaults to SENDER.
      */
-    type?: "SENDER" | "THIRD_PARTY" | "RECEIVER" | "COLLECT" | null;
+    type?: 'SENDER' | 'THIRD_PARTY' | 'RECEIVER' | 'COLLECT' | null;
 
     /**
      * Setting account number.
@@ -335,7 +335,7 @@ export type IOptions = {
    * This option allows you to request restrictive rates from USPS.
    * Can set to 'USPS.MEDIAMAIL' or 'USPS.LIBRARYMAIL'.
    */
-  special_rates_eligibility?: "USPS.MEDIAMAIL" | "USPS.LIBRARYMAIL" | null;
+  special_rates_eligibility?: 'USPS.MEDIAMAIL' | 'USPS.LIBRARYMAIL' | null;
 
   /**
    * You can use this to override the hub ID you have on your account.

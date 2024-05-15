@@ -1,5 +1,5 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { TReportObjectType } from "./ReportObjectType";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { TReportObjectType } from './ReportObjectType';
 
 /**
  * A Report contains a csv that is a log of all the objects created within a certain time frame.
@@ -24,7 +24,7 @@ export type IReport = IObjectWithId<TReportObjectType> &
     /**
      * "new", "available", "failed", or null
      */
-    status: "new" | "available" | "failed" | null;
+    status: 'new' | 'available' | 'failed' | null;
 
     /**
      * A date string in YYYY-MM-DD form eg: "2016-02-02"

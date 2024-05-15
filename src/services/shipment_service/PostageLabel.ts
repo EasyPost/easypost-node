@@ -1,9 +1,9 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
 
 /**
  * PostageLabel Object
  */
-export type IPostageLabel = IObjectWithId<"PostageLabel"> &
+export type IPostageLabel = IObjectWithId<'PostageLabel'> &
   IDatedObject & {
     date_advance: number;
     integrated_form: string;

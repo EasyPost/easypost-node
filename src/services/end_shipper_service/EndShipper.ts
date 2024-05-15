@@ -1,4 +1,4 @@
-import { IObjectWithId } from "../../utils/types";
+import { IObjectWithId } from '../../utils/types';
 
 /**
  * The EndShipper API is for platforms purchasing postage on behalf of their users, the EndShipper.
@@ -9,7 +9,7 @@ import { IObjectWithId } from "../../utils/types";
  *
  * @see https://www.easypost.com/docs/api/node#endshipper
  */
-export type IEndshipper = IObjectWithId<"EndShipper"> & {
+export type IEndshipper = IObjectWithId<'EndShipper'> & {
   /**
    * Name of responsible person (conditionally required)
    */

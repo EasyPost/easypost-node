@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import EasyPost from '../../out/src/easypost';
-import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
+import EasyPost from '../../out/easypost';
+import EndOfPaginationError from '../../out/errors/general/end_of_pagination_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 

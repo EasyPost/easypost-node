@@ -1,4 +1,4 @@
-import { IUser } from "../user_service";
+import { IUser } from '../user_service';
 
 /**
  * A Referral represents a sub-user under a Partner or white-label account.

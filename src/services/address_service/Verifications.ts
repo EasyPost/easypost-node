@@ -1,4 +1,4 @@
-import { IVerification } from "./Verification";
+import { IVerification } from './Verification';
 
 /**
  * @see https://www.easypost.com/docs/api/node#verifications-object

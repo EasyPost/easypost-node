@@ -1,4 +1,4 @@
-import EasyPostError from "../easypost_error";
+import EasyPostError from '../easypost_error';
 
 /**
  * The MissingParameterError class is used to represent an error due to a missing expected function parameter.

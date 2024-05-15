@@ -1,11 +1,11 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IRate } from "../rate_service";
-import { IOrder } from "./Order";
-import { IOrderCreateParameters } from "./OrderCreateParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IRate } from '../rate_service';
+import { IOrder } from './Order';
+import { IOrderCreateParameters } from './OrderCreateParameters';
 
-export * from "./Order";
-export * from "./OrderCreateParameters";
+export * from './Order';
+export * from './OrderCreateParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -20,7 +20,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created order.
      */
     static async create(params: IOrderCreateParameters) {
-      const url = "orders";
+      const url = 'orders';
 
       const wrappedParams = {
         order: params,
@@ -43,10 +43,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IOrder>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IOrder>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }

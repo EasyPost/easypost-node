@@ -1,11 +1,11 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
 
 /**
  * The Rate class represents a summary of the price and details of a delivery service quote.
  *
  * @see https://www.easypost.com/docs/api/node#rates
  */
-export type IRate = IObjectWithId<"Rate"> &
+export type IRate = IObjectWithId<'Rate'> &
   IDatedObject & {
     /**
      * The service level of the rate.

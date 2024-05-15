@@ -1,10 +1,7 @@
-import { ParametersToOmitOnCreate } from "../../utils/types";
-import { IParcel } from "./Parcel";
+import { ParametersToOmitOnCreate } from '../../utils/types';
+import { IParcel } from './Parcel';
 
-export type IParcelCreateParameters = Omit<
-  IParcel,
-  ParametersToOmitOnCreate
-> & {
+export type IParcelCreateParameters = Omit<IParcel, ParametersToOmitOnCreate> & {
   /**
    * Required if width and/or height are present
    * float (inches)

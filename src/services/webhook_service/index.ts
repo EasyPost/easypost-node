@@ -1,12 +1,12 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IWebhook } from "./Webhook";
-import { IWebhookCreateParameters } from "./WebhookCreateParameters";
-import { IWebhookListParameters } from "./WebhookListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IWebhook } from './Webhook';
+import { IWebhookCreateParameters } from './WebhookCreateParameters';
+import { IWebhookListParameters } from './WebhookListParameters';
 
-export * from "./Webhook";
-export * from "./WebhookCreateParameters";
-export * from "./WebhookListParameters";
+export * from './Webhook';
+export * from './WebhookCreateParameters';
+export * from './WebhookListParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -21,7 +21,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created webhook.
      */
     static async create(params: IWebhookCreateParameters) {
-      const url = "webhooks";
+      const url = 'webhooks';
 
       const wrappedParams = {
         webhook: params,
@@ -74,7 +74,7 @@ export default (easypostClient: EasyPost) =>
      * @returns
      */
     static async all(params: IWebhookListParameters = {}) {
-      const url = "webhooks";
+      const url = 'webhooks';
 
       return this._all<{ webhooks: IWebhook[] }>(url, params);
     }

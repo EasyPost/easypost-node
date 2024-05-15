@@ -1,4 +1,4 @@
-import { ICarrierTypeCredentials } from "./CarrierTypeCredentials";
+import { ICarrierTypeCredentials } from './CarrierTypeCredentials';
 
 /**
  * @see https://www.easypost.com/docs/api/node#carrier-type-fields-object

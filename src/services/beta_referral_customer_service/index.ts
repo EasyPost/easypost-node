@@ -1,7 +1,7 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IPaymentMethod } from "../billing_service";
-import { IRefund } from "../refund_service";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IPaymentMethod } from '../billing_service';
+import { IRefund } from '../refund_service';
 
 export default (easypostClient: EasyPost) =>
   class BetaReferralCustomerService extends baseService(easypostClient) {
@@ -15,7 +15,7 @@ export default (easypostClient: EasyPost) =>
     static async addPaymentMethod(
       stripeCustomerId: string,
       paymentMethodReference: string,
-      priority: "primary" | "secondary" = "primary"
+      priority: 'primary' | 'secondary' = 'primary',
     ) {
       const wrappedParams = {
         payment_method: {
@@ -25,7 +25,7 @@ export default (easypostClient: EasyPost) =>
         },
       };
 
-      const url = "beta/referral_customers/payment_method";
+      const url = 'beta/referral_customers/payment_method';
 
       const response = await easypostClient._post(url, wrappedParams);
 
@@ -42,7 +42,7 @@ export default (easypostClient: EasyPost) =>
         refund_amount: refundAmount,
       };
 
-      const url = "beta/referral_customers/refunds";
+      const url = 'beta/referral_customers/refunds';
 
       const response = await easypostClient._post(url, params);
 
@@ -59,7 +59,7 @@ export default (easypostClient: EasyPost) =>
         payment_log_id: paymentLogId,
       };
 
-      const url = "beta/referral_customers/refunds";
+      const url = 'beta/referral_customers/refunds';
 
       const response = await easypostClient._post(url, params);
 

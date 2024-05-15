@@ -1,8 +1,8 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IRate } from "./Rate";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IRate } from './Rate';
 
-export * from "./Rate";
+export * from './Rate';
 
 export default (easypostClient: EasyPost) =>
   /**

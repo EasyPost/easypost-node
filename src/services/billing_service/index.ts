@@ -1,10 +1,10 @@
-import EasyPost from "../..";
-import Constants from "../../constants";
-import InvalidObjectError from "../../errors/general/invalid_object_error";
-import baseService from "../base_service";
+import EasyPost from '../..';
+import Constants from '../../constants';
+import InvalidObjectError from '../../errors/general/invalid_object_error';
+import baseService from '../base_service';
 
-export * from "./PaymentMethod";
-export type Priority = "primary" | "secondary";
+export * from './PaymentMethod';
+export type Priority = 'primary' | 'secondary';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -18,10 +18,8 @@ export default (easypostClient: EasyPost) =>
      * @param amount - The amount to charge to your payment method.
      * @param priority - The priority of the payment method to charge. Can be either 'primary' or 'secondary'.
      */
-    static async fundWallet(amount: string, priority: Priority = "primary") {
-      const paymentInfo = await this._getPaymentInfo(
-        priority.toLowerCase() as Priority
-      );
+    static async fundWallet(amount: string, priority: Priority = 'primary') {
+      const paymentInfo = await this._getPaymentInfo(priority.toLowerCase() as Priority);
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
 
@@ -37,9 +35,7 @@ export default (easypostClient: EasyPost) =>
      * @param priority - The priority of the payment method to delete. Can be either 'primary' or 'secondary'.
      */
     static async deletePaymentMethod(priority: Priority) {
-      const paymentInfo = await this._getPaymentInfo(
-        priority.toLowerCase() as Priority
-      );
+      const paymentInfo = await this._getPaymentInfo(priority.toLowerCase() as Priority);
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
 
@@ -54,7 +50,7 @@ export default (easypostClient: EasyPost) =>
      * @returns {Object} - An object containing the payment methods associated with the current authenticated user.
      */
     static async retrievePaymentMethods() {
-      const url = "payment_methods";
+      const url = 'payment_methods';
 
       const res = await easypostClient._get(url);
 
@@ -75,25 +71,21 @@ export default (easypostClient: EasyPost) =>
     static async _getPaymentInfo(priority: Priority) {
       const paymentMethods = await this.retrievePaymentMethods();
       const paymentMethodMap = {
-        primary: "primary_payment_method",
-        secondary: "secondary_payment_method",
+        primary: 'primary_payment_method',
+        secondary: 'secondary_payment_method',
       };
 
       const paymentMethodToUse = paymentMethodMap[priority];
       let paymentMethodID;
       let endpoint;
-      const errorString =
-        "The chosen payment method is not valid. Please try again.";
+      const errorString = 'The chosen payment method is not valid. Please try again.';
 
-      if (
-        paymentMethodToUse !== undefined &&
-        paymentMethods[paymentMethodToUse] !== null
-      ) {
+      if (paymentMethodToUse !== undefined && paymentMethods[paymentMethodToUse] !== null) {
         paymentMethodID = paymentMethods[paymentMethodToUse].id;
-        if (paymentMethodID.startsWith("card_")) {
-          endpoint = "credit_cards";
-        } else if (paymentMethodID.startsWith("bank_")) {
-          endpoint = "bank_accounts";
+        if (paymentMethodID.startsWith('card_')) {
+          endpoint = 'credit_cards';
+        } else if (paymentMethodID.startsWith('bank_')) {
+          endpoint = 'bank_accounts';
         } else {
           throw new InvalidObjectError({ message: errorString });
         }

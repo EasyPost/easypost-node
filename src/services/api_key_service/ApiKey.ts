@@ -1,6 +1,6 @@
-import { IObjectWithId } from "../../utils/types";
+import { IObjectWithId } from '../../utils/types';
 
-export type IApiKey = IObjectWithId<"ApiKey"> & {
+export type IApiKey = IObjectWithId<'ApiKey'> & {
   /**
    * The actual key value to use for authentication
    */

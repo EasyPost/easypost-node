@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../out/src/easypost';
+import EasyPostClient from '../../out/easypost';
 import * as setupPolly from '../helpers/setup_polly';
 import Fixture from '../helpers/fixture';
-import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
+import EndOfPaginationError from '../../out/errors/general/end_of_pagination_error';
 
 /* eslint-disable func-names */
 describe('User Service', function () {

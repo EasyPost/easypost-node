@@ -1,6 +1,6 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { ICarrierAccountCreateParameters } from "./CarrierAccountCreateParameters";
-import { ICarrierAccountFields } from "./CarrierAccountFields";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { ICarrierAccountCreateParameters } from './CarrierAccountCreateParameters';
+import { ICarrierAccountFields } from './CarrierAccountFields';
 
 /**
  * A CarrierAccount encapsulates your credentials with the carrier.
@@ -14,7 +14,7 @@ import { ICarrierAccountFields } from "./CarrierAccountFields";
  *
  * @see https://www.easypost.com/docs/api/node#carrier-account-object
  */
-export type ICarrierAccount = IObjectWithId<"CarrierAccount"> &
+export type ICarrierAccount = IObjectWithId<'CarrierAccount'> &
   IDatedObject & {
     /**
      * The name of the carrier type.

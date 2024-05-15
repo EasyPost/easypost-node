@@ -1,9 +1,9 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { IPickup } from "../pickup_service/Pickup";
-import { IScanForm } from "../scan_form_service";
-import { IBatchShipment } from "./BatchShipment";
-import { TBatchState } from "./BatchState";
-import { TBatchStatuses } from "./BatchStatuses";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { IPickup } from '../pickup_service/Pickup';
+import { IScanForm } from '../scan_form_service';
+import { IBatchShipment } from './BatchShipment';
+import { TBatchState } from './BatchState';
+import { TBatchStatuses } from './BatchStatuses';
 
 /**
  * The Batch object allows you to perform operations on multiple Shipments at once.
@@ -12,7 +12,7 @@ import { TBatchStatuses } from "./BatchStatuses";
  *
  * @see https://www.easypost.com/docs/api/node#batch-object
  */
-export type IBatch = IObjectWithId<"Batch"> &
+export type IBatch = IObjectWithId<'Batch'> &
   IDatedObject & {
     /**
      * An optional field that may be used in place of ID in some API endpoints

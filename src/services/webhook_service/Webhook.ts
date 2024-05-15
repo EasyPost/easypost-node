@@ -1,4 +1,4 @@
-import { IObjectWithId } from "../../utils/types";
+import { IObjectWithId } from '../../utils/types';
 
 /**
  * Each Webhook contains the url which EasyPost will notify whenever an object in our system updates.
@@ -17,7 +17,7 @@ import { IObjectWithId } from "../../utils/types";
  *
  * @see https://www.easypost.com/docs/api/node#webhook-object
  */
-export type IWebhook = IObjectWithId<"Webhook"> & {
+export type IWebhook = IObjectWithId<'Webhook'> & {
   /**
    * http://example.com
    */

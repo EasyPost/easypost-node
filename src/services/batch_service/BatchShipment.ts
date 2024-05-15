@@ -1,4 +1,4 @@
-import { TBatchStatus } from "./BatchStatus";
+import { TBatchStatus } from './BatchStatus';
 
 /**
  * @see https://www.easypost.com/docs/api/node#batch-shipment-object

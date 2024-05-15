@@ -1,8 +1,8 @@
-import { IAddress } from "../address_service";
-import { IBatch } from "../batch_service";
-import { ICarrierAccount } from "../carrier_account_service";
-import { IShipment } from "../shipment_service";
-import { IPickupRate } from "./PickupRate";
+import { IAddress } from '../address_service';
+import { IBatch } from '../batch_service';
+import { ICarrierAccount } from '../carrier_account_service';
+import { IShipment } from '../shipment_service';
+import { IPickupRate } from './PickupRate';
 
 type BasePickupCreateParameters = {
   address: IAddress | string;
@@ -25,6 +25,4 @@ type BatchPickupCreateParameters = BasePickupCreateParameters & {
   batch?: IBatch | { id: string } | string | null;
 };
 
-export type IPickupCreateParameters =
-  | ShipmentPickupCreateParameters
-  | BatchPickupCreateParameters;
+export type IPickupCreateParameters = ShipmentPickupCreateParameters | BatchPickupCreateParameters;

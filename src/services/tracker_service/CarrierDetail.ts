@@ -1,10 +1,10 @@
-import { IBaseObject } from "../../utils/types";
-import { ITrackingLocation } from "./TrackingLocation";
+import { IBaseObject } from '../../utils/types';
+import { ITrackingLocation } from './TrackingLocation';
 
 /**
  * @see https://www.easypost.com/docs/api/node#carrier-detail-object
  */
-export type ICarrierDetail = IBaseObject<"CarrierDetail"> & {
+export type ICarrierDetail = IBaseObject<'CarrierDetail'> & {
   /**
    * The service level the associated shipment was shipped with (if available)
    */

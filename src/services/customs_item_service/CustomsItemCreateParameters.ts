@@ -1,7 +1,4 @@
-import { ParametersToOmitOnCreate } from "../../utils/types";
-import { ICustomsItem } from "./CustomsItem";
+import { ParametersToOmitOnCreate } from '../../utils/types';
+import { ICustomsItem } from './CustomsItem';
 
-export type ICustomsItemCreateParameters = Omit<
-  ICustomsItem,
-  ParametersToOmitOnCreate
->;
+export type ICustomsItemCreateParameters = Omit<ICustomsItem, ParametersToOmitOnCreate>;

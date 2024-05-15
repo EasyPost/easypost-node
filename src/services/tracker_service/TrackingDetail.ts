@@ -1,11 +1,11 @@
-import { IBaseObject } from "../../utils/types";
-import { ITrackerStatus } from "./TrackerStatus";
-import { ITrackingLocation } from "./TrackingLocation";
+import { IBaseObject } from '../../utils/types';
+import { ITrackerStatus } from './TrackerStatus';
+import { ITrackingLocation } from './TrackingLocation';
 
 /**
  * @see https://www.easypost.com/docs/api/node#tracking-detail-object
  */
-export type ITrackingDetail = IBaseObject<"TrackingDetail"> & {
+export type ITrackingDetail = IBaseObject<'TrackingDetail'> & {
   /**
    * Description of the scan event
    */

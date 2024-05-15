@@ -1,8 +1,8 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { IAddress } from "../address_service";
-import { ICarrierAccount } from "../carrier_account_service";
-import { IMessage, IShipment } from "../shipment_service";
-import { IPickupRate } from "./PickupRate";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { IAddress } from '../address_service';
+import { ICarrierAccount } from '../carrier_account_service';
+import { IMessage, IShipment } from '../shipment_service';
+import { IPickupRate } from './PickupRate';
 
 /**
  * The Pickup object allows you to schedule a pickup from your carrier from your customer's residence or place of business.
@@ -24,7 +24,7 @@ import { IPickupRate } from "./PickupRate";
  *
  * @see https://www.easypost.com/docs/api/node#pickup-object
  */
-export type IPickup = IObjectWithId<"Pickup"> &
+export type IPickup = IObjectWithId<'Pickup'> &
   IDatedObject & {
     /**
      * An optional field that may be used in place of ID in some API endpoints
@@ -34,7 +34,7 @@ export type IPickup = IObjectWithId<"Pickup"> &
     /**
      * One of: "unknown", "scheduled", or "canceled"
      */
-    status: "unknown" | "scheduled" | "canceled";
+    status: 'unknown' | 'scheduled' | 'canceled';
 
     /**
      * The earliest time at which the package is available to pick up

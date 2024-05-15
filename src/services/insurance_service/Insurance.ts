@@ -1,8 +1,8 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { IAddress } from "../address_service";
-import { ITracker } from "../tracker_service";
-import { IFee } from "./Fee";
-import { TInsuranceStatus } from "./InsuranceStatus";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { IAddress } from '../address_service';
+import { ITracker } from '../tracker_service';
+import { IFee } from './Fee';
+import { TInsuranceStatus } from './InsuranceStatus';
 
 /**
  * An Insurance object represents insurance for packages purchased both via the EasyPost API as well as shipments purchased through third parties and later registered with EasyPost.
@@ -21,7 +21,7 @@ import { TInsuranceStatus } from "./InsuranceStatus";
  *
  * @see https://www.easypost.com/docs/api/node#insurance-object
  */
-export type IInsurance = IObjectWithId<"Insurance"> &
+export type IInsurance = IObjectWithId<'Insurance'> &
   IDatedObject & {
     /**
      * The unique reference for this Insurance, if any

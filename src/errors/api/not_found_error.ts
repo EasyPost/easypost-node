@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The NotFoundError class is used to represent a 404 error that occurred while communicating with the EasyPost API.

@@ -1,9 +1,9 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { IFee } from "../insurance_service";
-import { ICarrierDetail } from "./CarrierDetail";
-import { ITrackerStatus } from "./TrackerStatus";
-import { ITrackerStatusDetail } from "./TrackerStatusDetail";
-import { ITrackingDetail } from "./TrackingDetail";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { IFee } from '../insurance_service';
+import { ICarrierDetail } from './CarrierDetail';
+import { ITrackerStatus } from './TrackerStatus';
+import { ITrackerStatusDetail } from './TrackerStatusDetail';
+import { ITrackingDetail } from './TrackingDetail';
 
 /**
  * A Tracker object contains all the tracking information for a package.
@@ -33,7 +33,7 @@ import { ITrackingDetail } from "./TrackingDetail";
  *
  * @see https://www.easypost.com/docs/api/node#tracker-object
  */
-export type ITracker = IObjectWithId<"Tracker"> &
+export type ITracker = IObjectWithId<'Tracker'> &
   IDatedObject & {
     /**
      * The tracking code provided by the carrier

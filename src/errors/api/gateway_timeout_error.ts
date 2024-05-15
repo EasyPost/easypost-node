@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The GatewayTimeoutError class is used to represent a 504 error that occurred while communicating with the EasyPost API.

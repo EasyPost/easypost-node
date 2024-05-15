@@ -1,18 +1,18 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IBatch } from "./Batch";
-import { IBatchCreateParameters } from "./BatchCreateParameters";
-import { IBatchListParameters } from "./BatchListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IBatch } from './Batch';
+import { IBatchCreateParameters } from './BatchCreateParameters';
+import { IBatchListParameters } from './BatchListParameters';
 
-export * from "./Batch";
-export * from "./BatchCreateParameters";
-export * from "./BatchListParameters";
-export * from "./BatchShipment";
-export * from "./BatchState";
-export * from "./BatchStatus";
-export * from "./BatchStatuses";
+export * from './Batch';
+export * from './BatchCreateParameters';
+export * from './BatchListParameters';
+export * from './BatchShipment';
+export * from './BatchState';
+export * from './BatchStatus';
+export * from './BatchStatuses';
 
-export const DEFAULT_LABEL_FORMAT = "pdf";
+export const DEFAULT_LABEL_FORMAT = 'pdf';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -27,7 +27,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created batch.
      */
     static async create(params: IBatchCreateParameters) {
-      const url = "batches";
+      const url = 'batches';
 
       const wrappedParams = {
         batch: params,
@@ -51,10 +51,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IBatch>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IBatch>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -76,10 +73,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IBatch>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IBatch>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -99,10 +93,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IBatch>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IBatch>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -151,7 +142,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing a list of {@link Batch batches} and pagination information.
      */
     static async all(params: IBatchListParameters = {}) {
-      const url = "batches";
+      const url = 'batches';
 
       return this._all<IBatch>(url, params);
     }

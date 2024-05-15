@@ -1,4 +1,4 @@
-import { IAllMethodParameters } from "../../utils/types";
+import { IAllMethodParameters } from '../../utils/types';
 
 export type ITrackerListParameters = IAllMethodParameters & {
   /**

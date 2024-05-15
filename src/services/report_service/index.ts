@@ -1,13 +1,13 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IReport } from "./Report";
-import { IReportCreateParameters } from "./ReportCreateParameters";
-import { IReportListParameters } from "./ReportListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IReport } from './Report';
+import { IReportCreateParameters } from './ReportCreateParameters';
+import { IReportListParameters } from './ReportListParameters';
 
-export * from "./Report";
-export * from "./ReportCreateParameters";
-export * from "./ReportListParameters";
-export * from "./ReportObjectType";
+export * from './Report';
+export * from './ReportCreateParameters';
+export * from './ReportListParameters';
+export * from './ReportObjectType';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -38,18 +38,12 @@ export default (easypostClient: EasyPost) =>
 
       try {
         // don't send "type" param to API
-        const apiParams = { ...params } as Omit<
-          IReportListParameters,
-          "type"
-        > & { type?: any };
+        const apiParams = { ...params } as Omit<IReportListParameters, 'type'> & { type?: any };
         delete apiParams.type;
 
         const response = await easypostClient._get(url, apiParams);
 
-        const responseObject = this._convertToEasyPostObject(
-          response.body,
-          params
-        );
+        const responseObject = this._convertToEasyPostObject(response.body, params);
 
         return responseObject;
       } catch (e) {
@@ -65,12 +59,7 @@ export default (easypostClient: EasyPost) =>
      */
     static async getNextPage(reports: any, pageSize: number | null = null) {
       const url = `reports/${reports.reports[0]._params.type}`;
-      return this._getNextPage<{ reports: IReport[] }>(
-        url,
-        "reports",
-        reports,
-        pageSize
-      );
+      return this._getNextPage<{ reports: IReport[] }>(url, 'reports', reports, pageSize);
     }
 
     /**

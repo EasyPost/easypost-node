@@ -1,11 +1,11 @@
-import { IObjectWithId } from "../../utils/types";
+import { IObjectWithId } from '../../utils/types';
 
 /**
  * The Payment method object can be either credit card or bank account.
  *
  * TODO: Add the link to the API doc once its updated
  */
-export type IPaymentMethod = IObjectWithId<"PaymentMethod"> & {
+export type IPaymentMethod = IObjectWithId<'PaymentMethod'> & {
   /**
    * Country of the bank account
    */

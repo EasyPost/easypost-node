@@ -1,10 +1,10 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IParcel } from "./Parcel";
-import { IParcelCreateParameters } from "./ParcelCreateParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IParcel } from './Parcel';
+import { IParcelCreateParameters } from './ParcelCreateParameters';
 
-export * from "./Parcel";
-export * from "./ParcelCreateParameters";
+export * from './Parcel';
+export * from './ParcelCreateParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -19,7 +19,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created parcel.
      */
     static async create(params: IParcelCreateParameters) {
-      const url = "parcels";
+      const url = 'parcels';
 
       const wrappedParams = {
         parcel: params,

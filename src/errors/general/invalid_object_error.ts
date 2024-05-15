@@ -1,4 +1,4 @@
-import EasyPostError from "../easypost_error";
+import EasyPostError from '../easypost_error';
 
 /**
  * The InvalidObjectError class is used to represent an error due to an invalid object (e.g. missing an expected property).

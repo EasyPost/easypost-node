@@ -1,18 +1,18 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { IAddress } from "../address_service";
-import { TBatchStatus } from "../batch_service";
-import { ICustomsInfo } from "../customs_info_service";
-import { IFee, IInsurance } from "../insurance_service";
-import { IParcel } from "../parcel_service";
-import { IRate } from "../rate_service";
-import { IScanForm } from "../scan_form_service";
-import { ITracker } from "../tracker_service";
-import { IForm } from "./Form";
-import { IMessage } from "./Message";
-import { IOptions, LabelFormat } from "./Options";
-import { IPostageLabel } from "./PostageLabel";
-import { IShipmentCreateParameters } from "./ShipmentCreateParameters";
-import { IShipmentListParameters } from "./ShipmentListParameters";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { IAddress } from '../address_service';
+import { TBatchStatus } from '../batch_service';
+import { ICustomsInfo } from '../customs_info_service';
+import { IFee, IInsurance } from '../insurance_service';
+import { IParcel } from '../parcel_service';
+import { IRate } from '../rate_service';
+import { IScanForm } from '../scan_form_service';
+import { ITracker } from '../tracker_service';
+import { IForm } from './Form';
+import { IMessage } from './Message';
+import { IOptions, LabelFormat } from './Options';
+import { IPostageLabel } from './PostageLabel';
+import { IShipmentCreateParameters } from './ShipmentCreateParameters';
+import { IShipmentListParameters } from './ShipmentListParameters';
 
 /**
  * The workhorse of the EasyPost API, a Shipment is made up of a "to" and "from" Address, the Parcel being shipped, and any customs forms required for international deliveries.
@@ -22,7 +22,7 @@ import { IShipmentListParameters } from "./ShipmentListParameters";
  *
  * @see https://www.easypost.com/docs/api/node#shipment-object
  */
-export type IShipment = IObjectWithId<"Shipment"> &
+export type IShipment = IObjectWithId<'Shipment'> &
   IDatedObject & {
     /**
      * An optional field that may be used in place of id in other API endpoints
@@ -132,7 +132,7 @@ export type IShipment = IObjectWithId<"Shipment"> &
     /**
      * The current status of the shipment refund process. Possible values are "submitted", "refunded", "rejected".
      */
-    refund_status: "submitted" | "refunded" | "rejected";
+    refund_status: 'submitted' | 'refunded' | 'rejected';
 
     /**
      * The ID of the batch that contains this shipment, if any

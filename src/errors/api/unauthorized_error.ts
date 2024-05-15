@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The UnauthorizedError class is used to represent a 401 error that occurred while communicating with the EasyPost API.

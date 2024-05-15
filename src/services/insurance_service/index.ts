@@ -1,14 +1,14 @@
-import EasyPost from "../..";
-import { IAllMethodParameters } from "../../utils/types";
-import baseService from "../base_service";
-import { IInsurance } from "./Insurance";
-import { IInsuranceCreateParameters } from "./InsuranceCreateParameters";
+import EasyPost from '../..';
+import { IAllMethodParameters } from '../../utils/types';
+import baseService from '../base_service';
+import { IInsurance } from './Insurance';
+import { IInsuranceCreateParameters } from './InsuranceCreateParameters';
 
-export * from "./Fee";
-export * from "./FeeType";
-export * from "./Insurance";
-export * from "./InsuranceCreateParameters";
-export * from "./InsuranceStatus";
+export * from './Fee';
+export * from './FeeType';
+export * from './Insurance';
+export * from './InsuranceCreateParameters';
+export * from './InsuranceStatus';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -23,7 +23,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created insurance.
      */
     static async create(params: IInsuranceCreateParameters) {
-      const url = "insurances";
+      const url = 'insurances';
 
       const wrappedParams = {
         insurance: params,
@@ -39,7 +39,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing the list of {@link Insurance insurance} records and pagination information.
      */
     static async all(params: IAllMethodParameters = {}) {
-      const url = "insurances";
+      const url = 'insurances';
 
       return this._all<IInsurance[]>(url, params);
     }
@@ -51,12 +51,12 @@ export default (easypostClient: EasyPost) =>
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async getNextPage(insurances: any, pageSize: number | null = null) {
-      const url = "insurances";
+      const url = 'insurances';
       return this._getNextPage<{ insurances: IInsurance[] }>(
         url,
-        "insurances",
+        'insurances',
         insurances,
-        pageSize
+        pageSize,
       );
     }
 

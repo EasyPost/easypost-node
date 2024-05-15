@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 
-import EasyPostClient from '../../out/src/easypost';
-import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
-import FilteringError from '../../out/src/errors/general/filtering_error';
-import InvalidParameterError from '../../out/src/errors/general/invalid_parameter_error';
+import EasyPostClient from '../../out/easypost';
+import EndOfPaginationError from '../../out/errors/general/end_of_pagination_error';
+import FilteringError from '../../out/errors/general/filtering_error';
+import InvalidParameterError from '../../out/errors/general/invalid_parameter_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 

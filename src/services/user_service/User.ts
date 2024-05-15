@@ -1,4 +1,4 @@
-import { IObjectWithId } from "../../utils/types";
+import { IObjectWithId } from '../../utils/types';
 
 /**
  * The User object can be used to manage your own account and to create child accounts.
@@ -8,7 +8,7 @@ import { IObjectWithId } from "../../utils/types";
  *
  * @see https://www.easypost.com/docs/api/node#user-object
  */
-export type IUser = IObjectWithId<"User"> & {
+export type IUser = IObjectWithId<'User'> & {
   /**
    * The ID of the parent user object.
    * Top-level users are defined as users with no parent

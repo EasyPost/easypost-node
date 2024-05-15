@@ -1,45 +1,40 @@
-import os from "os";
-import superagent, { SuperAgentStatic, Request, Response } from "superagent";
-import { v4 as uuid } from "uuid";
+import os from 'os';
+import superagent, { SuperAgentStatic, Request, Response } from 'superagent';
+import { v4 as uuid } from 'uuid';
 
-import pkg from "../package.json";
-import Constants from "./constants";
-import ErrorHandler from "./errors/error_handler";
-import MissingParameterError from "./errors/general/missing_parameter_error";
-import AddressService from "./services/address_service";
-import ApiKeyService from "./services/api_key_service";
-import BatchService from "./services/batch_service";
-import BetaRateService from "./services/beta_rate_service";
-import BetaReferralCustomerService from "./services/beta_referral_customer_service";
-import BillingService from "./services/billing_service";
-import CarrierAccountService from "./services/carrier_account_service";
-import CarrierMetadataService from "./services/carrier_metadata_service";
-import CarrierTypeService from "./services/carrier_type_service";
-import CustomsInfoService from "./services/customs_info_service";
-import CustomsItemService from "./services/customs_item_service";
-import EndShipperService from "./services/end_shipper_service";
-import EventService from "./services/event_service";
-import InsuranceService from "./services/insurance_service";
-import OrderService from "./services/order_service";
-import ParcelService from "./services/parcel_service";
-import PickupService from "./services/pickup_service";
-import RateService from "./services/rate_service";
-import ReferralCustomerService from "./services/referral_customer_service";
-import RefundService from "./services/refund_service";
-import ReportService from "./services/report_service";
-import ScanFormService from "./services/scan_form_service";
-import ShipmentService from "./services/shipment_service";
-import TrackerService from "./services/tracker_service";
-import UserService from "./services/user_service";
-import WebhookService from "./services/webhook_service";
-import Utils from "./utils/util";
+import pkg from '../package.json';
+import Constants from './constants';
+import ErrorHandler from './errors/error_handler';
+import MissingParameterError from './errors/general/missing_parameter_error';
+import AddressService from './services/address_service';
+import ApiKeyService from './services/api_key_service';
+import BatchService from './services/batch_service';
+import BetaRateService from './services/beta_rate_service';
+import BetaReferralCustomerService from './services/beta_referral_customer_service';
+import BillingService from './services/billing_service';
+import CarrierAccountService from './services/carrier_account_service';
+import CarrierMetadataService from './services/carrier_metadata_service';
+import CarrierTypeService from './services/carrier_type_service';
+import CustomsInfoService from './services/customs_info_service';
+import CustomsItemService from './services/customs_item_service';
+import EndShipperService from './services/end_shipper_service';
+import EventService from './services/event_service';
+import InsuranceService from './services/insurance_service';
+import OrderService from './services/order_service';
+import ParcelService from './services/parcel_service';
+import PickupService from './services/pickup_service';
+import RateService from './services/rate_service';
+import ReferralCustomerService from './services/referral_customer_service';
+import RefundService from './services/refund_service';
+import ReportService from './services/report_service';
+import ScanFormService from './services/scan_form_service';
+import ShipmentService from './services/shipment_service';
+import TrackerService from './services/tracker_service';
+import UserService from './services/user_service';
+import WebhookService from './services/webhook_service';
+import Utils from './utils/util';
 
-import util from "node:util";
-
-export * from "./errors";
-export * from "./services";
-export * from "./utils/errors";
-export * from "./constants";
+import util from 'node:util';
 
 /** How many milliseconds in a second. */
 export const MS_SECOND = 1000;
@@ -48,33 +43,31 @@ export const MS_SECOND = 1000;
 export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
 
 /** The default base URL for all production EasyPost API requests. */
-export const DEFAULT_BASE_URL = "https://api.easypost.com/v2/";
+export const DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
 
 /** The default headers used for all EasyPost API requests. */
 export const DEFAULT_HEADERS = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-  "User-Agent": `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+  'User-Agent': `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${
     process.versions.node
   } OS/${os.platform()} OSVersion/${os.release()} OSArch/${os.arch()}`,
 };
 
 /** A map of HTTP methods to their corresponding string values (for use with superagent). */
 export const METHODS = {
-  GET: "get",
-  POST: "post",
-  PUT: "put",
-  PATCH: "patch",
-  DELETE: "del",
+  GET: 'get',
+  POST: 'post',
+  PUT: 'put',
+  PATCH: 'patch',
+  DELETE: 'del',
 } as const;
 
 export type EasyPostClientOptions = {
   useProxy?: boolean;
   timeout?: number;
   baseUrl?: string;
-  superagentMiddleware?: (
-    agent: SuperAgentStatic<Request>
-  ) => SuperAgentStatic<Request>;
+  superagentMiddleware?: (agent: SuperAgentStatic<Request>) => SuperAgentStatic<Request>;
   requestMiddleware?: (request: Request) => Request;
 
   agent?: SuperAgentStatic<Request>;
@@ -91,9 +84,9 @@ export type RequestHookData = {
 export type RequestHook = (data: RequestHookData) => void;
 export type ResponseHookData = RequestHookData & {
   requestHeaders: Record<string, string>;
-  httpStatus: Response["status"];
-  responseBody: Response["body"];
-  headers: Response["headers"];
+  httpStatus: Response['status'];
+  responseBody: Response['body'];
+  headers: Response['headers'];
   responseTimestamp: number;
 };
 export type ResponseHook = (data: ResponseHookData) => void;
@@ -143,18 +136,11 @@ export default class EasyPostClient {
   Webhook: ReturnType<typeof WebhookService>;
 
   constructor(key: string, options: EasyPostClientOptions = {}) {
-    const {
-      useProxy,
-      timeout,
-      baseUrl,
-      superagentMiddleware,
-      requestMiddleware,
-      agent,
-    } = options;
+    const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware, agent } = options;
 
     if (!key && !useProxy) {
       throw new MissingParameterError({
-        message: util.format(Constants.MISSING_REQUIRED_PARAMETER, "API Key"),
+        message: util.format(Constants.MISSING_REQUIRED_PARAMETER, 'API Key'),
       });
     }
 
@@ -250,19 +236,10 @@ export default class EasyPostClient {
    */
   static copyClient(
     client: EasyPostClient,
-    options: EasyPostClientOptions & { apiKey?: string } = {}
+    options: EasyPostClientOptions & { apiKey?: string } = {},
   ) {
-    const {
-      apiKey,
-      useProxy,
-      timeout,
-      baseUrl,
-      superagentMiddleware,
-      requestMiddleware,
-    } = options;
-    const agent = superagentMiddleware
-      ? superagentMiddleware(client.agent)
-      : client.agent;
+    const { apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
+    const agent = superagentMiddleware ? superagentMiddleware(client.agent) : client.agent;
 
     return new EasyPostClient(apiKey || client.key, {
       useProxy: useProxy || client.useProxy,
@@ -290,15 +267,13 @@ export default class EasyPostClient {
    * @param {string} path - The path to build.
    * @returns {string} The full path to use for the HTTP request.
    */
-  _buildPath(path: string = ""): string {
-    if (path.indexOf("http") === 0) {
+  _buildPath(path: string = ''): string {
+    if (path.indexOf('http') === 0) {
       return path;
     }
 
     let completePath = this.baseUrl + path;
-    completePath = path.includes("beta")
-      ? completePath.replace("v2", "")
-      : completePath;
+    completePath = path.includes('beta') ? completePath.replace('v2', '') : completePath;
 
     return completePath;
   }
@@ -310,10 +285,7 @@ export default class EasyPostClient {
    * @param {Object} response - the response from the superagent request
    * @returns {Object} - the value to be passed to the responseHooks
    */
-  _createResponseHooksValue(
-    baseHooksValue: RequestHookData,
-    response: Response
-  ): ResponseHookData {
+  _createResponseHooksValue(baseHooksValue: RequestHookData, response: Response): ResponseHookData {
     return {
       ...baseHooksValue,
       requestHeaders: baseHooksValue.headers,
@@ -334,10 +306,10 @@ export default class EasyPostClient {
    * @throws {ApiError} If the request fails.
    */
   async _request(
-    path = "",
+    path = '',
     method: (typeof METHODS)[keyof typeof METHODS] = METHODS.GET,
     params: Record<string, string | number | boolean> = {},
-    headers: Record<string, string> = {}
+    headers: Record<string, string> = {},
   ) {
     const urlPath = this._buildPath(path);
     const requestHeaders = EasyPostClient._buildHeaders(headers);
@@ -348,7 +320,7 @@ export default class EasyPostClient {
     }
 
     if (this.key) {
-      request.auth(this.key, "", { type: "basic" });
+      request.auth(this.key, '', { type: 'basic' });
     }
 
     // it would be ideal if this "full url with params" could be gotten from superagent directly,
@@ -382,29 +354,26 @@ export default class EasyPostClient {
       const response = await request;
 
       if (this.responseHooks.length > 0) {
-        const responseHooksValue = this._createResponseHooksValue(
-          baseHooksValue,
-          response
-        );
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, response);
         this.responseHooks.forEach((fn) => fn(responseHooksValue));
       }
 
       return response;
     } catch (error) {
-      if (!error || typeof error !== "object") {
+      if (!error || typeof error !== 'object') {
         throw error;
       }
 
       if (
-        "response" in error &&
+        'response' in error &&
         error.response &&
-        typeof error.response === "object" &&
-        "body" in error.response &&
+        typeof error.response === 'object' &&
+        'body' in error.response &&
         error.response.body
       ) {
         const responseHooksValue = this._createResponseHooksValue(
           baseHooksValue,
-          error.response as any
+          error.response as any,
         );
         this.responseHooks.forEach((fn) => fn(responseHooksValue));
 
@@ -427,7 +396,7 @@ export default class EasyPostClient {
   _get(
     path: string,
     params: Record<string, string | number | boolean> = {},
-    headers: Record<string, string> = {}
+    headers: Record<string, string> = {},
   ) {
     return this._request(path, METHODS.GET, params, headers);
   }
@@ -472,11 +441,7 @@ export default class EasyPostClient {
    * @param {Record<string, string>} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _delete(
-    path: string,
-    params: any = {},
-    headers: Record<string, string> = {}
-  ) {
+  _delete(path: string, params: any = {}, headers: Record<string, string> = {}) {
     return this._request(path, METHODS.DELETE, params, headers);
   }
 }

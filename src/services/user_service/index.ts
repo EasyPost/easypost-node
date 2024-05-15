@@ -1,12 +1,12 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IBrand } from "./Brand";
-import { IUser } from "./User";
-import { IUserCreateParameters } from "./UserCreateParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IBrand } from './Brand';
+import { IUser } from './User';
+import { IUserCreateParameters } from './UserCreateParameters';
 
-export * from "./Brand";
-export * from "./User";
-export * from "./UserCreateParameters";
+export * from './Brand';
+export * from './User';
+export * from './UserCreateParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -21,7 +21,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created child user.
      */
     static async create(params: IUserCreateParameters) {
-      const url = "users";
+      const url = 'users';
 
       const wrappedParams = {
         user: params,
@@ -46,10 +46,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._patch(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IUser>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IUser>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -79,7 +76,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The retrieved user.
      */
     static async retrieveMe() {
-      const url = "users";
+      const url = 'users';
 
       try {
         const response = await easypostClient._get(url);
@@ -122,10 +119,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._patch(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IBrand>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IBrand>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -138,15 +132,12 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing a list of {@link Children User} and pagination information.
      */
     static async allChildren(params: any) {
-      const url = "users/children";
+      const url = 'users/children';
 
       try {
         const response = await easypostClient._get(url, params);
 
-        return this._convertToEasyPostObject<{ children: IUser[] }>(
-          response.body,
-          params
-        );
+        return this._convertToEasyPostObject<{ children: IUser[] }>(response.body, params);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -158,16 +149,8 @@ export default (easypostClient: EasyPost) =>
      * @param pageSize The number of records to return on each page
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(
-      children: { children: any[] },
-      pageSize: number | null = null
-    ) {
-      const url = "users/children";
-      return this._getNextPage<{ children: IUser[] }>(
-        url,
-        "children",
-        children,
-        pageSize
-      );
+    static async getNextPage(children: { children: any[] }, pageSize: number | null = null) {
+      const url = 'users/children';
+      return this._getNextPage<{ children: IUser[] }>(url, 'children', children, pageSize);
     }
   };

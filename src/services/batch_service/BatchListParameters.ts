@@ -1,4 +1,4 @@
-import { IAllMethodParameters } from "../../utils/types";
+import { IAllMethodParameters } from '../../utils/types';
 
 /**
  * @see https://www.easypost.com/docs/api/node#list-all-batches

@@ -3,11 +3,11 @@ import fs from 'fs';
 import { resolve } from 'path';
 import { expect } from 'chai';
 
-import EasyPostClient from '../../out/src/easypost';
+import EasyPostClient from '../../out/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
-import NotFoundError from '../../out/src/errors/api/not_found_error';
-import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
+import NotFoundError from '../../out/errors/api/not_found_error';
+import EndOfPaginationError from '../../out/errors/general/end_of_pagination_error';
 
 describe('Event Service', function () {
   setupPolly.startPolly();

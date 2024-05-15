@@ -1,5 +1,5 @@
-import { TErrorCode } from "./ErrorCode";
-import { IFieldError } from "./FieldError";
+import { TErrorCode } from './ErrorCode';
+import { IFieldError } from './FieldError';
 
 /**
  * In the event of a client or server error, the response will contain the standard 4xx or 5xx respectively, accompanied by a well-formed JSON body describing the issue, e.g., a required field was omitted, a purchase failed, etc.

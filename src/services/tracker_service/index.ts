@@ -1,17 +1,17 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { ITracker } from "./Tracker";
-import { ITrackerCreateParameters } from "./TrackerCreateParameters";
-import { ITrackerListParameters } from "./TrackerListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { ITracker } from './Tracker';
+import { ITrackerCreateParameters } from './TrackerCreateParameters';
+import { ITrackerListParameters } from './TrackerListParameters';
 
-export * from "./CarrierDetail";
-export * from "./Tracker";
-export * from "./TrackerCreateParameters";
-export * from "./TrackerListParameters";
-export * from "./TrackerStatus";
-export * from "./TrackerStatusDetail";
-export * from "./TrackingDetail";
-export * from "./TrackingLocation";
+export * from './CarrierDetail';
+export * from './Tracker';
+export * from './TrackerCreateParameters';
+export * from './TrackerListParameters';
+export * from './TrackerStatus';
+export * from './TrackerStatusDetail';
+export * from './TrackingDetail';
+export * from './TrackingLocation';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -26,7 +26,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created tracker.
      */
     static async create(params: ITrackerCreateParameters) {
-      const url = "trackers";
+      const url = 'trackers';
 
       const wrappedParams = {
         tracker: params,
@@ -42,7 +42,7 @@ export default (easypostClient: EasyPost) =>
      */
     static async createList(params: ITrackerCreateParameters[] = []) {
       const newParams = { trackers: params };
-      const url = "trackers/create_list";
+      const url = 'trackers/create_list';
       await easypostClient._post(url, newParams);
     }
 
@@ -53,7 +53,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing the list of {@link Tracker trackers} and pagination information.
      */
     static async all(params: ITrackerListParameters = {}) {
-      const url = "trackers";
+      const url = 'trackers';
 
       return this._all<{ trackers: ITracker[] }>(url, params);
     }
@@ -64,18 +64,10 @@ export default (easypostClient: EasyPost) =>
      * @param pageSize The number of records to return on each page
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(
-      trackers: { trackers: any[] },
-      pageSize: number | null = null
-    ) {
-      const url = "trackers";
+    static async getNextPage(trackers: { trackers: any[] }, pageSize: number | null = null) {
+      const url = 'trackers';
 
-      return this._getNextPage<{ trackers: ITracker[] }>(
-        url,
-        "trackers",
-        trackers,
-        pageSize
-      );
+      return this._getNextPage<{ trackers: ITracker[] }>(url, 'trackers', trackers, pageSize);
     }
 
     /**

@@ -1,5 +1,5 @@
-import { IBaseObject } from "../../utils/types";
-import { TFeeType } from "./FeeType";
+import { IBaseObject } from '../../utils/types';
+import { TFeeType } from './FeeType';
 
 /**
  * Fee objects are used to represent the breakdown of charges made when purchasing an item on EasyPost.
@@ -12,7 +12,7 @@ import { TFeeType } from "./FeeType";
  *
  * @see https://www.easypost.com/docs/api/node#fee-object
  */
-export type IFee = IBaseObject<"Fee"> & {
+export type IFee = IBaseObject<'Fee'> & {
   /**
    * The name of the category of fee. Possible types are "LabelFee", "PostageFee", "InsuranceFee", and "TrackerFee"
    */

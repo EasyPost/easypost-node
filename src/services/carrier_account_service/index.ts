@@ -1,15 +1,15 @@
-import util from "node:util";
-import baseService from "../base_service";
-import Constants from "../../constants";
-import InvalidParameterError from "../../errors/general/invalid_parameter_error";
-import EasyPost from "../..";
-import { ICarrierAccount } from "./CarrierAccount";
-import { ICarrierAccountCreateParameters } from "./CarrierAccountCreateParameters";
+import util from 'node:util';
+import baseService from '../base_service';
+import Constants from '../../constants';
+import InvalidParameterError from '../../errors/general/invalid_parameter_error';
+import EasyPost from '../..';
+import { ICarrierAccount } from './CarrierAccount';
+import { ICarrierAccountCreateParameters } from './CarrierAccountCreateParameters';
 
-export * from "./CarrierAccount";
-export * from "./CarrierAccountCreateParameters";
-export * from "./CarrierAccountField";
-export * from "./CarrierAccountFields";
+export * from './CarrierAccount';
+export * from './CarrierAccountCreateParameters';
+export * from './CarrierAccountField';
+export * from './CarrierAccountFields';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -28,15 +28,11 @@ export default (easypostClient: EasyPost) =>
 
       if (!carrierAccountType) {
         throw new InvalidParameterError({
-          message: util.format(
-            Constants.MISSING_REQUIRED_PARAMETER,
-            "CarrierAccount type"
-          ),
+          message: util.format(Constants.MISSING_REQUIRED_PARAMETER, 'CarrierAccount type'),
         });
       }
 
-      const endpoint =
-        this._selectCarrierAccountCreationEndpoint(carrierAccountType);
+      const endpoint = this._selectCarrierAccountCreationEndpoint(carrierAccountType);
 
       const wrappedParams = { carrier_account: params };
 
@@ -50,10 +46,7 @@ export default (easypostClient: EasyPost) =>
      * @param params - Parameters for the carrier account to be updated.
      * @returns - The updated carrier account.
      */
-    static async update(
-      id: string,
-      params: Partial<ICarrierAccountCreateParameters>
-    ) {
+    static async update(id: string, params: Partial<ICarrierAccountCreateParameters>) {
       const url = `carrier_accounts/${id}`;
       const wrappedParams = {
         carrier_account: params,
@@ -62,10 +55,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._patch(url, wrappedParams);
 
-        return this._convertToEasyPostObject<ICarrierAccount>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<ICarrierAccount>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -96,14 +86,10 @@ export default (easypostClient: EasyPost) =>
      * @returns {string} - The endpoint to be used for the carrier account creation request.
      */
     static _selectCarrierAccountCreationEndpoint(carrierAccountType: string) {
-      if (
-        Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_WORKFLOWS.includes(
-          carrierAccountType
-        )
-      ) {
-        return "carrier_accounts/register";
+      if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_WORKFLOWS.includes(carrierAccountType)) {
+        return 'carrier_accounts/register';
       }
-      return "carrier_accounts";
+      return 'carrier_accounts';
     }
 
     /**
@@ -113,7 +99,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing a list of {@link CarrierAccount carrier accounts} and pagination information.
      */
     static async all(params = {}) {
-      const url = "carrier_accounts";
+      const url = 'carrier_accounts';
 
       return this._all<ICarrierAccount>(url, params);
     }

@@ -1,10 +1,10 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { ICustomsInfo } from "./CustomsInfo";
-import { ICustomsInfoCreateParameters } from "./CustomsInfoCreateParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { ICustomsInfo } from './CustomsInfo';
+import { ICustomsInfoCreateParameters } from './CustomsInfoCreateParameters';
 
-export * from "./CustomsInfo";
-export * from "./CustomsInfoCreateParameters";
+export * from './CustomsInfo';
+export * from './CustomsInfoCreateParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -19,7 +19,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created customs info.
      */
     static async create(params: ICustomsInfoCreateParameters) {
-      const url = "customs_infos";
+      const url = 'customs_infos';
 
       const wrappedParams = {
         customs_info: params,

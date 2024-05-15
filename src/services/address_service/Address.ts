@@ -1,5 +1,5 @@
-import { IVerifications } from "./Verifications";
-import { IObjectWithId } from "../../utils/types";
+import { IVerifications } from './Verifications';
+import { IObjectWithId } from '../../utils/types';
 
 /**
  * Address objects are used to represent people, places, and organizations in a number of contexts.
@@ -9,7 +9,7 @@ import { IObjectWithId } from "../../utils/types";
  *
  * @see https://www.easypost.com/docs/api/node#address-object
  */
-export type IAddress = IObjectWithId<"Address"> & {
+export type IAddress = IObjectWithId<'Address'> & {
   /**
    * First line of the address
    */

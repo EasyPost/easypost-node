@@ -1,4 +1,4 @@
-import { ICarrierAccountField } from "./CarrierAccountField";
+import { ICarrierAccountField } from './CarrierAccountField';
 
 /**
  * @see https://www.easypost.com/docs/api/node#carrier-account-fields-object

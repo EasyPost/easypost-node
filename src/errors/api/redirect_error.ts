@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The RedirectError class is used to represent a 3xx error that occurred while communicating with the EasyPost API.

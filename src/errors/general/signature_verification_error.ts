@@ -1,4 +1,4 @@
-import EasyPostError from "../easypost_error";
+import EasyPostError from '../easypost_error';
 
 /**
  * The SignatureVerificationError class is used to represent an error due to a failed signature verification (e.g. a webhook HMAC signature).

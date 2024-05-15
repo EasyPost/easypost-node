@@ -1,5 +1,5 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { IAddress } from "../address_service";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { IAddress } from '../address_service';
 
 /**
  * A ScanForm can be created to speed up and simplify the carrier pickup process.
@@ -14,13 +14,13 @@ import { IAddress } from "../address_service";
  *
  * @see https://www.easypost.com/docs/api/node#scan-form-object
  */
-export type IScanForm = IObjectWithId<"ScanForm"> &
+export type IScanForm = IObjectWithId<'ScanForm'> &
   IDatedObject & {
     /**
      * Current status.
      * Possible values are "creating", "created" and "failed"
      */
-    status: "creating" | "created" | "failed";
+    status: 'creating' | 'created' | 'failed';
 
     /**
      * Human-readable message explaining any failures

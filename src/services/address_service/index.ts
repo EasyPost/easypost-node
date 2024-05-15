@@ -1,14 +1,14 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IAddress } from "./Address";
-import { IAddressCreateParameters } from "./AddressCreateParameters";
-import { IAddressListParameters } from "./AddressListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IAddress } from './Address';
+import { IAddressCreateParameters } from './AddressCreateParameters';
+import { IAddressListParameters } from './AddressListParameters';
 
-export * from "./Address";
-export * from "./AddressCreateParameters";
-export * from "./Verification";
-export * from "./VerificationDetails";
-export * from "./Verifications";
+export * from './Address';
+export * from './AddressCreateParameters';
+export * from './Verification';
+export * from './VerificationDetails';
+export * from './Verifications';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -23,11 +23,11 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created address.
      */
     static async create(params: IAddressCreateParameters) {
-      const url = "addresses";
+      const url = 'addresses';
 
       const wrappedParams: { address: IAddressCreateParameters } & Pick<
         IAddressCreateParameters,
-        "verify" | "verify_strict"
+        'verify' | 'verify_strict'
       > = {
         address: params,
       };
@@ -58,10 +58,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        return this._convertToEasyPostObject(
-          response.body.address,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject(response.body.address, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -74,7 +71,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing a list of {@link Address addresses} and pagination information.
      */
     static async all(params: IAddressListParameters = {}) {
-      const url = "addresses";
+      const url = 'addresses';
 
       return this._all(url, params);
     }
@@ -85,12 +82,9 @@ export default (easypostClient: EasyPost) =>
      * @param pageSize The number of records to return on each page
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(
-      addresses: { addresses: IAddress[] },
-      pageSize: number | null = null
-    ) {
-      const url = "addresses";
-      return this._getNextPage(url, "addresses", addresses, pageSize);
+    static async getNextPage(addresses: { addresses: IAddress[] }, pageSize: number | null = null) {
+      const url = 'addresses';
+      return this._getNextPage(url, 'addresses', addresses, pageSize);
     }
 
     /**

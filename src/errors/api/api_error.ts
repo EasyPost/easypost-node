@@ -1,4 +1,4 @@
-import EasyPostError from "../easypost_error";
+import EasyPostError from '../easypost_error';
 
 /**
  * The ApiError class is used to represent errors that occurred while communicating with the EasyPost API.

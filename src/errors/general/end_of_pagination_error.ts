@@ -1,5 +1,5 @@
-import Constants from "../../constants";
-import EasyPostError from "../easypost_error";
+import Constants from '../../constants';
+import EasyPostError from '../easypost_error';
 
 /**
  * The EndOfPaginationError class is used to represent an error that no more page can be retrieved

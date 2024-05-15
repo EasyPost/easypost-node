@@ -1,5 +1,5 @@
-import EasyPostClient from "../easypost";
-import EndOfPaginationError from "../errors/general/end_of_pagination_error";
+import EasyPostClient from '../easypost';
+import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 
 export type EasyPostObject<A> = A & {
   _params: any;
@@ -18,10 +18,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param {*} params The parameters passed when fetching the response
      * @returns {*} An {@link EasyPostObject}-based class instance or an `Array` of {@link EasyPostObject}-based class instances.
      */
-    static _convertToEasyPostObject<A extends any>(
-      response: A,
-      params?: any
-    ): EasyPostObject<A> {
+    static _convertToEasyPostObject<A extends any>(response: A, params?: any): EasyPostObject<A> {
       const newResponse = response as EasyPostObject<A>;
       newResponse._params = params;
 
@@ -35,10 +32,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param params The parameters to send with the API request.
      * @returns The created {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async _create<A>(
-      url: string,
-      params: object
-    ): Promise<EasyPostObject<A>> {
+    static async _create<A>(url: string, params: object): Promise<EasyPostObject<A>> {
       try {
         const response = await easypostClient._post(url, params);
 
@@ -57,7 +51,7 @@ export default (easypostClient: EasyPostClient) =>
      */
     static async _all<A>(
       url: string,
-      params: Record<string, string | number | boolean> = {}
+      params: Record<string, string | number | boolean> = {},
     ): Promise<EasyPostObject<A> & { has_more: boolean }> {
       try {
         // eslint-disable-next-line no-param-reassign
@@ -100,19 +94,14 @@ export default (easypostClient: EasyPostClient) =>
       key: keyof A,
       collection: A,
       pageSize: number | null = null,
-      optionalParams: Record<string, string> = {}
+      optionalParams: Record<string, string> = {},
     ): Promise<EasyPostObject<A> & { has_more: boolean }> {
       const collectionArray = collection[key];
-      if (
-        collectionArray == undefined ||
-        collectionArray.length == 0 ||
-        !collection.has_more
-      ) {
+      if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();
       }
 
-      const defaultParams =
-        collection._params ?? collectionArray[0]._params ?? {};
+      const defaultParams = collection._params ?? collectionArray[0]._params ?? {};
 
       const params = {
         ...defaultParams,

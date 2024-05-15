@@ -1,7 +1,7 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { IAddress } from "../address_service";
-import { IRate } from "../rate_service";
-import { IMessage, IShipment } from "../shipment_service";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { IAddress } from '../address_service';
+import { IRate } from '../rate_service';
+import { IMessage, IShipment } from '../shipment_service';
 
 /**
  * The Order object represents a collection of packages and can be used for Multi-Piece Shipments.
@@ -13,7 +13,7 @@ import { IMessage, IShipment } from "../shipment_service";
  *
  * @see https://www.easypost.com/docs/api/node#order-object
  */
-export type IOrder = IObjectWithId<"Order"> &
+export type IOrder = IObjectWithId<'Order'> &
   IDatedObject & {
     /**
      * An optional field that may be used in place of id in other API endpoints

@@ -1,19 +1,19 @@
-import util from "node:util";
-import superagent from "superagent";
+import util from 'node:util';
+import superagent from 'superagent';
 
-import Constants from "../../constants";
-import EasyPostClient from "../../easypost";
-import ExternalApiError from "../../errors/api/external_api_error";
-import baseService from "../base_service";
-import EasyPost from "../..";
-import { IReferralCreateParameters } from "./ReferralCreateParameters";
-import { IReferral } from "./Referral";
-import { IReferralListParameters } from "./ReferralListParameters";
-import { IPaymentMethod } from "../billing_service";
+import Constants from '../../constants';
+import EasyPostClient from '../../easypost';
+import ExternalApiError from '../../errors/api/external_api_error';
+import baseService from '../base_service';
+import EasyPost from '../..';
+import { IReferralCreateParameters } from './ReferralCreateParameters';
+import { IReferral } from './Referral';
+import { IReferralListParameters } from './ReferralListParameters';
+import { IPaymentMethod } from '../billing_service';
 
-export * from "./Referral";
-export * from "./ReferralCreateParameters";
-export * from "./ReferralListParameters";
+export * from './Referral';
+export * from './ReferralCreateParameters';
+export * from './ReferralListParameters';
 
 /**
  * Get an instance of the EasyPostClient using the referral user's API key.
@@ -34,10 +34,8 @@ function _getReferralClient(client: EasyPost, referralApiKey: string) {
  * @param easypostClient - The EasyPostClient to use.
  * @returns - The Stripe API key.
  */
-async function _getEasyPostStripeKey(
-  easypostClient: EasyPost
-): Promise<string> {
-  const url = "partners/stripe_public_key";
+async function _getEasyPostStripeKey(easypostClient: EasyPost): Promise<string> {
+  const url = 'partners/stripe_public_key';
 
   const response = await easypostClient._get(url);
 
@@ -59,14 +57,14 @@ async function _sendCardDetailsToStripe(
   number: string,
   expirationMonth: string,
   expirationYear: string,
-  cvc: string
+  cvc: string,
 ): Promise<string> {
   // Stripe's endpoint requires form-encoded requests
   const url = `https://api.stripe.com/v1/tokens?card[number]=${number}&card[exp_month]=${expirationMonth}&card[exp_year]=${expirationYear}&card[cvc]=${cvc}`;
 
   const request = superagent.post(url).set({
     Authorization: `Bearer ${stripeKey}`,
-    "Content-Type": "application/x-www-form-urlencoded",
+    'Content-Type': 'application/x-www-form-urlencoded',
   });
 
   try {
@@ -75,7 +73,7 @@ async function _sendCardDetailsToStripe(
     return response.body.id;
   } catch (error) {
     throw new ExternalApiError({
-      message: util.format(Constants.EXTERNAL_API_CALL_FAILED, "Stripe"),
+      message: util.format(Constants.EXTERNAL_API_CALL_FAILED, 'Stripe'),
     });
   }
 }
@@ -93,10 +91,10 @@ async function _sendCardDetailsToEasyPost(
   client: EasyPostClient,
   referralApiKey: string,
   stripeCreditCardToken: string,
-  priority: string
+  priority: string,
 ): Promise<IPaymentMethod> {
   const _client = _getReferralClient(client, referralApiKey);
-  const url = "credit_cards";
+  const url = 'credit_cards';
   const params = {
     credit_card: { stripe_object_id: stripeCreditCardToken, priority },
   };
@@ -119,7 +117,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The newly created referral customer.
      */
     static async create(params: IReferralCreateParameters) {
-      const url = "referral_customers";
+      const url = 'referral_customers';
 
       const wrappedParams = {
         user: params,
@@ -161,7 +159,7 @@ export default (easypostClient: EasyPost) =>
       expirationMonth: string,
       expirationYear: string,
       cvc: string,
-      priority: "primary" | "secondary" = "primary"
+      priority: 'primary' | 'secondary' = 'primary',
     ) {
       const stripeKey = await _getEasyPostStripeKey(easypostClient); // will throw if there's an error
 
@@ -170,14 +168,14 @@ export default (easypostClient: EasyPost) =>
         number,
         expirationMonth,
         expirationYear,
-        cvc
+        cvc,
       ); // will throw if there's an error
 
       const paymentMethod = await _sendCardDetailsToEasyPost(
         easypostClient,
         referralApiKey,
         stripeCreditCardId,
-        priority
+        priority,
       ); // will throw if there's an error
 
       return paymentMethod;
@@ -190,7 +188,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing a list of {@link User referral customers} and pagination information.
      */
     static async all(params: IReferralListParameters = {}) {
-      const url = "referral_customers";
+      const url = 'referral_customers';
 
       return this._all<IReferral[]>(url, params);
     }
@@ -201,16 +199,13 @@ export default (easypostClient: EasyPost) =>
      * @param pageSize The number of records to return on each page
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(
-      referralCustomers: any,
-      pageSize: number | null = null
-    ) {
-      const url = "referral_customers";
+    static async getNextPage(referralCustomers: any, pageSize: number | null = null) {
+      const url = 'referral_customers';
       return this._getNextPage<{ referral_customers: IReferral[] }>(
         url,
-        "referral_customers",
+        'referral_customers',
         referralCustomers,
-        pageSize
+        pageSize,
       );
     }
   };

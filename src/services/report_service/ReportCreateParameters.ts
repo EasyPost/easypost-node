@@ -1,4 +1,4 @@
-import { TReportType } from "./ReportObjectType";
+import { TReportType } from './ReportObjectType';
 
 export type IReportCreateParameters = {
   type: TReportType;

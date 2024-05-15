@@ -1,12 +1,12 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { ICustomsItemCreateParameters } from "./CustomsItemCreateParameters";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { ICustomsItemCreateParameters } from './CustomsItemCreateParameters';
 
 /**
  * A CustomsItem object describes goods for international shipment and should be created then included in a CustomsInfo object.
  *
  * @see https://www.easypost.com/docs/api/node#customs-item-object
  */
-export type ICustomsItem = IObjectWithId<"CustomsItem"> &
+export type ICustomsItem = IObjectWithId<'CustomsItem'> &
   IDatedObject & {
     /**
      * Required, description of item being shipped

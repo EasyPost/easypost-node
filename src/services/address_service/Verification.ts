@@ -1,5 +1,5 @@
-import { IFieldError } from "../../utils/errors";
-import { IVerificationDetails } from "./VerificationDetails";
+import { IFieldError } from '../../utils/errors';
+import { IVerificationDetails } from './VerificationDetails';
 
 /**
  * @see https://www.easypost.com/docs/api/node#verification-object

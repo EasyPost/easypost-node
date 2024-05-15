@@ -1,9 +1,9 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
 
 /**
  * @see https://www.easypost.com/docs/api/node#pickup-rate-object
  */
-export type IPickupRate = IObjectWithId<"PickupRate"> &
+export type IPickupRate = IObjectWithId<'PickupRate'> &
   IDatedObject & {
     /**
      * service name

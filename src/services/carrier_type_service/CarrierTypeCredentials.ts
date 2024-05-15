@@ -10,7 +10,7 @@ export type ICarrierTypeCredentials = {
   /**
    * There are five possible values, which encode the security need and storage type for each attribute: "visible", "checkbox", "fake", "password", and "masked"
    */
-  visibility: "visible" | "checkbox" | "fake" | "password" | "masked";
+  visibility: 'visible' | 'checkbox' | 'fake' | 'password' | 'masked';
 
   /**
    * Most attributes have generic names, so for clarity a "label" value is provided for clearer representation when rendering forms

@@ -1,7 +1,4 @@
-import { ParametersToOmitOnCreate } from "../../utils/types";
-import { IReferral } from "./Referral";
+import { ParametersToOmitOnCreate } from '../../utils/types';
+import { IReferral } from './Referral';
 
-export type IReferralCreateParameters = Omit<
-  IReferral,
-  ParametersToOmitOnCreate
->;
+export type IReferralCreateParameters = Omit<IReferral, ParametersToOmitOnCreate>;

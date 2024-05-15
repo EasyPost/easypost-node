@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The UnknownApiError class is used to represent a generic, unexpected error that occurred while communicating with the EasyPost API.

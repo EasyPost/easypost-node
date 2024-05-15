@@ -1,12 +1,12 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IRefund } from "./Refund";
-import { IRefundCreateParameters } from "./RefundCreateParameters";
-import { IRefundListParameters } from "./RefundListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IRefund } from './Refund';
+import { IRefundCreateParameters } from './RefundCreateParameters';
+import { IRefundListParameters } from './RefundListParameters';
 
-export * from "./Refund";
-export * from "./RefundCreateParameters";
-export * from "./RefundListParameters";
+export * from './Refund';
+export * from './RefundCreateParameters';
+export * from './RefundListParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -21,7 +21,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created refund.
      */
     static async create(params: IRefundCreateParameters) {
-      const url = "refunds";
+      const url = 'refunds';
 
       const wrappedParams = {
         refund: params,
@@ -37,7 +37,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing the list of {@link Refund refunds} and pagination information.
      */
     static async all(params: IRefundListParameters = {}) {
-      const url = "refunds";
+      const url = 'refunds';
 
       return this._all<{ refunds: IRefund[] }>(url, params);
     }
@@ -49,13 +49,8 @@ export default (easypostClient: EasyPost) =>
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async getNextPage(refunds: any, pageSize: number | null = null) {
-      const url = "refunds";
-      return this._getNextPage<{ refunds: IRefund[] }>(
-        url,
-        "refunds",
-        refunds,
-        pageSize
-      );
+      const url = 'refunds';
+      return this._getNextPage<{ refunds: IRefund[] }>(url, 'refunds', refunds, pageSize);
     }
 
     /**

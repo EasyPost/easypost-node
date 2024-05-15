@@ -1,5 +1,5 @@
-import { IBaseObject } from "../../utils/types";
-import { ICarrierTypeFields } from "./CarrierTypeFields";
+import { IBaseObject } from '../../utils/types';
+import { ICarrierTypeFields } from './CarrierTypeFields';
 
 /**
  * The CarrierType object provides an export declare interface for determining the valid fields of a CarrierAccount.
@@ -16,7 +16,7 @@ import { ICarrierTypeFields } from "./CarrierTypeFields";
  *
  * @see https://www.easypost.com/docs/api/node#carrier-type-object
  */
-export type ICarrierType = IBaseObject<"CarrierType"> & {
+export type ICarrierType = IBaseObject<'CarrierType'> & {
   /**
    * Specifies the CarrierAccount type.
    */

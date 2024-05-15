@@ -1,11 +1,11 @@
-import { IObjectWithId } from "../../utils/types";
+import { IObjectWithId } from '../../utils/types';
 
 /**
  * The Brand class represents the public-accessible information about a user's brand, including logos, colors and themes.
  *
  * @see https://www.easypost.com/docs/api/node#brand
  */
-export type IBrand = IObjectWithId<"Brand"> & {
+export type IBrand = IObjectWithId<'Brand'> & {
   /**
    * The background color of the brand, as a hex code.
    */
@@ -44,5 +44,5 @@ export type IBrand = IObjectWithId<"Brand"> & {
   /**
    * The name of the current theme.
    */
-  theme: "theme1" | "theme2";
+  theme: 'theme1' | 'theme2';
 };

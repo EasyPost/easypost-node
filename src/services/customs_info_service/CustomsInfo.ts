@@ -1,5 +1,5 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
-import { ICustomsItem } from "../customs_item_service";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
+import { ICustomsItem } from '../customs_item_service';
 
 /**
  * CustomsInfo objects contain CustomsItem objects and all necessary information for the generation of customs forms required for international shipping.
@@ -8,7 +8,7 @@ import { ICustomsItem } from "../customs_item_service";
  *
  * @see https://www.easypost.com/docs/api/node#customs-info-object
  */
-export type ICustomsInfo = IObjectWithId<"CustomsInfo"> &
+export type ICustomsInfo = IObjectWithId<'CustomsInfo'> &
   IDatedObject & {
     /**
      * "EEL" or "PFC"
@@ -41,17 +41,12 @@ export type ICustomsInfo = IObjectWithId<"CustomsInfo"> &
     /**
      * "abandon" or "return", defaults to "return"
      */
-    non_delivery_option?: "abandon" | "return" | null;
+    non_delivery_option?: 'abandon' | 'return' | null;
 
     /**
      * "none", "other", "quarantine", or "sanitary_phytosanitary_inspection"
      */
-    restriction_type?:
-      | "none"
-      | "other"
-      | "quarantine"
-      | "sanitary_phytosanitary_inspection"
-      | null;
+    restriction_type?: 'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection' | null;
 
     /**
      * Required if restriction_type is not "none"

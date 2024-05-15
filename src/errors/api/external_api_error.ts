@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The ExternalApiError class is used to represent errors that occurred while communicating with an external API.

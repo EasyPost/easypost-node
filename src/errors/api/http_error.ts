@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The HttpError class is used to represent a generic HTTP-related error that occurred while communicating with the EasyPost API.

@@ -1,4 +1,4 @@
-import { IDatedObject, IObjectWithId } from "../../utils/types";
+import { IDatedObject, IObjectWithId } from '../../utils/types';
 
 /**
  * Webhook Events are triggered by changes in objects you've created via the API.
@@ -8,7 +8,7 @@ import { IDatedObject, IObjectWithId } from "../../utils/types";
  *
  * @see https://www.easypost.com/docs/api/node#events
  */
-export type IEvent = IObjectWithId<"Event"> &
+export type IEvent = IObjectWithId<'Event'> &
   IDatedObject & {
     /**
      * Result type and event name, see the "Possible Event Types" section for more information
@@ -31,7 +31,7 @@ export type IEvent = IObjectWithId<"Event"> &
      *
      * @deprecated
      */
-    status: "completed" | "failed" | "in_queue" | "retrying" | "pending";
+    status: 'completed' | 'failed' | 'in_queue' | 'retrying' | 'pending';
 
     /**
      * Webhook URLs that have not yet been successfully notified as of the time this webhook event was sent.

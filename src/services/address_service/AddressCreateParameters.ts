@@ -1,12 +1,12 @@
-import { ParametersToOmitOnCreate } from "../../utils/types";
-import { IAddress } from "./Address";
+import { ParametersToOmitOnCreate } from '../../utils/types';
+import { IAddress } from './Address';
 
 /**
  * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
  */
 export type IAddressCreateParameters = Omit<
   IAddress,
-  ParametersToOmitOnCreate | "verifications"
+  ParametersToOmitOnCreate | 'verifications'
 > & {
   /**
    * The verifications to perform when creating.

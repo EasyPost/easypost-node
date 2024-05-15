@@ -6,7 +6,10 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false,
     "downlevelIteration": true,
-    "outDir": "./out"
+    "outDir": "./out",
+    "declaration": true,
+    "declarationDir": "./types",
+    "rootDir": "./src"
   },
   "include": ["./src"]
 }

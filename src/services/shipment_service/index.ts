@@ -1,22 +1,22 @@
-import EasyPost from "../..";
-import Constants from "../../constants";
-import baseService from "../base_service";
-import { IRate, ISmartRate } from "../rate_service";
-import { IOptions, LabelFormat } from "./Options";
-import { IShipment } from "./Shipment";
-import { IShipmentCreateParameters } from "./ShipmentCreateParameters";
-import { IShipmentListParameters } from "./ShipmentListParameters";
+import EasyPost from '../..';
+import Constants from '../../constants';
+import baseService from '../base_service';
+import { IRate, ISmartRate } from '../rate_service';
+import { IOptions, LabelFormat } from './Options';
+import { IShipment } from './Shipment';
+import { IShipmentCreateParameters } from './ShipmentCreateParameters';
+import { IShipmentListParameters } from './ShipmentListParameters';
 
-export * from "./Form";
-export * from "./Message";
-export * from "./PostageLabel";
-export * from "./Shipment";
-export * from "./ShipmentCreateParameters";
-export * from "./ShipmentListParameters";
-export * from "./Options";
+export * from './Form';
+export * from './Message';
+export * from './PostageLabel';
+export * from './Shipment';
+export * from './ShipmentCreateParameters';
+export * from './ShipmentListParameters';
+export * from './Options';
 
 const addLowestRateToShipment = (
-  shipment: IShipment
+  shipment: IShipment,
 ): IShipment & {
   lowestRate: (carriers?: string[], services?: string[]) => IRate;
 } => {
@@ -40,7 +40,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created shipment.
      */
     static async create(params: IShipmentCreateParameters) {
-      const url = "shipments";
+      const url = 'shipments';
 
       const wrappedParams = {
         shipment: params,
@@ -64,9 +64,9 @@ export default (easypostClient: EasyPost) =>
       id: string,
       rate: IRate | string,
       insuranceAmount: number | null = null,
-      endShipperId: string | null = null
+      endShipperId: string | null = null,
     ) {
-      const rateId = typeof rate === "object" ? rate.id : rate;
+      const rateId = typeof rate === 'object' ? rate.id : rate;
 
       const url = `shipments/${id}/buy`;
 
@@ -87,10 +87,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        const shipment = this._convertToEasyPostObject<IShipment>(
-          response.body,
-          wrappedParams
-        );
+        const shipment = this._convertToEasyPostObject<IShipment>(response.body, wrappedParams);
 
         return addLowestRateToShipment(shipment);
       } catch (e) {
@@ -112,10 +109,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._get(url, wrappedParams);
 
-        const shipment = this._convertToEasyPostObject<IShipment>(
-          response.body,
-          wrappedParams
-        );
+        const shipment = this._convertToEasyPostObject<IShipment>(response.body, wrappedParams);
         return addLowestRateToShipment(shipment);
       } catch (e) {
         return Promise.reject(e);
@@ -135,10 +129,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        const shipment = this._convertToEasyPostObject<IShipment>(
-          response.body,
-          wrappedParams
-        );
+        const shipment = this._convertToEasyPostObject<IShipment>(response.body, wrappedParams);
         return addLowestRateToShipment(shipment);
       } catch (e) {
         return Promise.reject(e);
@@ -157,9 +148,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._get(url);
 
-        return this._convertToEasyPostObject<ISmartRate[]>(
-          response.body.result
-        );
+        return this._convertToEasyPostObject<ISmartRate[]>(response.body.result);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -179,10 +168,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        const shipment = this._convertToEasyPostObject<IShipment>(
-          response.body,
-          wrappedParams
-        );
+        const shipment = this._convertToEasyPostObject<IShipment>(response.body, wrappedParams);
         return addLowestRateToShipment(shipment);
       } catch (e) {
         return Promise.reject(e);
@@ -197,11 +183,7 @@ export default (easypostClient: EasyPost) =>
      * @param [formOptions] - Options for the form.
      * @returns - The shipment with the generated form attached.
      */
-    static async generateForm(
-      id: string,
-      formType: string,
-      formOptions: IOptions = {}
-    ) {
+    static async generateForm(id: string, formType: string, formOptions: IOptions = {}) {
       const url = `shipments/${id}/forms`;
       const wrappedParams = {
         form: {
@@ -213,10 +195,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url, wrappedParams);
 
-        const shipment = this._convertToEasyPostObject<IShipment>(
-          response.body,
-          wrappedParams
-        );
+        const shipment = this._convertToEasyPostObject<IShipment>(response.body, wrappedParams);
         return addLowestRateToShipment(shipment);
       } catch (e) {
         return Promise.reject(e);
@@ -235,9 +214,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._post(url);
 
-        const shipment = this._convertToEasyPostObject<IShipment>(
-          response.body
-        );
+        const shipment = this._convertToEasyPostObject<IShipment>(response.body);
         return addLowestRateToShipment(shipment);
       } catch (e) {
         return Promise.reject(e);
@@ -254,13 +231,13 @@ export default (easypostClient: EasyPost) =>
     static async lowestSmartRate(
       id: string,
       deliveryDays: number,
-      deliveryAccuracy: keyof ISmartRate["time_in_transit"]
+      deliveryAccuracy: keyof ISmartRate['time_in_transit'],
     ) {
       const smartRates = await this.getSmartRates(id);
       return Constants.Utils.getLowestSmartRate(
         smartRates,
         deliveryDays,
-        deliveryAccuracy.toLowerCase() as keyof ISmartRate["time_in_transit"]
+        deliveryAccuracy.toLowerCase() as keyof ISmartRate['time_in_transit'],
       );
     }
 
@@ -271,7 +248,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing a list of {@link Shipment shipments} and pagination information.
      */
     static async all(params: IShipmentListParameters = {}) {
-      const url = "shipments";
+      const url = 'shipments';
 
       const result = await this._all<{ shipments: IShipment[] }>(url, params);
       return {
@@ -287,13 +264,13 @@ export default (easypostClient: EasyPost) =>
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async getNextPage(shipments: { shipments: any[] }, pageSize = null) {
-      const url = "shipments";
+      const url = 'shipments';
 
       const result = await this._getNextPage<{ shipments: IShipment[] }>(
         url,
-        "shipments",
+        'shipments',
         shipments,
-        pageSize
+        pageSize,
       );
       return {
         ...result,
@@ -320,10 +297,7 @@ export default (easypostClient: EasyPost) =>
      * @param plannedShipDate
      * @returns - An array of the estimated delivery date and rates.
      */
-    static async retrieveEstimatedDeliveryDate(
-      id: string,
-      plannedShipDate: string
-    ) {
+    static async retrieveEstimatedDeliveryDate(id: string, plannedShipDate: string) {
       const url = `shipments/${id}/smartrate/delivery_date`;
 
       const params = {
@@ -333,10 +307,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._get(url, params);
 
-        return this._convertToEasyPostObject<IRate[]>(
-          response.body.rates ?? [],
-          params
-        );
+        return this._convertToEasyPostObject<IRate[]>(response.body.rates ?? [], params);
       } catch (e) {
         return Promise.reject(e);
       }

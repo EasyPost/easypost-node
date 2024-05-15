@@ -1,20 +1,20 @@
-import Constants from "../constants";
-import ApiError from "./api/api_error";
-import BadRequestError from "./api/bad_request_error";
-import ForbiddenError from "./api/forbidden_error";
-import GatewayTimeoutError from "./api/gateway_timeout_error";
-import InternalServerError from "./api/internal_server_error";
-import InvalidRequestError from "./api/invalid_request_error";
-import MethodNotAllowedError from "./api/method_not_allowed_error";
-import NotFoundError from "./api/not_found_error";
-import PaymentError from "./api/payment_error";
-import RateLimitError from "./api/rate_limit_error";
-import RedirectError from "./api/redirect_error";
-import ServiceUnavailableError from "./api/service_unavailable_error";
-import TimeoutError from "./api/timeout_error";
-import UnauthorizedError from "./api/unauthorized_error";
-import UnknownApiError from "./api/unknown_api_error";
-import EasyPostError from "./easypost_error";
+import Constants from '../constants';
+import ApiError from './api/api_error';
+import BadRequestError from './api/bad_request_error';
+import ForbiddenError from './api/forbidden_error';
+import GatewayTimeoutError from './api/gateway_timeout_error';
+import InternalServerError from './api/internal_server_error';
+import InvalidRequestError from './api/invalid_request_error';
+import MethodNotAllowedError from './api/method_not_allowed_error';
+import NotFoundError from './api/not_found_error';
+import PaymentError from './api/payment_error';
+import RateLimitError from './api/rate_limit_error';
+import RedirectError from './api/redirect_error';
+import ServiceUnavailableError from './api/service_unavailable_error';
+import TimeoutError from './api/timeout_error';
+import UnauthorizedError from './api/unauthorized_error';
+import UnknownApiError from './api/unknown_api_error';
+import EasyPostError from './easypost_error';
 
 export type RawAPIError = {
   statusCode: number;
@@ -61,10 +61,10 @@ export default class ErrorHandler {
   static isAPIError(error: any): error is RawAPIError {
     return (
       error &&
-      typeof error.statusCode === "number" &&
-      typeof error.body === "object" &&
-      typeof error.body.error === "object" &&
-      typeof error.body.error.code === "string" &&
+      typeof error.statusCode === 'number' &&
+      typeof error.body === 'object' &&
+      typeof error.body.error === 'object' &&
+      typeof error.body.error.code === 'string' &&
       error.body.error.message &&
       error.body.error.errors
     );
@@ -79,7 +79,7 @@ export default class ErrorHandler {
     const { statusCode } = error;
     const { code, message, errors } = error.body.error;
     const errorParams = {
-      message: "",
+      message: '',
       code,
       statusCode,
       errors,
@@ -87,11 +87,11 @@ export default class ErrorHandler {
 
     try {
       const messages = this.traverseJsonElement(message);
-      errorParams.message = messages.join(", ");
+      errorParams.message = messages.join(', ');
     } catch (e) {
       const errorParams = {
         message: Constants.ERROR_DESERIALIZATION,
-        code: "ERROR_DESERIALIZATION_ERROR",
+        code: 'ERROR_DESERIALIZATION_ERROR',
       };
       return new EasyPostError(errorParams);
     }

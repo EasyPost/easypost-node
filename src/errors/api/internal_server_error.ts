@@ -1,4 +1,4 @@
-import ApiError from "./api_error";
+import ApiError from './api_error';
 
 /**
  * The InternalServerError class is used to represent a 500 error that occurred while communicating with the EasyPost API.

@@ -1,10 +1,10 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { ICarrierType } from "./CarrierType";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { ICarrierType } from './CarrierType';
 
-export * from "./CarrierType";
-export * from "./CarrierTypeCredentials";
-export * from "./CarrierTypeFields";
+export * from './CarrierType';
+export * from './CarrierTypeCredentials';
+export * from './CarrierTypeFields';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -19,15 +19,12 @@ export default (easypostClient: EasyPost) =>
      * @returns - A list of {@link CarrierType carrier types}.
      */
     static async all(params = {}) {
-      const url = "carrier_types";
+      const url = 'carrier_types';
 
       try {
         const response = await easypostClient._get(url, params);
 
-        return this._convertToEasyPostObject<ICarrierType[]>(
-          response.body,
-          params
-        );
+        return this._convertToEasyPostObject<ICarrierType[]>(response.body, params);
       } catch (e) {
         return Promise.reject(e);
       }

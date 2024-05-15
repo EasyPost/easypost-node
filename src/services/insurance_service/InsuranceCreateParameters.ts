@@ -1,4 +1,4 @@
-import { IAddress } from "../address_service";
+import { IAddress } from '../address_service';
 
 export type IInsuranceCreateParameters = {
   reference?: string | null;

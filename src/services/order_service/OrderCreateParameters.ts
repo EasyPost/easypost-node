@@ -1,5 +1,5 @@
-import { IAddress } from "../address_service";
-import { IShipment } from "../shipment_service";
+import { IAddress } from '../address_service';
+import { IShipment } from '../shipment_service';
 
 export type IOrderCreateParameters = {
   reference?: string | null;

@@ -1,9 +1,9 @@
-import { IBaseObject } from "../../utils/types";
+import { IBaseObject } from '../../utils/types';
 
 /**
  * @see https://www.easypost.com/docs/api/node#tracking-location-object
  */
-export type ITrackingLocation = IBaseObject<"TrackingLocation"> & {
+export type ITrackingLocation = IBaseObject<'TrackingLocation'> & {
   /**
    * The city where the scan event occurred (if available)
    */

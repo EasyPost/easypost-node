@@ -1,12 +1,12 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IEndshipper } from "./EndShipper";
-import { IEndShipperCreateParameters } from "./EndShipperCreateParameters";
-import { IEndShipperListParameters } from "./EndShipperListParameters";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IEndshipper } from './EndShipper';
+import { IEndShipperCreateParameters } from './EndShipperCreateParameters';
+import { IEndShipperListParameters } from './EndShipperListParameters';
 
-export * from "./EndShipper";
-export * from "./EndShipperCreateParameters";
-export * from "./EndShipperListParameters";
+export * from './EndShipper';
+export * from './EndShipperCreateParameters';
+export * from './EndShipperListParameters';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -21,7 +21,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - The created end shipper.
      */
     static async create(params: IEndShipperCreateParameters) {
-      const url = "end_shippers";
+      const url = 'end_shippers';
       const wrappedParams = { address: params };
 
       return this._create<IEndshipper>(url, wrappedParams);
@@ -34,20 +34,14 @@ export default (easypostClient: EasyPost) =>
      * @param params - Parameters for the end shipper to be updated.
      * @returns - The updated end shipper.
      */
-    static async update(
-      id: string,
-      params: Partial<IEndShipperCreateParameters>
-    ) {
+    static async update(id: string, params: Partial<IEndShipperCreateParameters>) {
       const url = `end_shippers/${id}`;
       const wrappedParams = { address: params };
 
       try {
         const response = await easypostClient._put(url, wrappedParams);
 
-        return this._convertToEasyPostObject<IEndshipper>(
-          response.body,
-          wrappedParams
-        );
+        return this._convertToEasyPostObject<IEndshipper>(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -72,7 +66,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing a list of {@link EndShipper end shippers} and pagination information.
      */
     static async all(params: IEndShipperListParameters = {}) {
-      const url = "end_shippers";
+      const url = 'end_shippers';
 
       return this._all(url, params);
     }

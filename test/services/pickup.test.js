@@ -1,11 +1,11 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../out/src/easypost';
+import EasyPostClient from '../../out/easypost';
 import Fixture from '../helpers/fixture';
-import FilteringError from '../../out/src/errors/general/filtering_error';
+import FilteringError from '../../out/errors/general/filtering_error';
 import * as setupPolly from '../helpers/setup_polly';
-import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
+import EndOfPaginationError from '../../out/errors/general/end_of_pagination_error';
 import { withoutParams } from '../helpers/utils';
 
 describe('Pickup Service', function () {

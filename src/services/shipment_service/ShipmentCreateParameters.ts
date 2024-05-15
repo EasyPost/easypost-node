@@ -1,8 +1,8 @@
-import { DeepPartial } from "../../utils/types";
-import { IAddressCreateParameters } from "../address_service";
-import { ICustomsInfo } from "../customs_info_service";
-import { IParcelCreateParameters } from "../parcel_service";
-import { IOptions } from "./Options";
+import { DeepPartial } from '../../utils/types';
+import { IAddressCreateParameters } from '../address_service';
+import { ICustomsInfo } from '../customs_info_service';
+import { IParcelCreateParameters } from '../parcel_service';
+import { IOptions } from './Options';
 
 export type IShipmentCreateParameters = {
   reference?: string | null;

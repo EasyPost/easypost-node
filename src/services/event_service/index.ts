@@ -1,12 +1,12 @@
-import EasyPost from "../..";
-import baseService from "../base_service";
-import { IEvent } from "./Event";
-import { IEventListParameters } from "./EventListParameters";
-import { IPayload } from "./Payload";
+import EasyPost from '../..';
+import baseService from '../base_service';
+import { IEvent } from './Event';
+import { IEventListParameters } from './EventListParameters';
+import { IPayload } from './Payload';
 
-export * from "./Event";
-export * from "./EventListParameters";
-export * from "./Payload";
+export * from './Event';
+export * from './EventListParameters';
+export * from './Payload';
 
 export default (easypostClient: EasyPost) =>
   /**
@@ -26,9 +26,7 @@ export default (easypostClient: EasyPost) =>
       try {
         const response = await easypostClient._get(url);
 
-        return this._convertToEasyPostObject<IPayload[]>(
-          response.body.payloads
-        );
+        return this._convertToEasyPostObject<IPayload[]>(response.body.payloads);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -60,7 +58,7 @@ export default (easypostClient: EasyPost) =>
      * @returns - An object containing the list of {@link Event events} and pagination information.
      */
     static async all(params: IEventListParameters = {}) {
-      const url = "events";
+      const url = 'events';
 
       return this._all(url, params);
     }
@@ -72,13 +70,8 @@ export default (easypostClient: EasyPost) =>
      * @returns The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async getNextPage(events: any, pageSize: number | null = null) {
-      const url = "events";
-      return this._getNextPage<{ events: IEvent[] }>(
-        url,
-        "events",
-        events,
-        pageSize
-      );
+      const url = 'events';
+      return this._getNextPage<{ events: IEvent[] }>(url, 'events', events, pageSize);
     }
 
     /**
