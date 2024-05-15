@@ -1,8 +1,7 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import Rate from '../../src/models/rate';
+import EasyPostClient from '../../out/src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -23,7 +22,7 @@ describe('Rate Service', function () {
 
     const rate = await this.client.Rate.retrieve(shipment.rates[0].id);
 
-    expect(rate).to.be.an.instanceOf(Rate);
+    expect(rate.object).to.be.equal('Rate');
     expect(rate.id).to.match(/^rate_/);
   });
 });

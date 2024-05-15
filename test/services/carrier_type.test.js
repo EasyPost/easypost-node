@@ -1,8 +1,7 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import CarrierType from '../../src/models/carrier_type';
+import EasyPostClient from '../../out/src/easypost';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('CarrierType Service', function () {
@@ -21,7 +20,7 @@ describe('CarrierType Service', function () {
     const carrierTypes = await this.client.CarrierType.all();
 
     carrierTypes.forEach((type) => {
-      expect(type).to.be.an.instanceOf(CarrierType);
+      expect(type.object).to.be.equal('CarrierType');
     });
   });
 });

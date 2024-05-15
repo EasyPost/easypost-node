@@ -1,8 +1,8 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
+import EasyPostClient from '../../out/src/easypost';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import * as setupPolly from '../helpers/setup_polly';
 import {
   MockMiddleware,

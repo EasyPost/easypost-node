@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 
-import EasyPost from '../../src/easypost';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
-import User from '../../src/models/user';
+import EasyPost from '../../out/src/easypost';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -27,7 +26,7 @@ describe('ReferralCustomer Service', function () {
       phone: '1111111111',
     });
 
-    expect(referral).to.be.an.instanceOf(User);
+    expect(referral.object).to.be.equal('User');
     expect(referral.id).to.match(/^user_/);
     expect(referral.name).to.equal('Test Referral');
   });
@@ -40,7 +39,7 @@ describe('ReferralCustomer Service', function () {
     expect(referralsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(referrals.has_more).to.exist;
     referralsArray.forEach((referral) => {
-      expect(referral).to.be.an.instanceOf(User);
+      expect(referral.object).to.be.equal('User');
     });
   });
 

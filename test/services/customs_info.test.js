@@ -1,8 +1,7 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import CustomsInfo from '../../src/models/customs_info';
+import EasyPostClient from '../../out/src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
@@ -22,7 +21,7 @@ describe('CustomsInfo Service', function () {
   it('creates a customs info', async function () {
     const customsInfo = await this.client.CustomsInfo.create(Fixture.basicCustomsInfo());
 
-    expect(customsInfo).to.be.an.instanceOf(CustomsInfo);
+    expect(customsInfo.object).to.be.equal('CustomsInfo');
     expect(customsInfo.id).to.match(/^cstinfo_/);
     expect(customsInfo.eel_pfc).to.equal('NOEEI 30.37(a)');
   });
@@ -31,7 +30,7 @@ describe('CustomsInfo Service', function () {
     const customsInfo = await this.client.CustomsInfo.create(Fixture.basicCustomsInfo());
     const retrievedCustomsInfo = await this.client.CustomsInfo.retrieve(customsInfo.id);
 
-    expect(customsInfo).to.be.an.instanceOf(CustomsInfo);
+    expect(customsInfo.object).to.be.equal('CustomsInfo');
     expect(withoutParams(retrievedCustomsInfo)).to.deep.include(withoutParams(customsInfo));
   });
 });

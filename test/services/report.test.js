@@ -1,9 +1,8 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
-import Report from '../../src/models/report';
+import EasyPostClient from '../../out/src/easypost';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -26,7 +25,7 @@ describe('Report Service', function () {
       type: Fixture.reportType(),
     });
 
-    expect(report).to.be.an.instanceOf(Report);
+    expect(report.object).to.be.equal('Report');
     expect(report.id).to.match(/^shprep_/);
   });
 
@@ -40,7 +39,7 @@ describe('Report Service', function () {
 
     // Reports are queued, so we can't wait for completion.
     // Verifying columns would require parsing CSV. Verify correct parameters via URL in cassette
-    expect(report).to.be.an.instanceOf(Report);
+    expect(report.object).to.be.equal('Report');
   });
 
   it(`creates a report with additional columns`, async function () {
@@ -53,7 +52,7 @@ describe('Report Service', function () {
 
     // Reports are queued, so we can't wait for completion.
     // Verifying columns would require parsing CSV. Verify correct parameters via URL in cassette
-    expect(report).to.be.an.instanceOf(Report);
+    expect(report.object).to.be.equal('Report');
   });
 
   it('retrieves a shipment report', async function () {
@@ -65,7 +64,7 @@ describe('Report Service', function () {
 
     const retrievedReport = await this.client.Report.retrieve(report.id);
 
-    expect(retrievedReport).to.be.an.instanceOf(Report);
+    expect(retrievedReport.object).to.be.equal('Report');
     expect(retrievedReport.start_date).to.equal(report.start_date);
     expect(retrievedReport.end_date).to.equal(report.end_date);
   });
@@ -81,7 +80,7 @@ describe('Report Service', function () {
     expect(reportsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(reports.has_more).to.exist;
     reportsArray.forEach((report) => {
-      expect(report).to.be.an.instanceOf(Report);
+      expect(report.object).to.be.equal('Report');
     });
   });
 

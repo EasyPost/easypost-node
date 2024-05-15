@@ -3,13 +3,11 @@ import fs from 'fs';
 import { resolve } from 'path';
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import Event from '../../src/models/event';
-import Payload from '../../src/models/payload';
+import EasyPostClient from '../../out/src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
-import NotFoundError from '../../src/errors/api/not_found_error';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
+import NotFoundError from '../../out/src/errors/api/not_found_error';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 
 describe('Event Service', function () {
   setupPolly.startPolly();
@@ -30,7 +28,7 @@ describe('Event Service', function () {
 
     const retrievedEvent = await this.client.Event.retrieve(events.events[0].id);
 
-    expect(retrievedEvent).to.be.an.instanceOf(Event);
+    expect(retrievedEvent.object).to.be.equal('Event');
     expect(retrievedEvent.id).to.match(/^evt_/);
   });
 
@@ -44,7 +42,7 @@ describe('Event Service', function () {
     expect(eventsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(events.has_more).to.exist;
     eventsArray.forEach((event) => {
-      expect(event).to.be.an.instanceOf(Event);
+      expect(event.object).to.be.equal('Event');
     });
   });
 
@@ -95,7 +93,7 @@ describe('Event Service', function () {
     const payloads = await this.client.Event.retrieveAllPayloads(event.id);
 
     payloads.forEach((payload) => {
-      expect(payload).to.be.an.instanceOf(Payload);
+      expect(payload.object).to.be.an.instanceOf('Payload');
     });
 
     // Remove the webhook once we are done testing

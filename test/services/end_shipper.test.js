@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import EndShipper from '../../src/models/end_shipper';
+import EasyPostClient from '../../out/src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -20,7 +19,7 @@ describe('EndShipper Service', function () {
   it('creates an EndShipper object', async function () {
     const endShipper = await this.client.EndShipper.create(Fixture.caAddress1());
 
-    expect(endShipper).to.be.an.instanceOf(EndShipper);
+    expect(endShipper.object).to.be.equal('EndShipper');
     expect(endShipper.id).to.match(/^es_/);
     expect(endShipper.street1).to.equal('388 TOWNSEND ST APT 20');
   });
@@ -29,7 +28,7 @@ describe('EndShipper Service', function () {
     const endShipper = await this.client.EndShipper.create(Fixture.caAddress2());
     const retrievedEndShipper = await this.client.EndShipper.retrieve(endShipper.id);
 
-    expect(retrievedEndShipper).to.be.an.instanceOf(EndShipper);
+    expect(retrievedEndShipper.object).to.be.equal('EndShipper');
     expect(endShipper.street1).to.equal(retrievedEndShipper.street1);
   });
 
@@ -41,7 +40,7 @@ describe('EndShipper Service', function () {
     expect(endShippersArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(endShippers.has_more).to.exist;
     endShippersArray.forEach((endShipper) => {
-      expect(endShipper).to.be.an.instanceOf(EndShipper);
+      expect(endShipper.object).to.be.equal('EndShipper');
     });
   });
 
@@ -63,7 +62,7 @@ describe('EndShipper Service', function () {
 
     const updatedEndShipper = await this.client.EndShipper.update(endShipper.id, params);
 
-    expect(updatedEndShipper).to.be.an.instanceOf(EndShipper);
+    expect(updatedEndShipper.object).to.be.equal('EndShipper');
     expect(updatedEndShipper.name).to.equal(newName.toUpperCase());
   });
 });

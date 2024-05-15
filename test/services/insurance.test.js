@@ -1,9 +1,8 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
-import Insurance from '../../src/models/insurance';
+import EasyPostClient from '../../out/src/easypost';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -27,7 +26,7 @@ describe('Insurance Service', function () {
 
     const insurance = await this.client.Insurance.create(insuranceData);
 
-    expect(insurance).to.be.an.instanceOf(Insurance);
+    expect(insurance.object).to.be.equal('Insurance');
     expect(insurance.id).to.match(/^ins_/);
     expect(insurance.amount).to.equal('100.00000');
   });
@@ -42,7 +41,7 @@ describe('Insurance Service', function () {
 
     const retrievedInsurance = await this.client.Insurance.retrieve(insurance.id);
 
-    expect(retrievedInsurance).to.be.an.instanceOf(Insurance);
+    expect(retrievedInsurance.object).to.be.equal('Insurance');
     expect(retrievedInsurance.id).to.equal(insurance.id);
   });
 
@@ -56,7 +55,7 @@ describe('Insurance Service', function () {
     expect(insuranceArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(insurance.has_more).to.exist;
     insuranceArray.forEach((event) => {
-      expect(event).to.be.an.instanceOf(Insurance);
+      expect(event.object).to.be.equal('Insurance');
     });
   });
 
@@ -83,7 +82,7 @@ describe('Insurance Service', function () {
     const insurance = await this.client.Insurance.create(insuranceData);
     const cancelledInsurance = await this.client.Insurance.refund(insurance.id);
 
-    expect(cancelledInsurance).to.be.an.instanceOf(Insurance);
+    expect(cancelledInsurance.object).to.be.equal('Insurance');
     expect(cancelledInsurance.id).to.match(/^ins_/);
     expect(cancelledInsurance.status).to.equal('cancelled');
     expect(cancelledInsurance.messages[0]).to.equal('Insurance was cancelled by the user.');

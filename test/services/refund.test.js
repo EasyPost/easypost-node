@@ -1,9 +1,8 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
-import Refund from '../../src/models/refund';
+import EasyPostClient from '../../out/src/easypost';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
@@ -34,7 +33,7 @@ describe('Refund Service', function () {
     const refunds = await this.client.Refund.create(refundData);
 
     refunds.forEach((pickup) => {
-      expect(pickup).to.be.an.instanceOf(Refund);
+      expect(pickup.object).to.be.equal('Refund');
     });
     expect(refunds[0].id).to.match(/^rfnd_/);
     expect(refunds[0].status).to.equal('submitted');
@@ -48,7 +47,7 @@ describe('Refund Service', function () {
     expect(refundsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(refunds.has_more).to.exist;
     refundsArray.forEach((refund) => {
-      expect(refund).to.be.an.instanceOf(Refund);
+      expect(refund.object).to.be.equal('Refund');
     });
   });
 
@@ -73,7 +72,7 @@ describe('Refund Service', function () {
 
     const retrieveRefund = await this.client.Refund.retrieve(refunds.refunds[0].id);
 
-    expect(retrieveRefund).to.be.an.instanceOf(Refund);
+    expect(retrieveRefund.object).to.be.equal('Refund');
     expect(withoutParams(retrieveRefund)).to.deep.include(withoutParams(refunds.refunds[0]));
   });
 });

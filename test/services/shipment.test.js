@@ -1,11 +1,9 @@
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
-import FilteringError from '../../src/errors/general/filtering_error';
-import InvalidParameterError from '../../src/errors/general/invalid_parameter_error';
-import Rate from '../../src/models/rate';
-import Shipment from '../../src/models/shipment';
+import EasyPostClient from '../../out/src/easypost';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
+import FilteringError from '../../out/src/errors/general/filtering_error';
+import InvalidParameterError from '../../out/src/errors/general/invalid_parameter_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -25,7 +23,7 @@ describe('Shipment Service', function () {
   it('creates a shipment', async function () {
     const shipment = await this.client.Shipment.create(Fixture.fullShipment());
 
-    expect(shipment).to.be.an.instanceOf(Shipment);
+    expect(shipment.object).to.be.equal('Shipment');
     expect(shipment.id).to.match(/^shp_/);
     expect(shipment.rates).to.exist;
     expect(shipment.options.label_format).to.equal('PNG');
@@ -42,7 +40,7 @@ describe('Shipment Service', function () {
 
     const shipment = await this.client.Shipment.create(shipmentData);
 
-    expect(shipment).to.be.an.instanceOf(Shipment);
+    expect(shipment.object).to.be.equal('Shipment');
     expect(shipment.id).to.match(/^shp_/);
     expect(shipment.options).to.exist; // The EasyPostClient API populates some default values here
     expect(shipment.customs_info).to.be.null;
@@ -56,7 +54,7 @@ describe('Shipment Service', function () {
 
     const shipment = await this.client.Shipment.create(shipmentData);
 
-    expect(shipment).to.be.an.instanceOf(Shipment);
+    expect(shipment.object).to.be.equal('Shipment');
     expect(shipment.id).to.match(/^shp_/);
     expect(shipment.tax_identifiers[0].tax_id_type).to.equal('IOSS');
   });
@@ -72,7 +70,7 @@ describe('Shipment Service', function () {
       parcel: { id: parcel.id },
     });
 
-    expect(shipment).to.be.an.instanceOf(Shipment);
+    expect(shipment.object).to.be.equal('Shipment');
     expect(shipment.id).to.match(/^shp_/);
     expect(shipment.from_address.id).to.match(/^adr_/);
     expect(shipment.to_address.id).to.match(/^adr_/);
@@ -85,7 +83,7 @@ describe('Shipment Service', function () {
 
     const retrievedShipment = await this.client.Shipment.retrieve(shipment.id);
 
-    expect(retrievedShipment).to.be.an.instanceOf(Shipment);
+    expect(retrievedShipment.object).to.be.equal('Shipment');
     expect(retrievedShipment.id).to.equal(shipment.id);
   });
 
@@ -99,7 +97,7 @@ describe('Shipment Service', function () {
     expect(shipmentsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(shipments.has_more).to.exist;
     shipmentsArray.forEach((shipment) => {
-      expect(shipment).to.be.an.instanceOf(Shipment);
+      expect(shipment.object).to.be.equal('Shipment');
     });
   });
 
@@ -136,7 +134,7 @@ describe('Shipment Service', function () {
 
     expect(ratesArray).to.be.an.instanceOf(Array);
     ratesArray.forEach((rate) => {
-      expect(rate).to.be.an.instanceOf(Rate);
+      expect(rate.object).to.be.equal('Rate');
     });
   });
 

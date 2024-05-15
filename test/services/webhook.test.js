@@ -1,9 +1,8 @@
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import Webhook from '../../src/models/webhook';
+import EasyPostClient from '../../out/src/easypost';
 import Fixture from '../helpers/fixture';
-import SignatureVerificationError from '../../src/errors/general/signature_verification_error';
+import SignatureVerificationError from '../../out/src/errors/general/signature_verification_error';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
@@ -26,7 +25,7 @@ describe('Webhook Service', function () {
       url: Fixture.webhookUrl(),
     });
 
-    expect(webhook).to.be.an.instanceOf(Webhook);
+    expect(webhook.object).to.be.equal('Webhook');
     expect(webhook.id).to.match(/^hook_/);
     expect(webhook.url).to.equal(Fixture.webhookUrl());
 
@@ -41,7 +40,7 @@ describe('Webhook Service', function () {
 
     const retrievedWebhook = await this.client.Webhook.retrieve(webhook.id);
 
-    expect(retrievedWebhook).to.be.an.instanceOf(Webhook);
+    expect(retrievedWebhook.object).to.be.equal('Webhook');
     expect(withoutParams(retrievedWebhook)).to.deep.include(withoutParams(webhook));
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
@@ -57,7 +56,7 @@ describe('Webhook Service', function () {
 
     expect(webhooksArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     webhooksArray.forEach((webhook) => {
-      expect(webhook).to.be.an.instanceOf(Webhook);
+      expect(webhook.object).to.be.equal('Webhook');
     });
   });
 
@@ -68,7 +67,7 @@ describe('Webhook Service', function () {
 
     const updatedWebhook = await this.client.Webhook.update(webhook.id);
 
-    expect(updatedWebhook).to.be.an.instanceOf(Webhook);
+    expect(updatedWebhook.object).to.be.equal('Webhook');
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
     await this.client.Webhook.delete(updatedWebhook.id);

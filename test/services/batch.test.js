@@ -3,8 +3,7 @@ import fs from 'fs';
 import { resolve } from 'path';
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import Batch from '../../src/models/batch';
+import EasyPostClient from '../../out/src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -25,7 +24,7 @@ describe('Batch Service', function () {
       shipments: [Fixture.oneCallBuyShipment()],
     });
 
-    expect(batch).to.be.an.instanceOf(Batch);
+    expect(batch.object).to.be.equal('Batch');
     expect(batch.id).to.match(/^batch_/);
     expect(batch.shipments).to.exist;
   });
@@ -37,7 +36,7 @@ describe('Batch Service', function () {
 
     const retrievedBatch = await this.client.Batch.retrieve(batch.id);
 
-    expect(retrievedBatch).to.be.an.instanceOf(Batch);
+    expect(retrievedBatch.object).to.be.equal('Batch');
     expect(retrievedBatch.id).to.equal(batch.id);
   });
 
@@ -49,7 +48,7 @@ describe('Batch Service', function () {
     expect(addressesArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(batches.has_more).to.exist;
     addressesArray.forEach((batch) => {
-      expect(batch).to.be.an.instanceOf(Batch);
+      expect(batch.object).to.be.equal('Batch');
     });
   });
 
@@ -60,7 +59,7 @@ describe('Batch Service', function () {
 
     const boughtBatch = await this.client.Batch.buy(batch.id);
 
-    expect(boughtBatch).to.be.an.instanceOf(Batch);
+    expect(boughtBatch.object).to.be.equal('Batch');
     expect(boughtBatch.num_shipments).to.equal(1);
   });
 
@@ -85,7 +84,7 @@ describe('Batch Service', function () {
     const batchWithScanForm = await this.client.Batch.createScanForm(boughtBatch.id);
 
     // We can't assert anything meaningful here because the scanform gets queued for generation and may not be immediately available
-    expect(batchWithScanForm).to.be.an.instanceOf(Batch);
+    expect(batchWithScanForm.object).to.be.equal('Batch');
   });
 
   it('adds and removes shipments from a batch', async function () {
@@ -122,6 +121,6 @@ describe('Batch Service', function () {
     const batchWithLabel = await this.client.Batch.generateLabel(boughtBatch.id, 'ZPL');
 
     // We can't assert anything meaningful here because the label gets queued for generation and may not be immediately available
-    expect(batchWithLabel).to.be.an.instanceOf(Batch);
+    expect(batchWithLabel.object).to.be.equal('Batch');
   });
 });

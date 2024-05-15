@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
+    "downlevelIteration": true,
+    "outDir": "./out"
+  },
+  "include": ["./src"]
+}

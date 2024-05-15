@@ -1,8 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import CarrierAccount from '../../src/models/carrier_account';
+import EasyPostClient from '../../out/src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
@@ -23,7 +22,7 @@ describe('CarrierAccount Service', function () {
   it('creates a carrier account', async function () {
     const carrierAccount = await this.client.CarrierAccount.create(Fixture.basicCarrierAccount());
 
-    expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
+    expect(carrierAccount.object).to.be.equal('CarrierAccount');
     expect(carrierAccount.id).to.match(/^ca_/);
     expect(carrierAccount.type).to.equal('DhlEcsAccount');
 
@@ -60,7 +59,7 @@ describe('CarrierAccount Service', function () {
     const carrierAccount = await this.client.CarrierAccount.create(Fixture.basicCarrierAccount());
     const retrievedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
 
-    expect(retrievedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
+    expect(retrievedCarrierAccount.object).to.be.equal('CarrierAccount');
     expect(withoutParams(retrievedCarrierAccount)).to.deep.include(withoutParams(carrierAccount));
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
@@ -71,7 +70,7 @@ describe('CarrierAccount Service', function () {
     const carrierAccounts = await this.client.CarrierAccount.all();
 
     carrierAccounts.forEach((carrierAccount) => {
-      expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
+      expect(carrierAccount.object).to.be.equal('CarrierAccount');
     });
   });
 
@@ -88,7 +87,7 @@ describe('CarrierAccount Service', function () {
         params,
       );
 
-      expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
+      expect(updatedCarrierAccount.object).to.be.equal('CarrierAccount');
       expect(updatedCarrierAccount.id).to.match(/^ca_/);
       expect(updatedCarrierAccount.description).to.equal(testDescription);
     });

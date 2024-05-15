@@ -1,9 +1,8 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
-import Tracker from '../../src/models/tracker';
+import EasyPostClient from '../../out/src/easypost';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -24,7 +23,7 @@ describe('Tracker Service', function () {
       tracking_code: 'EZ1000000001',
     });
 
-    expect(tracker).to.be.an.instanceOf(Tracker);
+    expect(tracker.object).to.be.equal('Tracker');
     expect(tracker.id).to.match(/^trk_/);
     expect(tracker.status).to.equal('pre_transit');
   });
@@ -36,7 +35,7 @@ describe('Tracker Service', function () {
 
     const retrievedTracker = await this.client.Tracker.retrieve(tracker.id);
 
-    expect(retrievedTracker).to.be.an.instanceOf(Tracker);
+    expect(retrievedTracker.object).to.be.equal('Tracker');
     expect(retrievedTracker.id).to.equal(tracker.id);
   });
 
@@ -50,7 +49,7 @@ describe('Tracker Service', function () {
     expect(trackersArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(trackers.has_more).to.exist;
     trackersArray.forEach((tracker) => {
-      expect(tracker).to.be.an.instanceOf(Tracker);
+      expect(tracker.object).to.be.equal('Tracker');
     });
   });
 

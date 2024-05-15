@@ -1,10 +1,8 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import FilteringError from '../../src/errors/general/filtering_error';
-import Order from '../../src/models/order';
-import Rate from '../../src/models/rate';
+import EasyPostClient from '../../out/src/easypost';
+import FilteringError from '../../out/src/errors/general/filtering_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -23,7 +21,7 @@ describe('Order Service', function () {
   it('creates an order', async function () {
     const order = await this.client.Order.create(Fixture.basicOrder());
 
-    expect(order).to.be.an.instanceOf(Order);
+    expect(order.object).to.be.equal('Order');
     expect(order.id).to.match(/^order_/);
     expect(order.rates).to.exist;
   });
@@ -33,7 +31,7 @@ describe('Order Service', function () {
 
     const retrievedOrder = await this.client.Order.retrieve(order.id);
 
-    expect(retrievedOrder).to.be.an.instanceOf(Order);
+    expect(retrievedOrder.object).to.be.equal('Order');
     expect(retrievedOrder.id).to.equal(order.id);
   });
 
@@ -46,7 +44,7 @@ describe('Order Service', function () {
 
     expect(ratesArray).to.be.an.instanceOf(Array);
     ratesArray.forEach((rate) => {
-      expect(rate).to.be.an.instanceOf(Rate);
+      expect(rate.object).to.be.equal('Rate');
     });
   });
 

@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import FilteringError from '../../src/errors/general/filtering_error';
-import Rate from '../../src/models/rate';
+import EasyPostClient from '../../out/src/easypost';
+import FilteringError from '../../out/src/errors/general/filtering_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
@@ -25,7 +24,7 @@ describe('BetaRateService', function () {
     );
 
     statelessRates.forEach((rate) => {
-      expect(rate).to.be.an.instanceOf(Rate);
+      expect(rate.object).to.be.equal('Rate');
       expect(rate).to.not.have.property('id');
     });
   });

@@ -1,9 +1,8 @@
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import InvalidRequestError from '../../src/errors/api/invalid_request_error';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
-import Address from '../../src/models/address';
+import EasyPostClient from '../../out/src/easypost';
+import InvalidRequestError from '../../out/src/errors/api/invalid_request_error';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
@@ -24,7 +23,7 @@ describe('Address Service', function () {
   it('creates an address', async function () {
     const address = await this.client.Address.create(Fixture.caAddress1());
 
-    expect(address).to.be.an.instanceOf(Address);
+    expect(address.object).to.be.equal('Address');
     expect(address.id).to.match(/^adr_/);
     expect(address.street1).to.equal('388 Townsend St');
   });
@@ -35,14 +34,14 @@ describe('Address Service', function () {
     // Creating normally (without specifying "verify") will make the address, perform no verifications
     let address = await this.client.Address.create(addressData);
 
-    expect(address).to.be.an.instanceOf(Address);
+    expect(address.object).to.be.equal('Address');
     expect(address.verifications.delivery).to.be.undefined;
 
     // Creating with verify = true will make the address, perform verifications
     addressData.verify = true;
     address = await this.client.Address.create(addressData);
 
-    expect(address).to.be.an.instanceOf(Address);
+    expect(address.object).to.be.equal('Address');
     expect(address.verifications.delivery.success).to.be.false;
   });
 
@@ -52,7 +51,7 @@ describe('Address Service', function () {
 
     const address = await this.client.Address.create(addressData);
 
-    expect(address).to.be.an.instanceOf(Address);
+    expect(address.object).to.be.equal('Address');
     expect(address.id).to.match(/^adr_/);
     expect(address.street1).to.equal('179 N HARBOR DR');
   });
@@ -63,14 +62,14 @@ describe('Address Service', function () {
     // Creating normally (without specifying "verify") will make the address, perform no verifications
     let address = await this.client.Address.create(addressData);
 
-    expect(address).to.be.an.instanceOf(Address);
+    expect(address.object).to.be.equal('Address');
     expect(address.verifications.delivery).to.be.undefined;
 
     // Creating with verify = true will make the address, perform verifications
     addressData.verify = [true];
     address = await this.client.Address.create(addressData);
 
-    expect(address).to.be.an.instanceOf(Address);
+    expect(address.object).to.be.equal('Address');
     expect(address.verifications.delivery.success).to.be.false;
   });
 
@@ -78,7 +77,7 @@ describe('Address Service', function () {
     const address = await this.client.Address.create(Fixture.caAddress1());
     const retrievedAddress = await this.client.Address.retrieve(address.id);
 
-    expect(retrievedAddress).to.be.an.instanceOf(Address);
+    expect(retrievedAddress.object).to.be.equal('Address');
     expect(withoutParams(retrievedAddress)).to.deep.include(withoutParams(address));
   });
 
@@ -90,7 +89,7 @@ describe('Address Service', function () {
     expect(addressesArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(addresses.has_more).to.exist;
     addressesArray.forEach((address) => {
-      expect(address).to.be.an.instanceOf(Address);
+      expect(address.object).to.be.equal('Address');
     });
   });
 
@@ -115,7 +114,7 @@ describe('Address Service', function () {
 
     const address = await this.client.Address.createAndVerify(addressData);
 
-    expect(address).to.be.an.instanceOf(Address);
+    expect(address.object).to.be.equal('Address');
     expect(address.id).to.match(/^adr_/);
     expect(address.street1).to.equal('179 N HARBOR DR');
   });
@@ -133,7 +132,7 @@ describe('Address Service', function () {
     const address = await this.client.Address.create(Fixture.caAddress2());
     const verifiedAddress = await this.client.Address.verifyAddress(address.id);
 
-    expect(verifiedAddress).to.be.an.instanceOf(Address);
+    expect(verifiedAddress.object).to.be.equal('Address');
     expect(verifiedAddress.id).to.match(/^adr_/);
     expect(verifiedAddress.street1).to.equal('179 N HARBOR DR');
   });

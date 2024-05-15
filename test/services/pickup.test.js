@@ -1,12 +1,11 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import Pickup from '../../src/models/pickup';
+import EasyPostClient from '../../out/src/easypost';
 import Fixture from '../helpers/fixture';
-import FilteringError from '../../src/errors/general/filtering_error';
+import FilteringError from '../../out/src/errors/general/filtering_error';
 import * as setupPolly from '../helpers/setup_polly';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import { withoutParams } from '../helpers/utils';
 
 describe('Pickup Service', function () {
@@ -29,7 +28,7 @@ describe('Pickup Service', function () {
 
     const pickup = await this.client.Pickup.create(pickupData);
 
-    expect(pickup).to.be.an.instanceOf(Pickup);
+    expect(pickup.object).to.be.equal('Pickup');
     expect(pickup.id).to.match(/^pickup_/);
     expect(pickup.pickup_rates).to.exist;
   });
@@ -44,7 +43,7 @@ describe('Pickup Service', function () {
 
     const retrievedPickup = await this.client.Pickup.retrieve(pickup.id);
 
-    expect(retrievedPickup).to.be.an.instanceOf(Pickup);
+    expect(retrievedPickup.object).to.be.equal('Pickup');
     expect(withoutParams(retrievedPickup)).to.deep.include(withoutParams(pickup));
   });
 
@@ -56,7 +55,7 @@ describe('Pickup Service', function () {
     expect(pickupsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(pickups.has_more).to.exist;
     pickupsArray.forEach((pickup) => {
-      expect(pickup).to.be.an.instanceOf(Pickup);
+      expect(pickup.object).to.be.equal('Pickup');
     });
   });
 
@@ -90,7 +89,7 @@ describe('Pickup Service', function () {
       Fixture.pickupService(),
     );
 
-    expect(boughtPickup).to.be.an.instanceOf(Pickup);
+    expect(boughtPickup.object).to.be.equal('Pickup');
     expect(boughtPickup.id).to.match(/^pickup_/);
     expect(boughtPickup.confirmation).to.exist;
     expect(boughtPickup.status).to.equal('scheduled');
@@ -111,7 +110,7 @@ describe('Pickup Service', function () {
 
     const cancelledPickup = await this.client.Pickup.cancel(boughtPickup.id);
 
-    expect(cancelledPickup).to.be.an.instanceOf(Pickup);
+    expect(cancelledPickup.object).to.be.equal('Pickup');
     expect(cancelledPickup.id).to.match(/^pickup_/);
     expect(cancelledPickup.status).to.equal('canceled');
   });

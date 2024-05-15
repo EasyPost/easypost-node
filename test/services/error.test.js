@@ -1,20 +1,20 @@
 import { assert, expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import ForbiddenError from '../../src/errors/api/forbidden_error';
-import GatewayTimeoutError from '../../src/errors/api/gateway_timeout_error';
-import InternalServerError from '../../src/errors/api/internal_server_error';
-import InvalidRequestError from '../../src/errors/api/invalid_request_error';
-import MethodNotAllowedError from '../../src/errors/api/method_not_allowed_error';
-import NotFoundError from '../../src/errors/api/not_found_error';
-import PaymentError from '../../src/errors/api/payment_error';
-import RateLimitError from '../../src/errors/api/rate_limit_error';
-import RedirectError from '../../src/errors/api/redirect_error';
-import ServiceUnavailableError from '../../src/errors/api/service_unavailable_error';
-import TimeoutError from '../../src/errors/api/timeout_error';
-import UnauthorizedError from '../../src/errors/api/unauthorized_error';
-import UnknownApiError from '../../src/errors/api/unknown_api_error';
-import ErrorHandler from '../../src/errors/error_handler';
+import EasyPostClient from '../../out/src/easypost';
+import ForbiddenError from '../../out/src/errors/api/forbidden_error';
+import GatewayTimeoutError from '../../out/src/errors/api/gateway_timeout_error';
+import InternalServerError from '../../out/src/errors/api/internal_server_error';
+import InvalidRequestError from '../../out/src/errors/api/invalid_request_error';
+import MethodNotAllowedError from '../../out/src/errors/api/method_not_allowed_error';
+import NotFoundError from '../../out/src/errors/api/not_found_error';
+import PaymentError from '../../out/src/errors/api/payment_error';
+import RateLimitError from '../../out/src/errors/api/rate_limit_error';
+import RedirectError from '../../out/src/errors/api/redirect_error';
+import ServiceUnavailableError from '../../out/src/errors/api/service_unavailable_error';
+import TimeoutError from '../../out/src/errors/api/timeout_error';
+import UnauthorizedError from '../../out/src/errors/api/unauthorized_error';
+import UnknownApiError from '../../out/src/errors/api/unknown_api_error';
+import ErrorHandler from '../../out/src/errors/error_handler';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Error Service', function () {

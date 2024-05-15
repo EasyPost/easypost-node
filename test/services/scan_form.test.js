@@ -1,9 +1,8 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 
-import EasyPostClient from '../../src/easypost';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
-import ScanForm from '../../src/models/scan_form';
+import EasyPostClient from '../../out/src/easypost';
+import EndOfPaginationError from '../../out/src/errors/general/end_of_pagination_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
@@ -27,7 +26,7 @@ describe('ScanForm Service', function () {
       shipments: [shipment],
     });
 
-    expect(scanform).to.be.an.instanceOf(ScanForm);
+    expect(scanform.object).to.be.equal('ScanForm');
     expect(scanform.id).to.match(/^sf_/);
   });
 
@@ -40,7 +39,7 @@ describe('ScanForm Service', function () {
 
     const retrievedScanform = await this.client.ScanForm.retrieve(scanform.id);
 
-    expect(retrievedScanform).to.be.an.instanceOf(ScanForm);
+    expect(retrievedScanform.object).to.be.equal('ScanForm');
     expect(withoutParams(retrievedScanform)).to.deep.include(withoutParams(scanform));
   });
 
@@ -54,7 +53,7 @@ describe('ScanForm Service', function () {
     expect(scanformsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(scanforms.has_more).to.exist;
     scanformsArray.forEach((scanform) => {
-      expect(scanform).to.be.an.instanceOf(ScanForm);
+      expect(scanform.object).to.be.equal('ScanForm');
     });
   });
 
