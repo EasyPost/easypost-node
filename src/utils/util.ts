@@ -1,10 +1,10 @@
-import crypto from 'node:crypto';
-import util from 'node:util';
+import crypto from 'crypto';
+import util from 'util';
 import Constants from '../constants';
 import FilteringError from '../errors/general/filtering_error';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
 import SignatureVerificationError from '../errors/general/signature_verification_error';
-import { IRate, ISmartRate } from '../services/rate_service';
+import { ISmartRate } from '../services/rate_service';
 
 /**
  * Utility class of various publicly-available helper functions.

@@ -1,4 +1,4 @@
-import util from 'node:util';
+import util from 'util';
 import baseService from '../base_service';
 import Constants from '../../constants';
 import FilteringError from '../../errors/general/filtering_error';

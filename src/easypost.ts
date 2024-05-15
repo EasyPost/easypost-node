@@ -34,7 +34,7 @@ import UserService from './services/user_service';
 import WebhookService from './services/webhook_service';
 import Utils from './utils/util';
 
-import util from 'node:util';
+import util from 'util';
 
 /** How many milliseconds in a second. */
 export const MS_SECOND = 1000;

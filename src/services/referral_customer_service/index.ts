@@ -1,4 +1,4 @@
-import util from 'node:util';
+import util from 'util';
 import superagent from 'superagent';
 
 import Constants from '../../constants';
