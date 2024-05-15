@@ -5,7 +5,7 @@ const mode = process.env.NODE_ENV || 'development';
 const isDev = mode === 'development';
 
 module.exports = {
-  entry: path.resolve(__dirname, 'out/src/easypost.js'),
+  entry: path.resolve(__dirname, 'out/easypost.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'easypost.js',
@@ -13,7 +13,7 @@ module.exports = {
       type: 'commonjs',
     },
   },
-  context: path.resolve(__dirname, 'out/src'),
+  context: path.resolve(__dirname, 'out'),
   mode,
   cache: isDev,
   devtool: isDev ? 'source-map' : undefined,
@@ -32,6 +32,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js'],
-    modules: [path.resolve(__dirname, 'out/src'), path.resolve(__dirname, './node_modules')],
+    modules: [path.resolve(__dirname, 'out'), path.resolve(__dirname, './node_modules')],
   },
 };

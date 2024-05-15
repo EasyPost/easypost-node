@@ -20,7 +20,9 @@
   "scripts": {
     "build": "npm run build:typescript && npm run build:webpack",
     "build:webpack": "webpack --config webpack.config.babel.js",
-    "build:typescript": "tsc",
+    "build:typescript": "npm run build:typescript:pre && tsc && npm run build:typescript:post",
+    "build:typescript:pre": "rm -rf out out-tmp types types-tmp",
+    "build:typescript:post": "mv out-tmp/src out && mv types-tmp/src types && rm -rf out-tmp types-tmp",
     "clean": "rm -rf ./dist ./nyc_output ./node_modules/.cache ./coverage",
     "coverage": "cross-env NODE_ENV=test nyc npm run test",
     "docs": "./node_modules/.bin/jsdoc src/models src/services src/errors src/utils -d docs",

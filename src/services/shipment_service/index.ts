@@ -1,4 +1,4 @@
-import EasyPost from '../..';
+import EasyPost from '../../easypost';
 import Constants from '../../constants';
 import baseService from '../base_service';
 import { IRate, ISmartRate } from '../rate_service';

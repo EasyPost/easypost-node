@@ -1,4 +1,4 @@
-import EasyPost from '../..';
+import EasyPost from '../../easypost';
 import Constants from '../../constants';
 import InvalidObjectError from '../../errors/general/invalid_object_error';
 import baseService from '../base_service';

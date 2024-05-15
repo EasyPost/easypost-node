@@ -6,10 +6,10 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false,
     "downlevelIteration": true,
-    "outDir": "./out",
+    "outDir": "./out-tmp",
     "declaration": true,
-    "declarationDir": "./types",
-    "rootDir": "./src"
+    "declarationDir": "./types-tmp"
   },
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["./package.json"]
 }

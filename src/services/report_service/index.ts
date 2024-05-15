@@ -1,4 +1,4 @@
-import EasyPost from '../..';
+import EasyPost from '../../easypost';
 import baseService from '../base_service';
 import { IReport } from './Report';
 import { IReportCreateParameters } from './ReportCreateParameters';

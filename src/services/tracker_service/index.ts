@@ -1,4 +1,4 @@
-import EasyPost from '../..';
+import EasyPost from '../../easypost';
 import baseService from '../base_service';
 import { ITracker } from './Tracker';
 import { ITrackerCreateParameters } from './TrackerCreateParameters';

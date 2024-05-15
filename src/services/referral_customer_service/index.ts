@@ -5,7 +5,7 @@ import Constants from '../../constants';
 import EasyPostClient from '../../easypost';
 import ExternalApiError from '../../errors/api/external_api_error';
 import baseService from '../base_service';
-import EasyPost from '../..';
+import EasyPost from '../../easypost';
 import { IReferralCreateParameters } from './ReferralCreateParameters';
 import { IReferral } from './Referral';
 import { IReferralListParameters } from './ReferralListParameters';

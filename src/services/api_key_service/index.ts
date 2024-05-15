@@ -2,7 +2,7 @@ import util from 'node:util';
 import baseService from '../base_service';
 import Constants from '../../constants';
 import FilteringError from '../../errors/general/filtering_error';
-import EasyPost from '../..';
+import EasyPost from '../../easypost';
 import { IApiKey, UserAPIKeys } from './ApiKey';
 
 export * from './ApiKey';

@@ -1,4 +1,4 @@
-import EasyPost from '../..';
+import EasyPost from '../../easypost';
 import baseService from '../base_service';
 import { IPaymentMethod } from '../billing_service';
 import { IRefund } from '../refund_service';

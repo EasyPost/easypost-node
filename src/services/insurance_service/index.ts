@@ -1,4 +1,4 @@
-import EasyPost from '../..';
+import EasyPost from '../../easypost';
 import { IAllMethodParameters } from '../../utils/types';
 import baseService from '../base_service';
 import { IInsurance } from './Insurance';

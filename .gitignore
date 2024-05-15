@@ -15,7 +15,10 @@ docs
 Icon
 node_modules
 npm-debug.log
-
+out
+out-tmp
+types
+types-tmp
 /.eslintrc
 /.eslintignore
 /.prettierrc.yml
