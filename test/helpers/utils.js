@@ -12,6 +12,10 @@ export const withoutParams = (obj) =>
           return null;
         }
 
+        if (key === 'lowestRate') {
+          return null;
+        }
+
         if (!value) {
           return [key, value];
         }
