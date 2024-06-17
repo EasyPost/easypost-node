@@ -2,7 +2,6 @@ export * from './Address';
 export * from './Batch';
 export * from './Billing';
 export * from './Brand';
-export * from './CarbonOffset';
 export * from './Carrier';
 export * from './Customs';
 export * from './EndShipper';
