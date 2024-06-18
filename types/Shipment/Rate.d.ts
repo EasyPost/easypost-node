@@ -1,5 +1,4 @@
 import { IDatedObject, IObjectWithId } from '../base';
-import { ICarbonOffset } from '../CarbonOffset';
 
 /**
  * After a Shipment is successfully created, it will automatically fetch Rates.
@@ -75,9 +74,4 @@ export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
    * indicates if delivery window is guaranteed (true) or not (false)
    */
   delivery_date_guaranteed: boolean;
-
-  /**
-   * Indicate if a rate includes a carbon offset fee
-   */
-  carbon_offset: ICarbonOffset;
 }
