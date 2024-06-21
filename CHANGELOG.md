@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v7.3.1 (2024-06-21)
+
+- Removes the unusable CarbonOffset types
+
 ## v7.3.0 (2024-04-10)
 
 - Fix payment method funding and deletion failures due to undetermined payment method type
