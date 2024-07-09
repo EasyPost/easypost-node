@@ -1,7 +1,7 @@
 import baseService from './base_service';
 import Constants from '../constants';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
-import InvalidRequestError from "../errors/api/invalid_request_error";
+import InvalidRequestError from '../errors/api/invalid_request_error';
 
 const util = require('util');
 
@@ -133,11 +133,11 @@ export default (easypostClient) =>
      */
     static _wrapCarrierAccountUpdateParams(carrierAccountType, params) {
       if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
-        let data = {ups_oauth_registrations: params};
+        let data = { ups_oauth_registrations: params };
         data.type = carrierAccountType; // Type needs to be top-level as well as nested in "ups_oauth_registration"
         return data;
       }
-      return {carrier_account: params};
+      return { carrier_account: params };
     }
 
     /**

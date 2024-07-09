@@ -35,8 +35,8 @@ describe('CarrierAccount Service', function () {
     const data = {
       type: 'FedexAccount',
       registration_data: {
-        some: 'data'
-      }
+        some: 'data',
+      },
     };
 
     try {
@@ -60,7 +60,7 @@ describe('CarrierAccount Service', function () {
   it('creates a UPS carrier account', async function () {
     const data = {
       type: 'UpsAccount',
-      account_number: "123456789"
+      account_number: '123456789',
     };
 
     try {
@@ -120,11 +120,11 @@ describe('CarrierAccount Service', function () {
     // Create a temporary UPS carrier account
     const params = {
       type: 'UpsAccount',
-      account_number: "123456789"
+      account_number: '123456789',
     };
     const carrierAccount = await this.client.CarrierAccount.create(params);
 
-    const testAccountNumber = "987654321";
+    const testAccountNumber = '987654321';
     const updateParams = {
       account_number: testAccountNumber,
     };
