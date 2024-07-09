@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Next Release
+
+- Routes `UpsAccount`, `UpsMailInnovationsAccount`, and `UpsSurepostAccount` create/update requests to the new `/ups_oauth_registrations` endpoint
+  - Starting `2024-08-05`, UPS accounts will require a new payload to register or update. See [UPS OAuth 2.0 Update](https://support.easypost.com/hc/en-us/articles/26635027512717-UPS-OAuth-2-0-Update) for more details
+
 ## v7.3.1 (2024-06-21)
 
 - Removes the unusable CarbonOffset types
