@@ -58,16 +58,23 @@ describe('CarrierAccount Service', function () {
   });
 
   it('creates a UPS carrier account', async function () {
+    const accountNumber = '123456789';
+    const type = 'UpsAccount';
+
     const data = {
-      type: 'UpsAccount',
-      account_number: '123456789',
+      type: type,
+      account_number: accountNumber,
     };
 
     try {
       const carrierAccount = await this.client.CarrierAccount.create(data);
+
+      expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
+      expect(carrierAccount.id).to.match(/^ca_/);
+      expect(carrierAccount.type).to.equal(type);
+      // account number not returned in API response, can't assert
+
       await this.client.CarrierAccount.delete(carrierAccount.id);
-      // If we get here, the UPS account was created (and deleted) successfully
-      expect(true).to.equal(true);
     } catch (error) {
       // If the API rejects the request due to bad data, that's fine
       expect(error.statusCode).to.equal(422);
