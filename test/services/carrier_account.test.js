@@ -66,19 +66,14 @@ describe('CarrierAccount Service', function () {
       account_number: accountNumber,
     };
 
-    try {
-      const carrierAccount = await this.client.CarrierAccount.create(data);
+    const carrierAccount = await this.client.CarrierAccount.create(data);
 
-      expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
-      expect(carrierAccount.id).to.match(/^ca_/);
-      expect(carrierAccount.type).to.equal(type);
-      // account number not returned in API response, can't assert
+    expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
+    expect(carrierAccount.id).to.match(/^ca_/);
+    expect(carrierAccount.type).to.equal(type);
+    // account number not returned in API response, can't assert
 
-      await this.client.CarrierAccount.delete(carrierAccount.id);
-    } catch (error) {
-      // If the API rejects the request due to bad data, that's fine
-      expect(error.statusCode).to.equal(422);
-    }
+    await this.client.CarrierAccount.delete(carrierAccount.id);
   });
 
   it('retrieves a carrier account', async function () {
@@ -101,7 +96,6 @@ describe('CarrierAccount Service', function () {
   });
 
   it('updates a carrier account', async function () {
-    // Create a temporary carrier account
     const carrierAccount = await this.client.CarrierAccount.create(Fixture.basicCarrierAccount());
 
     const testDescription = 'My custom description';
@@ -109,10 +103,8 @@ describe('CarrierAccount Service', function () {
       description: testDescription,
     };
 
-    // Update the carrier account
     await this.client.CarrierAccount.update(carrierAccount.id, updateParams);
 
-    // Retrieve the updated carrier account
     const updatedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
 
     expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
@@ -124,7 +116,6 @@ describe('CarrierAccount Service', function () {
   });
 
   it('updates a UPS carrier account', async function () {
-    // Create a temporary UPS carrier account
     const params = {
       type: 'UpsAccount',
       account_number: '123456789',
@@ -136,15 +127,12 @@ describe('CarrierAccount Service', function () {
       account_number: testAccountNumber,
     };
 
-    // Update the carrier account
     await this.client.CarrierAccount.update(carrierAccount.id, updateParams);
 
-    // Retrieve the updated carrier account
     const updatedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
 
     expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(updatedCarrierAccount.id).to.match(/^ca_/);
-    // expect(updatedCarrierAccount.credentials["account_number"]).to.equal(testAccountNumber); // TODO: Re-enable assertion when API updates number properly
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
     await this.client.CarrierAccount.delete(carrierAccount.id);

@@ -42,16 +42,10 @@ export default (easypostClient) =>
     static async update(id, params) {
       const carrierAccount = await this.retrieve(id);
 
-      if (!carrierAccount) {
-        throw new InvalidRequestError({
-          message: util.format(Constants.NO_OBJECT_FOUND, 'carrier account'),
-        });
-      }
-
       const carrierAccountType = carrierAccount.type;
 
       const endpoint = this._selectCarrierAccountUpdateEndpoint(carrierAccountType, id);
-      const wrappedParams = this._wrapCarrierAccountUpdateParams(carrierAccountType, params);
+      const wrappedParams = this._wrapCarrierAccountParams(carrierAccountType, params);
 
       try {
         const response = await easypostClient._patch(endpoint, wrappedParams);
@@ -97,20 +91,6 @@ export default (easypostClient) =>
     }
 
     /**
-     * Wraps the carrier account creation parameters in the correct format based on the type.
-     * @private
-     * @param {string} carrierAccountType - The type of carrier account to be created.
-     * @param {Object} params - The parameters for the carrier account to be created.
-     * @returns {Object} - The wrapped carrier account creation parameters.
-     */
-    static _wrapCarrierAccountCreationParams(carrierAccountType, params) {
-      if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
-        return { ups_oauth_registrations: params };
-      }
-      return { carrier_account: params };
-    }
-
-    /**
      * Returns the correct carrier_account endpoint when updating a record based on the type.
      * @private
      * @param {string} carrierAccountType - The type of carrier account to be updated.
@@ -125,13 +105,13 @@ export default (easypostClient) =>
     }
 
     /**
-     * Wraps the carrier account update parameters in the correct format based on the type.
+     * Wraps the carrier account parameters in the correct format based on the type.
      * @private
-     * @param {string} carrierAccountType - The type of carrier account to be updated.
-     * @param {Object} params - The parameters for the carrier account to be updated.
-     * @returns {Object} - The wrapped carrier account update parameters.
+     * @param {string} carrierAccountType - The type of carrier account to be created.
+     * @param {Object} params - The parameters for the carrier account to be created.
+     * @returns {Object} - The wrapped carrier account parameters.
      */
-    static _wrapCarrierAccountUpdateParams(carrierAccountType, params) {
+    static _wrapCarrierAccountParams(carrierAccountType, params) {
       if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
         return { ups_oauth_registrations: params };
       }
