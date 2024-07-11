@@ -1,7 +1,6 @@
 import baseService from './base_service';
 import Constants from '../constants';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
-import InvalidRequestError from '../errors/api/invalid_request_error';
 
 const util = require('util');
 
@@ -27,7 +26,7 @@ export default (easypostClient) =>
       }
 
       const endpoint = this._selectCarrierAccountCreationEndpoint(carrierAccountType);
-      const wrappedParams = this._wrapCarrierAccountCreationParams(carrierAccountType, params);
+      const wrappedParams = this._wrapCarrierAccountParams(carrierAccountType, params);
 
       return this._create(endpoint, wrappedParams);
     }
