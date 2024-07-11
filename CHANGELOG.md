@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds new `Shipment.recommendShipDate`, `SmartRate.recommendShipDate`, and `SmartRate.estimateDeliveryDate` functions
+
 ## v7.3.1 (2024-06-21)
 
 - Removes the unusable CarbonOffset types

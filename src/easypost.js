@@ -29,6 +29,7 @@ import RefundService from './services/refund_service';
 import ReportService from './services/report_service';
 import ScanFormService from './services/scan_form_service';
 import ShipmentService from './services/shipment_service';
+import SmartRateService from './services/smart_rate_service';
 import TrackerService from './services/tracker_service';
 import UserService from './services/user_service';
 import WebhookService from './services/webhook_service';
@@ -106,6 +107,7 @@ export const SERVICES = {
   Report: ReportService,
   ScanForm: ScanFormService,
   Shipment: ShipmentService,
+  SmartRate: SmartRateService,
   Tracker: TrackerService,
   User: UserService,
   Webhook: WebhookService,
