@@ -321,14 +321,31 @@ describe('Shipment Service', function () {
     expect(boughtShipment.postage_label).to.exist;
   });
 
-  it('retrieve time-in-transit data for each of the Rates of a shipment', async function () {
+  it('retrieve estimated delivery dates for each of the Rates of a shipment', async function () {
     const shipment = await this.client.Shipment.create(Fixture.basicShipment());
     const estimatedDeliveryDates = await this.client.Shipment.retrieveEstimatedDeliveryDate(
       shipment.id,
       Fixture.plannedShipDate(),
     );
 
-    expect(estimatedDeliveryDates.every((entry) => entry.easypost_time_in_transit_data)).to.not.be
-      .null;
+    for (const entry of estimatedDeliveryDates) {
+      expect(entry.rate).to.be.instanceOf(Rate);
+      expect(entry.easypost_time_in_transit_data).to.be.an('object');
+      expect(entry.easypost_time_in_transit_data.easypost_estimated_delivery_date).to.not.be.null;
+    }
+  });
+
+  it('retrieve recommended ship dates for each of the Rates of a shipment', async function () {
+    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
+    const recommendedShipDates = await this.client.Shipment.recommendShipDate(
+      shipment.id,
+      Fixture.plannedDeliveryDate(),
+    );
+
+    for (const entry of recommendedShipDates) {
+      expect(entry.rate).to.be.instanceOf(Rate);
+      expect(entry.easypost_time_in_transit_data).to.be.an('object');
+      expect(entry.easypost_time_in_transit_data.ship_on_date).to.not.be.null;
+    }
   });
 });

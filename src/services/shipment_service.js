@@ -238,9 +238,9 @@ export default (easypostClient) =>
     }
 
     /**
-     * Retrieves the estimated delivery date of each Rate via SmartRate.
-     * @param {string} id
-     * @param {string} plannedShipDate
+     * Retrieve the estimated delivery date of each Rate via SmartRate.
+     * @param {string} id - The ID of the shipment to retrieve the estimated delivery date for.
+     * @param {string} plannedShipDate - The planned ship date of the shipment.
      * @returns {Array} - An array of the estimated delivery date and rates.
      */
     static async retrieveEstimatedDeliveryDate(id, plannedShipDate) {
@@ -248,6 +248,28 @@ export default (easypostClient) =>
 
       const params = {
         planned_ship_date: plannedShipDate,
+      };
+
+      try {
+        const response = await easypostClient._get(url, params);
+
+        return this._convertToEasyPostObject(response.body.rates ?? [], params);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a recommended ship date for a {@link Shipment shipment} via the Precision Shipping API, based on a specific desired delivery date.
+     * @param id - The ID of the shipment to retrieve the recommended ship date for.
+     * @param desiredDeliveryDate - The desired delivery date for the shipment.
+     * @returns {Array} - An array of the recommended ship date and rates.
+     */
+    static async recommendShipDate(id, desiredDeliveryDate) {
+      const url = `shipments/${id}/smartrate/precision_shipping`;
+
+      const params = {
+        desired_delivery_date: desiredDeliveryDate,
       };
 
       try {

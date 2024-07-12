@@ -140,6 +140,10 @@ export default class Fixture {
   }
 
   static plannedShipDate() {
-    return '2024-04-08';
+    return '2024-07-14';
+  }
+
+  static plannedDeliveryDate() {
+    return '2024-07-14';
   }
 }
