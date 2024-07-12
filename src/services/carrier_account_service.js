@@ -26,8 +26,7 @@ export default (easypostClient) =>
       }
 
       const endpoint = this._selectCarrierAccountCreationEndpoint(carrierAccountType);
-
-      const wrappedParams = { carrier_account: params };
+      const wrappedParams = this._wrapCarrierAccountParams(carrierAccountType, params);
 
       return this._create(endpoint, wrappedParams);
     }
@@ -40,13 +39,15 @@ export default (easypostClient) =>
      * @returns {CarrierAccount} - The updated carrier account.
      */
     static async update(id, params) {
-      const url = `carrier_accounts/${id}`;
-      const wrappedParams = {
-        carrier_account: params,
-      };
+      const carrierAccount = await this.retrieve(id);
+
+      const carrierAccountType = carrierAccount.type;
+
+      const endpoint = this._selectCarrierAccountUpdateEndpoint(carrierAccountType, id);
+      const wrappedParams = this._wrapCarrierAccountParams(carrierAccountType, params);
 
       try {
-        const response = await easypostClient._patch(url, wrappedParams);
+        const response = await easypostClient._patch(endpoint, wrappedParams);
 
         return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
@@ -79,10 +80,41 @@ export default (easypostClient) =>
      * @returns {string} - The endpoint to be used for the carrier account creation request.
      */
     static _selectCarrierAccountCreationEndpoint(carrierAccountType) {
-      if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_WORKFLOWS.includes(carrierAccountType)) {
+      if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_CREATE_WORKFLOWS.includes(carrierAccountType)) {
         return 'carrier_accounts/register';
       }
+      if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
+        return 'ups_oauth_registrations';
+      }
       return 'carrier_accounts';
+    }
+
+    /**
+     * Returns the correct carrier_account endpoint when updating a record based on the type.
+     * @private
+     * @param {string} carrierAccountType - The type of carrier account to be updated.
+     * @param {string} carrierAccountId - The ID of the carrier account to be updated.
+     * @returns {string} - The endpoint to be used for the carrier account update request.
+     */
+    static _selectCarrierAccountUpdateEndpoint(carrierAccountType, carrierAccountId) {
+      if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
+        return `ups_oauth_registrations/${carrierAccountId}`;
+      }
+      return `carrier_accounts/${carrierAccountId}`;
+    }
+
+    /**
+     * Wraps the carrier account parameters in the correct format based on the type.
+     * @private
+     * @param {string} carrierAccountType - The type of carrier account to be created.
+     * @param {Object} params - The parameters for the carrier account to be created.
+     * @returns {Object} - The wrapped carrier account parameters.
+     */
+    static _wrapCarrierAccountParams(carrierAccountType, params) {
+      if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
+        return { ups_oauth_registrations: params };
+      }
+      return { carrier_account: params };
     }
 
     /**

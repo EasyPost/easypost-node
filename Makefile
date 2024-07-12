@@ -26,12 +26,17 @@ eslint:
 eslint-fix:
 	npm run lintFix
 
+## init-examples-submodule - Initialize the examples submodule
+init-examples-submodule:
+	git submodule init
+	git submodule update
+
 ## install-styleguide - Install the styleguide (Unix only)
 install-styleguide: | update-examples-submodule
 	sh examples/symlink_directory_files.sh examples/style_guides/node .
 
 ## install - Install project dependencies (Unix only)
-install: | update-examples-submodule
+install: | init-examples-submodule
 	npm install
 
 ## lint - Lint the project

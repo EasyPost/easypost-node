@@ -4,8 +4,11 @@ import Utils from './utils/util';
  * A class containing constants used throughout the EasyPost Node.js client library.
  */
 export default class Constants {
-  static get CARRIER_ACCOUNTS_WITH_CUSTOM_WORKFLOWS() {
-    return ['FedexAccount', 'FedexSmartpostAccount', 'UpsAccount'];
+  static get CARRIER_ACCOUNTS_WITH_CUSTOM_CREATE_WORKFLOWS() {
+    return ['FedexAccount', 'FedexSmartpostAccount'];
+  }
+  static get UPS_OAUTH_CARRIER_TYPES() {
+    return ['UpsAccount', 'UpsMailInnovationsAccount', 'UpsSurepostAccount'];
   }
   static EXTERNAL_API_CALL_FAILED = 'Communication with %s failed, please try again later';
   static INVALID_API_KEY_TYPE = 'Invalid API key type.';
