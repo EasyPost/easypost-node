@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: models/brand.js</title>
+    <title>JSDoc: Source: services/smart_rate_service.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: models/brand.js</h1>
+    <h1 class="page-title">Source: services/smart_rate_service.js</h1>
 
     
 
@@ -26,24 +26,48 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import EasyPostObject from './easypost_object';
+            <pre class="prettyprint source linenums"><code>import baseService from './base_service';
 
-/**
- * A {@link https://www.easypost.com/docs/api/node#brand Brand} represents custom branding for an EasyPost user's public-facing tracking details page.
- * @public
- * @extends EasyPostObject
- */
-export default class Brand extends EasyPostObject {
-  static ad_href;
-  static ad;
-  static background_color;
-  static color;
-  static logo_href;
-  static logo;
-  static name;
-  static theme;
-  static user_id;
-}
+export default (easypostClient) =>
+  /**
+   * The SmartRateService class provides methods for interacting with EasyPost SmartRate APIs.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
+  class SmartRateService extends baseService(easypostClient) {
+    /**
+     * Retrieve the estimated delivery date of each carrier-service level combination via the Smart Deliver By API, based on a specific ship date and origin-destination postal code pair.
+     * @param params - The parameters to estimate the delivery date with.
+     * @returns {Object} - Estimates and related metadata.
+     */
+    static async estimateDeliveryDate(params) {
+      const url = 'smartrate/deliver_by';
+
+      try {
+        const response = await easypostClient._post(url, params);
+
+        return this._convertToEasyPostObject(response.body, params);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Retrieve a recommended ship date for each carrier-service level combination via the Smart Deliver On API, based on a specific delivery date and origin-destination postal code pair.
+     * @param params - The parameters to recommend the ship date with.
+     * @returns {Object} - Recommendation and related metadata.
+     */
+    static async recommendShipDate(params) {
+      const url = 'smartrate/deliver_on';
+
+      try {
+        const response = await easypostClient._post(url, params);
+
+        return this._convertToEasyPostObject(response.body, params);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+  };
 </code></pre>
         </article>
     </section>
