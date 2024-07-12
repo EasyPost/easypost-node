@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v7.4.0 (2024-07-12)
 
 - Adds new `Shipment.recommendShipDate`, `SmartRate.recommendShipDate`, and `SmartRate.estimateDeliveryDate` functions
 - Routes `UpsAccount`, `UpsMailInnovationsAccount`, and `UpsSurepostAccount` create/update requests to the new `/ups_oauth_registrations` endpoint
