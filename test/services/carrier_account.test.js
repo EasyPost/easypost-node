@@ -32,10 +32,11 @@ describe('CarrierAccount Service', function () {
   });
 
   it('creates a carrier account with a custom workflow', async function () {
-    const data = {};
-    data.type = 'FedexAccount';
-    data.registration_data = {
-      some: 'data',
+    const data = {
+      type: 'FedexAccount',
+      registration_data: {
+        some: 'data',
+      },
     };
 
     try {
@@ -54,6 +55,25 @@ describe('CarrierAccount Service', function () {
       });
       expect(errorFound).to.equal(true);
     }
+  });
+
+  it('creates a UPS carrier account', async function () {
+    const accountNumber = '123456789';
+    const type = 'UpsAccount';
+
+    const data = {
+      type: type,
+      account_number: accountNumber,
+    };
+
+    const carrierAccount = await this.client.CarrierAccount.create(data);
+
+    expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
+    expect(carrierAccount.id).to.match(/^ca_/);
+    expect(carrierAccount.type).to.equal(type);
+    // account number not returned in API response, can't assert
+
+    await this.client.CarrierAccount.delete(carrierAccount.id);
   });
 
   it('retrieves a carrier account', async function () {
@@ -76,22 +96,43 @@ describe('CarrierAccount Service', function () {
   });
 
   it('updates a carrier account', async function () {
-    const testDescription = 'My custom description';
-
     const carrierAccount = await this.client.CarrierAccount.create(Fixture.basicCarrierAccount());
 
-    await this.client.CarrierAccount.retrieve(carrierAccount.id).then(async () => {
-      const params = {};
-      params.description = testDescription;
-      const updatedCarrierAccount = await this.client.CarrierAccount.update(
-        carrierAccount.id,
-        params,
-      );
+    const testDescription = 'My custom description';
+    const updateParams = {
+      description: testDescription,
+    };
 
-      expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
-      expect(updatedCarrierAccount.id).to.match(/^ca_/);
-      expect(updatedCarrierAccount.description).to.equal(testDescription);
-    });
+    await this.client.CarrierAccount.update(carrierAccount.id, updateParams);
+
+    const updatedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
+
+    expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
+    expect(updatedCarrierAccount.id).to.match(/^ca_/);
+    expect(updatedCarrierAccount.description).to.equal(testDescription);
+
+    // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
+    await this.client.CarrierAccount.delete(carrierAccount.id);
+  });
+
+  it('updates a UPS carrier account', async function () {
+    const params = {
+      type: 'UpsAccount',
+      account_number: '123456789',
+    };
+    const carrierAccount = await this.client.CarrierAccount.create(params);
+
+    const testAccountNumber = '987654321';
+    const updateParams = {
+      account_number: testAccountNumber,
+    };
+
+    await this.client.CarrierAccount.update(carrierAccount.id, updateParams);
+
+    const updatedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
+
+    expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
+    expect(updatedCarrierAccount.id).to.match(/^ca_/);
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
     await this.client.CarrierAccount.delete(carrierAccount.id);
