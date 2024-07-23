@@ -7,11 +7,6 @@
   },
 
   "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "webpack.config.babel.js"
-      }
-    },
     "import/extensions": ["", ".js", ".json"]
   },
 
@@ -30,8 +25,8 @@
   "globals": {
     "expect": true
   },
-  "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "ecmaVersion": 13
+    "ecmaVersion": 13,
+    "sourceType": "module"
   }
 }
