@@ -53,6 +53,7 @@
     "@pollyjs/adapter-node-http": "^6.0.5",
     "@pollyjs/core": "^6.0.5",
     "@pollyjs/persister-fs": "^6.0.5",
+    "@swc-node/register": "^1.10.9",
     "@swc/cli": "^0.4.0",
     "@swc/core": "^1.7.0",
     "@typescript-eslint/eslint-plugin": "^5.59.5",
