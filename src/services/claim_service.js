@@ -13,7 +13,7 @@ export default (easypostClient) =>
      * @returns {Claim} - The created claim.
      */
     static async create(params) {
-      const url = 'beta/claims';
+      const url = 'claims';
 
       return this._create(url, params);
     }
@@ -25,7 +25,7 @@ export default (easypostClient) =>
      * @returns {Object} - An object containing the list of {@link Claim claim} records and pagination information.
      */
     static async all(params = {}) {
-      const url = 'beta/claims';
+      const url = 'claims';
 
       return this._all(url, params);
     }
@@ -37,7 +37,7 @@ export default (easypostClient) =>
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
     static async getNextPage(claims, pageSize = null) {
-      const url = 'beta/claims';
+      const url = 'claims';
       return this._getNextPage(url, 'claims', claims, pageSize);
     }
 
@@ -48,7 +48,7 @@ export default (easypostClient) =>
      * @returns {Claim} - The retrieved claim.
      */
     static async retrieve(id) {
-      const url = `beta/claims/${id}`;
+      const url = `claims/${id}`;
 
       return this._retrieve(url);
     }
@@ -60,7 +60,7 @@ export default (easypostClient) =>
      * @returns {Claim} - The canceled claim.
      */
     static async cancel(id) {
-      const url = `beta/claims/${id}/cancel`;
+      const url = `claims/${id}/cancel`;
       return this._create(url);
     }
   };
