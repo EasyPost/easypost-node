@@ -14,10 +14,10 @@ jobs:
         node-version: [12.x, 13.x, 14.x, 15.x, 16.x, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x]
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 20.x To Build
+      - name: Use Node.js 22.x To Build
         uses: actions/setup-node@v3
         with:
-          node-version: 20.x
+          node-version: 22.x
       - run: make install
       - run: make install-styleguide
       - run: make build
