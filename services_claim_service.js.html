@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: models/customs_item.js</title>
+    <title>JSDoc: Source: services/claim_service.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: models/customs_item.js</h1>
+    <h1 class="page-title">Source: services/claim_service.js</h1>
 
     
 
@@ -26,23 +26,72 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import EasyPostObject from './easypost_object';
+            <pre class="prettyprint source linenums"><code>import baseService from './base_service';
 
-/**
- * A {@link https://www.easypost.com/docs/api/node#customs-item CustomsItem} represents a single item being shipped internationally.
- * @public
- * @extends EasyPostObject
- */
-export default class CustomsItem extends EasyPostObject {
-  static code;
-  static currency;
-  static description;
-  static hs_tariff_number;
-  static origin_country;
-  static quantity;
-  static value;
-  static weight;
-}
+export default (easypostClient) =>
+  /**
+   * The ClaimService class provides methods for interacting with EasyPost {@link Claim} objects.
+   * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
+   */
+  class ClaimService extends baseService(easypostClient) {
+    /**
+     * Create a {@link Claim claim} record.
+     * See {@link https://www.easypost.com/docs/api/node#create-a-claim EasyPost API Documentation} for more information.
+     * @param {Object} params - Parameters for the claim to be created.
+     * @returns {Claim} - The created claim.
+     */
+    static async create(params) {
+      const url = 'claims';
+
+      return this._create(url, params);
+    }
+
+    /**
+     * Retrieve all {@link Claim} records associated with the current authenticated user.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-claims EasyPost API Documentation} for more information.
+     * @param {Object} [params] - Parameters to filter the claim records.
+     * @returns {Object} - An object containing the list of {@link Claim claim} records and pagination information.
+     */
+    static async all(params = {}) {
+      const url = 'claims';
+
+      return this._all(url, params);
+    }
+
+    /**
+     * Retrieve the next page of Claim collection.
+     * @param {Object} claims An object containing a list of {@link Claim claims} and pagination information.
+     * @param {Number} pageSize The number of records to return on each page
+     * @returns {EasyPostObject|Promise&lt;never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
+     */
+    static async getNextPage(claims, pageSize = null) {
+      const url = 'claims';
+      return this._getNextPage(url, 'claims', claims, pageSize);
+    }
+
+    /**
+     * Retrieve a {@link Claim claim} record by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-claim EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the claim to retrieve.
+     * @returns {Claim} - The retrieved claim.
+     */
+    static async retrieve(id) {
+      const url = `claims/${id}`;
+
+      return this._retrieve(url);
+    }
+
+    /**
+     * Cancel a {@link Claim claim} record by its ID.
+     * See {@link https://www.easypost.com/docs/api/node#refund-a-claim EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the claim to be canceled.
+     * @returns {Claim} - The canceled claim.
+     */
+    static async cancel(id) {
+      const url = `claims/${id}/cancel`;
+      return this._create(url);
+    }
+  };
 </code></pre>
         </article>
     </section>

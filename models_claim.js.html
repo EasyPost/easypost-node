@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: models/customs_item.js</title>
+    <title>JSDoc: Source: models/claim.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: models/customs_item.js</h1>
+    <h1 class="page-title">Source: models/claim.js</h1>
 
     
 
@@ -29,19 +29,30 @@
             <pre class="prettyprint source linenums"><code>import EasyPostObject from './easypost_object';
 
 /**
- * A {@link https://www.easypost.com/docs/api/node#customs-item CustomsItem} represents a single item being shipped internationally.
+ * An {@link https://docs.easypost.com/docs/insurance/claims Claim} object represents claim for a {@link Shipment shipment}.
  * @public
  * @extends EasyPostObject
  */
-export default class CustomsItem extends EasyPostObject {
-  static code;
-  static currency;
+export default class Claim extends EasyPostObject {
+  static id;
+  static object;
+  static mode;
+  static attachments;
+  static contact_email;
+  static created_at;
   static description;
-  static hs_tariff_number;
-  static origin_country;
-  static quantity;
-  static value;
-  static weight;
+  static history;
+  static insurance_amount;
+  static insurance_id;
+  static payment_method;
+  static requested_amount;
+  static shipment_id;
+  static status;
+  static status_detail;
+  static status_timestamp;
+  static tracking_code;
+  static type;
+  static updated_at;
 }
 </code></pre>
         </article>

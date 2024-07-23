@@ -142,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line33">line 33</a>
+        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -204,7 +204,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line68">line 68</a>
+        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line70">line 70</a>
     </li></ul></dd>
     
 
@@ -376,7 +376,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line172">line 172</a>
+        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line174">line 174</a>
     </li></ul></dd>
     
 
@@ -564,7 +564,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line111">line 111</a>
+        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line113">line 113</a>
     </li></ul></dd>
     
 
@@ -746,7 +746,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line155">line 155</a>
+        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line157">line 157</a>
     </li></ul></dd>
     
 
@@ -997,7 +997,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line209">line 209</a>
+        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line211">line 211</a>
     </li></ul></dd>
     
 
@@ -1160,7 +1160,7 @@ TODO: Implement this function in EndShippers and Batches once the API supports t
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line189">line 189</a>
+        <a href="services_base_service.js.html">services/base_service.js</a>, <a href="services_base_service.js.html#line191">line 191</a>
     </li></ul></dd>
     
 
@@ -2738,6 +2738,178 @@ See <a href="https://www.easypost.com/docs/api/node#retrieve-available-carrier-t
     <dd>
         
 <span class="param-type">Array.&lt;CarrierType></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="all"><span class="type-signature">(async) </span>all<span class="signature">(params<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retrieve all Claim records associated with the current authenticated user.
+See <a href="https://www.easypost.com/docs/api/node#retrieve-a-list-of-claims">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Parameters to filter the claim records.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_claim_service.js.html">services/claim_service.js</a>, <a href="services_claim_service.js.html#line27">line 27</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - An object containing the list of claim records and pagination information.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -5670,6 +5842,166 @@ See <a href="https://www.easypost.com/docs/api/node#buy-a-shipment">EasyPost API
     
 
     
+    <h4 class="name" id="cancel"><span class="type-signature">(async) </span>cancel<span class="signature">(id)</span><span class="type-signature"> &rarr; {Claim}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Cancel a claim record by its ID.
+See <a href="https://www.easypost.com/docs/api/node#refund-a-claim">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the claim to be canceled.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_claim_service.js.html">services/claim_service.js</a>, <a href="services_claim_service.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The canceled claim.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Claim</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="cancel"><span class="type-signature">(async) </span>cancel<span class="signature">(id)</span><span class="type-signature"> &rarr; {Pickup}</span></h4>
     
 
@@ -6476,6 +6808,166 @@ See <a href="https://www.easypost.com/docs/api/node#create-a-carrier-account">Ea
     <dd>
         
 <span class="param-type">CarrierAccount</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="create"><span class="type-signature">(async) </span>create<span class="signature">(params)</span><span class="type-signature"> &rarr; {Claim}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Create a claim record.
+See <a href="https://www.easypost.com/docs/api/node#create-a-claim">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Parameters for the claim to be created.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_claim_service.js.html">services/claim_service.js</a>, <a href="services_claim_service.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The created claim.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Claim</span>
 
 
     </dd>
@@ -11416,6 +11908,203 @@ See <a href="https://www.easypost.com/docs/api/node#batch-labels">EasyPost API D
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="services_address_service.js.html">services/address_service.js</a>, <a href="services_address_service.js.html#line74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The retrieved EasyPostObject-based class instance, or a `Promise` that rejects with an error.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">EasyPostObject</span>
+|
+
+<span class="param-type">Promise.&lt;never></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getNextPage"><span class="type-signature">(async) </span>getNextPage<span class="signature">(claims, pageSize)</span><span class="type-signature"> &rarr; {EasyPostObject|Promise.&lt;never>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retrieve the next page of Claim collection.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>claims</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">An object containing a list of claims and pagination information.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pageSize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last">The number of records to return on each page</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_claim_service.js.html">services/claim_service.js</a>, <a href="services_claim_service.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -16996,6 +17685,166 @@ See <a href="https://www.easypost.com/docs/api/node#retrieve-a-carrieraccount">E
     
 
     
+    <h4 class="name" id="retrieve"><span class="type-signature">(async) </span>retrieve<span class="signature">(id)</span><span class="type-signature"> &rarr; {Claim}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retrieve a claim record by its ID.
+See <a href="https://www.easypost.com/docs/api/node#retrieve-a-claim">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the claim to retrieve.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_claim_service.js.html">services/claim_service.js</a>, <a href="services_claim_service.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The retrieved claim.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Claim</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="retrieve"><span class="type-signature">(async) </span>retrieve<span class="signature">(id)</span><span class="type-signature"> &rarr; {CustomsInfo}</span></h4>
     
 
@@ -22330,7 +23179,7 @@ See <a href="https://www.easypost.com/docs/api/node#create-and-verify-addresses"
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jul 22 2024 16:12:13 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Jul 23 2024 19:15:49 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
