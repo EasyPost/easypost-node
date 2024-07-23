@@ -174,13 +174,13 @@ If you would need or want to view what requests are being made to the EasyPost A
 ```javascript
 const client = new EasyPostClient('my-key');
 
-const logOutgoingRequest = (request) => console.log("Outgoing:", request);
-const logResponse = (response) => console.log("Response:", response)
+const logOutgoingRequest = (request) => console.log('Outgoing:', request);
+const logResponse = (response) => console.log('Response:', response);
 
 // optionally add your hook to listen for outgoing requests
 client.addRequestHook(logOutgoingRequest);
 // and optionally the hook for the response
-client.addResponseHook(logResponse)
+client.addResponseHook(logResponse);
 
 // ...do other stuff
 
