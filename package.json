@@ -39,6 +39,7 @@
     "repl": "./repl.js --local ./dist/cjs",
     "scan": "npx audit-ci -m --config ./audit-ci.jsonc",
     "test": "cross-env NODE_ENV=test mocha",
+    "test-import-and-use": "node ./test-import.js",
     "watch": "webpack --config webpack.config.babel.js --watch"
   },
   "dependencies": {

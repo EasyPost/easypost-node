@@ -14,14 +14,19 @@ jobs:
         node-version: [12.x, 13.x, 14.x, 15.x, 16.x, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x]
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 20.x To Build
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20.x
       - run: make install
       - run: make install-styleguide
       - run: make build
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test
+      - name: Use Node.js ${{ matrix.node-version }} to test importing and using
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: make test-import-and-use
   lint:
     runs-on: ubuntu-latest
     steps:
