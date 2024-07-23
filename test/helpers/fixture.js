@@ -115,6 +115,10 @@ export default class Fixture {
     return this.readFixtureData().insurances.basic;
   }
 
+  static basicClaim() {
+    return this.readFixtureData().claims.basic;
+  }
+
   static basicOrder() {
     return this.readFixtureData().orders.basic;
   }
