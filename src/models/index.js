@@ -4,6 +4,7 @@ export * from './batch';
 export * from './brand';
 export * from './carrier_account';
 export * from './carrier_type';
+export * from './claim';
 export * from './customs_info';
 export * from './customs_item';
 export * from './easypost_object';
