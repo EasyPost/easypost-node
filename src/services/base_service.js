@@ -4,6 +4,7 @@ import Batch from '../models/batch';
 import Brand from '../models/brand';
 import CarrierAccount from '../models/carrier_account';
 import CarrierType from '../models/carrier_type';
+import Claim from '../models/claim';
 import CustomsInfo from '../models/customs_info';
 import CustomsItem from '../models/customs_item';
 import EasyPostObject from '../models/easypost_object';
@@ -37,6 +38,7 @@ const EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP = {
   brd: Brand,
   ca: CarrierAccount,
   cfrep: Report,
+  clm: Claim,
   cstinfo: CustomsInfo,
   cstitem: CustomsItem,
   es: EndShipper,

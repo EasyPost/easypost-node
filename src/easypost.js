@@ -15,6 +15,7 @@ import BillingService from './services/billing_service';
 import CarrierAccountService from './services/carrier_account_service';
 import CarrierMetadataService from './services/carrier_metadata_service';
 import CarrierTypeService from './services/carrier_type_service';
+import ClaimService from './services/claim_service';
 import CustomsInfoService from './services/customs_info_service';
 import CustomsItemService from './services/customs_item_service';
 import EndShipperService from './services/end_shipper_service';
@@ -93,6 +94,7 @@ export const SERVICES = {
   CarrierAccount: CarrierAccountService,
   CarrierMetadata: CarrierMetadataService,
   CarrierType: CarrierTypeService,
+  Claim: ClaimService,
   CustomsInfo: CustomsInfoService,
   CustomsItem: CustomsItemService,
   EndShipper: EndShipperService,
@@ -239,7 +241,7 @@ export default class EasyPostClient {
     }
 
     let completePath = this.baseUrl + path;
-    completePath = path.includes('beta') ? completePath.replace('v2', '') : completePath;
+    completePath = path.includes('beta') ? completePath.replace('/v2', '') : completePath;
 
     return completePath;
   }
