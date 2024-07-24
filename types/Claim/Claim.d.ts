@@ -8,7 +8,6 @@ import { TClaimType } from './ClaimType';
 /**
  * Class representing an EasyPost claim object.
  *
- * @see https://www.easypost.com/docs/api/node#claim-object
  */
 export declare interface IClaim extends IObjectWithId<'Claim'>, IDatedObject {
   /** The amount that has been approved for reimbursement */
