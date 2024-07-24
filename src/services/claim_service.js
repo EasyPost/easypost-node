@@ -8,7 +8,6 @@ export default (easypostClient) =>
   class ClaimService extends baseService(easypostClient) {
     /**
      * Create a {@link Claim claim} record.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-claim EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the claim to be created.
      * @returns {Claim} - The created claim.
      */
@@ -20,7 +19,6 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Claim} records associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-claims EasyPost API Documentation} for more information.
      * @param {Object} [params] - Parameters to filter the claim records.
      * @returns {Object} - An object containing the list of {@link Claim claim} records and pagination information.
      */
@@ -43,7 +41,6 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Claim claim} record by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-claim EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the claim to retrieve.
      * @returns {Claim} - The retrieved claim.
      */
@@ -55,7 +52,6 @@ export default (easypostClient) =>
 
     /**
      * Cancel a {@link Claim claim} record by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#refund-a-claim EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the claim to be canceled.
      * @returns {Claim} - The canceled claim.
      */
