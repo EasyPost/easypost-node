@@ -1,5 +1,5 @@
 {
   "timeout": 10000,
-  "require": ["@swc-node/register", "dotenv/config", "./test/helpers/common.js"],
+  "require": ["@babel/register", "dotenv/config", "./test/helpers/common.js"],
   "recursive": true
 }
