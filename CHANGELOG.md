@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v7.5.0 (2024-07-24)
+
+- Adds new `Claim` service for filing claims on EasyPost shipments and insurances
+
 ## v7.4.0 (2024-07-12)
 
 - Adds new `Shipment.recommendShipDate`, `SmartRate.recommendShipDate`, and `SmartRate.estimateDeliveryDate` functions
