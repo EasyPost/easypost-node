@@ -5,5 +5,5 @@
   "lines": 90,
   "reporter": ["lcov", "text"],
   "include": ["src/**/*.js"],
-  "require": ["@swc-node/register", "./test/helpers/common.js"]
+  "require": ["@babel/register", "./test/helpers/common.js"]
 }

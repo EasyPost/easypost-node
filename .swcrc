@@ -1,7 +1,0 @@
-{
-  "$schema": "https://swc.rs/schema.json",
-  "sourceMaps": true,
-  "env": {
-    "targets": "Node >= 12"
-  }
-}

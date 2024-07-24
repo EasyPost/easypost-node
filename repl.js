@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 require('source-map-support').install();
 require('core-js/stable');
-require('dotenv').config();
 
 const repl = require('repl');
 const args = require('yargs').argv;
