@@ -75,6 +75,10 @@ scan:
 test:
 	npm run test
 
+## test actually importing and useing the built version
+test-import-and-use:
+	npm run test-import-and-use
+
 ## update - Update dependencies (Unix only)
 update: | update-examples-submodule
 	npm update
