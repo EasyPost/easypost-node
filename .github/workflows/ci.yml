@@ -17,7 +17,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make install install-styleguide build test
+      - run: make install
+      - run: make install-styleguide
+      - run: make build
+      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test
   lint:
     runs-on: ubuntu-latest
     steps:
