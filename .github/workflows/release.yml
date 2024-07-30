@@ -1,0 +1,25 @@
+name: release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch: ~
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+      - name: Publish Package
+        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
+      - name: Upload assets to release
+        uses: AButler/upload-release-assets@v3.0
+        with:
+          files: 'dist/*'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
