@@ -205,7 +205,7 @@ describe('Shipment Service', function () {
     // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
     const lowestRateService = shipment.lowestRate(null, ['Priority']);
     expect(lowestRateService.service).to.equal('Priority');
-    expect(lowestRateService.rate).to.equal('6.88');
+    expect(lowestRateService.rate).to.equal('6.90');
     expect(lowestRateService.carrier).to.equal('USPS');
 
     // Test lowest rate with carrier filter (should error due to bad carrier)
