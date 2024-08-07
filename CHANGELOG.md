@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds missing properties to `Rate` model
+  - `delivery_date`
+  - `est_delivery_days`
+  - `surcharges`
+
 ## v7.5.0 (2024-07-24)
 
 - Adds new `Claim` service for filing claims on EasyPost shipments and insurances
