@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 
 export default (easypostClient) =>
   /**
@@ -144,5 +145,28 @@ export default (easypostClient) =>
     static async getNextPage(children, pageSize = null) {
       const url = 'users/children';
       return this._getNextPage(url, 'children', children, pageSize);
+    }
+
+    static async _getNextPage(url, key, collection, pageSize = null, optionalParams = {}) {
+      const collectionArray = collection[key];
+      if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
+        throw new EndOfPaginationError();
+      }
+
+      const defaultParams = collection._params ?? collectionArray[0]._params ?? {};
+
+      const params = {
+        ...defaultParams,
+        page_size: defaultParams.page_size ?? pageSize,
+        after_id: collectionArray[collectionArray.length - 1].id,
+        ...optionalParams,
+      };
+
+      const response = await this._all(url, params);
+      if (response == undefined || response[key].length == 0) {
+        throw new EndOfPaginationError();
+      }
+
+      return response;
     }
   };
