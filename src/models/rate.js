@@ -21,5 +21,4 @@ export default class Rate extends EasyPostObject {
   static retail_rate;
   static service;
   static shipment_id;
-  static surcharges;
 }
