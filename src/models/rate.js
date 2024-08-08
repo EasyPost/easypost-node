@@ -11,7 +11,9 @@ export default class Rate extends EasyPostObject {
   static carrier;
   static currency;
   static delivery_date_guaranteed;
+  static delivery_date;
   static delivery_days;
+  static est_delivery_days;
   static list_currency;
   static list_rate;
   static rate;
