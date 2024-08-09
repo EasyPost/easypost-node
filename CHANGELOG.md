@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## v7.5.1 (2024-08-09)
 
 - Adds missing properties to `Rate` model
   - `delivery_date`
