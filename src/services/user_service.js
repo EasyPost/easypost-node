@@ -147,7 +147,7 @@ export default (easypostClient) =>
       return this._getNextPage(url, 'children', children, pageSize);
     }
 
-    static async _getNextPage(url, key, collection, pageSize = null, optionalParams = {}) {
+    static async _getNextPage(url, key, collection, pageSize = null) {
       const collectionArray = collection[key];
       if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();
@@ -159,7 +159,6 @@ export default (easypostClient) =>
         ...defaultParams,
         page_size: defaultParams.page_size ?? pageSize,
         after_id: collectionArray[collectionArray.length - 1].id,
-        ...optionalParams,
       };
 
       const response = await this._all(url, params);
