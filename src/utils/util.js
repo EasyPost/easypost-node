@@ -120,9 +120,14 @@ export default class Utils {
       const normalizedSecret = webhookSecret.normalize('NFKD');
       const encodedSecret = Buffer.from(normalizedSecret, 'utf8');
 
+      // Fixes Javascript's float to string conversion. See https://github.com/EasyPost/easypost-node/issues/467
+      const correctedEventBody = Buffer.from(eventBody)
+        .toString('utf8')
+        .replace(/("weight":)(\d+)(?!\.\d)/g, '$1$2.0');
+
       const expectedSignature = crypto
         .createHmac('sha256', encodedSecret)
-        .update(eventBody, 'utf-8')
+        .update(correctedEventBody, 'utf-8')
         .digest('hex');
 
       const digest = `hmac-sha256-hex=${expectedSignature}`;

@@ -42,10 +42,6 @@ export default class Fixture {
     return '2022-04-11';
   }
 
-  static webhookUrl() {
-    return this.readFixtureData().webhook_url;
-  }
-
   static caAddress1() {
     return this.readFixtureData().addresses.ca_address_1;
   }
@@ -141,6 +137,18 @@ export default class Fixture {
     );
 
     return Buffer.from(JSON.stringify(eventBody), 'utf8');
+  }
+
+  static webhookHmacSignature() {
+    return this.readFixtureData().webhook_hmac_signature;
+  }
+
+  static webhookSecret() {
+    return this.readFixtureData().webhook_secret;
+  }
+
+  static webhookUrl() {
+    return this.readFixtureData().webhook_url;
   }
 
   static plannedShipDate() {
