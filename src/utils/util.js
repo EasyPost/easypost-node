@@ -139,7 +139,7 @@ export default class Utils {
             Buffer.from(digest, 'utf8'),
           )
         ) {
-          webhook = JSON.parse(eventBody.toString());
+          webhook = JSON.parse(correctedEventBody);
         } else {
           throw new SignatureVerificationError({ message: Constants.WEBHOOK_DOES_NOT_MATCH });
         }
