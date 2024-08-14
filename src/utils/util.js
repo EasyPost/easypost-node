@@ -123,7 +123,7 @@ export default class Utils {
       // Fixes Javascript's float to string conversion. See https://github.com/EasyPost/easypost-node/issues/467
       const correctedEventBody = Buffer.from(eventBody)
         .toString('utf8')
-        .replace(/("weight":)(\d+)(?!\.\d)/g, '$1$2.0');
+        .replace(/("weight":\s*)(\d+)(\s*)(?=,|\})/g, '$1$2.0');
 
       const expectedSignature = crypto
         .createHmac('sha256', encodedSecret)

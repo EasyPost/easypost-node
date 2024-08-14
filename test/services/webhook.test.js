@@ -98,9 +98,7 @@ describe('Webhook Service', function () {
     );
 
     expect(webhookBody.description).to.equal('tracker.updated');
-    // JS converts this from `136.0` in the response to `136` on the user's end which is unfortunate; however, we
-    // compare signatures with the correct number prior to JSON parsing it and returning it to the user.
-    expect(webhookBody.result.weight).to.equal(136.0);
+    expect(webhookBody.result.weight).to.equal(614.4); // Ensure we convert floats properly
   });
 
   it('throws an error when a webhook secret is a differing length', function () {
