@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Fixes webhook validation when the `weight` field contains a float by converting it back into a float after conversion from a string (closes #467)
+
 ## v7.5.1 (2024-08-09)
 
 - Adds missing properties to `Rate` model
