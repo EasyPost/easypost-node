@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 export default class Fixture {
   // Read fixture data from the fixtures JSON file

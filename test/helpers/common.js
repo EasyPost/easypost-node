@@ -1,6 +1,7 @@
 import 'core-js/stable';
 
 import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 
 /* eslint-disable no-console */
 process.on('unhandledRejection', (err) => {
@@ -8,7 +9,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 chai.should();
-chai.use(require('chai-as-promised'));
+chai.use(chaiAsPromised);
 chai.config.truncateThreshold = 0;
 
 global.expect = chai.expect;
