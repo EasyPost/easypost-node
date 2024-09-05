@@ -1,11 +1,10 @@
 import superagent from 'superagent';
+import util from 'util';
 
 import Constants from '../constants';
 import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
 import baseService from './base_service';
-
-const util = require('util');
 
 /**
  * Get an instance of the EasyPostClient using the referral user's API key.

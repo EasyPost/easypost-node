@@ -1,10 +1,10 @@
+import crypto from 'crypto';
+import util from 'util';
+
 import Constants from '../constants';
 import FilteringError from '../errors/general/filtering_error';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
 import SignatureVerificationError from '../errors/general/signature_verification_error';
-
-const crypto = require('crypto');
-const util = require('util');
 
 /**
  * Utility class of various publicly-available helper functions.
