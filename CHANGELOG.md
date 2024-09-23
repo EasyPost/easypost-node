@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Removes the deprecated `create_list` tracker endpoint function as it is no longer available via API
+
 ## v7.5.2 (2024-08-16)
 
 - Fixes webhook validation when the `weight` field contains a float by converting it back into a float after conversion from a string (closes #467)

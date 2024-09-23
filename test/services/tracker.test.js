@@ -69,17 +69,4 @@ describe('Tracker Service', function () {
       }
     }
   });
-
-  it('creates trackers in bulk from a list of tracking codes', async function () {
-    await this.client.Tracker.createList({
-      0: { tracking_code: 'EZ1000000001' },
-      1: { tracking_code: 'EZ1000000002' },
-      2: { tracking_code: 'EZ1000000003' },
-      3: { tracking_code: 'EZ1000000004' },
-    }).then(
-      expect(function (result) {
-        result.not.to.throw();
-      }),
-    );
-  });
 });
