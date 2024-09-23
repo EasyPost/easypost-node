@@ -23,18 +23,6 @@ export default (easypostClient) =>
     }
 
     /**
-     * Create multiple {@link Tracker trackers} in a single request.
-     * See {@link https://www.easypost.com/docs/api/node#trackers EasyPost API Documentation} for more information.
-     * @param {Object} [params] - The parameters to create trackers with.
-     * @deprecated Use the create function instead. createList will be removed in a future version.
-     */
-    static async createList(params = {}) {
-      const newParams = { trackers: params };
-      const url = 'trackers/create_list';
-      await easypostClient._post(url, newParams);
-    }
-
-    /**
      * Retrieve all {@link Tracker trackers} associated with the current authenticated user.
      * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers EasyPost API Documentation} for more information.
      * @param {Object} [params] - The parameters to filter the trackers by.
