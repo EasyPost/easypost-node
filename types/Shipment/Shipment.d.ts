@@ -245,7 +245,12 @@ export declare class Shipment implements IShipment {
    * @param endShipperId The ID of the end shipper to purchase the shipment with.
    * @returns {Promise<Shipment>} The created {@link Shipment}.
    */
-  static buy(id: string, rate: string | IRate, insuranceAmount?: number, endShipperId?: string): Promise<Shipment>;
+  static buy(
+    id: string,
+    rate: string | IRate,
+    insuranceAmount?: number,
+    endShipperId?: string,
+  ): Promise<Shipment>;
 
   /**
    * Refunding a Shipment is available for many carriers supported by EasyPost.
