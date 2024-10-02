@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v7.6.0 (2024-10-01)
+## v7.5.3 (2024-10-02)
 
 - Removes the deprecated `create_list` tracker endpoint function as it is no longer available via API
 - Fix invalid TypeScript definition for Shipment `buy` function
