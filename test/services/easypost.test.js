@@ -9,10 +9,13 @@ import * as setupPolly from '../helpers/setup_polly';
 describe('EasyPost', function () {
   setupPolly.startPolly();
 
-  let client;
-
   before(function () {
-    client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
+    this.client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
+  });
+
+  beforeEach(function () {
+    const { server } = this.polly;
+    setupPolly.setupCassette(server);
   });
 
   it('throws an error when no API key is provided', async function () {
@@ -28,10 +31,10 @@ describe('EasyPost', function () {
     let responseConfig;
     const responseHook = (response) => (responseConfig = response);
 
-    client.addRequestHook(requestHook);
-    client.addResponseHook(responseHook);
+    this.client.addRequestHook(requestHook);
+    this.client.addResponseHook(responseHook);
 
-    await client.Address.create(Fixture.caAddress1());
+    await this.client.Address.create(Fixture.caAddress1());
 
     expect(requestConfig).to.be.an('object');
     expect(requestConfig.method).to.equal(METHODS.POST);
@@ -67,12 +70,12 @@ describe('EasyPost', function () {
     let responseConfig2;
     const responseHook2 = (response) => (responseConfig2 = response);
 
-    client.addRequestHook(requestHook1);
-    client.addRequestHook(requestHook2);
-    client.addResponseHook(responseHook1);
-    client.addResponseHook(responseHook2);
+    this.client.addRequestHook(requestHook1);
+    this.client.addRequestHook(requestHook2);
+    this.client.addResponseHook(responseHook1);
+    this.client.addResponseHook(responseHook2);
 
-    await client.Address.create(Fixture.caAddress1());
+    await this.client.Address.create(Fixture.caAddress1());
 
     expect(requestConfig1).to.be.an('object');
     expect(requestConfig2).to.be.an('object');
@@ -86,21 +89,21 @@ describe('EasyPost', function () {
     let responseConfig;
     const responseHook = (response) => (responseConfig = response);
 
-    client.addRequestHook(requestHook);
-    client.addResponseHook(responseHook);
+    this.client.addRequestHook(requestHook);
+    this.client.addResponseHook(responseHook);
 
-    await client.Address.create(Fixture.caAddress1());
+    await this.client.Address.create(Fixture.caAddress1());
 
     expect(requestConfig).to.be.an('object');
     expect(responseConfig).to.be.an('object');
 
-    client.removeRequestHook(requestHook);
-    client.removeResponseHook(responseHook);
+    this.client.removeRequestHook(requestHook);
+    this.client.removeResponseHook(responseHook);
 
     requestConfig = null;
     responseConfig = null;
 
-    await client.Address.create(Fixture.caAddress1());
+    await this.client.Address.create(Fixture.caAddress1());
 
     expect(requestConfig).to.be.null;
     expect(responseConfig).to.be.null;
@@ -116,27 +119,27 @@ describe('EasyPost', function () {
     let responseConfig2;
     const responseHook2 = (response) => (responseConfig2 = response);
 
-    client.addRequestHook(requestHook1);
-    client.addRequestHook(requestHook2);
-    client.addResponseHook(responseHook1);
-    client.addResponseHook(responseHook2);
+    this.client.addRequestHook(requestHook1);
+    this.client.addRequestHook(requestHook2);
+    this.client.addResponseHook(responseHook1);
+    this.client.addResponseHook(responseHook2);
 
-    await client.Address.create(Fixture.caAddress1());
+    await this.client.Address.create(Fixture.caAddress1());
 
     expect(requestConfig1).to.be.an('object');
     expect(requestConfig2).to.be.an('object');
     expect(responseConfig1).to.be.an('object');
     expect(responseConfig2).to.be.an('object');
 
-    client.clearRequestHooks();
-    client.clearResponseHooks();
+    this.client.clearRequestHooks();
+    this.client.clearResponseHooks();
 
     requestConfig1 = null;
     requestConfig2 = null;
     responseConfig1 = null;
     responseConfig2 = null;
 
-    await client.Address.create(Fixture.caAddress1());
+    await this.client.Address.create(Fixture.caAddress1());
 
     expect(requestConfig1).to.be.null;
     expect(requestConfig2).to.be.null;
