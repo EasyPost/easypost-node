@@ -1,8 +1,8 @@
-import baseService from './base_service';
+import util from 'util';
+
 import Constants from '../constants';
 import FilteringError from '../errors/general/filtering_error';
-
-const util = require('util');
+import baseService from './base_service';
 
 export default (easypostClient) =>
   /**

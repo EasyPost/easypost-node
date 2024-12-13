@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
+import SignatureVerificationError from '../../src/errors/general/signature_verification_error';
 import Webhook from '../../src/models/webhook';
 import Fixture from '../helpers/fixture';
-import SignatureVerificationError from '../../src/errors/general/signature_verification_error';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
@@ -87,20 +87,18 @@ describe('Webhook Service', function () {
   });
 
   it('validates a webhook secret', function () {
-    const webhookSecret = 'sécret';
-    const expectedHmacSignature =
-      'hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115a46b';
     const headers = {
-      'X-Hmac-Signature': expectedHmacSignature,
+      'X-Hmac-Signature': Fixture.webhookHmacSignature(),
     };
 
     const webhookBody = this.client.Utils.validateWebhook(
       Fixture.eventBody(),
       headers,
-      webhookSecret,
+      Fixture.webhookSecret(),
     );
 
-    expect(webhookBody.description).to.equal('batch.created');
+    expect(webhookBody.description).to.equal('tracker.updated');
+    expect(webhookBody.result.weight).to.equal(614.4); // Ensure we convert floats properly
   });
 
   it('throws an error when a webhook secret is a differing length', function () {

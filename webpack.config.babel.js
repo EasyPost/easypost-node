@@ -1,5 +1,5 @@
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+import path from 'path';
+import nodeExternals from 'webpack-node-externals';
 
 const mode = process.env.NODE_ENV || 'development';
 const isDev = mode === 'development';

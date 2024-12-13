@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v7.5.3 (2024-10-02)
+
+- Removes the deprecated `create_list` tracker endpoint function as it is no longer available via API
+- Fix invalid TypeScript definition for Shipment `buy` function
+
+## v7.5.2 (2024-08-16)
+
+- Fixes webhook validation when the `weight` field contains a float by converting it back into a float after conversion from a string (closes #467)
+
+## v7.5.1 (2024-08-09)
+
+- Adds missing properties to `Rate` model
+  - `delivery_date`
+  - `est_delivery_days`
+- Fixes `getNextPage` function in User Service
+
 ## v7.5.0 (2024-07-24)
 
 - Adds new `Claim` service for filing claims on EasyPost shipments and insurances

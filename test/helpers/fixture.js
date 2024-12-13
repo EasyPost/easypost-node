@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 export default class Fixture {
   // Read fixture data from the fixtures JSON file
@@ -40,10 +40,6 @@ export default class Fixture {
 
   static reportDate() {
     return '2022-04-11';
-  }
-
-  static webhookUrl() {
-    return this.readFixtureData().webhook_url;
   }
 
   static caAddress1() {
@@ -141,6 +137,18 @@ export default class Fixture {
     );
 
     return Buffer.from(JSON.stringify(eventBody), 'utf8');
+  }
+
+  static webhookHmacSignature() {
+    return this.readFixtureData().webhook_hmac_signature;
+  }
+
+  static webhookSecret() {
+    return this.readFixtureData().webhook_secret;
+  }
+
+  static webhookUrl() {
+    return this.readFixtureData().webhook_url;
   }
 
   static plannedShipDate() {

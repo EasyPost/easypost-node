@@ -314,7 +314,6 @@ describe('Shipment Service', function () {
       shipment.id,
       shipment.lowestRate(),
       null,
-      null,
       endShipper.id,
     );
 

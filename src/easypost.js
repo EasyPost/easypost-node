@@ -1,5 +1,6 @@
 import os from 'os';
 import superagent from 'superagent';
+import util from 'util';
 import { v4 as uuid } from 'uuid';
 
 import pkg from '../package.json';
@@ -35,8 +36,6 @@ import TrackerService from './services/tracker_service';
 import UserService from './services/user_service';
 import WebhookService from './services/webhook_service';
 import Utils from './utils/util';
-
-const util = require('util');
 
 /**
  * How many milliseconds in a second.
