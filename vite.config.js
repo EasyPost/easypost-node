@@ -6,6 +6,7 @@ const isDev = mode === 'development';
 
 export default defineConfig({
   build: {
+    target: 'node12',
     lib: {
       entry: path.resolve(__dirname, 'src/easypost.js'),
       fileName: 'easypost',
