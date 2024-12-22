@@ -75,6 +75,10 @@ scan:
 test:
 	npm run test
 
+## test - Test the project
+test-node-compatibility:
+	npm run test:node-compatibility
+
 ## update - Update dependencies (Unix only)
 update: | update-examples-submodule
 	npm update

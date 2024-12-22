@@ -30,6 +30,7 @@
     "repl": "./repl.js --local ./dist/easypost.js",
     "scan": "npx audit-ci -m --config ./audit-ci.jsonc",
     "test": "cross-env NODE_ENV=test vitest run",
+    "test:node-compatibility": "cross-env NODE_ENV=test node ./test/node_compatibility",
     "watch": "vite build --watch"
   },
   "dependencies": {
@@ -62,6 +63,7 @@
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.1",
+    "eslint-plugin-vitest-globals": "^1.5.0",
     "jsdoc": "^4.0.2",
     "prettier": "^2.8.8",
     "typescript": "^4.9.5 || ~5.0.0",

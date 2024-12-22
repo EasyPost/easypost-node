@@ -9,6 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make install install-styleguide build test
+  node-compatibility:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [12.x, 13.x, 14.x, 15.x, 16.x, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x]
@@ -16,8 +24,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
+          node-version: 22
+      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make install install-styleguide build
+      - uses: actions/setup-node@v4
+        with:
           node-version: ${{ matrix.node-version }}
-      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make install install-styleguide build test
+      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test-node-compatibility
   lint:
     runs-on: ubuntu-latest
     steps:
