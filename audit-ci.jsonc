@@ -2,25 +2,5 @@
   "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
   "critical": true,
   // Only fail the audit if there are critical vulnerabilities.
-  "allowlist": [
-    {
-      "GHSA-8cp3-66vr-3r4c": {
-        "active": true,
-        "expiry": "2024-10-22",
-        // Re-evaluate this vulnerability after this date.
-        "notes": "Transitive dependency of `superagent`, awaiting new `superagent` release."
-        // https://github.com/ladjs/superagent/issues/1799
-        // Vulnerability fix only available in `superagent@9.0.0+`: Please upgrade to v9.0.0+ as we have fixed a public vulnerability with formidable dependency. Note that v9.0.0+ requires Node.js v14.18.0+. See https://github.com/ladjs/superagent/pull/1800 for insight.
-      }
-    },
-    {
-      "GHSA-grv7-fg5c-xmjg|braces": {
-        "active": true,
-        "expiry": "2024-12-22", // Re-evaluate this vulnerability after this date.
-        "notes": "Transitive dependency of `chokidar` and `micromatch`"
-        // (`braces` -> `chokidar` -> `mocha`), chokidar unlikely to get patched: https://github.com/paulmillr/chokidar/issues/1301, mocha maintenance questionable: https://github.com/mochajs/mocha/issues/5027
-        // (`braces` -> `micromatch` -> `fast-glob` -> `globby` -> `typescript-eslint/typescript-estree`), micromatch is patched, but fast-glob not maintained: https://github.com/mrmlnc/fast-glob/issues/443
-      }
-    }
-  ]
+  "allowlist": []
 }
