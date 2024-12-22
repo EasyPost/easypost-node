@@ -18,7 +18,7 @@
     "node": ">= 12.0"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.babel.js",
+    "build": "vite build",
     "clean": "rm -rf ./dist ./nyc_output ./node_modules/.cache ./coverage",
     "coverage": "cross-env NODE_ENV=test nyc npm run test",
     "docs": "./node_modules/.bin/jsdoc src/models src/services src/errors src/utils -d docs",
@@ -79,6 +79,8 @@
     "nyc": "^15.1.0",
     "prettier": "^2.8.8",
     "typescript": "^4.9.5 || ~5.0.0",
+    "vite": "^6.0.5",
+    "vite-plugin-externals": "^0.6.2",
     "vows": "^0.8.3",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
