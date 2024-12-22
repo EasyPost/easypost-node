@@ -8,19 +8,20 @@ import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
 describe('Parcel Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a parcel', async function () {
-    const parcel = await this.client.Parcel.create(Fixture.basicParcel());
+    const parcel = await client.Parcel.create(Fixture.basicParcel());
 
     expect(parcel).to.be.an.instanceOf(Parcel);
     expect(parcel.id).to.match(/^prcl_/);
@@ -28,8 +29,8 @@ describe('Parcel Service', function () {
   });
 
   it('retrieves a parcel', async function () {
-    const parcel = await this.client.Parcel.create(Fixture.basicParcel());
-    const retrievedParcel = await this.client.Parcel.retrieve(parcel.id);
+    const parcel = await client.Parcel.create(Fixture.basicParcel());
+    const retrievedParcel = await client.Parcel.retrieve(parcel.id);
 
     expect(parcel).to.be.an.instanceOf(Parcel);
     expect(withoutParams(retrievedParcel)).to.deep.include(withoutParams(parcel));

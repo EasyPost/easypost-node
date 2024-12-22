@@ -6,14 +6,15 @@ import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable func-names */
 describe('SmartRate Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
@@ -27,7 +28,7 @@ describe('SmartRate Service', function () {
       carriers: [carrier],
     };
 
-    const estimatedDeliveryDates = await this.client.SmartRate.estimateDeliveryDate(params);
+    const estimatedDeliveryDates = await client.SmartRate.estimateDeliveryDate(params);
 
     for (const entry of estimatedDeliveryDates.results) {
       expect(entry.carrier).to.equal(carrier);
@@ -46,7 +47,7 @@ describe('SmartRate Service', function () {
       carriers: [carrier],
     };
 
-    const recommendedShipDates = await this.client.SmartRate.recommendShipDate(params);
+    const recommendedShipDates = await client.SmartRate.recommendShipDate(params);
 
     for (const entry of recommendedShipDates.results) {
       expect(entry.carrier).to.equal(carrier);

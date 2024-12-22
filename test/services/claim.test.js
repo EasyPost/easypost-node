@@ -31,17 +31,15 @@ const createTestClaim = async (client) => {
 };
 
 describe('Claim Service', function () {
-  setupPolly.startPolly();
-
-  /** @type {Client} */
+  const getPolly = setupPolly.setupPollyTests();
   let client;
 
-  before(function () {
+  beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 

@@ -10,24 +10,25 @@ import EndOfPaginationError from '../../src/errors/general/end_of_pagination_err
 import { withoutParams } from '../helpers/utils';
 
 describe('Pickup Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a pickup', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
     pickupData.shipment = withoutParams(shipment);
 
-    const pickup = await this.client.Pickup.create(pickupData);
+    const pickup = await client.Pickup.create(pickupData);
 
     expect(pickup).to.be.an.instanceOf(Pickup);
     expect(pickup.id).to.match(/^pickup_/);
@@ -35,21 +36,21 @@ describe('Pickup Service', function () {
   });
 
   it('retrieves a pickup', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
     pickupData.shipment = withoutParams(shipment);
 
-    const pickup = await this.client.Pickup.create(pickupData);
+    const pickup = await client.Pickup.create(pickupData);
 
-    const retrievedPickup = await this.client.Pickup.retrieve(pickup.id);
+    const retrievedPickup = await client.Pickup.retrieve(pickup.id);
 
     expect(retrievedPickup).to.be.an.instanceOf(Pickup);
     expect(withoutParams(retrievedPickup)).to.deep.include(withoutParams(pickup));
   });
 
   it('retrieves all pickup', async function () {
-    const pickups = await this.client.Pickup.all({ page_size: Fixture.pageSize() });
+    const pickups = await client.Pickup.all({ page_size: Fixture.pageSize() });
 
     const pickupsArray = pickups.pickups;
 
@@ -62,8 +63,8 @@ describe('Pickup Service', function () {
 
   it('retrieves next page of pickups', async function () {
     try {
-      const pickups = await this.client.Pickup.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Pickup.getNextPage(pickups, Fixture.pageSize());
+      const pickups = await client.Pickup.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.Pickup.getNextPage(pickups, Fixture.pageSize());
 
       const firstIdOfFirstPage = pickups.pickups[0].id;
       const firstIdOfSecondPage = nextPage.pickups[0].id;
@@ -77,14 +78,14 @@ describe('Pickup Service', function () {
   });
 
   it('buys a pickup', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
     pickupData.shipment = withoutParams(shipment);
 
-    const pickup = await this.client.Pickup.create(pickupData);
+    const pickup = await client.Pickup.create(pickupData);
 
-    const boughtPickup = await this.client.Pickup.buy(
+    const boughtPickup = await client.Pickup.buy(
       pickup.id,
       Fixture.usps(),
       Fixture.pickupService(),
@@ -97,19 +98,19 @@ describe('Pickup Service', function () {
   });
 
   it('cancels a pickup', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
     pickupData.shipment = withoutParams(shipment);
 
-    const pickup = await this.client.Pickup.create(pickupData);
-    const boughtPickup = await this.client.Pickup.buy(
+    const pickup = await client.Pickup.create(pickupData);
+    const boughtPickup = await client.Pickup.buy(
       pickup.id,
       Fixture.usps(),
       Fixture.pickupService(),
     );
 
-    const cancelledPickup = await this.client.Pickup.cancel(boughtPickup.id);
+    const cancelledPickup = await client.Pickup.cancel(boughtPickup.id);
 
     expect(cancelledPickup).to.be.an.instanceOf(Pickup);
     expect(cancelledPickup.id).to.match(/^pickup_/);
@@ -117,12 +118,12 @@ describe('Pickup Service', function () {
   });
 
   it('gets the lowest rate', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const pickupData = Fixture.basicPickup();
     pickupData.shipment = withoutParams(shipment);
 
-    const pickup = await this.client.Pickup.create(pickupData);
+    const pickup = await client.Pickup.create(pickupData);
 
     // Test lowest rate with no filters
     const lowestRate = pickup.lowestRate();

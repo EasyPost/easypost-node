@@ -9,21 +9,22 @@ import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
 describe('ScanForm Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a scanform', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
-    const scanform = await this.client.ScanForm.create({
+    const scanform = await client.ScanForm.create({
       shipments: [shipment],
     });
 
@@ -32,20 +33,20 @@ describe('ScanForm Service', function () {
   });
 
   it('retrieves a scanform', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
-    const scanform = await this.client.ScanForm.create({
+    const scanform = await client.ScanForm.create({
       shipments: [shipment],
     });
 
-    const retrievedScanform = await this.client.ScanForm.retrieve(scanform.id);
+    const retrievedScanform = await client.ScanForm.retrieve(scanform.id);
 
     expect(retrievedScanform).to.be.an.instanceOf(ScanForm);
     expect(withoutParams(retrievedScanform)).to.deep.include(withoutParams(scanform));
   });
 
   it('retrieves all scanforms', async function () {
-    const scanforms = await this.client.ScanForm.all({
+    const scanforms = await client.ScanForm.all({
       page_size: Fixture.pageSize(),
     });
 
@@ -60,8 +61,8 @@ describe('ScanForm Service', function () {
 
   it('retrieves next page of scanforms', async function () {
     try {
-      const scanforms = await this.client.ScanForm.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.ScanForm.getNextPage(scanforms, Fixture.pageSize());
+      const scanforms = await client.ScanForm.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.ScanForm.getNextPage(scanforms, Fixture.pageSize());
 
       const firstIdOfFirstPage = scanforms.scan_forms[0].id;
       const firstIdOfSecondPage = nextPage.scan_forms[0].id;

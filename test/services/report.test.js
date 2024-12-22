@@ -8,19 +8,20 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Report Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a report', async function () {
-    const report = await this.client.Report.create({
+    const report = await client.Report.create({
       start_date: Fixture.reportDate(),
       end_date: Fixture.reportDate(),
       type: Fixture.reportType(),
@@ -31,7 +32,7 @@ describe('Report Service', function () {
   });
 
   it(`creates a report by specifying columns`, async function () {
-    const report = await this.client.Report.create({
+    const report = await client.Report.create({
       start_date: Fixture.reportDate(),
       end_date: Fixture.reportDate(),
       type: Fixture.reportType(),
@@ -44,7 +45,7 @@ describe('Report Service', function () {
   });
 
   it(`creates a report with additional columns`, async function () {
-    const report = await this.client.Report.create({
+    const report = await client.Report.create({
       start_date: Fixture.reportDate(),
       end_date: Fixture.reportDate(),
       type: Fixture.reportType(),
@@ -57,13 +58,13 @@ describe('Report Service', function () {
   });
 
   it('retrieves a shipment report', async function () {
-    const report = await this.client.Report.create({
+    const report = await client.Report.create({
       start_date: Fixture.reportDate(),
       end_date: Fixture.reportDate(),
       type: Fixture.reportType(),
     });
 
-    const retrievedReport = await this.client.Report.retrieve(report.id);
+    const retrievedReport = await client.Report.retrieve(report.id);
 
     expect(retrievedReport).to.be.an.instanceOf(Report);
     expect(retrievedReport.start_date).to.equal(report.start_date);
@@ -71,7 +72,7 @@ describe('Report Service', function () {
   });
 
   it('retrieves all reports', async function () {
-    const reports = await this.client.Report.all({
+    const reports = await client.Report.all({
       page_size: Fixture.pageSize(),
       type: Fixture.reportType(),
     });
@@ -91,8 +92,8 @@ describe('Report Service', function () {
         page_size: Fixture.pageSize(),
         type: Fixture.reportType(),
       };
-      const reports = await this.client.Report.all(params);
-      const nextPage = await this.client.Report.getNextPage(reports, Fixture.pageSize());
+      const reports = await client.Report.all(params);
+      const nextPage = await client.Report.getNextPage(reports, Fixture.pageSize());
 
       const firstIdOfFirstPage = reports.reports[0].id;
       const firstIdOfSecondPage = nextPage.reports[0].id;

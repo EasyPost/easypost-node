@@ -8,24 +8,25 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Insurance Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates an insurance object', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const insuranceData = Fixture.basicInsurance();
     insuranceData.tracking_code = shipment.tracking_code;
 
-    const insurance = await this.client.Insurance.create(insuranceData);
+    const insurance = await client.Insurance.create(insuranceData);
 
     expect(insurance).to.be.an.instanceOf(Insurance);
     expect(insurance.id).to.match(/^ins_/);
@@ -33,21 +34,21 @@ describe('Insurance Service', function () {
   });
 
   it('retrieves an insurance object', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const insuranceData = Fixture.basicInsurance();
     insuranceData.tracking_code = shipment.tracking_code;
 
-    const insurance = await this.client.Insurance.create(insuranceData);
+    const insurance = await client.Insurance.create(insuranceData);
 
-    const retrievedInsurance = await this.client.Insurance.retrieve(insurance.id);
+    const retrievedInsurance = await client.Insurance.retrieve(insurance.id);
 
     expect(retrievedInsurance).to.be.an.instanceOf(Insurance);
     expect(retrievedInsurance.id).to.equal(insurance.id);
   });
 
   it('retrieves all insurance objects', async function () {
-    const insurance = await this.client.Insurance.all({
+    const insurance = await client.Insurance.all({
       page_size: Fixture.pageSize(),
     });
 
@@ -62,8 +63,8 @@ describe('Insurance Service', function () {
 
   it('retrieves next page of insurances', async function () {
     try {
-      const insurances = await this.client.Insurance.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Insurance.getNextPage(insurances, Fixture.pageSize());
+      const insurances = await client.Insurance.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.Insurance.getNextPage(insurances, Fixture.pageSize());
 
       const firstIdOfFirstPage = insurances.insurances[0].id;
       const firstIdOfSecondPage = nextPage.insurances[0].id;
@@ -80,8 +81,8 @@ describe('Insurance Service', function () {
     const insuranceData = Fixture.basicInsurance();
     insuranceData.tracking_code = 'EZ1000000001';
 
-    const insurance = await this.client.Insurance.create(insuranceData);
-    const cancelledInsurance = await this.client.Insurance.refund(insurance.id);
+    const insurance = await client.Insurance.create(insuranceData);
+    const cancelledInsurance = await client.Insurance.refund(insurance.id);
 
     expect(cancelledInsurance).to.be.an.instanceOf(Insurance);
     expect(cancelledInsurance.id).to.match(/^ins_/);
