@@ -1,5 +1,0 @@
-{
-  "timeout": 10000,
-  "require": ["@babel/register", "dotenv/config", "./test/helpers/common.js"],
-  "recursive": true
-}

@@ -8,5 +8,9 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: ['test/services/**/*.{js,ts}'],
+    coverage: {
+      provider: 'istanbul',
+      include: ['src/**/*.{js,ts}'],
+    },
   },
 });

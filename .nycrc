@@ -1,9 +1,0 @@
-{
-  "sourceMap": false,
-  "instrument": false,
-  "check-coverage": true,
-  "lines": 90,
-  "reporter": ["lcov", "text"],
-  "include": ["src/**/*.js"],
-  "require": ["@babel/register", "./test/helpers/common.js"]
-}
