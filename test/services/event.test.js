@@ -12,30 +12,31 @@ import NotFoundError from '../../src/errors/api/not_found_error';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 
 describe('Event Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('retrieves an event', async function () {
-    const events = await this.client.Event.all({
+    const events = await client.Event.all({
       page_size: Fixture.pageSize(),
     });
 
-    const retrievedEvent = await this.client.Event.retrieve(events.events[0].id);
+    const retrievedEvent = await client.Event.retrieve(events.events[0].id);
 
     expect(retrievedEvent).to.be.an.instanceOf(Event);
     expect(retrievedEvent.id).to.match(/^evt_/);
   });
 
   it('retrieves all events', async function () {
-    const events = await this.client.Event.all({
+    const events = await client.Event.all({
       page_size: Fixture.pageSize(),
     });
 
@@ -50,8 +51,8 @@ describe('Event Service', function () {
 
   it('retrieves next page of events', async function () {
     try {
-      const events = await this.client.Event.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Event.getNextPage(events, Fixture.pageSize());
+      const events = await client.Event.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.Event.getNextPage(events, Fixture.pageSize());
 
       const firstIdOfFirstPage = events.events[0].id;
       const firstIdOfSecondPage = nextPage.events[0].id;
@@ -66,12 +67,12 @@ describe('Event Service', function () {
 
   it('retrieves all payloads for an event', async function () {
     // Create a webhook to receive an event
-    const webhook = await this.client.Webhook.create({
+    const webhook = await client.Webhook.create({
       url: Fixture.webhookUrl(),
     });
 
     // Create a batch to trigger an event
-    await this.client.Batch.create({
+    await client.Batch.create({
       shipments: [Fixture.oneCallBuyShipment()],
     });
 
@@ -86,30 +87,30 @@ describe('Event Service', function () {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the event to be created
     }
 
-    const events = await this.client.Event.all({
+    const events = await client.Event.all({
       page_size: Fixture.pageSize(),
     });
 
     const event = events.events[0];
 
-    const payloads = await this.client.Event.retrieveAllPayloads(event.id);
+    const payloads = await client.Event.retrieveAllPayloads(event.id);
 
     payloads.forEach((payload) => {
       expect(payload).to.be.an.instanceOf(Payload);
     });
 
     // Remove the webhook once we are done testing
-    await this.client.Webhook.delete(webhook.id);
+    await client.Webhook.delete(webhook.id);
   });
 
   it('retrieves a payload for an event', async function () {
     // Create a webhook to receive an event
-    const webhook = await this.client.Webhook.create({
+    const webhook = await client.Webhook.create({
       url: Fixture.webhookUrl(),
     });
 
     // Create a batch to trigger an event
-    await this.client.Batch.create({
+    await client.Batch.create({
       shipments: [Fixture.oneCallBuyShipment()],
     });
 
@@ -124,7 +125,7 @@ describe('Event Service', function () {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the event to be created
     }
 
-    const events = await this.client.Event.all({
+    const events = await client.Event.all({
       page_size: Fixture.pageSize(),
     });
 
@@ -132,7 +133,7 @@ describe('Event Service', function () {
 
     try {
       // Payload does not exist due to queueing, so this will throw an exception
-      await this.client.Event.retrievePayload(event.id, 'payload_11111111111111111111111111111111');
+      await client.Event.retrievePayload(event.id, 'payload_11111111111111111111111111111111');
       // If we get here, the test failed, trigger a failed assertion
       expect(true).to.equal(false);
     } catch (error) {
@@ -142,6 +143,6 @@ describe('Event Service', function () {
     }
 
     // Remove the webhook once we are done testing
-    await this.client.Webhook.delete(webhook.id);
+    await client.Webhook.delete(webhook.id);
   });
 });

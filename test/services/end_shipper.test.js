@@ -6,19 +6,20 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('EndShipper Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates an EndShipper object', async function () {
-    const endShipper = await this.client.EndShipper.create(Fixture.caAddress1());
+    const endShipper = await client.EndShipper.create(Fixture.caAddress1());
 
     expect(endShipper).to.be.an.instanceOf(EndShipper);
     expect(endShipper.id).to.match(/^es_/);
@@ -26,15 +27,15 @@ describe('EndShipper Service', function () {
   });
 
   it('retrieves an EndShipper object', async function () {
-    const endShipper = await this.client.EndShipper.create(Fixture.caAddress2());
-    const retrievedEndShipper = await this.client.EndShipper.retrieve(endShipper.id);
+    const endShipper = await client.EndShipper.create(Fixture.caAddress2());
+    const retrievedEndShipper = await client.EndShipper.retrieve(endShipper.id);
 
     expect(retrievedEndShipper).to.be.an.instanceOf(EndShipper);
     expect(endShipper.street1).to.equal(retrievedEndShipper.street1);
   });
 
   it('retrieves all EndShipper objects', async function () {
-    const endShippers = await this.client.EndShipper.all({ page_size: Fixture.pageSize() });
+    const endShippers = await client.EndShipper.all({ page_size: Fixture.pageSize() });
 
     const endShippersArray = endShippers.end_shippers;
 
@@ -46,7 +47,7 @@ describe('EndShipper Service', function () {
   });
 
   it('updates an EndShipper object', async function () {
-    const endShipper = await this.client.EndShipper.create(Fixture.caAddress2());
+    const endShipper = await client.EndShipper.create(Fixture.caAddress2());
 
     const params = {};
     const newName = 'Captain Sparrow';
@@ -61,7 +62,7 @@ describe('EndShipper Service', function () {
     params.phone = '9999999999';
     params.email = 'test@example.com';
 
-    const updatedEndShipper = await this.client.EndShipper.update(endShipper.id, params);
+    const updatedEndShipper = await client.EndShipper.update(endShipper.id, params);
 
     expect(updatedEndShipper).to.be.an.instanceOf(EndShipper);
     expect(updatedEndShipper.name).to.equal(newName.toUpperCase());

@@ -9,19 +9,20 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Batch Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a batch', async function () {
-    const batch = await this.client.Batch.create({
+    const batch = await client.Batch.create({
       shipments: [Fixture.oneCallBuyShipment()],
     });
 
@@ -31,18 +32,18 @@ describe('Batch Service', function () {
   });
 
   it('retrieves a batch', async function () {
-    const batch = await this.client.Batch.create({
+    const batch = await client.Batch.create({
       shipments: [Fixture.oneCallBuyShipment()],
     });
 
-    const retrievedBatch = await this.client.Batch.retrieve(batch.id);
+    const retrievedBatch = await client.Batch.retrieve(batch.id);
 
     expect(retrievedBatch).to.be.an.instanceOf(Batch);
     expect(retrievedBatch.id).to.equal(batch.id);
   });
 
   it('retrieves all batches', async function () {
-    const batches = await this.client.Batch.all({ page_size: Fixture.pageSize() });
+    const batches = await client.Batch.all({ page_size: Fixture.pageSize() });
 
     const addressesArray = batches.batches;
 
@@ -54,22 +55,22 @@ describe('Batch Service', function () {
   });
 
   it('buys a batch', async function () {
-    const batch = await this.client.Batch.create({
+    const batch = await client.Batch.create({
       shipments: [Fixture.oneCallBuyShipment()],
     });
 
-    const boughtBatch = await this.client.Batch.buy(batch.id);
+    const boughtBatch = await client.Batch.buy(batch.id);
 
     expect(boughtBatch).to.be.an.instanceOf(Batch);
     expect(boughtBatch.num_shipments).to.equal(1);
   });
 
   it('creates a scanform for a batch', async function () {
-    const batch = await this.client.Batch.create({
+    const batch = await client.Batch.create({
       shipments: [Fixture.oneCallBuyShipment()],
     });
 
-    const boughtBatch = await this.client.Batch.buy(batch.id);
+    const boughtBatch = await client.Batch.buy(batch.id);
 
     if (
       !fs.existsSync(
@@ -82,31 +83,29 @@ describe('Batch Service', function () {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the batch to process buying the shipment
     }
 
-    const batchWithScanForm = await this.client.Batch.createScanForm(boughtBatch.id);
+    const batchWithScanForm = await client.Batch.createScanForm(boughtBatch.id);
 
     // We can't assert anything meaningful here because the scanform gets queued for generation and may not be immediately available
     expect(batchWithScanForm).to.be.an.instanceOf(Batch);
   });
 
   it('adds and removes shipments from a batch', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
-    const batch = await this.client.Batch.create({});
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const batch = await client.Batch.create({});
 
-    const addShipmentsResponse = await this.client.Batch.addShipments(batch.id, [shipment.id]);
+    const addShipmentsResponse = await client.Batch.addShipments(batch.id, [shipment.id]);
     expect(addShipmentsResponse.num_shipments).to.equal(1);
 
-    const removeShipmentsResponse = await this.client.Batch.removeShipments(batch.id, [
-      shipment.id,
-    ]);
+    const removeShipmentsResponse = await client.Batch.removeShipments(batch.id, [shipment.id]);
     expect(removeShipmentsResponse.num_shipments).to.equal(0);
   });
 
   it('generates a label for a batch', async function () {
-    const batch = await this.client.Batch.create({
+    const batch = await client.Batch.create({
       shipments: [Fixture.oneCallBuyShipment()],
     });
 
-    const boughtBatch = await this.client.Batch.buy(batch.id);
+    const boughtBatch = await client.Batch.buy(batch.id);
 
     if (
       !fs.existsSync(
@@ -119,7 +118,7 @@ describe('Batch Service', function () {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the batch to process buying the shipment
     }
 
-    const batchWithLabel = await this.client.Batch.generateLabel(boughtBatch.id, 'ZPL');
+    const batchWithLabel = await client.Batch.generateLabel(boughtBatch.id, 'ZPL');
 
     // We can't assert anything meaningful here because the label gets queued for generation and may not be immediately available
     expect(batchWithLabel).to.be.an.instanceOf(Batch);

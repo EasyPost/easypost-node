@@ -10,19 +10,20 @@ import { withoutParams } from '../helpers/utils';
 
 /* eslint-disable func-names */
 describe('Address Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates an address', async function () {
-    const address = await this.client.Address.create(Fixture.caAddress1());
+    const address = await client.Address.create(Fixture.caAddress1());
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.id).to.match(/^adr_/);
@@ -33,14 +34,14 @@ describe('Address Service', function () {
     const addressData = Fixture.incorrectAddress();
 
     // Creating normally (without specifying "verify") will make the address, perform no verifications
-    let address = await this.client.Address.create(addressData);
+    let address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.verifications.delivery).to.be.undefined;
 
     // Creating with verify = true will make the address, perform verifications
     addressData.verify = true;
-    address = await this.client.Address.create(addressData);
+    address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.verifications.delivery.success).to.be.false;
@@ -50,7 +51,7 @@ describe('Address Service', function () {
     const addressData = Fixture.caAddress2();
     addressData.verify_strict = true;
 
-    const address = await this.client.Address.create(addressData);
+    const address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.id).to.match(/^adr_/);
@@ -61,29 +62,29 @@ describe('Address Service', function () {
     const addressData = Fixture.incorrectAddress();
 
     // Creating normally (without specifying "verify") will make the address, perform no verifications
-    let address = await this.client.Address.create(addressData);
+    let address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.verifications.delivery).to.be.undefined;
 
     // Creating with verify = true will make the address, perform verifications
     addressData.verify = [true];
-    address = await this.client.Address.create(addressData);
+    address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.verifications.delivery.success).to.be.false;
   });
 
   it('retrieves an address', async function () {
-    const address = await this.client.Address.create(Fixture.caAddress1());
-    const retrievedAddress = await this.client.Address.retrieve(address.id);
+    const address = await client.Address.create(Fixture.caAddress1());
+    const retrievedAddress = await client.Address.retrieve(address.id);
 
     expect(retrievedAddress).to.be.an.instanceOf(Address);
     expect(withoutParams(retrievedAddress)).to.deep.include(withoutParams(address));
   });
 
   it('retrieves all addresses', async function () {
-    const addresses = await this.client.Address.all({ page_size: Fixture.pageSize() });
+    const addresses = await client.Address.all({ page_size: Fixture.pageSize() });
 
     const addressesArray = addresses.addresses;
 
@@ -96,8 +97,8 @@ describe('Address Service', function () {
 
   it('retrieves next page of addresses', async function () {
     try {
-      const addresses = await this.client.Address.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Address.getNextPage(addresses, Fixture.pageSize());
+      const addresses = await client.Address.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.Address.getNextPage(addresses, Fixture.pageSize());
 
       const firstIdOfFirstPage = addresses.addresses[0].id;
       const firstIdOfSecondPage = nextPage.addresses[0].id;
@@ -113,7 +114,7 @@ describe('Address Service', function () {
   it('creates a verified address', async function () {
     const addressData = Fixture.caAddress2();
 
-    const address = await this.client.Address.createAndVerify(addressData);
+    const address = await client.Address.createAndVerify(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.id).to.match(/^adr_/);
@@ -124,14 +125,14 @@ describe('Address Service', function () {
     const addressData = Fixture.incorrectAddress();
 
     // Creates with verify = true behind the scenes, will throw an error if the address cannot be verified
-    return this.client.Address.createAndVerify(addressData).catch((err) =>
+    return client.Address.createAndVerify(addressData).catch((err) =>
       expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });
 
   it('verifies an address', async function () {
-    const address = await this.client.Address.create(Fixture.caAddress2());
-    const verifiedAddress = await this.client.Address.verifyAddress(address.id);
+    const address = await client.Address.create(Fixture.caAddress2());
+    const verifiedAddress = await client.Address.verifyAddress(address.id);
 
     expect(verifiedAddress).to.be.an.instanceOf(Address);
     expect(verifiedAddress.id).to.match(/^adr_/);
@@ -139,9 +140,9 @@ describe('Address Service', function () {
   });
 
   it('throws an error when we cannot verify an address', async function () {
-    const address = await this.client.Address.create({ street1: 'invalid' });
+    const address = await client.Address.create({ street1: 'invalid' });
 
-    return this.client.Address.verifyAddress(address.id).catch((err) =>
+    return client.Address.verifyAddress(address.id).catch((err) =>
       expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });

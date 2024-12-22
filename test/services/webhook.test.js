@@ -10,19 +10,20 @@ import { withoutParams } from '../helpers/utils';
 /* eslint-disable no-shadow */
 /* eslint-disable func-names */
 describe('Webhook Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a webhook', async function () {
-    const webhook = await this.client.Webhook.create({
+    const webhook = await client.Webhook.create({
       url: Fixture.webhookUrl(),
     });
 
@@ -31,25 +32,25 @@ describe('Webhook Service', function () {
     expect(webhook.url).to.equal(Fixture.webhookUrl());
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
-    await this.client.Webhook.delete(webhook.id);
+    await client.Webhook.delete(webhook.id);
   });
 
   it('retrieves a webhook', async function () {
-    const webhook = await this.client.Webhook.create({
+    const webhook = await client.Webhook.create({
       url: Fixture.webhookUrl(),
     });
 
-    const retrievedWebhook = await this.client.Webhook.retrieve(webhook.id);
+    const retrievedWebhook = await client.Webhook.retrieve(webhook.id);
 
     expect(retrievedWebhook).to.be.an.instanceOf(Webhook);
     expect(withoutParams(retrievedWebhook)).to.deep.include(withoutParams(webhook));
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
-    await this.client.Webhook.delete(webhook.id);
+    await client.Webhook.delete(webhook.id);
   });
 
   it('retrieves all webhooks', async function () {
-    const webhooks = await this.client.Webhook.all({
+    const webhooks = await client.Webhook.all({
       page_size: Fixture.pageSize(),
     });
 
@@ -62,24 +63,24 @@ describe('Webhook Service', function () {
   });
 
   it('updates a webhook', async function () {
-    const webhook = await this.client.Webhook.create({
+    const webhook = await client.Webhook.create({
       url: Fixture.webhookUrl(),
     });
 
-    const updatedWebhook = await this.client.Webhook.update(webhook.id);
+    const updatedWebhook = await client.Webhook.update(webhook.id);
 
     expect(updatedWebhook).to.be.an.instanceOf(Webhook);
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
-    await this.client.Webhook.delete(updatedWebhook.id);
+    await client.Webhook.delete(updatedWebhook.id);
   });
 
   it('deletes a webhook', async function () {
-    const webhook = await this.client.Webhook.create({
+    const webhook = await client.Webhook.create({
       url: Fixture.webhookUrl(),
     });
 
-    await this.client.Webhook.delete(webhook.id).then(
+    await client.Webhook.delete(webhook.id).then(
       expect(function (result) {
         result.not.to.throw();
       }),
@@ -91,7 +92,7 @@ describe('Webhook Service', function () {
       'X-Hmac-Signature': Fixture.webhookHmacSignature(),
     };
 
-    const webhookBody = this.client.Utils.validateWebhook(
+    const webhookBody = client.Utils.validateWebhook(
       Fixture.eventBody(),
       headers,
       Fixture.webhookSecret(),
@@ -108,7 +109,7 @@ describe('Webhook Service', function () {
     };
 
     expect(() => {
-      this.client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+      client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
     }).to.throw(
       SignatureVerificationError,
       'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
@@ -124,7 +125,7 @@ describe('Webhook Service', function () {
     };
 
     expect(() => {
-      this.client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+      client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
     }).to.throw(
       SignatureVerificationError,
       'Webhook received did not originate from EasyPost or had a webhook secret mismatch.',
@@ -138,7 +139,7 @@ describe('Webhook Service', function () {
     };
 
     expect(() => {
-      this.client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
+      client.Utils.validateWebhook(Fixture.eventBody(), headers, webhookSecret);
     }).to.throw(SignatureVerificationError, 'Webhook does not contain a valid HMAC signature.');
   });
 });

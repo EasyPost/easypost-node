@@ -5,26 +5,27 @@ import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable func-names */
 describe('CarrierMetadataService', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('retrieves all carrier metadata', async function () {
-    const carrierMetadata = await this.client.CarrierMetadata.retrieve();
+    const carrierMetadata = await client.CarrierMetadata.retrieve();
 
     expect(carrierMetadata.some((carrier) => carrier.name === 'usps')).to.be.true;
     expect(carrierMetadata.some((carrier) => carrier.name === 'fedex')).to.be.true;
   });
 
   it('retrieves carrier metadata based on the filters provided', async function () {
-    const carrierMetadata = await this.client.CarrierMetadata.retrieve(
+    const carrierMetadata = await client.CarrierMetadata.retrieve(
       ['usps'],
       ['service_levels', 'predefined_packages'],
     );

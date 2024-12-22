@@ -7,21 +7,24 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('ReferralCustomer Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
+  let referralUserProdApiKey;
+
+  beforeAll(function () {
     const partnerUserProdApiKey = process.env.PARTNER_USER_PROD_API_KEY || '123';
-    this.referralUserProdApiKey = process.env.REFERRAL_CUSTOMER_PROD_API_KEY || '123';
-    this.client = new EasyPost(partnerUserProdApiKey);
+    referralUserProdApiKey = process.env.REFERRAL_CUSTOMER_PROD_API_KEY || '123';
+    client = new EasyPost(partnerUserProdApiKey);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a referral user', async function () {
-    const referral = await this.client.ReferralCustomer.create({
+    const referral = await client.ReferralCustomer.create({
       name: 'Test Referral',
       email: 'test@example.com',
       phone: '1111111111',
@@ -33,7 +36,7 @@ describe('ReferralCustomer Service', function () {
   });
 
   it('retrieves all referral users', async function () {
-    const referrals = await this.client.ReferralCustomer.all({ page_size: Fixture.pageSize() });
+    const referrals = await client.ReferralCustomer.all({ page_size: Fixture.pageSize() });
 
     const referralsArray = referrals.referral_customers;
 
@@ -46,11 +49,8 @@ describe('ReferralCustomer Service', function () {
 
   it('retrieves next page of referral customer', async function () {
     try {
-      const referrals = await this.client.ReferralCustomer.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.ReferralCustomer.getNextPage(
-        referrals,
-        Fixture.pageSize(),
-      );
+      const referrals = await client.ReferralCustomer.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.ReferralCustomer.getNextPage(referrals, Fixture.pageSize());
 
       const firstIdOfFirstPage = referrals.referral_customers[0].id;
       const firstIdOfSecondPage = nextPage.referral_customers[0].id;
@@ -64,12 +64,12 @@ describe('ReferralCustomer Service', function () {
   });
 
   it('updates a referral user', async function () {
-    const referrals = await this.client.ReferralCustomer.all({ page_size: Fixture.pageSize() });
+    const referrals = await client.ReferralCustomer.all({ page_size: Fixture.pageSize() });
     const singleReferral = referrals.referral_customers[0];
 
     const testEmail = 'me2@email.com';
 
-    await this.client.ReferralCustomer.updateEmail(singleReferral.id, testEmail).then(
+    await client.ReferralCustomer.updateEmail(singleReferral.id, testEmail).then(
       expect(function (result) {
         result.not.to.throw();
       }),
@@ -79,8 +79,8 @@ describe('ReferralCustomer Service', function () {
   it('add a referral user credit card', async function () {
     const creditCardDetails = Fixture.creditCardDetails();
 
-    const paymentMethod = await this.client.ReferralCustomer.addCreditCard(
-      this.referralUserProdApiKey,
+    const paymentMethod = await client.ReferralCustomer.addCreditCard(
+      referralUserProdApiKey,
       creditCardDetails.number,
       creditCardDetails.expiration_month,
       creditCardDetails.expiration_year,

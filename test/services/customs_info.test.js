@@ -8,19 +8,20 @@ import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
 describe('CustomsInfo Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a customs info', async function () {
-    const customsInfo = await this.client.CustomsInfo.create(Fixture.basicCustomsInfo());
+    const customsInfo = await client.CustomsInfo.create(Fixture.basicCustomsInfo());
 
     expect(customsInfo).to.be.an.instanceOf(CustomsInfo);
     expect(customsInfo.id).to.match(/^cstinfo_/);
@@ -28,8 +29,8 @@ describe('CustomsInfo Service', function () {
   });
 
   it('retrieves a customs info', async function () {
-    const customsInfo = await this.client.CustomsInfo.create(Fixture.basicCustomsInfo());
-    const retrievedCustomsInfo = await this.client.CustomsInfo.retrieve(customsInfo.id);
+    const customsInfo = await client.CustomsInfo.create(Fixture.basicCustomsInfo());
+    const retrievedCustomsInfo = await client.CustomsInfo.retrieve(customsInfo.id);
 
     expect(customsInfo).to.be.an.instanceOf(CustomsInfo);
     expect(withoutParams(retrievedCustomsInfo)).to.deep.include(withoutParams(customsInfo));
