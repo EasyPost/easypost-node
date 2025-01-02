@@ -7,6 +7,7 @@ on:
   workflow_dispatch: ~
 
 jobs:
+  # build checks that the app can build and runs tests on the latest node version
   build:
     runs-on: ubuntu-latest
     steps:
@@ -15,6 +16,8 @@ jobs:
         with:
           node-version: 22
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make install install-styleguide build test
+  # node-compatibility checks that the build version of the app can be imported
+  # and used on older versions of node
   node-compatibility:
     runs-on: ubuntu-latest
     strategy:

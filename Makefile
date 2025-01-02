@@ -75,7 +75,7 @@ scan:
 test:
 	npm run test
 
-## test - Test the project
+## test-node-compatibility - Check the built project works for older versions of Node
 test-node-compatibility:
 	npm run test:node-compatibility
 

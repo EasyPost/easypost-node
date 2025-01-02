@@ -2,7 +2,6 @@ import { resolve } from 'path';
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
 import { Polly } from '@pollyjs/core';
 import FSPersister from '@pollyjs/persister-fs';
-// import { beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
 
 import { decodeCassetteResponseBodies, encodeCassetteResponseBodies } from './cassette_encoding';
 
