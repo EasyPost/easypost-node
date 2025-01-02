@@ -1,14 +1,9 @@
-const dotenv = require('dotenv');
-
-dotenv.config();
-
 const EasyPostClient = require('../..');
 
 const test = async () => {
-  const apiKey = process.env.EASYPOST_TEST_API_KEY;
-  const client = new EasyPostClient(apiKey);
+  const client = new EasyPostClient('apiKey');
 
-  if (!client.baseUrl.includes('easypost.com')) {
+  if (!client.baseUrl.match(/^(http|https):\/\/api.easypost.com/gm)) {
     process.exit(1);
   }
 };
