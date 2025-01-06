@@ -12,10 +12,10 @@ import {
 } from '../helpers/mocking';
 
 describe('Base Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
@@ -43,11 +43,11 @@ describe('Base Service', function () {
         ),
       ]);
     };
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+    let client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
       requestMiddleware: middleware,
     });
 
-    let firstPage = await this.client.ScanForm.all({ page_size: pageSize });
+    let firstPage = await client.ScanForm.all({ page_size: pageSize });
     allResults = allResults.concat(firstPage.scan_forms);
     previousPage = firstPage;
 
@@ -69,11 +69,11 @@ describe('Base Service', function () {
         ),
       ]);
     };
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
       requestMiddleware: middleware,
     });
 
-    let secondPage = await this.client.ScanForm.getNextPage(previousPage, pageSize);
+    let secondPage = await client.ScanForm.getNextPage(previousPage, pageSize);
     allResults = allResults.concat(secondPage.scan_forms);
     previousPage = secondPage;
 
@@ -95,11 +95,11 @@ describe('Base Service', function () {
         ),
       ]);
     };
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
       requestMiddleware: middleware,
     });
 
-    let thirdPage = await this.client.ScanForm.getNextPage(previousPage, pageSize);
+    let thirdPage = await client.ScanForm.getNextPage(previousPage, pageSize);
     allResults = allResults.concat(thirdPage.scan_forms);
     previousPage = thirdPage;
 
@@ -109,7 +109,7 @@ describe('Base Service', function () {
 
     // Now that the previous page has "has_more" = False, it should throw an error before even making the API call
     try {
-      await this.client.ScanForm.getNextPage(previousPage, pageSize);
+      await client.ScanForm.getNextPage(previousPage, pageSize);
       // if the above line doesn't throw an error, the test should fail
       expect.fail();
     } catch (error) {
@@ -140,11 +140,11 @@ describe('Base Service', function () {
         ),
       ]);
     };
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+    let client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
       requestMiddleware: middleware,
     });
 
-    const firstPage = await this.client.ScanForm.all({ page_size: pageSize, foo: 'foo' });
+    const firstPage = await client.ScanForm.all({ page_size: pageSize, foo: 'foo' });
     previousPage = firstPage;
 
     // Mock the first "get next page" call with more to collect after
@@ -165,11 +165,11 @@ describe('Base Service', function () {
         ),
       ]);
     };
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
       requestMiddleware: middleware,
     });
 
-    const secondPage = await this.client.ScanForm.getNextPage(previousPage);
+    const secondPage = await client.ScanForm.getNextPage(previousPage);
 
     expect(secondPage._params.foo).to.equal('foo');
     expect(secondPage.scan_forms[0]._params.foo).to.equal('foo');

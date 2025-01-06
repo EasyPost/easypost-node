@@ -10,19 +10,20 @@ import EndOfPaginationError from '../../src/errors/general/end_of_pagination_err
 
 /* eslint-disable func-names */
 describe('User Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a child user', async function () {
-    const user = await this.client.User.create({
+    const user = await client.User.create({
       name: 'Test User',
     });
 
@@ -30,20 +31,20 @@ describe('User Service', function () {
     expect(user.id).to.match(/^user_/);
     expect(user.name).to.equal('Test User');
 
-    await this.client.User.delete(user.id);
+    await client.User.delete(user.id);
   });
 
   it('retrieves a user', async function () {
-    const authenticatedUser = await this.client.User.retrieveMe();
+    const authenticatedUser = await client.User.retrieveMe();
 
-    const user = await this.client.User.retrieve(authenticatedUser.id);
+    const user = await client.User.retrieve(authenticatedUser.id);
 
     expect(user).to.be.an.instanceOf(User);
     expect(user.id).to.match(/^user_/);
   });
 
   it('retrieves the authenticated user', async function () {
-    const user = await this.client.User.retrieveMe();
+    const user = await client.User.retrieveMe();
 
     expect(user).to.be.an.instanceOf(User);
     expect(user.id).to.match(/^user_/);
@@ -52,10 +53,10 @@ describe('User Service', function () {
   it('updates a user', async function () {
     const testName = 'Test User';
 
-    return this.client.User.retrieveMe().then(async (user) => {
+    return client.User.retrieveMe().then(async (user) => {
       const params = {};
       params.name = testName;
-      const updatedUser = await this.client.User.update(user.id, params);
+      const updatedUser = await client.User.update(user.id, params);
 
       expect(updatedUser).to.be.an.instanceOf(User);
       expect(updatedUser.id).to.match(/^user_/);
@@ -64,11 +65,11 @@ describe('User Service', function () {
   });
 
   it('deletes a user', async function () {
-    const user = await this.client.User.create({
+    const user = await client.User.create({
       name: 'Test User',
     });
 
-    await this.client.User.delete(user.id).then(
+    await client.User.delete(user.id).then(
       expect(function (result) {
         result.not.to.throw();
       }),
@@ -76,11 +77,11 @@ describe('User Service', function () {
   });
 
   it("updates the authenticated user's brand", async function () {
-    const user = await this.client.User.retrieveMe();
+    const user = await client.User.retrieveMe();
 
     const color = '#123456';
 
-    const brand = await this.client.User.updateBrand(user.id, { color });
+    const brand = await client.User.updateBrand(user.id, { color });
 
     expect(brand).to.be.an.instanceOf(Brand);
     expect(brand.id).to.match(/^brd_/);
@@ -88,7 +89,7 @@ describe('User Service', function () {
   });
 
   it('retrieves a paginated list of children', async function () {
-    const response = await this.client.User.allChildren({ page_size: Fixture.pageSize() });
+    const response = await client.User.allChildren({ page_size: Fixture.pageSize() });
 
     const childrenArray = response.children;
 
@@ -101,8 +102,8 @@ describe('User Service', function () {
 
   it('retrieves next page of children', async function () {
     try {
-      const children = await this.client.User.allChildren({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.User.getNextPage(children, Fixture.pageSize());
+      const children = await client.User.allChildren({ page_size: Fixture.pageSize() });
+      const nextPage = await client.User.getNextPage(children, Fixture.pageSize());
 
       const firstIdOfFirstPage = children.children[0].id;
       const firstIdOfSecondPage = nextPage.children[0].id;

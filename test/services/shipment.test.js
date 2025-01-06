@@ -11,19 +11,20 @@ import * as setupPolly from '../helpers/setup_polly';
 
 /* eslint-disable func-names */
 describe('Shipment Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(Fixture.fullShipment());
 
     expect(shipment).to.be.an.instanceOf(Shipment);
     expect(shipment.id).to.match(/^shp_/);
@@ -40,7 +41,7 @@ describe('Shipment Service', function () {
     shipmentData.tax_identifiers = undefined;
     shipmentData.reference = '';
 
-    const shipment = await this.client.Shipment.create(shipmentData);
+    const shipment = await client.Shipment.create(shipmentData);
 
     expect(shipment).to.be.an.instanceOf(Shipment);
     expect(shipment.id).to.match(/^shp_/);
@@ -54,7 +55,7 @@ describe('Shipment Service', function () {
     const shipmentData = Fixture.basicShipment();
     shipmentData.tax_identifiers = [Fixture.taxIdentifier()];
 
-    const shipment = await this.client.Shipment.create(shipmentData);
+    const shipment = await client.Shipment.create(shipmentData);
 
     expect(shipment).to.be.an.instanceOf(Shipment);
     expect(shipment.id).to.match(/^shp_/);
@@ -62,11 +63,11 @@ describe('Shipment Service', function () {
   });
 
   it('creates a shipment when only IDs are used', async function () {
-    const fromAddress = await this.client.Address.create(Fixture.caAddress1());
-    const toAddress = await this.client.Address.create(Fixture.caAddress2());
-    const parcel = await this.client.Parcel.create(Fixture.basicParcel());
+    const fromAddress = await client.Address.create(Fixture.caAddress1());
+    const toAddress = await client.Address.create(Fixture.caAddress2());
+    const parcel = await client.Parcel.create(Fixture.basicParcel());
 
-    const shipment = await this.client.Shipment.create({
+    const shipment = await client.Shipment.create({
       from_address: { id: fromAddress.id },
       to_address: { id: toAddress.id },
       parcel: { id: parcel.id },
@@ -81,16 +82,16 @@ describe('Shipment Service', function () {
   });
 
   it('retrieves a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(Fixture.fullShipment());
 
-    const retrievedShipment = await this.client.Shipment.retrieve(shipment.id);
+    const retrievedShipment = await client.Shipment.retrieve(shipment.id);
 
     expect(retrievedShipment).to.be.an.instanceOf(Shipment);
     expect(retrievedShipment.id).to.equal(shipment.id);
   });
 
   it('retrieves all shipments', async function () {
-    const shipments = await this.client.Shipment.all({
+    const shipments = await client.Shipment.all({
       page_size: Fixture.pageSize(),
     });
 
@@ -105,8 +106,8 @@ describe('Shipment Service', function () {
 
   it('retrieves next page of shipments', async function () {
     try {
-      const shipments = await this.client.Shipment.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Shipment.getNextPage(shipments, Fixture.pageSize());
+      const shipments = await client.Shipment.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.Shipment.getNextPage(shipments, Fixture.pageSize());
 
       const firstIdOfFirstPage = shipments.shipments[0].id;
       const firstIdOfSecondPage = nextPage.shipments[0].id;
@@ -120,17 +121,17 @@ describe('Shipment Service', function () {
   });
 
   it('buys a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(Fixture.fullShipment());
 
-    const boughtShipment = await this.client.Shipment.buy(shipment.id, shipment.lowestRate());
+    const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
 
     expect(boughtShipment.postage_label).to.exist;
   });
 
   it('regenerates rates for a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(Fixture.fullShipment());
 
-    const rates = await this.client.Shipment.regenerateRates(shipment.id);
+    const rates = await client.Shipment.regenerateRates(shipment.id);
 
     const ratesArray = rates.rates;
 
@@ -141,14 +142,11 @@ describe('Shipment Service', function () {
   });
 
   it('converts the label format of a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(Fixture.fullShipment());
 
-    const boughtShipment = await this.client.Shipment.buy(shipment.id, shipment.lowestRate());
+    const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
 
-    const shipmentWithLabel = await this.client.Shipment.convertLabelFormat(
-      boughtShipment.id,
-      'ZPL',
-    );
+    const shipmentWithLabel = await client.Shipment.convertLabelFormat(boughtShipment.id, 'ZPL');
 
     expect(shipmentWithLabel.postage_label.label_zpl_url).to.exist;
   });
@@ -159,9 +157,9 @@ describe('Shipment Service', function () {
     const shipmentData = Fixture.oneCallBuyShipment();
     shipmentData.insurance = '0';
 
-    const shipment = await this.client.Shipment.create(shipmentData);
+    const shipment = await client.Shipment.create(shipmentData);
 
-    const insuredShipment = await this.client.Shipment.insure(shipment.id, 100);
+    const insuredShipment = await client.Shipment.insure(shipment.id, 100);
 
     expect(insuredShipment.insurance).to.equal('100.00');
   });
@@ -170,19 +168,19 @@ describe('Shipment Service', function () {
     // Refunding a test shipment must happen within seconds of the shipment being created as test shipments naturally
     // follow a flow of created -> delivered to cycle through tracking events in test mode - as such anything older
     // than a few seconds in test mode may not be refundable.
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
-    const refundedShipment = await this.client.Shipment.refund(shipment.id);
+    const refundedShipment = await client.Shipment.refund(shipment.id);
 
     expect(refundedShipment.refund_status).to.equal('submitted');
   });
 
   it('retrieves smartRates of a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     expect(shipment.rates).to.exist;
 
-    const smartRates = await this.client.Shipment.getSmartRates(shipment.id);
+    const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     expect(smartRates[0].time_in_transit.percentile_50).to.exist;
     expect(smartRates[0].time_in_transit.percentile_75).to.exist;
@@ -194,7 +192,7 @@ describe('Shipment Service', function () {
   });
 
   it('gets the lowest rate', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(Fixture.fullShipment());
 
     // Test lowest rate with no filters
     const lowestRate = shipment.lowestRate();
@@ -215,65 +213,70 @@ describe('Shipment Service', function () {
   });
 
   it('gets the lowest smartrate', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
 
     // Test lowest smartrate with valid filters
-    const lowestSmartRate = await this.client.Shipment.lowestSmartRate(
-      shipment.id,
-      3,
-      'percentile_90',
-    );
+    const lowestSmartRate = await client.Shipment.lowestSmartRate(shipment.id, 3, 'percentile_90');
     expect(lowestSmartRate.service).to.equal('GroundAdvantage');
     expect(lowestSmartRate.rate).to.equal(5.93);
     expect(lowestSmartRate.carrier).to.equal('USPS');
   });
 
   it('raises an error for lowestSmartRate when no rates are found due to deliveryDays', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
-    await expect(
-      this.client.Shipment.lowestSmartRate(shipment.id, 0, 'percentile_90'),
-    ).to.be.rejectedWith(FilteringError, 'No rates found.');
+    try {
+      await client.Shipment.lowestSmartRate(shipment.id, 0, 'percentile_90');
+      throw new Error('Test failed intentionally');
+    } catch (error) {
+      expect(error).to.be.an.instanceOf(FilteringError);
+      expect(error.message).to.equal('No rates found.');
+    }
   });
 
   it('raises an error for lowestSmartRate when no rates are found due to deliveryAccuracy', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
-    await expect(
-      this.client.Shipment.lowestSmartRate(shipment.id, 3, 'BAD_ACCURACY'),
-    ).to.be.rejectedWith(InvalidParameterError, /Invalid deliveryAccuracy value/);
+    try {
+      await client.Shipment.lowestSmartRate(shipment.id, 3, 'BAD_ACCURACY');
+      throw new Error('Test failed intentionally');
+    } catch (error) {
+      expect(error).to.be.an.instanceOf(InvalidParameterError);
+      const regex = /Invalid deliveryAccuracy value/;
+      expect(error.message).to.match(regex);
+    }
   });
 
   it('gets the lowest smartrate from a list of smartRates', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-    const smartRates = await this.client.Shipment.getSmartRates(shipment.id);
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with valid filters
-    const lowestSmartRate = this.client.Utils.getLowestSmartRate(smartRates, 3, 'percentile_90');
+    const lowestSmartRate = client.Utils.getLowestSmartRate(smartRates, 3, 'percentile_90');
     expect(lowestSmartRate.service).to.equal('GroundAdvantage');
     expect(lowestSmartRate.rate).to.equal(5.93);
     expect(lowestSmartRate.carrier).to.equal('USPS');
   });
 
   it('raises an error for getLowestSmartRate when no rates are found due to deliveryDays', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-    const smartRates = await this.client.Shipment.getSmartRates(shipment.id);
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
     expect(() => {
-      this.client.Utils.getLowestSmartRate(smartRates, 0, 'percentile_90');
+      client.Utils.getLowestSmartRate(smartRates, 0, 'percentile_90');
     }).to.throw(FilteringError, 'No rates found.');
   });
 
   it('raises an error for getLowestSmartRate when no rates are found due to deliveryAccuracy', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-    const smartRates = await this.client.Shipment.getSmartRates(shipment.id);
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
     expect(() => {
-      this.client.Utils.getLowestSmartRate(smartRates, 3, 'BAD_ACCURACY');
+      client.Utils.getLowestSmartRate(smartRates, 3, 'BAD_ACCURACY');
     }).to.throw(
       InvalidParameterError,
       'Invalid deliveryAccuracy value, must be one of: percentile_50, percentile_75, percentile_85, percentile_90, percentile_95, percentile_97, percentile_99',
@@ -281,11 +284,11 @@ describe('Shipment Service', function () {
   });
 
   it('generates a form for a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     const formType = 'return_packing_slip';
 
-    const shipmentWithForm = await this.client.Shipment.generateForm(
+    const shipmentWithForm = await client.Shipment.generateForm(
       shipment.id,
       formType,
       Fixture.rmaFormOptions(),
@@ -300,17 +303,17 @@ describe('Shipment Service', function () {
   });
 
   it('buys a shipment with insuranceAmount', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-    const boughtShipment = await this.client.Shipment.buy(shipment.id, shipment.lowestRate(), 100);
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate(), 100);
 
     expect(boughtShipment.insurance).to.equal('100.00');
   });
 
   it('buys a shipment with end_shipper_id', async function () {
-    const endShipper = await this.client.EndShipper.create(Fixture.caAddress1());
+    const endShipper = await client.EndShipper.create(Fixture.caAddress1());
 
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-    const boughtShipment = await this.client.Shipment.buy(
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const boughtShipment = await client.Shipment.buy(
       shipment.id,
       shipment.lowestRate(),
       null,
@@ -321,8 +324,8 @@ describe('Shipment Service', function () {
   });
 
   it('retrieve estimated delivery dates for each of the Rates of a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-    const estimatedDeliveryDates = await this.client.Shipment.retrieveEstimatedDeliveryDate(
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const estimatedDeliveryDates = await client.Shipment.retrieveEstimatedDeliveryDate(
       shipment.id,
       Fixture.plannedShipDate(),
     );
@@ -335,8 +338,8 @@ describe('Shipment Service', function () {
   });
 
   it('retrieve recommended ship dates for each of the Rates of a shipment', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.basicShipment());
-    const recommendedShipDates = await this.client.Shipment.recommendShipDate(
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const recommendedShipDates = await client.Shipment.recommendShipDate(
       shipment.id,
       Fixture.plannedDeliveryDate(),
     );

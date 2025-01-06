@@ -9,19 +9,20 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Order Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates an order', async function () {
-    const order = await this.client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder());
 
     expect(order).to.be.an.instanceOf(Order);
     expect(order.id).to.match(/^order_/);
@@ -29,18 +30,18 @@ describe('Order Service', function () {
   });
 
   it('retrieves an order', async function () {
-    const order = await this.client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder());
 
-    const retrievedOrder = await this.client.Order.retrieve(order.id);
+    const retrievedOrder = await client.Order.retrieve(order.id);
 
     expect(retrievedOrder).to.be.an.instanceOf(Order);
     expect(retrievedOrder.id).to.equal(order.id);
   });
 
   it('get rates of an order', async function () {
-    const order = await this.client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder());
 
-    const rates = await this.client.Order.getRates(order.id);
+    const rates = await client.Order.getRates(order.id);
 
     const ratesArray = rates.rates;
 
@@ -51,13 +52,9 @@ describe('Order Service', function () {
   });
 
   it('buys an order', async function () {
-    const order = await this.client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder());
 
-    const boughtOrder = await this.client.Order.buy(
-      order.id,
-      Fixture.usps(),
-      Fixture.uspsService(),
-    );
+    const boughtOrder = await client.Order.buy(order.id, Fixture.usps(), Fixture.uspsService());
 
     const shipmentsArray = boughtOrder.shipments;
 
@@ -67,7 +64,7 @@ describe('Order Service', function () {
   });
 
   it('gets the lowest rate', async function () {
-    const order = await this.client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder());
 
     // Test lowest rate with no filters
     const lowestRate = order.lowestRate();

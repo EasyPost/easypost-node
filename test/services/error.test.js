@@ -18,19 +18,20 @@ import ErrorHandler from '../../src/errors/error_handler';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Error Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('pulls out error properties of an API error', async function () {
-    await this.client.Shipment.create().catch((error) => {
+    await client.Shipment.create().catch((error) => {
       expect(error.statusCode).to.equal(422);
       expect(error.code).to.equal('PARAMETER.REQUIRED');
       expect(error.message).to.equal('Missing required parameter.');

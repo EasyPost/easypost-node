@@ -8,19 +8,20 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Tracker Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a tracker', async function () {
-    const tracker = await this.client.Tracker.create({
+    const tracker = await client.Tracker.create({
       tracking_code: 'EZ1000000001',
     });
 
@@ -30,18 +31,18 @@ describe('Tracker Service', function () {
   });
 
   it('retrieves a tracker', async function () {
-    const tracker = await this.client.Tracker.create({
+    const tracker = await client.Tracker.create({
       tracking_code: 'EZ1000000001',
     });
 
-    const retrievedTracker = await this.client.Tracker.retrieve(tracker.id);
+    const retrievedTracker = await client.Tracker.retrieve(tracker.id);
 
     expect(retrievedTracker).to.be.an.instanceOf(Tracker);
     expect(retrievedTracker.id).to.equal(tracker.id);
   });
 
   it('retrieves all trackers', async function () {
-    const trackers = await this.client.Tracker.all({
+    const trackers = await client.Tracker.all({
       page_size: Fixture.pageSize(),
     });
 
@@ -56,8 +57,8 @@ describe('Tracker Service', function () {
 
   it('retrieves next page of trackers', async function () {
     try {
-      const trackers = await this.client.Tracker.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Tracker.getNextPage(trackers, Fixture.pageSize());
+      const trackers = await client.Tracker.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.Tracker.getNextPage(trackers, Fixture.pageSize());
 
       const firstIdOfFirstPage = trackers.trackers[0].id;
       const firstIdOfSecondPage = nextPage.trackers[0].id;

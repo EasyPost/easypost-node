@@ -1,25 +1,13 @@
 {
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "prettier", "plugin:vitest-globals/recommended"],
 
   "env": {
     "node": true,
-    "mocha": true
-  },
-
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "webpack.config.babel.js"
-      }
-    },
-    "import/extensions": ["", ".js", ".json"]
+    "vitest-globals/env": true
   },
 
   "rules": {
     "import/no-extraneous-dependencies": 0,
-
-    // mocha syntax: expect(x).to.not.be.undefined
-    "no-unused-expressions": 0,
 
     // @easypost/eslint-config-easypost-base assumes all tests are jest. so turn these rules off
     "jest/consistent-test-it": 0,
@@ -30,7 +18,6 @@
   "globals": {
     "expect": true
   },
-  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 13
   }

@@ -9,26 +9,27 @@ import { withoutParams } from '../helpers/utils';
 
 /* eslint-disable func-names */
 describe('CarrierAccount Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a carrier account', async function () {
-    const carrierAccount = await this.client.CarrierAccount.create(Fixture.basicCarrierAccount());
+    const carrierAccount = await client.CarrierAccount.create(Fixture.basicCarrierAccount());
 
     expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(carrierAccount.id).to.match(/^ca_/);
     expect(carrierAccount.type).to.equal('DhlEcsAccount');
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
-    await this.client.CarrierAccount.delete(carrierAccount.id);
+    await client.CarrierAccount.delete(carrierAccount.id);
   });
 
   it('creates a carrier account with a custom workflow', async function () {
@@ -40,8 +41,8 @@ describe('CarrierAccount Service', function () {
     };
 
     try {
-      const carrierAccount = await this.client.CarrierAccount.create(data);
-      await this.client.CarrierAccount.delete(carrierAccount.id);
+      const carrierAccount = await client.CarrierAccount.create(data);
+      await client.CarrierAccount.delete(carrierAccount.id);
     } catch (error) {
       // We're sending bad data to the API, so we expect an error
       expect(error.statusCode).to.equal(422);
@@ -66,29 +67,29 @@ describe('CarrierAccount Service', function () {
       account_number: accountNumber,
     };
 
-    const carrierAccount = await this.client.CarrierAccount.create(data);
+    const carrierAccount = await client.CarrierAccount.create(data);
 
     expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(carrierAccount.id).to.match(/^ca_/);
     expect(carrierAccount.type).to.equal(type);
     // account number not returned in API response, can't assert
 
-    await this.client.CarrierAccount.delete(carrierAccount.id);
+    await client.CarrierAccount.delete(carrierAccount.id);
   });
 
   it('retrieves a carrier account', async function () {
-    const carrierAccount = await this.client.CarrierAccount.create(Fixture.basicCarrierAccount());
-    const retrievedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
+    const carrierAccount = await client.CarrierAccount.create(Fixture.basicCarrierAccount());
+    const retrievedCarrierAccount = await client.CarrierAccount.retrieve(carrierAccount.id);
 
     expect(retrievedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(withoutParams(retrievedCarrierAccount)).to.deep.include(withoutParams(carrierAccount));
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
-    await this.client.CarrierAccount.delete(carrierAccount.id);
+    await client.CarrierAccount.delete(carrierAccount.id);
   });
 
   it('retrieves all carrier accounts', async function () {
-    const carrierAccounts = await this.client.CarrierAccount.all();
+    const carrierAccounts = await client.CarrierAccount.all();
 
     carrierAccounts.forEach((carrierAccount) => {
       expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
@@ -96,23 +97,23 @@ describe('CarrierAccount Service', function () {
   });
 
   it('updates a carrier account', async function () {
-    const carrierAccount = await this.client.CarrierAccount.create(Fixture.basicCarrierAccount());
+    const carrierAccount = await client.CarrierAccount.create(Fixture.basicCarrierAccount());
 
     const testDescription = 'My custom description';
     const updateParams = {
       description: testDescription,
     };
 
-    await this.client.CarrierAccount.update(carrierAccount.id, updateParams);
+    await client.CarrierAccount.update(carrierAccount.id, updateParams);
 
-    const updatedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
+    const updatedCarrierAccount = await client.CarrierAccount.retrieve(carrierAccount.id);
 
     expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(updatedCarrierAccount.id).to.match(/^ca_/);
     expect(updatedCarrierAccount.description).to.equal(testDescription);
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
-    await this.client.CarrierAccount.delete(carrierAccount.id);
+    await client.CarrierAccount.delete(carrierAccount.id);
   });
 
   it('updates a UPS carrier account', async function () {
@@ -120,28 +121,28 @@ describe('CarrierAccount Service', function () {
       type: 'UpsAccount',
       account_number: '123456789',
     };
-    const carrierAccount = await this.client.CarrierAccount.create(params);
+    const carrierAccount = await client.CarrierAccount.create(params);
 
     const testAccountNumber = '987654321';
     const updateParams = {
       account_number: testAccountNumber,
     };
 
-    await this.client.CarrierAccount.update(carrierAccount.id, updateParams);
+    await client.CarrierAccount.update(carrierAccount.id, updateParams);
 
-    const updatedCarrierAccount = await this.client.CarrierAccount.retrieve(carrierAccount.id);
+    const updatedCarrierAccount = await client.CarrierAccount.retrieve(carrierAccount.id);
 
     expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(updatedCarrierAccount.id).to.match(/^ca_/);
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
-    await this.client.CarrierAccount.delete(carrierAccount.id);
+    await client.CarrierAccount.delete(carrierAccount.id);
   });
 
   it('deletes a carrier account', async function () {
-    const carrierAccount = await this.client.CarrierAccount.create(Fixture.basicCarrierAccount());
+    const carrierAccount = await client.CarrierAccount.create(Fixture.basicCarrierAccount());
 
-    await this.client.CarrierAccount.delete(carrierAccount.id).then(
+    await client.CarrierAccount.delete(carrierAccount.id).then(
       expect(function (result) {
         result.not.to.throw();
       }),

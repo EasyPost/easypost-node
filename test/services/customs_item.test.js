@@ -8,19 +8,20 @@ import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
 describe('CustomsItem Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a customs item', async function () {
-    const customsItem = await this.client.CustomsItem.create(Fixture.basicCustomsItem());
+    const customsItem = await client.CustomsItem.create(Fixture.basicCustomsItem());
 
     expect(customsItem).to.be.an.instanceOf(CustomsItem);
     expect(customsItem.id).to.match(/^cstitem_/);
@@ -28,8 +29,8 @@ describe('CustomsItem Service', function () {
   });
 
   it('retrieves a customs item', async function () {
-    const customsItem = await this.client.CustomsItem.create(Fixture.basicCustomsItem());
-    const retrievedCustomsInfo = await this.client.CustomsItem.retrieve(customsItem.id);
+    const customsItem = await client.CustomsItem.create(Fixture.basicCustomsItem());
+    const retrievedCustomsInfo = await client.CustomsItem.retrieve(customsItem.id);
 
     expect(customsItem).to.be.an.instanceOf(CustomsItem);
     expect(withoutParams(retrievedCustomsInfo)).to.deep.include(withoutParams(customsItem));

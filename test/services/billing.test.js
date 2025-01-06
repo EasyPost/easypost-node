@@ -47,37 +47,39 @@ const middleware = (request) => {
 };
 
 describe('Billing Service', function () {
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
+  let client;
+
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {
       requestMiddleware: middleware,
     });
   });
 
   it('fund a wallet', async function () {
     expect(async () => {
-      await this.client.Billing.fundWallet('2000', 'primary');
+      await client.Billing.fundWallet('2000', 'primary');
     }).not.to.throw();
   });
 
   it('delete a payment method', async function () {
     expect(async () => {
-      await this.client.Billing.deletePaymentMethod('primary');
+      await client.Billing.deletePaymentMethod('primary');
     }).not.to.throw();
   });
 
   it('retrieves all payment methods', async function () {
-    const paymentMethods = await this.client.Billing.retrievePaymentMethods();
+    const paymentMethods = await client.Billing.retrievePaymentMethods();
 
     expect(paymentMethods.primary_payment_method).to.exist;
     expect(paymentMethods.secondary_payment_method).to.exist;
   });
 
   it('get payment info', async function () {
-    const paymentInfo = await this.client.Billing._getPaymentInfo('primary');
+    const paymentInfo = await client.Billing._getPaymentInfo('primary');
 
     expect(paymentInfo).to.deep.equal(['credit_cards', 'pm_123']);
 
-    const paymentInfo2 = await this.client.Billing._getPaymentInfo('secondary');
+    const paymentInfo2 = await client.Billing._getPaymentInfo('secondary');
 
     expect(paymentInfo2).to.deep.equal(['bank_accounts', 'pm_123']);
   });

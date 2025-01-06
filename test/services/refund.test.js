@@ -9,29 +9,30 @@ import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
 describe('Refund Service', function () {
-  setupPolly.startPolly();
+  const getPolly = setupPolly.setupPollyTests();
+  let client;
 
-  before(function () {
-    this.client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
+  beforeAll(function () {
+    client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
   });
 
   beforeEach(function () {
-    const { server } = this.polly;
+    const { server } = getPolly();
     setupPolly.setupCassette(server);
   });
 
   it('creates a refund', async function () {
-    const shipment = await this.client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
 
     // We need to retrieve the shipment so that the tracking_code has time to populate
-    const retrievedShipment = await this.client.Shipment.retrieve(shipment.id);
+    const retrievedShipment = await client.Shipment.retrieve(shipment.id);
 
     const refundData = {
       carrier: Fixture.usps(),
       tracking_codes: [retrievedShipment.tracking_code],
     };
 
-    const refunds = await this.client.Refund.create(refundData);
+    const refunds = await client.Refund.create(refundData);
 
     refunds.forEach((pickup) => {
       expect(pickup).to.be.an.instanceOf(Refund);
@@ -41,7 +42,7 @@ describe('Refund Service', function () {
   });
 
   it('retrieves all refunds', async function () {
-    const refunds = await this.client.Refund.all({ page_size: Fixture.pageSize() });
+    const refunds = await client.Refund.all({ page_size: Fixture.pageSize() });
 
     const refundsArray = refunds.refunds;
 
@@ -54,8 +55,8 @@ describe('Refund Service', function () {
 
   it('retrieves next page of refunds', async function () {
     try {
-      const refunds = await this.client.Refund.all({ page_size: Fixture.pageSize() });
-      const nextPage = await this.client.Refund.getNextPage(refunds, Fixture.pageSize());
+      const refunds = await client.Refund.all({ page_size: Fixture.pageSize() });
+      const nextPage = await client.Refund.getNextPage(refunds, Fixture.pageSize());
 
       const firstIdOfFirstPage = refunds.refunds[0].id;
       const firstIdOfSecondPage = nextPage.refunds[0].id;
@@ -69,9 +70,9 @@ describe('Refund Service', function () {
   });
 
   it('retrieves a refund', async function () {
-    const refunds = await this.client.Refund.all({ page_size: Fixture.pageSize() });
+    const refunds = await client.Refund.all({ page_size: Fixture.pageSize() });
 
-    const retrieveRefund = await this.client.Refund.retrieve(refunds.refunds[0].id);
+    const retrieveRefund = await client.Refund.retrieve(refunds.refunds[0].id);
 
     expect(retrieveRefund).to.be.an.instanceOf(Refund);
     expect(withoutParams(retrieveRefund)).to.deep.include(withoutParams(refunds.refunds[0]));

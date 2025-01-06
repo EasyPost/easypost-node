@@ -1,8 +1,6 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable no-param-reassign */
 import { resolve } from 'path';
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
-import { Polly, setupMocha as setupPolly } from '@pollyjs/core';
+import { Polly } from '@pollyjs/core';
 import FSPersister from '@pollyjs/persister-fs';
 
 import { decodeCassetteResponseBodies, encodeCassetteResponseBodies } from './cassette_encoding';
@@ -25,26 +23,6 @@ const scrubbers = {
   phone: redactedString,
   test_credentials: redactedObject,
 };
-
-function startPolly() {
-  setupPolly({
-    adapters: ['node-http'],
-    persister: 'fs',
-    recordFailedRequests: true,
-    persisterOptions: {
-      fs: {
-        recordingsDir: resolve(__dirname, '../cassettes'),
-      },
-    },
-    matchRequestsBy: {
-      headers: {
-        exclude: headerScrubbers,
-      },
-    },
-    expiresIn: '180d',
-    expiryStrategy: 'warn',
-  });
-}
 
 function scrubHeaders(recording) {
   recording.request.headers = recording.request.headers.filter(
@@ -131,4 +109,41 @@ function setupCassette(server) {
   });
 }
 
-export { startPolly, setupCassette };
+// New setup function for Vitest
+function setupPollyTests() {
+  /** @type {Polly} */
+  let polly;
+  let suiteName;
+
+  beforeAll(async ({ name }) => {
+    suiteName = name;
+  });
+
+  beforeEach((context) => {
+    polly = new Polly(`${suiteName}/${context.task.name}`, {
+      adapters: ['node-http'],
+      persister: 'fs',
+      recordFailedRequests: true,
+      persisterOptions: {
+        fs: {
+          recordingsDir: resolve(__dirname, '../cassettes'),
+        },
+      },
+      matchRequestsBy: {
+        headers: {
+          exclude: headerScrubbers,
+        },
+      },
+      expiresIn: '180d',
+      expiryStrategy: 'warn',
+    });
+  });
+
+  afterEach(async () => {
+    await polly.stop();
+  });
+
+  return () => polly;
+}
+
+export { setupPollyTests, setupCassette };
