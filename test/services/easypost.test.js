@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import EasyPostClient, { METHODS } from '../../src/easypost';
+import EasyPostClient from '../../src/easypost';
 import MissingParameterError from '../../src/errors/general/missing_parameter_error';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
@@ -38,7 +38,7 @@ describe('EasyPost', function () {
     await client.Address.create(Fixture.caAddress1());
 
     expect(requestConfig).to.be.an('object');
-    expect(requestConfig.method).to.equal(METHODS.POST);
+    expect(requestConfig.method).to.equal(EasyPostClient.METHODS.POST);
     expect(requestConfig.path).to.equal('https://api.easypost.com/v2/addresses');
     expect(requestConfig.headers).to.be.an('object');
     expect(requestConfig.headers['Content-Type']).to.equal('application/json');
@@ -46,7 +46,7 @@ describe('EasyPost', function () {
     expect(requestConfig.requestUUID).to.be.a('string');
 
     expect(responseConfig).to.be.an('object');
-    expect(responseConfig.method).to.equal(METHODS.POST);
+    expect(responseConfig.method).to.equal(EasyPostClient.METHODS.POST);
     expect(responseConfig.path).to.equal('https://api.easypost.com/v2/addresses');
     expect(responseConfig.requestTimestamp).to.be.a('number');
     expect(responseConfig.requestUUID).to.be.a('string');
