@@ -1,4 +1,4 @@
-const EasyPostClient = require('../..');
+const EasyPostClient = require('../../dist/easypost');
 
 const test = async () => {
   const client = new EasyPostClient('apiKey');
