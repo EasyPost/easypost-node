@@ -38,83 +38,6 @@ import WebhookService from './services/webhook_service';
 import Utils from './utils/util';
 
 /**
- * How many milliseconds in a second.
- * @type {number}
- */
-export const MS_SECOND = 1000;
-
-/**
- * The default timeout for all EasyPost API requests.
- * @type {number}
- */
-export const DEFAULT_TIMEOUT = 60 * MS_SECOND;
-
-/**
- * The default base URL for all production EasyPost API requests.
- * @type {string}
- */
-export const DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
-
-/**
- * The default headers used for all EasyPost API requests.
- * @type {{'Accept': string, 'Content-Type': string, 'User-Agent': string}}
- */
-export const DEFAULT_HEADERS = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-  'User-Agent': `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${
-    process.versions.node
-  } OS/${os.platform()} OSVersion/${os.release()} OSArch/${os.arch()}`,
-};
-
-/**
- * A map of HTTP methods to their corresponding string values (for use with superagent).
- * @type {{DELETE: string, POST: string, GET: string, PUT: string, PATCH: string}}
- */
-export const METHODS = {
-  GET: 'get',
-  POST: 'post',
-  PUT: 'put',
-  PATCH: 'patch',
-  DELETE: 'del',
-};
-
-/**
- * The services available for the client (end-user-facing name corresponding to a `BaseService`-based class).
- * @type {Map}
- */
-export const SERVICES = {
-  Address: AddressService,
-  ApiKey: ApiKeyService,
-  Batch: BatchService,
-  BetaRate: BetaRateService,
-  BetaReferralCustomer: BetaReferralCustomerService,
-  Billing: BillingService,
-  CarrierAccount: CarrierAccountService,
-  CarrierMetadata: CarrierMetadataService,
-  CarrierType: CarrierTypeService,
-  Claim: ClaimService,
-  CustomsInfo: CustomsInfoService,
-  CustomsItem: CustomsItemService,
-  EndShipper: EndShipperService,
-  Event: EventService,
-  Insurance: InsuranceService,
-  Order: OrderService,
-  Parcel: ParcelService,
-  Pickup: PickupService,
-  Rate: RateService,
-  ReferralCustomer: ReferralCustomerService,
-  Refund: RefundService,
-  Report: ReportService,
-  ScanForm: ScanFormService,
-  Shipment: ShipmentService,
-  SmartRate: SmartRateService,
-  Tracker: TrackerService,
-  User: UserService,
-  Webhook: WebhookService,
-};
-
-/**
  * The client used to access services of the EasyPost API.
  * This client is configured to use the latest production version of the EasyPost API.
  * @param {string} key The API key to use for API requests made by this client.
@@ -131,8 +54,8 @@ export default class EasyPostClient {
     }
 
     this.key = key;
-    this.timeout = timeout || DEFAULT_TIMEOUT;
-    this.baseUrl = baseUrl || DEFAULT_BASE_URL;
+    this.timeout = timeout || EasyPostClient.DEFAULT_TIMEOUT;
+    this.baseUrl = baseUrl || EasyPostClient.DEFAULT_BASE_URL;
     this.agent = superagent;
     this.requestMiddleware = requestMiddleware;
     this.requestHooks = [];
@@ -143,7 +66,7 @@ export default class EasyPostClient {
       this.agent = superagentMiddleware(this.agent);
     }
 
-    this._attachServices(SERVICES);
+    this._attachServices(EasyPostClient.SERVICES);
   }
 
   /**
@@ -214,7 +137,7 @@ export default class EasyPostClient {
    */
   static _buildHeaders(additionalHeaders = {}) {
     return {
-      ...DEFAULT_HEADERS,
+      ...EasyPostClient.DEFAULT_HEADERS,
       ...additionalHeaders,
     };
   }
@@ -271,7 +194,7 @@ export default class EasyPostClient {
    * @returns {*} The response from the HTTP request.
    * @throws {ApiError} If the request fails.
    */
-  async _request(path = '', method = METHODS.GET, params = {}, headers = {}) {
+  async _request(path = '', method = EasyPostClient.METHODS.GET, params = {}, headers = {}) {
     const urlPath = this._buildPath(path);
     const requestHeaders = EasyPostClient._buildHeaders(headers);
     let request = this.agent[method](urlPath).set(requestHeaders);
@@ -289,7 +212,7 @@ export default class EasyPostClient {
     const url = new URL(urlPath);
 
     if (params !== undefined) {
-      if (method === METHODS.GET || method === METHODS.DELETE) {
+      if (method === EasyPostClient.METHODS.GET || method === EasyPostClient.METHODS.DELETE) {
         request.query(params);
         Object.entries(params).forEach(([key, value]) => {
           url.searchParams.append(key, value);
@@ -338,7 +261,7 @@ export default class EasyPostClient {
    * @returns {*} The response from the HTTP request.
    */
   _get(path, params = {}, headers = {}) {
-    return this._request(path, METHODS.GET, params, headers);
+    return this._request(path, EasyPostClient.METHODS.GET, params, headers);
   }
 
   /**
@@ -349,7 +272,7 @@ export default class EasyPostClient {
    * @returns {*} The response from the HTTP request.
    */
   _post(path, params = {}, headers = {}) {
-    return this._request(path, METHODS.POST, params, headers);
+    return this._request(path, EasyPostClient.METHODS.POST, params, headers);
   }
 
   /**
@@ -360,7 +283,7 @@ export default class EasyPostClient {
    * @returns {*} The response from the HTTP request.
    */
   _put(path, params = {}, headers = {}) {
-    return this._request(path, METHODS.PUT, params, headers);
+    return this._request(path, EasyPostClient.METHODS.PUT, params, headers);
   }
 
   /**
@@ -371,7 +294,7 @@ export default class EasyPostClient {
    * @returns {*} The response from the HTTP request.
    */
   _patch(path, params = {}, headers = {}) {
-    return this._request(path, METHODS.PATCH, params, headers);
+    return this._request(path, EasyPostClient.METHODS.PATCH, params, headers);
   }
 
   /**
@@ -382,6 +305,83 @@ export default class EasyPostClient {
    * @returns {*} The response from the HTTP request.
    */
   _delete(path, params = {}, headers = {}) {
-    return this._request(path, METHODS.DELETE, params, headers);
+    return this._request(path, EasyPostClient.METHODS.DELETE, params, headers);
   }
 }
+
+/**
+ * How many milliseconds in a second.
+ * @type {number}
+ */
+EasyPostClient.MS_SECOND = 1000;
+
+/**
+ * The default timeout for all EasyPost API requests.
+ * @type {number}
+ */
+EasyPostClient.DEFAULT_TIMEOUT = 60 * EasyPostClient.MS_SECOND;
+
+/**
+ * The default base URL for all production EasyPost API requests.
+ * @type {string}
+ */
+EasyPostClient.DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
+
+/**
+ * The default headers used for all EasyPost API requests.
+ * @type {{'Accept': string, 'Content-Type': string, 'User-Agent': string}}
+ */
+EasyPostClient.DEFAULT_HEADERS = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+  'User-Agent': `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${
+    process.versions.node
+  } OS/${os.platform()} OSVersion/${os.release()} OSArch/${os.arch()}`,
+};
+
+/**
+ * A map of HTTP methods to their corresponding string values (for use with superagent).
+ * @type {{DELETE: string, POST: string, GET: string, PUT: string, PATCH: string}}
+ */
+EasyPostClient.METHODS = {
+  GET: 'get',
+  POST: 'post',
+  PUT: 'put',
+  PATCH: 'patch',
+  DELETE: 'del',
+};
+
+/**
+ * The services available for the client (end-user-facing name corresponding to a `BaseService`-based class).
+ * @type {Map}
+ */
+EasyPostClient.SERVICES = {
+  Address: AddressService,
+  ApiKey: ApiKeyService,
+  Batch: BatchService,
+  BetaRate: BetaRateService,
+  BetaReferralCustomer: BetaReferralCustomerService,
+  Billing: BillingService,
+  CarrierAccount: CarrierAccountService,
+  CarrierMetadata: CarrierMetadataService,
+  CarrierType: CarrierTypeService,
+  Claim: ClaimService,
+  CustomsInfo: CustomsInfoService,
+  CustomsItem: CustomsItemService,
+  EndShipper: EndShipperService,
+  Event: EventService,
+  Insurance: InsuranceService,
+  Order: OrderService,
+  Parcel: ParcelService,
+  Pickup: PickupService,
+  Rate: RateService,
+  ReferralCustomer: ReferralCustomerService,
+  Refund: RefundService,
+  Report: ReportService,
+  ScanForm: ScanFormService,
+  Shipment: ShipmentService,
+  SmartRate: SmartRateService,
+  Tracker: TrackerService,
+  User: UserService,
+  Webhook: WebhookService,
+};

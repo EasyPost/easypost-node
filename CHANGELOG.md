@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v7.5.4 (2025-01-22)
+
+- Replaces Webpack with Vite for building the distributable library
+- Fixes the filename for the `AddressCreateParameters` type declaration file (closes #487)
+- Bumps dependencies
+
 ## v7.5.3 (2024-10-02)
 
 - Removes the deprecated `create_list` tracker endpoint function as it is no longer available via API
