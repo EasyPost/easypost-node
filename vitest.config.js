@@ -1,5 +1,5 @@
-import { defineConfig } from 'vitest/config';
 import dotenv from 'dotenv';
+import { defineConfig } from 'vitest/config';
 
 dotenv.config();
 
@@ -10,6 +10,7 @@ export default defineConfig({
     include: ['test/services/**/*.{js,ts}'],
     coverage: {
       provider: 'istanbul',
+      reporter: ['lcov', 'html'],
       include: ['src/**/*.{js,ts}'],
       thresholds: {
         lines: 90,
