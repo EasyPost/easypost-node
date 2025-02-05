@@ -28,3 +28,7 @@ export { IEasyPostOptions } from './EasyPost';
 declare const EasyPostClient: typeof import('./EasyPost').default;
 export = EasyPostClient;
 export as namespace MainClient;
+
+declare module 'easypost' {
+  export = EasyPostClient;
+}
