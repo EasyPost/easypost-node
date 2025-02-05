@@ -23,4 +23,8 @@ export * from './User';
 export * from './utils';
 export * from './Utility';
 export * from './Webhook';
-export { default, IEasyPostOptions } from './EasyPost';
+export { IEasyPostOptions } from './EasyPost';
+
+declare const EasyPostClient: typeof import('./EasyPost').default;
+export = EasyPostClient;
+export as namespace MainClient;
