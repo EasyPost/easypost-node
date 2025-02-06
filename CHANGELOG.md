@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v7.5.5 (2025-02-06)
+
+- Fixes type importing and constructor creation (closes #446)
+
 ## v7.5.4 (2025-01-22)
 
 - Replaces Webpack with Vite for building the distributable library
