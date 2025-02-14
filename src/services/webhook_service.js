@@ -32,10 +32,14 @@ export default (easypostClient) =>
      */
     static async update(id, params) {
       const url = `webhooks/${id}`;
-      try {
-        const response = await easypostClient._patch(url, params);
+      const wrappedParams = {
+        webhook: params,
+      };
 
-        return this._convertToEasyPostObject(response.body, params);
+      try {
+        const response = await easypostClient._patch(url, wrappedParams);
+
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }

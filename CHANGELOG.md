@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Fixes the wrapping of params on the request for the update webhook function
+
 ## v7.5.5 (2025-02-06)
 
 - Fixes type importing and constructor creation (closes #446)

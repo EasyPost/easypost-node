@@ -25,6 +25,7 @@ describe('Webhook Service', function () {
   it('creates a webhook', async function () {
     const webhook = await client.Webhook.create({
       url: Fixture.webhookUrl(),
+      webhook_secret: Fixture.webhookSecret(),
     });
 
     expect(webhook).to.be.an.instanceOf(Webhook);
@@ -67,7 +68,9 @@ describe('Webhook Service', function () {
       url: Fixture.webhookUrl(),
     });
 
-    const updatedWebhook = await client.Webhook.update(webhook.id);
+    const updatedWebhook = await client.Webhook.update(webhook.id, {
+      webhook_secret: Fixture.webhookSecret(),
+    });
 
     expect(updatedWebhook).to.be.an.instanceOf(Webhook);
 
