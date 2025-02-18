@@ -1,7 +1,7 @@
-import { resolve } from 'path';
 import NodeHttpAdapter from '@pollyjs/adapter-node-http';
 import { Polly } from '@pollyjs/core';
 import FSPersister from '@pollyjs/persister-fs';
+import { resolve } from 'path';
 
 import { decodeCassetteResponseBodies, encodeCassetteResponseBodies } from './cassette_encoding';
 
@@ -134,7 +134,7 @@ function setupPollyTests() {
           exclude: headerScrubbers,
         },
       },
-      expiresIn: '180d',
+      expiresIn: '365d',
       expiryStrategy: 'warn',
     });
   });

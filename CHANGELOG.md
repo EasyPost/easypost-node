@@ -3,6 +3,7 @@
 ## Next Release
 
 - Fixes the wrapping of params on the request for the update webhook function
+- Bumps dependencies
 
 ## v7.5.5 (2025-02-06)
 

@@ -1,6 +1,7 @@
 {
   "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
-  "critical": true,
   // Only fail the audit if there are critical vulnerabilities.
-  "allowlist": []
+  "critical": true,
+  // TODO: `GHSA-67mh-4wv8-2f99` requires us to update `vite` once they bump their own dependencies to fix `esbuild`
+  "allowlist": ["GHSA-67mh-4wv8-2f99"]
 }
