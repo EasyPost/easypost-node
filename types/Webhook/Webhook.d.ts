@@ -29,6 +29,11 @@ export declare interface IWebhook extends IObjectWithId<'Webhook'> {
    * the timestamp at which the webhook was most recently disabled (if any)
    */
   disabled_at: string;
+
+  /**
+   * custom headers to add to your webhook
+   */
+  custom_headers: Record<string, string>;
 }
 
 export declare class Webhook implements IWebhook {

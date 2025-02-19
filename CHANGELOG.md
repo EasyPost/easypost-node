@@ -2,7 +2,7 @@
 
 ## Next Release
 
-- Fixes the wrapping of params on the request for the update webhook function
+- Adds `secret` and `custom_headers` properties to Typescript definitions of a Webhook
 - Bumps dependencies
 
 ## v7.5.5 (2025-02-06)
