@@ -33,7 +33,7 @@ export declare interface IWebhook extends IObjectWithId<'Webhook'> {
   /**
    * custom headers to add to your webhook
    */
-  custom_headers: Record<string, string>;
+  custom_headers: Array<{ key: string; value: string }>;
 }
 
 export declare class Webhook implements IWebhook {
