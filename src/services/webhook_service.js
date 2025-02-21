@@ -32,6 +32,7 @@ export default (easypostClient) =>
      */
     static async update(id, params) {
       const url = `webhooks/${id}`;
+
       try {
         const response = await easypostClient._patch(url, params);
 

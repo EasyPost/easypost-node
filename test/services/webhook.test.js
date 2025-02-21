@@ -25,11 +25,15 @@ describe('Webhook Service', function () {
   it('creates a webhook', async function () {
     const webhook = await client.Webhook.create({
       url: Fixture.webhookUrl(),
+      webhook_secret: Fixture.webhookSecret(),
+      custom_headers: Fixture.webhookCustomHeaders(),
     });
 
     expect(webhook).to.be.an.instanceOf(Webhook);
     expect(webhook.id).to.match(/^hook_/);
     expect(webhook.url).to.equal(Fixture.webhookUrl());
+    expect(webhook.custom_headers[0].name).to.equal('test');
+    expect(webhook.custom_headers[0].value).to.equal('header');
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
     await client.Webhook.delete(webhook.id);
@@ -67,9 +71,14 @@ describe('Webhook Service', function () {
       url: Fixture.webhookUrl(),
     });
 
-    const updatedWebhook = await client.Webhook.update(webhook.id);
+    const updatedWebhook = await client.Webhook.update(webhook.id, {
+      webhook_secret: Fixture.webhookSecret(),
+      custom_headers: Fixture.webhookCustomHeaders(),
+    });
 
     expect(updatedWebhook).to.be.an.instanceOf(Webhook);
+    expect(updatedWebhook.custom_headers[0].name).to.equal('test');
+    expect(updatedWebhook.custom_headers[0].value).to.equal('header');
 
     // Remove the webhook once we have tested it so we don't pollute the account with test webhooks
     await client.Webhook.delete(updatedWebhook.id);

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Next Release
+
+- Adds `webhook_secret` and `custom_headers` properties to Typescript definitions of a Webhook
+- Bumps dependencies
+
 ## v7.5.5 (2025-02-06)
 
 - Fixes type importing and constructor creation (closes #446)

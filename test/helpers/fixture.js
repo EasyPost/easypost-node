@@ -140,15 +140,19 @@ export default class Fixture {
   }
 
   static webhookHmacSignature() {
-    return this.readFixtureData().webhook_hmac_signature;
+    return this.readFixtureData().webhooks.hmac_signature;
   }
 
   static webhookSecret() {
-    return this.readFixtureData().webhook_secret;
+    return this.readFixtureData().webhooks.secret;
   }
 
   static webhookUrl() {
-    return this.readFixtureData().webhook_url;
+    return this.readFixtureData().webhooks.url;
+  }
+
+  static webhookCustomHeaders() {
+    return this.readFixtureData().webhooks.custom_headers;
   }
 
   static plannedShipDate() {
