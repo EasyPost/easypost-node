@@ -15,6 +15,7 @@ import TimeoutError from '../../src/errors/api/timeout_error';
 import UnauthorizedError from '../../src/errors/api/unauthorized_error';
 import UnknownApiError from '../../src/errors/api/unknown_api_error';
 import ErrorHandler from '../../src/errors/error_handler';
+import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 describe('Error Service', function () {
@@ -36,6 +37,17 @@ describe('Error Service', function () {
       expect(error.code).to.equal('PARAMETER.REQUIRED');
       expect(error.message).to.equal('Missing required parameter.');
       assert.deepEqual(error.errors[0], { field: 'shipment', message: 'cannot be blank' });
+    });
+  });
+
+  it('pulls out error properties of an API error when using the alternative format', async function () {
+    const claimData = Fixture.basicClaim();
+    claimData.tracking_code = '123'; // Intentionally pass a bad tracking code
+    await client.Claim.create(claimData).catch((error) => {
+      expect(error.statusCode).to.equal(404);
+      expect(error.code).to.equal('NOT_FOUND');
+      expect(error.message).to.equal('The requested resource could not be found.');
+      assert.deepEqual(error.errors[0], 'No eligible insurance found with provided tracking code.');
     });
   });
 
