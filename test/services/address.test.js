@@ -33,18 +33,34 @@ describe('Address Service', function () {
   it('creates an address with verify param', async function () {
     const addressData = Fixture.incorrectAddress();
 
-    // Creating normally (without specifying "verify") will make the address, perform no verifications
+    // Creating normally (without specifying "verify") will make the address and perform no verifications
     let address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.verifications.delivery).to.be.undefined;
 
-    // Creating with verify = true will make the address, perform verifications
+    // Creating with verify = true will make the address and perform verifications
     addressData.verify = true;
     address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
+
+    // Delivery verification assertions
     expect(address.verifications.delivery.success).to.be.false;
+    // TODO: details is not deserializing correctly, related to the larger "double EasyPostObject" wrapping issue
+    // expect(address.verifications.delivery.details).to.equal({});
+    expect(address.verifications.delivery.errors[0].code).to.equal('E.ADDRESS.NOT_FOUND');
+    expect(address.verifications.delivery.errors[0].field).to.equal('address');
+    expect(address.verifications.delivery.errors[0].suggestion).to.be.null;
+    expect(address.verifications.delivery.errors[0].message).to.equal('Address not found');
+
+    // Zip4 verification assertions
+    expect(address.verifications.zip4.success).to.be.false;
+    expect(address.verifications.zip4.details).to.be.null;
+    expect(address.verifications.zip4.errors[0].code).to.equal('E.ADDRESS.NOT_FOUND');
+    expect(address.verifications.zip4.errors[0].field).to.equal('address');
+    expect(address.verifications.zip4.errors[0].suggestion).to.be.null;
+    expect(address.verifications.zip4.errors[0].message).to.equal('Address not found');
   });
 
   it('creates an address with verify_strict param', async function () {
