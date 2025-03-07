@@ -34,7 +34,7 @@ export class MockMiddleware {
   // eslint-disable-next-line class-methods-use-this,no-unused-vars,consistent-return
   send(body) {
     // we don't need to do anything with the body
-    const mockRequest = this.findMatchingMockRequest(this.request);
+    const mockRequest = this._findMatchingMockRequest(this.request);
     if (mockRequest) {
       this.body = mockRequest.responseInfo.body;
       return mockRequest.responseInfo;
@@ -45,7 +45,7 @@ export class MockMiddleware {
   // eslint-disable-next-line no-unused-vars
   query(params) {
     // we don't need to do anything with the params
-    const mockRequest = this.findMatchingMockRequest(this.request);
+    const mockRequest = this._findMatchingMockRequest(this.request);
     if (mockRequest) {
       this.body = mockRequest.responseInfo.body;
       return mockRequest.responseInfo;
@@ -53,8 +53,10 @@ export class MockMiddleware {
     return {};
   }
 
-  // TODO: Make private in the future
-  findMatchingMockRequest(request) {
+  /**
+   * @private
+   */
+  _findMatchingMockRequest(request) {
     // for each mock request, check if the method and url match
     for (let i = 0; i < this.mockRequests.length; i += 1) {
       const mockRequest = this.mockRequests[i];

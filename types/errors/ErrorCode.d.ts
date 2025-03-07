@@ -1,4 +1,3 @@
-// TODO: there seems to be a lot of duplicate codes listed here https://www.easypost.com/errors-guide
 export declare type TErrorCode =
   | 'ADDRESS.COUNTRY.INVALID'
   | 'ADDRESS.PARAMETERS.INVALID_CHARACTER'

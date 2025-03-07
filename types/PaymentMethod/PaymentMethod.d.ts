@@ -2,8 +2,6 @@ import { IObjectWithId } from '../base';
 
 /**
  * The Payment method object can be either credit card or bank account.
- *
- * TODO: Add the link to the API doc once its updated
  */
 export declare interface IPaymentMethod extends IObjectWithId<'PaymentMethod'> {
   /**
