@@ -47,8 +47,7 @@ describe('Address Service', function () {
 
     // Delivery verification assertions
     expect(address.verifications.delivery.success).to.be.false;
-    // TODO: details is not deserializing correctly, related to the larger "double EasyPostObject" wrapping issue
-    // expect(address.verifications.delivery.details).to.equal({});
+    expect(address.verifications.delivery.details).to.not.be.null;
     expect(address.verifications.delivery.errors[0].code).to.equal('E.ADDRESS.NOT_FOUND');
     expect(address.verifications.delivery.errors[0].field).to.equal('address');
     expect(address.verifications.delivery.errors[0].suggestion).to.be.null;

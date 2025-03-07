@@ -2,7 +2,10 @@
 
 ## Next Release
 
+- Drop support for Node 12, 13, 14, and 15
 - Adds `webhook_secret` and `custom_headers` properties to Typescript definitions of a Webhook
+- `findMatchingMockRequest` mocking function made private
+- Removes undocumented and unmaintained `repl`
 - Bumps dependencies
 
 ## v7.5.5 (2025-02-06)
