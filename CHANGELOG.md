@@ -3,6 +3,7 @@
 ## Next Release
 
 - Adds `webhook_secret` and `custom_headers` properties to Typescript definitions of a Webhook
+- Removes undocumented and unmaintained `repl`
 - Bumps dependencies
 
 ## v7.5.5 (2025-02-06)
