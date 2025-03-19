@@ -4,6 +4,12 @@
 
 - Drop support for Node 12, 13, 14, and 15
 - Adds `webhook_secret` and `custom_headers` properties to Typescript definitions of a Webhook
+- Adds the following functions to assist ReferralCustomers add credit cards and bank accounts:
+  - `betaReferralCustomer.createCreditCardClientSecret`
+  - `betaReferralCustomer.createBankAccountClientSecret`
+  - `referralCustomer.addCreditCardFromStripe`
+  - `referralCustomer.addBankAccountFromStripe`
+- Properly returns the response body of the following functions: `addPaymentMethod`, `refundByAmount`, `refundByPaymentLog`
 - `findMatchingMockRequest` mocking function made private
 - Removes undocumented and unmaintained `repl`
 - Bumps dependencies

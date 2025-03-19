@@ -42,4 +42,16 @@ describe('BetaReferralCustomerService', function () {
       expect(error.message).to.equal('We could not find a transaction with that id.');
     });
   });
+
+  it('returns a client secret for credit cards', async function () {
+    const response = await client.BetaReferralCustomer.createCreditCardClientSecret();
+
+    expect(response.client_secret).to.match(/^seti_/);
+  });
+
+  it('returns a client secret for bank accounts', async function () {
+    const response = await client.BetaReferralCustomer.createBankAccountClientSecret();
+
+    expect(response.client_secret).to.match(/^fcsess_client_secret_/);
+  });
 });
