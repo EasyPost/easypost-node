@@ -162,4 +162,8 @@ export default class Fixture {
   static plannedDeliveryDate() {
     return '2024-08-03';
   }
+
+  static billing() {
+    return this.readFixtureData().billing;
+  }
 }

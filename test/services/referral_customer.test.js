@@ -90,4 +90,33 @@ describe('ReferralCustomer Service', function () {
     expect(paymentMethod.id).to.match(/^pm_/);
     expect(paymentMethod.last4).to.equal('6170');
   });
+
+  it('raises an error when adding a credit card from Stripe fails', async function () {
+    const billing = Fixture.billing();
+
+    await client.ReferralCustomer.addCreditCardFromStripe(
+      referralUserProdApiKey,
+      billing.payment_method_id,
+      billing.priority,
+    ).catch((error) => {
+      expect(error.message).to.equal(
+        'Stripe::PaymentMethod does not exist for the specified reference_id',
+      );
+    });
+  });
+
+  it('raises an error when adding a bank account from Stripe fails', async function () {
+    const billing = Fixture.billing();
+
+    await client.ReferralCustomer.addBankAccountFromStripe(
+      referralUserProdApiKey,
+      billing.financial_connections_id,
+      billing.mandate_data,
+      billing.priority,
+    ).catch((error) => {
+      expect(error.message).to.equal(
+        'account_holder_name must be present when creating a Financial Connections payment method',
+      );
+    });
+  });
 });

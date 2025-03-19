@@ -121,7 +121,7 @@ export default (easypostClient) =>
     }
 
     /**
-     * Add a credit card to a {@link User referral customer's} account.
+     * Add a credit card to EasyPost for a ReferralCustomer without needing a Stripe account. This function requires the ReferralCustomer User's API key.
      * See {@link https://www.easypost.com/docs/api/node#create-credit-card EasyPost API Documentation} for more information.
      * @param {string} referralApiKey - The referral customer's production API key.
      * @param {string} number - The credit card number.
@@ -157,6 +157,51 @@ export default (easypostClient) =>
       ); // will throw if there's an error
 
       return paymentMethod;
+    }
+
+    /**
+     * Add a credit card to EasyPost for a ReferralCustomer with a payment method ID from Stripe.
+     * This function requires the ReferralCustomer User's API key.
+     * @returns {object} - A JSON object representing the credit card.
+     */
+    static async addCreditCardFromStripe(referralApiKey, paymentMethodId, priority = 'primary') {
+      const _client = _getReferralClient(easypostClient, referralApiKey);
+      const params = {
+        credit_card: {
+          payment_method_id: paymentMethodId,
+          priority: priority,
+        },
+      };
+      const url = 'credit_cards';
+
+      const response = await _client._post(url, params);
+
+      return this._convertToEasyPostObject(response.body, params);
+    }
+
+    /**
+     * Add a bank account to EasyPost for a ReferralCustomer.
+     * This function requires the ReferralCustomer User's API key.
+     * @returns {object} - A JSON object representing the bank account.
+     */
+    static async addBankAccountFromStripe(
+      referralApiKey,
+      financialConnectionsId,
+      mandateData,
+      priority = 'primary',
+    ) {
+      const _client = _getReferralClient(easypostClient, referralApiKey);
+      const params = {
+        financial_connections_id: financialConnectionsId,
+        mandate_data: mandateData,
+        priority: priority,
+      };
+
+      const url = 'bank_accounts';
+
+      const response = await _client._post(url, params);
+
+      return this._convertToEasyPostObject(response.body, params);
     }
 
     /**

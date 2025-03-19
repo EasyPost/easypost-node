@@ -10,7 +10,7 @@ export default (easypostClient) =>
      * @returns {Object} - A JSON object representing the payment method.
      */
     static async addPaymentMethod(stripeCustomerId, paymentMethodReference, priority = 'primary') {
-      const wrappedParams = {
+      const params = {
         payment_method: {
           stripe_customer_id: stripeCustomerId,
           payment_method_reference: paymentMethodReference,
@@ -20,9 +20,9 @@ export default (easypostClient) =>
 
       const url = 'beta/referral_customers/payment_method';
 
-      const response = await easypostClient._post(url, wrappedParams);
+      const response = await easypostClient._post(url, params);
 
-      return response;
+      return response.body;
     }
 
     /**
@@ -39,7 +39,7 @@ export default (easypostClient) =>
 
       const response = await easypostClient._post(url, params);
 
-      return response;
+      return response.body;
     }
 
     /**
@@ -56,6 +56,32 @@ export default (easypostClient) =>
 
       const response = await easypostClient._post(url, params);
 
-      return response;
+      return response.body;
+    }
+
+    /**
+     * Creates a client secret to use with Stripe when adding a credit card.
+     * @returns {object} - A JSON object representing the client secret.
+     */
+    static async createCreditCardClientSecret() {
+      const url = 'beta/setup_intents';
+
+      const response = await easypostClient._post(url, null);
+
+      return response.body;
+    }
+
+    /**
+     * Creates a client secret to use with Stripe when adding a credit card.
+     * @returns {object} - A JSON object representing the client secret.
+     */
+    static async createBankAccountClientSecret(returnUrl) {
+      const params = returnUrl ? { return_url: returnUrl } : null;
+
+      const url = 'beta/financial_connections_sessions';
+
+      const response = await easypostClient._post(url, params);
+
+      return response.body;
     }
   };
