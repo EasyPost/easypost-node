@@ -2,7 +2,7 @@ import Constants from '../constants';
 import EasyPostObject from './easypost_object';
 
 /**
- * A {@link https://www.easypost.com/docs/api/node#shipments Shipment} represents a physical {@link Parcel}, the origin and destination {@link Address Addresses}, and any associated {@link CustomsInfo}.
+ * A {@link https://docs.easypost.com/docs/shipments Shipment} represents a physical {@link Parcel}, the origin and destination {@link Address Addresses}, and any associated {@link CustomsInfo}.
  * @public
  * @extends EasyPostObject
  */

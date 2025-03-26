@@ -7,7 +7,7 @@ import { IEventListParameters } from './EventListParameters';
  * For this reason, we strongly encourage your webhook handler to be idempotent.
  * See the webhooks guide for more information.
  *
- * @see https://www.easypost.com/docs/api/node#events
+ * @see https://docs.easypost.com/docs/events
  */
 export declare interface IEvent extends IObjectWithId<'Event'>, IDatedObject {
   /**
@@ -79,7 +79,7 @@ export declare class Event implements IEvent {
    *
    * This automatically reuses the parameters from the previous call or the original {@link Event.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-events
+   * @see https://docs.easypost.com/docs/events#retrieve-all-events
    *
    * @param {Object} events - The previous page of events (the response from the last {@link Event.getNextPage} or {@link Event.all} call).
    * @param {number} [pageSize] - The number of events to retrieve per page, optional. Defaults to server-side default.

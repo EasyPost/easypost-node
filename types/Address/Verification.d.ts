@@ -2,7 +2,7 @@ import { IFieldError } from '../errors';
 import { IVerificationDetails } from './VerificationDetails';
 
 /**
- * @see https://www.easypost.com/docs/api/node#verification-object
+ * @see https://docs.easypost.com/docs/addresses#verification-object
  */
 export declare interface IVerification {
   /**

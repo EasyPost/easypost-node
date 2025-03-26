@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class ScanFormService extends baseService(easypostClient) {
     /**
      * Create a {@link ScanForm scan form}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-scanform EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/scan-form#create-a-scanform EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a scan form with.
      * @returns {ScanForm} - The created scan form.
      */
@@ -36,7 +36,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link ScanForm scan forms} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-scanforms EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/scan-form#retrieve-all-scanforms EasyPost API Documentation} for more information.
      * @param {Object} [params] - The parameters to filter the scan forms by.
      * @returns {Object} - An object containing the list of {@link ScanForm scan forms} and pagination information.
      */
@@ -59,7 +59,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link ScanForm scan form} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-scanform EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/scan-form#retrieve-a-scanform EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the scan form to retrieve.
      * @returns {ScanForm} - The retrieved scan form.
      */

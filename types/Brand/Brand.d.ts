@@ -3,7 +3,7 @@ import { IObjectWithId } from '../base';
 /**
  * The Brand class represents the public-accessible information about a user's brand, including logos, colors and themes.
  *
- * @see https://www.easypost.com/docs/api/node#brand
+ * @see https://docs.easypost.com/docs/users/brand
  */
 export declare interface IBrand extends IObjectWithId<'Brand'> {
   /**
@@ -64,7 +64,7 @@ export declare class Brand implements IBrand {
   /**
    * Update the brand of the current authenticated user.
    *
-   * @see https://www.easypost.com/docs/api/node#update-a-brand
+   * @see https://docs.easypost.com/docs/users/brand#update-a-brand
    *
    * @param params The parameters to update the {@link Brand} with
    * @returns {Promise<Brand>} The updated Brand.

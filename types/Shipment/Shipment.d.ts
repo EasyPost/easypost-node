@@ -21,7 +21,7 @@ import { IShipmentListParameters } from './ShipmentListParameters';
  *
  * A Shipment created with a valid to_address, from_address, and parcel will automatically populate its rates attribute.
  *
- * @see https://www.easypost.com/docs/api/node#shipment-object
+ * @see https://docs.easypost.com/docs/shipments#shipment-object
  */
 export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObject {
   /**
@@ -194,7 +194,7 @@ export declare class Shipment implements IShipment {
    *
    * You can limit the CarrierAccounts to use for rating by passing the carrier_accounts parameter.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-shipment
+   * @see https://docs.easypost.com/docs/shipments#create-a-shipment
    *
    * @param {Object} params The parameters to create an {@link Shipment} with.
    * @returns {Promise<Shipment>} The created {@link Shipment}.
@@ -207,7 +207,7 @@ export declare class Shipment implements IShipment {
    * The `has_more` attribute indicates whether additional pages can be requested.
    * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
+   * @see https://docs.easypost.com/docs/shipments#retrieve-all-shipments
    *
    * @param params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
@@ -220,7 +220,7 @@ export declare class Shipment implements IShipment {
    * A Shipment can be retrieved by either its id or reference.
    * However, it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-shipment
+   * @see https://docs.easypost.com/docs/shipments#retrieve-a-shipment
    *
    * @param {string} id Unique, begins with "shp_".
    * @returns {Promise<Shipment>} The created {@link Shipment}.
@@ -237,7 +237,7 @@ export declare class Shipment implements IShipment {
    * To specify an amount to insure, pass the insurance attribute as a string.
    * The currency of all insurance is USD.
    *
-   * @see https://www.easypost.com/docs/api/node#buy-a-shipment
+   * @see https://docs.easypost.com/docs/shipments#buy-a-shipment
    *
    * @param id shipment id (begins with "shp_").
    * @param rate rate id (begins with "rate_") or rate object.
@@ -262,7 +262,7 @@ export declare class Shipment implements IShipment {
    * Refunds created very shortly after a label is generated may be improperly flagged as invalid, but you may retry a refund with the "rejected" status by submitting the same request again.
    * Carriers that are bill-on-scan tend to have refunds attempts return as "not_applicable", which will not change with multiple retries.
    *
-   * @see https://www.easypost.com/docs/api/node#refund-a-shipment
+   * @see https://docs.easypost.com/docs/shipments/shipping-refund#refund-a-shipment
    *
    * @param id shipment id (begins with "shp_").
    * @returns {Promise<Shipment>} The created {@link Shipment}.
@@ -281,7 +281,7 @@ export declare class Shipment implements IShipment {
    * A Shipment's PostageLabel can be converted from PNG to other formats.
    * If the PostageLabel was originally generated in a format other than PNG it cannot be converted.
    *
-   * @see https://www.easypost.com/docs/api/node#convert-the-label-format-of-a-shipment
+   * @see https://docs.easypost.com/docs/shipments#converting-the-label-format-of-a-shipment
    *
    * @param id shipment id (begins with "shp_").
    * @param format Format of the label ("PNG", "PDF", "ZPL", and "EPL2").
@@ -293,7 +293,7 @@ export declare class Shipment implements IShipment {
    * You can update the Rates of a Shipment at any time.
    * This operation respects the `carrier_accounts` attribute.
    *
-   * @see https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment
+   * @see https://docs.easypost.com/docs/shipments/rates#regenerate-rates-for-a-shipment
    *
    * @param id shipment id (begins with "shp_").
    * @returns {Promise<Shipment>} The created {@link Shipment}.
@@ -307,7 +307,7 @@ export declare class Shipment implements IShipment {
    *
    * To buy insurance, first purchase the Shipment, then make the insurance call before the package begins being handled by the carrier.
    *
-   * @see https://www.easypost.com/docs/api/node#insure-a-shipment
+   * @see https://docs.easypost.com/docs/shipments/shipping-insurance#insure-a-shipment
    *
    * @param id shipment id (begins with "shp_").
    * @param amount amount to insure the shipment for.
@@ -347,7 +347,7 @@ export declare class Shipment implements IShipment {
    *
    * This automatically reuses the parameters from the previous call or the original {@link Shipment.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
+   * @see https://docs.easypost.com/docs/shipments#retrieve-all-shipments
    *
    * @param {Object} shipments - The previous page of shipments (the response from the last {@link Shipment.getNextPage} or {@link Shipment.all} call).
    * @param {number} [pageSize] - The number of shipments to retrieve per page, optional. Defaults to server-side default.

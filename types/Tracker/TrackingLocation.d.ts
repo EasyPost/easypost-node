@@ -1,7 +1,7 @@
 import { IBaseObject } from '../base';
 
 /**
- * @see https://www.easypost.com/docs/api/node#tracking-location-object
+ * @see https://docs.easypost.com/docs/trackers#trackinglocation-object
  */
 export declare interface ITrackingLocation extends IBaseObject<'TrackingLocation'> {
   /**

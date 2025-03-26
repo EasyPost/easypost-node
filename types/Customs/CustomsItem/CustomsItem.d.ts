@@ -5,7 +5,7 @@ import { ICustomsItemCreateParameters } from './CustomsItemCreateParameters';
 /**
  * A CustomsItem object describes goods for international shipment and should be created then included in a CustomsInfo object.
  *
- * @see https://www.easypost.com/docs/api/node#customs-item-object
+ * @see https://docs.easypost.com/docs/customs-items-object
  */
 export declare interface ICustomsItem extends IObjectWithId<'CustomsItem'>, IDatedObject {
   /**
@@ -74,7 +74,7 @@ export declare class CustomsItem implements ICustomsItem {
   /**
    * A CustomsItem contains information relating to each product within the package. When creating a customs item, you may store the ID from the response for use later in CustomsInfo creation.
    *
-   * @see https://www.easypost.com/docs/api#create-a-customs-item
+   * @see https://docs.easypost.com/docs/customs-items#create-a-customsitem
    *
    * @param {Object} params The parameters to create an {@link CustomsItem} with.
    * @returns {Promise<CustomsItem>} The {@link CustomsItem}.
@@ -86,7 +86,7 @@ export declare class CustomsItem implements ICustomsItem {
    *
    * @param CustomsItemId Unique, begins with "cstitem_"
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-customs-item
+   * @see https://docs.easypost.com/docs/customs-items#retrieve-a-customsitem
    *
    * @returns {Promise<CustomsItem>} The {@link CustomsItem}.
    */

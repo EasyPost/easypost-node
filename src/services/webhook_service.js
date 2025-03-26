@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class WebhookService extends baseService(easypostClient) {
     /**
      * Create a {@link Webhook webhook}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-webhook EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/webhooks#create-a-webhook EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a webhook with.
      * @returns {Webhook} - The created webhook.
      */
@@ -25,7 +25,7 @@ export default (easypostClient) =>
     /**
      * Update a {@link Webhook webhook}.
      * A disabled webhook will be re-enabled if it is updated.
-     * See {@link https://www.easypost.com/docs/api/node#update-a-webhook EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/webhooks#update-a-webhook EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the webhook to update.
      * @param {Object} params - The parameters to update the webhook with.
      * @returns {Webhook} - The updated webhook.
@@ -44,7 +44,7 @@ export default (easypostClient) =>
 
     /**
      * Delete a {@link Webhook webhook}.
-     * See {@link https://www.easypost.com/docs/api/node#delete-a-webhook EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/webhooks#delete-a-webhook EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the webhook to delete.
      * @returns {Promise|Promise<never>} - A promise that resolves if the webhook was successfully deleted.
      */
@@ -62,7 +62,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Webhook webhooks} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#list-a-webhooks EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/webhooks#retrieve-all-webhooks EasyPost API Documentation} for more information.
      * @param {Object} [params]
      * @returns {Webhook[]}
      */
@@ -74,7 +74,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Webhook webhook} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-webhook EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/webhooks#retrieve-a-webhook EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the webhook to retrieve.
      * @returns {Webhook} - The retrieved webhook.
      */

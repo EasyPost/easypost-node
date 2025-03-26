@@ -2,7 +2,7 @@ import Constants from '../constants';
 import EasyPostObject from './easypost_object';
 
 /**
- * An {@link https://www.easypost.com/docs/api/node#orders Order} represents a collection of packages, intended only for multi-parcel shipments.
+ * An {@link https://docs.easypost.com/docs/orders Order} represents a collection of packages, intended only for multi-parcel shipments.
  * @public
  * @extends EasyPostObject
  */

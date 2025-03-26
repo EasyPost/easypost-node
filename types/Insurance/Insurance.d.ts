@@ -21,7 +21,7 @@ import { TInsuranceStatus } from './InsuranceStatus';
  * This means that a Shipment with "is_return: true" actually ships to the listed From Address.
  * Insurance does not have a concept of "is_return", so all insurance records refer to their true package destination as "to_address", regardless of whether or not the shipment is a return.
  *
- * @see https://www.easypost.com/docs/api/node#insurance-object
+ * @see https://docs.easypost.com/docs/insurance#insurance-object
  */
 export declare interface IInsurance extends IObjectWithId<'Insurance'>, IDatedObject {
   /**
@@ -115,7 +115,7 @@ export declare class Insurance implements IInsurance {
    * Providing a carrier parameter is recommended, since some tracking_codes are ambiguous and may match with more than one carrier.
    * In addition, not having to auto-match the carrier will significantly speed up the response time.
    *
-   * @see https://www.easypost.com/docs/api/node#create-an-insurance
+   * @see https://docs.easypost.com/docs/insurance#create-an-insurance
    *
    * @param {Object} params The parameters to create an {@link Insurance} with.
    * @returns {Promise<Insurance>} The created and verified {@link Insurance}.
@@ -128,7 +128,7 @@ export declare class Insurance implements IInsurance {
    * The has_more attribute indicates whether or not additional pages can be requested.
    * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
+   * @see https://docs.easypost.com/docs/insurance#retrieve-all-insurances
    *
    * @returns {Object} - An object containing a list of {@link Insurance insurance} and pagination information.
    */
@@ -139,7 +139,7 @@ export declare class Insurance implements IInsurance {
   /**
    * Retrieve an Insurance by id.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-an-insurance
+   * @see https://docs.easypost.com/docs/insurance#retrieve-an-insurance
    *
    * @param insuranceId Unique, starts with "ins_"
    * @returns {Promise<Insurance>} The retrieved {@link Insurance}.
@@ -151,7 +151,7 @@ export declare class Insurance implements IInsurance {
    *
    * This automatically reuses the parameters from the previous call or the original {@link Insurance.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances
+   * @see https://docs.easypost.com/docs/insurance#retrieve-all-insurances
    *
    * @param {Object} insurances - The previous page of insurances (the response from the last {@link Insurance.getNextPage} or {@link Insurance.all} call).
    * @param {number} [pageSize] - The number of insurances to retrieve per page, optional. Defaults to server-side default.
@@ -165,7 +165,7 @@ export declare class Insurance implements IInsurance {
   /**
    * Refund an Insurance by id.
    *
-   * @see https://www.easypost.com/docs/api/node#refund-an-insurance
+   * @see https://docs.easypost.com/docs/insurance#refund-an-insurance
    *
    * @param insuranceId Unique, starts with "ins_"
    * @returns {Promise<Insurance>} The refunded {@link Insurance}.

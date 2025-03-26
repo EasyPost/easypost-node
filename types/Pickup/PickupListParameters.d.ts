@@ -1,6 +1,6 @@
 import { IAllMethodParameters } from '../utils';
 
 /**
- * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-pickups
+ * @see https://docs.easypost.com/docs/pickups#retrieve-all-pickups
  */
 export declare interface IPickupListParameters extends IAllMethodParameters {}

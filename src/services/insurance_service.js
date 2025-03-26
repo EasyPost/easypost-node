@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class InsuranceService extends baseService(easypostClient) {
     /**
      * Create an {@link Insurance insurance} record.
-     * See {@link https://www.easypost.com/docs/api/node#create-an-insurance EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/insurance#create-an-insurance EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the insurance to be created.
      * @returns {Insurance} - The created insurance.
      */
@@ -24,7 +24,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Insurance} records associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-insurances EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/insurance#retrieve-all-insurances EasyPost API Documentation} for more information.
      * @param {Object} [params] - Parameters to filter the insurance records.
      * @returns {Object} - An object containing the list of {@link Insurance insurance} records and pagination information.
      */
@@ -47,7 +47,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve an {@link Insurance insurance} record by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-an-insurance EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/insurance#retrieve-an-insurance EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the insurance to retrieve.
      * @returns {Insurance} - The retrieved insurance.
      */
@@ -59,7 +59,7 @@ export default (easypostClient) =>
 
     /**
      * Refund an {@link Insurance insurance} record by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#refund-an-insurance EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/insurance#refund-an-insurance EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the insurance to be refunded.
      * @returns {Insurance} - The refunded insurance.
      */

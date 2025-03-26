@@ -17,7 +17,7 @@ import { IWebhookListParameters } from './WebhookListParameters';
  * A 200 is preferred, but any 2XX status will indicate to our system that the Webhook request was successful.
  * Endpoints that return a large volume and rate of failures over a period of time will get automatically disabled by the system; a disabled Webhook can be re-enabled using the Webhook update endpoint.
  *
- * @see https://www.easypost.com/docs/api/node#webhook-object
+ * @see https://docs.easypost.com/docs/webhooks#webhook-object
  */
 export declare interface IWebhook extends IObjectWithId<'Webhook'> {
   /**
@@ -48,7 +48,7 @@ export declare class Webhook implements IWebhook {
   /**
    * To create a Webhook, you simply need to provide a url parameter that you wish to receive notifications to.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-webhook
+   * @see https://docs.easypost.com/docs/webhooks#create-a-webhook
    *
    * @param {Object} params The parameters to create an {@link Webhook} with
    * @returns {Promise<Webhook>} The created and verified {@link Webhook}
@@ -58,7 +58,7 @@ export declare class Webhook implements IWebhook {
   /**
    * Enables a Webhook that has been disabled. You can also secure your webhook by adding a webhook_secret.
    *
-   * @see https://www.easypost.com/docs/api/node#update-a-webhook
+   * @see https://docs.easypost.com/docs/webhooks#update-a-webhook
    *
    * @param webhookId Unique, starts with "hook_"
    * @param params The parameters to update an {@link Webhook} with
@@ -69,7 +69,7 @@ export declare class Webhook implements IWebhook {
   /**
    * Retrieve an unpaginated list of all Webhooks available to the authenticated account.
    *
-   * @see https://www.easypost.com/docs/api/node#list-a-webhooks
+   * @see https://docs.easypost.com/docs/webhooks#retrieve-all-webhooks
    *
    * @param {Object} params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Webhook webhooks} and pagination information.
@@ -81,7 +81,7 @@ export declare class Webhook implements IWebhook {
    *
    * @param webhookId Unique, starts with "hook_"
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-webhook
+   * @see https://docs.easypost.com/docs/webhooks#retrieve-a-webhook
    *
    * @returns {Promise<Webhook>} The created and verified {@link Webhook}
    */
@@ -92,7 +92,7 @@ export declare class Webhook implements IWebhook {
    *
    * @param webhookId Unique, starts with "hook_"
    *
-   * @see https://www.easypost.com/docs/api/node#delete-a-webhook
+   * @see https://docs.easypost.com/docs/webhooks#delete-a-webhook
    */
   static delete(webhookId: string): void;
 }

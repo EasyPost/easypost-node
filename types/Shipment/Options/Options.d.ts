@@ -5,7 +5,7 @@ import { TPrintCustomCode } from './PrintCustomCode';
  * Shipments can have a variety of additional options which you can specify when creating a shipment.
  * The Options object can be populated with the keys below.
  *
- * @see https://www.easypost.com/docs/api/node#options-object
+ * @see https://docs.easypost.com/docs/shipments/options#options-object
  */
 export declare interface IOptions {
   /**
@@ -230,7 +230,7 @@ export declare interface IOptions {
    * Supported label formats include "PNG", "PDF", "ZPL", and "EPL2".
    * "PNG" is the only format that allows for conversion.
    *
-   * @see https://www.easypost.com/docs/api#convert-the-label-format-of-a-shipment
+   * @see https://docs.easypost.com/docs/shipments#converting-the-label-format-of-a-shipment
    */
   label_format?: LabelFormat | null;
 

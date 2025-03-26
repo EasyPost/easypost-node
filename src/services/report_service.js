@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class ReportService extends baseService(easypostClient) {
     /**
      * Create a {@link Report report}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-report EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/reports#create-a-report EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a report with.
      * @returns {Report} - The created report.
      */
@@ -19,7 +19,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Report reports} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-reports EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/reports#retrieve-all-reports EasyPost API Documentation} for more information.
      * @param {Object} [params] - The parameters to filter the reports by.
      * @returns {Object} - An object containing the list of {@link Report reports} and pagination information.
      */
@@ -56,7 +56,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Report report} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-report EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/reports#retrieve-a-report EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the report to retrieve.
      * @returns {Report} - The retrieved report.
      */

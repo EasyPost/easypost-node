@@ -1,5 +1,5 @@
 /**
- * @see https://www.easypost.com/docs/api/node#carrier-account-field-object
+ * @see https://docs.easypost.com/docs/carrier-accounts#fields-object
  */
 export declare interface ICarrierAccountField {
   /**

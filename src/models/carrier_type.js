@@ -1,7 +1,7 @@
 import EasyPostObject from './easypost_object';
 
 /**
- * A {@link https://www.easypost.com/docs/api/node#carrier-types CarrierType} represents the valid fields for a {@link CarrierAccount carrier account}.
+ * A {@link https://docs.easypost.com/docs/carrier-types CarrierType} represents the valid fields for a {@link CarrierAccount carrier account}.
  * @public
  * @extends EasyPostObject
  */

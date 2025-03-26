@@ -7,7 +7,7 @@ import { IUserCreateParameters } from './UserCreateParameters';
  *
  * Balance and recharge values on User objects are expressed in higher precision USD.
  *
- * @see https://www.easypost.com/docs/api/node#user-object
+ * @see https://docs.easypost.com/docs/users-object
  */
 export declare interface IUser extends IObjectWithId<'User'> {
   /**
@@ -100,7 +100,7 @@ export declare class User implements IUser {
   /**
    * Creates a child user.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-child-user
+   * @see https://docs.easypost.com/docs/users/child-users#create-a-child-user
    * @requires production API Key.
    *
    * @param {Object} params The parameters to create an {@link User} with.
@@ -112,7 +112,7 @@ export declare class User implements IUser {
    * Retrieve a child user.
    * @requires production API Key.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-user
+   * @see https://docs.easypost.com/docs/users#retrieve-a-user
    *
    * @param {string} id ID of the child user to retrieve
    * @param urlPrefix Override the prefix to use for the request URL, optional
@@ -124,7 +124,7 @@ export declare class User implements IUser {
    * Retrieve the current authenticated user.
    * @requires production API Key.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-user
+   * @see https://docs.easypost.com/docs/users#retrieve-a-user
    *
    * @returns {Promise<User>} The current authenticated user.
    */
@@ -139,7 +139,7 @@ export declare class User implements IUser {
    * Update requests for Users are partial updates. Only attributes specifically passed in will be updated.
    * The current_password attribute is required when updating email or password.
    *
-   * @see https://www.easypost.com/docs/api/node#update-a-user
+   * @see https://docs.easypost.com/docs/users#update-a-user
    * @requires production API Key.
    *
    * @param id The id of the user
@@ -165,7 +165,7 @@ export declare class User implements IUser {
    * The has_more attribute indicates whether additional pages can be requested.
    * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
-   * @see https://www.easypost.com/docs/api/node#child-users
+   * @see https://docs.easypost.com/docs/users/child-users#retrieve-all-child-users
    *
    * @param {Object} params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Children children} and pagination information.
@@ -177,7 +177,7 @@ export declare class User implements IUser {
    *
    * This automatically reuses the parameters from the previous call or the original {@link User.allChildren} call.
    *
-   * @see https://www.easypost.com/docs/api/node#child-users
+   * @see https://docs.easypost.com/docs/users/child-users#retrieve-all-child-users
    *
    * @param {Object} children - The previous page of child users (the response from the last {@link User.getNextPage} or {@link User.allChildren} call).
    * @param {number} [pageSize] - The number of child users to retrieve per page, optional. Defaults to server-side default.

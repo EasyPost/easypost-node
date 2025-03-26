@@ -2,7 +2,7 @@ import { IBaseObject } from '../base';
 import { ITrackingLocation } from './TrackingLocation';
 
 /**
- * @see https://www.easypost.com/docs/api/node#carrier-detail-object
+ * @see https://docs.easypost.com/docs/trackers#carrierdetail-object
  */
 export declare interface ICarrierDetail extends IBaseObject<'CarrierDetail'> {
   /**

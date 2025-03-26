@@ -19,7 +19,7 @@ import { TReportObjectType } from './ReportObjectType';
  *  - shipment_invoice
  *  - tracker
  *
- * @see https://www.easypost.com/docs/api/node#report-object
+ * @see https://docs.easypost.com/docs/reports#report-object
  */
 export declare interface IReport extends IObjectWithId<TReportObjectType>, IDatedObject {
   /**
@@ -85,7 +85,7 @@ export declare class Report implements IReport {
    *
    * When a Report's status changes, a webhook will be created. See our Webhooks Guide for help on Event handling.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-report
+   * @see https://docs.easypost.com/docs/reports#create-a-report
    *
    * @param {Object} params The parameters to create an {@link Report} with.
    * @returns {Promise<Report>} The created and verified {@link Report}.
@@ -98,7 +98,7 @@ export declare class Report implements IReport {
    * be requested. The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where
    * the next page begins.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-reports
+   * @see https://docs.easypost.com/docs/reports#retrieve-all-reports
    *
    * @param params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Report reports} and pagination information.
@@ -111,7 +111,7 @@ export declare class Report implements IReport {
    * @param reportId Unique, starts with the prefix for that particular report,
    * eg: "cfrep_", "plrep_", "refrep_", "shprep_", "shpinvrep_", "trkrep_"
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-report
+   * @see https://docs.easypost.com/docs/reports#retrieve-a-report
    */
   static retrieve(reportId: string): Promise<Report>;
 
@@ -120,7 +120,7 @@ export declare class Report implements IReport {
    *
    * This automatically reuses the parameters from the previous call or the original {@link Report.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-reports
+   * @see https://docs.easypost.com/docs/reports#retrieve-all-reports
    *
    * @param {Object} reports - The previous page of reports (the response from the last {@link Report.getNextPage} or {@link Report.all} call).
    * @param {number} [pageSize] - The number of reports to retrieve per page, optional. Defaults to server-side default.

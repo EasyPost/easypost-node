@@ -5,7 +5,7 @@
  * It is important to note that the message value for any member of this list comes directly from the carrier, not from EasyPost.
  * This means that if you see an authentication or other non-shipping error here, it is not an issue between you and EasyPost, it is an issue between you and the carrier, or an issue with the given data.
  *
- * @see https://www.easypost.com/docs/api/node#message-object
+ * @see https://docs.easypost.com/docs/shipments/messages#message-object
  */
 export declare interface IMessage {
   /**

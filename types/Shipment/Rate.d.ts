@@ -6,12 +6,12 @@ import { IDatedObject, IObjectWithId } from '../base';
  *
  * There are three rate types: the actual rate that will be purchased, rate and currency, the published non-discounted rate, list_rate and list_currency, and the rate if purchased from the post office, retail_rate and retail_currency.
  *
- * @see https://www.easypost.com/docs/api/node#rate-object
+ * @see https://docs.easypost.com/docs/shipments/rates#rate-object
  */
 export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
   /**
    * service level/name
-   * @see https://www.easypost.com/docs/api/node#service-levels
+   * @see https://docs.easypost.com/docs/shipments/rates#service-levels
    */
   service: string;
 

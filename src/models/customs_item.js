@@ -1,7 +1,7 @@
 import EasyPostObject from './easypost_object';
 
 /**
- * A {@link https://www.easypost.com/docs/api/node#customs-item CustomsItem} represents a single item being shipped internationally.
+ * A {@link https://docs.easypost.com/docs/customs-items CustomsItem} represents a single item being shipped internationally.
  * @public
  * @extends EasyPostObject
  */

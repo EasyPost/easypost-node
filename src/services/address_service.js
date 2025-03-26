@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class AddressService extends baseService(easypostClient) {
     /**
      * Create an {@link Address address}.
-     * See {@link https://www.easypost.com/docs/api/node#create-an-address EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/addresses#create-an-address EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the address to be created.
      * @returns {Address} - The created address.
      */
@@ -36,7 +36,7 @@ export default (easypostClient) =>
 
     /**
      * Create and verify an {@link Address address} in a single request.
-     * See {@link https://www.easypost.com/docs/api/node#create-and-verify-addresses EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/addresses#verify-an-address EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the address to be created.
      * @returns {Address} - The created and verified address.
      */
@@ -55,7 +55,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Address addresses} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-addresses EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/addresses#retrieve-all-addresses EasyPost API Documentation} for more information.
      * @param {Object} [params] - Parameters to filter the list of addresses.
      * @returns {Object} - An object containing a list of {@link Address addresses} and pagination information.
      */
@@ -78,7 +78,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve an {@link Address address} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-an-address EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/addresses#retrieve-an-address EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the address to retrieve.
      * @returns {Address} - The retrieved address.
      */
@@ -90,7 +90,7 @@ export default (easypostClient) =>
 
     /**
      * Verify an {@link Address address} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#create-and-verify-addresses EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/addresses#verify-an-address EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the address to verify.
      * @returns {Address} - The verified address.
      */

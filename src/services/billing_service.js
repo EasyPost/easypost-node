@@ -10,7 +10,7 @@ export default (easypostClient) =>
   class BillingService extends baseService(easypostClient) {
     /**
      * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
-     * See {@link https://www.easypost.com/docs/api/node#add-funds-to-your-wallet-one-time-charge EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/users/billing#add-funds-to-your-wallet-one-time-charge EasyPost API Documentation} for more information.
      * @param {String} amount - The amount to charge to your payment method.
      * @param {String} priority - The priority of the payment method to charge. Can be either 'primary' or 'secondary'.
      */
@@ -27,7 +27,7 @@ export default (easypostClient) =>
 
     /**
      * Delete a payment method from the current authenticated user's account.
-     * See {@link https://www.easypost.com/docs/api/node#delete-a-payment-method EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/users/billing#delete-a-payment-method EasyPost API Documentation} for more information.
      * @param {String} priority - The priority of the payment method to delete. Can be either 'primary' or 'secondary'.
      */
     static async deletePaymentMethod(priority) {
@@ -42,7 +42,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all payment methods associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-payment-methods EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/users/billing#retrieve-payment-methods EasyPost API Documentation} for more information.
      * @returns {Object} - An object containing the payment methods associated with the current authenticated user.
      */
     static async retrievePaymentMethods() {

@@ -33,7 +33,7 @@ import { ITrackingDetail } from './TrackingDetail';
  * The carriers do eventually recycle `tracking_codes`, and for this reason enforcing uniqueness on the `tracking_code` field is not recommended.
  * EasyPost does, however, prevent the creation of duplicate Trackers based on tracking_code and carrier; duplicate requests by the same User will simply return the original Tracker.
  *
- * @see https://www.easypost.com/docs/api/node#tracker-object
+ * @see https://docs.easypost.com/docs/trackers#tracker-object
  */
 export declare interface ITracker extends IObjectWithId<'Tracker'>, IDatedObject {
   /**
@@ -130,7 +130,7 @@ export declare class Tracker implements ITracker {
    * A Tracker is considered to be a duplicate if another Tracker with the same tracking_code and carrier was created by the same User in the last three months.
    * In the case where a duplicate request is submitted, the original Tracker will be returned.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-tracker
+   * @see https://docs.easypost.com/docs/trackers#create-a-tracker
    *
    * @param {Object} params The parameters to create an {@link Tracker} with.
    * @returns {Promise<Tracker>} The {@link Tracker}.
@@ -147,7 +147,7 @@ export declare class Tracker implements ITracker {
    * Unlike the retrieving a Tracker using the Retrieve endpoint, which accepts an id, the List endpoint accepts the tracking_code as the search parameter.
    * Normally, you'll only have one Tracker with a given `tracking_code`, but it is also possible to further filter those results by including the carrier parameter in your request.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers
+   * @see https://docs.easypost.com/docs/trackers#retrieve-all-trackers
    *
    * @param params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Tracker trackers} and pagination information.
@@ -159,7 +159,7 @@ export declare class Tracker implements ITracker {
    *
    * @param trackerId Unique, starts with "trk_"
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-tracker
+   * @see https://docs.easypost.com/docs/trackers#retrieve-a-tracker
    *
    * @param trackerId The id of tracker, starts with "trk_"
    * @returns {Promise<Tracker>} The retrieved {@link Tracker}.
@@ -171,7 +171,7 @@ export declare class Tracker implements ITracker {
    *
    * This automatically reuses the parameters from the previous call or the original {@link Tracker.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers
+   * @see https://docs.easypost.com/docs/trackers#retrieve-all-trackers
    *
    * @param {Object} trackers - The previous page of trackers (the response from the last {@link Tracker.getNextPage} or {@link Tracker.all} call).
    * @param {number} [pageSize] - The number of trackers to retrieve per page, optional. Defaults to server-side default.

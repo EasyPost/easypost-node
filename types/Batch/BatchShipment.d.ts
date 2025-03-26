@@ -1,7 +1,7 @@
 import { TBatchStatus } from './BatchStatus';
 
 /**
- * @see https://www.easypost.com/docs/api/node#batch-shipment-object
+ * @see https://docs.easypost.com/docs/batches#batchshipment-object
  */
 export declare interface IBatchShipment {
   /**

@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class RateService extends baseService(easypostClient) {
     /**
      * Retrieve a {@link Rate rate} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#rates EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments/rates EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the rate to retrieve.
      * @returns {Rate} - The retrieved rate.
      */

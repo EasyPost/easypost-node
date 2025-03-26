@@ -13,7 +13,7 @@ import { TBatchStatuses } from './BatchStatuses';
  * This includes scheduling a Pickup, creating a ScanForm and consolidating labels.
  * Operations performed on Batches are asynchronous and take advantage of our webhook infrastructure.
  *
- * @see https://www.easypost.com/docs/api/node#batch-object
+ * @see https://docs.easypost.com/docs/batches#batch-object
  */
 export declare interface IBatch extends IObjectWithId<'Batch'>, IDatedObject {
   /**
@@ -80,7 +80,7 @@ export declare class Batch implements IBatch {
    * Once the state changes to created a webhook Event will be sent.
    * When created with no Shipments the initial state will be created and webhook will be sent.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-batch
+   * @see https://docs.easypost.com/docs/batches#create-a-batch
    *
    * @param {Object} params The parameters to create an {@link Batch} with.
    * @returns {Promise<Batch>} The {@link Batch}.
@@ -90,7 +90,7 @@ export declare class Batch implements IBatch {
   /**
    * A Batch can be retrieved by its id.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-batch
+   * @see https://docs.easypost.com/docs/batches#retrieve-batch
    *
    * @param batchId Unique, begins with "batch_"
    *
@@ -102,7 +102,7 @@ export declare class Batch implements IBatch {
    * Shipments can be added to a Batch throughout its life cycle.
    * Just remember that the state change of a Batch is asynchronous and will fire a webhook Event when the state change is completed.
    *
-   * @see https://www.easypost.com/docs/api/node#add-shipments-to-a-batch
+   * @see https://docs.easypost.com/docs/batches#add-shipments-to-a-batch
    *
    * @param id Unique, begins with "batch_"
    * @param shipments An array of shipments
@@ -115,7 +115,7 @@ export declare class Batch implements IBatch {
    * There could be times when a Shipment needs to be removed from the Batch during its life cycle.
    * Removing a Shipment does not remove it from the consolidated label or ScanForm.
    *
-   * @see https://www.easypost.com/docs/api/node#remove-shipments-from-a-batch
+   * @see https://docs.easypost.com/docs/batches#remove-shipments-from-a-batch
    *
    * @param id Unique, begins with "batch_"
    * @param shipments An array of shipments
@@ -134,7 +134,7 @@ export declare class Batch implements IBatch {
    * Available label formats are 'pdf', 'zpl' or 'epl2' format.
    * Like converting a PostageLabel format, if this process will change the format of the labels they must have been created as PNGs.
    *
-   * @see https://www.easypost.com/docs/api/node#batch-labels
+   * @see https://docs.easypost.com/docs/batches#batch-labels
    *
    * @param id Unique, begins with "batch_"
    * @param labelFormat The format of label
@@ -144,9 +144,9 @@ export declare class Batch implements IBatch {
   static generateLabel(id: string, labelFormat: LabelFormat): Promise<Batch>;
 
   /**
-   * See [Scan Form](https://www.easypost.com/docs/api/node#scan-form) rules and [Object Definition](https://www.easypost.com/docs/api/node#scan-form-object).
+   * See [Scan Form](https://docs.easypost.com/docs/scan-form) rules and [Object Definition](https://docs.easypost.com/docs/scan-form-object).
    *
-   * @see https://www.easypost.com/docs/api/node#manifesting-scan-form
+   * @see https://docs.easypost.com/docs/batches#manifesting-scan-form
    *
    * @param id Unique, begins with "batch_"
    *
@@ -158,7 +158,7 @@ export declare class Batch implements IBatch {
    * Once you have added all of your Shipments to a Batch, issue a buy request to enqueue a background job to purchase the shipments and generate all necessary labels.
    * Purchasing may take anywhere from a few seconds to an hour, depending on the size of the batch, the carrier, and Internet weather.
    *
-   * @see https://www.easypost.com/docs/api/node#buy-a-batch
+   * @see https://docs.easypost.com/docs/batches#buy-a-batch
    *
    * @param id Unique, begins with "batch_"
    * @returns {Promise<Batch>} The {@link Batch}.
@@ -170,7 +170,7 @@ export declare class Batch implements IBatch {
    * See the Pagination section of our docs for more details on retrieving all records when
    * multiple pages are available.
    *
-   * @see https://www.easypost.com/docs/api/node#list-all-batches
+   * @see https://docs.easypost.com/docs/batches#retrieve-all-batches
    *
    * @param {Object} params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Batch batches} and pagination information.

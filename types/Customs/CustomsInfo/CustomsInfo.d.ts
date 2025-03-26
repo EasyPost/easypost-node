@@ -8,13 +8,13 @@ import { ICustomsInfoCreateParameters } from './CustomsInfoCreateParameters';
  *
  * Please see the Shipments documentation for examples of including a CustomsInfo object in a shipment.
  *
- * @see https://www.easypost.com/docs/api/node#customs-info-object
+ * @see https://docs.easypost.com/docs/customs-infos#customsinfo-object
  */
 export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDatedObject {
   /**
    * "EEL" or "PFC"
    * value less than $2500: "NOEEI 30.37(a)"
-   * value greater than $2500: see [Customs Guide](https://www.easypost.com/customs-guide)
+   * value greater than $2500: see [Customs Guide](https://docs.easypost.com/guides/customs-guide)
    */
   eel_pfc?: string | null;
 
@@ -87,7 +87,7 @@ export declare class CustomsInfo implements ICustomsInfo {
   /**
    * A CustomsInfo object contains all administrative information for processing customs, as well as a list of CustomsItems. When creating a CustomsInfo, you may store the ID from the response for use later in shipment creation.
    *
-   * @see https://www.easypost.com/docs/api#create-a-customs-info
+   * @see https://docs.easypost.com/docs/customs-infos#create-a-customsinfo
    *
    * @param {Object} params The parameters to create an {@link CustomsInfo} with.
    * @returns {Promise<CustomsInfo>} The {@link CustomsInfo}.
@@ -99,7 +99,7 @@ export declare class CustomsInfo implements ICustomsInfo {
    *
    * @param CustomsInfoId Unique, begins with "cstinfo_"
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-customs-info
+   * @see https://docs.easypost.com/docs/customs-infos#retrieve-a-customsinfo
    *
    * @returns {Promise<CustomsInfo>} The {@link CustomsInfo}.
    */
