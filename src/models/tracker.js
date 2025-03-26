@@ -1,7 +1,7 @@
 import EasyPostObject from './easypost_object';
 
 /**
- * A {@link https://www.easypost.com/docs/api/node#trackers Tracker} represents the available tracking information for a package.
+ * A {@link https://docs.easypost.com/docs/trackers Tracker} represents the available tracking information for a package.
  * @public
  * @extends EasyPostObject
  */

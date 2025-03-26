@@ -1,5 +1,5 @@
 /**
- * @see https://www.easypost.com/docs/api/node#carrier-type-credentials-object
+ * @see https://docs.easypost.com/docs/carrier-types#credentials-object
  */
 export declare interface ICarrierTypeCredentials {
   /**

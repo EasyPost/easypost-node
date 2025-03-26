@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class TrackerService extends baseService(easypostClient) {
     /**
      * Create a {@link Tracker tracker}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-tracker EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/trackers#create-a-tracker EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a tracker with.
      * @returns {Tracker} - The created tracker.
      */
@@ -24,7 +24,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Tracker trackers} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-trackers EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/trackers#retrieve-all-trackers EasyPost API Documentation} for more information.
      * @param {Object} [params] - The parameters to filter the trackers by.
      * @returns {Object} - An object containing the list of {@link Tracker trackers} and pagination information.
      */
@@ -48,7 +48,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Tracker tracker} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-tracker EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/trackers#retrieve-a-tracker EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the tracker to retrieve.
      * @returns {Tracker} - The retrieved tracker.
      */

@@ -3,7 +3,7 @@ import { IDatedObject, IObjectWithId } from '../base';
 /**
  * The Rate class represents a summary of the price and details of a delivery service quote.
  *
- * @see https://www.easypost.com/docs/api/node#rates
+ * @see https://docs.easypost.com/docs/shipments/rates
  */
 export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
   /**

@@ -1,6 +1,6 @@
 import { IAllMethodParameters } from '../utils';
 
 /**
- * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-scan-forms
+ * @see https://docs.easypost.com/docs/scan-form#retrieve-all-scanforms
  */
 export declare interface IScanFormListParameters extends IAllMethodParameters {}

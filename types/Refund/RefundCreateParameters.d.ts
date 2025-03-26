@@ -1,5 +1,5 @@
 /**
- * @see https://www.easypost.com/docs/api/node#create-a-refund
+ * @see https://docs.easypost.com/docs/refunds#create-a-refund
  */
 export declare interface IRefundCreateParameters {
   /**

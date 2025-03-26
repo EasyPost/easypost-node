@@ -1,7 +1,7 @@
 import { ICarrierTypeCredentials } from './CarrierTypeCredentials';
 
 /**
- * @see https://www.easypost.com/docs/api/node#carrier-type-fields-object
+ * @see https://docs.easypost.com/docs/carrier-types#fields-object
  */
 export declare interface ICarrierTypeFields {
   /**

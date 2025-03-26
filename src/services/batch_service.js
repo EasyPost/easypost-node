@@ -10,7 +10,7 @@ export default (easypostClient) =>
   class BatchService extends baseService(easypostClient) {
     /**
      * Create a {@link Batch batch}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-batch EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/batches#create-a-batch EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the batch to be created.
      * @returns {Batch} - The created batch.
      */
@@ -26,7 +26,7 @@ export default (easypostClient) =>
 
     /**
      * Add {@link Shipment shipments} to a {@link Batch batch}.
-     * See {@link https://www.easypost.com/docs/api/node#add-shipments-to-a-batch EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/batches#add-shipments-to-a-batch EasyPost API Documentation} for more information.
      * @param {string} id - The id of the batch to add shipments to.
      * @param {Array} shipmentIds - The ids of the shipments to add to the batch.
      * @returns {Batch} - The updated batch.
@@ -47,7 +47,7 @@ export default (easypostClient) =>
 
     /**
      * Removes {@link Shipment shipments} from a {@link Batch batch}.
-     * See {@link https://www.easypost.com/docs/api/node#remove-shipments-from-a-batch EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/batches#remove-shipments-from-a-batch EasyPost API Documentation} for more information.
      * @param {string} id - The id of the batch to remove shipments from.
      * @param {Array} shipmentIds - The ids of the shipments to remove from the batch.
      * @returns {Batch} - The updated batch.
@@ -69,7 +69,7 @@ export default (easypostClient) =>
 
     /**
      * Generate a label for a {@link Batch batch}.
-     * See {@link https://www.easypost.com/docs/api/node#batch-labels EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/batches#batch-labels EasyPost API Documentation} for more information.
      * @param {string} id - The id of the batch to generate a label for.
      * @param {string} fileFormat - The format of the label to generate. Defaults to 'pdf'.
      * @returns {Batch} - The updated batch.
@@ -89,7 +89,7 @@ export default (easypostClient) =>
 
     /**
      * Create a {@link ScanForm scan form} for a {@link Batch batch}.
-     * See {@link https://www.easypost.com/docs/api/node#manifesting-scan-form EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/batches#manifesting-scan-form EasyPost API Documentation} for more information.
      * @param {string} id - The id of the batch to create a scan form for.
      * @returns {Batch} - The updated batch.
      */
@@ -107,7 +107,7 @@ export default (easypostClient) =>
 
     /**
      * Purchase a {@link Batch batch}.
-     * See {@link https://www.easypost.com/docs/api/node#buy-a-batch EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/batches#buy-a-batch EasyPost API Documentation} for more information.
      * @param {string} id - The id of the batch to purchase.
      * @returns {Batch} - The purchased batch.
      */
@@ -125,7 +125,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Batch batches} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#list-all-batches EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/batches#retrieve-all-batches EasyPost API Documentation} for more information.
      * @param {Object} [params] - Parameters to filter the list of batches.
      * @returns {Object} - An object containing a list of {@link Batch batches} and pagination information.
      */
@@ -137,7 +137,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Batch batch} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-batch EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/batches#retrieve-batch EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the batch to retrieve.
      * @returns {Batch} - The retrieved batch.
      */

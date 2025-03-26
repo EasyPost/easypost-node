@@ -1,7 +1,7 @@
 import { IVerification } from './Verification';
 
 /**
- * @see https://www.easypost.com/docs/api/node#verifications-object
+ * @see https://docs.easypost.com/docs/addresses#verification-object
  */
 export declare interface IVerifications {
   /**

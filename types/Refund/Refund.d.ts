@@ -54,7 +54,7 @@ export declare class Refund implements IRefund {
    * This endpoint is intended to be used to bulk-process multiple refunds; as a result, this endpoint will return a list of Refund objects.
    * To refund a single shipment, use the Refund a Shipment endpoint instead.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-refund
+   * @see https://docs.easypost.com/docs/refunds#create-a-refund
    *
    * @param {Object} params The parameters to create an {@link Refund} with.
    * @returns {Promise<Refund>} The created and verified {@link Refund}.
@@ -65,7 +65,7 @@ export declare class Refund implements IRefund {
    * Retrieve a paginated list of all Refunds associated with the given API Key.
    * See the Pagination section of our docs for more details on retrieving all records when multiple pages are available.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-refunds
+   * @see https://docs.easypost.com/docs/refunds#retrieve-all-refunds
    *
    * @param params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Refund refunds} and pagination information.
@@ -75,7 +75,7 @@ export declare class Refund implements IRefund {
   /**
    * Retrieve a Refund by id.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-refund
+   * @see https://docs.easypost.com/docs/refunds#retrieve-a-refund
    *
    * @param refundId Unique, starts with "refund_"
    * @returns {Promise<Refund>} The created and verified {@link Refund}.
@@ -87,7 +87,7 @@ export declare class Refund implements IRefund {
    *
    * This automatically reuses the parameters from the previous call or the original {@link Refund.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-refunds
+   * @see https://docs.easypost.com/docs/refunds#retrieve-all-refunds
    *
    * @param {Object} refunds - The previous page of refunds (the response from the last {@link Refund.getNextPage} or {@link Refund.all} call).
    * @param {number} [pageSize] - The number of refunds to retrieve per page, optional. Defaults to server-side default.

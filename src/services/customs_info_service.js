@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class CustomsInfoService extends baseService(easypostClient) {
     /**
      * Create a {@link CustomsInfo customs info} record.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-customsinfo EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/customs-infos#create-a-customsinfo EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the customs info to be created.
      * @returns {CustomsInfo} - The created customs info.
      */
@@ -24,7 +24,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link CustomsInfo customs info} record by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-customsinfo EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/customs-infos#retrieve-a-customsinfo EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the customs info to retrieve.
      * @returns {CustomsInfo} - The retrieved customs info.
      */

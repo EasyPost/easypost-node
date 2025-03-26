@@ -4,7 +4,7 @@
  * more that are available per carrier. This metadata can be useful during onboarding and integration or when
  * determining the ideal carrier mix for your setup.
  *
- * @see https://www.easypost.com/docs/api/node#carriermetadata-object
+ * @see https://docs.easypost.com/docs/carrier-metadata#carriermetadata-object
  */
 export declare interface ICarrierMetadata {
   /**
@@ -53,7 +53,7 @@ export declare class CarrierMetadata implements ICarrierMetadata {
    * @param {Array} carriers A comma-delimited list of single-word carriers you'd like to filter the response by
    * @param {Array} types A comma-delimited list of the metadata types you'd like to filter the response by
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-carrier-metadata
+   * @see https://docs.easypost.com/docs/carrier-metadata#retrieve-carrier-metadata
    *
    * @returns {Promise<CarrierMetadata[]>} The {@link CarrierMetadata} object.
    */

@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class EventService extends baseService(easypostClient) {
     /**
      * Retrieve all {@link Payload payloads} for an {@link Event event}.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-payloads EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/events/payloads#retrieve-all-payloads EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the event to retrieve payloads for.
      * @returns {Payload[]} - A list of {@link Payload payloads} for the event.
      */
@@ -26,7 +26,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a specific {@link Payload payload} for an {@link Event event}.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-payload EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/events/payloads#retrieve-a-payload EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the event to retrieve the payload for.
      * @param {string} payloadId - The ID of the payload to retrieve.
      * @returns {Payload} - The {@link Payload payload} for the event.
@@ -45,7 +45,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Event events} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-events EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/events#retrieve-all-events EasyPost API Documentation} for more information.
      * @param {Object} [params] - Parameters to filter the list of events.
      * @returns {Object} - An object containing the list of {@link Event events} and pagination information.
      */
@@ -68,7 +68,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve an {@link Event event} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-an-event EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/events#retrieve-an-event EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the event to retrieve.
      * @returns {Event} - The retrieved event.
      */

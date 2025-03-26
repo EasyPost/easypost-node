@@ -7,7 +7,7 @@ import { IFieldError } from './FieldError';
  * Each client library will encapsulate these errors and raise an exception, in addition to other exceptional cases, such as network failures.
  * It is recommended to handle exceptions gracefully and to report any issues to support@easypost.com.
  *
- * @see https://www.easypost.com/docs/api/node#error-object
+ * @see https://docs.easypost.com/docs/errors
  */
 export declare interface IError {
   /**

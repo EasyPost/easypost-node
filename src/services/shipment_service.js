@@ -9,7 +9,7 @@ export default (easypostClient) =>
   class ShipmentService extends baseService(easypostClient) {
     /**
      * Create a {@link Shipment shipment}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-shipment EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments#create-a-shipment EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a shipment with.
      * @returns {Shipment} - The created shipment.
      */
@@ -25,7 +25,7 @@ export default (easypostClient) =>
 
     /**
      * Purchase a {@link Shipment shipment}.
-     * See {@link https://www.easypost.com/docs/api/node#buy-a-shipment EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments#buy-a-shipment EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to purchase.
      * @param {Rate} rate - The rate to purchase the shipment with.
      * @param {number|null} [insuranceAmount] - The amount of insurance to purchase for the shipment.
@@ -66,7 +66,7 @@ export default (easypostClient) =>
 
     /**
      * Convert the label format of a {@link Shipment shipment}.
-     * See {@link https://www.easypost.com/docs/api/node#convert-the-label-format-of-a-shipment EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments#converting-the-label-format-of-a-shipment EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to convert the label format of.
      * @param {string} format - The format to convert the label to.
      * @returns {Shipment} - The shipment with the converted label format.
@@ -86,7 +86,7 @@ export default (easypostClient) =>
 
     /**
      * Regenerate {@link Rate rates} for a {@link Shipment shipment}.
-     * See {@link https://www.easypost.com/docs/api/node#regenerate-rates-for-a-shipment EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments/rates#regenerate-rates-for-a-shipment EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to regenerate rates for.
      * @returns {Shipment} - The shipment with regenerated rates.
      */
@@ -105,7 +105,7 @@ export default (easypostClient) =>
 
     /**
      * Get SmartRates for a {@link Shipment shipment}.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-time-in-transit-statistics-across-all-rates-for-a-shipment EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments/shipping-smartrate#shipping-smartrate-1 EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to get SmartRates for.
      * @returns {Rate[]} - The SmartRates for the shipment.
      */
@@ -123,7 +123,7 @@ export default (easypostClient) =>
 
     /**
      * Insure a {@link Shipment shipment}.
-     * See {@link https://www.easypost.com/docs/api/node#insure-a-shipment EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments/shipping-insurance#insure-a-shipment EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to insure.
      * @param {number|string} amount - The amount to insure the shipment for.
      * @returns {Shipment} - The insured shipment.
@@ -143,7 +143,7 @@ export default (easypostClient) =>
 
     /**
      * Generate a form for a {@link Shipment shipment}.
-     * See {@link https://www.easypost.com/docs/api/node#create-form EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments/forms#create-form EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to generate a form for.
      * @param {string} formType - The type of form to generate.
      * @param {Map} [formOptions] - Options for the form.
@@ -169,7 +169,7 @@ export default (easypostClient) =>
 
     /**
      * Refund a {@link Shipment shipment}.
-     * See {@link https://www.easypost.com/docs/api/node#refund-a-shipment EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments/shipping-refund#refund-a-shipment EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to refund.
      * @returns {Shipment} - The refunded shipment.
      */
@@ -203,7 +203,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Shipment shipments} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments#retrieve-all-shipments EasyPost API Documentation} for more information.
      * @param {Object} [params] - Parameters to filter the shipments by.
      * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
      */
@@ -227,7 +227,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Shipment shipment} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-shipment EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/shipments#retrieve-a-shipment EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the shipment to retrieve.
      * @returns {Shipment} - The shipment with the given ID.
      */

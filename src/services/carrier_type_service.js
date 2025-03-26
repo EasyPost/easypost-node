@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class CarrierTypeService extends baseService(easypostClient) {
     /**
      * Retrieve all {@link CarrierType carrier types} available to the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-available-carrier-types EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/carrier-types#retrieve-available-carrier-types EasyPost API Documentation} for more information.
      * @param {Object} [params] - Parameters to filter the list of carrier types.
      * @returns {CarrierType[]} - A list of {@link CarrierType carrier types}.
      */

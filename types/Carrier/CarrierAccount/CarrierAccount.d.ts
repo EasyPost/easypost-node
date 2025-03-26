@@ -13,7 +13,7 @@ import { ICarrierAccountFields } from './CarrierAccountFields';
  * For instance, you may have multiple warehouses that need to use distinct FedEx SmartPost credentials to request the correct rates.
  * Rate objects will include a `carrier_account_id` field which can be used to determine the account used for rating.
  *
- * @see https://www.easypost.com/docs/api/node#carrier-account-object
+ * @see https://docs.easypost.com/docs/carrier-accounts#carrieraccount-object
  */
 export declare interface ICarrierAccount extends IObjectWithId<'CarrierAccount'>, IDatedObject {
   /**
@@ -86,7 +86,7 @@ export declare class CarrierAccount implements ICarrierAccount {
    *
    * The CarrierType of the preferred CarrierAccount should be consulted before attempting to create a new CarrierAccount, as it will inform you of the field names expected by a certain carrier.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-carrier-account
+   * @see https://docs.easypost.com/docs/carrier-accounts#create-a-carrieraccount
    * @requires production API Key.
    *
    * @param {Object} params The parameters to create an {@link CarrierAccount} with
@@ -95,7 +95,7 @@ export declare class CarrierAccount implements ICarrierAccount {
   static create(params: Object): Promise<CarrierAccount>;
 
   /**
-   * @see https://www.easypost.com/docs/api/node#update-a-carrieraccount
+   * @see https://docs.easypost.com/docs/carrier-accounts#update-a-carrieraccount
    *
    * @param carrierAccountId Unique, begins with "ca_"
    * @param {Object} params The parameters to create an {@link CarrierAccount} with
@@ -107,7 +107,7 @@ export declare class CarrierAccount implements ICarrierAccount {
    * Retrieve an unpaginated list of all CarrierAccounts available to the authenticated account.
    * Only Production API keys may be used to retrieve this list, as there is no test mode equivalent.
    *
-   * @see https://www.easypost.com/docs/api/node#list-all-carrier-accounts
+   * @see https://docs.easypost.com/docs/carrier-accounts#retrieve-all-carrieraccounts
    * @requires production API Key.
    *
    * @returns {Object} - An object containing a list of {@link CarrierAccount carrier accounts}.
@@ -120,7 +120,7 @@ export declare class CarrierAccount implements ICarrierAccount {
    *
    * @param carrierAccountId Unique, begins with "ca_"
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-carrieraccount
+   * @see https://docs.easypost.com/docs/carrier-accounts#retrieve-a-carrieraccount
    * @requires production API Key.
    *
    * @returns {Promise<CarrierAccount[]>} The {@link CarrierAccount} object.
@@ -130,7 +130,7 @@ export declare class CarrierAccount implements ICarrierAccount {
   /**
    * CarrierAccount objects may be removed from your account when they become out of date or no longer useful.
    *
-   * @see https://www.easypost.com/docs/api/node#delete-a-carrier-account
+   * @see https://docs.easypost.com/docs/carrier-accounts#delete-a-carrieraccount
    * @requires production API Key.
    *
    * @param carrierAccountId Unique, begins with "ca_"

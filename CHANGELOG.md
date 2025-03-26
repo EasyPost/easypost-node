@@ -9,6 +9,7 @@
   - `betaReferralCustomer.createBankAccountClientSecret`
   - `referralCustomer.addCreditCardFromStripe`
   - `referralCustomer.addBankAccountFromStripe`
+- Fixes all references to the docs
 - Properly returns the response body of the following functions: `addPaymentMethod`, `refundByAmount`, `refundByPaymentLog`
 - `findMatchingMockRequest` mocking function made private
 - Removes undocumented and unmaintained `repl`

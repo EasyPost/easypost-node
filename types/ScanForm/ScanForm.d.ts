@@ -14,7 +14,7 @@ import { IScanFormListParameters } from './ScanFormListParameters';
  *  - Existing ScanForms may not be updated with additional Shipments. If a ScanForm already exists, and new Shipments need to be added, a new ScanForm must be created.
  *  - Shipments should be provided in the form of an array
  *
- * @see https://www.easypost.com/docs/api/node#scan-form-object
+ * @see https://docs.easypost.com/docs/scan-form-object
  */
 export declare interface IScanForm extends IObjectWithId<'ScanForm'>, IDatedObject {
   /**
@@ -74,7 +74,7 @@ export declare class ScanForm implements IScanForm {
    * A ScanForm can be created to speed up and simplify the carrier pickup process.
    * The Scan Form is one document that can be scanned to mark all included tracking codes as "Accepted for Shipment" by the carrier.
    *
-   * @see https://www.easypost.com/docs/api/node#scan-form
+   * @see https://docs.easypost.com/docs/scan-form
    *
    * @returns {Promise<ScanForm>} The created ScanForm
    *
@@ -89,7 +89,7 @@ export declare class ScanForm implements IScanForm {
    * The `has_more` attribute indicates whether additional pages can be requested.
    * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-scan-forms
+   * @see https://docs.easypost.com/docs/scan-form#retrieve-all-scanforms
    *
    * @param {object} params The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link ScanForm scanforms} and pagination information.
@@ -102,7 +102,7 @@ export declare class ScanForm implements IScanForm {
    * A ScanForm can be retrieved by either its id or reference.
    * However, it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-scan-form
+   * @see https://docs.easypost.com/docs/scan-form#retrieve-a-scanform
    *
    * @param {string} scanFormId Unique, begins with "sf_".
    */
@@ -113,7 +113,7 @@ export declare class ScanForm implements IScanForm {
    *
    * This automatically reuses the parameters from the previous call or the original {@link ScanForm.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-scanforms
+   * @see https://docs.easypost.com/docs/scan-form#retrieve-all-scanforms
    *
    * @param {Object} scanforms - The previous page of scan forms (the response from the last {@link ScanForm.getNextPage} or {@link ScanForm.all} call).
    * @param {number} [pageSize] - The number of scan forms to retrieve per page, optional. Defaults to server-side default.

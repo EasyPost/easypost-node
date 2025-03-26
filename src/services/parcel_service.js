@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class ParcelService extends baseService(easypostClient) {
     /**
      * Create a {@link Parcel parcel}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-parcel EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/parcels#create-a-parcel EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a parcel with.
      * @returns {Parcel} - The created parcel.
      */
@@ -24,7 +24,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Parcel parcel} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-parcel EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/parcels#retrieve-a-parcel EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the parcel to retrieve.
      * @returns {Parcel} - The retrieved parcel.
      */

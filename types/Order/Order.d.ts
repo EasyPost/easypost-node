@@ -12,7 +12,7 @@ import { IOrderCreateParameters } from './OrderCreateParameters';
  *
  * An Order created with valid Address Objects and Parcel data nested within the Order's Shipment object will automatically retrieve available shipping Rate options.
  *
- * @see https://www.easypost.com/docs/api/node#order-object
+ * @see https://docs.easypost.com/docs/orders#order-object
  */
 export declare interface IOrder extends IObjectWithId<'Order'>, IDatedObject {
   /**
@@ -85,7 +85,7 @@ export declare class Order implements IOrder {
    *
    * You can limit the CarrierAccounts to use for rating by passing the carrier_accounts parameter.
    *
-   * @see https://www.easypost.com/docs/api/node#create-an-order
+   * @see https://docs.easypost.com/docs/orders#create-an-order
    *
    * @param {Object} params The parameters to create an {@link Order} with.
    * @returns {Promise<Order>} The created and verified {@link Order}.
@@ -96,7 +96,7 @@ export declare class Order implements IOrder {
    * An Order can be retrieved by either its id or reference.
    * However it is recommended to use EasyPost's provided identifiers because uniqueness on reference is not enforced.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-an-order
+   * @see https://docs.easypost.com/docs/orders#retrieve-an-order
    *
    * @param orderId Unique, begins with "order_"
    * @returns {Promise<Order>} The retrieved {@link Order}.
@@ -107,7 +107,7 @@ export declare class Order implements IOrder {
    * To purchase an Order you only need to specify the carrier and service to purchase.
    * This operation populates the `tracking_code` and `postage_label` attributes of each Shipment.
    *
-   * @see https://www.easypost.com/docs/api/node#buy-an-order
+   * @see https://docs.easypost.com/docs/orders#buy-an-order
    *
    * @param orderId Unique, begins with "order_"
    * @param carrier Carrier (UPS, FedEx, USPS)

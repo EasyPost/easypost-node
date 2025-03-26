@@ -2,7 +2,7 @@ import Constants from '../constants';
 import EasyPostObject from './easypost_object';
 
 /**
- * A {@link https://www.easypost.com/docs/api/node#pickups Pickup} represents a scheduled carrier pickup of packages from an {@link https://www.easypost.com/docs/api/node#addresses Address}.
+ * A {@link https://docs.easypost.com/docs/pickups Pickup} represents a scheduled carrier pickup of packages from an {@link https://docs.easypost.com/docs/addresses Address}.
  * @public
  * @extends EasyPostObject
  */

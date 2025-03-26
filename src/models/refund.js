@@ -1,7 +1,7 @@
 import EasyPostObject from './easypost_object';
 
 /**
- * A {@link https://www.easypost.com/docs/api/node#refunds Refund} represents a refunded {@link Shipment}.
+ * A {@link https://docs.easypost.com/docs/refunds Refund} represents a refunded {@link Shipment}.
  * @public
  * @extends EasyPostObject
  */

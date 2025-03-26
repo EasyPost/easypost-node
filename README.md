@@ -197,7 +197,7 @@ client.clearResponseHooks();
 
 ## Documentation
 
-API documentation can be found at: <https://easypost.com/docs/api>.
+API documentation can be found at: <https://docs.easypost.com>.
 
 Library documentation can be found on the web at: <https://easypost.github.io/easypost-node/> or by building them locally via the `make docs` command.
 
@@ -249,9 +249,9 @@ Starting with `v5.3.0`, this project has Typescript definitions included.
 #### Typescript Exclusions
 
 - We do not provide a DefinitelyTyped version of these definitions at this time
-- Predefined packages (see [Carrier Metadata](https://www.easypost.com/docs/api#carrier-metadata) in our docs for more details)
-- Carrier service levels (see [Carrier Metadata](https://www.easypost.com/docs/api#carrier-metadata) in our docs for more details)
-- Carrier list (see [Carrier Types](https://www.easypost.com/docs/api#carrier-types) in our docs for more details)
+- Predefined packages (see [Carrier Metadata](https://docs.easypost.com/docs/carrier-metadata) in our docs for more details)
+- Carrier service levels (see [Carrier Metadata](https://docs.easypost.com/docs/carrier-metadata) in our docs for more details)
+- Carrier list (see [Carrier Types](https://docs.easypost.com/docs/carrier-types) in our docs for more details)
 
 ### Testing
 

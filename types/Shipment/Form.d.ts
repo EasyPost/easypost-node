@@ -1,7 +1,7 @@
 import { IDatedObject, IObjectWithId } from '../base';
 
 /**
- * @see https://www.easypost.com/docs/api/node#form-object
+ * @see https://docs.easypost.com/docs/shipments/forms#form-object
  */
 export declare interface IForm extends IObjectWithId<'Form'>, IDatedObject {
   /**

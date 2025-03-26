@@ -10,7 +10,7 @@ import { TFeeType } from './FeeType';
  * Insurance on a Shipment will add an "InsuranceFee" with the insurance premium (not the covered value) for the amount.
  * Tracker objects will have a "TrackerFee" with the price, even when a Tracker is free.
  *
- * @see https://www.easypost.com/docs/api/node#fee-object
+ * @see https://docs.easypost.com/docs/fees#fee-object
  */
 export declare interface IFee extends IBaseObject<'Fee'> {
   /**

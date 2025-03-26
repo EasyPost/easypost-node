@@ -95,7 +95,7 @@ export declare class Claim implements IClaim {
   /**
    * Create a claim
    *
-   * @see https://www.easypost.com/docs/api/node#create-an-claim
+   * @see https://docs.easypost.com/docs/insurance/claims#create-a-claim
    *
    * @param {Object} params The parameters to create an {@link Claim} with.
    * @returns {Promise<Claim>} The created and verified {@link Claim}.
@@ -108,7 +108,7 @@ export declare class Claim implements IClaim {
    * The has_more attribute indicates whether or not additional pages can be requested.
    * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-claims
+   * @see https://docs.easypost.com/docs/insurance/claims#retrieve-all-claims
    *
    * @returns {Object} - An object containing a list of {@link Claim claim} and pagination information.
    */
@@ -117,7 +117,7 @@ export declare class Claim implements IClaim {
   /**
    * Retrieve an Claim by id.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-an-claim
+   * @see https://docs.easypost.com/docs/insurance/claims#retrieve-a-claim
    *
    * @param claimId Unique, starts with "clm_"
    * @returns {Promise<Claim>} The retrieved {@link Claim}.
@@ -129,7 +129,7 @@ export declare class Claim implements IClaim {
    *
    * This automatically reuses the parameters from the previous call or the original {@link Claim.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-claims
+   * @see https://docs.easypost.com/docs/insurance/claims#retrieve-all-claims
    *
    * @param {Object} claims - The previous page of claims (the response from the last {@link Claim.getNextPage} or {@link Claim.all} call).
    * @param {number} [pageSize] - The number of claims to retrieve per page, optional. Defaults to server-side default.
@@ -143,7 +143,7 @@ export declare class Claim implements IClaim {
   /**
    * Cancel an Claim by id.
    *
-   * @see https://www.easypost.com/docs/api/node#cancel-an-claim
+   * @see https://docs.easypost.com/docs/insurance/claims#cancel-a-claim
    *
    * @param claimId Unique, starts with "clm_"
    * @returns {Promise<Claim>} The refunded {@link Claim}.

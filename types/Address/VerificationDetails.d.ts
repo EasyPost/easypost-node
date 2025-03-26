@@ -1,5 +1,5 @@
 /**
- * @see https://www.easypost.com/docs/api/node#verification_details-object
+ * @see https://docs.easypost.com/docs/addresses#verificationdetails-object
  */
 export declare interface IVerificationDetails {
   /**

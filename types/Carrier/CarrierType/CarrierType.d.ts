@@ -14,7 +14,7 @@ import { ICarrierTypeFields } from './CarrierTypeFields';
  * The other custom option in the fields list is custom_workflow: true, which indicates that the EasyPost website export declare interface includes special processing for signups for the associated CarrierType.
  * Carriers with a custom workflow will also present their normal credential rules, but it is considered unsafe to directly add a CarrierAccount of this type with these attributes filled out via another source than the EasyPost custom workflow.
  *
- * @see https://www.easypost.com/docs/api/node#carrier-type-object
+ * @see https://docs.easypost.com/docs/carrier-types#carriertype-object
  */
 export declare interface ICarrierType extends IBaseObject<'CarrierType'> {
   /**
@@ -36,7 +36,7 @@ export declare class CarrierType implements ICarrierType {
   /**
    * The CarrierType list is an unpaginated list of all carrier types available to the account of the given API key.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-available-carrier-types
+   * @see https://docs.easypost.com/docs/carrier-types#retrieve-available-carrier-types
    * @requires production API Key.
    *
    * @returns {Object} - An object containing a list of {@link CarrierType carrier types}.

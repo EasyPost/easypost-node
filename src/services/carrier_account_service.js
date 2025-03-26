@@ -12,7 +12,7 @@ export default (easypostClient) =>
   class CarrierAccountService extends baseService(easypostClient) {
     /**
      * Create a {@link CarrierAccount carrier account}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-carrier-account EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/carrier-accounts#create-a-carrieraccount EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the carrier account to be created.
      * @returns {CarrierAccount} - The created carrier account.
      */
@@ -33,7 +33,7 @@ export default (easypostClient) =>
 
     /**
      * Update a {@link CarrierAccount carrier account}.
-     * See {@link https://www.easypost.com/docs/api/node#update-a-carrieraccount EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/carrier-accounts#update-a-carrieraccount EasyPost API Documentation} for more information.
      * @param {string} id - The id of the carrier account to be updated.
      * @param {Object} params - Parameters for the carrier account to be updated.
      * @returns {CarrierAccount} - The updated carrier account.
@@ -57,7 +57,7 @@ export default (easypostClient) =>
 
     /**
      * Delete a {@link CarrierAccount carrier account}.
-     * See {@link https://www.easypost.com/docs/api/node#delete-a-carrier-account EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/carrier-accounts#delete-a-carrieraccount EasyPost API Documentation} for more information.
      * @param {string} id - The id of the carrier account to be deleted.
      * @returns {Promise|Promise<never>} - A promise that resolves when the carrier account has been deleted.
      */
@@ -119,7 +119,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link CarrierAccount carrier accounts} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#list-all-carrier-accounts EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/carrier-accounts#retrieve-all-carrieraccounts EasyPost API Documentation} for more information.
      * @param {Object} [params] - Parameters to filter the list of carrier accounts.
      * @returns {Object} - An object containing a list of {@link CarrierAccount carrier accounts} and pagination information.
      */
@@ -131,7 +131,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link CarrierAccount carrier account} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-carrieraccount EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/carrier-accounts#retrieve-a-carrieraccount EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the carrier account to retrieve.
      * @returns {CarrierAccount} - The retrieved carrier account.
      */

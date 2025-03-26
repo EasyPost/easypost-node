@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class CustomsItemService extends baseService(easypostClient) {
     /**
      * Create a {@link CustomsItem customs item}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-customsitem EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/customs-items#create-a-customsitem EasyPost API Documentation} for more information.
      * @param {Object} params - Parameters for the customs item to be created.
      * @returns {CustomsItem} - The created customs item.
      */
@@ -24,7 +24,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link CustomsItem customs item} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-customsitem EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/customs-items#retrieve-a-customsitem EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the customs item to retrieve.
      * @returns {CustomsItem} - The retrieved customs item.
      */

@@ -1,7 +1,7 @@
 import { IAllMethodParameters } from '../utils';
 
 /**
- * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-shipments
+ * @see https://docs.easypost.com/docs/shipments#retrieve-all-shipments
  */
 export declare interface IShipmentListParameters extends IAllMethodParameters {
   /**

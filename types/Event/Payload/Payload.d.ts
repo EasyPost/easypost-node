@@ -25,7 +25,7 @@ export declare class Payload implements IPayload {
   /**
    * Payload can be retrieved by their ID.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-payload
+   * @see https://docs.easypost.com/docs/events/payloads#retrieve-a-payload
    *
    * @param eventId the ID of the event object.
    * @param payloadId the ID of the payload.
@@ -36,7 +36,7 @@ export declare class Payload implements IPayload {
   /**
    * Retrieve all payload objects.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-payloads
+   * @see https://docs.easypost.com/docs/events/payloads#retrieve-all-payloads
    *
    * @param params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Payload payloads} and pagination information.

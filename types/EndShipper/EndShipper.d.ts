@@ -10,7 +10,7 @@ import { IEndShipperListParameters } from './EndShipperListParameters';
  * EndShipper objects must be created prior to buying a Shipment. Once EndShipper objects have been created,
  * you must keep track of their public id in order to use them during a label buy.
  *
- * @see https://www.easypost.com/docs/api/node#endshipper
+ * @see https://docs.easypost.com/docs/endshippers
  */
 export declare interface IEndshipper extends IObjectWithId<'EndShipper'> {
   /**
@@ -87,7 +87,7 @@ export declare class EndShipper implements IEndshipper {
    * name and company fields. At least one of these fields must be filled (when both are present, name will take precedence).
    * street2 field. This fieldcan be empty if the address does not include multiple lines.
    *
-   * @see https://www.easypost.com/docs/api/node#create-an-endshipper
+   * @see https://docs.easypost.com/docs/endshippers#create-an-endshipper
    *
    * @param {Object} params The parameters to create an {@link EndShipper} with.
    * @returns {Promise<EndShipper>} The created and verified {@link EndShipper}.
@@ -98,7 +98,7 @@ export declare class EndShipper implements IEndshipper {
    * An EndShipper object may be updated using the EndShipper API.
    * All required fields for creating an EndShipper are required in an update request. Partial updates are not supported.
    *
-   * @see https://www.easypost.com/docs/api/node#update-an-endshipper
+   * @see https://docs.easypost.com/docs/endshippers#update-an-endshipper
    *
    * @param id Unique, start with "es_".
    * @param params The parameters to update an {@link EndShipper} with.
@@ -109,7 +109,7 @@ export declare class EndShipper implements IEndshipper {
   /**
    * Similar to retrieving a list of EndShippers, you can retrieve an individual EndShipper.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-an-endshipper
+   * @see https://docs.easypost.com/docs/endshippers#retrieve-an-endshipper
    *
    * @param id Unique, start with "es_".
    * @returns {Promise<EndShipper>} The retrieved {@link EndShipper}.
@@ -119,7 +119,7 @@ export declare class EndShipper implements IEndshipper {
   /**
    * List the EndShippers that have been created.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-endshippers
+   * @see https://docs.easypost.com/docs/endshippers#retrieve-all-endshippers
    *
    * @param params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link EndShipper endshippers} and pagination information.

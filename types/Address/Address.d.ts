@@ -1,8 +1,8 @@
 import { IObjectWithId } from '../base';
 import { DeepPartial } from '../utils';
 import { IAddressCreateParameters } from './AddressCreateParameters';
-import { IVerifications } from './Verifications';
 import { IAddressListParameters } from './AddressListParameters';
+import { IVerifications } from './Verifications';
 
 /**
  * Address objects are used to represent people, places, and organizations in a number of contexts.
@@ -10,7 +10,7 @@ import { IAddressListParameters } from './AddressListParameters';
  *
  * Additionally, EasyPost offers several verification tools that can be used to detect deliverability issues, correct minor errors in spelling/formatting, and determine if an Address is residential or not (which has a significant effect on Shipment rating for many carriers).
  *
- * @see https://www.easypost.com/docs/api/node#address-object
+ * @see https://docs.easypost.com/docs/addresses#address-object
  */
 export declare interface IAddress extends IObjectWithId<'Address'> {
   /**
@@ -113,7 +113,7 @@ export declare class Address implements IAddress {
 
   /**
    * Create an {@link Address address}.
-   * @see https://www.easypost.com/docs/api/node#create-an-address
+   * @see https://docs.easypost.com/docs/addresses#create-an-address
    * @param {Object} params - Parameters for the address to be created.
    * @returns {Address} - The created address.
    */
@@ -127,7 +127,7 @@ export declare class Address implements IAddress {
    * The has_more attribute indicates whether additional pages can be requested.
    * The recommended way of paginating is to use either the `before_id` or `after_id` parameter to specify where the next page begins.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-addresses
+   * @see https://docs.easypost.com/docs/addresses#retrieve-all-addresses
    *
    * @param {Object} params - The parameters to use for the request.
    * @returns {Object} - An object containing a list of {@link Address addresses} and pagination information.
@@ -147,7 +147,7 @@ export declare class Address implements IAddress {
    *    When designing a shopping cart it is recommended to ask the shopper for their address and verify it on the spot.
    *    If verification fails, ask them to double-check their input; if they confirm that their data is correct, assume they know their address more correctly than the verification process.
    *
-   * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
+   * @see https://docs.easypost.com/docs/addresses#verify-an-address
    *
    * @param {Object} params The parameters to create an {@link Address} with.
    * @returns {Promise<Address>} The created and verified {@link Address}.
@@ -157,7 +157,7 @@ export declare class Address implements IAddress {
   /**
    * Verify an {@link Address}.
    *
-   * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
+   * @see https://docs.easypost.com/docs/addresses#verify-an-address
    *
    * @param addressId Unique, begins with "adr_"
    * @returns {Promise<Address>} The verified {@link Address}.
@@ -167,7 +167,7 @@ export declare class Address implements IAddress {
   /**
    * An Address can be retrieved by its id.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-an-address
+   * @see https://docs.easypost.com/docs/addresses#retrieve-an-address
    *
    * @param addressId Unique, begins with "adr_"
    * @returns {Promise<Address>} The verified {@link Address} address.
@@ -179,7 +179,7 @@ export declare class Address implements IAddress {
    *
    * This automatically reuses the parameters from the previous call or the original {@link Address.all} call.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-list-of-addresses
+   * @see https://docs.easypost.com/docs/addresses#retrieve-all-addresses
    *
    * @param {Object} addresses - The previous page of addresses (the response from the last {@link Address.getNextPage} or {@link Address.all} call).
    * @param {number} [pageSize] - The number of addresses to retrieve per page, optional. Defaults to server-side default.

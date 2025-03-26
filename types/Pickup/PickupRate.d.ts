@@ -1,7 +1,7 @@
 import { IDatedObject, IObjectWithId } from '../base';
 
 /**
- * @see https://www.easypost.com/docs/api/node#pickup-rate-object
+ * @see https://docs.easypost.com/docs/pickups#pickuprate-object
  */
 export declare interface IPickupRate extends IObjectWithId<'PickupRate'>, IDatedObject {
   /**

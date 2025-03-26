@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class PickupService extends baseService(easypostClient) {
     /**
      * Create a {@link Pickup pickup}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-pickup EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/pickups#create-a-pickup EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a pickup with.
      * @returns {Pickup} - The created pickup.
      */
@@ -24,7 +24,7 @@ export default (easypostClient) =>
 
     /**
      * Purchase a {@link Pickup pickup}.
-     * See {@link https://www.easypost.com/docs/api/node#buy-a-pickup EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/pickups#buy-a-pickup EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the pickup to purchase.
      * @param {string} carrier - The carrier to purchase the pickup with.
      * @param {string} service - The service to purchase the pickup with.
@@ -44,7 +44,7 @@ export default (easypostClient) =>
 
     /**
      * Cancel a {@link Pickup pickup}.
-     * See {@link https://www.easypost.com/docs/api/node#cancel-a-pickup EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/pickups#cancel-a-pickup EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the pickup to cancel.
      * @returns {Pickup} - The cancelled pickup.
      */
@@ -61,7 +61,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Pickup pickups} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-pickups EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/pickups#retrieve-all-pickups EasyPost API Documentation} for more information.
      * @param {Object} [params] - The parameters to filter the pickups by.
      * @returns {Object} - An object containing a list of {@link Pickup pickups} and pagination information.
      */
@@ -84,7 +84,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Pickup pickup} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-pickup EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/pickups#retrieve-a-pickup EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the pickup to retrieve.
      * @returns {Pickup} - The retrieved pickup.
      */

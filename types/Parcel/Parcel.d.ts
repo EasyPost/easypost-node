@@ -10,7 +10,7 @@ import { IParcelCreateParameters } from './ParcelCreateParameters';
  * Weights are in OUNCES (OZ) and go to one decimal point.
  * Dimensions are in INCHES (IN) and go to one decimal point.
  *
- * @see https://www.easypost.com/docs/api/node#parcel-object
+ * @see https://docs.easypost.com/docs/parcels#parcel-object
  */
 export declare interface IParcel extends IObjectWithId<'Parcel'>, IDatedObject {
   /**
@@ -60,7 +60,7 @@ export declare class Parcel implements IParcel {
   /**
    * Include the `weight`, and either a `predefined_package` or `length`, `width` and `height` if applicable.
    *
-   * @see https://www.easypost.com/docs/api/node#create-a-parcel
+   * @see https://docs.easypost.com/docs/parcels#create-a-parcel
    *
    * @param {Object} params The parameters to create an {@link Parcel} with.
    * @returns {Promise<Parcel>} The created and verified {@link Parcel}.
@@ -73,7 +73,7 @@ export declare class Parcel implements IParcel {
    * A Parcel's id can be inlined into the creation call to other objects.
    * This allows you to only create one Parcel for each package you will be using.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-a-parcel
+   * @see https://docs.easypost.com/docs/parcels#retrieve-a-parcel
    *
    * @param parcelId Unique, begins with "prcl_"
    * @returns {Promise<Parcel>} The retrieved {@link Parcel}.

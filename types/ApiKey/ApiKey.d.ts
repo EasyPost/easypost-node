@@ -1,5 +1,4 @@
 import { IObjectWithId } from '../base';
-import { DeepPartial } from '../utils';
 
 export declare interface IApiKey extends IObjectWithId<'ApiKey'> {
   /**
@@ -30,7 +29,7 @@ export declare class ApiKey implements IApiKey {
    * Both production and test keys will be returned for a User and all of its children.
    * If the request is authenticated as a Child, only the API Keys for that Child will be returned.
    *
-   * @see https://www.easypost.com/docs/api/node#retrieve-an-api-key
+   * @see https://docs.easypost.com/docs/api-keys#retrieve-an-api-key
    *
    * @param apiKeyId Unique, begins with "user_"
    * @returns {Promise<ApiKey>} The verified {@link ApiKey}.

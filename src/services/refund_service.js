@@ -8,7 +8,7 @@ export default (easypostClient) =>
   class RefundService extends baseService(easypostClient) {
     /**
      * Create a {@link Refund refund}.
-     * See {@link https://www.easypost.com/docs/api/node#create-a-refund EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/refunds#create-a-refund EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a refund with.
      * @returns {Refund} - The created refund.
      */
@@ -24,7 +24,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve all {@link Refund refunds} associated with the current authenticated user.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-list-of-refunds EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/refunds#retrieve-all-refunds EasyPost API Documentation} for more information.
      * @param {Object} [params] - The parameters to filter the refunds by.
      * @returns {Object} - An object containing the list of {@link Refund refunds} and pagination information.
      */
@@ -47,7 +47,7 @@ export default (easypostClient) =>
 
     /**
      * Retrieve a {@link Refund refund} by its ID.
-     * See {@link https://www.easypost.com/docs/api/node#retrieve-a-refund EasyPost API Documentation} for more information.
+     * See {@link https://docs.easypost.com/docs/refunds#retrieve-a-refund EasyPost API Documentation} for more information.
      * @param {string} id - The ID of the refund to retrieve.
      * @returns {Refund} - The retrieved refund.
      */

@@ -1,6 +1,6 @@
 import { IAllMethodParameters } from '../utils';
 
 /**
- * @see https://www.easypost.com/docs/api/node#list-all-batches
+ * @see https://docs.easypost.com/docs/batches#retrieve-all-batches
  */
 export declare interface IBatchListParameters extends IAllMethodParameters {}

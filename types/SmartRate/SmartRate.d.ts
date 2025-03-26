@@ -1,7 +1,7 @@
 /**
  * The SmartRate class interacts with the SmartRate API to provide optimized shipping rates and estimates.
  *
- * @see https://www.easypost.com/smartrate
+ * @see https://docs.easypost.com/docs/smartrate
  */
 export declare class SmartRate {
   /**

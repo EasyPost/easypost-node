@@ -2,7 +2,7 @@ import { ParametersToOmitOnCreate } from '../utils';
 import { IAddress } from './Address';
 
 /**
- * @see https://www.easypost.com/docs/api/node#create-and-verify-addresses
+ * @see https://docs.easypost.com/docs/addresses#verify-an-address
  */
 export declare interface IAddressCreateParameters
   extends Omit<IAddress, ParametersToOmitOnCreate | 'verifications'> {

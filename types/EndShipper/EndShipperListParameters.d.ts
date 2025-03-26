@@ -1,6 +1,6 @@
 import { IAllMethodParameters } from '../utils';
 
 /**
- * @see https://www.easypost.com/docs/api#endshipper
+ * @see https://docs.easypost.com/docs/endshippers
  */
 export declare interface IEndShipperListParameters extends IAllMethodParameters {}

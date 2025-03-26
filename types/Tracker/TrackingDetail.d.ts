@@ -3,7 +3,7 @@ import { ITrackerStatus } from './TrackerStatus';
 import { ITrackingLocation } from './TrackingLocation';
 
 /**
- * @see https://www.easypost.com/docs/api/node#tracking-detail-object
+ * @see https://docs.easypost.com/docs/trackers#trackingdetail-object
  */
 export declare interface ITrackingDetail extends IBaseObject<'TrackingDetail'> {
   /**
