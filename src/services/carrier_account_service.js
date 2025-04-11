@@ -82,10 +82,12 @@ export default (easypostClient) =>
     static _selectCarrierAccountCreationEndpoint(carrierAccountType) {
       if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_CREATE_WORKFLOWS.includes(carrierAccountType)) {
         return 'carrier_accounts/register';
-      }
-      if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
+      } else if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
         return 'ups_oauth_registrations';
+      } else if (Constants.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.includes(carrierAccountType)) {
+        return 'carrier_accounts/register_oauth';
       }
+
       return 'carrier_accounts';
     }
 
@@ -113,7 +115,10 @@ export default (easypostClient) =>
     static _wrapCarrierAccountParams(carrierAccountType, params) {
       if (Constants.UPS_OAUTH_CARRIER_TYPES.includes(carrierAccountType)) {
         return { ups_oauth_registrations: params };
+      } else if (Constants.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.includes(carrierAccountType)) {
+        return { carrier_account_oauth_registrations: params };
       }
+
       return { carrier_account: params };
     }
 

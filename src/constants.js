@@ -10,6 +10,9 @@ export default class Constants {
   static get UPS_OAUTH_CARRIER_TYPES() {
     return ['UpsAccount', 'UpsMailInnovationsAccount', 'UpsSurepostAccount'];
   }
+  static get CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH() {
+    return ['AmazonShippingAccount'];
+  }
   static EXTERNAL_API_CALL_FAILED = 'Communication with %s failed, please try again later';
   static INVALID_API_KEY_TYPE = 'Invalid API key type.';
   static INVALID_PARAMETER = 'Invalid parameter: %s.';

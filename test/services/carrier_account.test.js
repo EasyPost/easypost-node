@@ -72,7 +72,20 @@ describe('CarrierAccount Service', function () {
     expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(carrierAccount.id).to.match(/^ca_/);
     expect(carrierAccount.type).to.equal(type);
-    // account number not returned in API response, can't assert
+
+    await client.CarrierAccount.delete(carrierAccount.id);
+  });
+
+  it('creates an Amazon carrier account', async function () {
+    const type = 'AmazonShippingAccount';
+
+    const data = { type: type };
+
+    const carrierAccount = await client.CarrierAccount.create(data);
+
+    expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
+    expect(carrierAccount.id).to.match(/^ca_/);
+    expect(carrierAccount.type).to.equal(type);
 
     await client.CarrierAccount.delete(carrierAccount.id);
   });
