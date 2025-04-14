@@ -21,10 +21,12 @@ export default defineConfig({
         {
           format: 'cjs',
           entryFileNames: '[name].js',
+          dir: 'dist',
         },
         {
           format: 'esm',
           entryFileNames: '[name].mjs',
+          dir: 'dist',
         },
       ],
     },
