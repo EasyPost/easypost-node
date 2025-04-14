@@ -4,6 +4,16 @@
   "version": "7.5.5",
   "author": "Easypost Engineering <oss@easypost.com>",
   "homepage": "https://easypost.com",
+  "exports": {
+    ".": {
+      "import": "./dist/easypost.mjs",
+      "require": "./dist/easypost.js",
+      "types": "./types/index.d.ts"
+    }
+  },
+  "main": "./dist/easypost.js",
+  "module": "./dist/easypost.mjs",
+  "types": "./types/index.d.ts",
   "bin": {
     "easypost": "./repl.js"
   },
@@ -11,8 +21,6 @@
     "type": "git",
     "url": "git://github.com/easypost/easypost-node.git"
   },
-  "main": "index.js",
-  "types": "types/index.d.ts",
   "license": "MIT",
   "engines": {
     "node": ">= 16.0"
