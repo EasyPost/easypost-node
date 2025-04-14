@@ -12,14 +12,23 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/easypost.js'),
       fileName: 'easypost',
-      formats: ['cjs'],
+      formats: ['cjs', 'es'],
     },
     sourcemap: isDev,
     rollupOptions: {
       external: [/^node:.*/, /^@?[a-zA-Z\-_]+\/?[a-zA-Z\-_]*$/],
-      output: {
-        dir: 'dist',
-      },
+      output: [
+        {
+          format: 'cjs',
+          entryFileNames: '[name].js',
+          dir: 'dist',
+        },
+        {
+          format: 'esm',
+          entryFileNames: '[name].mjs',
+          dir: 'dist',
+        },
+      ],
     },
   },
 
