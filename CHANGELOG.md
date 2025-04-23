@@ -9,6 +9,7 @@
   - `betaReferralCustomer.createBankAccountClientSecret`
   - `referralCustomer.addCreditCardFromStripe`
   - `referralCustomer.addBankAccountFromStripe`
+- Adds missing tracker props
 - Routes `AmazonShippingAccount` to the correct endpoint on create
 - Fixes all references to the docs
 - Properly returns the response body of the following functions: `addPaymentMethod`, `refundByAmount`, `refundByPaymentLog`

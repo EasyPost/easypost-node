@@ -6,15 +6,17 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Tracker extends EasyPostObject {
-  static carrier_details;
+  static carrier_detail;
   static carrier;
   static est_delivery_date;
   static fees;
+  static finalized;
+  static is_return;
   static public_url;
   static shipment_id;
   static signed_by;
-  static status;
   static status_detail;
+  static status;
   static tracking_code;
   static tracking_details;
   static weight;
