@@ -96,6 +96,10 @@ export declare interface ITracker extends IObjectWithId<'Tracker'>, IDatedObject
    * Array of the associated Fee objects
    */
   fees: IFee[];
+
+  finalized: boolean;
+
+  is_return: boolean;
 }
 
 export declare class Tracker implements ITracker {
@@ -116,6 +120,8 @@ export declare class Tracker implements ITracker {
   carrier_detail: ICarrierDetail;
   public_url: string;
   fees: IFee[];
+  finalized: boolean;
+  is_return: boolean;
   created_at: string;
   updated_at: string;
 
