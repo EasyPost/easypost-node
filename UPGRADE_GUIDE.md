@@ -20,7 +20,7 @@ Use the following guide to assist in the upgrade process of the `easypost-node` 
 
 ### 8.0 Updated Dependencies
 
-*Likelihood of Impact: **High***
+Likelihood of Impact: **High**
 
 Node 16+ is now required.
 
@@ -28,7 +28,7 @@ All dependencies had major version bumps.
 
 ### 8.0 Removed repl
 
-*Likelihood of Impact: **Low***
+Likelihood of Impact: **Low**
 
 The undocumented and unmaintained `repl` has been removed.
 
