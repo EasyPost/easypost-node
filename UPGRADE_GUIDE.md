@@ -2,12 +2,39 @@
 
 Use the following guide to assist in the upgrade process of the `easypost-node` library between major versions.
 
+- [Upgrading from 7.x to 8.0](#upgrading-from-7x-to-80)
 - [Upgrading from 6.x to 7.0](#upgrading-from-6x-to-70)
 - [Upgrading from 5.x to 6.0](#upgrading-from-5x-to-60)
 - [Upgrading from 4.x to 5.0](#upgrading-from-4x-to-50)
 - [Upgrading from 3.x to 4.0](#upgrading-from-3x-to-40)
 
+## Upgrading from 7.x to 8.0
+
+### 8.0 High Impact Changes
+
+- [Updated Dependencies](#80-updated-dependencies)
+
+### 8.0 Low Impact Changes
+
+- [Removed repl](#80-removed-repl)
+
+### 8.0 Updated Dependencies
+
+*Likelihood of Impact: **High***
+
+Node 16+ is now required.
+
+All dependencies had major version bumps.
+
+### 8.0 Removed repl
+
+*Likelihood of Impact: **Low***
+
+The undocumented and unmaintained `repl` has been removed.
+
 ## Upgrading from 6.x to 7.0
+
+**NOTICE:** v7 is deprecated.
 
 ### 7.0 High Impact Changes
 
