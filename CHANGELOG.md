@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## Next Release
+## v8.0.0 (2025-04-28)
+
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-7x-to-80) for more details.
 
 - Drop support for Node 12, 13, 14, and 15
 - Adds `webhook_secret` and `custom_headers` properties to Typescript definitions of a Webhook
@@ -72,6 +74,8 @@
 - Adds `getNextPage` function in User service to get next paginated list of children
 
 ## v7.0.0 (2023-12-06)
+
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-6x-to-70) for more details.
 
 - Removes `withCarbonOffset` parameter from shipment create and buy functions
 - Removes `carbon_offset` property of `Rate` object
@@ -154,6 +158,8 @@
 
 ## v6.0.0 (2023-03-22)
 
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-5x-to-60) for more details.
+
 Includes all of the changes made in v6.0.0-rc1 below plus the following:
 
 - Adds class properties to each model for autocomplete and explicit deserialization
@@ -168,7 +174,7 @@ Includes all of the changes made in v6.0.0-rc1 below plus the following:
 - Overhauled the data flow of the library
   - Instead of creating a local object and then calling `.save()` on it to create/update it at the API level, you will pass in the same data as before but to one of either `create()` or `update()` functions on the service in question
   - The base service no longer implements all functions and instead each individual service implements its own functions. This means the library namespace won't be cluttered with various `notImplemented` functions
-  - All instance functions (excluding `lowestRate`) previously called on an object are instead called on a service. (eg: `shipment.buy(shipment.lowest_rate())` is now `client.Shipment.buy(shipment.id, shipment.lowest_rate())`))
+  - All instance functions (excluding `lowestRate`) previously called on an object are instead called on a service. (eg: `shipment.buy(shipment.lowest_rate())` is now `client.Shipment.buy(shipment.id, shipment.lowest_rate())`)
     - All functions attached to a service are now async and must be awaited
 - Moved library structure around
   - Introduced `/models` that contain the EasyPost objects
@@ -274,6 +280,8 @@ Includes all of the changes made in v6.0.0-rc1 below plus the following:
 
 ## v5.0.0 (2022-04-13)
 
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-4x-to-50) for more details.
+
 ### Breaking Changes
 
 - Bumps the minimum version of Node to `v10`
@@ -311,6 +319,8 @@ Includes all of the changes made in v6.0.0-rc1 below plus the following:
 - Adds jsdoc style info to each method
 
 ## v4.0.0 (2021-10-06)
+
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-3x-to-40) for more details.
 
 - JSON encodes POST bodies instead of form encoding them by default
 - Adds support for `tax_identifiers`
