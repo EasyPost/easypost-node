@@ -14,9 +14,6 @@
   "main": "./dist/easypost.js",
   "module": "./dist/easypost.mjs",
   "types": "./types/index.d.ts",
-  "bin": {
-    "easypost": "./repl.js"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/easypost/easypost-node.git"
