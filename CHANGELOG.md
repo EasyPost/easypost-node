@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v8.0.2 (2025-05-27)
+
+- Corrects the endpoint used for creating/updating UPS accounts
+
 ## v8.0.1 (2025-05-08)
 
 - Fixes built distribution by removing reference to removed `repl`
