@@ -17,6 +17,7 @@ export default class Claim extends EasyPostObject {
   static insurance_amount;
   static insurance_id;
   static payment_method;
+  static reference;
   static requested_amount;
   static shipment_id;
   static status;

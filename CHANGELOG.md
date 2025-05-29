@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v8.1.0 (2025-05-29)
+
+- Adds `reference` to Claims
+
 ## v8.0.2 (2025-05-27)
 
 - Corrects the endpoint used for creating/updating UPS accounts
