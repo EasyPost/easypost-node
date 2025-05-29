@@ -40,6 +40,9 @@ export declare interface IClaim extends IObjectWithId<'Claim'>, IDatedObject {
   /** The name of the person who was to receive the shipment */
   recipient_name: null;
 
+  /** An optional value that may be used in place of ID when doing Retrieve calls for this claim. */
+  reference: string | null;
+
   /** The amount the claim is for */
   requested_amount: string;
 
