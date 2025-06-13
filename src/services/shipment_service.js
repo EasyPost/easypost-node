@@ -246,14 +246,14 @@ export default (easypostClient) =>
     static async retrieveEstimatedDeliveryDate(id, plannedShipDate) {
       const url = `shipments/${id}/smartrate/delivery_date`;
 
-      const params = {
+      const wrappedParams = {
         planned_ship_date: plannedShipDate,
       };
 
       try {
-        const response = await easypostClient._get(url, params);
+        const response = await easypostClient._get(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body.rates ?? [], params);
+        return this._convertToEasyPostObject(response.body.rates ?? [], wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -268,14 +268,53 @@ export default (easypostClient) =>
     static async recommendShipDate(id, desiredDeliveryDate) {
       const url = `shipments/${id}/smartrate/precision_shipping`;
 
-      const params = {
+      const wrappedParams = {
         desired_delivery_date: desiredDeliveryDate,
       };
 
       try {
-        const response = await easypostClient._get(url, params);
+        const response = await easypostClient._get(url, wrappedParams);
 
-        return this._convertToEasyPostObject(response.body.rates ?? [], params);
+        return this._convertToEasyPostObject(response.body.rates ?? [], wrappedParams);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Create and buy a Luma Shipment in one call.
+     * @param {Object} params - The parameters to create and buy a Shipment with Luma.
+     * @returns {Shipment} - The shipment with the given ID.
+     */
+    static async createAndBuyLuma(params) {
+      const url = `shipments/luma`;
+
+      const wrappedParams = {
+        shipment: params,
+      };
+
+      try {
+        const response = await easypostClient._post(url, wrappedParams);
+
+        return this._convertToEasyPostObject(response.body, wrappedParams);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    /**
+     * Buy a Shipment with Luma.
+     * @param {string} id - The ID of the Shipment to buy with Luma.
+     * @param {Object} params - The parameters to buy a Shipment with Luma.
+     * @returns {Shipment} - The shipment with the given ID.
+     */
+    static async buyLuma(id, params) {
+      const url = `shipments/${id}/luma`;
+
+      try {
+        const response = await easypostClient._post(url, params);
+
+        return this._convertToEasyPostObject(response.body, params);
       } catch (e) {
         return Promise.reject(e);
       }

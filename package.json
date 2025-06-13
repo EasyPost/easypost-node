@@ -6,9 +6,9 @@
   "homepage": "https://easypost.com",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "import": "./dist/easypost.mjs",
-      "require": "./dist/easypost.js",
-      "types": "./types/index.d.ts"
+      "require": "./dist/easypost.js"
     }
   },
   "main": "./dist/easypost.js",
