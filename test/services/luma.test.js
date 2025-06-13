@@ -25,6 +25,6 @@ describe('Luma Service', function () {
 
     const response = await client.Luma.getPromise(basicShipment);
 
-    expect(response.luma_info.luma_selected_rate).to.not.be.null;
+    expect(response.luma_selected_rate).to.not.be.null;
   });
 });
