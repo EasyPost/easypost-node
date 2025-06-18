@@ -22,6 +22,7 @@ import CustomsItemService from './services/customs_item_service';
 import EndShipperService from './services/end_shipper_service';
 import EventService from './services/event_service';
 import InsuranceService from './services/insurance_service';
+import LumaService from './services/luma_service';
 import OrderService from './services/order_service';
 import ParcelService from './services/parcel_service';
 import PickupService from './services/pickup_service';
@@ -371,6 +372,7 @@ EasyPostClient.SERVICES = {
   EndShipper: EndShipperService,
   Event: EventService,
   Insurance: InsuranceService,
+  Luma: LumaService,
   Order: OrderService,
   Parcel: ParcelService,
   Pickup: PickupService,

@@ -350,4 +350,26 @@ describe('Shipment Service', function () {
       expect(entry.easypost_time_in_transit_data.ship_on_date).to.not.be.null;
     }
   });
+
+  it('creates and buys a Shipment with Luma', async function () {
+    const oneCallBuyShipment = Fixture.oneCallBuyShipment();
+    delete oneCallBuyShipment.service;
+    oneCallBuyShipment.ruleset_name = Fixture.lumaRulesetName();
+    oneCallBuyShipment.planned_ship_date = Fixture.lumaPlannedShipDate();
+
+    const shipment = await client.Shipment.createAndBuyLuma(oneCallBuyShipment);
+
+    expect(shipment.postage_label).to.not.be.null;
+  });
+
+  it('buys a Shipment with Luma', async function () {
+    const shipment = await client.Shipment.create(Fixture.basicShipment());
+
+    const boughtShipment = await client.Shipment.buyLuma(shipment.id, {
+      ruleset_name: Fixture.lumaRulesetName(),
+      planned_ship_date: Fixture.lumaPlannedShipDate(),
+    });
+
+    expect(boughtShipment.postage_label).to.not.be.null;
+  });
 });

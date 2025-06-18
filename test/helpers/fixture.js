@@ -166,4 +166,12 @@ export default class Fixture {
   static billing() {
     return this.readFixtureData().billing;
   }
+
+  static lumaRulesetName() {
+    return this.readFixtureData().luma.ruleset_name;
+  }
+
+  static lumaPlannedShipDate() {
+    return '2025-06-13';
+  }
 }
