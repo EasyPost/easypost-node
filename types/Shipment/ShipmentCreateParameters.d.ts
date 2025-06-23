@@ -15,6 +15,19 @@ export declare interface IShipmentCreateParameters {
    */
   carrier_accounts?: string[] | null;
 
+  /**
+   * Optional service name to create one-call-buy shipment
+   */
+  service?: string | null;
+
+  tax_identifiers?: TaxIdentifier[] | null
   customs_info?: DeepPartial<ICustomsInfo> | null;
   options?: DeepPartial<IOptions> | null;
+}
+
+type TaxIdentifier = {
+    entity: "SENDER" | "RECIPIENT"
+    tax_id: string,
+    tax_id_type: string;
+    issuing_country: string
 }
