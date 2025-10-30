@@ -19,7 +19,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
       - name: Upload assets to release
-        uses: AButler/upload-release-assets@v3.0
+        uses: AButler/upload-release-assets@v3.0.1
         with:
           files: 'dist/*'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
