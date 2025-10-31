@@ -13,6 +13,7 @@ export default class Constants {
       'UpsAccount',
       'UpsMailInnovationsAccount',
       'UpsSurepostAccount',
+      'UspsShipAccount',
     ];
   }
   static EXTERNAL_API_CALL_FAILED = 'Communication with %s failed, please try again later';
