@@ -70,4 +70,18 @@ describe('Tracker Service', function () {
       }
     }
   });
+
+  it('retrieves a batch of trackers', async function () {
+    const tracker = await client.Tracker.create({
+      tracking_code: 'EZ1000000001',
+    });
+
+    const trackers = await client.Tracker.retrieveBatch({
+      tracking_codes: [tracker.tracking_code],
+    });
+
+    trackers.trackers.forEach((tracker) => {
+      expect(tracker).to.be.an.instanceOf(Tracker);
+    });
+  });
 });
