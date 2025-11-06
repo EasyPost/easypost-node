@@ -3,13 +3,14 @@
 ## Next Release
 
 - Adds support for `UspsShipAccount`
+- Adds `Tracker.retrieveBatch` function
 
 ## v8.2.0 (2025-06-18)
 
 - Adds the following functions
-  - `shipment.createAndBuyLuma`
-  - `shipment.buyLuma`
-  - `luma.getPromise`
+  - `Shipment.createAndBuyLuma`
+  - `Shipment.buyLuma`
+  - `Luma.getPromise`
 
 ## v8.1.0 (2025-05-29)
 

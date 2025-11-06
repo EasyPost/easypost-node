@@ -57,4 +57,21 @@ export default (easypostClient) =>
 
       return this._retrieve(url);
     }
+
+    /**
+     * Retrieve a batch of {@link Tracker trackers}.
+     * @param {Object} [params] - The parameters to filter the trackers by.
+     * @returns {Object} - An object containing the list of {@link Tracker trackers}.
+     */
+    static async retrieveBatch(params = {}) {
+      const url = 'trackers/batch';
+
+      try {
+        const response = await easypostClient._post(url, params);
+
+        return this._convertToEasyPostObject(response.body, params);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   };
