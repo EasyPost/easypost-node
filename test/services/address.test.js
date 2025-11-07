@@ -161,4 +161,29 @@ describe('Address Service', function () {
       expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });
+
+  it('creates an address with verify_carrier param', async function () {
+    const addressData = Fixture.incorrectAddress();
+
+    addressData.verify = true;
+    addressData.verify_carrier = 'UPS';
+    const address = await client.Address.create(addressData);
+
+    expect(address).to.be.an.instanceOf(Address);
+
+    expect(address.verifications.delivery.errors[0].message).to.equal('Address not found');
+    expect(address.verifications.zip4.errors[0].message).to.equal('Address not found');
+  });
+
+  it('creates and verifies address with verify_carrier param', async function () {
+    const addressData = Fixture.incorrectAddress();
+
+    addressData.verify_carrier = 'UPS';
+    const address = await client.Address.createAndVerify(addressData);
+
+    expect(address).to.be.an.instanceOf(Address);
+
+    expect(address.verifications.delivery.errors[0].message).to.equal('Address not found');
+    expect(address.verifications.zip4.errors[0].message).to.equal('Address not found');
+  });
 });

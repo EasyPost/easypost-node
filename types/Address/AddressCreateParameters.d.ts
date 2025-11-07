@@ -19,4 +19,10 @@ export declare interface IAddressCreateParameters
    * true will perform both delivery and zip code.
    */
   verify_strict?: boolean | null;
+
+  /**
+   * The verifications to perform when creating.
+   * Define either UPS or FedEx as the carrier to verify against.
+   */
+  verify_carrier?: string | null;
 }

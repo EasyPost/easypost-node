@@ -15,21 +15,24 @@ export default (easypostClient) =>
     static async create(params) {
       const url = 'addresses';
 
-      const wrappedParams = {
-        address: params,
-      };
+      const wrappedParams = {};
 
       if (params.verify) {
-        const clone = params;
         wrappedParams.verify = params.verify;
-        delete clone.verify;
+        delete params.verify;
       }
 
       if (params.verify_strict) {
-        const clone = params;
         wrappedParams.verify_strict = params.verify_strict;
-        delete clone.verify_strict;
+        delete params.verify_strict;
       }
+
+      if (params.verify_carrier) {
+        wrappedParams.verify_carrier = params.verify_carrier;
+        delete params.verify_carrier;
+      }
+
+      wrappedParams['address'] = params;
 
       return this._create(url, wrappedParams);
     }
@@ -42,7 +45,15 @@ export default (easypostClient) =>
      */
     static async createAndVerify(params) {
       const url = `addresses/create_and_verify`;
-      const wrappedParams = { address: params };
+
+      const wrappedParams = {};
+
+      if (params.verify_carrier) {
+        wrappedParams.verify_carrier = params.verify_carrier;
+        delete params.verify_carrier;
+      }
+
+      wrappedParams['address'] = params;
 
       try {
         const response = await easypostClient._post(url, wrappedParams);
