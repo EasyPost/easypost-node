@@ -24,10 +24,12 @@ describe('ReferralCustomer Service', function () {
   });
 
   it('creates a referral user', async function () {
+    const referralUser = Fixture.referralUser();
+
     const referral = await client.ReferralCustomer.create({
-      name: 'Test Referral',
-      email: 'test@example.com',
-      phone: '1111111111',
+      name: referralUser.name,
+      email: referralUser.email,
+      phone: referralUser.phone,
     });
 
     expect(referral).to.be.an.instanceOf(User);
