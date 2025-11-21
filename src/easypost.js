@@ -17,8 +17,10 @@ import CarrierAccountService from './services/carrier_account_service';
 import CarrierMetadataService from './services/carrier_metadata_service';
 import CarrierTypeService from './services/carrier_type_service';
 import ClaimService from './services/claim_service';
+import CustomerPortalService from './services/customer_portal_service';
 import CustomsInfoService from './services/customs_info_service';
 import CustomsItemService from './services/customs_item_service';
+import EmbeddableService from './services/embeddable_service';
 import EndShipperService from './services/end_shipper_service';
 import EventService from './services/event_service';
 import InsuranceService from './services/insurance_service';
@@ -367,8 +369,10 @@ EasyPostClient.SERVICES = {
   CarrierMetadata: CarrierMetadataService,
   CarrierType: CarrierTypeService,
   Claim: ClaimService,
+  CustomerPortal: CustomerPortalService,
   CustomsInfo: CustomsInfoService,
   CustomsItem: CustomsItemService,
+  Embeddable: EmbeddableService,
   EndShipper: EndShipperService,
   Event: EventService,
   Insurance: InsuranceService,

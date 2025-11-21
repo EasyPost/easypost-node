@@ -10,7 +10,7 @@ export default defineConfig({
     include: ['test/services/**/*.{js,ts}'],
     coverage: {
       provider: 'istanbul',
-      reporter: ['lcov', 'html'],
+      reporter: ['text', 'lcov', 'html'],
       include: ['src/**/*.{js,ts}'],
       thresholds: {
         lines: 90,

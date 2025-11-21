@@ -174,4 +174,8 @@ export default class Fixture {
   static lumaPlannedShipDate() {
     return '2025-06-13';
   }
+
+  static referralUser() {
+    return this.readFixtureData().users.referral;
+  }
 }
