@@ -11,10 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make install install-styleguide build test
   # node-compatibility checks that the build version of the app can be imported
   # and used on older versions of node
@@ -22,32 +22,32 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x]
+        node-version: [16.x, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x, 24.x]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make install install-styleguide build
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make test-node-compatibility
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
       - run: make install install-styleguide build lint
   coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
       - run: make install install-styleguide build
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make coverage
       - name: Coveralls
@@ -59,10 +59,10 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
       - name: Install Dependencies
         run: make install
       - name: Generate Docs
