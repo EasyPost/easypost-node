@@ -4,8 +4,10 @@ import { IAddress } from './Address';
 /**
  * @see https://docs.easypost.com/docs/addresses#verify-an-address
  */
-export declare interface IAddressCreateParameters
-  extends Omit<IAddress, ParametersToOmitOnCreate | 'verifications'> {
+export declare interface IAddressCreateParameters extends Omit<
+  IAddress,
+  ParametersToOmitOnCreate | 'verifications'
+> {
   /**
    * The verifications to perform when creating.
    * verify_strict takes precedence.
