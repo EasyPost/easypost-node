@@ -2,4 +2,6 @@
   "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
   // Only fail the audit if there are critical vulnerabilities.
   "critical": true,
+  // Can't update ESLint yet because we must support Node 16
+  "allowlist": ["GHSA-p5wg-g6qr-c7cg"],
 }
