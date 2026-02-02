@@ -101,7 +101,7 @@ export declare class Pickup implements IPickup {
   min_datetime: string;
   max_datetime: string;
   is_account_address?: boolean | null;
-  instructions: string;
+  instructions?: string | null;
   messages: IMessage[];
   confirmation: string;
   shipment: IShipment;

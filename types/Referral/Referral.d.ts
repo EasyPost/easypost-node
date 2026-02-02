@@ -1,3 +1,4 @@
+import { IApiKey } from '../ApiKey';
 import { IUser } from '../User';
 import { IReferralCreateParameters } from './ReferralCreateParameters';
 import { IReferralListParameters } from './ReferralListParameters';
@@ -7,7 +8,14 @@ import { IReferralListParameters } from './ReferralListParameters';
  *
  * @see https://docs.easypost.com/docs/users/referral-customers
  */
-export declare interface IReferral extends IUser {}
+export declare interface IReferral extends IUser {
+  /**
+   * API keys for the referral customer (only returned on creation).
+   * Contains both test and production API keys.
+   * These keys should be saved securely as they cannot be retrieved again later.
+   */
+  api_keys?: IApiKey[];
+}
 
 export declare class Referral implements IReferral {
   public constructor(input: IReferralCreateParameters);
@@ -26,6 +34,7 @@ export declare class Referral implements IReferral {
   secondary_recharge_amount: string;
   recharge_threshold: string;
   children: IUser[];
+  api_keys?: IApiKey[];
 
   /**
    * Creates a referral customer.
@@ -111,5 +120,5 @@ export declare class Referral implements IReferral {
   static getNextPage(
     referralCustomers: Object,
     pageSize?: number,
-  ): Promise<{ referrals: Referral[]; has_more: boolean }>;
+  ): Promise<{ referral_customers: Referral[]; has_more: boolean }>;
 }
