@@ -16,7 +16,7 @@ jobs:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
       - name: Publish Package
-        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 make install install-styleguide publish
+        run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just install install-styleguide publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
       - name: Upload assets to release
