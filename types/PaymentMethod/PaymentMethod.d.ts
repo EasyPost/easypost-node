@@ -50,7 +50,7 @@ export declare interface IPaymentMethod extends IObjectWithId<'PaymentMethod'> {
   verified: boolean;
 }
 
-export declare class PaymentMethod implements IPaymentMethod {
+declare class PaymentMethod implements IPaymentMethod {
   id: string;
   mode: 'test' | 'production';
   object: 'PaymentMethod';
@@ -64,3 +64,5 @@ export declare class PaymentMethod implements IPaymentMethod {
   name: string;
   verified: boolean;
 }
+
+export type { PaymentMethod };

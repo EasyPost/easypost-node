@@ -3,7 +3,7 @@
  *
  * @see https://docs.easypost.com/docs/smartrate
  */
-export declare class SmartRate {
+declare class SmartRate {
   /**
    * Retrieve the estimated delivery date of each carrier-service level combination via the Smart Deliver By API, based on a specific ship date and origin-destination postal code pair.
    * @param params - The parameters to estimate the delivery date with.
@@ -18,3 +18,5 @@ export declare class SmartRate {
    */
   static recommendShipDate(params: object): object;
 }
+
+export type { SmartRate };

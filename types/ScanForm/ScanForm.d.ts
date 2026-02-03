@@ -54,7 +54,7 @@ export declare interface IScanForm extends IObjectWithId<'ScanForm'>, IDatedObje
   batch_id: string;
 }
 
-export declare class ScanForm implements IScanForm {
+declare class ScanForm implements IScanForm {
   public constructor(input: IScanFormCreateParameters);
 
   address: IAddress;
@@ -124,3 +124,5 @@ export declare class ScanForm implements IScanForm {
     pageSize?: number,
   ): Promise<{ scan_forms: ScanForm[]; has_more: boolean }>;
 }
+
+export type { ScanForm };

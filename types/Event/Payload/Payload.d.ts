@@ -14,7 +14,7 @@ export declare interface IPayload extends IObjectWithId<'Payload'>, IDatedObject
   response_body: string | null;
 }
 
-export declare class Payload implements IPayload {
+declare class Payload implements IPayload {
   id: string;
   mode: 'test' | 'production';
   object: 'Payload';
@@ -43,3 +43,5 @@ export declare class Payload implements IPayload {
    */
   static all(params: IPayloadListParameters): Promise<{ payloads: Payload[] }>;
 }
+
+export type { Payload };

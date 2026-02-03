@@ -64,7 +64,7 @@ export declare interface IEndshipper extends IObjectWithId<'EndShipper'> {
   email?: string | null;
 }
 
-export declare class EndShipper implements IEndshipper {
+declare class EndShipper implements IEndshipper {
   public constructor(input: DeepPartial<IEndShipperCreateParameters>);
   id: string;
   mode: 'test' | 'production';
@@ -128,3 +128,5 @@ export declare class EndShipper implements IEndshipper {
     params: IEndShipperListParameters,
   ): Promise<{ endshippers: EndShipper[]; has_more: boolean }>;
 }
+
+export type { EndShipper };

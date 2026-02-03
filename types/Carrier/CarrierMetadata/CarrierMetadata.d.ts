@@ -38,7 +38,7 @@ export declare interface ICarrierMetadata {
   shipment_options?: Array<Object> | null;
 }
 
-export declare class CarrierMetadata implements ICarrierMetadata {
+declare class CarrierMetadata implements ICarrierMetadata {
   carrier: string;
   human_readable?: string | null;
   service_levels?: Array<Object> | null;
@@ -59,3 +59,5 @@ export declare class CarrierMetadata implements ICarrierMetadata {
    */
   static retrieve(carriers: Array<string>, types: Array<string>): Promise<CarrierMetadata>;
 }
+
+export type { CarrierMetadata };

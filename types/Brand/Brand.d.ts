@@ -47,7 +47,7 @@ export declare interface IBrand extends IObjectWithId<'Brand'> {
   theme: 'theme1' | 'theme2';
 }
 
-export declare class Brand implements IBrand {
+declare class Brand implements IBrand {
   id: string;
   mode: 'test' | 'production';
   object: 'Brand';
@@ -71,3 +71,5 @@ export declare class Brand implements IBrand {
    */
   static updateBrand(params: object): Promise<Brand>;
 }
+
+export type { Brand };

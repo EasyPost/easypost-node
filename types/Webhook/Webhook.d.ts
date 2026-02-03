@@ -36,7 +36,7 @@ export declare interface IWebhook extends IObjectWithId<'Webhook'> {
   custom_headers: Array<{ key: string; value: string }>;
 }
 
-export declare class Webhook implements IWebhook {
+declare class Webhook implements IWebhook {
   public constructor(input: IWebhookCreateParameters);
 
   url: string;
@@ -44,6 +44,7 @@ export declare class Webhook implements IWebhook {
   id: string;
   mode: 'test' | 'production';
   object: 'Webhook';
+  custom_headers: { key: string; value: string }[];
 
   /**
    * To create a Webhook, you simply need to provide a url parameter that you wish to receive notifications to.
@@ -96,3 +97,5 @@ export declare class Webhook implements IWebhook {
    */
   static delete(webhookId: string): void;
 }
+
+export type { Webhook };

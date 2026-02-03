@@ -54,7 +54,7 @@ export declare interface ICustomsItem extends IObjectWithId<'CustomsItem'>, IDat
   currency?: string | null;
 }
 
-export declare class CustomsItem implements ICustomsItem {
+declare class CustomsItem implements ICustomsItem {
   public constructor(input: DeepPartial<ICustomsItemCreateParameters>);
 
   id: string;
@@ -92,3 +92,5 @@ export declare class CustomsItem implements ICustomsItem {
    */
   static retrieve(CustomsItemId: string): Promise<CustomsItem>;
 }
+
+export type { CustomsItem };

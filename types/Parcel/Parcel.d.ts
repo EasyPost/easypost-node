@@ -43,7 +43,7 @@ export declare interface IParcel extends IObjectWithId<'Parcel'>, IDatedObject {
   predefined_package?: string | null;
 }
 
-export declare class Parcel implements IParcel {
+declare class Parcel implements IParcel {
   public constructor(input: DeepPartial<IParcelCreateParameters>);
 
   id: string;
@@ -80,3 +80,5 @@ export declare class Parcel implements IParcel {
    */
   static retrieve(parcelId: string): Promise<Parcel>;
 }
+
+export type { Parcel };

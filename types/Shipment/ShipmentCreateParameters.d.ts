@@ -19,4 +19,8 @@ export declare interface IShipmentCreateParameters {
   customs_info?: DeepPartial<ICustomsInfo> | null;
   tax_identifiers?: ITaxIdentifier[] | null;
   options?: DeepPartial<IOptions> | null;
+  line_items?: Array<{
+    total_line_value: string;
+    item_description: string;
+  }>;
 }

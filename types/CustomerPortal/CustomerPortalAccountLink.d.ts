@@ -18,7 +18,7 @@ export declare interface ICustomerPortalAccountLink {
   expires_at: string;
 }
 
-export declare class CustomerPortalAccountLink implements ICustomerPortalAccountLink {
+declare class CustomerPortalAccountLink implements ICustomerPortalAccountLink {
   public constructor(input: ICustomerPortalAccountLinkCreateParameters);
 
   object: 'CustomerPortalAccountLink';
@@ -36,3 +36,5 @@ export declare class CustomerPortalAccountLink implements ICustomerPortalAccount
    */
   static createAccountLink(params: Object): Promise<CustomerPortalAccountLink>;
 }
+
+export type { CustomerPortalAccountLink };

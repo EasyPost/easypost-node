@@ -34,10 +34,12 @@ export declare interface IFee extends IBaseObject<'Fee'> {
   refunded: boolean;
 }
 
-export declare class Fee implements IFee {
+declare class Fee implements IFee {
   object: 'Fee';
   type: TFeeType;
   amount: string;
   charged: boolean;
   refunded: boolean;
 }
+
+export type { Fee };

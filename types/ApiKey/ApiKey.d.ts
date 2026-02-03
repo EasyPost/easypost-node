@@ -17,7 +17,7 @@ export declare interface IApiKey extends IObjectWithId<'ApiKey'> {
   active: boolean;
 }
 
-export declare class ApiKey implements IApiKey {
+declare class ApiKey implements IApiKey {
   id: string;
   mode: 'test' | 'production';
   object: 'ApiKey';
@@ -86,3 +86,5 @@ export declare class ApiKey implements IApiKey {
    */
   static disable(id: string): Promise<ApiKey>;
 }
+
+export type { ApiKey };
