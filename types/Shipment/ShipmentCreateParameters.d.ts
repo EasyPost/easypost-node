@@ -3,6 +3,7 @@ import { ICustomsInfo } from '../Customs/CustomsInfo/CustomsInfo';
 import { IParcelCreateParameters } from '../Parcel/ParcelCreateParameters';
 import { DeepPartial } from '../utils';
 import { IOptions } from './Options';
+import { ITaxIdentifier } from './TaxIdentifier';
 
 export declare interface IShipmentCreateParameters {
   reference?: string | null;
@@ -16,5 +17,6 @@ export declare interface IShipmentCreateParameters {
   carrier_accounts?: string[] | null;
 
   customs_info?: DeepPartial<ICustomsInfo> | null;
+  tax_identifiers?: ITaxIdentifier[] | null;
   options?: DeepPartial<IOptions> | null;
 }

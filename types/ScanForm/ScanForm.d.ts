@@ -122,5 +122,5 @@ export declare class ScanForm implements IScanForm {
   static getNextPage(
     scanforms: Object,
     pageSize?: number,
-  ): Promise<{ scanforms: ScanForm[]; has_more: boolean }>;
+  ): Promise<{ scan_forms: ScanForm[]; has_more: boolean }>;
 }

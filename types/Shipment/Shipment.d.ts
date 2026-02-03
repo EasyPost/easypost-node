@@ -14,6 +14,7 @@ import { IPostageLabel } from './PostageLabel';
 import { IRate } from './Rate';
 import { IShipmentCreateParameters } from './ShipmentCreateParameters';
 import { IShipmentListParameters } from './ShipmentListParameters';
+import { ITaxIdentifier } from './TaxIdentifier';
 
 /**
  * The workhorse of the EasyPost API, a Shipment is made up of a "to" and "from" Address, the Parcel being shipped, and any customs forms required for international deliveries.
@@ -58,6 +59,11 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
    * Information for the processing of customs
    */
   customs_info?: ICustomsInfo | null;
+
+  /**
+   * Tax identifiers for the shipment
+   */
+  tax_identifiers?: ITaxIdentifier[];
 
   /**
    * Document created to manifest and scan multiple shipments

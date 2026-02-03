@@ -275,7 +275,7 @@ export declare interface IOptions {
   /**
    * The latest a package should be picked up. Supported carriers vary.
    */
-  pickup_man_datetime: string | null;
+  pickup_max_datetime: string | null;
 
   /**
    * You can optionally print custom messages on labels.

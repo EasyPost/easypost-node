@@ -67,15 +67,15 @@ export declare class Order implements IOrder {
   id: string;
   mode: 'test' | 'production';
   object: 'Order';
-  reference?: string;
+  reference?: string | null;
   to_address: IAddress;
   from_address: IAddress;
-  return_address: IAddress;
-  buyer_address: IAddress;
+  return_address?: IAddress | null;
+  buyer_address?: IAddress | null;
   shipments: IShipment[];
   rates: IRate[];
   messages: IMessage[];
-  is_return: boolean;
+  is_return?: boolean | null;
   created_at: string;
   updated_at: string;
 

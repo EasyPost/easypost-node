@@ -8,6 +8,7 @@
   - `ApiKey.enable`
   - `ApiKey.disable`
 - Adds a `Tracker.delete` function
+- Fixes various Typescript definitions (adding missing items, correcting invalid items, consolidating duplicates, etc)
 
 ## v8.4.0 (2025-11-24)
 

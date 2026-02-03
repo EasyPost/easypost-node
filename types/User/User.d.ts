@@ -11,6 +11,11 @@ import { IUserCreateParameters } from './UserCreateParameters';
  */
 export declare interface IUser extends IObjectWithId<'User'> {
   /**
+   * An optional field that may be used in place of id in other API endpoints
+   */
+  reference?: string | null;
+
+  /**
    * The ID of the parent user object.
    * Top-level users are defined as users with no parent
    */
