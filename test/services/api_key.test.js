@@ -46,7 +46,7 @@ describe('ApiKey Service', function () {
   });
 
   it('creates, disables, enables, and deletes an API key', async function () {
-    const referralClient = new EasyPostClient(process.env.REFERRAL_CUSTOMER_PROD_API_KEY);
+    const referralClient = new EasyPostClient(process.env.REFERRAL_CUSTOMER_PROD_API_KEY || '123');
 
     // Create an API key
     const apiKey = await referralClient.ApiKey.create('production');
