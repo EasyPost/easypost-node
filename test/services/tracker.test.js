@@ -84,4 +84,13 @@ describe('Tracker Service', function () {
       expect(tracker).to.be.an.instanceOf(Tracker);
     });
   });
+
+  it('deletes a tracker', async function () {
+    const tracker = await client.Tracker.create({
+      tracking_code: 'EZ1000000001',
+    });
+
+    // Nothing gets returned here, simply ensure no error gets raised
+    await client.Tracker.delete(tracker.id);
+  });
 });

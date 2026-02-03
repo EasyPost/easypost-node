@@ -187,4 +187,14 @@ export declare class Tracker implements ITracker {
     trackers: Object,
     pageSize?: number,
   ): Promise<{ trackers: Tracker[]; has_more: boolean }>;
+
+  /**
+   * Delete a Tracker.
+   *
+   * @see https://docs.easypost.com/docs/trackers#delete-a-tracker
+   *
+   * @param {string} id - The id of the tracker to delete, starts with "trk_"
+   * @returns {Promise<void>}
+   */
+  static delete(id: string): Promise<void>;
 }

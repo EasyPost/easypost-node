@@ -74,4 +74,22 @@ export default (easypostClient) =>
         return Promise.reject(e);
       }
     }
+
+    /**
+     * Delete a {@link Tracker tracker}.
+     * See {@link https://docs.easypost.com/docs/trackers#delete-a-tracker EasyPost API Documentation} for more information.
+     * @param {string} id - The ID of the tracker to delete.
+     * @returns {Promise<void>}
+     */
+    static async delete(id) {
+      const url = `trackers/${id}`;
+
+      try {
+        await easypostClient._delete(url);
+
+        return Promise.resolve();
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   };
