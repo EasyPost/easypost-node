@@ -44,7 +44,7 @@ declare class Webhook implements IWebhook {
   id: string;
   mode: 'test' | 'production';
   object: 'Webhook';
-  custom_headers: { key: string; value: string; }[];
+  custom_headers: { key: string; value: string }[];
 
   /**
    * To create a Webhook, you simply need to provide a url parameter that you wish to receive notifications to.
