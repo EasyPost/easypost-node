@@ -59,7 +59,7 @@ export declare interface IReport extends IObjectWithId<TReportObjectType>, IDate
   send_email?: boolean | null;
 }
 
-export declare class Report implements IReport {
+declare class Report implements IReport {
   public constructor(input: IReportCreateParameters);
 
   id: string;
@@ -131,3 +131,5 @@ export declare class Report implements IReport {
     pageSize?: number,
   ): Promise<{ reports: Report[]; has_more: boolean }>;
 }
+
+export type { Report };

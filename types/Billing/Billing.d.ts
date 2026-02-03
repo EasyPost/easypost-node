@@ -4,7 +4,7 @@
  *
  * @see https://docs.easypost.com/docs/users/billing
  */
-export declare class Billing {
+declare class Billing {
   /**
    * Fund your EasyPost wallet by charging your primary or secondary payment method on file.
    *
@@ -33,3 +33,5 @@ export declare class Billing {
    */
   static retrievePaymentMethods(): object;
 }
+
+export type { Billing };

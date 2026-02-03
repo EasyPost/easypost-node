@@ -156,7 +156,7 @@ export declare interface IShipment extends IObjectWithId<'Shipment'>, IDatedObje
   batch_message: string;
 }
 
-export declare class Shipment implements IShipment {
+declare class Shipment implements IShipment {
   public constructor(input: IShipmentCreateParameters);
 
   id: string;
@@ -364,3 +364,5 @@ export declare class Shipment implements IShipment {
     pageSize?: number,
   ): Promise<{ shipments: Shipment[]; has_more: boolean }>;
 }
+
+export type { Shipment };

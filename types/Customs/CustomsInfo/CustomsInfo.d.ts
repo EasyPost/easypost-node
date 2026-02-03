@@ -65,7 +65,7 @@ export declare interface ICustomsInfo extends IObjectWithId<'CustomsInfo'>, IDat
   declaration?: string | null;
 }
 
-export declare class CustomsInfo implements ICustomsInfo {
+declare class CustomsInfo implements ICustomsInfo {
   public constructor(input: DeepPartial<ICustomsInfoCreateParameters>);
 
   id: string;
@@ -105,3 +105,5 @@ export declare class CustomsInfo implements ICustomsInfo {
    */
   static retrieve(CustomsInfoId: string): Promise<CustomsInfo>;
 }
+
+export type { CustomsInfo };

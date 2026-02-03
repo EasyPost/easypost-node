@@ -3,7 +3,7 @@ import { Rate } from '../Rate';
 /**
  * The Utils class represents a number of helper methods for the client library.
  */
-export declare class Utils {
+declare class Utils {
   /**
    * Get the lowest SmartRate from a provided list of SmartRates.
    * @public
@@ -45,3 +45,5 @@ export declare class Utils {
    */
   static validateWebhook(eventBody: Buffer, headers: object, webhookSecret: string): object;
 }
+
+export type { Utils };

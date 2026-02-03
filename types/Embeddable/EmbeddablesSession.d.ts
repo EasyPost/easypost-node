@@ -18,7 +18,7 @@ export declare interface IEmbeddablesSession {
   expires_at: string;
 }
 
-export declare class EmbeddablesSession implements IEmbeddablesSession {
+declare class EmbeddablesSession implements IEmbeddablesSession {
   public constructor(input: IEmbeddablesSessionCreateParameters);
 
   object: 'EmbeddablesSession';
@@ -36,3 +36,5 @@ export declare class EmbeddablesSession implements IEmbeddablesSession {
    */
   static createSession(params: Object): Promise<EmbeddablesSession>;
 }
+
+export type { EmbeddablesSession };

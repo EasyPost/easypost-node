@@ -85,7 +85,7 @@ export declare interface IInsurance extends IObjectWithId<'Insurance'>, IDatedOb
   messages: string[];
 }
 
-export declare class Insurance implements IInsurance {
+declare class Insurance implements IInsurance {
   public constructor(input: IInsuranceCreateParameters);
 
   id: string;
@@ -172,3 +172,5 @@ export declare class Insurance implements IInsurance {
    */
   static refund(insuranceId: string): Promise<Insurance>;
 }
+
+export type { Insurance };

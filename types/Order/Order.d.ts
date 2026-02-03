@@ -61,7 +61,7 @@ export declare interface IOrder extends IObjectWithId<'Order'>, IDatedObject {
   is_return?: boolean | null;
 }
 
-export declare class Order implements IOrder {
+declare class Order implements IOrder {
   public constructor(input: IOrderCreateParameters);
 
   id: string;
@@ -133,3 +133,5 @@ export declare class Order implements IOrder {
    */
   lowestRate(carriers?: string[], services?: string[]): IRate;
 }
+
+export type { Order };

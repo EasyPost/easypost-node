@@ -89,7 +89,7 @@ export declare interface IAddress extends IObjectWithId<'Address'> {
   verifications: IVerifications;
 }
 
-export declare class Address implements IAddress {
+declare class Address implements IAddress {
   public constructor(input: DeepPartial<IAddressCreateParameters>);
 
   id: string;
@@ -190,3 +190,5 @@ export declare class Address implements IAddress {
     pageSize?: number,
   ): Promise<{ addresses: Address[]; has_more: boolean }>;
 }
+
+export type { Address };

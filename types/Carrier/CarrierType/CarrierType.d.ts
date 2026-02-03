@@ -28,7 +28,7 @@ export declare interface ICarrierType extends IBaseObject<'CarrierType'> {
   fields: ICarrierTypeFields;
 }
 
-export declare class CarrierType implements ICarrierType {
+declare class CarrierType implements ICarrierType {
   type: string;
   fields: ICarrierTypeFields;
   object: 'CarrierType';
@@ -43,3 +43,5 @@ export declare class CarrierType implements ICarrierType {
    */
   static all(): Promise<CarrierType[]>;
 }
+
+export type { CarrierType };

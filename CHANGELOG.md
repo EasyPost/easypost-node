@@ -9,6 +9,7 @@
   - `ApiKey.disable`
 - Adds a `Tracker.delete` function
 - Fixes various Typescript definitions (adding missing items, correcting invalid items, consolidating duplicates, etc)
+  - Fixes TypeScript exports for model classes to be type-only exports. This prevents runtime errors when attempting to use these classes with `instanceof` or as constructors, since they are not actually exported as JavaScript values from the package. Users can still use these types for type annotations. (closes #456)
 
 ## v8.4.0 (2025-11-24)
 

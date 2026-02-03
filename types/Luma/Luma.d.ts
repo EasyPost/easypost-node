@@ -34,7 +34,7 @@ export declare interface ILumaPromise {
  *
  * @see https://docs.easypost.com/docs/luma
  */
-export declare class Luma {
+declare class Luma {
   /**
    * Get service recommendations from Luma that meet the criteria of your ruleset.
    *
@@ -45,3 +45,5 @@ export declare class Luma {
    */
   static getPromise(params: object): Promise<ILumaPromise>;
 }
+
+export type { Luma };

@@ -68,7 +68,7 @@ export declare interface IClaim extends IObjectWithId<'Claim'>, IDatedObject {
   type: TClaimType;
 }
 
-export declare class Claim implements IClaim {
+declare class Claim implements IClaim {
   public constructor(input: IClaimCreateParameters);
 
   id: string;
@@ -153,3 +153,5 @@ export declare class Claim implements IClaim {
    */
   static cancel(claimId: string): Promise<Claim>;
 }
+
+export type { Claim };

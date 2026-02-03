@@ -81,7 +81,7 @@ export declare interface IUser extends IObjectWithId<'User'> {
   children: IUser[];
 }
 
-export declare class User implements IUser {
+declare class User implements IUser {
   public constructor(input: IUserCreateParameters);
 
   id: string;
@@ -193,3 +193,5 @@ export declare class User implements IUser {
     pageSize?: number,
   ): Promise<{ children: User[]; has_more: boolean }>;
 }
+
+export type { User };

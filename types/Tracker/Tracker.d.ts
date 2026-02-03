@@ -102,7 +102,7 @@ export declare interface ITracker extends IObjectWithId<'Tracker'>, IDatedObject
   is_return: boolean;
 }
 
-export declare class Tracker implements ITracker {
+declare class Tracker implements ITracker {
   public constructor(input: ITrackerCreateParameters);
 
   id: string;
@@ -198,3 +198,5 @@ export declare class Tracker implements ITracker {
    */
   static delete(id: string): Promise<void>;
 }
+
+export type { Tracker };

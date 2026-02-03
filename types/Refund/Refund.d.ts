@@ -36,7 +36,7 @@ export declare interface IRefund extends IObjectWithId<'Refund'>, IDatedObject {
   shipment_id: string;
 }
 
-export declare class Refund implements IRefund {
+declare class Refund implements IRefund {
   public constructor(input: IRefundCreateParameters);
 
   id: string;
@@ -98,3 +98,5 @@ export declare class Refund implements IRefund {
     pageSize?: number,
   ): Promise<{ refunds: Refund[]; has_more: boolean }>;
 }
+
+export type { Refund };

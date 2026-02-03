@@ -69,7 +69,7 @@ export declare interface IRate extends IObjectWithId<'Rate'>, IDatedObject {
   billing_type: string;
 }
 
-export declare class Rate implements IRate {
+declare class Rate implements IRate {
   billing_type: string;
   carrier: string;
   carrier_account_id: string;
@@ -91,3 +91,5 @@ export declare class Rate implements IRate {
   shipment_id: string;
   updated_at: string;
 }
+
+export type { Rate };

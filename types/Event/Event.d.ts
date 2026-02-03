@@ -45,7 +45,7 @@ export declare interface IEvent extends IObjectWithId<'Event'>, IDatedObject {
   completed_urls: string[];
 }
 
-export declare class Event implements IEvent {
+declare class Event implements IEvent {
   id: string;
   mode: 'test' | 'production';
   object: 'Event';
@@ -90,3 +90,5 @@ export declare class Event implements IEvent {
     pageSize?: number,
   ): Promise<{ events: Event[]; has_more: boolean }>;
 }
+
+export type { Event };

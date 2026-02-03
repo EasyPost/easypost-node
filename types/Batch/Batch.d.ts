@@ -57,7 +57,7 @@ export declare interface IBatch extends IObjectWithId<'Batch'>, IDatedObject {
   pickup: IPickup;
 }
 
-export declare class Batch implements IBatch {
+declare class Batch implements IBatch {
   public constructor(input: IBatchCreateParameters);
 
   id: string;
@@ -177,3 +177,5 @@ export declare class Batch implements IBatch {
    */
   static all(params?: IBatchListParameters): Promise<{ batches: Batch[]; has_more: boolean }>;
 }
+
+export type { Batch };

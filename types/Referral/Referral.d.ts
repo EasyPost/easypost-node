@@ -17,7 +17,7 @@ export declare interface IReferral extends IUser {
   api_keys?: IApiKey[];
 }
 
-export declare class Referral implements IReferral {
+declare class Referral implements IReferral {
   public constructor(input: IReferralCreateParameters);
 
   id: string;
@@ -122,3 +122,5 @@ export declare class Referral implements IReferral {
     pageSize?: number,
   ): Promise<{ referral_customers: Referral[]; has_more: boolean }>;
 }
+
+export type { Referral };

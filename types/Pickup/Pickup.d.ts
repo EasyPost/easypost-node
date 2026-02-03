@@ -90,7 +90,7 @@ export declare interface IPickup extends IObjectWithId<'Pickup'>, IDatedObject {
   pickup_rates: IPickupRate[];
 }
 
-export declare class Pickup implements IPickup {
+declare class Pickup implements IPickup {
   public constructor(input: IPickupCreateParameters);
 
   id: string;
@@ -197,3 +197,5 @@ export declare class Pickup implements IPickup {
    */
   lowestRate(carriers?: string[], services?: string[]): IRate;
 }
+
+export type { Pickup };

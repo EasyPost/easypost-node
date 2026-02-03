@@ -62,7 +62,7 @@ export declare interface ICarrierAccount extends IObjectWithId<'CarrierAccount'>
   billing_type: string | null;
 }
 
-export declare class CarrierAccount implements ICarrierAccount {
+declare class CarrierAccount implements ICarrierAccount {
   public constructor(input: DeepPartial<ICarrierAccountCreateParameters>);
 
   id: string;
@@ -137,3 +137,5 @@ export declare class CarrierAccount implements ICarrierAccount {
    */
   static delete(carrierAccountId: string): void;
 }
+
+export type { CarrierAccount };
