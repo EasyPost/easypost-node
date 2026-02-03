@@ -2403,7 +2403,7 @@ See <a href="https://docs.easypost.com/docs/api-keys#retrieve-an-api-key">EasyPo
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_api_key_service.js.html">services/api_key_service.js</a>, <a href="services_api_key_service.js.html#line18">line 18</a>
+        <a href="services_api_key_service.js.html">services/api_key_service.js</a>, <a href="services_api_key_service.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -6907,6 +6907,166 @@ See <a href="https://docs.easypost.com/docs/addresses#create-an-address">EasyPos
     
 
     
+    <h4 class="name" id="create"><span class="type-signature">(async) </span>create<span class="signature">(mode)</span><span class="type-signature"> &rarr; {ApiKey}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Create an API key for a child or referral customer user.
+See <a href="https://docs.easypost.com/docs/api-keys#create-an-api-key">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mode for the API key (either "production" or "test").</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_api_key_service.js.html">services/api_key_service.js</a>, <a href="services_api_key_service.js.html#line60">line 60</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The created API key.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ApiKey</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="create"><span class="type-signature">(async) </span>create<span class="signature">(params)</span><span class="type-signature"> &rarr; {Batch}</span></h4>
     
 
@@ -10835,6 +10995,169 @@ See <a href="https://docs.easypost.com/docs/batches#manifesting-scan-form">EasyP
 
 
 <div class="description">
+    Delete an API key for a child or referral customer user.
+See <a href="https://docs.easypost.com/docs/api-keys#delete-an-api-key">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the API key to delete.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_api_key_service.js.html">services/api_key_service.js</a>, <a href="services_api_key_service.js.html#line73">line 73</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - A promise that resolves if the API key was successfully deleted.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+|
+
+<span class="param-type">Promise.&lt;never></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="delete"><span class="type-signature">(async) </span>delete<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise|Promise.&lt;never>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
     Delete a carrier account.
 See <a href="https://docs.easypost.com/docs/carrier-accounts#delete-a-carrieraccount">EasyPost API Documentation</a> for more information.
 </div>
@@ -11443,6 +11766,326 @@ See <a href="https://docs.easypost.com/docs/users/billing#delete-a-payment-metho
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="disable"><span class="type-signature">(async) </span>disable<span class="signature">(id)</span><span class="type-signature"> &rarr; {ApiKey}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Disable a child or referral customer API key.
+See <a href="https://docs.easypost.com/docs/api-keys#disable-an-api-key">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the API key to disable.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_api_key_service.js.html">services/api_key_service.js</a>, <a href="services_api_key_service.js.html#line109">line 109</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The disabled API key.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ApiKey</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="enable"><span class="type-signature">(async) </span>enable<span class="signature">(id)</span><span class="type-signature"> &rarr; {ApiKey}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Enable a child or referral customer API key.
+See <a href="https://docs.easypost.com/docs/api-keys#enable-an-api-key">EasyPost API Documentation</a> for more information.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ID of the API key to enable.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_api_key_service.js.html">services/api_key_service.js</a>, <a href="services_api_key_service.js.html#line91">line 91</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The enabled API key.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ApiKey</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -21795,7 +22438,7 @@ See <a href="https://docs.easypost.com/docs/api-keys#retrieve-an-api-key">EasyPo
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_api_key_service.js.html">services/api_key_service.js</a>, <a href="services_api_key_service.js.html#line31">line 31</a>
+        <a href="services_api_key_service.js.html">services/api_key_service.js</a>, <a href="services_api_key_service.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -24472,13 +25115,13 @@ See <a href="https://docs.easypost.com/docs/addresses#verify-an-address">EasyPos
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP">EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP</a></li><li><a href="global.html#RESOURCES">RESOURCES</a></li><li><a href="global.html#_all">_all</a></li><li><a href="global.html#_convertToEasyPostObject">_convertToEasyPostObject</a></li><li><a href="global.html#_create">_create</a></li><li><a href="global.html#_getNextPage">_getNextPage</a></li><li><a href="global.html#_retrieve">_retrieve</a></li><li><a href="global.html#addBankAccountFromStripe">addBankAccountFromStripe</a></li><li><a href="global.html#addCreditCard">addCreditCard</a></li><li><a href="global.html#addCreditCardFromStripe">addCreditCardFromStripe</a></li><li><a href="global.html#addPaymentMethod">addPaymentMethod</a></li><li><a href="global.html#addShipments">addShipments</a></li><li><a href="global.html#all">all</a></li><li><a href="global.html#allChildren">allChildren</a></li><li><a href="global.html#buy">buy</a></li><li><a href="global.html#buyLuma">buyLuma</a></li><li><a href="global.html#cancel">cancel</a></li><li><a href="global.html#convertLabelFormat">convertLabelFormat</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#createAccountLink">createAccountLink</a></li><li><a href="global.html#createAndBuyLuma">createAndBuyLuma</a></li><li><a href="global.html#createAndVerify">createAndVerify</a></li><li><a href="global.html#createBankAccountClientSecret">createBankAccountClientSecret</a></li><li><a href="global.html#createCreditCardClientSecret">createCreditCardClientSecret</a></li><li><a href="global.html#createScanForm">createScanForm</a></li><li><a href="global.html#createSession">createSession</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deletePaymentMethod">deletePaymentMethod</a></li><li><a href="global.html#estimateDeliveryDate">estimateDeliveryDate</a></li><li><a href="global.html#fundWallet">fundWallet</a></li><li><a href="global.html#generateForm">generateForm</a></li><li><a href="global.html#generateLabel">generateLabel</a></li><li><a href="global.html#getLowestRate">getLowestRate</a></li><li><a href="global.html#getLowestSmartRate">getLowestSmartRate</a></li><li><a href="global.html#getNextPage">getNextPage</a></li><li><a href="global.html#getPromise">getPromise</a></li><li><a href="global.html#getRates">getRates</a></li><li><a href="global.html#getSmartRates">getSmartRates</a></li><li><a href="global.html#handleApiError">handleApiError</a></li><li><a href="global.html#insure">insure</a></li><li><a href="global.html#lowestRate">lowestRate</a></li><li><a href="global.html#lowestSmartRate">lowestSmartRate</a></li><li><a href="global.html#recommendShipDate">recommendShipDate</a></li><li><a href="global.html#refund">refund</a></li><li><a href="global.html#refundByAmount">refundByAmount</a></li><li><a href="global.html#refundByPaymentLog">refundByPaymentLog</a></li><li><a href="global.html#regenerateRates">regenerateRates</a></li><li><a href="global.html#removeShipments">removeShipments</a></li><li><a href="global.html#retrieve">retrieve</a></li><li><a href="global.html#retrieveAllPayloads">retrieveAllPayloads</a></li><li><a href="global.html#retrieveApiKeysForUser">retrieveApiKeysForUser</a></li><li><a href="global.html#retrieveBatch">retrieveBatch</a></li><li><a href="global.html#retrieveEstimatedDeliveryDate">retrieveEstimatedDeliveryDate</a></li><li><a href="global.html#retrieveMe">retrieveMe</a></li><li><a href="global.html#retrievePayload">retrievePayload</a></li><li><a href="global.html#retrievePaymentMethods">retrievePaymentMethods</a></li><li><a href="global.html#retrieveStatelessRates">retrieveStatelessRates</a></li><li><a href="global.html#traverseJsonElement">traverseJsonElement</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateBrand">updateBrand</a></li><li><a href="global.html#updateEmail">updateEmail</a></li><li><a href="global.html#validateWebhook">validateWebhook</a></li><li><a href="global.html#verifyAddress">verifyAddress</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module.html#.exports">exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP">EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP</a></li><li><a href="global.html#RESOURCES">RESOURCES</a></li><li><a href="global.html#_all">_all</a></li><li><a href="global.html#_convertToEasyPostObject">_convertToEasyPostObject</a></li><li><a href="global.html#_create">_create</a></li><li><a href="global.html#_getNextPage">_getNextPage</a></li><li><a href="global.html#_retrieve">_retrieve</a></li><li><a href="global.html#addBankAccountFromStripe">addBankAccountFromStripe</a></li><li><a href="global.html#addCreditCard">addCreditCard</a></li><li><a href="global.html#addCreditCardFromStripe">addCreditCardFromStripe</a></li><li><a href="global.html#addPaymentMethod">addPaymentMethod</a></li><li><a href="global.html#addShipments">addShipments</a></li><li><a href="global.html#all">all</a></li><li><a href="global.html#allChildren">allChildren</a></li><li><a href="global.html#buy">buy</a></li><li><a href="global.html#buyLuma">buyLuma</a></li><li><a href="global.html#cancel">cancel</a></li><li><a href="global.html#convertLabelFormat">convertLabelFormat</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#createAccountLink">createAccountLink</a></li><li><a href="global.html#createAndBuyLuma">createAndBuyLuma</a></li><li><a href="global.html#createAndVerify">createAndVerify</a></li><li><a href="global.html#createBankAccountClientSecret">createBankAccountClientSecret</a></li><li><a href="global.html#createCreditCardClientSecret">createCreditCardClientSecret</a></li><li><a href="global.html#createScanForm">createScanForm</a></li><li><a href="global.html#createSession">createSession</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#deletePaymentMethod">deletePaymentMethod</a></li><li><a href="global.html#disable">disable</a></li><li><a href="global.html#enable">enable</a></li><li><a href="global.html#estimateDeliveryDate">estimateDeliveryDate</a></li><li><a href="global.html#fundWallet">fundWallet</a></li><li><a href="global.html#generateForm">generateForm</a></li><li><a href="global.html#generateLabel">generateLabel</a></li><li><a href="global.html#getLowestRate">getLowestRate</a></li><li><a href="global.html#getLowestSmartRate">getLowestSmartRate</a></li><li><a href="global.html#getNextPage">getNextPage</a></li><li><a href="global.html#getPromise">getPromise</a></li><li><a href="global.html#getRates">getRates</a></li><li><a href="global.html#getSmartRates">getSmartRates</a></li><li><a href="global.html#handleApiError">handleApiError</a></li><li><a href="global.html#insure">insure</a></li><li><a href="global.html#lowestRate">lowestRate</a></li><li><a href="global.html#lowestSmartRate">lowestSmartRate</a></li><li><a href="global.html#recommendShipDate">recommendShipDate</a></li><li><a href="global.html#refund">refund</a></li><li><a href="global.html#refundByAmount">refundByAmount</a></li><li><a href="global.html#refundByPaymentLog">refundByPaymentLog</a></li><li><a href="global.html#regenerateRates">regenerateRates</a></li><li><a href="global.html#removeShipments">removeShipments</a></li><li><a href="global.html#retrieve">retrieve</a></li><li><a href="global.html#retrieveAllPayloads">retrieveAllPayloads</a></li><li><a href="global.html#retrieveApiKeysForUser">retrieveApiKeysForUser</a></li><li><a href="global.html#retrieveBatch">retrieveBatch</a></li><li><a href="global.html#retrieveEstimatedDeliveryDate">retrieveEstimatedDeliveryDate</a></li><li><a href="global.html#retrieveMe">retrieveMe</a></li><li><a href="global.html#retrievePayload">retrievePayload</a></li><li><a href="global.html#retrievePaymentMethods">retrievePaymentMethods</a></li><li><a href="global.html#retrieveStatelessRates">retrieveStatelessRates</a></li><li><a href="global.html#traverseJsonElement">traverseJsonElement</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateBrand">updateBrand</a></li><li><a href="global.html#updateEmail">updateEmail</a></li><li><a href="global.html#validateWebhook">validateWebhook</a></li><li><a href="global.html#verifyAddress">verifyAddress</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri Jan 30 2026 20:17:39 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Feb 03 2026 18:28:54 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
