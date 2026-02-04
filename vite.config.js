@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite';
 import path from 'path';
+import { defineConfig } from 'vite';
 
 const mode = process.env.NODE_ENV || 'development';
 const isDev = mode === 'development';
@@ -12,7 +12,6 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/easypost.js'),
       fileName: 'easypost',
-      formats: ['cjs', 'es'],
     },
     sourcemap: isDev,
     rollupOptions: {

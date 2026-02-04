@@ -26,7 +26,7 @@
     "build": "vite build",
     "clean": "rm -rf ./dist ./nyc_output ./node_modules/.cache ./coverage",
     "coverage": "cross-env NODE_ENV=test vitest run --coverage",
-    "docs": "./node_modules/.bin/jsdoc src/models src/services src/errors src/utils -d docs",
+    "docs": "jsdoc src/models src/services src/errors src/utils -d docs",
     "format": "prettier --write .",
     "formatCheck": "prettier --check .",
     "lint": "eslint --ext .js,.ts .",
