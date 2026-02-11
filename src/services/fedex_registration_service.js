@@ -10,10 +10,9 @@ export default (easypostClient) =>
   class FedExRegistrationService extends baseService(easypostClient) {
     /**
      * Register the billing address for a FedEx account.
-     * Advanced method for custom parameter structures.
      * @param {string} fedexAccountNumber - The FedEx account number.
      * @param {Object} params - Map of parameters.
-     * @returns {Object} - FedExAccountValidationResponse object with next steps (PIN or invoice validation).
+     * @returns {Object}
      */
     static async registerAddress(fedexAccountNumber, params) {
       const wrappedParams = this._wrapAddressValidation(params);
@@ -31,7 +30,7 @@ export default (easypostClient) =>
      * Request a PIN for FedEx account verification.
      * @param {string} fedexAccountNumber - The FedEx account number.
      * @param {string} pinMethodOption - The PIN delivery method: "SMS", "CALL", or "EMAIL".
-     * @returns {Object} - FedExRequestPinResponse object confirming PIN was sent.
+     * @returns {Object}
      */
     static async requestPin(fedexAccountNumber, pinMethodOption) {
       const wrappedParams = {
@@ -53,7 +52,7 @@ export default (easypostClient) =>
      * Validate the PIN entered by the user for FedEx account verification.
      * @param {string} fedexAccountNumber - The FedEx account number.
      * @param {Object} params - Map of parameters.
-     * @returns {Object} - FedExAccountValidationResponse object.
+     * @returns {Object}
      */
     static async validatePin(fedexAccountNumber, params) {
       const wrappedParams = this._wrapPinValidation(params);
@@ -71,7 +70,7 @@ export default (easypostClient) =>
      * Submit invoice information to complete FedEx account registration.
      * @param {string} fedexAccountNumber - The FedEx account number.
      * @param {Object} params - Map of parameters.
-     * @returns {Object} - FedExAccountValidationResponse object.
+     * @returns {Object}
      */
     static async submitInvoice(fedexAccountNumber, params) {
       const wrappedParams = this._wrapInvoiceValidation(params);
