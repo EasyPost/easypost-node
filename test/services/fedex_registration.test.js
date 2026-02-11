@@ -39,7 +39,10 @@ describe('FedExRegistrationService', function () {
     const middleware = (request) => {
       return new MockMiddleware(request, [
         new MockRequest(
-          new MockRequestMatchRule('POST', `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/address`),
+          new MockRequestMatchRule(
+            'POST',
+            `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/address`,
+          ),
           new MockRequestResponseInfo(200, mockResponse),
         ),
       ]);
@@ -68,7 +71,10 @@ describe('FedExRegistrationService', function () {
     const middleware = (request) => {
       return new MockMiddleware(request, [
         new MockRequest(
-          new MockRequestMatchRule('POST', `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/pin`),
+          new MockRequestMatchRule(
+            'POST',
+            `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/pin`,
+          ),
           new MockRequestResponseInfo(200, mockResponse),
         ),
       ]);
@@ -166,7 +172,10 @@ describe('FedExRegistrationService', function () {
     const middleware = (request) => {
       return new MockMiddleware(request, [
         new MockRequest(
-          new MockRequestMatchRule('POST', `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/invoice`),
+          new MockRequestMatchRule(
+            'POST',
+            `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/invoice`,
+          ),
           new MockRequestResponseInfo(200, mockResponse),
         ),
       ]);
