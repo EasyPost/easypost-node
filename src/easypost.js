@@ -23,6 +23,7 @@ import CustomsItemService from './services/customs_item_service';
 import EmbeddableService from './services/embeddable_service';
 import EndShipperService from './services/end_shipper_service';
 import EventService from './services/event_service';
+import FedExRegistrationService from './services/fedex_registration_service';
 import InsuranceService from './services/insurance_service';
 import LumaService from './services/luma_service';
 import OrderService from './services/order_service';
@@ -375,6 +376,7 @@ EasyPostClient.SERVICES = {
   Embeddable: EmbeddableService,
   EndShipper: EndShipperService,
   Event: EventService,
+  FedExRegistration: FedExRegistrationService,
   Insurance: InsuranceService,
   Luma: LumaService,
   Order: OrderService,

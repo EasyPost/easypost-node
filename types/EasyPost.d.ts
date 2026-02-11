@@ -10,6 +10,7 @@ import { CustomsInfo, CustomsItem } from './Customs';
 import { EmbeddablesSession } from './Embeddable';
 import { EndShipper } from './EndShipper';
 import { Event } from './Event';
+import { FedExRegistration } from './FedExRegistration';
 import { Fee } from './Fee';
 import { Insurance } from './Insurance';
 import { Luma } from './Luma';
@@ -89,6 +90,7 @@ export default class EasyPost {
   public Embeddable: typeof EmbeddablesSession;
   public EndShipper: typeof EndShipper;
   public Event: typeof Event;
+  public FedExRegistration: typeof FedExRegistration;
   public Fee: typeof Fee; // TODO: Fix IFee
   public Insurance: typeof Insurance;
   public Luma: typeof Luma;
