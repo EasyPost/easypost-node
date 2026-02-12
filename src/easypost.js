@@ -116,6 +116,23 @@ export default class EasyPostClient {
   }
 
   /**
+   * Make an API call to the EasyPost API.
+   *
+   * This public, generic interface is useful for making arbitrary API calls to the EasyPost API that
+   * are not yet supported by the client library's services. When possible, the service for your use case
+   * should be used instead as it provides a more convenient and higher-level interface depending on the endpoint.
+   * @param {string} method - The HTTP method to use (e.g. 'get', 'post', 'put', 'patch', 'del').
+   * @param {string} endpoint - The API endpoint to call (e.g. '/addresses').
+   * @param {Object} [params] - The parameters to send with the request.
+   * @returns {Promise<Object>} The response from the API call.
+   */
+  async makeApiCall(method, endpoint, params = {}) {
+    const response = await this._request(endpoint, method, params);
+
+    return response.body;
+  }
+
+  /**
    * Create a copy of an {@link EasyPostClient} with overridden options.
    * @param {EasyPostClient} client The `EasyPostClient` instance to clone.
    * @param {Object} [options] The options to override.

@@ -136,4 +136,16 @@ export default class EasyPost {
    * Clears all response hooks from the EasyPost client.
    */
   public clearResponseHooks(): void;
+  /**
+   * Make an API call to the EasyPost API.
+   *
+   * This public, generic interface is useful for making arbitrary API calls to the EasyPost API that
+   * are not yet supported by the client library's services. When possible, the service for your use case
+   * should be used instead as it provides a more convenient and higher-level interface depending on the endpoint.
+   */
+  public makeApiCall(
+    method: 'get' | 'post' | 'put' | 'patch' | 'del',
+    endpoint: string,
+    params?: Record<string, any>,
+  ): Promise<Record<string, any>>;
 }
