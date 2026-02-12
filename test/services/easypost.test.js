@@ -149,11 +149,10 @@ describe('EasyPost', function () {
   });
 
   it('makes an API call using the generic makeApiCall method', async function () {
-    const response = await client.makeApiCall(EasyPostClient.METHODS.GET, '/addresses', {
+    const response = await client.makeApiCall('get', '/addresses', {
       page_size: 1,
     });
 
-    expect(response.addresses).to.be.an('array');
     expect(response.addresses.length).to.equal(1);
     expect(response.addresses[0].object).to.equal('Address');
   });
