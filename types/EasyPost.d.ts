@@ -116,26 +116,32 @@ export default class EasyPost {
    * Adds a request hook to the EasyPost client. Useful for logging or debugging.
    */
   public addRequestHook(fn: (config: IEasyPostRequest) => void): void;
+
   /**
    * Removes a request hook from the EasyPost client.
    */
   public removeRequestHook(fn: (config: IEasyPostRequest) => void): void;
+
   /**
    * Clears all request hooks from the EasyPost client.
    */
   public clearRequestHooks(): void;
+
   /**
    * Adds a response hook to the EasyPost client. Useful for logging or debugging.
    */
   public addResponseHook(fn: (config: IEasyPostResponse) => void): void;
+
   /**
    * Removes a response hook from the EasyPost client.
    */
   public removeResponseHook(fn: (config: IEasyPostResponse) => void): void;
+
   /**
    * Clears all response hooks from the EasyPost client.
    */
   public clearResponseHooks(): void;
+
   /**
    * Make an API call to the EasyPost API.
    *
