@@ -147,4 +147,13 @@ describe('EasyPost', function () {
     expect(responseConfig1).to.be.null;
     expect(responseConfig2).to.be.null;
   });
+
+  it('makes an API call using the generic makeApiCall method', async function () {
+    const response = await client.makeApiCall('get', '/addresses', {
+      page_size: 1,
+    });
+
+    expect(response.addresses.length).to.equal(1);
+    expect(response.addresses[0].object).to.equal('Address');
+  });
 });
