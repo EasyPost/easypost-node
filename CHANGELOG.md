@@ -9,6 +9,7 @@
   - `FedExRegistration.submitInvoice`
 - Corrects additional Typescript definitions (eg: reference to `Rate` on `Shipment`, `Claim` missing `reference`)
   - Adds automated testing to catch Typescript errors in the future
+- Bumps dependencies
 
 ## v8.5.0 (2026-02-03)
 
