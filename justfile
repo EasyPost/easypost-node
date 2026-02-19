@@ -70,11 +70,14 @@ scan:
 # Test the project
 test:
     npm run test
-    npm run typescript
 
 # Check the built project works for older versions of Node
 test-node-compatibility:
     npm run test:node-compatibility
+
+# Run the TypeScript compiler to check for type errors
+typescript:
+    npm run typescript
 
 # Update dependencies (Unix only)
 update: update-examples-submodule
