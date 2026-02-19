@@ -70,6 +70,7 @@ scan:
 # Test the project
 test:
     npm run test
+    npm run typescript
 
 # Check the built project works for older versions of Node
 test-node-compatibility:

@@ -3,5 +3,5 @@
   // Only fail the audit if there are critical vulnerabilities.
   "critical": true,
   // Can't update ESLint yet because we must support Node 16
-  "allowlist": ["GHSA-p5wg-g6qr-c7cg"],
+  "allowlist": ["GHSA-p5wg-g6qr-c7cg", "GHSA-2g4f-4pwh-qvx6", "GHSA-3ppc-4f35-3m26"],
 }

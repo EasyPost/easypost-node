@@ -1,7 +1,7 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "8.5.0",
+  "version": "8.6.0",
   "author": "Easypost Engineering <oss@easypost.com>",
   "homepage": "https://easypost.com",
   "exports": {
@@ -32,10 +32,10 @@
     "lint": "eslint --ext .js,.ts .",
     "lintFix": "eslint --ext .js,.ts --fix .",
     "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run formatCheck",
-    "repl": "./repl.js --local ./dist/easypost.js",
     "scan": "npx audit-ci -m --config ./audit-ci.jsonc",
     "test": "cross-env NODE_ENV=test vitest run",
     "test:node-compatibility": "cross-env NODE_ENV=test node ./test/node_compatibility",
+    "typescript": "npx tsc",
     "watch": "vite build --watch"
   },
   "dependencies": {
@@ -52,8 +52,8 @@
     "@pollyjs/adapter-node-http": "^6.0.6",
     "@pollyjs/core": "^6.0.6",
     "@pollyjs/persister-fs": "^6.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.59.5",
-    "@typescript-eslint/parser": "^5.59.5",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "@vitest/coverage-istanbul": "^4.0.10",
     "audit-ci": "^7.1",
     "chai": "5.2",
@@ -71,7 +71,7 @@
     "eslint-plugin-vitest-globals": "^1.5.0",
     "jsdoc": "^4.0.2",
     "prettier": "^3.5",
-    "typescript": "^4.9.5 || ~5.0.0",
+    "typescript": "~5.3.0",
     "vite": "^6.2",
     "vite-plugin-externals": "^0.6.2",
     "vitest": "^4.0.10",

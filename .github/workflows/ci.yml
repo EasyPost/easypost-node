@@ -7,7 +7,7 @@ on:
   workflow_dispatch: ~
 
 jobs:
-  # build checks that the app can build and runs tests on the latest node version
+  # build checks that the app can build, Typescript compiles, and runs tests on the latest node version
   build:
     runs-on: ubuntu-latest
     steps:
