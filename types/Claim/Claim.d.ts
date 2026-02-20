@@ -87,6 +87,7 @@ declare class Claim implements IClaim {
   requested_amount: string;
   salvage_value: null;
   shipment_id: string;
+  reference: string | null;
   status: string;
   status_detail: string;
   status_timestamp: string;

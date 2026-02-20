@@ -73,7 +73,9 @@ declare class FedExRegistration {
         country_code: string;
       };
       easypost_details?: {
-        carrier_account_id: string;
+        action?: string;
+        type?: string;
+        carrier_account_id?: string;
       };
     },
   ): Promise<IFedExAccountValidationResponse>;
@@ -105,7 +107,9 @@ declare class FedExRegistration {
         name?: string;
       };
       easypost_details?: {
-        carrier_account_id: string;
+        action?: string;
+        type?: string;
+        carrier_account_id?: string;
       };
     },
   ): Promise<IFedExAccountValidationResponse>;
@@ -128,7 +132,9 @@ declare class FedExRegistration {
         invoice_currency: string;
       };
       easypost_details?: {
-        carrier_account_id: string;
+        action?: string;
+        type?: string;
+        carrier_account_id?: string;
       };
     },
   ): Promise<IFedExAccountValidationResponse>;

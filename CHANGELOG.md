@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v8.6.0 (2026-02-20)
+
+- Adds the following functions:
+  - `FedExRegistration.registerAddress`
+  - `FedExRegistration.requestPin`
+  - `FedExRegistration.validatePin`
+  - `FedExRegistration.submitInvoice`
+- Corrects additional Typescript definitions (eg: reference to `Rate` on `Shipment`, `Claim` missing `reference`)
+  - Adds automated testing to catch Typescript errors in the future
+- Bumps dependencies
+
 ## v8.5.0 (2026-02-03)
 
 - Adds the following functions usable by child and referral customer users:
@@ -14,8 +25,8 @@
 ## v8.4.0 (2025-11-24)
 
 - Adds the following functions:
-  - `embeddable.createSession`
-  - `customerPortal.createAccountLink`
+  - `Embeddable.createSession`
+  - `CustomerPortal.createAccountLink`
 - Bumps dependencies
 
 ## v8.3.0 (2025-11-10)

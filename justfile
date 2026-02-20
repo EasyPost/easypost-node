@@ -75,6 +75,10 @@ test:
 test-node-compatibility:
     npm run test:node-compatibility
 
+# Run the TypeScript compiler to check for type errors
+typescript:
+    npm run typescript
+
 # Update dependencies (Unix only)
 update: update-examples-submodule
     npm update

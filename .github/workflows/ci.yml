@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x, 24.x]
+        node-version: [16.x, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x]
     steps:
       - uses: actions/checkout@v6
       - uses: extractions/setup-just@v3
@@ -35,6 +35,20 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just test-node-compatibility
+  # typescript checks that the our Typescript definitions can be compiled without errors
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: extractions/setup-just@v3
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: |
+          cd types/demo
+          npm install
+          cd ../../
+          just install install-styleguide typescript
   lint:
     runs-on: ubuntu-latest
     steps:
