@@ -1,7 +1,7 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "8.6.0",
+  "version": "8.7.0",
   "author": "Easypost Engineering <oss@easypost.com>",
   "homepage": "https://easypost.com",
   "exports": {
