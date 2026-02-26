@@ -68,11 +68,11 @@ jobs:
           node-version: 24
       - run: just install install-styleguide build
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just coverage
-      - name: Coveralls
+      - name: Coverage
         if: github.ref == 'refs/heads/master'
-        uses: coverallsapp/github-action@master
+        uses: codecov/codecov-action@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
   docs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
