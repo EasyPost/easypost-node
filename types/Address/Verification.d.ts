@@ -1,4 +1,4 @@
-import { IFieldError } from '../errors';
+import { IAddressVerificationFieldError } from '../errors';
 import { IVerificationDetails } from './VerificationDetails';
 
 /**
@@ -13,7 +13,7 @@ export declare interface IVerification {
   /**
    * All errors that caused the verification to fail
    */
-  errors: IFieldError[];
+  errors: IAddressVerificationFieldError[];
 
   /**
    * Extra data related to the verification

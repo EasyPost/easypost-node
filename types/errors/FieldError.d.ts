@@ -7,12 +7,4 @@ export declare interface IFieldError {
    * Human readable description of the problem
    */
   message: string;
-  /**
-   * Error code of the request
-   */
-  code?: string;
-  /**
-   * possible error fix if available 
-   */
-  suggestion?: string;
 }
