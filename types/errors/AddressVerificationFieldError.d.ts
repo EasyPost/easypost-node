@@ -10,8 +10,8 @@ export declare interface IAddressVerificationFieldError {
   code: TErrorCode;
 
   /**
-  * Field of the request that the error describes
-  */
+   * Field of the request that the error describes
+   */
   field: string;
 
   /**
