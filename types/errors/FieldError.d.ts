@@ -8,4 +8,9 @@ export declare interface IFieldError {
    * Human readable description of the problem
    */
   message: string;
+
+  /**
+   * Occasional insight on how to correct the error
+   */
+  suggestion?: string;
 }
