@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v8.8.0 (2026-03-03)
+
+- Adds `IAddressVerificationFieldError` Typescript interface, replacing `IFieldError` on `Verification`
+- Adds missing `suggestion` property to `IFieldError`
+- Removes unused dependencies, bumps remaining
+
 ## v8.7.0 (2026-02-25)
 
 - Adds generic `makeApiCall` function
