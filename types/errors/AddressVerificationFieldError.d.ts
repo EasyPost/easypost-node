@@ -10,7 +10,7 @@ export declare interface IAddressVerificationFieldError {
   code: TErrorCode;
 
   /**
-  * Human readable description of the problem
+  * Field of the request that the error describes
   */
   field: string;
 
@@ -23,5 +23,4 @@ export declare interface IAddressVerificationFieldError {
    * Occasional insight on how to correct the error
    */
   suggestion?: string;
-
 }
