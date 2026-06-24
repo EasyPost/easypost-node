@@ -25,9 +25,7 @@ const scrubbers = {
 };
 
 function scrubHeaders(recording) {
-  recording.request.headers = recording.request.headers.filter(
-    ({ name }) => !headerScrubbers.includes(name),
-  );
+  recording.request.headers = recording.request.headers.filter(({ name }) => !headerScrubbers.includes(name));
 }
 
 /**
@@ -113,13 +111,10 @@ function setupCassette(server) {
 function setupPollyTests() {
   /** @type {Polly} */
   let polly;
-  let suiteName;
-
-  beforeAll(async ({ name }) => {
-    suiteName = name;
-  });
 
   beforeEach((context) => {
+    const suiteName = context.task?.suite?.name || 'unknown-suite';
+
     polly = new Polly(`${suiteName}/${context.task.name}`, {
       adapters: ['node-http'],
       persister: 'fs',
@@ -146,4 +141,4 @@ function setupPollyTests() {
   return () => polly;
 }
 
-export { setupPollyTests, setupCassette };
+export { setupCassette, setupPollyTests };
