@@ -25,7 +25,9 @@ const scrubbers = {
 };
 
 function scrubHeaders(recording) {
-  recording.request.headers = recording.request.headers.filter(({ name }) => !headerScrubbers.includes(name));
+  recording.request.headers = recording.request.headers.filter(
+    ({ name }) => !headerScrubbers.includes(name),
+  );
 }
 
 /**
