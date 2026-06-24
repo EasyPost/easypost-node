@@ -20,7 +20,7 @@ export default (easypostClient) =>
 
       try {
         const response = await easypostClient._post(endpoint, wrappedParams);
-        return this._convertToEasyPostObject(response.body, params);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -30,13 +30,13 @@ export default (easypostClient) =>
      * Request a PIN for FedEx account verification.
      * @param {string} fedexAccountNumber - The FedEx account number.
      * @param {string} pinMethodOption - The PIN delivery method: "SMS", "CALL", or "EMAIL".
+     * @param {Object} params - Map of parameters.
      * @returns {Object}
      */
-    static async requestPin(fedexAccountNumber, pinMethodOption) {
-      const wrappedParams = {
-        pin_method: {
-          option: pinMethodOption,
-        },
+    static async requestPin(fedexAccountNumber, pinMethodOption, params) {
+      const wrappedParams = this._wrapPinValidation(params);
+      wrappedParams.pin_method = {
+        option: pinMethodOption,
       };
       const endpoint = `fedex_registrations/${fedexAccountNumber}/pin`;
 
@@ -60,7 +60,7 @@ export default (easypostClient) =>
 
       try {
         const response = await easypostClient._post(endpoint, wrappedParams);
-        return this._convertToEasyPostObject(response.body, params);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -78,7 +78,7 @@ export default (easypostClient) =>
 
       try {
         const response = await easypostClient._post(endpoint, wrappedParams);
-        return this._convertToEasyPostObject(response.body, params);
+        return this._convertToEasyPostObject(response.body, wrappedParams);
       } catch (e) {
         return Promise.reject(e);
       }

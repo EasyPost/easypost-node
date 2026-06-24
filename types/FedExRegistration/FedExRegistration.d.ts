@@ -85,11 +85,19 @@ declare class FedExRegistration {
    *
    * @param fedexAccountNumber The FedEx account number.
    * @param pinMethodOption The PIN delivery method: "SMS", "CALL", or "EMAIL".
+   * @param params Parameters including easypost_details.
    * @returns {Promise<IFedExRequestPinResponse>} Response object confirming PIN was sent.
    */
   static requestPin(
     fedexAccountNumber: string,
     pinMethodOption: string,
+    params: {
+      easypost_details?: {
+        action?: string;
+        type?: string;
+        carrier_account_id?: string;
+      };
+    },
   ): Promise<IFedExRequestPinResponse>;
 
   /**
