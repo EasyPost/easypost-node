@@ -64,6 +64,12 @@ describe('FedExRegistrationService', function () {
   it('requests a pin', async function () {
     const fedexAccountNumber = '123456789';
 
+    const params = {
+      easypost_details: {
+        carrier_account_id: 'ca_123',
+      },
+    };
+
     const mockResponse = {
       message: 'sent secured Pin',
     };
@@ -84,7 +90,7 @@ describe('FedExRegistrationService', function () {
       requestMiddleware: middleware,
     });
 
-    const response = await client.FedExRegistration.requestPin(fedexAccountNumber, 'SMS');
+    const response = await client.FedExRegistration.requestPin(fedexAccountNumber, 'SMS', params);
 
     expect(response.message).to.equal('sent secured Pin');
   });

@@ -1,7 +1,7 @@
 {
   "name": "@easypost/api",
   "description": "EasyPost Node Client Library",
-  "version": "8.8.0",
+  "version": "8.9.0",
   "author": "Easypost Engineering <oss@easypost.com>",
   "homepage": "https://easypost.com",
   "exports": {
@@ -48,6 +48,7 @@
     "@pollyjs/adapter-node-http": "^6.0.6",
     "@pollyjs/core": "^6.0.6",
     "@pollyjs/persister-fs": "^6.0.6",
+    "@types/node": "^20.17.57",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitest/coverage-istanbul": "^4.0.18",

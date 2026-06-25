@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v8.9.0 (2026-06-25)
+
+- Adds `params` to `requestPin` ensuring users can pass `easypost_details` to the call.
+- Bumps dependencies
+
 ## v8.8.0 (2026-03-03)
 
 - Adds `IAddressVerificationFieldError` Typescript interface, replacing `IFieldError` on `Verification`
