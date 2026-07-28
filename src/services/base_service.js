@@ -1,3 +1,4 @@
+import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 import Address from '../models/address';
 import ApiKey from '../models/api_key';
 import Batch from '../models/batch';
@@ -26,7 +27,8 @@ import Shipment from '../models/shipment';
 import Tracker from '../models/tracker';
 import User from '../models/user';
 import Webhook from '../models/webhook';
-import EndOfPaginationError from '../errors/general/end_of_pagination_error';
+
+const EASYPOST_MODEL_CONSTRUCTOR_TAG = Symbol.for('easypost.modelConstructor');
 
 /**
  * A map of EasyPost object ID prefixes to their associated class names.
@@ -104,17 +106,67 @@ export default (easypostClient) =>
    */
   class BaseService {
     /**
+     * Converts model instances and nested data into plain JSON-compatible objects while
+     * preserving model helper methods as non-enumerable properties.
+     * @internal
+     * @param {*} response The value to serialize.
+     * @returns {*} A plain object/array/scalar.
+     */
+    static _toPlainEasyPostObject(response) {
+      if (Array.isArray(response)) {
+        return response.map((value) => this._toPlainEasyPostObject(value));
+      }
+
+      if (typeof response === 'object' && response !== null) {
+        const plainObject = {};
+        const prototype = Object.getPrototypeOf(response);
+
+        if (prototype && prototype !== Object.prototype) {
+          Object.defineProperty(plainObject, EASYPOST_MODEL_CONSTRUCTOR_TAG, {
+            value: response.constructor,
+            enumerable: false,
+            configurable: true,
+            writable: false,
+          });
+
+          const descriptors = Object.getOwnPropertyDescriptors(prototype);
+
+          Object.entries(descriptors).forEach(([name, descriptor]) => {
+            if (name === 'constructor' || typeof descriptor.value !== 'function') {
+              return;
+            }
+
+            Object.defineProperty(plainObject, name, {
+              value: descriptor.value.bind(plainObject),
+              enumerable: false,
+              configurable: true,
+              writable: true,
+            });
+          });
+        }
+
+        Object.keys(response).forEach((key) => {
+          plainObject[key] = this._toPlainEasyPostObject(response[key]);
+        });
+
+        return plainObject;
+      }
+
+      return response;
+    }
+
+    /**
      * Converts a JSON response and all its nested elements to associated {@link EasyPostObject}-based class instances.
      * @internal
      * @param {*} response The JSON response to convert (usually a `Map` or `Array`).
-     * @param {*} params The parameters passed when fetching the response
+     * @param {*} params The parameters passed when fetching the response.
      * @returns {*} An {@link EasyPostObject}-based class instance or an `Array` of {@link EasyPostObject}-based class instances.
      */
-    static _convertToEasyPostObject(response, params) {
+    static _buildEasyPostObject(response, params) {
       if (Array.isArray(response)) {
         return response.map((value) => {
           if (typeof value === 'object') {
-            return this._convertToEasyPostObject(value, params);
+            return this._buildEasyPostObject(value, params);
           }
           return value;
         });
@@ -137,14 +189,28 @@ export default (easypostClient) =>
         }
 
         Object.keys(response).forEach((key) => {
-          classObject[key] = this._convertToEasyPostObject(response[key], params);
+          classObject[key] = this._buildEasyPostObject(response[key], params);
         });
 
         classObject._params = params;
 
         return classObject;
       }
+
       return response;
+    }
+
+    /**
+     * Converts a JSON response to plain JSON-compatible output while preserving model-based conversion internally.
+     * @internal
+     * @param {*} response The JSON response to convert (usually a `Map` or `Array`).
+     * @param {*} params The parameters passed when fetching the response.
+     * @returns {*} A plain object or array suitable for JSON serialization.
+     */
+    static _convertToEasyPostObject(response, params) {
+      const modelResponse = this._buildEasyPostObject(response, params);
+
+      return this._toPlainEasyPostObject(modelResponse);
     }
 
     /**

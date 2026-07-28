@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v9.0.0 (Unreleased)
+
+- Breaking: API resource responses are now plain JSON-compatible objects rather than model class instances
+
 ## v8.9.0 (2026-06-25)
 
 - Adds `params` to `requestPin` ensuring users can pass `easypost_details` to the call.

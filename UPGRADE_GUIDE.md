@@ -3,10 +3,32 @@
 Use the following guide to assist in the upgrade process of the `easypost-node` library between major versions.
 
 - [Upgrading from 7.x to 8.0](#upgrading-from-7x-to-80)
+- [Upgrading from 8.x to 9.0](#upgrading-from-8x-to-90)
 - [Upgrading from 6.x to 7.0](#upgrading-from-6x-to-70)
 - [Upgrading from 5.x to 6.0](#upgrading-from-5x-to-60)
 - [Upgrading from 4.x to 5.0](#upgrading-from-4x-to-50)
 - [Upgrading from 3.x to 4.0](#upgrading-from-3x-to-40)
+
+## Upgrading from 8.x to 9.0
+
+### 9.0 High Impact Changes
+
+- [Response Objects Are Now Plain JSON Objects](#90-response-objects-are-now-plain-json-objects)
+
+### 9.0 Response Objects Are Now Plain JSON Objects
+
+Likelihood of Impact: **High**
+
+API responses are now returned as plain JSON-compatible objects instead of model class instances.
+
+Instance helper methods such as `shipment.lowestRate()` remain available on returned objects:
+
+```javascript
+const shipment = await client.Shipment.create({ ... });
+const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
+```
+
+This change improves compatibility with serializers and SSR frameworks that require plain objects.
 
 ## Upgrading from 7.x to 8.0
 
