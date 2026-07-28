@@ -201,18 +201,7 @@ export declare interface IOptions {
    * Setting this value to anything other than "DDP" will pass the cost and responsibility of duties on to the recipient of the package(s), as specified by Incoterms rules
    */
   incoterm?:
-    | 'EXW'
-    | 'FCA'
-    | 'CPT'
-    | 'CIP'
-    | 'DAT'
-    | 'DAP'
-    | 'DDP'
-    | 'FAS'
-    | 'FOB'
-    | 'CFR'
-    | 'CIF'
-    | null;
+    'EXW' | 'FCA' | 'CPT' | 'CIP' | 'DAT' | 'DAP' | 'DDP' | 'FAS' | 'FOB' | 'CFR' | 'CIF' | null;
 
   /**
    * This will print an invoice number on the postage label.
