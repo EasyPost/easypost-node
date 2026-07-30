@@ -1,5 +1,3 @@
-import os from 'os';
-import superagent from 'superagent';
 import util from 'util';
 import { v4 as uuid } from 'uuid';
 
@@ -45,11 +43,11 @@ import Utils from './utils/util';
  * The client used to access services of the EasyPost API.
  * This client is configured to use the latest production version of the EasyPost API.
  * @param {string} key The API key to use for API requests made by this client.
- * @param {Object} [options] Additional options to use for the underlying HTTP client (e.g. superagent, middleware, proxy configuration).
+ * @param {Object} [options] Additional options to use for the underlying HTTP client (e.g. middleware, proxy configuration).
  */
 export default class EasyPostClient {
   constructor(key, options = {}) {
-    const { useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
+    const { useProxy, timeout, baseUrl, httpMiddleware, requestMiddleware, httpClient } = options;
 
     if (!key && !useProxy) {
       throw new MissingParameterError({
@@ -60,14 +58,18 @@ export default class EasyPostClient {
     this.key = key;
     this.timeout = timeout || EasyPostClient.DEFAULT_TIMEOUT;
     this.baseUrl = baseUrl || EasyPostClient.DEFAULT_BASE_URL;
-    this.agent = superagent;
+    this.httpClient = httpClient || (typeof fetch === 'function' ? fetch.bind(null) : undefined);
     this.requestMiddleware = requestMiddleware;
     this.requestHooks = [];
     this.responseHooks = [];
     this.Utils = new Utils();
 
-    if (superagentMiddleware) {
-      this.agent = superagentMiddleware(this.agent);
+    if (typeof this.httpClient !== 'function') {
+      throw new Error('No global fetch implementation found. Node 18+ is required.');
+    }
+
+    if (httpMiddleware) {
+      this.httpClient = httpMiddleware(this.httpClient);
     }
 
     this._attachServices(EasyPostClient.SERVICES);
@@ -121,7 +123,7 @@ export default class EasyPostClient {
    * This public, generic interface is useful for making arbitrary API calls to the EasyPost API that
    * are not yet supported by the client library's services. When possible, the service for your use case
    * should be used instead as it provides a more convenient and higher-level interface depending on the endpoint.
-   * @param {string} method - The HTTP method to use (e.g. 'get', 'post', 'put', 'patch', 'del').
+   * @param {string} method - The HTTP method to use (e.g. 'get', 'post', 'put', 'patch', 'delete').
    * @param {string} endpoint - The API endpoint to call (e.g. '/addresses').
    * @param {Object} [params] - The parameters to send with the request.
    * @returns {Promise<Object>} The response from the API call.
@@ -139,16 +141,81 @@ export default class EasyPostClient {
    * @returns {EasyPostClient} A new `EasyPostClient` instance.
    */
   static copyClient(client, options = {}) {
-    const { apiKey, useProxy, timeout, baseUrl, superagentMiddleware, requestMiddleware } = options;
-    const agent = superagentMiddleware ? superagentMiddleware(client.agent) : client.agent;
+    const { apiKey, useProxy, timeout, baseUrl, httpMiddleware, requestMiddleware, httpClient } =
+      options;
+    const nextHttpClient =
+      httpClient || (httpMiddleware ? httpMiddleware(client.httpClient) : client.httpClient);
 
     return new EasyPostClient(apiKey || client.key, {
       useProxy: useProxy || client.useProxy,
       timeout: timeout || client.timeout,
       baseUrl: baseUrl || client.baseUrl,
-      agent,
+      httpClient: nextHttpClient,
       requestMiddleware: requestMiddleware || client.requestMiddleware,
     });
+  }
+
+  /**
+   * Normalize HTTP methods from public API input into fetch-compatible values.
+   * @param {string} method - The method passed in by callers.
+   * @returns {string} lowercase method suitable for fetch.
+   */
+  static _normalizeMethod(method = EasyPostClient.METHODS.GET) {
+    return method.toLowerCase();
+  }
+
+  /**
+   * Executes a fetch request with timeout support.
+   * @private
+   */
+  async _fetchWithTimeout(url, init) {
+    if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+      return this.httpClient(url, {
+        ...init,
+        signal: AbortSignal.timeout(this.timeout),
+      });
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+
+    try {
+      return await this.httpClient(url, {
+        ...init,
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
+
+  /**
+   * Parse an HTTP response body.
+   * @private
+   */
+  async _parseResponseBody(response) {
+    const text = await response.text();
+    if (!text) {
+      return {};
+    }
+
+    try {
+      return JSON.parse(text);
+    } catch (error) {
+      return text;
+    }
+  }
+
+  /**
+   * Encodes a string to base64 in both Node and edge runtimes.
+   * @private
+   */
+  static _toBase64(value) {
+    if (typeof Buffer !== 'undefined') {
+      return Buffer.from(value).toString('base64');
+    }
+
+    return btoa(value);
   }
 
   /**
@@ -159,8 +226,32 @@ export default class EasyPostClient {
   static _buildHeaders(additionalHeaders = {}) {
     return {
       ...EasyPostClient.DEFAULT_HEADERS,
+      'User-Agent': EasyPostClient._buildUserAgent(),
       ...additionalHeaders,
     };
+  }
+
+  /**
+   * Build the default User-Agent string while remaining safe in runtimes that
+   * do not expose Node globals/modules.
+   * @returns {string} The default User-Agent header value.
+   */
+  static _buildUserAgent() {
+    let nodeVersion = 'unknown';
+    let osName = 'unknown';
+    let osVersion = 'unknown';
+    let osArch = 'unknown';
+
+    if (typeof process !== 'undefined') {
+      nodeVersion = process.versions && process.versions.node ? process.versions.node : nodeVersion;
+      osName = process.platform || osName;
+      osArch = process.arch || osArch;
+      osVersion =
+        (process.env && (process.env.OS_VERSION || process.env.OSTYPE || process.env.OS)) ||
+        osVersion;
+    }
+
+    return `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${nodeVersion} OS/${osName} OSVersion/${osVersion} OSArch/${osArch}`;
   }
 
   /**
@@ -183,7 +274,9 @@ export default class EasyPostClient {
       return path;
     }
 
-    let completePath = this.baseUrl + path;
+    const normalizedPath =
+      this.baseUrl.endsWith('/') && path.startsWith('/') ? path.slice(1) : path;
+    let completePath = this.baseUrl + normalizedPath;
     completePath = path.includes('beta') ? completePath.replace('/v2', '') : completePath;
 
     return completePath;
@@ -193,7 +286,7 @@ export default class EasyPostClient {
    * Create a value to be passed to the responseHooks, based on the requestHooks
    * value and the response.
    * @param {Object} baseHooksValue - the value being passed the requestHooks
-   * @param {Object} response - the response from the superagent request
+   * @param {Object} response - the response from the HTTP request
    * @returns {Object} - the value to be passed to the responseHooks
    */
   _createResponseHooksValue(baseHooksValue, response) {
@@ -217,36 +310,85 @@ export default class EasyPostClient {
    */
   async _request(path = '', method = EasyPostClient.METHODS.GET, params = {}, headers = {}) {
     const urlPath = this._buildPath(path);
+    const normalizedMethod = EasyPostClient._normalizeMethod(method);
     const requestHeaders = EasyPostClient._buildHeaders(headers);
-    let request = this.agent[method](urlPath).set(requestHeaders);
-
-    if (this.requestMiddleware) {
-      request = this.requestMiddleware(request);
-    }
-
-    if (this.key) {
-      request.auth(this.key);
-    }
-
-    // it would be ideal if this "full url with params" could be gotten from superagent directly,
-    // but it doesn't seem to be possible
     const url = new URL(urlPath);
+    const isQueryMethod =
+      normalizedMethod === EasyPostClient.METHODS.GET ||
+      normalizedMethod === EasyPostClient.METHODS.DELETE;
+    let requestBody;
 
     if (params !== undefined) {
-      if (method === EasyPostClient.METHODS.GET || method === EasyPostClient.METHODS.DELETE) {
-        request.query(params);
+      if (isQueryMethod) {
         Object.entries(params).forEach(([key, value]) => {
           url.searchParams.append(key, value);
         });
       } else {
-        request.send(params);
+        requestBody = params;
       }
+    }
+
+    const compatibilityRequest = {
+      method: normalizedMethod.toUpperCase(),
+      url: url.toString(),
+      _data: requestBody,
+      set: (headersToSet = {}) => {
+        Object.assign(requestHeaders, headersToSet);
+        return compatibilityRequest;
+      },
+      auth: (key) => {
+        requestHeaders.Authorization = `Basic ${EasyPostClient._toBase64(`${key}:`)}`;
+        return compatibilityRequest;
+      },
+      query: (queryParams = {}) => {
+        Object.entries(queryParams).forEach(([key, value]) => {
+          url.searchParams.append(key, value);
+        });
+        compatibilityRequest.url = url.toString();
+        return compatibilityRequest;
+      },
+      send: (body = {}) => {
+        compatibilityRequest._data = body;
+        return compatibilityRequest;
+      },
+    };
+
+    let middlewareRequest = compatibilityRequest;
+
+    if (this.requestMiddleware) {
+      middlewareRequest = this.requestMiddleware(compatibilityRequest) || compatibilityRequest;
+    }
+
+    if (this.key) {
+      if (typeof middlewareRequest.auth === 'function') {
+        middlewareRequest.auth(this.key);
+      } else {
+        requestHeaders.Authorization = `Basic ${EasyPostClient._toBase64(`${this.key}:`)}`;
+      }
+    }
+
+    let middlewareResponse;
+
+    if (
+      this.requestMiddleware &&
+      params !== undefined &&
+      typeof middlewareRequest.query === 'function' &&
+      isQueryMethod
+    ) {
+      middlewareResponse = middlewareRequest.query(params);
+    } else if (
+      this.requestMiddleware &&
+      params !== undefined &&
+      typeof middlewareRequest.send === 'function' &&
+      !isQueryMethod
+    ) {
+      middlewareResponse = middlewareRequest.send(params);
     }
 
     const baseHooksValue = {
       method,
-      path: url.toString(),
-      requestBody: request._data,
+      path: middlewareRequest.url || url.toString(),
+      requestBody: middlewareRequest._data,
       headers: requestHeaders,
       requestTimestamp: Date.now(),
       requestUUID: uuid(),
@@ -255,7 +397,46 @@ export default class EasyPostClient {
     this.requestHooks.forEach((fn) => fn(baseHooksValue));
 
     try {
-      const response = await request;
+      let response;
+
+      if (
+        middlewareResponse &&
+        typeof middlewareResponse === 'object' &&
+        typeof middlewareResponse.statusCode === 'number'
+      ) {
+        response = {
+          status: middlewareResponse.statusCode,
+          statusCode: middlewareResponse.statusCode,
+          body: middlewareResponse.body,
+          headers: middlewareResponse.headers || {},
+        };
+      } else {
+        const fetchResponse = await this._fetchWithTimeout(baseHooksValue.path, {
+          method: normalizedMethod.toUpperCase(),
+          headers: requestHeaders,
+          body:
+            normalizedMethod === EasyPostClient.METHODS.GET ||
+            normalizedMethod === EasyPostClient.METHODS.DELETE
+              ? undefined
+              : JSON.stringify(middlewareRequest._data),
+        });
+
+        const responseBody = await this._parseResponseBody(fetchResponse);
+        const responseHeaders = Object.fromEntries(fetchResponse.headers.entries());
+
+        response = {
+          status: fetchResponse.status,
+          statusCode: fetchResponse.status,
+          body: responseBody,
+          headers: responseHeaders,
+        };
+      }
+
+      if (response.status >= 400) {
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, response);
+        this.responseHooks.forEach((fn) => fn(responseHooksValue));
+        throw ErrorHandler.handleApiError(response);
+      }
 
       if (this.responseHooks.length > 0) {
         const responseHooksValue = this._createResponseHooksValue(baseHooksValue, response);
@@ -264,7 +445,11 @@ export default class EasyPostClient {
 
       return response;
     } catch (error) {
-      if (error.response && error.response.body) {
+      if (error.statusCode && error.body) {
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, error);
+        this.responseHooks.forEach((fn) => fn(responseHooksValue));
+        throw ErrorHandler.handleApiError(error);
+      } else if (error.response && error.response.body) {
         const responseHooksValue = this._createResponseHooksValue(baseHooksValue, error.response);
         this.responseHooks.forEach((fn) => fn(responseHooksValue));
         throw ErrorHandler.handleApiError(error.response);
@@ -355,13 +540,11 @@ EasyPostClient.DEFAULT_BASE_URL = 'https://api.easypost.com/v2/';
 EasyPostClient.DEFAULT_HEADERS = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
-  'User-Agent': `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${
-    process.versions.node
-  } OS/${os.platform()} OSVersion/${os.release()} OSArch/${os.arch()}`,
+  'User-Agent': EasyPostClient._buildUserAgent(),
 };
 
 /**
- * A map of HTTP methods to their corresponding string values (for use with superagent).
+ * A map of HTTP methods to their corresponding string values.
  * @type {{DELETE: string, POST: string, GET: string, PUT: string, PATCH: string}}
  */
 EasyPostClient.METHODS = {
@@ -369,7 +552,7 @@ EasyPostClient.METHODS = {
   POST: 'post',
   PUT: 'put',
   PATCH: 'patch',
-  DELETE: 'del',
+  DELETE: 'delete',
 };
 
 /**

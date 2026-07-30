@@ -111,7 +111,8 @@ const client = new EasyPostClient(process.env.EASYPOST_API_KEY, {
   timeout: 120000,
   baseUrl: 'https://api.easypost.com/v2/',
   useProxy: false,
-  superagentMiddleware: (s) => s,
+  httpMiddleware: (f) => f,
+  httpClient: fetch,
   requestMiddleware: (r) => r,
 });
 ```
@@ -130,30 +131,35 @@ from a frontend through a server.
 Disable using the API key. Useful if you proxy requests from a frontend through
 a server.
 
-#### superagentMiddleware
+#### httpMiddleware
 
-Function that takes `superagent` and returns `superagent`. Useful if you need
-to wrap superagent in a function, such as many superagent libraries do.
+Function that wraps the underlying HTTP transport function.
 
 ```javascript
-import superagentLib from 'some-superagent-lib';
+const wrapFetch = (f) => (input, init) => {
+  // custom behavior here
+  return f(input, init);
+};
 
 const client = new EasyPostClient('my-key', {
-  superagentMiddleware: (s) => superagentLib(s),
+  httpMiddleware: wrapFetch,
 });
 ```
 
+#### httpClient
+
+Function used for HTTP requests. Defaults to built-in `fetch` (Node 18+).
+You can override this for custom environments, testing, or instrumentation.
+
 #### requestMiddleware
 
-Function that takes a superagent `request` and returns that request. Useful if
-you need to hook into a request:
+Function that takes a compatibility request object and returns it. Existing
+middleware patterns that use `auth`, `query`, and `send` are still supported.
 
 ```javascript
-import superagentLib from 'some-superagent-lib';
-
 const client = new EasyPostClient('my-key', {
   requestMiddleware: (r) => {
-    r.someLibFunction(SOME_CONFIG_VALUE);
+    r.set({ 'X-Custom-Header': 'my-value' });
     return r;
   },
 });

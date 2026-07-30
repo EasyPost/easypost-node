@@ -2,7 +2,15 @@
 
 ## v9.0.0 (Unreleased)
 
+- Breaking: Node 18+ is now required (built-in `fetch`)
 - Breaking: API resource responses are now plain JSON-compatible objects rather than model class instances
+- Breaking: HTTP transport migrated from `superagent` to fetch-compatible transport
+  - `superagent` runtime dependency removed
+  - Breaking: `superagentMiddleware` renamed to `httpMiddleware`
+  - Breaking: `fetchClient` renamed to `httpClient`
+  - Breaking: `makeApiCall` now accepts `delete` (the `del` alias was removed)
+  - `requestMiddleware` compatibility preserved using a fetch-era compatibility request object
+  - Default `User-Agent` retains structured runtime metadata fields (`Nodejs/`, `OS/`, `OSVersion/`, `OSArch/`) via runtime-safe detection
 
 ## v8.9.0 (2026-06-25)
 

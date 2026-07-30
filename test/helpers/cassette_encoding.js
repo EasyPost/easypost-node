@@ -1,5 +1,4 @@
 import { gunzipSync, gzipSync } from 'zlib';
-import { text } from 'superagent/lib/node/parsers';
 
 const charset = 'utf8';
 const encoding = 'base64';
@@ -64,8 +63,9 @@ const encodeCassetteResponseBodies = (response) => {
   content.text = JSON.stringify(body);
 
   // recalculating the content size in case manual editing of data changes the size
-  content.size = text.length;
-  response.bodySize = text.length;
+  const contentLength = content.text.length;
+  content.size = contentLength;
+  response.bodySize = contentLength;
 };
 
 export { decodeCassetteResponseBodies, encodeCassetteResponseBodies };
