@@ -58,7 +58,8 @@ export default class EasyPostClient {
     this.key = key;
     this.timeout = timeout || EasyPostClient.DEFAULT_TIMEOUT;
     this.baseUrl = baseUrl || EasyPostClient.DEFAULT_BASE_URL;
-    this.httpClient = httpClient || (typeof fetch === 'function' ? fetch.bind(null) : undefined);
+    this.httpClient =
+      httpClient || (typeof fetch === 'function' ? (...args) => fetch(...args) : undefined);
     this.requestMiddleware = requestMiddleware;
     this.requestHooks = [];
     this.responseHooks = [];

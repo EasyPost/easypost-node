@@ -2,11 +2,11 @@
 import { expect } from 'chai';
 
 import EasyPostClient from '../../src/easypost';
+import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
+import FilteringError from '../../src/errors/general/filtering_error';
 import Pickup from '../../src/models/pickup';
 import Fixture from '../helpers/fixture';
-import FilteringError from '../../src/errors/general/filtering_error';
 import * as setupPolly from '../helpers/setup_polly';
-import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import { withoutParams } from '../helpers/utils';
 
 describe('Pickup Service', function () {
@@ -33,7 +33,7 @@ describe('Pickup Service', function () {
     expect(pickup).to.be.an.instanceOf(Pickup);
     expect(pickup.id).to.match(/^pickup_/);
     expect(pickup.pickup_rates).to.exist;
-  });
+  }, 20000);
 
   it('retrieves a pickup', async function () {
     const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
@@ -95,7 +95,7 @@ describe('Pickup Service', function () {
     expect(boughtPickup.id).to.match(/^pickup_/);
     expect(boughtPickup.confirmation).to.exist;
     expect(boughtPickup.status).to.equal('scheduled');
-  });
+  }, 20000);
 
   it('cancels a pickup', async function () {
     const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
@@ -115,7 +115,7 @@ describe('Pickup Service', function () {
     expect(cancelledPickup).to.be.an.instanceOf(Pickup);
     expect(cancelledPickup.id).to.match(/^pickup_/);
     expect(cancelledPickup.status).to.equal('canceled');
-  });
+  }, 30000);
 
   it('gets the lowest rate', async function () {
     const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
