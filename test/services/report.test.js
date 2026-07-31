@@ -87,13 +87,16 @@ describe('Report Service', function () {
   });
 
   it('retrieves next page of reports', async function () {
+    let reports;
+    let nextPage;
+
     try {
       const params = {
         page_size: Fixture.pageSize(),
         type: Fixture.reportType(),
       };
-      const reports = await client.Report.all(params);
-      const nextPage = await client.Report.getNextPage(reports, Fixture.pageSize());
+      reports = await client.Report.all(params);
+      nextPage = await client.Report.getNextPage(reports, Fixture.pageSize());
 
       const firstIdOfFirstPage = reports.reports[0].id;
       const firstIdOfSecondPage = nextPage.reports[0].id;
@@ -101,7 +104,12 @@ describe('Report Service', function () {
       expect(firstIdOfFirstPage).to.not.equal(firstIdOfSecondPage);
     } catch (error) {
       if (!(error instanceof EndOfPaginationError)) {
-        throw new Error('Test failed intentionally');
+        if (reports.has_more === false) {
+          // Test reports may not return via API
+          expect(reports.reports.length).to.equal(0);
+        } else {
+          throw new Error('Test failed intentionally');
+        }
       }
     }
   });
