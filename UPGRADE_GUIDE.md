@@ -47,7 +47,7 @@ What changed:
 - `superagent` is no longer a runtime dependency.
 - Node 18+ is now required (built-in `fetch`).
 - `superagentMiddleware` has been removed and replaced by `httpMiddleware`.
-- `fetchClient` has been renamed to `httpClient`.
+- `agent` has been renamed to `httpClient`.
 - `makeApiCall` now uses `delete` only (the `del` alias was removed).
 - Middleware relying on superagent-only request internals (private properties or plugin APIs) must be updated.
 - The default `User-Agent` retains the prior structured format (`Nodejs/`, `OS/`, `OSVersion/`, `OSArch/`) while collecting values in a runtime-safe way.
