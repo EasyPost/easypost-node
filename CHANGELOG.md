@@ -7,7 +7,7 @@
 - Breaking: HTTP transport migrated from `superagent` to fetch-compatible transport
   - `superagent` runtime dependency removed
   - Breaking: `superagentMiddleware` renamed to `httpMiddleware`
-  - Breaking: `fetchClient` renamed to `httpClient`
+  - Breaking: `agent` renamed to `httpClient`
   - Breaking: `makeApiCall` now accepts `delete` (the `del` alias was removed)
   - `requestMiddleware` compatibility preserved using a fetch-era compatibility request object
   - Default `User-Agent` retains structured runtime metadata fields (`Nodejs/`, `OS/`, `OSVersion/`, `OSArch/`) via runtime-safe detection
