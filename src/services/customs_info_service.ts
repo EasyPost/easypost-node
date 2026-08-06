@@ -1,5 +1,7 @@
 import baseService from './base_service';
 
+type CustomsInfoParams = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The CustomsInfoService class provides methods for interacting with EasyPost {@link CustomsInfo} objects.
@@ -12,7 +14,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the customs info to be created.
      * @returns {CustomsInfo} - The created customs info.
      */
-    static async create(params) {
+    static async create(params: CustomsInfoParams): Promise<unknown> {
       const url = 'customs_infos';
 
       const wrappedParams = {
@@ -28,7 +30,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the customs info to retrieve.
      * @returns {CustomsInfo} - The retrieved customs info.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `customs_infos/${id}`;
 
       return this._retrieve(url);

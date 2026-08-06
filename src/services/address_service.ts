@@ -1,5 +1,13 @@
 import baseService from './base_service';
 
+type AddressParams = Record<string, unknown> & {
+  verify?: unknown;
+  verify_strict?: unknown;
+  verify_carrier?: unknown;
+};
+
+type PaginationCollection = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The AddressService class provides methods for interacting with EasyPost {@link Address} objects.
@@ -12,7 +20,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the address to be created.
      * @returns {Address} - The created address.
      */
-    static async create(params) {
+    static async create(params: AddressParams): Promise<unknown> {
       const url = 'addresses';
 
       const wrappedParams: Record<string, unknown> = {};
@@ -43,7 +51,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the address to be created.
      * @returns {Address} - The created and verified address.
      */
-    static async createAndVerify(params) {
+    static async createAndVerify(params: AddressParams): Promise<unknown> {
       const url = `addresses/create_and_verify`;
 
       const wrappedParams: Record<string, unknown> = {};
@@ -70,7 +78,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the list of addresses.
      * @returns {Object} - An object containing a list of {@link Address addresses} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'addresses';
 
       return this._all(url, params);
@@ -82,7 +90,10 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(addresses, pageSize = null) {
+    static async getNextPage(
+      addresses: PaginationCollection,
+      pageSize?: number,
+    ): Promise<unknown> {
       const url = 'addresses';
       return this._getNextPage(url, 'addresses', addresses, pageSize);
     }
@@ -93,7 +104,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the address to retrieve.
      * @returns {Address} - The retrieved address.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `addresses/${id}`;
 
       return this._retrieve(url);
@@ -105,7 +116,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the address to verify.
      * @returns {Address} - The verified address.
      */
-    static async verifyAddress(id) {
+    static async verifyAddress(id: string): Promise<unknown> {
       try {
         const url = `addresses/${id}/verify`;
         const response = await easypostClient._get(url);

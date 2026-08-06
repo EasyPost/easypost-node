@@ -1,5 +1,7 @@
 import baseService from './base_service';
 
+type ParcelParams = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The ParcelService class provides methods for interacting with EasyPost {@link Parcel} objects.
@@ -12,7 +14,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a parcel with.
      * @returns {Parcel} - The created parcel.
      */
-    static async create(params) {
+    static async create(params: ParcelParams): Promise<unknown> {
       const url = 'parcels';
 
       const wrappedParams = {
@@ -28,7 +30,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the parcel to retrieve.
      * @returns {Parcel} - The retrieved parcel.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `parcels/${id}`;
 
       return this._retrieve(url);
