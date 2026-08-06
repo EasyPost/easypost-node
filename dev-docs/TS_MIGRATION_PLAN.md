@@ -62,6 +62,7 @@ Merge behavior alignment:
 - Defer broad refactors until after full TS compilation parity is established.
 - Avoid side branches that bypass stack ordering.
 - Open stack PRs as drafts by default and mark ready only after layer checks pass.
+- Replace PR template boilerplate with concise PR-specific summaries for each layer.
 
 ## Target End State
 

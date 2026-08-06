@@ -256,6 +256,33 @@ Recommended labels:
 - `permissive-types`
 - `tsm-00` ... `tsm-91`
 
+## PR Summary Standards
+
+Do not leave the pull request template text in place.
+
+For each stacked PR, replace the template with a concise, PR-specific summary:
+
+- 1 short paragraph describing what changed in this layer.
+- 3-6 bullets listing concrete file/scope changes.
+- a short testing section with exact commands run.
+
+Keep PR summaries brief and communicative:
+
+- avoid long narrative prose.
+- avoid repeating migration context from other docs.
+- link to stack PR numbers only when needed for dependency context.
+
+Suggested title pattern:
+
+- `TSM-XX: <action-oriented summary>`
+
+Suggested body shape:
+
+- `Summary`
+- `Changes in this PR`
+- `Testing`
+- `Stack Context` (optional, one line)
+
 ## Risk Register
 
 | Risk | Likelihood | Impact | Mitigation |
