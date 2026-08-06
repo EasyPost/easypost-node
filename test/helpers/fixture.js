@@ -39,7 +39,7 @@ export default class Fixture {
   }
 
   static reportDate() {
-    return '2022-04-11';
+    return '2026-07-30';
   }
 
   static caAddress1() {
@@ -93,7 +93,7 @@ export default class Fixture {
   // If you need to re-record cassettes, increment the date below and ensure it is one day in the future,
   // USPS only does "next-day" pickups including Saturday but not Sunday or Holidays.
   static basicPickup() {
-    const pickupDate = '2024-08-01';
+    const pickupDate = '2026-08-01';
 
     const pickupData = this.readFixtureData().pickups.basic;
     pickupData.min_datetime = pickupDate;
@@ -156,11 +156,11 @@ export default class Fixture {
   }
 
   static plannedShipDate() {
-    return '2024-08-01';
+    return '2026-08-01';
   }
 
   static plannedDeliveryDate() {
-    return '2024-08-03';
+    return '2026-08-03';
   }
 
   static billing() {
@@ -172,7 +172,7 @@ export default class Fixture {
   }
 
   static lumaPlannedShipDate() {
-    return '2025-06-13';
+    return '2026-08-01';
   }
 
   static referralUser() {

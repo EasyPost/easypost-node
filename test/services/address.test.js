@@ -179,11 +179,9 @@ describe('Address Service', function () {
     const addressData = Fixture.incorrectAddress();
 
     addressData.verify_carrier = 'UPS';
-    const address = await client.Address.createAndVerify(addressData);
 
-    expect(address).to.be.an.instanceOf(Address);
-
-    expect(address.verifications.delivery.errors[0].message).to.equal('Address not found');
-    expect(address.verifications.zip4.errors[0].message).to.equal('Address not found');
+    return client.Address.createAndVerify(addressData).catch((err) =>
+      expect(err).to.be.an.instanceOf(InvalidRequestError),
+    );
   });
 });

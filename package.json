@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 16.0"
+    "node": ">= 18.0"
   },
   "scripts": {
     "build": "vite build",
@@ -39,13 +39,12 @@
     "watch": "vite build --watch"
   },
   "dependencies": {
-    "superagent": "~10.3.0",
     "uuid": "~11.1.0",
     "yargs": "~17.7.2",
     "yargs-parser": "~21.1.1"
   },
   "devDependencies": {
-    "@pollyjs/adapter-node-http": "^6.0.6",
+    "@pollyjs/adapter-fetch": "^6.0.6",
     "@pollyjs/core": "^6.0.6",
     "@pollyjs/persister-fs": "^6.0.6",
     "@types/node": "^20.17.57",

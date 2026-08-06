@@ -14,6 +14,7 @@ Use the following guide to assist in the upgrade process of the `easypost-node` 
 ### 9.0 High Impact Changes
 
 - [Response Objects Are Now Plain JSON Objects](#90-response-objects-are-now-plain-json-objects)
+- [HTTP Transport Migrated to Fetch](#90-http-transport-migrated-to-fetch)
 
 ### 9.0 Response Objects Are Now Plain JSON Objects
 
@@ -29,6 +30,42 @@ const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRat
 ```
 
 This change improves compatibility with serializers and SSR frameworks that require plain objects.
+
+### 9.0 HTTP Transport Migrated to Fetch
+
+Likelihood of Impact: **Medium**
+
+The internal HTTP transport has moved from `superagent` to `fetch`.
+
+What stayed compatible:
+
+- Existing service APIs are unchanged.
+- `requestMiddleware` is still supported via a compatibility request object.
+
+What changed:
+
+- `superagent` is no longer a runtime dependency.
+- Node 18+ is now required (built-in `fetch`).
+- `superagentMiddleware` has been removed and replaced by `httpMiddleware`.
+- `agent` has been renamed to `httpClient`.
+- `makeApiCall` now uses `delete` only (the `del` alias was removed).
+- Middleware relying on superagent-only request internals (private properties or plugin APIs) must be updated.
+- The default `User-Agent` retains the prior structured format (`Nodejs/`, `OS/`, `OSVersion/`, `OSArch/`) while collecting values in a runtime-safe way.
+
+Migration examples:
+
+```javascript
+// After
+const client = new EasyPostClient('api_key', {
+  httpMiddleware: (httpFn) => httpFn,
+  httpClient: fetch,
+});
+```
+
+```javascript
+// Updated method name
+await client.makeApiCall('delete', '/trackers/trk_123');
+```
 
 ## Upgrading from 7.x to 8.0
 

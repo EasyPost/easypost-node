@@ -1,14 +1,38 @@
-import NodeHttpAdapter from '@pollyjs/adapter-node-http';
+import FetchAdapter from '@pollyjs/adapter-fetch';
 import { Polly } from '@pollyjs/core';
 import FSPersister from '@pollyjs/persister-fs';
 import { resolve } from 'path';
 
-import { decodeCassetteResponseBodies, encodeCassetteResponseBodies } from './cassette_encoding';
-
 Polly.register(FSPersister);
-Polly.register(NodeHttpAdapter);
+Polly.register(FetchAdapter);
 
 const headerScrubbers = ['authorization', 'user-agent'];
+
+const legacyIdentityHeaders = {
+  'accept-encoding': 'gzip, deflate',
+};
+
+function normalizeNavigatorOnlineForNode() {
+  const isNodeRuntime = typeof process !== 'undefined' && Boolean(process.versions?.node);
+  const hasNavigator = typeof navigator !== 'undefined' && navigator !== null;
+
+  // In newer Node runtimes, `navigator` exists but `navigator.onLine` may be undefined.
+  // Polly treats falsy `onLine` as offline and emits a warning for every recorded request.
+  if (!isNodeRuntime || !hasNavigator || typeof navigator.onLine !== 'undefined') {
+    return;
+  }
+
+  try {
+    Object.defineProperty(navigator, 'onLine', {
+      value: true,
+      configurable: true,
+    });
+  } catch {
+    // If navigator is non-configurable in a specific runtime, continue without mutation.
+  }
+}
+
+normalizeNavigatorOnlineForNode();
 
 const redactedString = '<REDACTED>';
 const redactedObject = {};
@@ -82,14 +106,36 @@ function scrubResponseBodies(recording) {
   recording.response.content.text = JSON.stringify(response);
 }
 
+function isJsonString(value) {
+  if (typeof value !== 'string') {
+    return false;
+  }
+
+  const trimmed = value.trim();
+  if (!(trimmed.startsWith('{') || trimmed.startsWith('['))) {
+    return false;
+  }
+
+  try {
+    JSON.parse(trimmed);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function normalizeLegacyReplayEncoding(recording) {
+  const content = recording?.response?.content;
+
+  // Some legacy cassettes store plain JSON text but still mark `encoding: base64`.
+  // The fetch adapter decodes base64 when this flag exists, which corrupts replay bodies.
+  if (content?.encoding === 'base64' && isJsonString(content.text)) {
+    delete content.encoding;
+  }
+}
+
 function setupCassette(server) {
   server.any().on('beforePersist', (_, recording) => {
-    try {
-      decodeCassetteResponseBodies(recording.response);
-    } catch (err) {
-      throw new Error(`Error decoding cassette: ${err.message}`);
-    }
-
     // TODO: Add support to scrub CC details from the request URL and `queryParams`
 
     scrubHeaders(recording);
@@ -101,10 +147,23 @@ function setupCassette(server) {
   });
 
   server.any().on('beforeReplay', (_, recording) => {
-    try {
-      encodeCassetteResponseBodies(recording.response);
-    } catch (err) {
-      throw new Error(`Error encoding cassette: ${err.message}`);
+    normalizeLegacyReplayEncoding(recording);
+  });
+}
+
+function setupLegacyRequestIdentityCompatibility(server) {
+  server.any().on('request', (req) => {
+    // Keep request identifiers compatible with pre-fetch cassettes.
+    if (!req.hasHeader('accept-encoding')) {
+      req.setHeader('accept-encoding', legacyIdentityHeaders['accept-encoding']);
+    }
+
+    if (!req.hasHeader('host') && req.hostname) {
+      req.setHeader('host', req.hostname);
+    }
+
+    if (!req.hasHeader('content-length') && typeof req.body === 'string') {
+      req.setHeader('content-length', Buffer.byteLength(req.body));
     }
   });
 }
@@ -118,8 +177,9 @@ function setupPollyTests() {
     const suiteName = context.task?.suite?.name || 'unknown-suite';
 
     polly = new Polly(`${suiteName}/${context.task.name}`, {
-      adapters: ['node-http'],
+      adapters: ['fetch'],
       persister: 'fs',
+      recordIfMissing: true,
       recordFailedRequests: true,
       persisterOptions: {
         fs: {
@@ -134,6 +194,8 @@ function setupPollyTests() {
       expiresIn: '365d',
       expiryStrategy: 'warn',
     });
+
+    setupLegacyRequestIdentityCompatibility(polly.server);
   });
 
   afterEach(async () => {

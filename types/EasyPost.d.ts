@@ -31,7 +31,7 @@ import { Utils } from './Utility';
 import { Webhook } from './Webhook';
 
 export interface IEasyPostRequest {
-  method: 'get' | 'post' | 'put' | 'patch' | 'del';
+  method: 'get' | 'post' | 'put' | 'patch' | 'delete';
   path: string;
   requestBody: any;
   headers: Record<string, any>;
@@ -62,14 +62,19 @@ export interface IEasyPostOptions {
   useProxy?: boolean;
 
   /**
-   * Function that takes `superagent` and returns `superagent`.
-   * Useful if you need to wrap superagent in a function, such as many superagent libraries do.
+   * Function that wraps the HTTP transport function.
+   * Backward-compatibility alias retained from the pre-fetch transport implementation.
    */
-  superagentMiddleware?: (agent: any) => any;
+  httpMiddleware?: (httpClient: any) => any;
 
   /**
-   * Function that takes a superagent `request` and returns that request.
-   * Useful if you need to hook into a request:
+   * Function that wraps the HTTP transport function.
+   */
+  httpClient?: (input: string, init?: Record<string, any>) => Promise<any>;
+
+  /**
+   * Function that takes a compatibility request object and returns it.
+   * Supports legacy middleware patterns with `auth`, `query`, and `send` methods.
    */
   requestMiddleware?: (request: any) => any;
 }
@@ -150,7 +155,7 @@ export default class EasyPost {
    * should be used instead as it provides a more convenient and higher-level interface depending on the endpoint.
    */
   public makeApiCall(
-    method: 'get' | 'post' | 'put' | 'patch' | 'del',
+    method: 'get' | 'post' | 'put' | 'patch' | 'delete',
     endpoint: string,
     params?: Record<string, any>,
   ): Promise<Record<string, any>>;

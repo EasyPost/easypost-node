@@ -1,4 +1,3 @@
-import superagent from 'superagent';
 import util from 'util';
 
 import Constants from '../constants';
@@ -44,18 +43,30 @@ async function _getEasyPostStripeKey(easypostClient) {
  * @returns {Promise<string>} - Stripe credit card token.
  */
 async function _sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
-  // Stripe's endpoint requires form-encoded requests
-  const url = `https://api.stripe.com/v1/tokens?card[number]=${number}&card[exp_month]=${expirationMonth}&card[exp_year]=${expirationYear}&card[cvc]=${cvc}`;
-
-  const request = superagent.post(url).set({
-    Authorization: `Bearer ${stripeKey}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
+  const searchParams = new URLSearchParams({
+    'card[number]': number,
+    'card[exp_month]': expirationMonth,
+    'card[exp_year]': expirationYear,
+    'card[cvc]': cvc,
   });
+  const url = `https://api.stripe.com/v1/tokens?${searchParams.toString()}`;
 
   try {
-    const response = await request;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${stripeKey}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
 
-    return response.body.id;
+    if (!response.ok) {
+      throw new Error('Failed Stripe request');
+    }
+
+    const body = await response.json();
+
+    return body.id;
   } catch (error) {
     throw new ExternalApiError({
       message: util.format(Constants.EXTERNAL_API_CALL_FAILED, 'Stripe'),

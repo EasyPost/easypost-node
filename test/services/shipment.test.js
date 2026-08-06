@@ -197,13 +197,13 @@ describe('Shipment Service', function () {
     // Test lowest rate with no filters
     const lowestRate = shipment.lowestRate();
     expect(lowestRate.service).to.equal('GroundAdvantage');
-    expect(lowestRate.rate).to.equal('5.93');
+    expect(lowestRate.rate).to.equal('6.98');
     expect(lowestRate.carrier).to.equal('USPS');
 
     // Test lowest rate with service filter (this rate is higher than the lowest but should filter)
     const lowestRateService = shipment.lowestRate(null, ['Priority']);
     expect(lowestRateService.service).to.equal('Priority');
-    expect(lowestRateService.rate).to.equal('6.90');
+    expect(lowestRateService.rate).to.equal('9.22');
     expect(lowestRateService.carrier).to.equal('USPS');
 
     // Test lowest rate with carrier filter (should error due to bad carrier)
@@ -218,7 +218,7 @@ describe('Shipment Service', function () {
     // Test lowest smartrate with valid filters
     const lowestSmartRate = await client.Shipment.lowestSmartRate(shipment.id, 3, 'percentile_90');
     expect(lowestSmartRate.service).to.equal('GroundAdvantage');
-    expect(lowestSmartRate.rate).to.equal(5.93);
+    expect(lowestSmartRate.rate).to.equal(6.98);
     expect(lowestSmartRate.carrier).to.equal('USPS');
   });
 
@@ -256,7 +256,7 @@ describe('Shipment Service', function () {
     // Test lowest smartrate with valid filters
     const lowestSmartRate = client.Utils.getLowestSmartRate(smartRates, 3, 'percentile_90');
     expect(lowestSmartRate.service).to.equal('GroundAdvantage');
-    expect(lowestSmartRate.rate).to.equal(5.93);
+    expect(lowestSmartRate.rate).to.equal(6.98);
     expect(lowestSmartRate.carrier).to.equal('USPS');
   });
 

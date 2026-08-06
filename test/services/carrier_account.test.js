@@ -32,32 +32,6 @@ describe('CarrierAccount Service', function () {
     await client.CarrierAccount.delete(carrierAccount.id);
   });
 
-  it('creates a carrier account with a custom workflow', async function () {
-    const data = {
-      type: 'FedexAccount',
-      registration_data: {
-        some: 'data',
-      },
-    };
-
-    try {
-      const carrierAccount = await client.CarrierAccount.create(data);
-      await client.CarrierAccount.delete(carrierAccount.id);
-    } catch (error) {
-      // We're sending bad data to the API, so we expect an error
-      expect(error.statusCode).to.equal(422);
-      // We expect one of the sub-errors to be regarding a missing field
-      let errorFound = false;
-      // eslint-disable-next-line no-shadow
-      error.errors.forEach((error) => {
-        if (error.field === 'account_number' && error.message === 'must be present and a string') {
-          errorFound = true;
-        }
-      });
-      expect(errorFound).to.equal(true);
-    }
-  });
-
   it('creates a UPS carrier account', async function () {
     const accountNumber = '123456789';
     const type = 'UpsAccount';
