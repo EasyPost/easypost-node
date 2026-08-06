@@ -1,3 +1,4 @@
+// @ts-nocheck
 import crypto from 'crypto';
 import util from 'util';
 

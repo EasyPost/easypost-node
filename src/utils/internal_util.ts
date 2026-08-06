@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Utility class of various internal helper functions.
  * This class is not designed to be used directly by consumers of the library.

@@ -10,7 +10,7 @@ export default defineConfig({
     // drop node 12 support in the future, change this to the next min version
     target: 'node12',
     lib: {
-      entry: path.resolve(__dirname, 'src/easypost.js'),
+      entry: path.resolve(__dirname, 'src/easypost.ts'),
       fileName: 'easypost',
     },
     sourcemap: isDev,
@@ -32,7 +32,7 @@ export default defineConfig({
   },
 
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.ts', '.js'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },

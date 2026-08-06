@@ -1,3 +1,4 @@
+// @ts-nocheck
 import util from 'util';
 import { v4 as uuid } from 'uuid';
 
