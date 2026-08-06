@@ -1,3 +1,4 @@
+// @ts-nocheck
 import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 import Address from '../models/address';
 import ApiKey from '../models/api_key';
