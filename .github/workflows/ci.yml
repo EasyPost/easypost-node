@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just install install-styleguide build test
+      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just install build test
   # node-compatibility checks that the build version of the app can be imported
   # and used on older versions of node
   node-compatibility:
@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just install install-styleguide build
+      - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just install build
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
@@ -48,7 +48,7 @@ jobs:
           cd types/demo
           npm install
           cd ../../
-          just install install-styleguide typescript
+          just install typescript
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -57,7 +57,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - run: just install install-styleguide build lint
+      - run: just install build lint
   coverage:
     runs-on: ubuntu-latest
     steps:
@@ -66,7 +66,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - run: just install install-styleguide build
+      - run: just install build
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just coverage
       - name: Coverage
         if: github.ref == 'refs/heads/master'
