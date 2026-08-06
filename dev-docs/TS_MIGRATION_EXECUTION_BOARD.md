@@ -80,6 +80,38 @@ Draft-first PR command behavior:
 - Node compatibility is not regressed.
 - Public API shape remains unchanged.
 
+## Type-Integration Policy (When We Move Beyond Rename-Only)
+
+Rename-only conversion is an allowed bootstrap for early foundation layers, not the end-state.
+
+Policy by phase:
+
+- TSM-00 through TSM-05:
+   - mechanical JS->TS conversion is allowed to unblock stack progress
+   - temporary `@ts-nocheck` is allowed only on files first entering TS
+- TSM-06 through TSM-10 (services):
+   - begin real type integration in every touched file
+   - no new `@ts-nocheck` allowed
+   - remove `@ts-nocheck` from files touched in the PR unless explicitly listed as deferred
+- TSM-11 through TSM-15 (models):
+   - continue type integration and remove remaining `@ts-nocheck` in converted model/service files
+   - treat internal helper/model boundaries as typed seams (prefer `unknown` + narrowing over `any`)
+- TSM-90 through TSM-91:
+   - zero `@ts-nocheck` under `src/`
+   - migration exceptions removed or justified with explicit follow-up
+
+Minimum typed-code requirements for TSM-06+ PRs:
+
+- exported class methods have explicit parameter and return types
+- newly introduced `any` is disallowed unless justified inline
+- API response boundaries should default to `unknown` and be narrowed where used
+
+Deferred typing (if needed in a layer) must be explicit:
+
+- add a short "Deferred Typing" section in the PR body
+- list exact file/symbol and why it is deferred
+- include the planned catch-up layer (same branch family if possible)
+
 ## Single Stack Topology
 
 All branches are in one stack and must remain in this order.
@@ -208,6 +240,11 @@ Run:
 - `npm run test` (targeted subset allowed for per-layer iteration)
 - `npm run typescript`
 
+Additional hardening checks for TSM-06 through TSM-15:
+
+- `rg "@ts-nocheck" src` must trend downward each layer and never increase
+- `rg "\bany\b" src/<group-scope>` results reviewed in PR notes when non-zero
+
 ### Cutover Layers
 
 Run:
@@ -245,6 +282,28 @@ Cleanup acceptance criteria:
 - No loss of runtime behavior coverage.
 - No loss of CJS/ESM import compatibility checks.
 - No loss of permissive public type-surface regression coverage.
+
+## Typing Hardening Schedule for Completed Work
+
+The first five layers are already landed/active as mostly mechanical conversion. Tightening starts now, not after step 16.
+
+Planned catch-up timing:
+
+- During TSM-06 through TSM-08:
+   - opportunistically remove `@ts-nocheck` in already-converted foundation files when those files are touched for service wiring
+   - prioritize `src/services/base_service.ts` and `src/easypost.ts` first because they influence many downstream modules
+- During TSM-09 through TSM-11:
+   - complete remaining foundation-file `@ts-nocheck` removals
+   - add explicit method signatures and key object-shape aliases for hydration paths
+- Before opening TSM-90:
+   - all foundation files converted in TSM-04/05 must be `@ts-nocheck` free
+   - any remaining permissive typing must be intentional and documented
+
+Required tracking in each TSM-06+ PR summary:
+
+- `@ts-nocheck` count in `src/` before/after
+- deferred typing items carried forward (if any)
+- quick note on where permissive typing remains intentional for SDK compatibility
 
 ## Labeling
 
