@@ -41,7 +41,7 @@ export default (easypostClient) =>
 
       const url = `shipments/${id}/buy`;
 
-      const wrappedParams = {
+      const wrappedParams: Record<string, unknown> = {
         rate: {
           id: rateId,
         },
@@ -115,7 +115,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._get(url);
 
-        return this._convertToEasyPostObject(response.body.result);
+        return this._convertToEasyPostObject(response.body.result, {});
       } catch (e) {
         return Promise.reject(e);
       }
@@ -179,7 +179,7 @@ export default (easypostClient) =>
       try {
         const response = await easypostClient._post(url);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, {});
       } catch (e) {
         return Promise.reject(e);
       }

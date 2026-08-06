@@ -15,7 +15,7 @@ export default (easypostClient) =>
     static async create(params) {
       const url = 'addresses';
 
-      const wrappedParams = {};
+      const wrappedParams: Record<string, unknown> = {};
 
       if (params.verify) {
         wrappedParams.verify = params.verify;
@@ -46,7 +46,7 @@ export default (easypostClient) =>
     static async createAndVerify(params) {
       const url = `addresses/create_and_verify`;
 
-      const wrappedParams = {};
+      const wrappedParams: Record<string, unknown> = {};
 
       if (params.verify_carrier) {
         wrappedParams.verify_carrier = params.verify_carrier;
@@ -110,7 +110,7 @@ export default (easypostClient) =>
         const url = `addresses/${id}/verify`;
         const response = await easypostClient._get(url);
 
-        return this._convertToEasyPostObject(response.body.address);
+        return this._convertToEasyPostObject(response.body.address, {});
       } catch (e) {
         return Promise.reject(e);
       }
