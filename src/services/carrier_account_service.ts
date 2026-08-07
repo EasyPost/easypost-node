@@ -4,6 +4,8 @@ import Constants from '../constants';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
 import baseService from './base_service';
 
+type CarrierAccountParams = Record<string, unknown> & { type?: string };
+
 export default (easypostClient) =>
   /**
    * The CarrierAccountService class provides methods for interacting with EasyPost @{link CarrierAccount} objects.
@@ -16,7 +18,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the carrier account to be created.
      * @returns {CarrierAccount} - The created carrier account.
      */
-    static async create(params) {
+    static async create(params: CarrierAccountParams): Promise<unknown> {
       const carrierAccountType = params.type;
 
       if (!carrierAccountType) {
@@ -38,7 +40,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the carrier account to be updated.
      * @returns {CarrierAccount} - The updated carrier account.
      */
-    static async update(id, params) {
+    static async update(id: string, params: Record<string, unknown>): Promise<unknown> {
       const wrappedParams = { carrier_account: params };
 
       try {
@@ -56,7 +58,7 @@ export default (easypostClient) =>
      * @param {string} id - The id of the carrier account to be deleted.
      * @returns {Promise|Promise<never>} - A promise that resolves when the carrier account has been deleted.
      */
-    static async delete(id) {
+    static async delete(id: string): Promise<void> {
       const url = `carrier_accounts/${id}`;
 
       try {
@@ -74,7 +76,7 @@ export default (easypostClient) =>
      * @param {string} carrierAccountType - The type of carrier account to be created.
      * @returns {string} - The endpoint to be used for the carrier account creation request.
      */
-    static _selectCarrierAccountCreationEndpoint(carrierAccountType) {
+    static _selectCarrierAccountCreationEndpoint(carrierAccountType: string): string {
       if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_CREATE_WORKFLOWS.includes(carrierAccountType)) {
         return 'carrier_accounts/register';
       } else if (Constants.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.includes(carrierAccountType)) {
@@ -91,7 +93,10 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters for the carrier account to be created.
      * @returns {Object} - The wrapped carrier account parameters.
      */
-    static _wrapCarrierAccountParams(carrierAccountType, params) {
+    static _wrapCarrierAccountParams(
+      carrierAccountType: string,
+      params: Record<string, unknown>,
+    ): Record<string, unknown> {
       if (Constants.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.includes(carrierAccountType)) {
         return { carrier_account_oauth_registrations: params };
       }
@@ -105,7 +110,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the list of carrier accounts.
      * @returns {Object} - An object containing a list of {@link CarrierAccount carrier accounts} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'carrier_accounts';
 
       return this._all(url, params);
@@ -117,7 +122,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the carrier account to retrieve.
      * @returns {CarrierAccount} - The retrieved carrier account.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `carrier_accounts/${id}`;
 
       return this._retrieve(url);
