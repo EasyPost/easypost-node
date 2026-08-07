@@ -1,5 +1,8 @@
 import baseService from './base_service';
 
+type TrackerParams = Record<string, unknown>;
+type TrackerCollection = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The TrackerService class provides methods for interacting with EasyPost {@link Tracker} objects.
@@ -12,7 +15,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a tracker with.
      * @returns {Tracker} - The created tracker.
      */
-    static async create(params) {
+    static async create(params: TrackerParams): Promise<unknown> {
       const url = 'trackers';
 
       const wrappedParams = {
@@ -28,7 +31,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the trackers by.
      * @returns {Object} - An object containing the list of {@link Tracker trackers} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'trackers';
 
       return this._all(url, params);
@@ -40,7 +43,10 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(trackers, pageSize = null) {
+    static async getNextPage(
+      trackers: TrackerCollection,
+      pageSize: number | null = null,
+    ): Promise<unknown> {
       const url = 'trackers';
 
       return this._getNextPage(url, 'trackers', trackers, pageSize);
@@ -52,7 +58,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the tracker to retrieve.
      * @returns {Tracker} - The retrieved tracker.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `trackers/${id}`;
 
       return this._retrieve(url);
@@ -63,7 +69,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the trackers by.
      * @returns {Object} - An object containing the list of {@link Tracker trackers}.
      */
-    static async retrieveBatch(params = {}) {
+    static async retrieveBatch(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'trackers/batch';
 
       try {
@@ -81,7 +87,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the tracker to delete.
      * @returns {Promise<void>}
      */
-    static async delete(id) {
+    static async delete(id: string): Promise<void> {
       const url = `trackers/${id}`;
 
       try {
