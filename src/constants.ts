@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Utils from './utils/util';
 
 /**
