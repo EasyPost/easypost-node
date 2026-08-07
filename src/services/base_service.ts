@@ -6,7 +6,6 @@ import Batch from '../models/batch';
 import Brand from '../models/brand';
 import CarrierAccount from '../models/carrier_account';
 import CarrierType from '../models/carrier_type';
-import Claim from '../models/claim';
 import CustomsInfo from '../models/customs_info';
 import CustomsItem from '../models/customs_item';
 import EasyPostObject from '../models/easypost_object';

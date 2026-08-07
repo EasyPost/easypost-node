@@ -1,28 +1,32 @@
-// @ts-nocheck
 /**
  * An EasyPostObject is the base class for all EasyPost API resources.
  * @internal
  * @abstract
  */
 export default class EasyPostObject {
-  static id;
-  static object;
-  static mode;
-  static created_at;
-  static updated_at;
-  static _params;
+  static id: string;
+  static object: string;
+  static mode: string;
+  static created_at: string;
+  static updated_at: string;
+  static _params: Record<string, unknown>;
 
-  static [Symbol.hasInstance](instance) {
+  static [Symbol.hasInstance](instance: unknown): boolean {
     if (instance == null || typeof instance !== 'object') {
       return false;
     }
 
-    const modelConstructor = instance[Symbol.for('easypost.modelConstructor')];
+    const modelConstructor = (instance as Record<symbol, unknown>)[
+      Symbol.for('easypost.modelConstructor')
+    ];
     if (typeof modelConstructor === 'function') {
       return modelConstructor === this;
     }
 
     // Fallback for plain API payloads that include object names like "Address" or "Shipment".
-    return typeof instance.object === 'string' && instance.object === this.name;
+    return (
+      typeof (instance as Record<string, unknown>).object === 'string' &&
+      (instance as Record<string, unknown>).object === this.name
+    );
   }
 }
