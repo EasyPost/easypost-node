@@ -11,7 +11,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to create a session from.
      * @returns {Object} - An object containing the created session.
      */
-    static async createSession(params = {}) {
+    static async createSession(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'embeddables/session';
 
       try {

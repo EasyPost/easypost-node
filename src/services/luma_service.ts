@@ -1,5 +1,7 @@
 import baseService from './base_service';
 
+type LumaParams = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The LumaService class provides methods for interacting with EasyPost Luma objects.
@@ -11,7 +13,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to get a Luma promise with.
      * @returns {Object} - An object containing the Luma promise.
      */
-    static async getPromise(params) {
+    static async getPromise(params: LumaParams): Promise<unknown> {
       const url = `luma/promise`;
 
       const wrappedParams = {

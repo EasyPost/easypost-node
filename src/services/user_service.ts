@@ -1,6 +1,13 @@
 import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 import baseService from './base_service';
 
+type UserParams = Record<string, unknown>;
+type BrandParams = Record<string, unknown>;
+type UserCollection = Record<string, unknown> & {
+  has_more?: boolean;
+  _params?: Record<string, unknown>;
+};
+
 export default (easypostClient) =>
   /**
    * The UserService class provides methods for interacting with EasyPost {@link User} objects.
@@ -13,7 +20,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a child user with.
      * @returns {User} - The created child user.
      */
-    static async create(params) {
+    static async create(params: UserParams): Promise<unknown> {
       const url = 'users';
 
       const wrappedParams = {
@@ -30,7 +37,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to update the user with.
      * @returns {User} - The updated user.
      */
-    static async update(id, params) {
+    static async update(id: string, params: UserParams): Promise<unknown> {
       const url = `users/${id}`;
       const wrappedParams = {
         user: params,
@@ -51,7 +58,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the child user to retrieve.
      * @returns {User} - The retrieved child user.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `users/${id}`;
 
       try {
@@ -68,7 +75,7 @@ export default (easypostClient) =>
      * See {@link https://docs.easypost.com/docs/users#retrieve-a-user EasyPost API Documentation} for more information.
      * @returns {User} - The retrieved user.
      */
-    static async retrieveMe() {
+    static async retrieveMe(): Promise<unknown> {
       const url = 'users';
 
       try {
@@ -86,7 +93,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the child user to delete.
      * @returns {Promise|Promise<never>} - A promise that resolves when the child user is deleted successfully.
      */
-    static async delete(id) {
+    static async delete(id: string): Promise<void> {
       const url = `users/${id}`;
 
       try {
@@ -105,7 +112,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to update the brand with.
      * @returns {Brand} - The updated brand.
      */
-    static async updateBrand(id, params) {
+    static async updateBrand(id: string, params: BrandParams): Promise<unknown> {
       const url = `users/${id}/brand`;
       const wrappedParams = { brand: params };
 
@@ -124,7 +131,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters to filter the list of children users.
      * @returns {Object} - An object containing a list of {@link Children User} and pagination information.
      */
-    static async allChildren(params) {
+    static async allChildren(params: Record<string, unknown>): Promise<unknown> {
       const url = 'users/children';
 
       try {
@@ -142,18 +149,28 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(children, pageSize = null) {
+    static async getNextPage(
+      children: UserCollection,
+      pageSize: number | null = null,
+    ): Promise<unknown> {
       const url = 'users/children';
       return this._getNextPage(url, 'children', children, pageSize);
     }
 
-    static async _getNextPage(url, key, collection, pageSize = null) {
-      const collectionArray = collection[key];
+    static async _getNextPage(
+      url: string,
+      key: string,
+      collection: UserCollection,
+      pageSize: number | null = null,
+    ): Promise<unknown> {
+      const collectionArray = collection[key] as Array<Record<string, unknown>> | undefined;
       if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();
       }
 
-      const defaultParams = collection._params ?? collectionArray[0]._params ?? {};
+      const firstObjectParams =
+        (collectionArray[0]?._params as Record<string, unknown> | undefined) ?? {};
+      const defaultParams = collection._params ?? firstObjectParams;
 
       const params = {
         ...defaultParams,
@@ -161,8 +178,13 @@ export default (easypostClient) =>
         after_id: collectionArray[collectionArray.length - 1].id,
       };
 
-      const response = await this._all(url, params);
-      if (response == undefined || response[key].length == 0) {
+      const response = (await this._all(url, params)) as Record<string, unknown>;
+      const responseCollection = response[key] as Array<Record<string, unknown>> | undefined;
+      if (
+        response == undefined ||
+        responseCollection == undefined ||
+        responseCollection.length == 0
+      ) {
         throw new EndOfPaginationError();
       }
 

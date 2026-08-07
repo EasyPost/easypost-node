@@ -4,6 +4,12 @@ import Constants from '../constants';
 import FilteringError from '../errors/general/filtering_error';
 import baseService from './base_service';
 
+type ApiKeyUser = Record<string, unknown> & {
+  id?: string;
+  keys?: unknown[];
+  children?: Array<Record<string, unknown> & { id?: string; keys?: unknown[] }>;
+};
+
 export default (easypostClient) =>
   /**
    * The ApiKeyService class provides methods for interacting with EasyPost {@link ApiKey} objects.
@@ -17,20 +23,20 @@ export default (easypostClient) =>
      * @returns {Array} - List of associated API Keys.
      * @throws {FilteringError} If user or API Keys are not found.
      */
-    static async retrieveApiKeysForUser(id) {
+    static async retrieveApiKeysForUser(id: string): Promise<unknown[]> {
       const url = `api_keys`;
 
       try {
         const response = await easypostClient._get(url);
-        const user = this._convertToEasyPostObject(response.body);
+        const user = this._convertToEasyPostObject(response.body) as ApiKeyUser;
 
         if (user.id == id) {
-          return user.keys;
+          return user.keys ?? [];
         }
 
-        user.children.forEach((child) => {
+        user.children?.forEach((child) => {
           if (child.id == id) {
-            return child.keys;
+            return child.keys ?? [];
           }
         });
       } catch (e) {
@@ -45,7 +51,7 @@ export default (easypostClient) =>
      * See {@link https://docs.easypost.com/docs/api-keys#retrieve-an-api-key EasyPost API Documentation} for more information.
      * @returns {Object} - An object containing the API keys associated with the current authenticated user and its child users.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'api_keys';
 
       return this._all(url, params);
@@ -57,7 +63,7 @@ export default (easypostClient) =>
      * @param {string} mode - The mode for the API key (either "production" or "test").
      * @returns {ApiKey} - The created API key.
      */
-    static async create(mode) {
+    static async create(mode: string): Promise<unknown> {
       const url = 'api_keys';
       const params = { mode };
 
@@ -70,7 +76,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the API key to delete.
      * @returns {Promise|Promise<never>} - A promise that resolves if the API key was successfully deleted.
      */
-    static async delete(id) {
+    static async delete(id: string): Promise<void> {
       const url = `api_keys/${id}`;
 
       try {
@@ -88,7 +94,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the API key to enable.
      * @returns {ApiKey} - The enabled API key.
      */
-    static async enable(id) {
+    static async enable(id: string): Promise<unknown> {
       const url = `api_keys/${id}/enable`;
 
       try {
@@ -106,7 +112,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the API key to disable.
      * @returns {ApiKey} - The disabled API key.
      */
-    static async disable(id) {
+    static async disable(id: string): Promise<unknown> {
       const url = `api_keys/${id}/disable`;
 
       try {

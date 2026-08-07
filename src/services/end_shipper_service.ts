@@ -1,5 +1,7 @@
 import baseService from './base_service';
 
+type EndShipperParams = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The EndShipperService class provides methods for interacting with EasyPost {@link EndShipper} objects.
@@ -12,7 +14,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the end shipper to be created.
      * @returns {EndShipper} - The created end shipper.
      */
-    static async create(params) {
+    static async create(params: EndShipperParams): Promise<unknown> {
       const url = 'end_shippers';
       const wrappedParams = { address: params };
 
@@ -26,7 +28,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the end shipper to be updated.
      * @returns {EndShipper} - The updated end shipper.
      */
-    static async update(id, params) {
+    static async update(id: string, params: EndShipperParams): Promise<unknown> {
       const url = `end_shippers/${id}`;
       const wrappedParams = { address: params };
 
@@ -45,7 +47,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the end shipper to retrieve.
      * @returns {EndShipper} - The retrieved end shipper.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `end_shippers/${id}`;
 
       return this._retrieve(url);
@@ -57,7 +59,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the list of end shippers.
      * @returns {Object} - An object containing a list of {@link EndShipper end shippers} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'end_shippers';
 
       return this._all(url, params);
