@@ -87,18 +87,18 @@ Rename-only conversion is an allowed bootstrap for early foundation layers, not 
 Policy by phase:
 
 - TSM-00 through TSM-05:
-   - mechanical JS->TS conversion is allowed to unblock stack progress
-   - temporary `@ts-nocheck` is allowed only on files first entering TS
+  - mechanical JS->TS conversion is allowed to unblock stack progress
+  - temporary `@ts-nocheck` is allowed only on files first entering TS
 - TSM-06 through TSM-10 (services):
-   - begin real type integration in every touched file
-   - no new `@ts-nocheck` allowed
-   - remove `@ts-nocheck` from files touched in the PR unless explicitly listed as deferred
+  - begin real type integration in every touched file
+  - no new `@ts-nocheck` allowed
+  - remove `@ts-nocheck` from files touched in the PR unless explicitly listed as deferred
 - TSM-11 through TSM-15 (models):
-   - continue type integration and remove remaining `@ts-nocheck` in converted model/service files
-   - treat internal helper/model boundaries as typed seams (prefer `unknown` + narrowing over `any`)
+  - continue type integration and remove remaining `@ts-nocheck` in converted model/service files
+  - treat internal helper/model boundaries as typed seams (prefer `unknown` + narrowing over `any`)
 - TSM-90 through TSM-91:
-   - zero `@ts-nocheck` under `src/`
-   - migration exceptions removed or justified with explicit follow-up
+  - zero `@ts-nocheck` under `src/`
+  - migration exceptions removed or justified with explicit follow-up
 
 Minimum typed-code requirements for TSM-06+ PRs:
 
@@ -137,26 +137,26 @@ All branches are in one stack and must remain in this order.
 
 ## Detailed PR Board
 
-| PR ID | Branch | Base Branch | Scope | Est. Effort | Required Checks |
-| --- | --- | --- | --- | --- | --- |
-| TSM-00 | `ts-migrate/00-baseline-safety-net` | `master` | baseline scripts, API surface snapshot, migration checklist wiring | S | build, test, lint, types, node-compat smoke |
-| TSM-01 | `ts-migrate/01-ts-build-scaffolding` | `ts-migrate/00-baseline-safety-net` | tsconfig split, mixed JS/TS compile setup, lint parser readiness | M | build, test, lint, types |
-| TSM-02 | `ts-migrate/02-package-export-readiness` | `ts-migrate/01-ts-build-scaffolding` | package metadata prep, consumer import compatibility tests | S | build, test, package smoke |
-| TSM-03 | `ts-migrate/03-type-strategy-guardrails` | `ts-migrate/02-package-export-readiness` | permissive TS policy doc + type tests for compatibility | S | types, test |
-| TSM-04 | `ts-migrate/04-core-entry-shared-infra` | `ts-migrate/03-type-strategy-guardrails` | convert core entry/shared files to TS with behavior parity | M | build, test, lint, types |
-| TSM-05 | `ts-migrate/05-base-service-hydration` | `ts-migrate/04-core-entry-shared-infra` | convert base service + dynamic hydration layer | M | build, test, types, targeted service tests |
-| TSM-06 | `ts-migrate/06-services-group-a` | `ts-migrate/05-base-service-hydration` | convert Group A services + immediate deps | M | group tests, build, types |
-| TSM-07 | `ts-migrate/07-services-group-b` | `ts-migrate/06-services-group-a` | convert Group B services + immediate deps | M | group tests, build, types |
-| TSM-08 | `ts-migrate/08-services-group-c` | `ts-migrate/07-services-group-b` | convert Group C services + immediate deps | M | group tests, build, types |
-| TSM-09 | `ts-migrate/09-services-group-d` | `ts-migrate/08-services-group-c` | convert Group D services + immediate deps | M | group tests, build, types |
-| TSM-10 | `ts-migrate/10-services-group-e` | `ts-migrate/09-services-group-d` | convert Group E services + immediate deps | M | group tests, build, types |
-| TSM-11 | `ts-migrate/11-models-group-a` | `ts-migrate/10-services-group-e` | convert remaining Group A models | S-M | group tests, build, types |
-| TSM-12 | `ts-migrate/12-models-group-b` | `ts-migrate/11-models-group-a` | convert remaining Group B models | S-M | group tests, build, types |
-| TSM-13 | `ts-migrate/13-models-group-c` | `ts-migrate/12-models-group-b` | convert remaining Group C models | S-M | group tests, build, types |
-| TSM-14 | `ts-migrate/14-models-group-d` | `ts-migrate/13-models-group-c` | convert remaining Group D models | S-M | group tests, build, types |
-| TSM-15 | `ts-migrate/15-models-group-e` | `ts-migrate/14-models-group-d` | convert remaining Group E models | S-M | group tests, build, types |
-| TSM-90 | `ts-migrate/90-cutover-generated-types` | `ts-migrate/15-models-group-e` | generated declarations from src, remove `types/`, metadata switch | M-L | full CI, package smoke, TS demo compile |
-| TSM-91 | `ts-migrate/91-cleanup-calibration` | `ts-migrate/90-cutover-generated-types` | remove migration-only exceptions, docs cleanup, final polish | S-M | full CI |
+| PR ID  | Branch                                   | Base Branch                              | Scope                                                              | Est. Effort | Required Checks                             |
+| ------ | ---------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------ | ----------- | ------------------------------------------- |
+| TSM-00 | `ts-migrate/00-baseline-safety-net`      | `master`                                 | baseline scripts, API surface snapshot, migration checklist wiring | S           | build, test, lint, types, node-compat smoke |
+| TSM-01 | `ts-migrate/01-ts-build-scaffolding`     | `ts-migrate/00-baseline-safety-net`      | tsconfig split, mixed JS/TS compile setup, lint parser readiness   | M           | build, test, lint, types                    |
+| TSM-02 | `ts-migrate/02-package-export-readiness` | `ts-migrate/01-ts-build-scaffolding`     | package metadata prep, consumer import compatibility tests         | S           | build, test, package smoke                  |
+| TSM-03 | `ts-migrate/03-type-strategy-guardrails` | `ts-migrate/02-package-export-readiness` | permissive TS policy doc + type tests for compatibility            | S           | types, test                                 |
+| TSM-04 | `ts-migrate/04-core-entry-shared-infra`  | `ts-migrate/03-type-strategy-guardrails` | convert core entry/shared files to TS with behavior parity         | M           | build, test, lint, types                    |
+| TSM-05 | `ts-migrate/05-base-service-hydration`   | `ts-migrate/04-core-entry-shared-infra`  | convert base service + dynamic hydration layer                     | M           | build, test, types, targeted service tests  |
+| TSM-06 | `ts-migrate/06-services-group-a`         | `ts-migrate/05-base-service-hydration`   | convert Group A services + immediate deps                          | M           | group tests, build, types                   |
+| TSM-07 | `ts-migrate/07-services-group-b`         | `ts-migrate/06-services-group-a`         | convert Group B services + immediate deps                          | M           | group tests, build, types                   |
+| TSM-08 | `ts-migrate/08-services-group-c`         | `ts-migrate/07-services-group-b`         | convert Group C services + immediate deps                          | M           | group tests, build, types                   |
+| TSM-09 | `ts-migrate/09-services-group-d`         | `ts-migrate/08-services-group-c`         | convert Group D services + immediate deps                          | M           | group tests, build, types                   |
+| TSM-10 | `ts-migrate/10-services-group-e`         | `ts-migrate/09-services-group-d`         | convert Group E services + immediate deps                          | M           | group tests, build, types                   |
+| TSM-11 | `ts-migrate/11-models-group-a`           | `ts-migrate/10-services-group-e`         | convert remaining Group A models                                   | S-M         | group tests, build, types                   |
+| TSM-12 | `ts-migrate/12-models-group-b`           | `ts-migrate/11-models-group-a`           | convert remaining Group B models                                   | S-M         | group tests, build, types                   |
+| TSM-13 | `ts-migrate/13-models-group-c`           | `ts-migrate/12-models-group-b`           | convert remaining Group C models                                   | S-M         | group tests, build, types                   |
+| TSM-14 | `ts-migrate/14-models-group-d`           | `ts-migrate/13-models-group-c`           | convert remaining Group D models                                   | S-M         | group tests, build, types                   |
+| TSM-15 | `ts-migrate/15-models-group-e`           | `ts-migrate/14-models-group-d`           | convert remaining Group E models                                   | S-M         | group tests, build, types                   |
+| TSM-90 | `ts-migrate/90-cutover-generated-types`  | `ts-migrate/15-models-group-e`           | generated declarations from src, remove `types/`, metadata switch  | M-L         | full CI, package smoke, TS demo compile     |
+| TSM-91 | `ts-migrate/91-cleanup-calibration`      | `ts-migrate/90-cutover-generated-types`  | remove migration-only exceptions, docs cleanup, final polish       | S-M         | full CI                                     |
 
 ## Scope Group Definitions
 
@@ -290,14 +290,14 @@ The first five layers are already landed/active as mostly mechanical conversion.
 Planned catch-up timing:
 
 - During TSM-06 through TSM-08:
-   - opportunistically remove `@ts-nocheck` in already-converted foundation files when those files are touched for service wiring
-   - prioritize `src/services/base_service.ts` and `src/easypost.ts` first because they influence many downstream modules
+  - opportunistically remove `@ts-nocheck` in already-converted foundation files when those files are touched for service wiring
+  - prioritize `src/services/base_service.ts` and `src/easypost.ts` first because they influence many downstream modules
 - During TSM-09 through TSM-11:
-   - complete remaining foundation-file `@ts-nocheck` removals
-   - add explicit method signatures and key object-shape aliases for hydration paths
+  - complete remaining foundation-file `@ts-nocheck` removals
+  - add explicit method signatures and key object-shape aliases for hydration paths
 - Before opening TSM-90:
-   - all foundation files converted in TSM-04/05 must be `@ts-nocheck` free
-   - any remaining permissive typing must be intentional and documented
+  - all foundation files converted in TSM-04/05 must be `@ts-nocheck` free
+  - any remaining permissive typing must be intentional and documented
 
 Required tracking in each TSM-06+ PR summary:
 
@@ -344,13 +344,13 @@ Suggested body shape:
 
 ## Risk Register
 
-| Risk | Likelihood | Impact | Mitigation |
-| --- | --- | --- | --- |
-| Hidden runtime behavior drift during conversion | Medium | High | no-refactor rule, baseline snapshots, test parity |
-| Type tightening causes consumer compile failures | Medium | High | permissive guardrails, type tests, widen by default |
-| Branch drift within stack | Medium | High | frequent `gh stack sync`, single maintainer ownership |
-| Declaration output path mistakes at cutover | Medium | High | package smoke tests + TS demo compile |
-| CI duration growth slows review loop | Medium | Medium | targeted checks per layer + full checks at cutover |
+| Risk                                             | Likelihood | Impact | Mitigation                                            |
+| ------------------------------------------------ | ---------- | ------ | ----------------------------------------------------- |
+| Hidden runtime behavior drift during conversion  | Medium     | High   | no-refactor rule, baseline snapshots, test parity     |
+| Type tightening causes consumer compile failures | Medium     | High   | permissive guardrails, type tests, widen by default   |
+| Branch drift within stack                        | Medium     | High   | frequent `gh stack sync`, single maintainer ownership |
+| Declaration output path mistakes at cutover      | Medium     | High   | package smoke tests + TS demo compile                 |
+| CI duration growth slows review loop             | Medium     | Medium | targeted checks per layer + full checks at cutover    |
 
 ## Cutover Gate Checklist (Must Be Green Before TSM-90 Merge)
 
