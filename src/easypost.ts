@@ -533,7 +533,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _get(path: string, params: Record<string, unknown> = {}, headers: RequestHeaders = {}): Promise<any> {
+  _get(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.GET, params, headers);
   }
 
@@ -544,7 +548,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _post(path: string, params: Record<string, unknown> = {}, headers: RequestHeaders = {}): Promise<any> {
+  _post(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.POST, params, headers);
   }
 
@@ -555,7 +563,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _put(path: string, params: Record<string, unknown> = {}, headers: RequestHeaders = {}): Promise<any> {
+  _put(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.PUT, params, headers);
   }
 
@@ -566,7 +578,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _patch(path: string, params: Record<string, unknown> = {}, headers: RequestHeaders = {}): Promise<any> {
+  _patch(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.PATCH, params, headers);
   }
 
@@ -577,7 +593,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _delete(path: string, params: Record<string, unknown> = {}, headers: RequestHeaders = {}): Promise<any> {
+  _delete(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.DELETE, params, headers);
   }
 }

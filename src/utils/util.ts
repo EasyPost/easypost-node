@@ -61,9 +61,7 @@ export default class Utils {
     for (let i = 0; i < smartrates.length; i += 1) {
       const rate = smartrates[i];
 
-      if (
-        rate.time_in_transit[lowercaseDeliveryAccuracy] > parseInt(String(deliveryDays), 10)
-      ) {
+      if (rate.time_in_transit[lowercaseDeliveryAccuracy] > parseInt(String(deliveryDays), 10)) {
         // eslint-disable-next-line no-continue
         continue;
       } else if (
@@ -90,7 +88,11 @@ export default class Utils {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  getLowestRate(rates: Rate[], carriers: string[] | null = null, services: string[] | null = null): Rate {
+  getLowestRate(
+    rates: Rate[],
+    carriers: string[] | null = null,
+    services: string[] | null = null,
+  ): Rate {
     if (carriers) {
       const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
       // eslint-disable-next-line no-param-reassign
