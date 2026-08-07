@@ -207,10 +207,7 @@ export default (easypostClient) =>
      * @param {*} params The parameters passed when fetching the response.
      * @returns {*} A plain object or array suitable for JSON serialization.
      */
-    static _convertToEasyPostObject(
-      response: unknown,
-      params: Record<string, unknown> = {},
-    ): unknown {
+    static _convertToEasyPostObject(response: any, params: any = {}): any {
       const modelResponse = this._buildEasyPostObject(response, params);
 
       return this._toPlainEasyPostObject(modelResponse);
@@ -280,10 +277,10 @@ export default (easypostClient) =>
     static async _getNextPage(
       url: string,
       key: string,
-      collection: Record<string, unknown>,
+      collection: any,
       pageSize: number | null = null,
-      optionalParams: Record<string, unknown> = {},
-    ): Promise<unknown> {
+      optionalParams: any = {},
+    ): Promise<any> {
       const collectionArray = collection[key];
       if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();

@@ -210,7 +210,7 @@ export default (easypostClient) =>
       deliveryDays: number,
       deliveryAccuracy: string,
     ): Promise<unknown> {
-      const smartRates = await this.getSmartRates(id);
+      const smartRates = (await this.getSmartRates(id)) as any[];
       return Constants.Utils.getLowestSmartRate(
         smartRates,
         deliveryDays,
