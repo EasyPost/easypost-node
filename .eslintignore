@@ -1,0 +1,5 @@
+dist
+/docs
+examples
+node_modules
+types/demo
