@@ -1,4 +1,3 @@
-// @ts-nocheck
 import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 import Address from '../models/address';
 import ApiKey from '../models/api_key';
@@ -6,6 +5,7 @@ import Batch from '../models/batch';
 import Brand from '../models/brand';
 import CarrierAccount from '../models/carrier_account';
 import CarrierType from '../models/carrier_type';
+import Claim from '../models/claim';
 import CustomsInfo from '../models/customs_info';
 import CustomsItem from '../models/customs_item';
 import EasyPostObject from '../models/easypost_object';
@@ -207,7 +207,7 @@ export default (easypostClient) =>
      * @param {*} params The parameters passed when fetching the response.
      * @returns {*} A plain object or array suitable for JSON serialization.
      */
-    static _convertToEasyPostObject(response, params) {
+    static _convertToEasyPostObject(response, params = {}) {
       const modelResponse = this._buildEasyPostObject(response, params);
 
       return this._toPlainEasyPostObject(modelResponse);
