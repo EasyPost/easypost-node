@@ -1,5 +1,7 @@
 import baseService from './base_service';
 
+type SmartRateParams = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The SmartRateService class provides methods for interacting with EasyPost SmartRate APIs.
@@ -11,7 +13,7 @@ export default (easypostClient) =>
      * @param params - The parameters to estimate the delivery date with.
      * @returns {Object} - Estimates and related metadata.
      */
-    static async estimateDeliveryDate(params) {
+    static async estimateDeliveryDate(params: SmartRateParams): Promise<unknown> {
       const url = 'smartrate/deliver_by';
 
       try {
@@ -28,7 +30,7 @@ export default (easypostClient) =>
      * @param params - The parameters to recommend the ship date with.
      * @returns {Object} - Recommendation and related metadata.
      */
-    static async recommendShipDate(params) {
+    static async recommendShipDate(params: SmartRateParams): Promise<unknown> {
       const url = 'smartrate/deliver_on';
 
       try {

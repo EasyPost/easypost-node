@@ -1,5 +1,7 @@
 import baseService from './base_service';
 
+type OrderParams = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The OrderService class provides methods for interacting with EasyPost {@link Order} objects.
@@ -12,7 +14,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create an order with.
      * @returns {Order} - The created order.
      */
-    static async create(params) {
+    static async create(params: OrderParams): Promise<unknown> {
       const url = 'orders';
 
       const wrappedParams = {
@@ -30,7 +32,7 @@ export default (easypostClient) =>
      * @param {string} service - The service to use for the order purchase.
      * @returns {Order} - The purchased order.
      */
-    static async buy(id, carrier, service) {
+    static async buy(id: string, carrier: string, service: string): Promise<unknown> {
       const url = `orders/${id}/buy`;
       const wrappedParams = { carrier, service };
       try {
@@ -48,7 +50,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the order to get rates for.
      * @returns {Order} - The order with rates.
      */
-    static async getRates(id) {
+    static async getRates(id: string): Promise<unknown> {
       const url = `orders/${id}/rates`;
 
       try {
@@ -66,7 +68,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the order to retrieve.
      * @returns {Order} - The retrieved order.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `orders/${id}`;
 
       return this._retrieve(url);

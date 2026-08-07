@@ -12,7 +12,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the rate to retrieve.
      * @returns {Rate} - The retrieved rate.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `rates/${id}`;
 
       return this._retrieve(url);

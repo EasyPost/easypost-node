@@ -1,5 +1,8 @@
 import baseService from './base_service';
 
+type PickupParams = Record<string, unknown>;
+type PickupCollection = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The PickupService class provides methods for interacting with EasyPost {@link Pickup} objects.
@@ -12,7 +15,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a pickup with.
      * @returns {Pickup} - The created pickup.
      */
-    static async create(params) {
+    static async create(params: PickupParams): Promise<unknown> {
       const url = 'pickups';
 
       const wrappedParams = {
@@ -30,7 +33,7 @@ export default (easypostClient) =>
      * @param {string} service - The service to purchase the pickup with.
      * @returns {Pickup} - The purchased pickup.
      */
-    static async buy(id, carrier, service) {
+    static async buy(id: string, carrier: string, service: string): Promise<unknown> {
       const url = `pickups/${id}/buy`;
       const wrappedParams = { carrier, service };
       try {
@@ -48,7 +51,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the pickup to cancel.
      * @returns {Pickup} - The cancelled pickup.
      */
-    static async cancel(id) {
+    static async cancel(id: string): Promise<unknown> {
       const url = `pickups/${id}/cancel`;
       try {
         const response = await easypostClient._post(url);
@@ -65,7 +68,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the pickups by.
      * @returns {Object} - An object containing a list of {@link Pickup pickups} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'pickups';
 
       return this._all(url, params);
@@ -77,7 +80,10 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(pickups, pageSize = null) {
+    static async getNextPage(
+      pickups: PickupCollection,
+      pageSize: number | null = null,
+    ): Promise<unknown> {
       const url = 'pickups';
       return this._getNextPage(url, 'pickups', pickups, pageSize);
     }
@@ -88,7 +94,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the pickup to retrieve.
      * @returns {Pickup} - The retrieved pickup.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `pickups/${id}`;
 
       return this._retrieve(url);

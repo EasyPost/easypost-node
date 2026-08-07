@@ -1,5 +1,10 @@
 import baseService from './base_service';
 
+type ScanFormParams = Record<string, unknown> & {
+  shipments?: Array<string | { id: string }>;
+};
+type ScanFormCollection = Record<string, unknown>;
+
 export default (easypostClient) =>
   /**
    * The ScanFormService class provides methods for interacting with EasyPost {@link ScanForm} objects.
@@ -12,7 +17,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a scan form with.
      * @returns {ScanForm} - The created scan form.
      */
-    static async create(params) {
+    static async create(params: ScanFormParams): Promise<unknown> {
       const url = 'scan_forms';
 
       // wraps up params in `shipments` if the user didn't do it
@@ -40,7 +45,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the scan forms by.
      * @returns {Object} - An object containing the list of {@link ScanForm scan forms} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
       const url = 'scan_forms';
 
       return this._all(url, params);
@@ -52,7 +57,10 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(scanforms, pageSize = null) {
+    static async getNextPage(
+      scanforms: ScanFormCollection,
+      pageSize: number | null = null,
+    ): Promise<unknown> {
       const url = 'scan_forms';
       return this._getNextPage(url, 'scan_forms', scanforms, pageSize);
     }
@@ -63,7 +71,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the scan form to retrieve.
      * @returns {ScanForm} - The retrieved scan form.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `scan_forms/${id}`;
 
       return this._retrieve(url);
