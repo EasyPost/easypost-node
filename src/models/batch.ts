@@ -6,12 +6,12 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Batch extends EasyPostObject {
-  static label_url;
-  static num_shipments;
-  static pickup;
-  static reference;
-  static scan_form;
-  static shipments;
-  static state;
-  static status;
+  declare label_url?: string | null;
+  declare num_shipments: number;
+  declare pickup: Record<string, unknown>;
+  declare reference?: string | null;
+  declare scan_form: Record<string, unknown>;
+  declare shipments: Record<string, unknown>[];
+  declare state: string;
+  declare status: Record<string, number>;
 }

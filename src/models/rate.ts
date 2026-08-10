@@ -6,19 +6,19 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Rate extends EasyPostObject {
-  static billing_type;
-  static carrier_account_id;
-  static carrier;
-  static currency;
-  static delivery_date_guaranteed;
-  static delivery_date;
-  static delivery_days;
-  static est_delivery_days;
-  static list_currency;
-  static list_rate;
-  static rate;
-  static retail_currency;
-  static retail_rate;
-  static service;
-  static shipment_id;
+  declare billing_type: string;
+  declare carrier_account_id: string;
+  declare carrier: string;
+  declare currency: string;
+  declare delivery_date_guaranteed: boolean;
+  declare delivery_date: string;
+  declare delivery_days: number;
+  declare est_delivery_days: number;
+  declare list_currency: string;
+  declare list_rate: string;
+  declare rate: string;
+  declare retail_currency: string;
+  declare retail_rate: string;
+  declare service: string;
+  declare shipment_id: string;
 }

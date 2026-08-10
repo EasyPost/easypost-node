@@ -6,9 +6,9 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Refund extends EasyPostObject {
-  static carrier;
-  static confirmation_number;
-  static shipment_id;
-  static status;
-  static tracking_code;
+  declare carrier: string;
+  declare confirmation_number: string;
+  declare shipment_id: string;
+  declare status: 'submitted' | 'refunded' | 'rejected';
+  declare tracking_code: string;
 }

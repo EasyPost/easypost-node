@@ -7,18 +7,18 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Pickup extends EasyPostObject {
-  static address;
-  static carrier_accounts;
-  static confirmation;
-  static instructions;
-  static is_account_address;
-  static max_datetime;
-  static messages;
-  static min_datetime;
-  static pickup_rates;
-  static reference;
-  static shipment;
-  static status;
+  declare address: Record<string, unknown>;
+  declare carrier_accounts?: Record<string, unknown>[] | null;
+  declare confirmation: string;
+  declare instructions?: string | null;
+  declare is_account_address?: boolean | null;
+  declare max_datetime: string;
+  declare messages: Record<string, unknown>[];
+  declare min_datetime: string;
+  declare pickup_rates: Parameters<typeof Constants.Utils.getLowestRate>[0];
+  declare reference?: string | null;
+  declare shipment: Record<string, unknown>;
+  declare status: 'unknown' | 'scheduled' | 'canceled';
 
   /**
    * Get the lowest rate for this {@link Pickup}.
@@ -28,7 +28,10 @@ export default class Pickup extends EasyPostObject {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  lowestRate(carriers?: string[], services?: string[]): unknown {
+  lowestRate(
+    carriers?: string[],
+    services?: string[],
+  ): ReturnType<typeof Constants.Utils.getLowestRate> {
     const rates = ((this as Pickup & { pickup_rates?: unknown[] }).pickup_rates ||
       []) as Parameters<typeof Constants.Utils.getLowestRate>[0];
 

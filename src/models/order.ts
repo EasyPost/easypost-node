@@ -7,15 +7,15 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Order extends EasyPostObject {
-  static buyer_address;
-  static from_address;
-  static is_return;
-  static messages;
-  static rates;
-  static reference;
-  static return_address;
-  static shipments;
-  static to_address;
+  declare buyer_address?: Record<string, unknown> | null;
+  declare from_address: Record<string, unknown>;
+  declare is_return?: boolean | null;
+  declare messages: Record<string, unknown>[];
+  declare rates: Parameters<typeof Constants.Utils.getLowestRate>[0];
+  declare reference?: string | null;
+  declare return_address?: Record<string, unknown> | null;
+  declare shipments: Record<string, unknown>[];
+  declare to_address: Record<string, unknown>;
 
   /**
    * Get the lowest rate for this {@link Order}.
@@ -25,7 +25,10 @@ export default class Order extends EasyPostObject {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  lowestRate(carriers?: string[], services?: string[]): unknown {
+  lowestRate(
+    carriers?: string[],
+    services?: string[],
+  ): ReturnType<typeof Constants.Utils.getLowestRate> {
     const rates = ((this as Order & { rates?: unknown[] }).rates || []) as Parameters<
       typeof Constants.Utils.getLowestRate
     >[0];

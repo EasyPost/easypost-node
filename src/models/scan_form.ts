@@ -6,11 +6,11 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class ScanForm extends EasyPostObject {
-  static address;
-  static batch_id;
-  static form_file_type;
-  static form_url;
-  static message;
-  static status;
-  static tracking_codes;
+  declare address: Record<string, unknown>;
+  declare batch_id: string;
+  declare form_file_type: string;
+  declare form_url: string;
+  declare message: string;
+  declare status: 'creating' | 'created' | 'failed';
+  declare tracking_codes: string[];
 }
