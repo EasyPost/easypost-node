@@ -6,14 +6,14 @@
   "homepage": "https://easypost.com",
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/easypost.mjs",
       "require": "./dist/easypost.js"
     }
   },
   "main": "./dist/easypost.js",
   "module": "./dist/easypost.mjs",
-  "types": "./types/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git://github.com/easypost/easypost-node.git"
@@ -31,7 +31,7 @@
     "formatCheck": "prettier --check .",
     "lint": "eslint --ext .js,.ts --ignore-pattern 'examples/**' .",
     "lintFix": "eslint --ext .js,.ts --ignore-pattern 'examples/**' --fix .",
-    "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run formatCheck",
+    "prepublishOnly": "npm run clean && npm run build && npm run typescript:declarations && npm run test && npm run lint && npm run formatCheck",
     "scan": "npx audit-ci -m --config ./audit-ci.jsonc",
     "test": "npm run typescript:test && cross-env NODE_ENV=test vitest run",
     "test:node-compatibility": "cross-env NODE_ENV=test node ./test/node_compatibility",

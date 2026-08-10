@@ -9,7 +9,7 @@ import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
-/** @typedef {import("../../types/easypost").default} Client */
+/** @typedef {import("../../src/easypost").default} Client */
 
 type ClaimTestCreateInput = Parameters<ReturnType<typeof ClaimServiceFactory>['create']>[0];
 type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];

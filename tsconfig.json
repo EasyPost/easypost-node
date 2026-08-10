@@ -7,7 +7,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "rootDir": "./src",
-    "outDir": "./types",
+    "outDir": "./dist/types",
     "noEmit": false
   },
   "include": ["src/**/*.js", "src/**/*.ts"],
