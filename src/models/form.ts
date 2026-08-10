@@ -6,7 +6,7 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Form extends EasyPostObject {
-  declare form_type:
+  declare form_type?:
     | 'cn22'
     | 'cod_return_label'
     | 'commercial_invoice'
@@ -16,6 +16,6 @@ export default class Form extends EasyPostObject {
     | 'order_summary'
     | 'return_packing_slip'
     | 'rma_qr_code';
-  declare form_url: string | null;
-  declare submitted_electronically: boolean | null;
+  declare form_url?: string | null;
+  declare submitted_electronically?: boolean | null;
 }

@@ -6,6 +6,6 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class ApiKey extends EasyPostObject {
-  declare active: boolean | null;
-  declare key: string | null;
+  declare active?: boolean | null;
+  declare key?: string | null;
 }
