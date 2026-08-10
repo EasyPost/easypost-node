@@ -6,5 +6,5 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Payload extends EasyPostObject {
-  static response_body;
+  declare response_body: string | null;
 }

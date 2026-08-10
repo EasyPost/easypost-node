@@ -6,6 +6,7 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Webhook extends EasyPostObject {
-  static disabled_at;
-  static url;
+  declare custom_headers: { key: string; value: string }[];
+  declare disabled_at: string;
+  declare url: string;
 }
