@@ -7,31 +7,31 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Shipment extends EasyPostObject {
-  declare batch_id: string | null;
-  declare batch_message: string | null;
-  declare batch_status: string | null;
+  declare batch_id?: string | null;
+  declare batch_message?: string | null;
+  declare batch_status?: string | null;
   declare buyer_address?: Record<string, unknown> | null;
   declare customs_info?: Record<string, unknown> | null;
-  declare fees: Record<string, unknown>[] | null;
-  declare forms: Record<string, unknown>[] | null;
-  declare from_address: Record<string, unknown> | null;
-  declare insurance: Record<string, unknown> | null;
+  declare fees?: Record<string, unknown>[] | null;
+  declare forms?: Record<string, unknown>[] | null;
+  declare from_address?: Record<string, unknown> | null;
+  declare insurance?: Record<string, unknown> | null;
   declare is_return?: boolean | null;
-  declare messages: Record<string, unknown>[] | null;
+  declare messages?: Record<string, unknown>[] | null;
   declare options?: Record<string, unknown> | null;
-  declare parcel: Record<string, unknown> | null;
-  declare postage_label: Record<string, unknown> | null;
-  declare rates: Parameters<typeof Constants.Utils.getLowestRate>[0] | null;
+  declare parcel?: Record<string, unknown> | null;
+  declare postage_label?: Record<string, unknown> | null;
+  declare rates?: Parameters<typeof Constants.Utils.getLowestRate>[0] | null;
   declare reference?: string | null;
-  declare refund_status: 'submitted' | 'refunded' | 'rejected' | null;
+  declare refund_status?: 'submitted' | 'refunded' | 'rejected' | null;
   declare return_address?: Record<string, unknown> | null;
-  declare scan_form: Record<string, unknown> | null;
-  declare selected_rate: Parameters<typeof Constants.Utils.getLowestRate>[0][number] | null;
-  declare status: string | null;
-  declare to_address: Record<string, unknown> | null;
-  declare tracker: Record<string, unknown> | null;
-  declare tracking_code: string | null;
-  declare usps_zone: string | null;
+  declare scan_form?: Record<string, unknown> | null;
+  declare selected_rate?: Parameters<typeof Constants.Utils.getLowestRate>[0][number] | null;
+  declare status?: string | null;
+  declare to_address?: Record<string, unknown> | null;
+  declare tracker?: Record<string, unknown> | null;
+  declare tracking_code?: string | null;
+  declare usps_zone?: string | null;
 
   /**
    * Get the lowest rate for this {@link Shipment}.

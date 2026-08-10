@@ -9,7 +9,7 @@ export default class CustomsInfo extends EasyPostObject {
   declare content_explanation?: string | null;
   declare contents_type?: string | null;
   declare customs_certify?: boolean | null;
-  declare customs_items: unknown[] | null;
+  declare customs_items?: unknown[] | null;
   declare customs_signer?: string | null;
   declare declaration?: string | null;
   declare eel_pfc?: string | null;

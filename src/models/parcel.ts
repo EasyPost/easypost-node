@@ -9,6 +9,6 @@ export default class Parcel extends EasyPostObject {
   declare height?: number | null;
   declare length?: number | null;
   declare predefined_package?: string | null;
-  declare weight: number | null;
+  declare weight?: number | null;
   declare width?: number | null;
 }

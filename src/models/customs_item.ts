@@ -8,10 +8,10 @@ import EasyPostObject from './easypost_object';
 export default class CustomsItem extends EasyPostObject {
   declare code?: string | null;
   declare currency?: string | null;
-  declare description: string | null;
+  declare description?: string | null;
   declare hs_tariff_number?: string | null;
-  declare origin_country: string | null;
-  declare quantity: number | null;
-  declare value: number | null;
-  declare weight: number | null;
+  declare origin_country?: string | null;
+  declare quantity?: number | null;
+  declare value?: number | null;
+  declare weight?: number | null;
 }
