@@ -10,8 +10,8 @@ export default class CarrierAccount extends EasyPostObject {
   declare clone?: boolean | null;
   declare credentials?: object | null;
   declare description?: string | null;
-  declare fields: Record<string, unknown>;
-  declare readable: string;
+  declare fields: Record<string, unknown> | null;
+  declare readable: string | null;
   declare reference?: string | null;
   declare test_credentials?: object | null;
 }
