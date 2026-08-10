@@ -15,10 +15,10 @@ export default class Claim extends EasyPostObject {
   declare insurance_amount: string | null;
   declare insurance_id: string | null;
   declare payment_method: string | null;
-  declare recipient_name: null;
+  declare recipient_name: unknown | null;
   declare reference: string | null;
   declare requested_amount: string | null;
-  declare salvage_value: null;
+  declare salvage_value: unknown | null;
   declare shipment_id: string | null;
   declare status_detail: string | null;
   declare status_timestamp: string | null;
