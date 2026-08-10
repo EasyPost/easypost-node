@@ -10,8 +10,8 @@ export default class Address extends EasyPostObject {
   declare street2?: string | null;
   declare city?: string | null;
   declare state?: string | null;
-  declare zip: string;
-  declare country: string;
+  declare zip: string | null;
+  declare country: string | null;
   declare residential?: boolean | null;
   declare carrier_facility?: string | null;
   declare name?: string | null;
@@ -20,5 +20,5 @@ export default class Address extends EasyPostObject {
   declare email?: string | null;
   declare federal_tax_id?: string | null;
   declare state_tax_id?: string | null;
-  declare verifications: Record<string, unknown>;
+  declare verifications: Record<string, unknown> | null;
 }
