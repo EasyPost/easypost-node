@@ -6,12 +6,12 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class CarrierAccount extends EasyPostObject {
-  static billing_type;
-  static clone;
-  static credentials;
-  static description;
-  static fields;
-  static readable;
-  static reference;
-  static test_credentials;
+  declare billing_type: string | null;
+  declare clone?: boolean | null;
+  declare credentials?: object | null;
+  declare description?: string | null;
+  declare fields: Record<string, unknown>;
+  declare readable: string;
+  declare reference?: string | null;
+  declare test_credentials?: object | null;
 }
