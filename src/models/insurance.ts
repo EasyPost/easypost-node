@@ -6,16 +6,16 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Insurance extends EasyPostObject {
-  declare amount: string;
-  declare fee: Record<string, unknown>;
-  declare from_address: Record<string, unknown>;
-  declare messages: string[];
-  declare provider_id: string;
-  declare provider: string;
+  declare amount: string | null;
+  declare fee: Record<string, unknown> | null;
+  declare from_address: Record<string, unknown> | null;
+  declare messages: string[] | null;
+  declare provider_id: string | null;
+  declare provider: string | null;
   declare reference?: string | null;
-  declare shipment_id: string;
-  declare status: 'new' | 'pending' | 'purchased' | 'failed' | 'cancelled';
-  declare to_address: Record<string, unknown>;
-  declare tracking_code: string;
-  declare tracker: Record<string, unknown>;
+  declare shipment_id: string | null;
+  declare status: 'new' | 'pending' | 'purchased' | 'failed' | 'cancelled' | null;
+  declare to_address: Record<string, unknown> | null;
+  declare tracking_code: string | null;
+  declare tracker: Record<string, unknown> | null;
 }
