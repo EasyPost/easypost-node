@@ -10,8 +10,8 @@ export default class EndShipper extends EasyPostObject {
   declare street2?: string | null;
   declare city?: string | null;
   declare state?: string | null;
-  declare zip: string;
-  declare country: string;
+  declare zip: string | null;
+  declare country: string | null;
   declare name?: string | null;
   declare company?: string | null;
   declare phone?: string | null;

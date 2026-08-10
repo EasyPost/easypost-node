@@ -16,6 +16,6 @@ export default class Form extends EasyPostObject {
     | 'order_summary'
     | 'return_packing_slip'
     | 'rma_qr_code';
-  declare form_url: string;
-  declare submitted_electronically: boolean;
+  declare form_url: string | null;
+  declare submitted_electronically: boolean | null;
 }
