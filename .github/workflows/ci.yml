@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just test-node-compatibility
-  # typescript checks that the our Typescript definitions can be compiled without errors
+  # typescript checks that TypeScript declarations and compatibility tests compile without errors
   typescript:
     runs-on: ubuntu-latest
     steps:
@@ -44,11 +44,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - run: |
-          cd types/demo
-          npm install
-          cd ../../
-          just install typescript
+      - run: just install typescript
   lint:
     runs-on: ubuntu-latest
     steps:
