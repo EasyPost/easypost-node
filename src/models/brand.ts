@@ -12,7 +12,7 @@ export default class Brand extends EasyPostObject {
   static color;
   static logo_href;
   static logo;
-  static name;
+  declare name: unknown;
   static theme;
   static user_id;
 }

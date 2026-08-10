@@ -12,7 +12,7 @@ export default class EndShipper extends EasyPostObject {
   static state;
   static zip;
   static country;
-  static name;
+  declare name: unknown;
   static company;
   static phone;
   static email;

@@ -13,7 +13,7 @@ export default class User extends EasyPostObject {
   static email;
   static insurance_fee_minimum;
   static insurance_fee_rate;
-  static name;
+  declare name: unknown;
   static parent_id;
   static phone_number;
   static price_per_shipment;
