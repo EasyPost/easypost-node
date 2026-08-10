@@ -28,8 +28,9 @@ export default class Pickup extends EasyPostObject {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  lowestRate(carriers, services) {
-    const rates = this.pickup_rates || [];
+  lowestRate(carriers?: string[], services?: string[]): unknown {
+    const rates = ((this as Pickup & { pickup_rates?: unknown[] }).pickup_rates ||
+      []) as Parameters<typeof Constants.Utils.getLowestRate>[0];
 
     return Constants.Utils.getLowestRate(rates, carriers, services);
   }

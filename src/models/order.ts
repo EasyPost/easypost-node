@@ -25,8 +25,10 @@ export default class Order extends EasyPostObject {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  lowestRate(carriers, services) {
-    const rates = this.rates || [];
+  lowestRate(carriers?: string[], services?: string[]): unknown {
+    const rates = ((this as Order & { rates?: unknown[] }).rates || []) as Parameters<
+      typeof Constants.Utils.getLowestRate
+    >[0];
 
     return Constants.Utils.getLowestRate(rates, carriers, services);
   }
