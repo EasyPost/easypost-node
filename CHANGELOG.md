@@ -11,6 +11,8 @@
   - Breaking: `makeApiCall` now accepts `delete` (the `del` alias was removed)
   - `requestMiddleware` compatibility preserved using a fetch-era compatibility request object
   - Default `User-Agent` retains structured runtime metadata fields (`Nodejs/`, `OS/`, `OSVersion/`, `OSArch/`) via runtime-safe detection
+- TypeScript declarations are now generated from source and published from `dist/types`.
+- Internal root `types/` declaration sources and demo fixtures were removed from the repository.
 
 ## v8.9.0 (2026-06-25)
 
