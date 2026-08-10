@@ -14,7 +14,7 @@ export default class Address extends EasyPostObject {
   static country;
   static residential;
   static carrier_facility;
-  static name;
+  declare name: unknown;
   static company;
   static phone;
   static email;
