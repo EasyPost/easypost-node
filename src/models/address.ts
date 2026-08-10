@@ -6,19 +6,19 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Address extends EasyPostObject {
-  static street1;
-  static street2;
-  static city;
-  static state;
-  static zip;
-  static country;
-  static residential;
-  static carrier_facility;
-  declare name: unknown;
-  static company;
-  static phone;
-  static email;
-  static federal_tax_id;
-  static state_tax_id;
-  static verifications;
+  declare street1?: string | null;
+  declare street2?: string | null;
+  declare city?: string | null;
+  declare state?: string | null;
+  declare zip: string;
+  declare country: string;
+  declare residential?: boolean | null;
+  declare carrier_facility?: string | null;
+  declare name?: string | null;
+  declare company?: string | null;
+  declare phone?: string | null;
+  declare email?: string | null;
+  declare federal_tax_id?: string | null;
+  declare state_tax_id?: string | null;
+  declare verifications: Record<string, unknown>;
 }

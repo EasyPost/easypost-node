@@ -7,31 +7,31 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Shipment extends EasyPostObject {
-  static batch_id;
-  static batch_message;
-  static batch_status;
-  static buyer_address;
-  static customs_info;
-  static fees;
-  static forms;
-  static from_address;
-  static insurance;
-  static is_return;
-  static messages;
-  static options;
-  static parcel;
-  static postage_label;
-  static rates;
-  static reference;
-  static refund_status;
-  static return_address;
-  static scan_form;
-  static selected_rate;
-  static status;
-  static to_address;
-  static tracker;
-  static tracking_code;
-  static usps_zone;
+  declare batch_id: string;
+  declare batch_message: string;
+  declare batch_status: string;
+  declare buyer_address?: Record<string, unknown> | null;
+  declare customs_info?: Record<string, unknown> | null;
+  declare fees: Record<string, unknown>[];
+  declare forms: Record<string, unknown>[];
+  declare from_address: Record<string, unknown>;
+  declare insurance: Record<string, unknown>;
+  declare is_return?: boolean | null;
+  declare messages: Record<string, unknown>[];
+  declare options?: Record<string, unknown> | null;
+  declare parcel: Record<string, unknown>;
+  declare postage_label: Record<string, unknown>;
+  declare rates: Parameters<typeof Constants.Utils.getLowestRate>[0];
+  declare reference?: string | null;
+  declare refund_status: 'submitted' | 'refunded' | 'rejected';
+  declare return_address?: Record<string, unknown> | null;
+  declare scan_form: Record<string, unknown>;
+  declare selected_rate: Parameters<typeof Constants.Utils.getLowestRate>[0][number];
+  declare status: string;
+  declare to_address: Record<string, unknown>;
+  declare tracker: Record<string, unknown>;
+  declare tracking_code: string;
+  declare usps_zone: string;
 
   /**
    * Get the lowest rate for this {@link Shipment}.
@@ -41,7 +41,10 @@ export default class Shipment extends EasyPostObject {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  lowestRate(carriers?: string[], services?: string[]): unknown {
+  lowestRate(
+    carriers?: string[],
+    services?: string[],
+  ): ReturnType<typeof Constants.Utils.getLowestRate> {
     const rates = ((this as Shipment & { rates?: unknown[] }).rates || []) as Parameters<
       typeof Constants.Utils.getLowestRate
     >[0];

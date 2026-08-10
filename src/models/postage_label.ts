@@ -6,13 +6,13 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class PostageLabel extends EasyPostObject {
-  static label_date;
-  static label_epl2_url;
-  static label_file_type;
-  static label_pdf_url;
-  static label_resolution;
-  static label_size;
-  static label_type;
-  static label_url;
-  static label_zpl_url;
+  declare label_date: string;
+  declare label_epl2_url: string;
+  declare label_file_type: string;
+  declare label_pdf_url: string;
+  declare label_resolution: number;
+  declare label_size: string;
+  declare label_type: string;
+  declare label_url: string;
+  declare label_zpl_url: string;
 }

@@ -6,14 +6,15 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class CustomsInfo extends EasyPostObject {
-  static content_explanation;
-  static contents_type;
-  static customs_certify;
-  static customs_items;
-  static customs_signer;
-  static declaration;
-  static eel_pfc;
-  static non_delivery_option;
-  static restriction_comments;
-  static restriction_type;
+  declare content_explanation?: string | null;
+  declare contents_type?: string | null;
+  declare customs_certify?: boolean | null;
+  declare customs_items: unknown[];
+  declare customs_signer?: string | null;
+  declare declaration?: string | null;
+  declare eel_pfc?: string | null;
+  declare non_delivery_option?: 'abandon' | 'return' | null;
+  declare restriction_comments?: string | null;
+  declare restriction_type?:
+    'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection' | null;
 }

@@ -6,12 +6,12 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class CustomsItem extends EasyPostObject {
-  static code;
-  static currency;
-  static description;
-  static hs_tariff_number;
-  static origin_country;
-  static quantity;
-  static value;
-  static weight;
+  declare code?: string | null;
+  declare currency?: string | null;
+  declare description: string;
+  declare hs_tariff_number?: string | null;
+  declare origin_country: string;
+  declare quantity: number;
+  declare value: number;
+  declare weight: number;
 }
