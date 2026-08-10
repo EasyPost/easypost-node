@@ -6,17 +6,18 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class User extends EasyPostObject {
-  static api_keys;
-  static balance;
-  static cc_fee_rate;
-  static children;
-  static email;
-  static insurance_fee_minimum;
-  static insurance_fee_rate;
-  declare name: unknown;
-  static parent_id;
-  static phone_number;
-  static price_per_shipment;
-  static recharge_amount;
-  static secondary_recharge_amount;
+  declare api_keys: Record<string, unknown>[];
+  declare balance: string;
+  declare cc_fee_rate: string;
+  declare children: Record<string, unknown>[];
+  declare email: string;
+  declare insurance_fee_minimum: string;
+  declare insurance_fee_rate: string;
+  declare name: string;
+  declare parent_id: string;
+  declare phone_number?: string | null;
+  declare price_per_shipment: string;
+  declare recharge_amount: string;
+  declare recharge_threshold: string;
+  declare secondary_recharge_amount: string;
 }

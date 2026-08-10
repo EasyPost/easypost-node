@@ -6,14 +6,14 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class EndShipper extends EasyPostObject {
-  static street1;
-  static street2;
-  static city;
-  static state;
-  static zip;
-  static country;
-  declare name: unknown;
-  static company;
-  static phone;
-  static email;
+  declare street1?: string | null;
+  declare street2?: string | null;
+  declare city?: string | null;
+  declare state?: string | null;
+  declare zip: string;
+  declare country: string;
+  declare name?: string | null;
+  declare company?: string | null;
+  declare phone?: string | null;
+  declare email?: string | null;
 }
