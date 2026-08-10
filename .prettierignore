@@ -11,6 +11,5 @@ examples
 official/fixtures/
 package-lock.json
 style_guides/
-types/
 vendor/
 venv/
