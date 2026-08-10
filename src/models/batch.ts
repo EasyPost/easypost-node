@@ -7,11 +7,11 @@ import EasyPostObject from './easypost_object';
  */
 export default class Batch extends EasyPostObject {
   declare label_url?: string | null;
-  declare num_shipments: number | null;
-  declare pickup: Record<string, unknown> | null;
+  declare num_shipments?: number | null;
+  declare pickup?: Record<string, unknown> | null;
   declare reference?: string | null;
-  declare scan_form: Record<string, unknown> | null;
-  declare shipments: Record<string, unknown>[] | null;
-  declare state: string | null;
-  declare status: Record<string, number> | null;
+  declare scan_form?: Record<string, unknown> | null;
+  declare shipments?: Record<string, unknown>[] | null;
+  declare state?: string | null;
+  declare status?: Record<string, number> | null;
 }

@@ -6,9 +6,9 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class PickupRate extends EasyPostObject {
-  declare carrier: string | null;
-  declare currency: string | null;
-  declare pickup_id: string | null;
-  declare rate: string | null;
-  declare service: string | null;
+  declare carrier?: string | null;
+  declare currency?: string | null;
+  declare pickup_id?: string | null;
+  declare rate?: string | null;
+  declare service?: string | null;
 }

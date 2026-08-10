@@ -8,14 +8,14 @@ import EasyPostObject from './easypost_object';
  */
 export default class Order extends EasyPostObject {
   declare buyer_address?: Record<string, unknown> | null;
-  declare from_address: Record<string, unknown> | null;
+  declare from_address?: Record<string, unknown> | null;
   declare is_return?: boolean | null;
-  declare messages: Record<string, unknown>[] | null;
-  declare rates: Parameters<typeof Constants.Utils.getLowestRate>[0] | null;
+  declare messages?: Record<string, unknown>[] | null;
+  declare rates?: Parameters<typeof Constants.Utils.getLowestRate>[0] | null;
   declare reference?: string | null;
   declare return_address?: Record<string, unknown> | null;
-  declare shipments: Record<string, unknown>[] | null;
-  declare to_address: Record<string, unknown> | null;
+  declare shipments?: Record<string, unknown>[] | null;
+  declare to_address?: Record<string, unknown> | null;
 
   /**
    * Get the lowest rate for this {@link Order}.

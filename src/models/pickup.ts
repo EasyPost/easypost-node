@@ -7,18 +7,18 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Pickup extends EasyPostObject {
-  declare address: Record<string, unknown> | null;
+  declare address?: Record<string, unknown> | null;
   declare carrier_accounts?: Record<string, unknown>[] | null;
-  declare confirmation: string | null;
+  declare confirmation?: string | null;
   declare instructions?: string | null;
   declare is_account_address?: boolean | null;
-  declare max_datetime: string | null;
-  declare messages: Record<string, unknown>[] | null;
-  declare min_datetime: string | null;
-  declare pickup_rates: Parameters<typeof Constants.Utils.getLowestRate>[0] | null;
+  declare max_datetime?: string | null;
+  declare messages?: Record<string, unknown>[] | null;
+  declare min_datetime?: string | null;
+  declare pickup_rates?: Parameters<typeof Constants.Utils.getLowestRate>[0] | null;
   declare reference?: string | null;
-  declare shipment: Record<string, unknown> | null;
-  declare status: 'unknown' | 'scheduled' | 'canceled' | null;
+  declare shipment?: Record<string, unknown> | null;
+  declare status?: 'unknown' | 'scheduled' | 'canceled' | null;
 
   /**
    * Get the lowest rate for this {@link Pickup}.
