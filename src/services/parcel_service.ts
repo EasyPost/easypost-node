@@ -1,6 +1,12 @@
 import baseService from './base_service';
 
-type ParcelParams = Record<string, unknown>;
+type ParcelCreateParameters = Record<string, unknown> & {
+  length?: number | null;
+  width?: number | null;
+  height?: number | null;
+  weight?: number | null;
+  predefined_package?: string | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -14,7 +20,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a parcel with.
      * @returns {Parcel} - The created parcel.
      */
-    static async create(params: ParcelParams): Promise<unknown> {
+    static async create(params: ParcelCreateParameters): Promise<unknown> {
       const url = 'parcels';
 
       const wrappedParams = {

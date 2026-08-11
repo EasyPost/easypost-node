@@ -1,7 +1,43 @@
 import Constants from '../constants';
 import baseService from './base_service';
 
-type ShipmentParams = Record<string, unknown>;
+type AddressCreateInput = Record<string, unknown> & {
+  verify?: boolean | string | string[] | null;
+  verify_strict?: boolean | string | string[] | null;
+  verify_carrier?: string | null;
+};
+
+type ParcelCreateInput = Record<string, unknown> & {
+  length?: number | null;
+  width?: number | null;
+  height?: number | null;
+  weight?: number | null;
+  predefined_package?: string | null;
+};
+
+type ShipmentTaxIdentifier = Record<string, unknown> & {
+  entity?: string | null;
+  tax_id?: string | null;
+  tax_id_type?: string | null;
+  issuing_country?: string | null;
+};
+
+type ShipmentLineItem = Record<string, unknown> & {
+  total_line_value?: string | null;
+  item_description?: string | null;
+};
+
+type ShipmentCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  to_address?: AddressCreateInput | string | null;
+  from_address?: AddressCreateInput | string | null;
+  parcel?: ParcelCreateInput | string | null;
+  carrier_accounts?: string[] | null;
+  customs_info?: Record<string, unknown> | null;
+  tax_identifiers?: ShipmentTaxIdentifier[] | null;
+  options?: Record<string, unknown> | null;
+  line_items?: ShipmentLineItem[] | null;
+};
 type ShipmentRateInput = string | { id: string };
 type ShipmentCollection = Record<string, unknown>;
 
@@ -17,7 +53,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a shipment with.
      * @returns {Shipment} - The created shipment.
      */
-    static async create(params: ShipmentParams): Promise<unknown> {
+    static async create(params: ShipmentCreateParameters): Promise<unknown> {
       const url = 'shipments';
 
       const wrappedParams = {

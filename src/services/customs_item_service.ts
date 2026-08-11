@@ -1,6 +1,15 @@
 import baseService from './base_service';
 
-type CustomsItemParams = Record<string, unknown>;
+type CustomsItemCreateParameters = Record<string, unknown> & {
+  description?: string | null;
+  quantity?: number | null;
+  value?: number | null;
+  weight?: number | null;
+  hs_tariff_number?: string | null;
+  code?: string | null;
+  origin_country?: string | null;
+  currency?: string | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -14,7 +23,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the customs item to be created.
      * @returns {CustomsItem} - The created customs item.
      */
-    static async create(params: CustomsItemParams): Promise<unknown> {
+    static async create(params: CustomsItemCreateParameters): Promise<unknown> {
       const url = 'customs_items';
 
       const wrappedParams = {

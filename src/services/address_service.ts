@@ -1,9 +1,22 @@
 import baseService from './base_service';
 
-type AddressParams = Record<string, unknown> & {
-  verify?: unknown;
-  verify_strict?: unknown;
-  verify_carrier?: unknown;
+type AddressCreateParameters = Record<string, unknown> & {
+  name?: string | null;
+  company?: string | null;
+  street1?: string | null;
+  street2?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zip?: string | null;
+  country?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  residential?: boolean | null;
+  federal_tax_id?: string | null;
+  state_tax_id?: string | null;
+  verify?: boolean | string | string[] | null;
+  verify_strict?: boolean | string | string[] | null;
+  verify_carrier?: string | null;
 };
 
 type PaginationCollection = Record<string, unknown>;
@@ -20,7 +33,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the address to be created.
      * @returns {Address} - The created address.
      */
-    static async create(params: AddressParams): Promise<unknown> {
+    static async create(params: AddressCreateParameters): Promise<unknown> {
       const url = 'addresses';
 
       const wrappedParams: Record<string, unknown> = {};
@@ -51,7 +64,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the address to be created.
      * @returns {Address} - The created and verified address.
      */
-    static async createAndVerify(params: AddressParams): Promise<unknown> {
+    static async createAndVerify(params: AddressCreateParameters): Promise<unknown> {
       const url = `addresses/create_and_verify`;
 
       const wrappedParams: Record<string, unknown> = {};

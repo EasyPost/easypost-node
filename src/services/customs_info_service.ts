@@ -1,6 +1,19 @@
 import baseService from './base_service';
 
-type CustomsInfoParams = Record<string, unknown>;
+type CustomsItemInput = Record<string, unknown>;
+
+type CustomsInfoCreateParameters = Record<string, unknown> & {
+  eel_pfc?: string | null;
+  contents_type?: string | null;
+  contents_explanation?: string | null;
+  customs_certify?: boolean | null;
+  customs_signer?: string | null;
+  non_delivery_option?: 'abandon' | 'return' | null;
+  restriction_type?: 'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection' | null;
+  restriction_comments?: string | null;
+  customs_items?: CustomsItemInput[] | null;
+  declaration?: string | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -14,7 +27,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the customs info to be created.
      * @returns {CustomsInfo} - The created customs info.
      */
-    static async create(params: CustomsInfoParams): Promise<unknown> {
+    static async create(params: CustomsInfoCreateParameters): Promise<unknown> {
       const url = 'customs_infos';
 
       const wrappedParams = {
