@@ -1,6 +1,13 @@
 import baseService from './base_service';
 
-type InsuranceParams = Record<string, unknown>;
+type InsuranceCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  to_address?: Record<string, unknown> | string | null;
+  from_address?: Record<string, unknown> | string | null;
+  carrier?: string | null;
+  tracking_code?: string | null;
+  amount?: string | null;
+};
 type InsuranceCollection = Record<string, unknown>;
 
 export default (easypostClient) =>
@@ -15,7 +22,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the insurance to be created.
      * @returns {Insurance} - The created insurance.
      */
-    static async create(params: InsuranceParams): Promise<unknown> {
+    static async create(params: InsuranceCreateParameters): Promise<unknown> {
       const url = 'insurances';
 
       const wrappedParams = {

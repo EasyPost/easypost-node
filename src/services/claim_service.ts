@@ -1,6 +1,17 @@
 import baseService from './base_service';
 
-type ClaimParams = Record<string, unknown>;
+type ClaimCreateParameters = Record<string, unknown> & {
+  tracking_code?: string | null;
+  type?: string | null;
+  amount?: string | null;
+  email_evidence_attachments?: string[] | null;
+  invoice_attachments?: string[] | null;
+  supporting_documentation_attachments?: string[] | null;
+  description?: string | null;
+  recipient_name?: string | null;
+  contact_email?: string | null;
+  payment_method?: string | null;
+};
 type ClaimCollection = Record<string, unknown>;
 
 export default (easypostClient) =>
@@ -14,7 +25,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the claim to be created.
      * @returns {Claim} - The created claim.
      */
-    static async create(params: ClaimParams): Promise<unknown> {
+    static async create(params: ClaimCreateParameters): Promise<unknown> {
       const url = 'claims';
 
       return this._create(url, params);

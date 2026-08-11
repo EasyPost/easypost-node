@@ -1,6 +1,9 @@
 import baseService from './base_service';
 
-type TrackerParams = Record<string, unknown>;
+type TrackerCreateParameters = Record<string, unknown> & {
+  tracking_code?: string | null;
+  carrier?: string | null;
+};
 type TrackerCollection = Record<string, unknown>;
 
 export default (easypostClient) =>
@@ -15,7 +18,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a tracker with.
      * @returns {Tracker} - The created tracker.
      */
-    static async create(params: TrackerParams): Promise<unknown> {
+    static async create(params: TrackerCreateParameters): Promise<unknown> {
       const url = 'trackers';
 
       const wrappedParams = {

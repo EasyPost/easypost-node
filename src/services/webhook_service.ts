@@ -1,6 +1,10 @@
 import baseService from './base_service';
 
-type WebhookParams = Record<string, unknown>;
+type WebhookCreateParameters = Record<string, unknown> & {
+  url?: string | null;
+  webhook_secret?: string | null;
+  custom_headers?: Array<{ key?: string | null; value?: string | null }> | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -14,7 +18,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a webhook with.
      * @returns {Webhook} - The created webhook.
      */
-    static async create(params: WebhookParams): Promise<unknown> {
+    static async create(params: WebhookCreateParameters): Promise<unknown> {
       const url = 'webhooks';
 
       const wrappedParams = {
@@ -32,7 +36,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to update the webhook with.
      * @returns {Webhook} - The updated webhook.
      */
-    static async update(id: string, params: Record<string, unknown>): Promise<unknown> {
+    static async update(id: string, params: WebhookCreateParameters): Promise<unknown> {
       const url = `webhooks/${id}`;
 
       try {
