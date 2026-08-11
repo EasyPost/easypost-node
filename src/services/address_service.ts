@@ -14,8 +14,8 @@ type AddressCreateParameters = Record<string, unknown> & {
   residential?: boolean | null;
   federal_tax_id?: string | null;
   state_tax_id?: string | null;
-  verify?: boolean | string | string[] | null;
-  verify_strict?: boolean | string | string[] | null;
+  verify?: boolean | string | Array<boolean | string> | null;
+  verify_strict?: boolean | string | Array<boolean | string> | null;
   verify_carrier?: string | null;
 };
 

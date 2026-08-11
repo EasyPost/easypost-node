@@ -33,8 +33,8 @@ type ShipmentCreateParameters = Record<string, unknown> & {
   from_address?: AddressCreateInput | string | null;
   parcel?: ParcelCreateInput | string | null;
   carrier_accounts?: string[] | null;
-  customs_info?: Record<string, unknown> | null;
-  tax_identifiers?: ShipmentTaxIdentifier[] | null;
+  customs_info?: Record<string, unknown> | Record<string, unknown>[] | null;
+  tax_identifiers?: Array<ShipmentTaxIdentifier | null | undefined> | null;
   options?: Record<string, unknown> | null;
   line_items?: ShipmentLineItem[] | null;
 };

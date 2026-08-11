@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["vitest/globals", "node"]
+  },
+  "include": ["test/services/**/*.ts"]
+}

@@ -1,5 +1,5 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPost from '../../src/easypost';
 import CustomsItem from '../../src/models/customs_item';

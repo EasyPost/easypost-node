@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
@@ -231,7 +231,7 @@ describe('Shipment Service', function () {
       throw new Error('Test failed intentionally');
     } catch (error) {
       expect(error).to.be.an.instanceOf(FilteringError);
-      expect(error.message).to.equal('No rates found.');
+      expect(error instanceof Error ? error.message : String(error)).to.equal('No rates found.');
     }
   });
 
@@ -245,7 +245,7 @@ describe('Shipment Service', function () {
     } catch (error) {
       expect(error).to.be.an.instanceOf(InvalidParameterError);
       const regex = /Invalid deliveryAccuracy value/;
-      expect(error.message).to.match(regex);
+      expect(error instanceof Error ? error.message : String(error)).to.match(regex);
     }
   });
 
