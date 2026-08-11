@@ -4,7 +4,17 @@ import Constants from '../constants';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
 import baseService from './base_service';
 
-type CarrierAccountParams = Record<string, unknown> & { type?: string };
+type CarrierAccountCreateParameters = Record<string, unknown> & {
+  type?: string | null;
+  fields?: Record<string, unknown> | null;
+  clone?: boolean | null;
+  description?: string | null;
+  reference?: string | null;
+  readable?: string | null;
+  credentials?: Record<string, unknown> | null;
+  test_credentials?: Record<string, unknown> | null;
+  billing_type?: string | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -18,10 +28,10 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the carrier account to be created.
      * @returns {CarrierAccount} - The created carrier account.
      */
-    static async create(params: CarrierAccountParams): Promise<unknown> {
+    static async create(params: CarrierAccountCreateParameters): Promise<unknown> {
       const carrierAccountType = params.type;
 
-      if (!carrierAccountType) {
+      if (typeof carrierAccountType !== 'string' || carrierAccountType.length === 0) {
         throw new InvalidParameterError({
           message: util.format(Constants.MISSING_REQUIRED_PARAMETER, 'CarrierAccount type'),
         });
@@ -40,7 +50,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the carrier account to be updated.
      * @returns {CarrierAccount} - The updated carrier account.
      */
-    static async update(id: string, params: Record<string, unknown>): Promise<unknown> {
+    static async update(id: string, params: CarrierAccountCreateParameters): Promise<unknown> {
       const wrappedParams = { carrier_account: params };
 
       try {
