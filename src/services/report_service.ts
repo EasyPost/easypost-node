@@ -1,5 +1,17 @@
 import baseService from './base_service';
 
+type ReportCreateParameters = Record<string, unknown> & {
+  type: string;
+};
+
+type ReportAllParameters = Record<string, unknown> & {
+  type?: string;
+};
+
+type ReportCollection = Record<string, unknown> & {
+  reports?: Array<Record<string, any>>;
+};
+
 export default (easypostClient) =>
   /**
    * The ReportService class provides methods for interacting with EasyPost {@link Report} objects.
@@ -12,7 +24,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a report with.
      * @returns {Report} - The created report.
      */
-    static async create(params) {
+    static async create(params: ReportCreateParameters): Promise<unknown> {
       const url = `reports/${params.type}`;
       return this._create(url, params);
     }
@@ -23,8 +35,8 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the reports by.
      * @returns {Object} - An object containing the list of {@link Report reports} and pagination information.
      */
-    static async all(params = {}) {
-      const type = params.type;
+    static async all(params: ReportAllParameters): Promise<unknown> {
+      const type = params.type || '';
       const url = `reports/${type}`;
 
       // delete "type" from params, so it doesn't get sent to the API
@@ -49,8 +61,8 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(reports, pageSize = null) {
-      const url = `reports/${reports.reports[0]._params.type}`;
+    static async getNextPage(reports: ReportCollection, pageSize: number | null = null): Promise<unknown> {
+      const url = `reports/${reports.reports?.[0]?._params?.type || ''}`;
       return this._getNextPage(url, 'reports', reports, pageSize);
     }
 
@@ -60,7 +72,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the report to retrieve.
      * @returns {Report} - The retrieved report.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<unknown> {
       const url = `reports/${id}`;
 
       return this._retrieve(url);

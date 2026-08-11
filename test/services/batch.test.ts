@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 import fs from 'fs';
 import { resolve } from 'path';
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import Batch from '../../src/models/batch';
