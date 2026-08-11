@@ -43,7 +43,7 @@ describe('Address Service', function () {
     expect(address.verifications.delivery).to.be.undefined;
 
     // Creating with verify = true will make the address and perform verifications
-    addressData.verify = [true];
+    addressData.verify = true;
     address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
@@ -86,7 +86,7 @@ describe('Address Service', function () {
     expect(address.verifications.delivery).to.be.undefined;
 
     // Creating with verify = true will make the address, perform verifications
-    addressData.verify = true;
+    addressData.verify = [true];
     address = await client.Address.create(addressData);
 
     expect(address).to.be.an.instanceOf(Address);
