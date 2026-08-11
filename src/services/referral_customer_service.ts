@@ -5,7 +5,19 @@ import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
 import baseService from './base_service';
 
-type ReferralCustomerParams = Record<string, unknown>;
+type ReferralCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  parent_id?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone_number?: string | null;
+  balance?: string | null;
+  recharge_amount?: string | null;
+  secondary_recharge_amount?: string | null;
+  recharge_threshold?: string | null;
+  children?: Record<string, unknown>[] | null;
+  api_keys?: Record<string, unknown>[] | null;
+};
 type MandateData = Record<string, unknown>;
 /* eslint-disable no-unused-vars */
 type ReferralScopedClient = {
@@ -134,7 +146,7 @@ export default (easypostClient) =>
      * @param {Object} params - The referral customer's information.
      * @returns {User} - The newly created referral customer.
      */
-    static async create(params: ReferralCustomerParams): Promise<unknown> {
+    static async create(params: ReferralCreateParameters): Promise<unknown> {
       const url = 'referral_customers';
 
       const wrappedParams = {

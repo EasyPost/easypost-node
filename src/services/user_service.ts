@@ -1,7 +1,22 @@
 import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 import baseService from './base_service';
 
-type UserParams = Record<string, unknown>;
+type UserCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  parent_id?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone_number?: string | null;
+  balance?: string | null;
+  price_per_shipment?: string | null;
+  recharge_amount?: string | null;
+  secondary_recharge_amount?: string | null;
+  recharge_threshold?: string | null;
+  cc_fee_rate?: string | null;
+  insurance_fee_rate?: string | null;
+  insurance_fee_minimum?: string | null;
+  children?: Record<string, unknown>[] | null;
+};
 type BrandParams = Record<string, unknown>;
 type UserCollection = Record<string, unknown> & {
   has_more?: boolean;
@@ -20,7 +35,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a child user with.
      * @returns {User} - The created child user.
      */
-    static async create(params: UserParams): Promise<unknown> {
+    static async create(params: UserCreateParameters): Promise<unknown> {
       const url = 'users';
 
       const wrappedParams = {
@@ -37,7 +52,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to update the user with.
      * @returns {User} - The updated user.
      */
-    static async update(id: string, params: UserParams): Promise<unknown> {
+    static async update(id: string, params: UserCreateParameters): Promise<unknown> {
       const url = `users/${id}`;
       const wrappedParams = {
         user: params,

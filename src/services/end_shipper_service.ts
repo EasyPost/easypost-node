@@ -1,6 +1,17 @@
 import baseService from './base_service';
 
-type EndShipperParams = Record<string, unknown>;
+type EndShipperCreateParameters = Record<string, unknown> & {
+  name?: string | null;
+  company?: string | null;
+  street1?: string | null;
+  street2?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zip?: string | null;
+  country?: string | null;
+  phone?: string | null;
+  email?: string | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -14,7 +25,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the end shipper to be created.
      * @returns {EndShipper} - The created end shipper.
      */
-    static async create(params: EndShipperParams): Promise<unknown> {
+    static async create(params: EndShipperCreateParameters): Promise<unknown> {
       const url = 'end_shippers';
       const wrappedParams = { address: params };
 
@@ -28,7 +39,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the end shipper to be updated.
      * @returns {EndShipper} - The updated end shipper.
      */
-    static async update(id: string, params: EndShipperParams): Promise<unknown> {
+    static async update(id: string, params: EndShipperCreateParameters): Promise<unknown> {
       const url = `end_shippers/${id}`;
       const wrappedParams = { address: params };
 

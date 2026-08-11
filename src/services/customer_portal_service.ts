@@ -1,5 +1,13 @@
 import baseService from './base_service';
 
+type CustomerPortalAccountLinkCreateParameters = Record<string, unknown> & {
+  session_type?: 'account_onboarding' | 'account_management' | null;
+  user_id?: string | null;
+  refresh_url?: string | null;
+  return_url?: string | null;
+  metadata?: Record<string, unknown> | null;
+};
+
 export default (easypostClient) =>
   /**
    * The CustomerPortalService class provides methods for interacting with EasyPost {@link Tracker} objects.
@@ -11,7 +19,9 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to create a session from.
      * @returns {Object} - An object containing the created session.
      */
-    static async createAccountLink(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async createAccountLink(
+      params: CustomerPortalAccountLinkCreateParameters = {},
+    ): Promise<unknown> {
       const url = 'customer_portal/account_link';
 
       try {

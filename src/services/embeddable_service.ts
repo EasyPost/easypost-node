@@ -1,5 +1,10 @@
 import baseService from './base_service';
 
+type EmbeddablesSessionCreateParameters = Record<string, unknown> & {
+  origin_host?: string | null;
+  user_id?: string | null;
+};
+
 export default (easypostClient) =>
   /**
    * The EmbeddableService class provides methods for interacting with EasyPost {@link Tracker} objects.
@@ -11,7 +16,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to create a session from.
      * @returns {Object} - An object containing the created session.
      */
-    static async createSession(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async createSession(params: EmbeddablesSessionCreateParameters = {}): Promise<unknown> {
       const url = 'embeddables/session';
 
       try {
