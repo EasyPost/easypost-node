@@ -6,10 +6,15 @@ import { expect } from 'vitest';
 import EasyPostClient from '../../src/easypost';
 import Event from '../../src/models/event';
 import Payload from '../../src/models/payload';
+import type BatchServiceFactory from '../../src/services/batch_service';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import NotFoundError from '../../src/errors/api/not_found_error';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
+
+type BatchTestCreateInput = Parameters<ReturnType<typeof BatchServiceFactory>['create']>[0];
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
 
 describe('Event Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -73,8 +78,8 @@ describe('Event Service', function () {
 
     // Create a batch to trigger an event
     await client.Batch.create({
-      shipments: [Fixture.oneCallBuyShipment()],
-    });
+      shipments: [Fixture.oneCallBuyShipment() as ShipmentTestCreateInput],
+    } as BatchTestCreateInput);
 
     if (
       !fs.existsSync(
@@ -111,8 +116,8 @@ describe('Event Service', function () {
 
     // Create a batch to trigger an event
     await client.Batch.create({
-      shipments: [Fixture.oneCallBuyShipment()],
-    });
+      shipments: [Fixture.oneCallBuyShipment() as ShipmentTestCreateInput],
+    } as BatchTestCreateInput);
 
     if (
       !fs.existsSync(
