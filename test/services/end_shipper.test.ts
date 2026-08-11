@@ -1,9 +1,12 @@
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndShipper from '../../src/models/end_shipper';
+import type EndShipperServiceFactory from '../../src/services/end_shipper_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type EndShipperUpdateInput = Parameters<ReturnType<typeof EndShipperServiceFactory>['update']>[1];
 
 describe('EndShipper Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -49,7 +52,7 @@ describe('EndShipper Service', function () {
   it('updates an EndShipper object', async function () {
     const endShipper = await client.EndShipper.create(Fixture.caAddress2());
 
-    const params = {};
+    const params: EndShipperUpdateInput = {};
     const newName = 'Captain Sparrow';
     params.name = newName;
     params.company = 'EasyPost';
