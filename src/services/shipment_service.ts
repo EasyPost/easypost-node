@@ -48,7 +48,7 @@ export default (easypostClient) =>
    */
   class ShipmentService extends baseService(easypostClient) {
     /**
-     * Create a {@link Shipment shipment}.
+  static async createAndBuyLuma(params: ShipmentCreateParameters): Promise<unknown> {
      * See {@link https://docs.easypost.com/docs/shipments#create-a-shipment EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a shipment with.
      * @returns {Shipment} - The created shipment.
@@ -342,7 +342,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create and buy a Shipment with Luma.
      * @returns {Shipment} - The shipment with the given ID.
      */
-    static async createAndBuyLuma(params: ShipmentParams): Promise<unknown> {
+    static async createAndBuyLuma(params: ShipmentCreateParameters): Promise<unknown> {
       const url = `shipments/luma`;
 
       const wrappedParams = {
