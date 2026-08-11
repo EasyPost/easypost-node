@@ -3,9 +3,12 @@ import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import CarrierAccount from '../../src/models/carrier_account';
+import type CarrierAccountServiceFactory from '../../src/services/carrier_account_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
+
+type CarrierAccountTestCreateInput = Parameters<ReturnType<typeof CarrierAccountServiceFactory>['create']>[0];
 
 /* eslint-disable func-names */
 describe('CarrierAccount Service', function () {
@@ -22,7 +25,9 @@ describe('CarrierAccount Service', function () {
   });
 
   it('creates a carrier account', async function () {
-    const carrierAccount = await client.CarrierAccount.create(Fixture.basicCarrierAccount());
+    const carrierAccount = await client.CarrierAccount.create(
+      Fixture.basicCarrierAccount() as CarrierAccountTestCreateInput,
+    );
 
     expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(carrierAccount.id).to.match(/^ca_/);
@@ -65,7 +70,9 @@ describe('CarrierAccount Service', function () {
   });
 
   it('retrieves a carrier account', async function () {
-    const carrierAccount = await client.CarrierAccount.create(Fixture.basicCarrierAccount());
+    const carrierAccount = await client.CarrierAccount.create(
+      Fixture.basicCarrierAccount() as CarrierAccountTestCreateInput,
+    );
     const retrievedCarrierAccount = await client.CarrierAccount.retrieve(carrierAccount.id);
 
     expect(retrievedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
@@ -84,7 +91,9 @@ describe('CarrierAccount Service', function () {
   });
 
   it('updates a carrier account', async function () {
-    const carrierAccount = await client.CarrierAccount.create(Fixture.basicCarrierAccount());
+    const carrierAccount = await client.CarrierAccount.create(
+      Fixture.basicCarrierAccount() as CarrierAccountTestCreateInput,
+    );
 
     const testDescription = 'My custom description';
     const updateParams = {
@@ -127,7 +136,9 @@ describe('CarrierAccount Service', function () {
   });
 
   it('deletes a carrier account', async function () {
-    const carrierAccount = await client.CarrierAccount.create(Fixture.basicCarrierAccount());
+    const carrierAccount = await client.CarrierAccount.create(
+      Fixture.basicCarrierAccount() as CarrierAccountTestCreateInput,
+    );
 
     await client.CarrierAccount.delete(carrierAccount.id).then(
       expect(function (result) {
