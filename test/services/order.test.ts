@@ -5,8 +5,11 @@ import EasyPostClient from '../../src/easypost';
 import FilteringError from '../../src/errors/general/filtering_error';
 import Order from '../../src/models/order';
 import Rate from '../../src/models/rate';
+import type OrderServiceFactory from '../../src/services/order_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type OrderTestCreateInput = Parameters<ReturnType<typeof OrderServiceFactory>['create']>[0];
 
 describe('Order Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -22,7 +25,7 @@ describe('Order Service', function () {
   });
 
   it('creates an order', async function () {
-    const order = await client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder() as OrderTestCreateInput);
 
     expect(order).to.be.an.instanceOf(Order);
     expect(order.id).to.match(/^order_/);
@@ -30,7 +33,7 @@ describe('Order Service', function () {
   });
 
   it('retrieves an order', async function () {
-    const order = await client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder() as OrderTestCreateInput);
 
     const retrievedOrder = await client.Order.retrieve(order.id);
 
@@ -39,7 +42,7 @@ describe('Order Service', function () {
   });
 
   it('get rates of an order', async function () {
-    const order = await client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder() as OrderTestCreateInput);
 
     const rates = await client.Order.getRates(order.id);
 
@@ -52,7 +55,7 @@ describe('Order Service', function () {
   });
 
   it('buys an order', async function () {
-    const order = await client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder() as OrderTestCreateInput);
 
     const boughtOrder = await client.Order.buy(order.id, Fixture.usps(), Fixture.uspsService());
 
@@ -64,7 +67,7 @@ describe('Order Service', function () {
   });
 
   it('gets the lowest rate', async function () {
-    const order = await client.Order.create(Fixture.basicOrder());
+    const order = await client.Order.create(Fixture.basicOrder() as OrderTestCreateInput);
 
     // Test lowest rate with no filters
     const lowestRate = order.lowestRate();

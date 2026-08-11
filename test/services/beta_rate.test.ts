@@ -3,8 +3,11 @@ import { expect } from 'vitest';
 import EasyPostClient from '../../src/easypost';
 import FilteringError from '../../src/errors/general/filtering_error';
 import Rate from '../../src/models/rate';
+import type BetaRateServiceFactory from '../../src/services/beta_rate_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type BetaRateRetrieveInput = Parameters<ReturnType<typeof BetaRateServiceFactory>['retrieveStatelessRates']>[0];
 
 /* eslint-disable func-names */
 describe('BetaRateService', function () {
@@ -21,7 +24,9 @@ describe('BetaRateService', function () {
   });
 
   it('retrieves a list of stateless rates', async function () {
-    const statelessRates = await client.BetaRate.retrieveStatelessRates(Fixture.basicShipment());
+    const statelessRates = await client.BetaRate.retrieveStatelessRates(
+      Fixture.basicShipment() as BetaRateRetrieveInput,
+    );
 
     statelessRates.forEach((rate) => {
       expect(rate).to.be.an.instanceOf(Rate);
@@ -30,7 +35,9 @@ describe('BetaRateService', function () {
   });
 
   it('retrieve the lowest rate', async function () {
-    const statelessRates = await client.BetaRate.retrieveStatelessRates(Fixture.basicShipment());
+    const statelessRates = await client.BetaRate.retrieveStatelessRates(
+      Fixture.basicShipment() as BetaRateRetrieveInput,
+    );
 
     const lowestStatelessRate = client.Utils.getLowestRate(statelessRates);
 
@@ -39,7 +46,9 @@ describe('BetaRateService', function () {
   });
 
   it('retrieve invalid lowest rate', async function () {
-    const statelessRates = await client.BetaRate.retrieveStatelessRates(Fixture.basicShipment());
+    const statelessRates = await client.BetaRate.retrieveStatelessRates(
+      Fixture.basicShipment() as BetaRateRetrieveInput,
+    );
 
     expect(() => {
       client.Utils.getLowestRate(statelessRates, ['invalid_carrier'], ['invalid_service']);

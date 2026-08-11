@@ -5,8 +5,13 @@ import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import Batch from '../../src/models/batch';
+import type BatchServiceFactory from '../../src/services/batch_service';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type BatchTestCreateInput = Parameters<ReturnType<typeof BatchServiceFactory>['create']>[0];
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
 
 describe('Batch Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -23,8 +28,8 @@ describe('Batch Service', function () {
 
   it('creates a batch', async function () {
     const batch = await client.Batch.create({
-      shipments: [Fixture.oneCallBuyShipment()],
-    });
+      shipments: [Fixture.oneCallBuyShipment() as ShipmentTestCreateInput],
+    } as BatchTestCreateInput);
 
     expect(batch).to.be.an.instanceOf(Batch);
     expect(batch.id).to.match(/^batch_/);
@@ -33,8 +38,8 @@ describe('Batch Service', function () {
 
   it('retrieves a batch', async function () {
     const batch = await client.Batch.create({
-      shipments: [Fixture.oneCallBuyShipment()],
-    });
+      shipments: [Fixture.oneCallBuyShipment() as ShipmentTestCreateInput],
+    } as BatchTestCreateInput);
 
     const retrievedBatch = await client.Batch.retrieve(batch.id);
 
@@ -56,8 +61,8 @@ describe('Batch Service', function () {
 
   it('buys a batch', async function () {
     const batch = await client.Batch.create({
-      shipments: [Fixture.oneCallBuyShipment()],
-    });
+      shipments: [Fixture.oneCallBuyShipment() as ShipmentTestCreateInput],
+    } as BatchTestCreateInput);
 
     const boughtBatch = await client.Batch.buy(batch.id);
 
@@ -67,8 +72,8 @@ describe('Batch Service', function () {
 
   it('creates a scanform for a batch', async function () {
     const batch = await client.Batch.create({
-      shipments: [Fixture.oneCallBuyShipment()],
-    });
+      shipments: [Fixture.oneCallBuyShipment() as ShipmentTestCreateInput],
+    } as BatchTestCreateInput);
 
     const boughtBatch = await client.Batch.buy(batch.id);
 
@@ -90,7 +95,7 @@ describe('Batch Service', function () {
   });
 
   it('adds and removes shipments from a batch', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
     const batch = await client.Batch.create({});
 
     const addShipmentsResponse = await client.Batch.addShipments(batch.id, [shipment.id]);
@@ -102,8 +107,8 @@ describe('Batch Service', function () {
 
   it('generates a label for a batch', async function () {
     const batch = await client.Batch.create({
-      shipments: [Fixture.oneCallBuyShipment()],
-    });
+      shipments: [Fixture.oneCallBuyShipment() as ShipmentTestCreateInput],
+    } as BatchTestCreateInput);
 
     const boughtBatch = await client.Batch.buy(batch.id);
 
