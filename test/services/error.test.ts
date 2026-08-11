@@ -1,4 +1,4 @@
-import { assert, expect } from 'chai';
+import { assert, expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import ForbiddenError from '../../src/errors/api/forbidden_error';
@@ -171,9 +171,10 @@ describe('Error Service', function () {
         ErrorHandler.handleApiError(fakeErrorResponse);
       } catch (error) {
         expect(error).to.be.an.instanceOf(value);
-        expect(error.message).to.be.equal('API did not return error details.');
-        expect(error.code).to.be.equal('NO RESPONSE CODE');
-        expect(error.errors).to.be.an('array').that.is.empty;
+        const knownError = error as { message?: string; code?: string; errors?: unknown[] };
+        expect(knownError.message).to.be.equal('API did not return error details.');
+        expect(knownError.code).to.be.equal('NO RESPONSE CODE');
+        expect(knownError.errors).to.be.an('array').that.is.empty;
       }
     });
   });
