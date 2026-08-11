@@ -1,7 +1,7 @@
 import baseService from './base_service';
 
-type ScanFormParams = Record<string, unknown> & {
-  shipments?: Array<string | { id: string }>;
+type ScanFormCreateParameters = Record<string, unknown> & {
+  shipments?: Array<string | { id?: string | null } | Record<string, unknown>> | null;
 };
 type ScanFormCollection = Record<string, unknown>;
 
@@ -17,7 +17,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a scan form with.
      * @returns {ScanForm} - The created scan form.
      */
-    static async create(params: ScanFormParams): Promise<unknown> {
+    static async create(params: ScanFormCreateParameters): Promise<unknown> {
       const url = 'scan_forms';
 
       // wraps up params in `shipments` if the user didn't do it

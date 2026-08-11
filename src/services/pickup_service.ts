@@ -1,6 +1,19 @@
 import baseService from './base_service';
 
-type PickupParams = Record<string, unknown>;
+type PickupCreateParameters = Record<string, unknown> & {
+  address?: Record<string, unknown> | string | null;
+  carrier_accounts?: Array<Record<string, unknown> | string> | null;
+  confirmation?: string | null;
+  instructions?: string | null;
+  is_account_address?: boolean | null;
+  max_datetime?: string | null;
+  min_datetime?: string | null;
+  pickup_rates?: Record<string, unknown> | null;
+  reference?: string | null;
+  status?: string | null;
+  shipment?: Record<string, unknown> | string | null;
+  batch?: Record<string, unknown> | string | null;
+};
 type PickupCollection = Record<string, unknown>;
 
 export default (easypostClient) =>
@@ -15,7 +28,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a pickup with.
      * @returns {Pickup} - The created pickup.
      */
-    static async create(params: PickupParams): Promise<unknown> {
+    static async create(params: PickupCreateParameters): Promise<unknown> {
       const url = 'pickups';
 
       const wrappedParams = {

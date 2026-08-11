@@ -2,7 +2,9 @@ import baseService from './base_service';
 
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
-type BatchParams = Record<string, unknown>;
+type BatchCreateParameters = Record<string, unknown> & {
+  shipments?: Array<string | Record<string, unknown>> | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -16,7 +18,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the batch to be created.
      * @returns {Batch} - The created batch.
      */
-    static async create(params: BatchParams): Promise<unknown> {
+    static async create(params: BatchCreateParameters): Promise<unknown> {
       const url = 'batches';
 
       const wrappedParams = {

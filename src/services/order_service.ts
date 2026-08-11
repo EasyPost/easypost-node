@@ -1,6 +1,12 @@
 import baseService from './base_service';
 
-type OrderParams = Record<string, unknown>;
+type OrderCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  to_address?: Record<string, unknown> | string | null;
+  from_address?: Record<string, unknown> | string | null;
+  shipments?: Array<Record<string, unknown> | string> | null;
+  carrier_accounts?: string[] | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -14,7 +20,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create an order with.
      * @returns {Order} - The created order.
      */
-    static async create(params: OrderParams): Promise<unknown> {
+    static async create(params: OrderCreateParameters): Promise<unknown> {
       const url = 'orders';
 
       const wrappedParams = {

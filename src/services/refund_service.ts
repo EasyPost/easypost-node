@@ -1,6 +1,9 @@
 import baseService from './base_service';
 
-type RefundParams = Record<string, unknown>;
+type RefundCreateParameters = Record<string, unknown> & {
+  carrier?: string | null;
+  tracking_codes?: string[] | null;
+};
 type RefundCollection = Record<string, unknown>;
 
 export default (easypostClient) =>
@@ -15,7 +18,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a refund with.
      * @returns {Refund} - The created refund.
      */
-    static async create(params: RefundParams): Promise<unknown> {
+    static async create(params: RefundCreateParameters): Promise<unknown> {
       const url = 'refunds';
 
       const wrappedParams = {
