@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import CarrierAccount from '../../src/models/carrier_account';
