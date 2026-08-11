@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 import fs from 'fs';
 import { resolve } from 'path';
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import Event from '../../src/models/event';
@@ -138,8 +138,9 @@ describe('Event Service', function () {
       expect(true).to.equal(false);
     } catch (error) {
       expect(error).to.be.an.instanceOf(NotFoundError);
-      expect(error.code).to.equal('PAYLOAD.NOT_FOUND');
-      expect(error.statusCode).to.equal(404);
+      const knownError = error as { code?: string; statusCode?: number };
+      expect(knownError.code).to.equal('PAYLOAD.NOT_FOUND');
+      expect(knownError.statusCode).to.equal(404);
     }
 
     // Remove the webhook once we are done testing
