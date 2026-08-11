@@ -14,8 +14,8 @@ describe('Package export compatibility', function () {
   });
 
   it('supports ESM import default', async function () {
-    const module = (await import('../' + '..')) as { default: new (apiKey: string) => unknown };
-    const EasyPostClient = module.default;
+    const module = await import('../' + '..');
+    const EasyPostClient = module.default as any;
 
     expect(EasyPostClient).to.be.a('function');
 
