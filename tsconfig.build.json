@@ -5,7 +5,8 @@
     "checkJs": false,
     "noImplicitAny": false,
     "declaration": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": ["vitest/globals", "node"]
   },
   "include": ["src/**/*.js", "src/**/*.ts", "test/**/*.js", "test/**/*.ts"],
   "exclude": ["dist/**", "docs/**", "coverage/**", "node_modules/**"]
