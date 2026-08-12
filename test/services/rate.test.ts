@@ -23,7 +23,9 @@ describe('Rate Service', function () {
   });
 
   it('retrieves a rate', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
 
     const rate = await client.Rate.retrieve(shipment.rates[0].id);
 

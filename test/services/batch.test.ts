@@ -95,7 +95,9 @@ describe('Batch Service', function () {
   });
 
   it('adds and removes shipments from a batch', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
     const batch = await client.Batch.create({});
 
     const addShipmentsResponse = await client.Batch.addShipments(batch.id, [shipment.id]);

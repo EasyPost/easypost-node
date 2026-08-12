@@ -7,8 +7,12 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 type AddressTestCreateInput = Parameters<ReturnType<typeof AddressServiceFactory>['create']>[0];
-type SmartRateEstimateInput = Parameters<ReturnType<typeof SmartRateServiceFactory>['estimateDeliveryDate']>[0];
-type SmartRateRecommendInput = Parameters<ReturnType<typeof SmartRateServiceFactory>['recommendShipDate']>[0];
+type SmartRateEstimateInput = Parameters<
+  ReturnType<typeof SmartRateServiceFactory>['estimateDeliveryDate']
+>[0];
+type SmartRateRecommendInput = Parameters<
+  ReturnType<typeof SmartRateServiceFactory>['recommendShipDate']
+>[0];
 
 /* eslint-disable func-names */
 describe('SmartRate Service', function () {

@@ -7,7 +7,9 @@ import type BetaRateServiceFactory from '../../src/services/beta_rate_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
-type BetaRateRetrieveInput = Parameters<ReturnType<typeof BetaRateServiceFactory>['retrieveStatelessRates']>[0];
+type BetaRateRetrieveInput = Parameters<
+  ReturnType<typeof BetaRateServiceFactory>['retrieveStatelessRates']
+>[0];
 
 /* eslint-disable func-names */
 describe('BetaRateService', function () {

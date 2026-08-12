@@ -25,7 +25,9 @@ describe('Refund Service', function () {
   });
 
   it('creates a refund', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     // We need to retrieve the shipment so that the tracking_code has time to populate
     const retrievedShipment = await client.Shipment.retrieve(shipment.id);

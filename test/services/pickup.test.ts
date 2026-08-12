@@ -28,7 +28,9 @@ describe('Pickup Service', function () {
   });
 
   it('creates a pickup', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
@@ -41,7 +43,9 @@ describe('Pickup Service', function () {
   }, 20000);
 
   it('retrieves a pickup', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
@@ -83,7 +87,9 @@ describe('Pickup Service', function () {
   });
 
   it('buys a pickup', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
@@ -103,7 +109,9 @@ describe('Pickup Service', function () {
   }, 20000);
 
   it('cancels a pickup', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
@@ -123,7 +131,9 @@ describe('Pickup Service', function () {
   }, 30000);
 
   it('gets the lowest rate', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
