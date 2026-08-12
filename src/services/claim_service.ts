@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import Claim from '../models/claim';
 
 type ClaimCreateParameters = Record<string, unknown> & {
   tracking_code?: string | null;
@@ -13,6 +14,7 @@ type ClaimCreateParameters = Record<string, unknown> & {
   payment_method?: string | null;
 };
 type ClaimCollection = Record<string, unknown>;
+type ClaimListResponse = { claims: Claim[]; has_more: boolean };
 
 export default (easypostClient) =>
   /**
@@ -25,7 +27,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the claim to be created.
      * @returns {Claim} - The created claim.
      */
-    static async create(params: ClaimCreateParameters): Promise<unknown> {
+    static async create(params: ClaimCreateParameters): Promise<Claim> {
       const url = 'claims';
 
       return this._create(url, params);
@@ -36,7 +38,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the claim records.
      * @returns {Object} - An object containing the list of {@link Claim claim} records and pagination information.
      */
-    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async all(params: Record<string, unknown> = {}): Promise<ClaimListResponse> {
       const url = 'claims';
 
       return this._all(url, params);
@@ -51,7 +53,7 @@ export default (easypostClient) =>
     static async getNextPage(
       claims: ClaimCollection,
       pageSize: number | null = null,
-    ): Promise<unknown> {
+    ): Promise<ClaimListResponse> {
       const url = 'claims';
       return this._getNextPage(url, 'claims', claims, pageSize);
     }
@@ -61,7 +63,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the claim to retrieve.
      * @returns {Claim} - The retrieved claim.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<Claim> {
       const url = `claims/${id}`;
 
       return this._retrieve(url);
@@ -72,7 +74,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the claim to be canceled.
      * @returns {Claim} - The canceled claim.
      */
-    static async cancel(id: string): Promise<unknown> {
+    static async cancel(id: string): Promise<Claim> {
       const url = `claims/${id}/cancel`;
       return this._create(url, {});
     }

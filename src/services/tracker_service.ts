@@ -1,10 +1,12 @@
 import baseService from './base_service';
+import Tracker from '../models/tracker';
 
 type TrackerCreateParameters = Record<string, unknown> & {
   tracking_code?: string | null;
   carrier?: string | null;
 };
 type TrackerCollection = Record<string, unknown>;
+type TrackerListResponse = { trackers: Tracker[]; has_more: boolean };
 
 export default (easypostClient) =>
   /**
@@ -18,7 +20,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a tracker with.
      * @returns {Tracker} - The created tracker.
      */
-    static async create(params: TrackerCreateParameters): Promise<unknown> {
+    static async create(params: TrackerCreateParameters): Promise<Tracker> {
       const url = 'trackers';
 
       const wrappedParams = {
@@ -34,7 +36,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the trackers by.
      * @returns {Object} - An object containing the list of {@link Tracker trackers} and pagination information.
      */
-    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async all(params: Record<string, unknown> = {}): Promise<TrackerListResponse> {
       const url = 'trackers';
 
       return this._all(url, params);
@@ -49,7 +51,7 @@ export default (easypostClient) =>
     static async getNextPage(
       trackers: TrackerCollection,
       pageSize: number | null = null,
-    ): Promise<unknown> {
+    ): Promise<TrackerListResponse> {
       const url = 'trackers';
 
       return this._getNextPage(url, 'trackers', trackers, pageSize);
@@ -61,7 +63,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the tracker to retrieve.
      * @returns {Tracker} - The retrieved tracker.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<Tracker> {
       const url = `trackers/${id}`;
 
       return this._retrieve(url);
@@ -72,7 +74,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the trackers by.
      * @returns {Object} - An object containing the list of {@link Tracker trackers}.
      */
-    static async retrieveBatch(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async retrieveBatch(params: Record<string, unknown> = {}): Promise<TrackerListResponse> {
       const url = 'trackers/batch';
 
       try {

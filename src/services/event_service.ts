@@ -1,6 +1,9 @@
 import baseService from './base_service';
+import Event from '../models/event';
+import Payload from '../models/payload';
 
 type EventCollection = Record<string, unknown>;
+type EventListResponse = { events: Event[]; has_more: boolean };
 
 export default (easypostClient) =>
   /**
@@ -14,7 +17,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the event to retrieve payloads for.
      * @returns {Payload[]} - A list of {@link Payload payloads} for the event.
      */
-    static async retrieveAllPayloads(id: string): Promise<unknown> {
+    static async retrieveAllPayloads(id: string): Promise<Payload[]> {
       const url = `events/${id}/payloads`;
 
       try {
@@ -33,7 +36,7 @@ export default (easypostClient) =>
      * @param {string} payloadId - The ID of the payload to retrieve.
      * @returns {Payload} - The {@link Payload payload} for the event.
      */
-    static async retrievePayload(id: string, payloadId: string): Promise<unknown> {
+    static async retrievePayload(id: string, payloadId: string): Promise<Payload> {
       const url = `events/${id}/payloads/${payloadId}`;
 
       try {
@@ -51,7 +54,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the list of events.
      * @returns {Object} - An object containing the list of {@link Event events} and pagination information.
      */
-    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async all(params: Record<string, unknown> = {}): Promise<EventListResponse> {
       const url = 'events';
 
       return this._all(url, params);
@@ -66,7 +69,7 @@ export default (easypostClient) =>
     static async getNextPage(
       events: EventCollection,
       pageSize: number | null = null,
-    ): Promise<unknown> {
+    ): Promise<EventListResponse> {
       const url = 'events';
       return this._getNextPage(url, 'events', events, pageSize);
     }
@@ -77,7 +80,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the event to retrieve.
      * @returns {Event} - The retrieved event.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<Event> {
       const url = `events/${id}`;
 
       return this._retrieve(url);
