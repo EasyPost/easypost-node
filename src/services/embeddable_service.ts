@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import type { IEmbeddablesSession } from '../../types/Embeddable/EmbeddablesSession';
 
 type EmbeddablesSessionCreateParameters = Record<string, unknown> & {
   origin_host?: string | null;
@@ -16,7 +17,9 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to create a session from.
      * @returns {Object} - An object containing the created session.
      */
-    static async createSession(params: EmbeddablesSessionCreateParameters = {}): Promise<unknown> {
+    static async createSession(
+      params: EmbeddablesSessionCreateParameters = {},
+    ): Promise<IEmbeddablesSession> {
       const url = 'embeddables/session';
 
       try {

@@ -1,4 +1,6 @@
 import EndOfPaginationError from '../errors/general/end_of_pagination_error';
+import Brand from '../models/brand';
+import User from '../models/user';
 import baseService from './base_service';
 
 type UserCreateParameters = Record<string, unknown> & {
@@ -18,6 +20,7 @@ type UserCreateParameters = Record<string, unknown> & {
   children?: Record<string, unknown>[] | null;
 };
 type BrandParams = Record<string, unknown>;
+type UserChildrenListResponse = { children: User[]; has_more: boolean };
 type UserCollection = Record<string, unknown> & {
   has_more?: boolean;
   _params?: Record<string, unknown>;
@@ -35,7 +38,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a child user with.
      * @returns {User} - The created child user.
      */
-    static async create(params: UserCreateParameters): Promise<unknown> {
+    static async create(params: UserCreateParameters): Promise<User> {
       const url = 'users';
 
       const wrappedParams = {
@@ -52,7 +55,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to update the user with.
      * @returns {User} - The updated user.
      */
-    static async update(id: string, params: UserCreateParameters): Promise<unknown> {
+    static async update(id: string, params: UserCreateParameters): Promise<User> {
       const url = `users/${id}`;
       const wrappedParams = {
         user: params,
@@ -73,7 +76,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the child user to retrieve.
      * @returns {User} - The retrieved child user.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<User> {
       const url = `users/${id}`;
 
       try {
@@ -90,7 +93,7 @@ export default (easypostClient) =>
      * See {@link https://docs.easypost.com/docs/users#retrieve-a-user EasyPost API Documentation} for more information.
      * @returns {User} - The retrieved user.
      */
-    static async retrieveMe(): Promise<unknown> {
+    static async retrieveMe(): Promise<User> {
       const url = 'users';
 
       try {
@@ -127,7 +130,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to update the brand with.
      * @returns {Brand} - The updated brand.
      */
-    static async updateBrand(id: string, params: BrandParams): Promise<unknown> {
+    static async updateBrand(id: string, params: BrandParams): Promise<Brand> {
       const url = `users/${id}/brand`;
       const wrappedParams = { brand: params };
 
@@ -146,7 +149,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters to filter the list of children users.
      * @returns {Object} - An object containing a list of {@link Children User} and pagination information.
      */
-    static async allChildren(params: Record<string, unknown>): Promise<unknown> {
+    static async allChildren(params: Record<string, unknown>): Promise<UserChildrenListResponse> {
       const url = 'users/children';
 
       try {
@@ -167,7 +170,7 @@ export default (easypostClient) =>
     static async getNextPage(
       children: UserCollection,
       pageSize: number | null = null,
-    ): Promise<unknown> {
+    ): Promise<UserChildrenListResponse> {
       const url = 'users/children';
       return this._getNextPage(url, 'children', children, pageSize);
     }
@@ -177,7 +180,7 @@ export default (easypostClient) =>
       key: string,
       collection: UserCollection,
       pageSize: number | null = null,
-    ): Promise<unknown> {
+    ): Promise<UserChildrenListResponse> {
       const collectionArray = collection[key] as Array<Record<string, unknown>> | undefined;
       if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();
@@ -203,6 +206,6 @@ export default (easypostClient) =>
         throw new EndOfPaginationError();
       }
 
-      return response;
+      return response as UserChildrenListResponse;
     }
   };

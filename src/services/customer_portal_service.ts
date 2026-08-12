@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import type { ICustomerPortalAccountLink } from '../../types/CustomerPortal/CustomerPortalAccountLink';
 
 type CustomerPortalAccountLinkCreateParameters = Record<string, unknown> & {
   session_type?: 'account_onboarding' | 'account_management' | null;
@@ -21,7 +22,7 @@ export default (easypostClient) =>
      */
     static async createAccountLink(
       params: CustomerPortalAccountLinkCreateParameters = {},
-    ): Promise<unknown> {
+    ): Promise<ICustomerPortalAccountLink> {
       const url = 'customer_portal/account_link';
 
       try {

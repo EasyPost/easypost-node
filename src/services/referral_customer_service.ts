@@ -3,6 +3,8 @@ import util from 'util';
 import Constants from '../constants';
 import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
+import User from '../models/user';
+import type { IPaymentMethod } from '../../types/PaymentMethod/PaymentMethod';
 import baseService from './base_service';
 
 type ReferralCreateParameters = Record<string, unknown> & {
@@ -19,6 +21,7 @@ type ReferralCreateParameters = Record<string, unknown> & {
   api_keys?: Record<string, unknown>[] | null;
 };
 type MandateData = Record<string, unknown>;
+type ReferralCustomerListResponse = { referral_customers: User[]; has_more: boolean };
 /* eslint-disable no-unused-vars */
 type ReferralScopedClient = {
   _post: (
@@ -27,7 +30,7 @@ type ReferralScopedClient = {
 };
 type EasyPostHttpClient = {
   _get: (...args: [string, Record<string, unknown>?]) => Promise<{ body: Record<string, unknown> }>;
-  _put: (...args: [string, Record<string, unknown>?]) => Promise<unknown>;
+  _put: (...args: [string, Record<string, unknown>?]) => Promise<void>;
 };
 /* eslint-enable no-unused-vars */
 
@@ -146,7 +149,7 @@ export default (easypostClient) =>
      * @param {Object} params - The referral customer's information.
      * @returns {User} - The newly created referral customer.
      */
-    static async create(params: ReferralCreateParameters): Promise<unknown> {
+    static async create(params: ReferralCreateParameters): Promise<User> {
       const url = 'referral_customers';
 
       const wrappedParams = {
@@ -220,7 +223,7 @@ export default (easypostClient) =>
       referralApiKey: string,
       paymentMethodId: string,
       priority: string = 'primary',
-    ): Promise<unknown> {
+    ): Promise<IPaymentMethod> {
       const _client = _getReferralClient(easypostClient, referralApiKey);
       const params = {
         credit_card: {
@@ -245,7 +248,7 @@ export default (easypostClient) =>
       financialConnectionsId: string,
       mandateData: MandateData,
       priority: string = 'primary',
-    ): Promise<unknown> {
+    ): Promise<IPaymentMethod> {
       const _client = _getReferralClient(easypostClient, referralApiKey);
       const params = {
         financial_connections_id: financialConnectionsId,
@@ -266,7 +269,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the referral customers by.
      * @returns {Object} - An object containing a list of {@link User referral customers} and pagination information.
      */
-    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async all(params: Record<string, unknown> = {}): Promise<ReferralCustomerListResponse> {
       const url = 'referral_customers';
 
       return this._all(url, params);
@@ -281,7 +284,7 @@ export default (easypostClient) =>
     static async getNextPage(
       referralCustomers: Record<string, unknown>,
       pageSize: number | null = null,
-    ): Promise<unknown> {
+    ): Promise<ReferralCustomerListResponse> {
       const url = 'referral_customers';
       return this._getNextPage(url, 'referral_customers', referralCustomers, pageSize);
     }

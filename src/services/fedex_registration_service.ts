@@ -1,5 +1,9 @@
 import { v4 as uuid } from 'uuid';
 
+import type {
+  IFedExAccountValidationResponse,
+  IFedExRequestPinResponse,
+} from '../../types/FedExRegistration/FedExRegistration';
 import baseService from './base_service';
 
 type FedExValidationMap = Record<string, unknown> & { name?: string | null };
@@ -25,7 +29,7 @@ export default (easypostClient) =>
     static async registerAddress(
       fedexAccountNumber: string,
       params: FedExParams,
-    ): Promise<unknown> {
+    ): Promise<IFedExAccountValidationResponse> {
       const wrappedParams = this._wrapAddressValidation(params);
       const endpoint = `fedex_registrations/${fedexAccountNumber}/address`;
 
@@ -48,7 +52,7 @@ export default (easypostClient) =>
       fedexAccountNumber: string,
       pinMethodOption: string,
       params: FedExParams,
-    ): Promise<unknown> {
+    ): Promise<IFedExRequestPinResponse> {
       const wrappedParams = this._wrapPinValidation(params);
       wrappedParams.pin_method = {
         option: pinMethodOption,
@@ -69,7 +73,10 @@ export default (easypostClient) =>
      * @param {Object} params - Map of parameters.
      * @returns {Object}
      */
-    static async validatePin(fedexAccountNumber: string, params: FedExParams): Promise<unknown> {
+    static async validatePin(
+      fedexAccountNumber: string,
+      params: FedExParams,
+    ): Promise<IFedExAccountValidationResponse> {
       const wrappedParams = this._wrapPinValidation(params);
       const endpoint = `fedex_registrations/${fedexAccountNumber}/pin/validate`;
 
@@ -87,7 +94,10 @@ export default (easypostClient) =>
      * @param {Object} params - Map of parameters.
      * @returns {Object}
      */
-    static async submitInvoice(fedexAccountNumber: string, params: FedExParams): Promise<unknown> {
+    static async submitInvoice(
+      fedexAccountNumber: string,
+      params: FedExParams,
+    ): Promise<IFedExAccountValidationResponse> {
       const wrappedParams = this._wrapInvoiceValidation(params);
       const endpoint = `fedex_registrations/${fedexAccountNumber}/invoice`;
 

@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import type { ILumaPromise } from '../../types/Luma/Luma';
 
 type LumaParams = Record<string, unknown>;
 
@@ -13,7 +14,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to get a Luma promise with.
      * @returns {Object} - An object containing the Luma promise.
      */
-    static async getPromise(params: LumaParams): Promise<unknown> {
+    static async getPromise(params: LumaParams): Promise<ILumaPromise> {
       const url = `luma/promise`;
 
       const wrappedParams = {
