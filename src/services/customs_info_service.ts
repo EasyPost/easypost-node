@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import CustomsInfo from '../models/customs_info';
 
 type CustomsItemInput = Record<string, unknown>;
 
@@ -27,7 +28,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the customs info to be created.
      * @returns {CustomsInfo} - The created customs info.
      */
-    static async create(params: CustomsInfoCreateParameters): Promise<unknown> {
+    static async create(params: CustomsInfoCreateParameters): Promise<CustomsInfo> {
       const url = 'customs_infos';
 
       const wrappedParams = {
@@ -43,7 +44,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the customs info to retrieve.
      * @returns {CustomsInfo} - The retrieved customs info.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<CustomsInfo> {
       const url = `customs_infos/${id}`;
 
       return this._retrieve(url);

@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import CustomsItem from '../models/customs_item';
 
 type CustomsItemCreateParameters = Record<string, unknown> & {
   description?: string | null;
@@ -23,7 +24,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the customs item to be created.
      * @returns {CustomsItem} - The created customs item.
      */
-    static async create(params: CustomsItemCreateParameters): Promise<unknown> {
+    static async create(params: CustomsItemCreateParameters): Promise<CustomsItem> {
       const url = 'customs_items';
 
       const wrappedParams = {
@@ -39,7 +40,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the customs item to retrieve.
      * @returns {CustomsItem} - The retrieved customs item.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<CustomsItem> {
       const url = `customs_items/${id}`;
 
       return this._retrieve(url);
