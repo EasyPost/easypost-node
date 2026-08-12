@@ -7,11 +7,15 @@ import type ReferralCustomerServiceFactory from '../../src/services/referral_cus
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
-type ReferralCustomerCreateInput = Parameters<ReturnType<typeof ReferralCustomerServiceFactory>['create']>[0];
-type ReferralCustomerAddCardStripeParams =
-  Parameters<ReturnType<typeof ReferralCustomerServiceFactory>['addCreditCardFromStripe']>;
-type ReferralCustomerAddBankStripeParams =
-  Parameters<ReturnType<typeof ReferralCustomerServiceFactory>['addBankAccountFromStripe']>;
+type ReferralCustomerCreateInput = Parameters<
+  ReturnType<typeof ReferralCustomerServiceFactory>['create']
+>[0];
+type ReferralCustomerAddCardStripeParams = Parameters<
+  ReturnType<typeof ReferralCustomerServiceFactory>['addCreditCardFromStripe']
+>;
+type ReferralCustomerAddBankStripeParams = Parameters<
+  ReturnType<typeof ReferralCustomerServiceFactory>['addBankAccountFromStripe']
+>;
 type ReferralCustomerBillingInput = {
   payment_method_id: ReferralCustomerAddCardStripeParams[1];
   priority: ReferralCustomerAddCardStripeParams[2];

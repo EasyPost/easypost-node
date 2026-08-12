@@ -23,7 +23,9 @@ describe('EndShipper Service', function () {
   });
 
   it('creates an EndShipper object', async function () {
-    const endShipper = await client.EndShipper.create(Fixture.caAddress1() as EndShipperCreateInput);
+    const endShipper = await client.EndShipper.create(
+      Fixture.caAddress1() as EndShipperCreateInput,
+    );
 
     expect(endShipper).to.be.an.instanceOf(EndShipper);
     expect(endShipper.id).to.match(/^es_/);
@@ -31,7 +33,9 @@ describe('EndShipper Service', function () {
   });
 
   it('retrieves an EndShipper object', async function () {
-    const endShipper = await client.EndShipper.create(Fixture.caAddress2() as EndShipperCreateInput);
+    const endShipper = await client.EndShipper.create(
+      Fixture.caAddress2() as EndShipperCreateInput,
+    );
     const retrievedEndShipper = await client.EndShipper.retrieve(endShipper.id);
 
     expect(retrievedEndShipper).to.be.an.instanceOf(EndShipper);
@@ -51,7 +55,9 @@ describe('EndShipper Service', function () {
   });
 
   it('updates an EndShipper object', async function () {
-    const endShipper = await client.EndShipper.create(Fixture.caAddress2() as EndShipperCreateInput);
+    const endShipper = await client.EndShipper.create(
+      Fixture.caAddress2() as EndShipperCreateInput,
+    );
 
     const params: EndShipperUpdateInput = {};
     const newName = 'Captain Sparrow';
