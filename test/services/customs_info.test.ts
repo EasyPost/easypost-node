@@ -8,7 +8,9 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
-type CustomsInfoTestCreateInput = Parameters<ReturnType<typeof CustomsInfoServiceFactory>['create']>[0];
+type CustomsInfoTestCreateInput = Parameters<
+  ReturnType<typeof CustomsInfoServiceFactory>['create']
+>[0];
 
 describe('CustomsInfo Service', function () {
   const getPolly = setupPolly.setupPollyTests();
