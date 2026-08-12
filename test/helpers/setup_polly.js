@@ -1,6 +1,7 @@
 import FetchAdapter from '@pollyjs/adapter-fetch';
 import { Polly } from '@pollyjs/core';
 import FSPersister from '@pollyjs/persister-fs';
+import { existsSync } from 'fs';
 import { resolve } from 'path';
 
 Polly.register(FSPersister);
@@ -168,22 +169,33 @@ function setupLegacyRequestIdentityCompatibility(server) {
   });
 }
 
+function getPollyMode(recordingsDir, recordingName) {
+  const cassettePath = resolve(recordingsDir, recordingName, 'recording.har');
+
+  // Source-of-truth behavior: replay when cassette exists, record only when missing.
+  return existsSync(cassettePath) ? 'replay' : 'record';
+}
+
 // New setup function for Vitest
 function setupPollyTests() {
   /** @type {Polly} */
   let polly;
+  const recordingsDir = resolve(__dirname, '../cassettes');
 
   beforeEach((context) => {
     const suiteName = context.task?.suite?.name || 'unknown-suite';
+    const recordingName = `${suiteName}/${context.task.name}`;
+    const mode = getPollyMode(recordingsDir, recordingName);
 
-    polly = new Polly(`${suiteName}/${context.task.name}`, {
+    polly = new Polly(recordingName, {
       adapters: ['fetch'],
       persister: 'fs',
-      recordIfMissing: true,
+      mode,
+      recordIfMissing: false,
       recordFailedRequests: true,
       persisterOptions: {
         fs: {
-          recordingsDir: resolve(__dirname, '../cassettes'),
+          recordingsDir,
         },
       },
       matchRequestsBy: {
