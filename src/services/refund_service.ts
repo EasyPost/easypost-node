@@ -1,10 +1,12 @@
 import baseService from './base_service';
+import Refund from '../models/refund';
 
 type RefundCreateParameters = Record<string, unknown> & {
   carrier?: string | null;
   tracking_codes?: string[] | null;
 };
 type RefundCollection = Record<string, unknown>;
+type RefundListResponse = { refunds: Refund[]; has_more: boolean };
 
 export default (easypostClient) =>
   /**
@@ -18,7 +20,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a refund with.
      * @returns {Refund} - The created refund.
      */
-    static async create(params: RefundCreateParameters): Promise<unknown> {
+    static async create(params: RefundCreateParameters): Promise<Refund[]> {
       const url = 'refunds';
 
       const wrappedParams = {
@@ -34,7 +36,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the refunds by.
      * @returns {Object} - An object containing the list of {@link Refund refunds} and pagination information.
      */
-    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async all(params: Record<string, unknown> = {}): Promise<RefundListResponse> {
       const url = 'refunds';
 
       return this._all(url, params);
@@ -49,7 +51,7 @@ export default (easypostClient) =>
     static async getNextPage(
       refunds: RefundCollection,
       pageSize: number | null = null,
-    ): Promise<unknown> {
+    ): Promise<RefundListResponse> {
       const url = 'refunds';
       return this._getNextPage(url, 'refunds', refunds, pageSize);
     }
@@ -60,7 +62,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the refund to retrieve.
      * @returns {Refund} - The retrieved refund.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<Refund> {
       const url = `refunds/${id}`;
 
       return this._retrieve(url);

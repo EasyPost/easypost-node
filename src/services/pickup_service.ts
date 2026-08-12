@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import Pickup from '../models/pickup';
 
 type PickupCreateParameters = Record<string, unknown> & {
   address?: Record<string, unknown> | string | null;
@@ -15,6 +16,7 @@ type PickupCreateParameters = Record<string, unknown> & {
   batch?: Record<string, unknown> | string | null;
 };
 type PickupCollection = Record<string, unknown>;
+type PickupListResponse = { pickups: Pickup[]; has_more: boolean };
 
 export default (easypostClient) =>
   /**
@@ -28,7 +30,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a pickup with.
      * @returns {Pickup} - The created pickup.
      */
-    static async create(params: PickupCreateParameters): Promise<unknown> {
+    static async create(params: PickupCreateParameters): Promise<Pickup> {
       const url = 'pickups';
 
       const wrappedParams = {
@@ -46,7 +48,7 @@ export default (easypostClient) =>
      * @param {string} service - The service to purchase the pickup with.
      * @returns {Pickup} - The purchased pickup.
      */
-    static async buy(id: string, carrier: string, service: string): Promise<unknown> {
+    static async buy(id: string, carrier: string, service: string): Promise<Pickup> {
       const url = `pickups/${id}/buy`;
       const wrappedParams = { carrier, service };
       try {
@@ -64,7 +66,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the pickup to cancel.
      * @returns {Pickup} - The cancelled pickup.
      */
-    static async cancel(id: string): Promise<unknown> {
+    static async cancel(id: string): Promise<Pickup> {
       const url = `pickups/${id}/cancel`;
       try {
         const response = await easypostClient._post(url);
@@ -81,7 +83,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - The parameters to filter the pickups by.
      * @returns {Object} - An object containing a list of {@link Pickup pickups} and pagination information.
      */
-    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async all(params: Record<string, unknown> = {}): Promise<PickupListResponse> {
       const url = 'pickups';
 
       return this._all(url, params);
@@ -96,7 +98,7 @@ export default (easypostClient) =>
     static async getNextPage(
       pickups: PickupCollection,
       pageSize: number | null = null,
-    ): Promise<unknown> {
+    ): Promise<PickupListResponse> {
       const url = 'pickups';
       return this._getNextPage(url, 'pickups', pickups, pageSize);
     }
@@ -107,7 +109,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the pickup to retrieve.
      * @returns {Pickup} - The retrieved pickup.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<Pickup> {
       const url = `pickups/${id}`;
 
       return this._retrieve(url);

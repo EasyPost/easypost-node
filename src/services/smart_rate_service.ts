@@ -1,6 +1,7 @@
 import baseService from './base_service';
 
 type SmartRateParams = Record<string, unknown>;
+type SmartRateResult = { results: Array<Record<string, unknown>> };
 
 export default (easypostClient) =>
   /**
@@ -13,7 +14,7 @@ export default (easypostClient) =>
      * @param params - The parameters to estimate the delivery date with.
      * @returns {Object} - Estimates and related metadata.
      */
-    static async estimateDeliveryDate(params: SmartRateParams): Promise<unknown> {
+    static async estimateDeliveryDate(params: SmartRateParams): Promise<SmartRateResult> {
       const url = 'smartrate/deliver_by';
 
       try {
@@ -30,7 +31,7 @@ export default (easypostClient) =>
      * @param params - The parameters to recommend the ship date with.
      * @returns {Object} - Recommendation and related metadata.
      */
-    static async recommendShipDate(params: SmartRateParams): Promise<unknown> {
+    static async recommendShipDate(params: SmartRateParams): Promise<SmartRateResult> {
       const url = 'smartrate/deliver_on';
 
       try {
