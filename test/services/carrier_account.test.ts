@@ -8,7 +8,9 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
-type CarrierAccountTestCreateInput = Parameters<ReturnType<typeof CarrierAccountServiceFactory>['create']>[0];
+type CarrierAccountTestCreateInput = Parameters<
+  ReturnType<typeof CarrierAccountServiceFactory>['create']
+>[0];
 
 /* eslint-disable func-names */
 describe('CarrierAccount Service', function () {
