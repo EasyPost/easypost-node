@@ -26,7 +26,9 @@ describe('Insurance Service', function () {
   });
 
   it('creates an insurance object', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const insuranceData = Fixture.basicInsurance() as InsuranceTestCreateInput;
     insuranceData.tracking_code = shipment.tracking_code;
@@ -39,7 +41,9 @@ describe('Insurance Service', function () {
   });
 
   it('retrieves an insurance object', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const insuranceData = Fixture.basicInsurance() as InsuranceTestCreateInput;
     insuranceData.tracking_code = shipment.tracking_code;
