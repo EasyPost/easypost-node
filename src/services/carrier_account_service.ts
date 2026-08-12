@@ -2,6 +2,7 @@ import util from 'util';
 
 import Constants from '../constants';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
+import CarrierAccount from '../models/carrier_account';
 import baseService from './base_service';
 
 type CarrierAccountCreateParameters = Record<string, unknown> & {
@@ -28,7 +29,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the carrier account to be created.
      * @returns {CarrierAccount} - The created carrier account.
      */
-    static async create(params: CarrierAccountCreateParameters): Promise<unknown> {
+    static async create(params: CarrierAccountCreateParameters): Promise<CarrierAccount> {
       const carrierAccountType = params.type;
 
       if (typeof carrierAccountType !== 'string' || carrierAccountType.length === 0) {
@@ -50,7 +51,10 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the carrier account to be updated.
      * @returns {CarrierAccount} - The updated carrier account.
      */
-    static async update(id: string, params: CarrierAccountCreateParameters): Promise<unknown> {
+    static async update(
+      id: string,
+      params: CarrierAccountCreateParameters,
+    ): Promise<CarrierAccount> {
       const wrappedParams = { carrier_account: params };
 
       try {
@@ -120,7 +124,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the list of carrier accounts.
      * @returns {Object} - An object containing a list of {@link CarrierAccount carrier accounts} and pagination information.
      */
-    static async all(params: Record<string, unknown> = {}): Promise<unknown> {
+    static async all(params: Record<string, unknown> = {}): Promise<CarrierAccount[]> {
       const url = 'carrier_accounts';
 
       return this._all(url, params);
@@ -132,7 +136,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the carrier account to retrieve.
      * @returns {CarrierAccount} - The retrieved carrier account.
      */
-    static async retrieve(id: string): Promise<unknown> {
+    static async retrieve(id: string): Promise<CarrierAccount> {
       const url = `carrier_accounts/${id}`;
 
       return this._retrieve(url);

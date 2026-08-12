@@ -1,5 +1,7 @@
 import baseService from './base_service';
 
+type CarrierMetadata = Record<string, unknown>;
+
 /**
  * @extends baseService
  */
@@ -14,7 +16,7 @@ export default (easypostClient) =>
     static async retrieve(
       carriers: string[] | null = null,
       types: string[] | null = null,
-    ): Promise<unknown> {
+    ): Promise<CarrierMetadata[]> {
       const url = 'metadata/carriers';
       const params = {
         ...(carriers && carriers.length > 0 && { carriers: carriers.join(',') }),
