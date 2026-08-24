@@ -2,6 +2,7 @@ import Constants from '../constants';
 import Rate from '../models/rate';
 import Shipment from '../models/shipment';
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 
 type AddressCreateInput = Record<string, unknown> & {
   verify?: boolean | string | string[] | null;
@@ -44,8 +45,12 @@ type ShipmentRateInput = string | { id: string };
 type ShipmentCollection = Record<string, unknown>;
 type ShipmentListResponse = { shipments: Shipment[]; has_more: boolean };
 type ShipmentSmartRateResponse = Array<Record<string, unknown>>;
+type SmartRate = {
+  rate: string;
+  time_in_transit: Record<string, number>;
+};
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ShipmentService class provides methods for interacting with EasyPost {@link Shipment} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
@@ -158,7 +163,7 @@ export default (easypostClient: any) =>
      * @param {string} id - The ID of the shipment to get SmartRates for.
      * @returns {Rate[]} - The SmartRates for the shipment.
      */
-    static async getSmartRates(id: string): Promise<Rate[]> {
+    static async getSmartRates(id: string): Promise<ShipmentSmartRateResponse> {
       const url = `shipments/${id}/smartrate`;
 
       try {
@@ -249,8 +254,8 @@ export default (easypostClient: any) =>
       id: string,
       deliveryDays: number,
       deliveryAccuracy: string,
-    ): Promise<ReturnType<typeof Constants.Utils.getLowestSmartRate>> {
-      const smartRates = (await this.getSmartRates(id)) as any[];
+    ): Promise<Rate> {
+      const smartRates = (await this.getSmartRates(id)) as SmartRate[];
       return Constants.Utils.getLowestSmartRate(
         smartRates,
         deliveryDays,

@@ -1,10 +1,11 @@
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 
 type BetaPaymentMethodResponse = Record<string, unknown>;
 type BetaRefundResponse = Record<string, unknown>;
 type BetaClientSecretResponse = Record<string, unknown>;
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   class BetaReferralCustomerService extends baseService(easypostClient) {
     /**
      * Add an existing Stripe payment method to a {@link User referral customer's} account.
@@ -74,7 +75,7 @@ export default (easypostClient: any) =>
     static async createCreditCardClientSecret(): Promise<BetaClientSecretResponse> {
       const url = 'beta/setup_intents';
 
-      const response = await easypostClient._post(url, null);
+      const response = await easypostClient._post(url);
 
       return response.body;
     }
@@ -86,7 +87,7 @@ export default (easypostClient: any) =>
     static async createBankAccountClientSecret(
       returnUrl: string | null,
     ): Promise<BetaClientSecretResponse> {
-      const params = returnUrl ? { return_url: returnUrl } : null;
+      const params = returnUrl ? { return_url: returnUrl } : undefined;
 
       const url = 'beta/financial_connections_sessions';
 

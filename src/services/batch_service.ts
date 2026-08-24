@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import Batch from '../models/batch';
+import type EasyPostClient from '../easypost';
 
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
@@ -8,7 +9,7 @@ type BatchCreateParameters = Record<string, unknown> & {
 };
 type BatchListResponse = { batches: Batch[]; has_more: boolean };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The BatchService class provides methods for interacting with EasyPost {@link Batch} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

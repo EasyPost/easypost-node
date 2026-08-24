@@ -1,9 +1,10 @@
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 type ILumaPromise = Record<string, unknown>;
 
 type LumaParams = Record<string, unknown>;
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The LumaService class provides methods for interacting with EasyPost Luma objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

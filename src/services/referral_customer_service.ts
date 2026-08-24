@@ -6,6 +6,7 @@ import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
 import User from '../models/user';
 import baseService from './base_service';
+type IPaymentMethod = Record<string, unknown>;
 
 type ReferralCreateParameters = Record<string, unknown> & {
   reference?: string | null;
@@ -128,7 +129,7 @@ async function _sendCardDetailsToEasyPost(
   return response.body;
 }
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ReferralCustomerService class provides methods for interacting with EasyPost {@link User referral customer} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

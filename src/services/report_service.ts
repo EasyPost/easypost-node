@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import Report from '../models/report';
+import type EasyPostClient from '../easypost';
 
 type ReportCreateParameters = Record<string, unknown> & {
   type: string;
@@ -10,11 +11,11 @@ type ReportAllParameters = Record<string, unknown> & {
 };
 
 type ReportCollection = Record<string, unknown> & {
-  reports?: Array<Record<string, any>>;
+  reports?: Array<Record<string, unknown>>;
 };
 type ReportListResponse = { reports: Report[]; has_more: boolean };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ReportService class provides methods for interacting with EasyPost {@link Report} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
@@ -67,7 +68,8 @@ export default (easypostClient: any) =>
       reports: ReportCollection,
       pageSize: number | null = null,
     ): Promise<ReportListResponse> {
-      const url = `reports/${reports.reports?.[0]?._params?.type || ''}`;
+      const firstReport = reports.reports?.[0] as { _params?: { type?: string } } | undefined;
+      const url = `reports/${firstReport?._params?.type || ''}`;
       return this._getNextPage(url, 'reports', reports, pageSize);
     }
 

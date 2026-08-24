@@ -1,6 +1,7 @@
 import baseService from './base_service';
 import Order from '../models/order';
 import Rate from '../models/rate';
+import type EasyPostClient from '../easypost';
 
 type OrderCreateParameters = Record<string, unknown> & {
   reference?: string | null;
@@ -11,7 +12,7 @@ type OrderCreateParameters = Record<string, unknown> & {
 };
 type OrderRatesResponse = { rates: Rate[] };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The OrderService class provides methods for interacting with EasyPost {@link Order} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

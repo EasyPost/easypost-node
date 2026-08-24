@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import Refund from '../models/refund';
+import type EasyPostClient from '../easypost';
 
 type RefundCreateParameters = Record<string, unknown> & {
   carrier?: string | null;
@@ -8,7 +9,7 @@ type RefundCreateParameters = Record<string, unknown> & {
 type RefundCollection = Record<string, unknown>;
 type RefundListResponse = { refunds: Refund[]; has_more: boolean };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The RefundService class provides methods for interacting with EasyPost {@link Refund} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

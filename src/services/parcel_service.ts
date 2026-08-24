@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import Parcel from '../models/parcel';
+import type EasyPostClient from '../easypost';
 
 type ParcelCreateParameters = Record<string, unknown> & {
   length?: number | null;
@@ -9,7 +10,7 @@ type ParcelCreateParameters = Record<string, unknown> & {
   predefined_package?: string | null;
 };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ParcelService class provides methods for interacting with EasyPost {@link Parcel} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

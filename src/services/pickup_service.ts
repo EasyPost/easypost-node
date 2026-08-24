@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import Pickup from '../models/pickup';
+import type EasyPostClient from '../easypost';
 
 type PickupCreateParameters = Record<string, unknown> & {
   address?: Record<string, unknown> | string | null;
@@ -18,7 +19,7 @@ type PickupCreateParameters = Record<string, unknown> & {
 type PickupCollection = Record<string, unknown>;
 type PickupListResponse = { pickups: Pickup[]; has_more: boolean };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The PickupService class provides methods for interacting with EasyPost {@link Pickup} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

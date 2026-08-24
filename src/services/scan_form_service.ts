@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import ScanForm from '../models/scan_form';
+import type EasyPostClient from '../easypost';
 
 type ScanFormCreateParameters = Record<string, unknown> & {
   shipments?: Array<string | { id?: string | null } | Record<string, unknown>> | null;
@@ -7,7 +8,7 @@ type ScanFormCreateParameters = Record<string, unknown> & {
 type ScanFormCollection = Record<string, unknown>;
 type ScanFormListResponse = { scan_forms: ScanForm[]; has_more: boolean };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ScanFormService class provides methods for interacting with EasyPost {@link ScanForm} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

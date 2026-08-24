@@ -2,6 +2,7 @@ import EndOfPaginationError from '../errors/general/end_of_pagination_error';
 import Brand from '../models/brand';
 import User from '../models/user';
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 
 type UserCreateParameters = Record<string, unknown> & {
   reference?: string | null;
@@ -26,7 +27,7 @@ type UserCollection = Record<string, unknown> & {
   _params?: Record<string, unknown>;
 };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The UserService class provides methods for interacting with EasyPost {@link User} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

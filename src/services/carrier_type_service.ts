@@ -1,7 +1,8 @@
 import baseService from './base_service';
 import CarrierType from '../models/carrier_type';
+import type EasyPostClient from '../easypost';
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The CarrierTypeService class provides methods for interacting with EasyPost {@link CarrierType} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

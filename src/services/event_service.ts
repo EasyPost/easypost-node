@@ -1,11 +1,12 @@
 import baseService from './base_service';
 import Event from '../models/event';
 import Payload from '../models/payload';
+import type EasyPostClient from '../easypost';
 
 type EventCollection = Record<string, unknown>;
 type EventListResponse = { events: Event[]; has_more: boolean };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The EventService class provides methods for interacting with EasyPost {@link Event} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

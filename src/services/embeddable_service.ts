@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 type IEmbeddablesSession = Record<string, unknown>;
 
 type EmbeddablesSessionCreateParameters = Record<string, unknown> & {
@@ -6,7 +7,7 @@ type EmbeddablesSessionCreateParameters = Record<string, unknown> & {
   user_id?: string | null;
 };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The EmbeddableService class provides methods for interacting with EasyPost {@link Tracker} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

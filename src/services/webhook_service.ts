@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import Webhook from '../models/webhook';
+import type EasyPostClient from '../easypost';
 
 type WebhookListResponse = { webhooks: Webhook[]; has_more?: boolean };
 
@@ -9,7 +10,7 @@ type WebhookCreateParameters = Record<string, unknown> & {
   custom_headers?: Array<{ key?: string | null; value?: string | null }> | null;
 };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The WebhookService class provides methods for interacting with EasyPost {@link Webhook} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

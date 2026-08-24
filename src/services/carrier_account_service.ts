@@ -1,4 +1,5 @@
 import util from 'util';
+import type EasyPostClient from '../easypost';
 
 import Constants from '../constants';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
@@ -17,7 +18,7 @@ type CarrierAccountCreateParameters = Record<string, unknown> & {
   billing_type?: string | null;
 };
 
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The CarrierAccountService class provides methods for interacting with EasyPost @{link CarrierAccount} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

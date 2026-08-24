@@ -1,9 +1,10 @@
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 
 /**
  * @extends baseService
  */
-export default (easypostClient: any) =>
+export default (easypostClient: EasyPostClient) =>
   class BetaRateService extends baseService(easypostClient) {
     /**
      * Retrieve a list of stateless {@link Rate rates} based on the provided parameters.
