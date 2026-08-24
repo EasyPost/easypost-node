@@ -40,17 +40,38 @@ import Utils from './utils/util';
 
 const pkgVersion = process.env.npm_package_version ?? 'unknown';
 
+/* eslint-disable no-unused-vars */
 type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete';
 type RequestHeaders = Record<string, string>;
+type HttpClient = typeof fetch;
+
+interface CompatibilityRequest {
+  method: string;
+  url: string;
+  _data: unknown;
+  set(headersToSet?: RequestHeaders): CompatibilityRequest;
+  auth(key: string): CompatibilityRequest;
+  query(queryParams?: Record<string, unknown>): CompatibilityRequest;
+  send(body?: unknown): CompatibilityRequest;
+}
+
+interface HttpMiddleware {
+  (httpClient: HttpClient): HttpClient;
+}
+
+interface RequestMiddleware {
+  (request: CompatibilityRequest): CompatibilityRequest | undefined;
+}
+/* eslint-enable no-unused-vars */
 
 type ClientOptions = {
   apiKey?: string;
   useProxy?: boolean;
   timeout?: number;
   baseUrl?: string;
-  httpMiddleware?: any;
-  requestMiddleware?: any;
-  httpClient?: any;
+  httpMiddleware?: HttpMiddleware;
+  requestMiddleware?: RequestMiddleware;
+  httpClient?: HttpClient;
 };
 
 type HookValue = {
@@ -86,8 +107,8 @@ export default class EasyPostClient {
   useProxy?: boolean;
   timeout: number;
   baseUrl: string;
-  httpClient: any;
-  requestMiddleware?: any;
+  httpClient: HttpClient;
+  requestMiddleware?: RequestMiddleware;
   requestHooks: HookHandler[];
   responseHooks: HookHandler[];
   Utils: Utils;
@@ -108,9 +129,9 @@ export default class EasyPostClient {
       httpClient ||
       (typeof fetch === 'function'
         ? (input: RequestInfo | URL, init?: RequestInit) => fetch(input, init)
-        : async () => {
+        : ((async () => {
             throw new Error('No global fetch implementation found. Node 18+ is required.');
-          });
+          }) as HttpClient));
     this.useProxy = useProxy;
     this.requestMiddleware = requestMiddleware;
     this.requestHooks = [];
