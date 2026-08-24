@@ -1,0 +1,162 @@
+import { Address } from './Address';
+import { ApiKey } from './ApiKey';
+import { Batch } from './Batch';
+import { Billing } from './Billing';
+import { Brand } from './Brand';
+import { CarrierAccount, CarrierMetadata, CarrierType } from './Carrier';
+import { Claim } from './Claim';
+import { CustomerPortalAccountLink } from './CustomerPortal';
+import { CustomsInfo, CustomsItem } from './Customs';
+import { EmbeddablesSession } from './Embeddable';
+import { EndShipper } from './EndShipper';
+import { Event } from './Event';
+import { FedExRegistration } from './FedExRegistration';
+import { Fee } from './Fee';
+import { Insurance } from './Insurance';
+import { Luma } from './Luma';
+import { Order } from './Order';
+import { Parcel } from './Parcel';
+import { PaymentMethod } from './PaymentMethod';
+import { Pickup } from './Pickup';
+import { Rate } from './Rate';
+import { Referral } from './Referral';
+import { Refund } from './Refund';
+import { Report } from './Report';
+import { ScanForm } from './ScanForm';
+import { Shipment } from './Shipment';
+import { SmartRate } from './SmartRate';
+import { Tracker } from './Tracker';
+import { User } from './User';
+import { Utils } from './Utility';
+import { Webhook } from './Webhook';
+
+export interface IEasyPostRequest {
+  method: 'get' | 'post' | 'put' | 'patch' | 'delete';
+  path: string;
+  requestBody: any;
+  headers: Record<string, any>;
+  requestTimestamp: number;
+  requestUUID: string;
+}
+export interface IEasyPostResponse extends IEasyPostRequest {
+  httpStatus: number;
+  responseBody: any;
+  responseTimestamp: number;
+}
+
+export interface IEasyPostOptions {
+  /**
+   * Time in milliseconds that should fail requests.
+   */
+  timeout?: number;
+
+  /**
+   * Change the base URL that the API library uses. Useful if you proxy requests from a frontend through a server.
+   * @example https://api.easypost.com/v2/
+   */
+  baseUrl?: string;
+
+  /**
+   * Disable using the API key. Useful if you proxy requests from a frontend through a server.
+   */
+  useProxy?: boolean;
+
+  /**
+   * Function that wraps the HTTP transport function.
+   * Backward-compatibility alias retained from the pre-fetch transport implementation.
+   */
+  httpMiddleware?: (httpClient: any) => any;
+
+  /**
+   * Function that wraps the HTTP transport function.
+   */
+  httpClient?: (input: string, init?: Record<string, any>) => Promise<any>;
+
+  /**
+   * Function that takes a compatibility request object and returns it.
+   * Supports legacy middleware patterns with `auth`, `query`, and `send` methods.
+   */
+  requestMiddleware?: (request: any) => any;
+}
+
+export default class EasyPost {
+  public Address: typeof Address;
+  public ApiKey: typeof ApiKey;
+  public Batch: typeof Batch;
+  public Billing: typeof Billing;
+  public Brand: typeof Brand;
+  public CarrierAccount: typeof CarrierAccount;
+  public CarrierMetadata: typeof CarrierMetadata;
+  public CarrierType: typeof CarrierType;
+  public Claim: typeof Claim;
+  public CustomerPortal: typeof CustomerPortalAccountLink;
+  public CustomsInfo: typeof CustomsInfo;
+  public CustomsItem: typeof CustomsItem;
+  public Embeddable: typeof EmbeddablesSession;
+  public EndShipper: typeof EndShipper;
+  public Event: typeof Event;
+  public FedExRegistration: typeof FedExRegistration;
+  public Fee: typeof Fee; // TODO: Fix IFee
+  public Insurance: typeof Insurance;
+  public Luma: typeof Luma;
+  public Order: typeof Order;
+  public Parcel: typeof Parcel;
+  public PaymentMethod: typeof PaymentMethod;
+  public Pickup: typeof Pickup;
+  public Rate: typeof Rate;
+  public ReferralCustomer: typeof Referral;
+  public Refund: typeof Refund;
+  public Report: typeof Report;
+  public ScanForm: typeof ScanForm;
+  public Shipment: typeof Shipment;
+  public SmartRate: typeof SmartRate;
+  public Tracker: typeof Tracker;
+  public User: typeof User;
+  public Utils: typeof Utils;
+  public Webhook: typeof Webhook;
+
+  public constructor(apiKey: string, options?: IEasyPostOptions);
+
+  /**
+   * Adds a request hook to the EasyPost client. Useful for logging or debugging.
+   */
+  public addRequestHook(fn: (config: IEasyPostRequest) => void): void;
+
+  /**
+   * Removes a request hook from the EasyPost client.
+   */
+  public removeRequestHook(fn: (config: IEasyPostRequest) => void): void;
+
+  /**
+   * Clears all request hooks from the EasyPost client.
+   */
+  public clearRequestHooks(): void;
+
+  /**
+   * Adds a response hook to the EasyPost client. Useful for logging or debugging.
+   */
+  public addResponseHook(fn: (config: IEasyPostResponse) => void): void;
+
+  /**
+   * Removes a response hook from the EasyPost client.
+   */
+  public removeResponseHook(fn: (config: IEasyPostResponse) => void): void;
+
+  /**
+   * Clears all response hooks from the EasyPost client.
+   */
+  public clearResponseHooks(): void;
+
+  /**
+   * Make an API call to the EasyPost API.
+   *
+   * This public, generic interface is useful for making arbitrary API calls to the EasyPost API that
+   * are not yet supported by the client library's services. When possible, the service for your use case
+   * should be used instead as it provides a more convenient and higher-level interface depending on the endpoint.
+   */
+  public makeApiCall(
+    method: 'get' | 'post' | 'put' | 'patch' | 'delete',
+    endpoint: string,
+    params?: Record<string, any>,
+  ): Promise<Record<string, any>>;
+}
