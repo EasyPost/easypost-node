@@ -3,6 +3,9 @@
  * @internal
  * @abstract
  */
+const isObjectRecord = (value: unknown): value is Record<PropertyKey, unknown> =>
+  value != null && typeof value === 'object';
+
 export default class EasyPostObject {
   static id: string;
   static object: string;
@@ -12,21 +15,16 @@ export default class EasyPostObject {
   static _params: Record<string, unknown>;
 
   static [Symbol.hasInstance](instance: unknown): boolean {
-    if (instance == null || typeof instance !== 'object') {
+    if (!isObjectRecord(instance)) {
       return false;
     }
 
-    const modelConstructor = (instance as Record<symbol, unknown>)[
-      Symbol.for('easypost.modelConstructor')
-    ];
+    const modelConstructor = instance[Symbol.for('easypost.modelConstructor')];
     if (typeof modelConstructor === 'function') {
       return modelConstructor === this;
     }
 
     // Fallback for plain API payloads that include object names like "Address" or "Shipment".
-    return (
-      typeof (instance as Record<string, unknown>).object === 'string' &&
-      (instance as Record<string, unknown>).object === this.name
-    );
+    return typeof instance.object === 'string' && instance.object === this.name;
   }
 }
