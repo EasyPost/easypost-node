@@ -11,7 +11,7 @@ type AddressTestCreateInput = Parameters<ReturnType<typeof AddressServiceFactory
 /* eslint-disable func-names */
 describe('EasyPost', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -30,10 +30,10 @@ describe('EasyPost', function () {
   });
 
   it('will log the appropriate values when a request and response hooks are provided', async function () {
-    let requestConfig;
-    const requestHook = (response) => (requestConfig = response);
-    let responseConfig;
-    const responseHook = (response) => (responseConfig = response);
+    let requestConfig: any;
+    const requestHook = (response: any) => (requestConfig = response);
+    let responseConfig: any;
+    const responseHook = (response: any) => (responseConfig = response);
 
     client.addRequestHook(requestHook);
     client.addResponseHook(responseHook);
@@ -65,14 +65,14 @@ describe('EasyPost', function () {
   });
 
   it('will add more than one request and response hook', async function () {
-    let requestConfig1;
-    const requestHook1 = (response) => (requestConfig1 = response);
-    let requestConfig2;
-    const requestHook2 = (response) => (requestConfig2 = response);
-    let responseConfig1;
-    const responseHook1 = (response) => (responseConfig1 = response);
-    let responseConfig2;
-    const responseHook2 = (response) => (responseConfig2 = response);
+    let requestConfig1: any;
+    const requestHook1 = (response: any) => (requestConfig1 = response);
+    let requestConfig2: any;
+    const requestHook2 = (response: any) => (requestConfig2 = response);
+    let responseConfig1: any;
+    const responseHook1 = (response: any) => (responseConfig1 = response);
+    let responseConfig2: any;
+    const responseHook2 = (response: any) => (responseConfig2 = response);
 
     client.addRequestHook(requestHook1);
     client.addRequestHook(requestHook2);
@@ -88,10 +88,10 @@ describe('EasyPost', function () {
   });
 
   it('will unsubscribe from requests and responses', async function () {
-    let requestConfig;
-    const requestHook = (response) => (requestConfig = response);
-    let responseConfig;
-    const responseHook = (response) => (responseConfig = response);
+    let requestConfig: any;
+    const requestHook = (response: any) => (requestConfig = response);
+    let responseConfig: any;
+    const responseHook = (response: any) => (responseConfig = response);
 
     client.addRequestHook(requestHook);
     client.addResponseHook(responseHook);
@@ -114,14 +114,14 @@ describe('EasyPost', function () {
   });
 
   it('will clear all request and response hooks', async function () {
-    let requestConfig1;
-    const requestHook1 = (response) => (requestConfig1 = response);
-    let requestConfig2;
-    const requestHook2 = (response) => (requestConfig2 = response);
-    let responseConfig1;
-    const responseHook1 = (response) => (responseConfig1 = response);
-    let responseConfig2;
-    const responseHook2 = (response) => (responseConfig2 = response);
+    let requestConfig1: any;
+    const requestHook1 = (response: any) => (requestConfig1 = response);
+    let requestConfig2: any;
+    const requestHook2 = (response: any) => (requestConfig2 = response);
+    let responseConfig1: any;
+    const responseHook1 = (response: any) => (responseConfig1 = response);
+    let responseConfig2: any;
+    const responseHook2 = (response: any) => (responseConfig2 = response);
 
     client.addRequestHook(requestHook1);
     client.addRequestHook(requestHook2);
@@ -152,9 +152,9 @@ describe('EasyPost', function () {
   });
 
   it('makes an API call using the generic makeApiCall method', async function () {
-    const response = await client.makeApiCall('get', '/addresses', {
+    const response = (await client.makeApiCall('get', '/addresses', {
       page_size: 1,
-    });
+    })) as { addresses: Array<{ object: string }> };
 
     expect(response.addresses.length).to.equal(1);
     expect(response.addresses[0].object).to.equal('Address');

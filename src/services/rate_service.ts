@@ -1,7 +1,7 @@
 import baseService from './base_service';
 import Rate from '../models/rate';
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The RateService class provides methods for interacting with EasyPost {@link Rate} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

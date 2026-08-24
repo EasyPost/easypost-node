@@ -9,7 +9,7 @@ import * as setupPolly from '../helpers/setup_polly';
 
 describe('Tracker Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -50,7 +50,7 @@ describe('Tracker Service', function () {
 
     expect(trackersArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(trackers.has_more).to.exist;
-    trackersArray.forEach((tracker) => {
+    trackersArray.forEach((tracker: any) => {
       expect(tracker).to.be.an.instanceOf(Tracker);
     });
   });
@@ -80,7 +80,7 @@ describe('Tracker Service', function () {
       tracking_codes: [tracker.tracking_code],
     });
 
-    trackers.trackers.forEach((tracker) => {
+    trackers.trackers.forEach((tracker: any) => {
       expect(tracker).to.be.an.instanceOf(Tracker);
     });
   });

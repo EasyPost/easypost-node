@@ -23,7 +23,7 @@ type AddressCreateParameters = Record<string, unknown> & {
 type PaginationCollection = Record<string, unknown>;
 type AddressCollection = { addresses: Address[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The AddressService class provides methods for interacting with EasyPost {@link Address} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

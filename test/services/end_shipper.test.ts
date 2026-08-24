@@ -11,7 +11,7 @@ type EndShipperUpdateInput = Parameters<ReturnType<typeof EndShipperServiceFacto
 
 describe('EndShipper Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -49,7 +49,7 @@ describe('EndShipper Service', function () {
 
     expect(endShippersArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(endShippers.has_more).to.exist;
-    endShippersArray.forEach((endShipper) => {
+    endShippersArray.forEach((endShipper: any) => {
       expect(endShipper).to.be.an.instanceOf(EndShipper);
     });
   });

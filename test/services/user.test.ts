@@ -14,7 +14,7 @@ type UserUpdateInput = Parameters<ReturnType<typeof UserServiceFactory>['update'
 /* eslint-disable func-names */
 describe('User Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);
@@ -56,7 +56,7 @@ describe('User Service', function () {
   it('updates a user', async function () {
     const testName = 'Test User';
 
-    return client.User.retrieveMe().then(async (user) => {
+    return client.User.retrieveMe().then(async (user: any) => {
       const params: UserUpdateInput = {};
       params.name = testName;
       const updatedUser = await client.User.update(user.id, params);
@@ -73,7 +73,7 @@ describe('User Service', function () {
     });
 
     await client.User.delete(user.id).then(
-      expect(function (result) {
+      expect(function (result: any) {
         result.not.to.throw();
       }),
     );
@@ -98,7 +98,7 @@ describe('User Service', function () {
 
     expect(childrenArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(response.has_more).to.exist;
-    childrenArray.forEach((children) => {
+    childrenArray.forEach((children: any) => {
       expect(children).to.be.an.instanceOf(User);
     });
   });

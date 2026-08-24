@@ -2,6 +2,7 @@
 import { expect } from 'vitest';
 
 import EasyPost from '../../src/easypost';
+import type EasyPostClient from '../../src/easypost';
 import CustomsItem from '../../src/models/customs_item';
 import type CustomsItemServiceFactory from '../../src/services/customs_item_service';
 import Fixture from '../helpers/fixture';
@@ -14,7 +15,7 @@ type CustomsItemTestCreateInput = Parameters<
 
 describe('CustomsItem Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPost(process.env.EASYPOST_TEST_API_KEY);

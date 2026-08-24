@@ -9,7 +9,7 @@ type WebhookCreateParameters = Record<string, unknown> & {
   custom_headers?: Array<{ key?: string | null; value?: string | null }> | null;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The WebhookService class provides methods for interacting with EasyPost {@link Webhook} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

@@ -23,7 +23,7 @@ type ClaimTestCreateInput = Parameters<ReturnType<typeof ClaimServiceFactory>['c
 
 describe('Error Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -35,7 +35,7 @@ describe('Error Service', function () {
   });
 
   it('pulls out error properties of an API error', async function () {
-    await client.Shipment.create().catch((error) => {
+    await client.Shipment.create().catch((error: any) => {
       expect(error.statusCode).to.equal(422);
       expect(error.code).to.equal('PARAMETER.REQUIRED');
       expect(error.message).to.equal('Missing required parameter.');
@@ -46,7 +46,7 @@ describe('Error Service', function () {
   it('pulls out error properties of an API error when using the alternative format', async function () {
     const claimData = Fixture.basicClaim() as ClaimTestCreateInput;
     claimData.tracking_code = '123'; // Intentionally pass a bad tracking code
-    await client.Claim.create(claimData).catch((error) => {
+    await client.Claim.create(claimData).catch((error: any) => {
       expect(error.statusCode).to.equal(404);
       expect(error.code).to.equal('NOT_FOUND');
       expect(error.message).to.equal('The requested resource could not be found.');
@@ -70,7 +70,7 @@ describe('Error Service', function () {
       throw ErrorHandler.handleApiError(fakeErrorResponse);
     })
       .to.throw(NotFoundError)
-      .and.satisfy((error) => {
+      .and.satisfy((error: any) => {
         expect(error.message).to.be.equal('ERROR_MESSAGE_1, ERROR_MESSAGE_2');
         expect(error.code).to.be.equal('NO RESPONSE CODE');
         expect(error.errors).to.be.an('array').that.is.empty;
@@ -96,7 +96,7 @@ describe('Error Service', function () {
       throw ErrorHandler.handleApiError(fakeErrorResponse);
     })
       .to.throw(NotFoundError)
-      .and.satisfy((error) => {
+      .and.satisfy((error: any) => {
         expect(error.message).to.be.equal('bad error., second bad error.');
         expect(error.code).to.be.equal('NO RESPONSE CODE');
         expect(error.errors).to.be.an('array').that.is.empty;
@@ -129,7 +129,7 @@ describe('Error Service', function () {
       throw ErrorHandler.handleApiError(fakeErrorResponse);
     })
       .to.throw(NotFoundError)
-      .and.satisfy((error) => {
+      .and.satisfy((error: any) => {
         expect(error.message).to.be.equal(
           'Bad format 1, Bad format 2, Bad format 3, Bad format 4, Bad format 5',
         );

@@ -36,7 +36,7 @@ describe('FedExRegistrationService', function () {
       phone_number: '***-***-9721',
     };
 
-    const middleware = (request) => {
+    const middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule(
@@ -74,7 +74,7 @@ describe('FedExRegistrationService', function () {
       message: 'sent secured Pin',
     };
 
-    const middleware = (request) => {
+    const middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule(
@@ -121,7 +121,7 @@ describe('FedExRegistrationService', function () {
       },
     };
 
-    const middleware = (request) => {
+    const middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule(
@@ -175,7 +175,7 @@ describe('FedExRegistrationService', function () {
       },
     };
 
-    const middleware = (request) => {
+    const middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule(

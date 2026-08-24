@@ -16,7 +16,7 @@ type CustomsInfoCreateParameters = Record<string, unknown> & {
   declaration?: string | null;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The CustomsInfoService class provides methods for interacting with EasyPost {@link CustomsInfo} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

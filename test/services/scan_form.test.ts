@@ -15,7 +15,7 @@ type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFacto
 
 describe('ScanForm Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -63,7 +63,7 @@ describe('ScanForm Service', function () {
 
     expect(scanformsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(scanforms.has_more).to.exist;
-    scanformsArray.forEach((scanform) => {
+    scanformsArray.forEach((scanform: any) => {
       expect(scanform).to.be.an.instanceOf(ScanForm);
     });
   });

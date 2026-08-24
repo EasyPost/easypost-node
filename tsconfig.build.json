@@ -3,7 +3,7 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": false,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "declaration": true,
     "noEmit": true,
     "types": ["vitest/globals", "node"]

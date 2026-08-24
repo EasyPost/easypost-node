@@ -8,7 +8,7 @@ type TrackerCreateParameters = Record<string, unknown> & {
 type TrackerCollection = Record<string, unknown>;
 type TrackerListResponse = { trackers: Tracker[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The TrackerService class provides methods for interacting with EasyPost {@link Tracker} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

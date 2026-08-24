@@ -45,7 +45,7 @@ type ShipmentCollection = Record<string, unknown>;
 type ShipmentListResponse = { shipments: Shipment[]; has_more: boolean };
 type ShipmentSmartRateResponse = Array<Record<string, unknown>>;
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The ShipmentService class provides methods for interacting with EasyPost {@link Shipment} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

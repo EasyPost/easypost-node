@@ -8,7 +8,7 @@ import * as setupPolly from '../helpers/setup_polly';
 
 describe('ApiKey Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);
@@ -40,7 +40,7 @@ describe('ApiKey Service', function () {
   it('retrieves all apiKeys', async function () {
     const apiKeys = await client.ApiKey.all();
 
-    apiKeys.keys.forEach((apiKey) => {
+    apiKeys.keys.forEach((apiKey: any) => {
       expect(apiKey).to.be.an.instanceOf(ApiKey);
     });
   });

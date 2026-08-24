@@ -12,7 +12,7 @@ type CustomsItemCreateParameters = Record<string, unknown> & {
   currency?: string | null;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The CustomsItemService class provides methods for interacting with EasyPost {@link CustomsItem} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

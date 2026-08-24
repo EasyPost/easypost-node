@@ -5,7 +5,7 @@ import * as setupPolly from '../helpers/setup_polly';
 
 describe('BetaReferralCustomerService', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     const referralCustomerProdApiKey = process.env.REFERRAL_CUSTOMER_PROD_API_KEY || '123';
@@ -18,7 +18,7 @@ describe('BetaReferralCustomerService', function () {
   });
 
   it('add payment method to a referral customer account', async function () {
-    await client.BetaReferralCustomer.addPaymentMethod('cus_123', 'ba_123').catch((error) => {
+    await client.BetaReferralCustomer.addPaymentMethod('cus_123', 'ba_123').catch((error: any) => {
       expect(error.statusCode).to.equal(422);
       expect(error.code).to.equal('BILLING.INVALID_PAYMENT_GATEWAY_REFERENCE');
       expect(error.message).to.equal('Invalid connect integration.');
@@ -26,7 +26,7 @@ describe('BetaReferralCustomerService', function () {
   });
 
   it('Refund by amount for a recent payment', async function () {
-    await client.BetaReferralCustomer.refundByAmount(2000).catch((error) => {
+    await client.BetaReferralCustomer.refundByAmount(2000).catch((error: any) => {
       expect(error.statusCode).to.equal(422);
       expect(error.code).to.equal('TRANSACTION.AMOUNT_INVALID');
       expect(error.message).to.equal(
@@ -36,7 +36,7 @@ describe('BetaReferralCustomerService', function () {
   });
 
   it('Refund a payment by a payment log ID', async function () {
-    await client.BetaReferralCustomer.refundByPaymentLog('paylog_...').catch((error) => {
+    await client.BetaReferralCustomer.refundByPaymentLog('paylog_...').catch((error: any) => {
       expect(error.statusCode).to.equal(422);
       expect(error.code).to.equal('TRANSACTION.DOES_NOT_EXIST');
       expect(error.message).to.equal('We could not find a transaction with that id.');

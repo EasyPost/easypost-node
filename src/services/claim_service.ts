@@ -16,7 +16,7 @@ type ClaimCreateParameters = Record<string, unknown> & {
 type ClaimCollection = Record<string, unknown>;
 type ClaimListResponse = { claims: Claim[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The ClaimService class provides methods for interacting with EasyPost {@link Claim} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

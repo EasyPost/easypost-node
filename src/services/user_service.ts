@@ -26,7 +26,7 @@ type UserCollection = Record<string, unknown> & {
   _params?: Record<string, unknown>;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The UserService class provides methods for interacting with EasyPost {@link User} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

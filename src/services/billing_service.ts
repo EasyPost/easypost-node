@@ -13,7 +13,7 @@ type PaymentMethodsResponse = Record<string, unknown> & {
   secondary_payment_method?: PaymentMethodObject | null;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The BillingService class provides methods for interacting with EasyPost's billing capabilities.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

@@ -11,7 +11,7 @@ import { withoutParams } from '../helpers/utils';
 /* eslint-disable func-names */
 describe('Webhook Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -61,7 +61,7 @@ describe('Webhook Service', function () {
     const webhooksArray = webhooks.webhooks;
 
     expect(webhooksArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
-    webhooksArray.forEach((webhook) => {
+    webhooksArray.forEach((webhook: any) => {
       expect(webhook).to.be.an.instanceOf(Webhook);
     });
   });
@@ -90,7 +90,7 @@ describe('Webhook Service', function () {
     });
 
     await client.Webhook.delete(webhook.id).then(
-      expect(function (result) {
+      expect(function (result: any) {
         result.not.to.throw();
       }),
     );
@@ -105,7 +105,7 @@ describe('Webhook Service', function () {
       Fixture.eventBody(),
       headers,
       Fixture.webhookSecret(),
-    );
+    ) as { description: string; result: { weight: number } };
 
     expect(webhookBody.description).to.equal('tracker.updated');
     expect(webhookBody.result.weight).to.equal(614.4); // Ensure we convert floats properly

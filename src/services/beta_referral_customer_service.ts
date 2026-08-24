@@ -4,7 +4,7 @@ type BetaPaymentMethodResponse = Record<string, unknown>;
 type BetaRefundResponse = Record<string, unknown>;
 type BetaClientSecretResponse = Record<string, unknown>;
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   class BetaReferralCustomerService extends baseService(easypostClient) {
     /**
      * Add an existing Stripe payment method to a {@link User referral customer's} account.

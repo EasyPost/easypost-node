@@ -1,6 +1,7 @@
 import { expect } from 'vitest';
 
 import EasyPost from '../../src/easypost';
+import type EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import User from '../../src/models/user';
 import type ReferralCustomerServiceFactory from '../../src/services/referral_customer_service';
@@ -25,9 +26,9 @@ type ReferralCustomerBillingInput = {
 
 describe('ReferralCustomer Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
-  let referralUserProdApiKey;
+  let referralUserProdApiKey: string;
 
   beforeAll(function () {
     const partnerUserProdApiKey = process.env.PARTNER_USER_PROD_API_KEY || '123';
@@ -61,7 +62,7 @@ describe('ReferralCustomer Service', function () {
 
     expect(referralsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(referrals.has_more).to.exist;
-    referralsArray.forEach((referral) => {
+    referralsArray.forEach((referral: any) => {
       expect(referral).to.be.an.instanceOf(User);
     });
   });
@@ -89,7 +90,7 @@ describe('ReferralCustomer Service', function () {
     const testEmail = 'me2@email.com';
 
     await client.ReferralCustomer.updateEmail(singleReferral.id, testEmail).then(
-      expect(function (result) {
+      expect(function (result: any) {
         result.not.to.throw();
       }),
     );
@@ -117,7 +118,7 @@ describe('ReferralCustomer Service', function () {
       referralUserProdApiKey,
       billing.payment_method_id,
       billing.priority,
-    ).catch((error) => {
+    ).catch((error: any) => {
       expect(error.message).to.equal(
         'Stripe::PaymentMethod does not exist for the specified reference_id',
       );
@@ -132,7 +133,7 @@ describe('ReferralCustomer Service', function () {
       billing.financial_connections_id,
       billing.mandate_data,
       billing.priority,
-    ).catch((error) => {
+    ).catch((error: any) => {
       expect(error.message).to.equal(
         'account_holder_name must be present when creating a Financial Connections payment method',
       );

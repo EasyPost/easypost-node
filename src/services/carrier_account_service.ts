@@ -17,7 +17,7 @@ type CarrierAccountCreateParameters = Record<string, unknown> & {
   billing_type?: string | null;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The CarrierAccountService class provides methods for interacting with EasyPost @{link CarrierAccount} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

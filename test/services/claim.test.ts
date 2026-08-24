@@ -17,7 +17,7 @@ type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFacto
 const CLAIM_AMOUNT = 100;
 
 /** @param {Client} client */
-const buyTestShipment = async (client) => {
+const buyTestShipment = async (client: any) => {
   const shipment = await client.Shipment.create(Fixture.fullShipment() as ShipmentTestCreateInput);
   const rate = shipment.lowestRate();
 
@@ -25,7 +25,7 @@ const buyTestShipment = async (client) => {
 };
 
 /** @param {Client} client */
-const createTestClaim = async (client) => {
+const createTestClaim = async (client: any) => {
   const shipment = await buyTestShipment(client);
 
   const claimData = Fixture.basicClaim() as ClaimTestCreateInput;
@@ -37,7 +37,7 @@ const createTestClaim = async (client) => {
 
 describe('Claim Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -74,7 +74,7 @@ describe('Claim Service', function () {
 
     expect(claimArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(claim.has_more).to.exist;
-    claimArray.forEach((event) => {
+    claimArray.forEach((event: any) => {
       expect(event).to.be.an.instanceOf(Claim);
     });
   });

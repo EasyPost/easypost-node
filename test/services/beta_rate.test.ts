@@ -14,7 +14,7 @@ type BetaRateRetrieveInput = Parameters<
 /* eslint-disable func-names */
 describe('BetaRateService', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -30,7 +30,7 @@ describe('BetaRateService', function () {
       Fixture.basicShipment() as BetaRateRetrieveInput,
     );
 
-    statelessRates.forEach((rate) => {
+    statelessRates.forEach((rate: any) => {
       expect(rate).to.be.an.instanceOf(Rate);
       expect(rate).to.not.have.property('id');
     });

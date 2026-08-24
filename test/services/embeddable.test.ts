@@ -7,7 +7,7 @@ import * as setupPolly from '../helpers/setup_polly';
 
 describe('Embeddable Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);

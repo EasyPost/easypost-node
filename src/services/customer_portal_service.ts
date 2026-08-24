@@ -1,5 +1,5 @@
 import baseService from './base_service';
-import type { ICustomerPortalAccountLink } from '../../types/CustomerPortal/CustomerPortalAccountLink';
+type ICustomerPortalAccountLink = Record<string, unknown>;
 
 type CustomerPortalAccountLinkCreateParameters = Record<string, unknown> & {
   session_type?: 'account_onboarding' | 'account_management' | null;
@@ -9,7 +9,7 @@ type CustomerPortalAccountLinkCreateParameters = Record<string, unknown> & {
   metadata?: Record<string, unknown> | null;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The CustomerPortalService class provides methods for interacting with EasyPost {@link Tracker} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

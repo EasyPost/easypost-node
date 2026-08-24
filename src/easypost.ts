@@ -48,11 +48,11 @@ type HttpClient = typeof fetch;
 interface CompatibilityRequest {
   method: string;
   url: string;
-  _data: unknown;
+  _data: Record<string, unknown> | undefined;
   set(headersToSet?: RequestHeaders): CompatibilityRequest;
   auth(key: string): CompatibilityRequest;
   query(queryParams?: Record<string, unknown>): CompatibilityRequest;
-  send(body?: unknown): CompatibilityRequest;
+  send(body?: Record<string, unknown>): CompatibilityRequest;
 }
 
 interface HttpMiddleware {
@@ -415,7 +415,7 @@ export default class EasyPostClient {
     const isQueryMethod =
       normalizedMethod === EasyPostClient.METHODS.GET ||
       normalizedMethod === EasyPostClient.METHODS.DELETE;
-    let requestBody;
+    let requestBody: Record<string, unknown> | undefined;
 
     if (params !== undefined) {
       if (isQueryMethod) {
@@ -427,7 +427,7 @@ export default class EasyPostClient {
       }
     }
 
-    const compatibilityRequest = {
+    const compatibilityRequest: CompatibilityRequest = {
       method: normalizedMethod.toUpperCase(),
       url: url.toString(),
       _data: requestBody,
@@ -435,7 +435,7 @@ export default class EasyPostClient {
         Object.assign(requestHeaders, headersToSet);
         return compatibilityRequest;
       },
-      auth: (key) => {
+      auth: (key: string) => {
         requestHeaders.Authorization = `Basic ${EasyPostClient._toBase64(`${key}:`)}`;
         return compatibilityRequest;
       },
@@ -446,7 +446,7 @@ export default class EasyPostClient {
         compatibilityRequest.url = url.toString();
         return compatibilityRequest;
       },
-      send: (body = {}) => {
+      send: (body: Record<string, unknown> = {}) => {
         compatibilityRequest._data = body;
         return compatibilityRequest;
       },
@@ -466,7 +466,7 @@ export default class EasyPostClient {
       }
     }
 
-    let middlewareResponse;
+    let middlewareResponse: any;
 
     if (
       this.requestMiddleware &&

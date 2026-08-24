@@ -14,7 +14,7 @@ type ReportCollection = Record<string, unknown> & {
 };
 type ReportListResponse = { reports: Report[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The ReportService class provides methods for interacting with EasyPost {@link Report} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

@@ -15,7 +15,7 @@ type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFacto
 
 describe('Batch Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -54,7 +54,7 @@ describe('Batch Service', function () {
 
     expect(addressesArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(batches.has_more).to.exist;
-    addressesArray.forEach((batch) => {
+    addressesArray.forEach((batch: any) => {
       expect(batch).to.be.an.instanceOf(Batch);
     });
   });

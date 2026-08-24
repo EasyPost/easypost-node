@@ -11,7 +11,7 @@ type OrderCreateParameters = Record<string, unknown> & {
 };
 type OrderRatesResponse = { rates: Rate[] };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The OrderService class provides methods for interacting with EasyPost {@link Order} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

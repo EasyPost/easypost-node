@@ -17,7 +17,7 @@ type AddressTestCreateAndVerifyInput = Parameters<
 /* eslint-disable func-names */
 describe('Address Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -111,7 +111,7 @@ describe('Address Service', function () {
 
     expect(addressesArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(addresses.has_more).to.exist;
-    addressesArray.forEach((address) => {
+    addressesArray.forEach((address: any) => {
       expect(address).to.be.an.instanceOf(Address);
     });
   });
@@ -146,7 +146,7 @@ describe('Address Service', function () {
     const addressData = Fixture.incorrectAddress() as AddressTestCreateAndVerifyInput;
 
     // Creates with verify = true behind the scenes, will throw an error if the address cannot be verified
-    return client.Address.createAndVerify(addressData).catch((err) =>
+    return client.Address.createAndVerify(addressData).catch((err: any) =>
       expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });
@@ -163,7 +163,7 @@ describe('Address Service', function () {
   it('throws an error when we cannot verify an address', async function () {
     const address = await client.Address.create({ street1: 'invalid' });
 
-    return client.Address.verifyAddress(address.id).catch((err) =>
+    return client.Address.verifyAddress(address.id).catch((err: any) =>
       expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });
@@ -186,7 +186,7 @@ describe('Address Service', function () {
 
     addressData.verify_carrier = 'UPS';
 
-    return client.Address.createAndVerify(addressData).catch((err) =>
+    return client.Address.createAndVerify(addressData).catch((err: any) =>
       expect(err).to.be.an.instanceOf(InvalidRequestError),
     );
   });

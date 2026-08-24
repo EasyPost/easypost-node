@@ -8,7 +8,7 @@ type BatchCreateParameters = Record<string, unknown> & {
 };
 type BatchListResponse = { batches: Batch[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The BatchService class provides methods for interacting with EasyPost {@link Batch} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

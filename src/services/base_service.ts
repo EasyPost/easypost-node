@@ -99,7 +99,7 @@ const RESOURCES = {
   Webhook,
 };
 
-export default (easypostClient) =>
+export default (easypostClient: any) =>
   /**
    * The base class for all EasyPost client library services.
    * @param {EasyPostClient} easypostClient The {@link EasyPostClient} instance to use for API calls.
@@ -112,13 +112,13 @@ export default (easypostClient) =>
      * @param {*} response The value to serialize.
      * @returns {*} A plain object/array/scalar.
      */
-    static _toPlainEasyPostObject(response) {
+    static _toPlainEasyPostObject(response: any): any {
       if (Array.isArray(response)) {
         return response.map((value) => this._toPlainEasyPostObject(value));
       }
 
       if (typeof response === 'object' && response !== null) {
-        const plainObject = {};
+        const plainObject: Record<string, any> = {};
         const prototype = Object.getPrototypeOf(response);
 
         if (prototype && prototype !== Object.prototype) {
@@ -145,8 +145,10 @@ export default (easypostClient) =>
           });
         }
 
-        Object.keys(response).forEach((key) => {
-          plainObject[key] = this._toPlainEasyPostObject(response[key]);
+        Object.keys(response as Record<string, unknown>).forEach((key) => {
+          plainObject[key] = this._toPlainEasyPostObject(
+            (response as Record<string, unknown>)[key],
+          );
         });
 
         return plainObject;
@@ -162,7 +164,7 @@ export default (easypostClient) =>
      * @param {*} params The parameters passed when fetching the response.
      * @returns {*} An {@link EasyPostObject}-based class instance or an `Array` of {@link EasyPostObject}-based class instances.
      */
-    static _buildEasyPostObject(response, params) {
+    static _buildEasyPostObject(response: any, params: any): any {
       if (Array.isArray(response)) {
         return response.map((value) => {
           if (typeof value === 'object') {
@@ -173,23 +175,26 @@ export default (easypostClient) =>
       }
 
       if (typeof response === 'object' && response !== null) {
-        let classObject;
-        if (RESOURCES[response.object] !== undefined) {
-          classObject = new RESOURCES[response.object]();
+        const responseRecord = response as Record<string, any>;
+        let classObject: any;
+        if ((RESOURCES as Record<string, any>)[responseRecord.object] !== undefined) {
+          classObject = new (RESOURCES as Record<string, any>)[responseRecord.object]();
         } else if (
-          response.id !== undefined &&
-          EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP[
-            response.id.substr(0, response.id.indexOf('_'))
+          responseRecord.id !== undefined &&
+          (EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP as Record<string, any>)[
+            responseRecord.id.substr(0, responseRecord.id.indexOf('_'))
           ] !== undefined
         ) {
-          const className = response.id.substr(0, response.id.indexOf('_'));
-          classObject = new EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP[className]();
+          const className = responseRecord.id.substr(0, responseRecord.id.indexOf('_'));
+          classObject = new (EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP as Record<string, any>)[
+            className
+          ]();
         } else {
           classObject = new EasyPostObject();
         }
 
-        Object.keys(response).forEach((key) => {
-          classObject[key] = this._buildEasyPostObject(response[key], params);
+        Object.keys(responseRecord).forEach((key) => {
+          classObject[key] = this._buildEasyPostObject(responseRecord[key], params);
         });
 
         classObject._params = params;
@@ -220,7 +225,7 @@ export default (easypostClient) =>
      * @param {Object} params The parameters to send with the API request.
      * @returns {EasyPostObject|Promise<never>} The created {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async _create(url, params) {
+    static async _create(url: string, params: any) {
       try {
         const response = await easypostClient._post(url, params);
 
@@ -237,7 +242,7 @@ export default (easypostClient) =>
      * @param {Object} [params] The parameters to send with the API request.
      * @returns {EasyPostObject|EasyPostObject[]|Promise<never>} The retrieved {@link EasyPostObject}-based class instance(s), or a `Promise` that rejects with an error.
      */
-    static async _all(url, params = {}) {
+    static async _all(url: string, params: any = {}) {
       try {
         // eslint-disable-next-line no-param-reassign
         const response = await easypostClient._get(url, params);
@@ -254,7 +259,7 @@ export default (easypostClient) =>
      * @param {string} url The URL to send the API request to.
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async _retrieve(url) {
+    static async _retrieve(url: string) {
       try {
         const response = await easypostClient._get(url);
 
