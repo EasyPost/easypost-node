@@ -59,8 +59,24 @@ interface HttpMiddleware {
   (httpClient: HttpClient): HttpClient;
 }
 
+type MiddlewareResponse = {
+  statusCode: number;
+  body: unknown;
+  headers?: Record<string, string>;
+};
+
+interface MiddlewareRequest {
+  method?: string;
+  url?: string;
+  _data?: unknown;
+  set?(headersToSet?: RequestHeaders): CompatibilityRequest;
+  auth?(key: string): unknown;
+  query?(queryParams?: Record<string, unknown>): CompatibilityRequest | MiddlewareResponse;
+  send?(body?: unknown): CompatibilityRequest | MiddlewareResponse;
+}
+
 interface RequestMiddleware {
-  (request: CompatibilityRequest): CompatibilityRequest | undefined;
+  (request: CompatibilityRequest): MiddlewareRequest | undefined;
 }
 /* eslint-enable no-unused-vars */
 
@@ -436,7 +452,7 @@ export default class EasyPostClient {
       },
     };
 
-    let middlewareRequest = compatibilityRequest;
+    let middlewareRequest: MiddlewareRequest = compatibilityRequest;
 
     if (this.requestMiddleware) {
       middlewareRequest = this.requestMiddleware(compatibilityRequest) || compatibilityRequest;
