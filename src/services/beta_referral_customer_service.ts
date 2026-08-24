@@ -75,7 +75,10 @@ export default (easypostClient: EasyPostClient) =>
     static async createCreditCardClientSecret(): Promise<BetaClientSecretResponse> {
       const url = 'beta/setup_intents';
 
-      const response = await easypostClient._post(url);
+      // Preserve legacy null payload behavior for cassette matching in tests.
+      const emptyPayload = null as unknown as Record<string, unknown>;
+
+      const response = await easypostClient._post(url, emptyPayload);
 
       return response.body;
     }
@@ -87,7 +90,9 @@ export default (easypostClient: EasyPostClient) =>
     static async createBankAccountClientSecret(
       returnUrl: string | null,
     ): Promise<BetaClientSecretResponse> {
-      const params = returnUrl ? { return_url: returnUrl } : undefined;
+      const params = returnUrl
+        ? { return_url: returnUrl }
+        : (null as unknown as Record<string, unknown>);
 
       const url = 'beta/financial_connections_sessions';
 
