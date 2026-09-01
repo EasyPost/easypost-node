@@ -1,5 +1,6 @@
 import Constants from '../constants';
 import EasyPostObject from './easypost_object';
+import Rate from './rate';
 
 /**
  * An {@link https://docs.easypost.com/docs/orders Order} represents a collection of packages, intended only for multi-parcel shipments.
@@ -11,7 +12,7 @@ export default class Order extends EasyPostObject {
   declare from_address?: Record<string, unknown> | null;
   declare is_return?: boolean | null;
   declare messages?: Record<string, unknown>[] | null;
-  declare rates?: Parameters<typeof Constants.Utils.getLowestRate>[0] | null;
+  declare rates?: Rate[] | null;
   declare reference?: string | null;
   declare return_address?: Record<string, unknown> | null;
   declare shipments?: Record<string, unknown>[] | null;
@@ -29,9 +30,7 @@ export default class Order extends EasyPostObject {
     carriers?: string[],
     services?: string[],
   ): ReturnType<typeof Constants.Utils.getLowestRate> {
-    const rates = ((this as Order & { rates?: unknown[] }).rates || []) as Parameters<
-      typeof Constants.Utils.getLowestRate
-    >[0];
+    const rates = this.rates || [];
 
     return Constants.Utils.getLowestRate(rates, carriers, services);
   }

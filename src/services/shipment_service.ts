@@ -1,7 +1,7 @@
 import Constants from '../constants';
-import baseService from './base_service';
 import Rate from '../models/rate';
 import Shipment from '../models/shipment';
+import baseService from './base_service';
 
 type AddressCreateInput = Record<string, unknown> & {
   verify?: boolean | string | string[] | null;
@@ -249,7 +249,7 @@ export default (easypostClient) =>
       id: string,
       deliveryDays: number,
       deliveryAccuracy: string,
-    ): Promise<Rate> {
+    ): Promise<ReturnType<typeof Constants.Utils.getLowestSmartRate>> {
       const smartRates = (await this.getSmartRates(id)) as any[];
       return Constants.Utils.getLowestSmartRate(
         smartRates,
