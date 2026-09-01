@@ -36,11 +36,10 @@ export default (easypostClient) =>
           return user.keys ?? [];
         }
 
-        user.children?.forEach((child) => {
-          if (child.id == id) {
-            return child.keys ?? [];
-          }
-        });
+        const child = user.children?.find((childUser) => childUser.id == id);
+        if (child) {
+          return child.keys ?? [];
+        }
       } catch (e) {
         return Promise.reject(e);
       }

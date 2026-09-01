@@ -1,10 +1,10 @@
 import util from 'util';
 
+import type { IPaymentMethod } from '../../types/PaymentMethod/PaymentMethod';
 import Constants from '../constants';
 import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
 import User from '../models/user';
-import type { IPaymentMethod } from '../../types/PaymentMethod/PaymentMethod';
 import baseService from './base_service';
 
 type ReferralCreateParameters = Record<string, unknown> & {
@@ -22,17 +22,13 @@ type ReferralCreateParameters = Record<string, unknown> & {
 };
 type MandateData = Record<string, unknown>;
 type ReferralCustomerListResponse = { referral_customers: User[]; has_more: boolean };
-/* eslint-disable no-unused-vars */
 type ReferralScopedClient = {
-  _post: (
-    ...args: [string, Record<string, unknown>?]
-  ) => Promise<{ body: Record<string, unknown> }>;
+  _post: (...args: [string, Record<string, unknown>?]) => Promise<{ body: IPaymentMethod }>;
 };
 type EasyPostHttpClient = {
   _get: (...args: [string, Record<string, unknown>?]) => Promise<{ body: Record<string, unknown> }>;
   _put: (...args: [string, Record<string, unknown>?]) => Promise<void>;
 };
-/* eslint-enable no-unused-vars */
 
 /**
  * Get an instance of the EasyPostClient using the referral user's API key.
@@ -58,8 +54,8 @@ async function _getEasyPostStripeKey(easypostClient: EasyPostHttpClient): Promis
 
   const response = await easypostClient._get(url);
 
-  const body = response.body as Record<string, unknown>;
-  return body.public_key as string;
+  const body = response.body as { public_key: string };
+  return body.public_key;
 }
 
 /**
@@ -127,7 +123,7 @@ async function _sendCardDetailsToEasyPost(
   referralApiKey: string,
   stripeCreditCardToken: string,
   priority: string,
-): Promise<Record<string, unknown>> {
+): Promise<IPaymentMethod> {
   const _client = _getReferralClient(client, referralApiKey);
   const url = 'credit_cards';
   const params = { credit_card: { stripe_object_id: stripeCreditCardToken, priority } };
@@ -193,7 +189,7 @@ export default (easypostClient) =>
       expirationYear: string,
       cvc: string,
       priority: string = 'primary',
-    ): Promise<Record<string, unknown>> {
+    ): Promise<IPaymentMethod> {
       const stripeKey = await _getEasyPostStripeKey(easypostClient); // will throw if there's an error
 
       const stripeCreditCardId = await _sendCardDetailsToStripe(
