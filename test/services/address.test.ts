@@ -1,12 +1,18 @@
-import { expect } from 'chai';
+import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import InvalidRequestError from '../../src/errors/api/invalid_request_error';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import Address from '../../src/models/address';
+import type AddressServiceFactory from '../../src/services/address_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
+
+type AddressTestCreateInput = Parameters<ReturnType<typeof AddressServiceFactory>['create']>[0];
+type AddressTestCreateAndVerifyInput = Parameters<
+  ReturnType<typeof AddressServiceFactory>['createAndVerify']
+>[0];
 
 /* eslint-disable func-names */
 describe('Address Service', function () {
@@ -23,7 +29,7 @@ describe('Address Service', function () {
   });
 
   it('creates an address', async function () {
-    const address = await client.Address.create(Fixture.caAddress1());
+    const address = await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
 
     expect(address).to.be.an.instanceOf(Address);
     expect(address.id).to.match(/^adr_/);
@@ -31,7 +37,7 @@ describe('Address Service', function () {
   });
 
   it('creates an address with verify param', async function () {
-    const addressData = Fixture.incorrectAddress();
+    const addressData = Fixture.incorrectAddress() as AddressTestCreateInput;
 
     // Creating normally (without specifying "verify") will make the address and perform no verifications
     let address = await client.Address.create(addressData);
@@ -63,7 +69,7 @@ describe('Address Service', function () {
   });
 
   it('creates an address with verify_strict param', async function () {
-    const addressData = Fixture.caAddress2();
+    const addressData = Fixture.caAddress2() as AddressTestCreateInput;
     addressData.verify_strict = true;
 
     const address = await client.Address.create(addressData);
@@ -74,7 +80,7 @@ describe('Address Service', function () {
   });
 
   it('creates an address with an array verify param', async function () {
-    const addressData = Fixture.incorrectAddress();
+    const addressData = Fixture.incorrectAddress() as AddressTestCreateInput;
 
     // Creating normally (without specifying "verify") will make the address, perform no verifications
     let address = await client.Address.create(addressData);
@@ -91,7 +97,7 @@ describe('Address Service', function () {
   });
 
   it('retrieves an address', async function () {
-    const address = await client.Address.create(Fixture.caAddress1());
+    const address = await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
     const retrievedAddress = await client.Address.retrieve(address.id);
 
     expect(retrievedAddress).to.be.an.instanceOf(Address);
@@ -127,7 +133,7 @@ describe('Address Service', function () {
   });
 
   it('creates a verified address', async function () {
-    const addressData = Fixture.caAddress2();
+    const addressData = Fixture.caAddress2() as AddressTestCreateAndVerifyInput;
 
     const address = await client.Address.createAndVerify(addressData);
 
@@ -137,7 +143,7 @@ describe('Address Service', function () {
   });
 
   it('throws an error when we cannot create and verify an address', async function () {
-    const addressData = Fixture.incorrectAddress();
+    const addressData = Fixture.incorrectAddress() as AddressTestCreateAndVerifyInput;
 
     // Creates with verify = true behind the scenes, will throw an error if the address cannot be verified
     return client.Address.createAndVerify(addressData).catch((err) =>
@@ -146,7 +152,7 @@ describe('Address Service', function () {
   });
 
   it('verifies an address', async function () {
-    const address = await client.Address.create(Fixture.caAddress2());
+    const address = await client.Address.create(Fixture.caAddress2() as AddressTestCreateInput);
     const verifiedAddress = await client.Address.verifyAddress(address.id);
 
     expect(verifiedAddress).to.be.an.instanceOf(Address);
@@ -163,7 +169,7 @@ describe('Address Service', function () {
   });
 
   it('creates an address with verify_carrier param', async function () {
-    const addressData = Fixture.incorrectAddress();
+    const addressData = Fixture.incorrectAddress() as AddressTestCreateInput;
 
     addressData.verify = true;
     addressData.verify_carrier = 'UPS';
@@ -176,7 +182,7 @@ describe('Address Service', function () {
   });
 
   it('creates and verifies address with verify_carrier param', async function () {
-    const addressData = Fixture.incorrectAddress();
+    const addressData = Fixture.incorrectAddress() as AddressTestCreateAndVerifyInput;
 
     addressData.verify_carrier = 'UPS';
 

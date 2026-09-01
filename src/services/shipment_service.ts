@@ -1,5 +1,49 @@
 import Constants from '../constants';
 import baseService from './base_service';
+import Rate from '../models/rate';
+import Shipment from '../models/shipment';
+
+type AddressCreateInput = Record<string, unknown> & {
+  verify?: boolean | string | string[] | null;
+  verify_strict?: boolean | string | string[] | null;
+  verify_carrier?: string | null;
+};
+
+type ParcelCreateInput = Record<string, unknown> & {
+  length?: number | null;
+  width?: number | null;
+  height?: number | null;
+  weight?: number | null;
+  predefined_package?: string | null;
+};
+
+type ShipmentTaxIdentifier = Record<string, unknown> & {
+  entity?: string | null;
+  tax_id?: string | null;
+  tax_id_type?: string | null;
+  issuing_country?: string | null;
+};
+
+type ShipmentLineItem = Record<string, unknown> & {
+  total_line_value?: string | null;
+  item_description?: string | null;
+};
+
+type ShipmentCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  to_address?: AddressCreateInput | string | null;
+  from_address?: AddressCreateInput | string | null;
+  parcel?: ParcelCreateInput | string | null;
+  carrier_accounts?: string[] | null;
+  customs_info?: Record<string, unknown> | Record<string, unknown>[] | null;
+  tax_identifiers?: Array<ShipmentTaxIdentifier | null | undefined> | null;
+  options?: Record<string, unknown> | null;
+  line_items?: ShipmentLineItem[] | null;
+};
+type ShipmentRateInput = string | { id: string };
+type ShipmentCollection = Record<string, unknown>;
+type ShipmentListResponse = { shipments: Shipment[]; has_more: boolean };
+type ShipmentSmartRateResponse = Array<Record<string, unknown>>;
 
 export default (easypostClient) =>
   /**
@@ -8,12 +52,12 @@ export default (easypostClient) =>
    */
   class ShipmentService extends baseService(easypostClient) {
     /**
-     * Create a {@link Shipment shipment}.
+  static async createAndBuyLuma(params: ShipmentCreateParameters): Promise<unknown> {
      * See {@link https://docs.easypost.com/docs/shipments#create-a-shipment EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a shipment with.
      * @returns {Shipment} - The created shipment.
      */
-    static async create(params) {
+    static async create(params: ShipmentCreateParameters): Promise<Shipment> {
       const url = 'shipments';
 
       const wrappedParams = {
@@ -32,7 +76,12 @@ export default (easypostClient) =>
      * @param {string|null} [endShipperId] - The ID of the end shipper to purchase the shipment with.
      * @returns {Shipment} - The purchased shipment.
      */
-    static async buy(id, rate, insuranceAmount = null, endShipperId = null) {
+    static async buy(
+      id: string,
+      rate: ShipmentRateInput,
+      insuranceAmount: number | null = null,
+      endShipperId: string | null = null,
+    ): Promise<Shipment> {
       let rateId = rate;
 
       if (typeof rate === 'object') {
@@ -41,7 +90,7 @@ export default (easypostClient) =>
 
       const url = `shipments/${id}/buy`;
 
-      const wrappedParams = {
+      const wrappedParams: Record<string, unknown> = {
         rate: {
           id: rateId,
         },
@@ -71,7 +120,7 @@ export default (easypostClient) =>
      * @param {string} format - The format to convert the label to.
      * @returns {Shipment} - The shipment with the converted label format.
      */
-    static async convertLabelFormat(id, format) {
+    static async convertLabelFormat(id: string, format: string): Promise<Shipment> {
       const url = `shipments/${id}/label`;
       const wrappedParams = { file_format: format };
 
@@ -90,7 +139,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the shipment to regenerate rates for.
      * @returns {Shipment} - The shipment with regenerated rates.
      */
-    static async regenerateRates(id) {
+    static async regenerateRates(id: string): Promise<Shipment> {
       const url = `shipments/${id}/rerate`;
       const wrappedParams = {};
 
@@ -109,13 +158,13 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the shipment to get SmartRates for.
      * @returns {Rate[]} - The SmartRates for the shipment.
      */
-    static async getSmartRates(id) {
+    static async getSmartRates(id: string): Promise<Rate[]> {
       const url = `shipments/${id}/smartrate`;
 
       try {
         const response = await easypostClient._get(url);
 
-        return this._convertToEasyPostObject(response.body.result);
+        return this._convertToEasyPostObject(response.body.result, {});
       } catch (e) {
         return Promise.reject(e);
       }
@@ -128,7 +177,7 @@ export default (easypostClient) =>
      * @param {number|string} amount - The amount to insure the shipment for.
      * @returns {Shipment} - The insured shipment.
      */
-    static async insure(id, amount) {
+    static async insure(id: string, amount: number | string): Promise<Shipment> {
       const url = `shipments/${id}/insure`;
       const wrappedParams = { amount };
 
@@ -149,7 +198,11 @@ export default (easypostClient) =>
      * @param {Map} [formOptions] - Options for the form.
      * @returns {Shipment} - The shipment with the generated form attached.
      */
-    static async generateForm(id, formType, formOptions = {}) {
+    static async generateForm(
+      id: string,
+      formType: string,
+      formOptions: Record<string, unknown> = {},
+    ): Promise<Shipment> {
       const url = `shipments/${id}/forms`;
       const wrappedParams = {
         form: {
@@ -173,13 +226,13 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the shipment to refund.
      * @returns {Shipment} - The refunded shipment.
      */
-    static async refund(id) {
+    static async refund(id: string): Promise<Shipment> {
       const url = `shipments/${id}/refund`;
 
       try {
         const response = await easypostClient._post(url);
 
-        return this._convertToEasyPostObject(response.body);
+        return this._convertToEasyPostObject(response.body, {});
       } catch (e) {
         return Promise.reject(e);
       }
@@ -192,8 +245,12 @@ export default (easypostClient) =>
      * @param {string} deliveryAccuracy - The accuracy of the delivery days.
      * @returns {Rate} - The lowest SmartRate of the shipment.
      */
-    static async lowestSmartRate(id, deliveryDays, deliveryAccuracy) {
-      const smartRates = await this.getSmartRates(id);
+    static async lowestSmartRate(
+      id: string,
+      deliveryDays: number,
+      deliveryAccuracy: string,
+    ): Promise<Rate> {
+      const smartRates = (await this.getSmartRates(id)) as any[];
       return Constants.Utils.getLowestSmartRate(
         smartRates,
         deliveryDays,
@@ -207,7 +264,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the shipments by.
      * @returns {Object} - An object containing a list of {@link Shipment shipments} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<ShipmentListResponse> {
       const url = 'shipments';
 
       return this._all(url, params);
@@ -219,7 +276,10 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(shipments, pageSize = null) {
+    static async getNextPage(
+      shipments: ShipmentCollection,
+      pageSize?: number,
+    ): Promise<ShipmentListResponse> {
       const url = 'shipments';
 
       return this._getNextPage(url, 'shipments', shipments, pageSize);
@@ -231,7 +291,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the shipment to retrieve.
      * @returns {Shipment} - The shipment with the given ID.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<Shipment> {
       const url = `shipments/${id}`;
 
       return this._retrieve(url);
@@ -243,7 +303,10 @@ export default (easypostClient) =>
      * @param {string} plannedShipDate - The planned ship date of the shipment.
      * @returns {Array} - An array of the estimated delivery date and rates.
      */
-    static async retrieveEstimatedDeliveryDate(id, plannedShipDate) {
+    static async retrieveEstimatedDeliveryDate(
+      id: string,
+      plannedShipDate: string,
+    ): Promise<ShipmentSmartRateResponse> {
       const url = `shipments/${id}/smartrate/delivery_date`;
 
       const wrappedParams = {
@@ -265,7 +328,10 @@ export default (easypostClient) =>
      * @param desiredDeliveryDate - The desired delivery date for the shipment.
      * @returns {Array} - An array of the recommended ship date and rates.
      */
-    static async recommendShipDate(id, desiredDeliveryDate) {
+    static async recommendShipDate(
+      id: string,
+      desiredDeliveryDate: string,
+    ): Promise<ShipmentSmartRateResponse> {
       const url = `shipments/${id}/smartrate/precision_shipping`;
 
       const wrappedParams = {
@@ -286,7 +352,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create and buy a Shipment with Luma.
      * @returns {Shipment} - The shipment with the given ID.
      */
-    static async createAndBuyLuma(params) {
+    static async createAndBuyLuma(params: ShipmentCreateParameters): Promise<Shipment> {
       const url = `shipments/luma`;
 
       const wrappedParams = {
@@ -308,7 +374,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to buy a Shipment with Luma.
      * @returns {Shipment} - The shipment with the given ID.
      */
-    static async buyLuma(id, params) {
+    static async buyLuma(id: string, params: Record<string, unknown>): Promise<Shipment> {
       const url = `shipments/${id}/luma`;
 
       try {

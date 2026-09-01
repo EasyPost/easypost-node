@@ -172,18 +172,19 @@ function setupLegacyRequestIdentityCompatibility(server) {
 function setupPollyTests() {
   /** @type {Polly} */
   let polly;
+  const recordingsDir = resolve(__dirname, '../cassettes');
 
   beforeEach((context) => {
     const suiteName = context.task?.suite?.name || 'unknown-suite';
+    const recordingName = `${suiteName}/${context.task.name}`;
 
-    polly = new Polly(`${suiteName}/${context.task.name}`, {
+    polly = new Polly(recordingName, {
       adapters: ['fetch'],
       persister: 'fs',
-      recordIfMissing: true,
       recordFailedRequests: true,
       persisterOptions: {
         fs: {
-          recordingsDir: resolve(__dirname, '../cassettes'),
+          recordingsDir,
         },
       },
       matchRequestsBy: {

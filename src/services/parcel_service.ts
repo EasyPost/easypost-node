@@ -1,4 +1,13 @@
 import baseService from './base_service';
+import Parcel from '../models/parcel';
+
+type ParcelCreateParameters = Record<string, unknown> & {
+  length?: number | null;
+  width?: number | null;
+  height?: number | null;
+  weight?: number | null;
+  predefined_package?: string | null;
+};
 
 export default (easypostClient) =>
   /**
@@ -12,7 +21,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create a parcel with.
      * @returns {Parcel} - The created parcel.
      */
-    static async create(params) {
+    static async create(params: ParcelCreateParameters): Promise<Parcel> {
       const url = 'parcels';
 
       const wrappedParams = {
@@ -28,7 +37,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the parcel to retrieve.
      * @returns {Parcel} - The retrieved parcel.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<Parcel> {
       const url = `parcels/${id}`;
 
       return this._retrieve(url);

@@ -207,7 +207,7 @@ export default (easypostClient) =>
      * @param {*} params The parameters passed when fetching the response.
      * @returns {*} A plain object or array suitable for JSON serialization.
      */
-    static _convertToEasyPostObject(response, params = {}) {
+    static _convertToEasyPostObject(response: any, params: any = {}): any {
       const modelResponse = this._buildEasyPostObject(response, params);
 
       return this._toPlainEasyPostObject(modelResponse);
@@ -274,7 +274,13 @@ export default (easypostClient) =>
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      * TODO: Implement this function in EndShippers and Batches once the API supports them properly.
      */
-    static async _getNextPage(url, key, collection, pageSize = null, optionalParams = {}) {
+    static async _getNextPage(
+      url: string,
+      key: string,
+      collection: any,
+      pageSize: number | null = null,
+      optionalParams: any = {},
+    ): Promise<any> {
       const collectionArray = collection[key];
       if (collectionArray == undefined || collectionArray.length == 0 || !collection.has_more) {
         throw new EndOfPaginationError();

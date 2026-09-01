@@ -4,10 +4,9 @@
     "allowJs": true,
     "checkJs": false,
     "noImplicitAny": false,
-    "declaration": true,
     "noEmit": true,
+    "skipLibCheck": true,
     "types": ["vitest/globals", "node"]
   },
-  "include": ["src/**/*.js", "src/**/*.ts", "test/**/*.js", "test/**/*.ts"],
-  "exclude": ["dist/**", "docs/**", "coverage/**", "node_modules/**"]
+  "include": ["test/services/**/*.ts"]
 }

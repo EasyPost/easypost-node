@@ -25,7 +25,7 @@
   "scripts": {
     "build": "vite build",
     "clean": "rm -rf ./dist ./nyc_output ./node_modules/.cache ./coverage",
-    "coverage": "cross-env NODE_ENV=test vitest run --coverage",
+    "coverage": "npm run typescript:test && cross-env NODE_ENV=test vitest run --coverage",
     "docs": "jsdoc src/models src/services src/errors src/utils -d docs",
     "format": "prettier --write .",
     "formatCheck": "prettier --check .",
@@ -33,10 +33,11 @@
     "lintFix": "eslint --ext .js,.ts --ignore-pattern 'examples/**' --fix .",
     "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run formatCheck",
     "scan": "npx audit-ci -m --config ./audit-ci.jsonc",
-    "test": "cross-env NODE_ENV=test vitest run",
+    "test": "npm run typescript:test && cross-env NODE_ENV=test vitest run",
     "test:node-compatibility": "cross-env NODE_ENV=test node ./test/node_compatibility",
     "typescript": "npm run typescript:declarations && npm run typescript:source && npm run typescript:compat",
     "typescript:declarations": "npx tsc -p tsconfig.json",
+    "typescript:test": "npx tsc -p tsconfig.test-services.json",
     "typescript:source": "npx tsc -p tsconfig.build.json",
     "typescript:compat": "npx tsc -p tsconfig.type-tests.json",
     "watch": "vite build --watch"

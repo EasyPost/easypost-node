@@ -1,11 +1,14 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import Parcel from '../../src/models/parcel';
+import type ParcelServiceFactory from '../../src/services/parcel_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
+
+type ParcelTestCreateInput = Parameters<ReturnType<typeof ParcelServiceFactory>['create']>[0];
 
 describe('Parcel Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -21,7 +24,8 @@ describe('Parcel Service', function () {
   });
 
   it('creates a parcel', async function () {
-    const parcel = await client.Parcel.create(Fixture.basicParcel());
+    const parcelData = Fixture.basicParcel() as ParcelTestCreateInput;
+    const parcel = await client.Parcel.create(parcelData);
 
     expect(parcel).to.be.an.instanceOf(Parcel);
     expect(parcel.id).to.match(/^prcl_/);
@@ -29,7 +33,8 @@ describe('Parcel Service', function () {
   });
 
   it('retrieves a parcel', async function () {
-    const parcel = await client.Parcel.create(Fixture.basicParcel());
+    const parcelData = Fixture.basicParcel() as ParcelTestCreateInput;
+    const parcel = await client.Parcel.create(parcelData);
     const retrievedParcel = await client.Parcel.retrieve(parcel.id);
 
     expect(parcel).to.be.an.instanceOf(Parcel);

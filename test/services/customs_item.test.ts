@@ -1,11 +1,16 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPost from '../../src/easypost';
 import CustomsItem from '../../src/models/customs_item';
+import type CustomsItemServiceFactory from '../../src/services/customs_item_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
+
+type CustomsItemTestCreateInput = Parameters<
+  ReturnType<typeof CustomsItemServiceFactory>['create']
+>[0];
 
 describe('CustomsItem Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -21,7 +26,8 @@ describe('CustomsItem Service', function () {
   });
 
   it('creates a customs item', async function () {
-    const customsItem = await client.CustomsItem.create(Fixture.basicCustomsItem());
+    const customsItemData = Fixture.basicCustomsItem() as CustomsItemTestCreateInput;
+    const customsItem = await client.CustomsItem.create(customsItemData);
 
     expect(customsItem).to.be.an.instanceOf(CustomsItem);
     expect(customsItem.id).to.match(/^cstitem_/);
@@ -29,7 +35,8 @@ describe('CustomsItem Service', function () {
   });
 
   it('retrieves a customs item', async function () {
-    const customsItem = await client.CustomsItem.create(Fixture.basicCustomsItem());
+    const customsItemData = Fixture.basicCustomsItem() as CustomsItemTestCreateInput;
+    const customsItem = await client.CustomsItem.create(customsItemData);
     const retrievedCustomsInfo = await client.CustomsItem.retrieve(customsItem.id);
 
     expect(customsItem).to.be.an.instanceOf(CustomsItem);

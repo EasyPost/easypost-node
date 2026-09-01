@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
@@ -6,8 +6,25 @@ import FilteringError from '../../src/errors/general/filtering_error';
 import InvalidParameterError from '../../src/errors/general/invalid_parameter_error';
 import Rate from '../../src/models/rate';
 import Shipment from '../../src/models/shipment';
+import type AddressServiceFactory from '../../src/services/address_service';
+import type EndShipperServiceFactory from '../../src/services/end_shipper_service';
+import type ParcelServiceFactory from '../../src/services/parcel_service';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type AddressTestCreateInput = Parameters<ReturnType<typeof AddressServiceFactory>['create']>[0];
+type EndShipperTestCreateInput = Parameters<
+  ReturnType<typeof EndShipperServiceFactory>['create']
+>[0];
+type ParcelTestCreateInput = Parameters<ReturnType<typeof ParcelServiceFactory>['create']>[0];
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
+type ShipmentTestCreateAndBuyLumaInput = Parameters<
+  ReturnType<typeof ShipmentServiceFactory>['createAndBuyLuma']
+>[0];
+type ShipmentTestGenerateFormInput = Parameters<
+  ReturnType<typeof ShipmentServiceFactory>['generateForm']
+>[2];
 
 /* eslint-disable func-names */
 describe('Shipment Service', function () {
@@ -24,7 +41,9 @@ describe('Shipment Service', function () {
   });
 
   it('creates a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.fullShipment() as ShipmentTestCreateInput,
+    );
 
     expect(shipment).to.be.an.instanceOf(Shipment);
     expect(shipment.id).to.match(/^shp_/);
@@ -35,7 +54,7 @@ describe('Shipment Service', function () {
   });
 
   it('creates a shipment with empty or null objects and arrays', async function () {
-    const shipmentData = Fixture.basicShipment();
+    const shipmentData = Fixture.basicShipment() as ShipmentTestCreateInput;
     shipmentData.customs_info = [];
     shipmentData.options = null;
     shipmentData.tax_identifiers = undefined;
@@ -52,7 +71,7 @@ describe('Shipment Service', function () {
   });
 
   it('creates a shipment with tax_identifiers', async function () {
-    const shipmentData = Fixture.basicShipment();
+    const shipmentData = Fixture.basicShipment() as ShipmentTestCreateInput;
     shipmentData.tax_identifiers = [Fixture.taxIdentifier()];
 
     const shipment = await client.Shipment.create(shipmentData);
@@ -63,9 +82,9 @@ describe('Shipment Service', function () {
   });
 
   it('creates a shipment when only IDs are used', async function () {
-    const fromAddress = await client.Address.create(Fixture.caAddress1());
-    const toAddress = await client.Address.create(Fixture.caAddress2());
-    const parcel = await client.Parcel.create(Fixture.basicParcel());
+    const fromAddress = await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
+    const toAddress = await client.Address.create(Fixture.caAddress2() as AddressTestCreateInput);
+    const parcel = await client.Parcel.create(Fixture.basicParcel() as ParcelTestCreateInput);
 
     const shipment = await client.Shipment.create({
       from_address: { id: fromAddress.id },
@@ -82,7 +101,9 @@ describe('Shipment Service', function () {
   });
 
   it('retrieves a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.fullShipment() as ShipmentTestCreateInput,
+    );
 
     const retrievedShipment = await client.Shipment.retrieve(shipment.id);
 
@@ -121,7 +142,9 @@ describe('Shipment Service', function () {
   });
 
   it('buys a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.fullShipment() as ShipmentTestCreateInput,
+    );
 
     const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
 
@@ -129,7 +152,9 @@ describe('Shipment Service', function () {
   });
 
   it('regenerates rates for a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.fullShipment() as ShipmentTestCreateInput,
+    );
 
     const rates = await client.Shipment.regenerateRates(shipment.id);
 
@@ -142,7 +167,9 @@ describe('Shipment Service', function () {
   });
 
   it('converts the label format of a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.fullShipment() as ShipmentTestCreateInput,
+    );
 
     const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
 
@@ -154,7 +181,7 @@ describe('Shipment Service', function () {
   it('insures a shipment', async function () {
     // If the shipment was purchased with a USPS rate, it must have its insurance set to `0` when bought
     // so that USPS doesn't automatically insure it so we could manually insure it here.
-    const shipmentData = Fixture.oneCallBuyShipment();
+    const shipmentData = Fixture.oneCallBuyShipment() as ShipmentTestCreateInput;
     shipmentData.insurance = '0';
 
     const shipment = await client.Shipment.create(shipmentData);
@@ -168,7 +195,9 @@ describe('Shipment Service', function () {
     // Refunding a test shipment must happen within seconds of the shipment being created as test shipments naturally
     // follow a flow of created -> delivered to cycle through tracking events in test mode - as such anything older
     // than a few seconds in test mode may not be refundable.
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const refundedShipment = await client.Shipment.refund(shipment.id);
 
@@ -176,7 +205,9 @@ describe('Shipment Service', function () {
   });
 
   it('retrieves smartRates of a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     expect(shipment.rates).to.exist;
 
@@ -192,7 +223,9 @@ describe('Shipment Service', function () {
   });
 
   it('gets the lowest rate', async function () {
-    const shipment = await client.Shipment.create(Fixture.fullShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.fullShipment() as ShipmentTestCreateInput,
+    );
 
     // Test lowest rate with no filters
     const lowestRate = shipment.lowestRate();
@@ -213,7 +246,9 @@ describe('Shipment Service', function () {
   });
 
   it('gets the lowest smartrate', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
 
     // Test lowest smartrate with valid filters
     const lowestSmartRate = await client.Shipment.lowestSmartRate(shipment.id, 3, 'percentile_90');
@@ -223,7 +258,9 @@ describe('Shipment Service', function () {
   });
 
   it('raises an error for lowestSmartRate when no rates are found due to deliveryDays', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
     try {
@@ -231,12 +268,14 @@ describe('Shipment Service', function () {
       throw new Error('Test failed intentionally');
     } catch (error) {
       expect(error).to.be.an.instanceOf(FilteringError);
-      expect(error.message).to.equal('No rates found.');
+      expect(error instanceof Error ? error.message : String(error)).to.equal('No rates found.');
     }
   });
 
   it('raises an error for lowestSmartRate when no rates are found due to deliveryAccuracy', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
     try {
@@ -245,12 +284,14 @@ describe('Shipment Service', function () {
     } catch (error) {
       expect(error).to.be.an.instanceOf(InvalidParameterError);
       const regex = /Invalid deliveryAccuracy value/;
-      expect(error.message).to.match(regex);
+      expect(error instanceof Error ? error.message : String(error)).to.match(regex);
     }
   });
 
   it('gets the lowest smartrate from a list of smartRates', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
     const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with valid filters
@@ -261,7 +302,9 @@ describe('Shipment Service', function () {
   });
 
   it('raises an error for getLowestSmartRate when no rates are found due to deliveryDays', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
     const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
@@ -271,7 +314,9 @@ describe('Shipment Service', function () {
   });
 
   it('raises an error for getLowestSmartRate when no rates are found due to deliveryAccuracy', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
     const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
@@ -284,14 +329,16 @@ describe('Shipment Service', function () {
   });
 
   it('generates a form for a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const formType = 'return_packing_slip';
 
     const shipmentWithForm = await client.Shipment.generateForm(
       shipment.id,
       formType,
-      Fixture.rmaFormOptions(),
+      Fixture.rmaFormOptions() as ShipmentTestGenerateFormInput,
     );
 
     expect(shipmentWithForm.forms.length).to.equal(1);
@@ -303,16 +350,22 @@ describe('Shipment Service', function () {
   });
 
   it('buys a shipment with insuranceAmount', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
     const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate(), 100);
 
     expect(boughtShipment.insurance).to.equal('100.00');
   });
 
   it('buys a shipment with end_shipper_id', async function () {
-    const endShipper = await client.EndShipper.create(Fixture.caAddress1());
+    const endShipper = await client.EndShipper.create(
+      Fixture.caAddress1() as EndShipperTestCreateInput,
+    );
 
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
     const boughtShipment = await client.Shipment.buy(
       shipment.id,
       shipment.lowestRate(),
@@ -324,7 +377,9 @@ describe('Shipment Service', function () {
   });
 
   it('retrieve estimated delivery dates for each of the Rates of a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
     const estimatedDeliveryDates = await client.Shipment.retrieveEstimatedDeliveryDate(
       shipment.id,
       Fixture.plannedShipDate(),
@@ -338,7 +393,9 @@ describe('Shipment Service', function () {
   });
 
   it('retrieve recommended ship dates for each of the Rates of a shipment', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
     const recommendedShipDates = await client.Shipment.recommendShipDate(
       shipment.id,
       Fixture.plannedDeliveryDate(),
@@ -352,7 +409,7 @@ describe('Shipment Service', function () {
   });
 
   it('creates and buys a Shipment with Luma', async function () {
-    const oneCallBuyShipment = Fixture.oneCallBuyShipment();
+    const oneCallBuyShipment = Fixture.oneCallBuyShipment() as ShipmentTestCreateAndBuyLumaInput;
     delete oneCallBuyShipment.service;
     oneCallBuyShipment.ruleset_name = Fixture.lumaRulesetName();
     oneCallBuyShipment.planned_ship_date = Fixture.lumaPlannedShipDate();
@@ -363,7 +420,9 @@ describe('Shipment Service', function () {
   });
 
   it('buys a Shipment with Luma', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
 
     const boughtShipment = await client.Shipment.buyLuma(shipment.id, {
       ruleset_name: Fixture.lumaRulesetName(),
