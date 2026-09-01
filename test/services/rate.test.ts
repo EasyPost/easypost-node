@@ -1,10 +1,13 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import Rate from '../../src/models/rate';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
 
 describe('Rate Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -20,7 +23,9 @@ describe('Rate Service', function () {
   });
 
   it('retrieves a rate', async function () {
-    const shipment = await client.Shipment.create(Fixture.basicShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.basicShipment() as ShipmentTestCreateInput,
+    );
 
     const rate = await client.Rate.retrieve(shipment.rates[0].id);
 

@@ -1,4 +1,15 @@
 import baseService from './base_service';
+import Order from '../models/order';
+import Rate from '../models/rate';
+
+type OrderCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  to_address?: Record<string, unknown> | string | null;
+  from_address?: Record<string, unknown> | string | null;
+  shipments?: Array<Record<string, unknown> | string> | null;
+  carrier_accounts?: string[] | null;
+};
+type OrderRatesResponse = { rates: Rate[] };
 
 export default (easypostClient) =>
   /**
@@ -12,7 +23,7 @@ export default (easypostClient) =>
      * @param {Object} params - The parameters to create an order with.
      * @returns {Order} - The created order.
      */
-    static async create(params) {
+    static async create(params: OrderCreateParameters): Promise<Order> {
       const url = 'orders';
 
       const wrappedParams = {
@@ -30,7 +41,7 @@ export default (easypostClient) =>
      * @param {string} service - The service to use for the order purchase.
      * @returns {Order} - The purchased order.
      */
-    static async buy(id, carrier, service) {
+    static async buy(id: string, carrier: string, service: string): Promise<Order> {
       const url = `orders/${id}/buy`;
       const wrappedParams = { carrier, service };
       try {
@@ -48,7 +59,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the order to get rates for.
      * @returns {Order} - The order with rates.
      */
-    static async getRates(id) {
+    static async getRates(id: string): Promise<OrderRatesResponse> {
       const url = `orders/${id}/rates`;
 
       try {
@@ -66,7 +77,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the order to retrieve.
      * @returns {Order} - The retrieved order.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<Order> {
       const url = `orders/${id}`;
 
       return this._retrieve(url);

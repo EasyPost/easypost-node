@@ -1,12 +1,17 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import ScanForm from '../../src/models/scan_form';
+import type ScanFormServiceFactory from '../../src/services/scan_form_service';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
+
+type ScanFormTestCreateInput = Parameters<ReturnType<typeof ScanFormServiceFactory>['create']>[0];
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
 
 describe('ScanForm Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -22,22 +27,26 @@ describe('ScanForm Service', function () {
   });
 
   it('creates a scanform', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const scanform = await client.ScanForm.create({
       shipments: [shipment],
-    });
+    } as ScanFormTestCreateInput);
 
     expect(scanform).to.be.an.instanceOf(ScanForm);
     expect(scanform.id).to.match(/^sf_/);
   });
 
   it('retrieves a scanform', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     const scanform = await client.ScanForm.create({
       shipments: [shipment],
-    });
+    } as ScanFormTestCreateInput);
 
     const retrievedScanform = await client.ScanForm.retrieve(scanform.id);
 

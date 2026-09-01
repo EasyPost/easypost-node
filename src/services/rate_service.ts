@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import Rate from '../models/rate';
 
 export default (easypostClient) =>
   /**
@@ -12,7 +13,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the rate to retrieve.
      * @returns {Rate} - The retrieved rate.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<Rate> {
       const url = `rates/${id}`;
 
       return this._retrieve(url);

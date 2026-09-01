@@ -1,6 +1,12 @@
 import baseService from './base_service';
+import Batch from '../models/batch';
 
 export const DEFAULT_LABEL_FORMAT = 'pdf';
+
+type BatchCreateParameters = Record<string, unknown> & {
+  shipments?: Array<string | Record<string, unknown>> | null;
+};
+type BatchListResponse = { batches: Batch[]; has_more: boolean };
 
 export default (easypostClient) =>
   /**
@@ -14,7 +20,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the batch to be created.
      * @returns {Batch} - The created batch.
      */
-    static async create(params) {
+    static async create(params: BatchCreateParameters): Promise<Batch> {
       const url = 'batches';
 
       const wrappedParams = {
@@ -31,7 +37,7 @@ export default (easypostClient) =>
      * @param {Array} shipmentIds - The ids of the shipments to add to the batch.
      * @returns {Batch} - The updated batch.
      */
-    static async addShipments(id, shipmentIds) {
+    static async addShipments(id: string, shipmentIds: string[]): Promise<Batch> {
       const url = `batches/${id}/add_shipments`;
       const wrappedParams = {
         shipments: shipmentIds.map((s) => ({ id: s })),
@@ -52,7 +58,7 @@ export default (easypostClient) =>
      * @param {Array} shipmentIds - The ids of the shipments to remove from the batch.
      * @returns {Batch} - The updated batch.
      */
-    static async removeShipments(id, shipmentIds) {
+    static async removeShipments(id: string, shipmentIds: string[]): Promise<Batch> {
       const url = `batches/${id}/remove_shipments`;
       const wrappedParams = {
         shipments: shipmentIds.map((s) => ({ id: s })),
@@ -74,7 +80,10 @@ export default (easypostClient) =>
      * @param {string} fileFormat - The format of the label to generate. Defaults to 'pdf'.
      * @returns {Batch} - The updated batch.
      */
-    static async generateLabel(id, fileFormat = DEFAULT_LABEL_FORMAT) {
+    static async generateLabel(
+      id: string,
+      fileFormat: string = DEFAULT_LABEL_FORMAT,
+    ): Promise<Batch> {
       const url = `batches/${id}/label`;
       const wrappedParams = { file_format: fileFormat };
 
@@ -93,7 +102,7 @@ export default (easypostClient) =>
      * @param {string} id - The id of the batch to create a scan form for.
      * @returns {Batch} - The updated batch.
      */
-    static async createScanForm(id) {
+    static async createScanForm(id: string): Promise<Batch> {
       const url = `batches/${id}/scan_form`;
 
       try {
@@ -111,7 +120,7 @@ export default (easypostClient) =>
      * @param {string} id - The id of the batch to purchase.
      * @returns {Batch} - The purchased batch.
      */
-    static async buy(id) {
+    static async buy(id: string): Promise<Batch> {
       const url = `batches/${id}/buy`;
 
       try {
@@ -129,7 +138,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the list of batches.
      * @returns {Object} - An object containing a list of {@link Batch batches} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<BatchListResponse> {
       const url = 'batches';
 
       return this._all(url, params);
@@ -141,7 +150,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the batch to retrieve.
      * @returns {Batch} - The retrieved batch.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<Batch> {
       const url = `batches/${id}`;
 
       return this._retrieve(url);

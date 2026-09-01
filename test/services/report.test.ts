@@ -1,5 +1,5 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';

@@ -1,13 +1,18 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import FilteringError from '../../src/errors/general/filtering_error';
 import Pickup from '../../src/models/pickup';
+import type PickupServiceFactory from '../../src/services/pickup_service';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
+
+type PickupTestCreateInput = Parameters<ReturnType<typeof PickupServiceFactory>['create']>[0];
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
 
 describe('Pickup Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -23,9 +28,11 @@ describe('Pickup Service', function () {
   });
 
   it('creates a pickup', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
-    const pickupData = Fixture.basicPickup();
+    const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
 
     const pickup = await client.Pickup.create(pickupData);
@@ -36,9 +43,11 @@ describe('Pickup Service', function () {
   }, 20000);
 
   it('retrieves a pickup', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
-    const pickupData = Fixture.basicPickup();
+    const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
 
     const pickup = await client.Pickup.create(pickupData);
@@ -78,9 +87,11 @@ describe('Pickup Service', function () {
   });
 
   it('buys a pickup', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
-    const pickupData = Fixture.basicPickup();
+    const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
 
     const pickup = await client.Pickup.create(pickupData);
@@ -98,9 +109,11 @@ describe('Pickup Service', function () {
   }, 20000);
 
   it('cancels a pickup', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
-    const pickupData = Fixture.basicPickup();
+    const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
 
     const pickup = await client.Pickup.create(pickupData);
@@ -118,9 +131,11 @@ describe('Pickup Service', function () {
   }, 30000);
 
   it('gets the lowest rate', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
-    const pickupData = Fixture.basicPickup();
+    const pickupData = Fixture.basicPickup() as PickupTestCreateInput;
     pickupData.shipment = withoutParams(shipment);
 
     const pickup = await client.Pickup.create(pickupData);

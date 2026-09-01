@@ -1,12 +1,15 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import Refund from '../../src/models/refund';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
+
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
 
 describe('Refund Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -22,7 +25,9 @@ describe('Refund Service', function () {
   });
 
   it('creates a refund', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
     // We need to retrieve the shipment so that the tracking_code has time to populate
     const retrievedShipment = await client.Shipment.retrieve(shipment.id);
