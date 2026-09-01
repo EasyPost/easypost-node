@@ -207,7 +207,7 @@ export default (easypostClient) =>
      * @param {*} params The parameters passed when fetching the response.
      * @returns {*} A plain object or array suitable for JSON serialization.
      */
-    static _convertToEasyPostObject(response, params) {
+    static _convertToEasyPostObject(response, params = {}) {
       const modelResponse = this._buildEasyPostObject(response, params);
 
       return this._toPlainEasyPostObject(modelResponse);

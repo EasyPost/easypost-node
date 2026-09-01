@@ -3,16 +3,19 @@
  * @internal
  * @abstract
  */
-export default class EasyPostObject {
-  static id;
-  static object;
-  static mode;
-  static created_at;
-  static updated_at;
-  static _params;
+const isObjectRecord = (value: unknown): value is Record<PropertyKey, unknown> =>
+  value != null && typeof value === 'object';
 
-  static [Symbol.hasInstance](instance) {
-    if (instance == null || typeof instance !== 'object') {
+export default class EasyPostObject {
+  static id: string;
+  static object: string;
+  static mode: string;
+  static created_at: string;
+  static updated_at: string;
+  static _params: Record<string, unknown>;
+
+  static [Symbol.hasInstance](instance: unknown): boolean {
+    if (!isObjectRecord(instance)) {
       return false;
     }
 
