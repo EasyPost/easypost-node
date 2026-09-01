@@ -22,13 +22,8 @@ type ReferralCreateParameters = Record<string, unknown> & {
 };
 type MandateData = Record<string, unknown>;
 type ReferralCustomerListResponse = { referral_customers: User[]; has_more: boolean };
-type ReferralScopedClient = {
-  _post: (...args: [string, Record<string, unknown>?]) => Promise<{ body: IPaymentMethod }>;
-};
-type EasyPostHttpClient = {
-  _get: (...args: [string, Record<string, unknown>?]) => Promise<{ body: Record<string, unknown> }>;
-  _put: (...args: [string, Record<string, unknown>?]) => Promise<void>;
-};
+type ReferralScopedClient = Pick<EasyPostClient, '_post'>;
+type EasyPostHttpClient = Pick<EasyPostClient, '_get' | '_put'>;
 
 /**
  * Get an instance of the EasyPostClient using the referral user's API key.
