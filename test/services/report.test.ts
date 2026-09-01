@@ -9,7 +9,7 @@ import * as setupPolly from '../helpers/setup_polly';
 
 describe('Report Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -81,14 +81,14 @@ describe('Report Service', function () {
 
     expect(reportsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(reports.has_more).to.exist;
-    reportsArray.forEach((report) => {
+    reportsArray.forEach((report: any) => {
       expect(report).to.be.an.instanceOf(Report);
     });
   });
 
   it('retrieves next page of reports', async function () {
-    let reports;
-    let nextPage;
+    let reports: any;
+    let nextPage: any;
 
     try {
       const params = {

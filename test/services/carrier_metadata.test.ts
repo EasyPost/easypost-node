@@ -6,7 +6,7 @@ import * as setupPolly from '../helpers/setup_polly';
 /* eslint-disable func-names */
 describe('CarrierMetadataService', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -20,8 +20,8 @@ describe('CarrierMetadataService', function () {
   it('retrieves all carrier metadata', async function () {
     const carrierMetadata = await client.CarrierMetadata.retrieve();
 
-    expect(carrierMetadata.some((carrier) => carrier.name === 'usps')).to.be.true;
-    expect(carrierMetadata.some((carrier) => carrier.name === 'fedex')).to.be.true;
+    expect(carrierMetadata.some((carrier: any) => carrier.name === 'usps')).to.be.true;
+    expect(carrierMetadata.some((carrier: any) => carrier.name === 'fedex')).to.be.true;
   });
 
   it('retrieves carrier metadata based on the filters provided', async function () {
@@ -30,7 +30,7 @@ describe('CarrierMetadataService', function () {
       ['service_levels', 'predefined_packages'],
     );
 
-    expect(carrierMetadata.some((carrier) => carrier.name === 'usps')).to.be.true;
+    expect(carrierMetadata.some((carrier: any) => carrier.name === 'usps')).to.be.true;
     expect(carrierMetadata).to.have.lengthOf(1);
     expect(carrierMetadata[0]).to.have.property('service_levels');
     expect(carrierMetadata[0]).to.have.property('predefined_packages');

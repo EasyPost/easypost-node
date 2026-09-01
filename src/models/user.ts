@@ -1,3 +1,4 @@
+import ApiKey from './api_key';
 import EasyPostObject from './easypost_object';
 
 /**
@@ -6,10 +7,10 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class User extends EasyPostObject {
-  declare api_keys?: Record<string, unknown>[] | null;
+  declare api_keys?: ApiKey[] | null;
   declare balance?: string | null;
   declare cc_fee_rate?: string | null;
-  declare children?: Record<string, unknown>[] | null;
+  declare children?: User[] | null;
   declare email?: string | null;
   declare insurance_fee_minimum?: string | null;
   declare insurance_fee_rate?: string | null;

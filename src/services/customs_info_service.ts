@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import CustomsInfo from '../models/customs_info';
+import type EasyPostClient from '../easypost';
 
 type CustomsItemInput = Record<string, unknown>;
 
@@ -16,7 +17,7 @@ type CustomsInfoCreateParameters = Record<string, unknown> & {
   declaration?: string | null;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The CustomsInfoService class provides methods for interacting with EasyPost {@link CustomsInfo} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

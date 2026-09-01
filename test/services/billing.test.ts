@@ -9,7 +9,7 @@ import {
   MockRequestResponseInfo,
 } from '../helpers/mocking';
 
-const middleware = (request) => {
+const middleware = (request: any) => {
   return new MockMiddleware(request, [
     new MockRequest(
       new MockRequestMatchRule('POST', 'v2\\/bank_accounts\\/\\S*\\/charges$'),
@@ -47,7 +47,7 @@ const middleware = (request) => {
 };
 
 describe('Billing Service', function () {
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY, {

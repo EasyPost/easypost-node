@@ -1,5 +1,10 @@
+import type { ICustomsInfoCreateParameters } from '../../types/Customs/CustomsInfo/CustomsInfoCreateParameters';
+import type { DeepPartial } from '../../types/utils';
 import Constants from '../constants';
-import Rate from '../models/rate';
+import type EasyPostClient from '../easypost';
+import Address from '../models/address';
+import CustomsInfo from '../models/customs_info';
+import Parcel from '../models/parcel';
 import Shipment from '../models/shipment';
 import baseService from './base_service';
 
@@ -29,13 +34,16 @@ type ShipmentLineItem = Record<string, unknown> & {
   item_description?: string | null;
 };
 
+type CustomsInfoReferenceInput = DeepPartial<ICustomsInfoCreateParameters>;
+
 type ShipmentCreateParameters = Record<string, unknown> & {
   reference?: string | null;
-  to_address?: AddressCreateInput | string | null;
-  from_address?: AddressCreateInput | string | null;
-  parcel?: ParcelCreateInput | string | null;
+  to_address?: AddressCreateInput | Address | string | null;
+  from_address?: AddressCreateInput | Address | string | null;
+  parcel?: ParcelCreateInput | Parcel | string | null;
   carrier_accounts?: string[] | null;
-  customs_info?: Record<string, unknown> | Record<string, unknown>[] | null;
+  customs_info?:
+    CustomsInfo | CustomsInfo[] | CustomsInfoReferenceInput | CustomsInfoReferenceInput[] | null;
   tax_identifiers?: Array<ShipmentTaxIdentifier | null | undefined> | null;
   options?: Record<string, unknown> | null;
   line_items?: ShipmentLineItem[] | null;
@@ -44,8 +52,12 @@ type ShipmentRateInput = string | { id: string };
 type ShipmentCollection = Record<string, unknown>;
 type ShipmentListResponse = { shipments: Shipment[]; has_more: boolean };
 type ShipmentSmartRateResponse = Array<Record<string, unknown>>;
+type SmartRate = {
+  rate: string;
+  time_in_transit: Record<string, number>;
+};
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ShipmentService class provides methods for interacting with EasyPost {@link Shipment} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
@@ -158,7 +170,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the shipment to get SmartRates for.
      * @returns {Rate[]} - The SmartRates for the shipment.
      */
-    static async getSmartRates(id: string): Promise<Rate[]> {
+    static async getSmartRates(id: string): Promise<ShipmentSmartRateResponse> {
       const url = `shipments/${id}/smartrate`;
 
       try {
@@ -250,7 +262,7 @@ export default (easypostClient) =>
       deliveryDays: number,
       deliveryAccuracy: string,
     ): Promise<ReturnType<typeof Constants.Utils.getLowestSmartRate>> {
-      const smartRates = (await this.getSmartRates(id)) as any[];
+      const smartRates = (await this.getSmartRates(id)) as SmartRate[];
       return Constants.Utils.getLowestSmartRate(
         smartRates,
         deliveryDays,

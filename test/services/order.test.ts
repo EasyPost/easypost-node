@@ -13,7 +13,7 @@ type OrderTestCreateInput = Parameters<ReturnType<typeof OrderServiceFactory>['c
 
 describe('Order Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -49,7 +49,7 @@ describe('Order Service', function () {
     const ratesArray = rates.rates;
 
     expect(ratesArray).to.be.an.instanceOf(Array);
-    ratesArray.forEach((rate) => {
+    ratesArray.forEach((rate: any) => {
       expect(rate).to.be.an.instanceOf(Rate);
     });
   });
@@ -61,7 +61,7 @@ describe('Order Service', function () {
 
     const shipmentsArray = boughtOrder.shipments;
 
-    shipmentsArray.forEach((shipment) => {
+    shipmentsArray.forEach((shipment: any) => {
       expect(shipment.postage_label).to.exist;
     });
   });

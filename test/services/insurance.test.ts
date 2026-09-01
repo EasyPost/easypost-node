@@ -14,7 +14,7 @@ type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFacto
 
 describe('Insurance Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -65,7 +65,7 @@ describe('Insurance Service', function () {
 
     expect(insuranceArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(insurance.has_more).to.exist;
-    insuranceArray.forEach((event) => {
+    insuranceArray.forEach((event: any) => {
       expect(event).to.be.an.instanceOf(Insurance);
     });
   });

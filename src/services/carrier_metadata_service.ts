@@ -1,11 +1,12 @@
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 
 type CarrierMetadata = Record<string, unknown>;
 
 /**
  * @extends baseService
  */
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   class CarrierMetadataService extends baseService(easypostClient) {
     /**
      * Retrieve a list of carrier metadata based on the provided parameters.

@@ -1,17 +1,20 @@
-import baseService from './base_service';
+import type EasyPostClient from '../easypost';
+import Address from '../models/address';
 import Order from '../models/order';
 import Rate from '../models/rate';
+import Shipment from '../models/shipment';
+import baseService from './base_service';
 
-type OrderCreateParameters = Record<string, unknown> & {
+type OrderCreateParameters = {
   reference?: string | null;
-  to_address?: Record<string, unknown> | string | null;
-  from_address?: Record<string, unknown> | string | null;
-  shipments?: Array<Record<string, unknown> | string> | null;
+  to_address?: Address | string | null;
+  from_address?: Address | string | null;
+  shipments?: Array<Shipment | string> | null;
   carrier_accounts?: string[] | null;
 };
 type OrderRatesResponse = { rates: Rate[] };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The OrderService class provides methods for interacting with EasyPost {@link Order} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

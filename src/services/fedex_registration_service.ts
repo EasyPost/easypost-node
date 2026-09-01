@@ -1,10 +1,9 @@
 import { v4 as uuid } from 'uuid';
-
-import type {
-  IFedExAccountValidationResponse,
-  IFedExRequestPinResponse,
-} from '../../types/FedExRegistration/FedExRegistration';
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
+
+type IFedExAccountValidationResponse = Record<string, unknown>;
+type IFedExRequestPinResponse = Record<string, unknown>;
 
 type FedExValidationMap = Record<string, unknown> & { name?: string | null };
 type FedExParams = Record<string, unknown> & {
@@ -14,7 +13,7 @@ type FedExParams = Record<string, unknown> & {
   easypost_details?: Record<string, unknown>;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The FedExRegistrationService class provides methods for registering FedEx carrier accounts with MFA.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

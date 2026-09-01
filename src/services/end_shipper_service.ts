@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import EndShipper from '../models/end_shipper';
+import type EasyPostClient from '../easypost';
 
 type EndShipperCreateParameters = Record<string, unknown> & {
   name?: string | null;
@@ -15,7 +16,7 @@ type EndShipperCreateParameters = Record<string, unknown> & {
 };
 type EndShipperListResponse = { end_shippers: EndShipper[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The EndShipperService class provides methods for interacting with EasyPost {@link EndShipper} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

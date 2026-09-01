@@ -1,6 +1,8 @@
 import Constants from '../constants';
+import Address from './address';
 import EasyPostObject from './easypost_object';
 import Rate from './rate';
+import Shipment from './shipment';
 
 /**
  * An {@link https://docs.easypost.com/docs/orders Order} represents a collection of packages, intended only for multi-parcel shipments.
@@ -8,15 +10,15 @@ import Rate from './rate';
  * @extends EasyPostObject
  */
 export default class Order extends EasyPostObject {
-  declare buyer_address?: Record<string, unknown> | null;
-  declare from_address?: Record<string, unknown> | null;
+  declare buyer_address?: Address | null;
+  declare from_address?: Address | null;
   declare is_return?: boolean | null;
   declare messages?: Record<string, unknown>[] | null;
   declare rates?: Rate[] | null;
   declare reference?: string | null;
-  declare return_address?: Record<string, unknown> | null;
-  declare shipments?: Record<string, unknown>[] | null;
-  declare to_address?: Record<string, unknown> | null;
+  declare return_address?: Address | null;
+  declare shipments?: Shipment[] | null;
+  declare to_address?: Address | null;
 
   /**
    * Get the lowest rate for this {@link Order}.

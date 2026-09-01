@@ -29,7 +29,7 @@ type ShipmentTestGenerateFormInput = Parameters<
 /* eslint-disable func-names */
 describe('Shipment Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -120,7 +120,7 @@ describe('Shipment Service', function () {
 
     expect(shipmentsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(shipments.has_more).to.exist;
-    shipmentsArray.forEach((shipment) => {
+    shipmentsArray.forEach((shipment: any) => {
       expect(shipment).to.be.an.instanceOf(Shipment);
     });
   });
@@ -161,7 +161,7 @@ describe('Shipment Service', function () {
     const ratesArray = rates.rates;
 
     expect(ratesArray).to.be.an.instanceOf(Array);
-    ratesArray.forEach((rate) => {
+    ratesArray.forEach((rate: any) => {
       expect(rate).to.be.an.instanceOf(Rate);
     });
   });
@@ -295,7 +295,7 @@ describe('Shipment Service', function () {
     const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with valid filters
-    const lowestSmartRate = client.Utils.getLowestSmartRate(smartRates, 3, 'percentile_90');
+    const lowestSmartRate = client.Utils.getLowestSmartRate(smartRates, 3, 'percentile_90') as any;
     expect(lowestSmartRate.service).to.equal('GroundAdvantage');
     expect(lowestSmartRate.rate).to.equal(6.98);
     expect(lowestSmartRate.carrier).to.equal('USPS');

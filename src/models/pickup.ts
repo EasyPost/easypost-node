@@ -1,5 +1,9 @@
 import Constants from '../constants';
+import Address from './address';
+import CarrierAccount from './carrier_account';
 import EasyPostObject from './easypost_object';
+import PickupRate from './pickup_rate';
+import Shipment from './shipment';
 
 /**
  * A {@link https://docs.easypost.com/docs/pickups Pickup} represents a scheduled carrier pickup of packages from an {@link https://docs.easypost.com/docs/addresses Address}.
@@ -7,17 +11,17 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Pickup extends EasyPostObject {
-  declare address?: Record<string, unknown> | null;
-  declare carrier_accounts?: Record<string, unknown>[] | null;
+  declare address?: Address | null;
+  declare carrier_accounts?: CarrierAccount[] | null;
   declare confirmation?: string | null;
   declare instructions?: string | null;
   declare is_account_address?: boolean | null;
   declare max_datetime?: string | null;
   declare messages?: Record<string, unknown>[] | null;
   declare min_datetime?: string | null;
-  declare pickup_rates?: Parameters<typeof Constants.Utils.getLowestRate>[0] | null;
+  declare pickup_rates?: PickupRate[] | null;
   declare reference?: string | null;
-  declare shipment?: Record<string, unknown> | null;
+  declare shipment?: Shipment | null;
   declare status?: 'unknown' | 'scheduled' | 'canceled' | null;
 
   /**

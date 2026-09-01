@@ -17,7 +17,7 @@ type SmartRateRecommendInput = Parameters<
 /* eslint-disable func-names */
 describe('SmartRate Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);

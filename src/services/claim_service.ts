@@ -1,5 +1,6 @@
 import baseService from './base_service';
 import Claim from '../models/claim';
+import type EasyPostClient from '../easypost';
 
 type ClaimCreateParameters = Record<string, unknown> & {
   tracking_code?: string | null;
@@ -16,7 +17,7 @@ type ClaimCreateParameters = Record<string, unknown> & {
 type ClaimCollection = Record<string, unknown>;
 type ClaimListResponse = { claims: Claim[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ClaimService class provides methods for interacting with EasyPost {@link Claim} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

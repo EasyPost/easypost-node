@@ -3,7 +3,7 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": false,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "rootDir": "./src",

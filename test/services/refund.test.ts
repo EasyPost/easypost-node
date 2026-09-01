@@ -13,7 +13,7 @@ type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFacto
 
 describe('Refund Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_TEST_API_KEY);
@@ -39,7 +39,7 @@ describe('Refund Service', function () {
 
     const refunds = await client.Refund.create(refundData);
 
-    refunds.forEach((pickup) => {
+    refunds.forEach((pickup: any) => {
       expect(pickup).to.be.an.instanceOf(Refund);
     });
     expect(refunds[0].id).to.match(/^rfnd_/);
@@ -53,7 +53,7 @@ describe('Refund Service', function () {
 
     expect(refundsArray.length).to.be.lessThanOrEqual(Fixture.pageSize());
     expect(refunds.has_more).to.exist;
-    refundsArray.forEach((refund) => {
+    refundsArray.forEach((refund: any) => {
       expect(refund).to.be.an.instanceOf(Refund);
     });
   });

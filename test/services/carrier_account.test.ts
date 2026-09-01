@@ -15,7 +15,7 @@ type CarrierAccountTestCreateInput = Parameters<
 /* eslint-disable func-names */
 describe('CarrierAccount Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);
@@ -87,7 +87,7 @@ describe('CarrierAccount Service', function () {
   it('retrieves all carrier accounts', async function () {
     const carrierAccounts = await client.CarrierAccount.all();
 
-    carrierAccounts.forEach((carrierAccount) => {
+    carrierAccounts.forEach((carrierAccount: any) => {
       expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
     });
   });
@@ -143,7 +143,7 @@ describe('CarrierAccount Service', function () {
     );
 
     await client.CarrierAccount.delete(carrierAccount.id).then(
-      expect(function (result) {
+      expect(function (result: any) {
         result.not.to.throw();
       }),
     );

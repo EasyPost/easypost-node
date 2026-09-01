@@ -7,7 +7,7 @@ import * as setupPolly from '../helpers/setup_polly';
 
 describe('CarrierType Service', function () {
   const getPolly = setupPolly.setupPollyTests();
-  let client;
+  let client: EasyPostClient;
 
   beforeAll(function () {
     client = new EasyPostClient(process.env.EASYPOST_PROD_API_KEY);
@@ -21,7 +21,7 @@ describe('CarrierType Service', function () {
   it('retrieves the carrier account types available', async function () {
     const carrierTypes = await client.CarrierType.all();
 
-    carrierTypes.forEach((type) => {
+    carrierTypes.forEach((type: any) => {
       expect(type).to.be.an.instanceOf(CarrierType);
     });
   });

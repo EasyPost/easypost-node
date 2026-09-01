@@ -1,6 +1,7 @@
 import Constants from '../constants';
 import InvalidObjectError from '../errors/general/invalid_object_error';
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 
 type PaymentMethodObject = {
   id: string;
@@ -13,7 +14,7 @@ type PaymentMethodsResponse = Record<string, unknown> & {
   secondary_payment_method?: PaymentMethodObject | null;
 };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The BillingService class provides methods for interacting with EasyPost's billing capabilities.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

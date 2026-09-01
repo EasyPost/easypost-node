@@ -44,15 +44,17 @@ const pkgVersion = process.env.npm_package_version ?? 'unknown';
 type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete';
 type RequestHeaders = Record<string, string>;
 type HttpClient = typeof fetch;
+type RequestParams = Record<string, unknown>;
+type RequestBody = RequestParams | null;
 
 interface CompatibilityRequest {
   method: string;
   url: string;
-  _data: unknown;
+  _data: RequestBody | undefined;
   set(headersToSet?: RequestHeaders): CompatibilityRequest;
   auth(key: string): CompatibilityRequest;
-  query(queryParams?: Record<string, unknown>): CompatibilityRequest;
-  send(body?: unknown): CompatibilityRequest;
+  query(queryParams?: RequestParams): CompatibilityRequest;
+  send(body?: RequestBody): CompatibilityRequest;
 }
 
 interface HttpMiddleware {
@@ -218,11 +220,7 @@ export default class EasyPostClient {
    * @param {Object} [params] - The parameters to send with the request.
    * @returns {Promise<Object>} The response from the API call.
    */
-  async makeApiCall(
-    method: string,
-    endpoint: string,
-    params: Record<string, unknown> = {},
-  ): Promise<unknown> {
+  async makeApiCall(method: string, endpoint: string, params: RequestBody = {}): Promise<unknown> {
     const response = await this._request(endpoint, method, params);
 
     return response.body;
@@ -405,7 +403,7 @@ export default class EasyPostClient {
   async _request(
     path = '',
     method: string = EasyPostClient.METHODS.GET,
-    params: Record<string, unknown> = {},
+    params: RequestBody = {},
     headers: RequestHeaders = {},
   ): Promise<any> {
     const urlPath = this._buildPath(path);
@@ -415,19 +413,21 @@ export default class EasyPostClient {
     const isQueryMethod =
       normalizedMethod === EasyPostClient.METHODS.GET ||
       normalizedMethod === EasyPostClient.METHODS.DELETE;
-    let requestBody;
+    let requestBody: RequestBody | undefined;
 
     if (params !== undefined) {
       if (isQueryMethod) {
-        Object.entries(params).forEach(([key, value]) => {
-          url.searchParams.append(key, String(value));
-        });
+        if (params !== null) {
+          Object.entries(params).forEach(([key, value]) => {
+            url.searchParams.append(key, String(value));
+          });
+        }
       } else {
         requestBody = params;
       }
     }
 
-    const compatibilityRequest = {
+    const compatibilityRequest: CompatibilityRequest = {
       method: normalizedMethod.toUpperCase(),
       url: url.toString(),
       _data: requestBody,
@@ -435,7 +435,7 @@ export default class EasyPostClient {
         Object.assign(requestHeaders, headersToSet);
         return compatibilityRequest;
       },
-      auth: (key) => {
+      auth: (key: string) => {
         requestHeaders.Authorization = `Basic ${EasyPostClient._toBase64(`${key}:`)}`;
         return compatibilityRequest;
       },
@@ -446,7 +446,7 @@ export default class EasyPostClient {
         compatibilityRequest.url = url.toString();
         return compatibilityRequest;
       },
-      send: (body = {}) => {
+      send: (body: RequestBody = {}) => {
         compatibilityRequest._data = body;
         return compatibilityRequest;
       },
@@ -466,11 +466,12 @@ export default class EasyPostClient {
       }
     }
 
-    let middlewareResponse;
+    let middlewareResponse: any;
 
     if (
       this.requestMiddleware &&
       params !== undefined &&
+      params !== null &&
       typeof middlewareRequest.query === 'function' &&
       isQueryMethod
     ) {
@@ -570,11 +571,7 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _get(
-    path: string,
-    params: Record<string, unknown> = {},
-    headers: RequestHeaders = {},
-  ): Promise<any> {
+  _get(path: string, params: RequestParams = {}, headers: RequestHeaders = {}): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.GET, params, headers);
   }
 
@@ -585,11 +582,7 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _post(
-    path: string,
-    params: Record<string, unknown> = {},
-    headers: RequestHeaders = {},
-  ): Promise<any> {
+  _post(path: string, params: RequestBody = {}, headers: RequestHeaders = {}): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.POST, params, headers);
   }
 
@@ -600,11 +593,7 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _put(
-    path: string,
-    params: Record<string, unknown> = {},
-    headers: RequestHeaders = {},
-  ): Promise<any> {
+  _put(path: string, params: RequestBody = {}, headers: RequestHeaders = {}): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.PUT, params, headers);
   }
 
@@ -615,11 +604,7 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _patch(
-    path: string,
-    params: Record<string, unknown> = {},
-    headers: RequestHeaders = {},
-  ): Promise<any> {
+  _patch(path: string, params: RequestBody = {}, headers: RequestHeaders = {}): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.PATCH, params, headers);
   }
 
@@ -630,11 +615,7 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _delete(
-    path: string,
-    params: Record<string, unknown> = {},
-    headers: RequestHeaders = {},
-  ): Promise<any> {
+  _delete(path: string, params: RequestParams = {}, headers: RequestHeaders = {}): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.DELETE, params, headers);
   }
 }

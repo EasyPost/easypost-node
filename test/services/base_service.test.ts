@@ -22,7 +22,7 @@ describe('Base Service', function () {
   it('getNextPage collects all pages', async function () {
     const pageSize = 1; // Doesn't matter what this is, we're mocking the response
 
-    let allResults = [];
+    let allResults: any[] = [];
     let previousPage = null;
 
     // Using scanforms as an example, but this should work for any service since it's a base class method
@@ -35,7 +35,7 @@ describe('Base Service', function () {
       ],
       has_more: true,
     };
-    let middleware = (request) => {
+    let middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule('GET', 'v2\\/scan_forms'),
@@ -61,7 +61,7 @@ describe('Base Service', function () {
       ],
       has_more: true,
     };
-    middleware = (request) => {
+    middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule('GET', 'v2\\/scan_forms'),
@@ -87,7 +87,7 @@ describe('Base Service', function () {
       ],
       has_more: false,
     };
-    middleware = (request) => {
+    middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule('GET', 'v2\\/scan_forms'),
@@ -132,7 +132,7 @@ describe('Base Service', function () {
       ],
       has_more: true,
     };
-    let middleware = (request) => {
+    let middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule('GET', 'v2\\/scan_forms'),
@@ -157,7 +157,7 @@ describe('Base Service', function () {
       ],
       has_more: true,
     };
-    middleware = (request) => {
+    middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
           new MockRequestMatchRule('GET', 'v2\\/scan_forms'),

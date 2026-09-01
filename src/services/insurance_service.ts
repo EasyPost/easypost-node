@@ -1,10 +1,12 @@
-import baseService from './base_service';
+import type EasyPostClient from '../easypost';
+import Address from '../models/address';
 import Insurance from '../models/insurance';
+import baseService from './base_service';
 
 type InsuranceCreateParameters = Record<string, unknown> & {
   reference?: string | null;
-  to_address?: Record<string, unknown> | string | null;
-  from_address?: Record<string, unknown> | string | null;
+  to_address?: Address | string | null;
+  from_address?: Address | string | null;
   carrier?: string | null;
   tracking_code?: string | null;
   amount?: string | null;
@@ -12,7 +14,7 @@ type InsuranceCreateParameters = Record<string, unknown> & {
 type InsuranceCollection = Record<string, unknown>;
 type InsuranceListResponse = { insurances: Insurance[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The InsuranceService class provides methods for interacting with EasyPost {@link Insurance} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

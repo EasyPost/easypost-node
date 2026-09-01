@@ -1,14 +1,19 @@
-import baseService from './base_service';
+import type { IShipmentCreateParameters } from '../../types/Shipment';
+import type { DeepPartial } from '../../types/utils';
+import type EasyPostClient from '../easypost';
 import Batch from '../models/batch';
+import baseService from './base_service';
 
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
+type ShipmentReferenceInput = { id?: string | null } & DeepPartial<IShipmentCreateParameters>;
+
 type BatchCreateParameters = Record<string, unknown> & {
-  shipments?: Array<string | Record<string, unknown>> | null;
+  shipments?: Array<string | ShipmentReferenceInput> | null;
 };
 type BatchListResponse = { batches: Batch[]; has_more: boolean };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The BatchService class provides methods for interacting with EasyPost {@link Batch} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

@@ -1,9 +1,10 @@
 import baseService from './base_service';
+import type EasyPostClient from '../easypost';
 
 type SmartRateParams = Record<string, unknown>;
 type SmartRateResult = { results: Array<Record<string, unknown>> };
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The SmartRateService class provides methods for interacting with EasyPost SmartRate APIs.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

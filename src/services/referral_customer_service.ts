@@ -128,7 +128,7 @@ async function _sendCardDetailsToEasyPost(
   return response.body;
 }
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ReferralCustomerService class provides methods for interacting with EasyPost {@link User referral customer} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.

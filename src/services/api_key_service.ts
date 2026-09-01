@@ -1,4 +1,5 @@
 import util from 'util';
+import type EasyPostClient from '../easypost';
 
 import Constants from '../constants';
 import FilteringError from '../errors/general/filtering_error';
@@ -12,7 +13,7 @@ type ApiKeyUser = Record<string, unknown> & {
 };
 type ApiKeyAllResponse = Record<string, unknown>;
 
-export default (easypostClient) =>
+export default (easypostClient: EasyPostClient) =>
   /**
    * The ApiKeyService class provides methods for interacting with EasyPost {@link ApiKey} objects.
    * @param {EasyPostClient} easypostClient - The pre-configured EasyPostClient instance to use for API requests with this service.
