@@ -99,6 +99,10 @@ const RESOURCES = {
   Webhook,
 };
 
+function isObjectRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
 export default (easypostClient: any) =>
   /**
    * The base class for all EasyPost client library services.
@@ -174,18 +178,20 @@ export default (easypostClient: any) =>
         });
       }
 
-      if (typeof response === 'object' && response !== null) {
-        const responseRecord = response as Record<string, any>;
+      if (isObjectRecord(response)) {
         let classObject: any;
-        if ((RESOURCES as Record<string, any>)[responseRecord.object] !== undefined) {
-          classObject = new (RESOURCES as Record<string, any>)[responseRecord.object]();
+        if (
+          typeof response.object === 'string' &&
+          (RESOURCES as Record<string, any>)[response.object] !== undefined
+        ) {
+          classObject = new (RESOURCES as Record<string, any>)[response.object]();
         } else if (
-          responseRecord.id !== undefined &&
+          typeof response.id === 'string' &&
           (EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP as Record<string, any>)[
-            responseRecord.id.substr(0, responseRecord.id.indexOf('_'))
+            response.id.substring(0, response.id.indexOf('_'))
           ] !== undefined
         ) {
-          const className = responseRecord.id.substr(0, responseRecord.id.indexOf('_'));
+          const className = response.id.substring(0, response.id.indexOf('_'));
           classObject = new (EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP as Record<string, any>)[
             className
           ]();
@@ -193,8 +199,8 @@ export default (easypostClient: any) =>
           classObject = new EasyPostObject();
         }
 
-        Object.keys(responseRecord).forEach((key) => {
-          classObject[key] = this._buildEasyPostObject(responseRecord[key], params);
+        Object.keys(response).forEach((key) => {
+          classObject[key] = this._buildEasyPostObject(response[key], params);
         });
 
         classObject._params = params;
