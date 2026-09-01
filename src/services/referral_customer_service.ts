@@ -6,7 +6,6 @@ import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
 import User from '../models/user';
 import baseService from './base_service';
-type IPaymentMethod = Record<string, unknown>;
 
 type ReferralCreateParameters = Record<string, unknown> & {
   reference?: string | null;

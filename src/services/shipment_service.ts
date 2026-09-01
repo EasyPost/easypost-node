@@ -5,7 +5,6 @@ import type EasyPostClient from '../easypost';
 import Address from '../models/address';
 import CustomsInfo from '../models/customs_info';
 import Parcel from '../models/parcel';
-import Rate from '../models/rate';
 import Shipment from '../models/shipment';
 import baseService from './base_service';
 
@@ -262,7 +261,7 @@ export default (easypostClient: EasyPostClient) =>
       id: string,
       deliveryDays: number,
       deliveryAccuracy: string,
-    ): Promise<Rate> {
+    ): Promise<ReturnType<typeof Constants.Utils.getLowestSmartRate>> {
       const smartRates = (await this.getSmartRates(id)) as SmartRate[];
       return Constants.Utils.getLowestSmartRate(
         smartRates,
