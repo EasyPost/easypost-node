@@ -6,9 +6,9 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Parcel extends EasyPostObject {
-  static height;
-  static length;
-  static predefined_package;
-  static weight;
-  static width;
+  declare height?: number | null;
+  declare length?: number | null;
+  declare predefined_package?: string | null;
+  declare weight?: number | null;
+  declare width?: number | null;
 }
