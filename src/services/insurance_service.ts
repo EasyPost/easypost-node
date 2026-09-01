@@ -1,4 +1,16 @@
 import baseService from './base_service';
+import Insurance from '../models/insurance';
+
+type InsuranceCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  to_address?: Record<string, unknown> | string | null;
+  from_address?: Record<string, unknown> | string | null;
+  carrier?: string | null;
+  tracking_code?: string | null;
+  amount?: string | null;
+};
+type InsuranceCollection = Record<string, unknown>;
+type InsuranceListResponse = { insurances: Insurance[]; has_more: boolean };
 
 export default (easypostClient) =>
   /**
@@ -12,7 +24,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the insurance to be created.
      * @returns {Insurance} - The created insurance.
      */
-    static async create(params) {
+    static async create(params: InsuranceCreateParameters): Promise<Insurance> {
       const url = 'insurances';
 
       const wrappedParams = {
@@ -28,7 +40,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the insurance records.
      * @returns {Object} - An object containing the list of {@link Insurance insurance} records and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<InsuranceListResponse> {
       const url = 'insurances';
 
       return this._all(url, params);
@@ -40,7 +52,10 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(insurances, pageSize = null) {
+    static async getNextPage(
+      insurances: InsuranceCollection,
+      pageSize: number | null = null,
+    ): Promise<InsuranceListResponse> {
       const url = 'insurances';
       return this._getNextPage(url, 'insurances', insurances, pageSize);
     }
@@ -51,7 +66,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the insurance to retrieve.
      * @returns {Insurance} - The retrieved insurance.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<Insurance> {
       const url = `insurances/${id}`;
 
       return this._retrieve(url);
@@ -63,7 +78,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the insurance to be refunded.
      * @returns {Insurance} - The refunded insurance.
      */
-    static async refund(id) {
+    static async refund(id: string): Promise<Insurance> {
       const url = `insurances/${id}/refund`;
       const response = await easypostClient._post(url);
 

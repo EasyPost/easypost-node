@@ -1,19 +1,24 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import Claim from '../../src/models/claim';
+import type ClaimServiceFactory from '../../src/services/claim_service';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 /** @typedef {import("../../types/EasyPost").default} Client */
 
+type ClaimTestCreateInput = Parameters<ReturnType<typeof ClaimServiceFactory>['create']>[0];
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
+
 const CLAIM_AMOUNT = 100;
 
 /** @param {Client} client */
 const buyTestShipment = async (client) => {
-  const shipment = await client.Shipment.create(Fixture.fullShipment());
+  const shipment = await client.Shipment.create(Fixture.fullShipment() as ShipmentTestCreateInput);
   const rate = shipment.lowestRate();
 
   return client.Shipment.buy(shipment.id, rate, CLAIM_AMOUNT);
@@ -23,9 +28,9 @@ const buyTestShipment = async (client) => {
 const createTestClaim = async (client) => {
   const shipment = await buyTestShipment(client);
 
-  const claimData = Fixture.basicClaim();
+  const claimData = Fixture.basicClaim() as ClaimTestCreateInput;
   claimData.tracking_code = shipment.tracking_code;
-  claimData.amount = CLAIM_AMOUNT;
+  claimData.amount = String(CLAIM_AMOUNT);
 
   return client.Claim.create(claimData);
 };

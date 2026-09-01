@@ -1,11 +1,16 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import Insurance from '../../src/models/insurance';
+import type InsuranceServiceFactory from '../../src/services/insurance_service';
+import type ShipmentServiceFactory from '../../src/services/shipment_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type InsuranceTestCreateInput = Parameters<ReturnType<typeof InsuranceServiceFactory>['create']>[0];
+type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
 
 describe('Insurance Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -21,9 +26,11 @@ describe('Insurance Service', function () {
   });
 
   it('creates an insurance object', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
-    const insuranceData = Fixture.basicInsurance();
+    const insuranceData = Fixture.basicInsurance() as InsuranceTestCreateInput;
     insuranceData.tracking_code = shipment.tracking_code;
 
     const insurance = await client.Insurance.create(insuranceData);
@@ -34,9 +41,11 @@ describe('Insurance Service', function () {
   });
 
   it('retrieves an insurance object', async function () {
-    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment());
+    const shipment = await client.Shipment.create(
+      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
+    );
 
-    const insuranceData = Fixture.basicInsurance();
+    const insuranceData = Fixture.basicInsurance() as InsuranceTestCreateInput;
     insuranceData.tracking_code = shipment.tracking_code;
 
     const insurance = await client.Insurance.create(insuranceData);
@@ -78,7 +87,7 @@ describe('Insurance Service', function () {
   });
 
   it('refunds a standalone insurance', async function () {
-    const insuranceData = Fixture.basicInsurance();
+    const insuranceData = Fixture.basicInsurance() as InsuranceTestCreateInput;
     insuranceData.tracking_code = 'EZ1000000001';
 
     const insurance = await client.Insurance.create(insuranceData);
