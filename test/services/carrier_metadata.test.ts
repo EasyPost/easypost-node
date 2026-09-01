@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import * as setupPolly from '../helpers/setup_polly';

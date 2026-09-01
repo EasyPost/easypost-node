@@ -2,6 +2,17 @@ import Constants from '../constants';
 import InvalidObjectError from '../errors/general/invalid_object_error';
 import baseService from './base_service';
 
+type PaymentMethodObject = {
+  id: string;
+  object: string;
+};
+
+type PaymentMethodsResponse = Record<string, unknown> & {
+  id: string | null;
+  primary_payment_method?: PaymentMethodObject | null;
+  secondary_payment_method?: PaymentMethodObject | null;
+};
+
 export default (easypostClient) =>
   /**
    * The BillingService class provides methods for interacting with EasyPost's billing capabilities.
@@ -14,7 +25,7 @@ export default (easypostClient) =>
      * @param {String} amount - The amount to charge to your payment method.
      * @param {String} priority - The priority of the payment method to charge. Can be either 'primary' or 'secondary'.
      */
-    static async fundWallet(amount, priority = 'primary') {
+    static async fundWallet(amount: string, priority: string = 'primary'): Promise<void> {
       const paymentInfo = await this._getPaymentInfo(priority.toLowerCase());
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
@@ -30,7 +41,7 @@ export default (easypostClient) =>
      * See {@link https://docs.easypost.com/docs/users/billing#delete-a-payment-method EasyPost API Documentation} for more information.
      * @param {String} priority - The priority of the payment method to delete. Can be either 'primary' or 'secondary'.
      */
-    static async deletePaymentMethod(priority) {
+    static async deletePaymentMethod(priority: string): Promise<void> {
       const paymentInfo = await this._getPaymentInfo(priority.toLowerCase());
       const endpoint = paymentInfo[0];
       const paymentMethodID = paymentInfo[1];
@@ -45,7 +56,7 @@ export default (easypostClient) =>
      * See {@link https://docs.easypost.com/docs/users/billing#retrieve-payment-methods EasyPost API Documentation} for more information.
      * @returns {Object} - An object containing the payment methods associated with the current authenticated user.
      */
-    static async retrievePaymentMethods() {
+    static async retrievePaymentMethods(): Promise<PaymentMethodsResponse> {
       const url = 'payment_methods';
 
       const res = await easypostClient._get(url);
@@ -64,22 +75,26 @@ export default (easypostClient) =>
      * @param {String} priority - The priority of the payment method to retrieve. Can be either 'primary' or 'secondary'.
      * @returns {string[]} - An array of two strings, the first being the endpoint of the payment method and the second being the ID of the payment method.
      */
-    static async _getPaymentInfo(priority) {
+    static async _getPaymentInfo(priority: string): Promise<[string, string]> {
       const paymentMethods = await this.retrievePaymentMethods();
-      const paymentMethodMap = {
+      const paymentMethodMap: Record<
+        string,
+        'primary_payment_method' | 'secondary_payment_method'
+      > = {
         primary: 'primary_payment_method',
         secondary: 'secondary_payment_method',
       };
 
       const paymentMethodToUse = paymentMethodMap[priority];
-      let paymentMethodID;
-      let paymentMethodObjectType;
-      let endpoint;
+      let paymentMethodID: string;
+      let paymentMethodObjectType: string;
+      let endpoint: string;
       const errorString = 'The chosen payment method is not valid. Please try again.';
 
       if (paymentMethodToUse !== undefined && paymentMethods[paymentMethodToUse] !== null) {
-        paymentMethodID = paymentMethods[paymentMethodToUse].id;
-        paymentMethodObjectType = paymentMethods[paymentMethodToUse].object;
+        const paymentMethod = paymentMethods[paymentMethodToUse] as PaymentMethodObject;
+        paymentMethodID = paymentMethod.id;
+        paymentMethodObjectType = paymentMethod.object;
         if (paymentMethodObjectType === 'CreditCard') {
           endpoint = 'credit_cards';
         } else if (paymentMethodObjectType === 'BankAccount') {

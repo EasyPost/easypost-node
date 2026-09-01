@@ -1,4 +1,5 @@
 import baseService from './base_service';
+import CarrierType from '../models/carrier_type';
 
 export default (easypostClient) =>
   /**
@@ -12,7 +13,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the list of carrier types.
      * @returns {CarrierType[]} - A list of {@link CarrierType carrier types}.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<CarrierType[]> {
       const url = 'carrier_types';
 
       try {
