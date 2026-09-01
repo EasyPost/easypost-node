@@ -1,20 +1,25 @@
-import baseService from './base_service';
-import Pickup from '../models/pickup';
 import type EasyPostClient from '../easypost';
+import Address from '../models/address';
+import Batch from '../models/batch';
+import CarrierAccount from '../models/carrier_account';
+import Pickup from '../models/pickup';
+import PickupRate from '../models/pickup_rate';
+import Shipment from '../models/shipment';
+import baseService from './base_service';
 
-type PickupCreateParameters = Record<string, unknown> & {
-  address?: Record<string, unknown> | string | null;
-  carrier_accounts?: Array<Record<string, unknown> | string> | null;
+type PickupCreateParameters = {
+  address?: Address | string | null;
+  carrier_accounts?: Array<CarrierAccount | string> | null;
   confirmation?: string | null;
   instructions?: string | null;
   is_account_address?: boolean | null;
   max_datetime?: string | null;
   min_datetime?: string | null;
-  pickup_rates?: Record<string, unknown> | null;
+  pickup_rates?: PickupRate[] | null;
   reference?: string | null;
   status?: string | null;
-  shipment?: Record<string, unknown> | string | null;
-  batch?: Record<string, unknown> | string | null;
+  shipment?: Shipment | string | null;
+  batch?: Batch | string | null;
 };
 type PickupCollection = Record<string, unknown>;
 type PickupListResponse = { pickups: Pickup[]; has_more: boolean };

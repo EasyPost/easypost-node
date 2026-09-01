@@ -1,8 +1,13 @@
+import type { ICustomsInfoCreateParameters } from '../../types/Customs/CustomsInfo/CustomsInfoCreateParameters';
+import type { DeepPartial } from '../../types/utils';
 import Constants from '../constants';
+import type EasyPostClient from '../easypost';
+import Address from '../models/address';
+import CustomsInfo from '../models/customs_info';
+import Parcel from '../models/parcel';
 import Rate from '../models/rate';
 import Shipment from '../models/shipment';
 import baseService from './base_service';
-import type EasyPostClient from '../easypost';
 
 type AddressCreateInput = Record<string, unknown> & {
   verify?: boolean | string | string[] | null;
@@ -30,13 +35,16 @@ type ShipmentLineItem = Record<string, unknown> & {
   item_description?: string | null;
 };
 
+type CustomsInfoReferenceInput = DeepPartial<ICustomsInfoCreateParameters>;
+
 type ShipmentCreateParameters = Record<string, unknown> & {
   reference?: string | null;
-  to_address?: AddressCreateInput | string | null;
-  from_address?: AddressCreateInput | string | null;
-  parcel?: ParcelCreateInput | string | null;
+  to_address?: AddressCreateInput | Address | string | null;
+  from_address?: AddressCreateInput | Address | string | null;
+  parcel?: ParcelCreateInput | Parcel | string | null;
   carrier_accounts?: string[] | null;
-  customs_info?: Record<string, unknown> | Record<string, unknown>[] | null;
+  customs_info?:
+    CustomsInfo | CustomsInfo[] | CustomsInfoReferenceInput | CustomsInfoReferenceInput[] | null;
   tax_identifiers?: Array<ShipmentTaxIdentifier | null | undefined> | null;
   options?: Record<string, unknown> | null;
   line_items?: ShipmentLineItem[] | null;

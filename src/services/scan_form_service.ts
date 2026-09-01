@@ -1,9 +1,13 @@
-import baseService from './base_service';
-import ScanForm from '../models/scan_form';
+import type { IShipmentCreateParameters } from '../../types/Shipment';
+import type { DeepPartial } from '../../types/utils';
 import type EasyPostClient from '../easypost';
+import ScanForm from '../models/scan_form';
+import baseService from './base_service';
 
-type ScanFormCreateParameters = Record<string, unknown> & {
-  shipments?: Array<string | { id?: string | null } | Record<string, unknown>> | null;
+type ShipmentReferenceInput = { id?: string | null } & DeepPartial<IShipmentCreateParameters>;
+
+type ScanFormCreateParameters = {
+  shipments?: Array<string | ShipmentReferenceInput> | null;
 };
 type ScanFormCollection = Record<string, unknown>;
 type ScanFormListResponse = { scan_forms: ScanForm[]; has_more: boolean };

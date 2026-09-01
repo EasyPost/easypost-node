@@ -1,4 +1,6 @@
+import Address from './address';
 import EasyPostObject from './easypost_object';
+import Tracker from './tracker';
 
 /**
  * An {@link https://docs.easypost.com/docs/api-keys Insurance} object represents insurance for a {@link Shipment shipment}.
@@ -7,15 +9,15 @@ import EasyPostObject from './easypost_object';
  */
 export default class Insurance extends EasyPostObject {
   declare amount?: string | null;
-  declare fee?: Record<string, unknown> | null;
-  declare from_address?: Record<string, unknown> | null;
+  declare fee?: EasyPostObject | null;
+  declare from_address?: Address | null;
   declare messages?: string[] | null;
   declare provider_id?: string | null;
   declare provider?: string | null;
   declare reference?: string | null;
   declare shipment_id?: string | null;
   declare status?: 'new' | 'pending' | 'purchased' | 'failed' | 'cancelled' | null;
-  declare to_address?: Record<string, unknown> | null;
+  declare to_address?: Address | null;
   declare tracking_code?: string | null;
-  declare tracker?: Record<string, unknown> | null;
+  declare tracker?: Tracker | null;
 }

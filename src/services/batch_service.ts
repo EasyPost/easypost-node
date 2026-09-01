@@ -1,11 +1,15 @@
-import baseService from './base_service';
-import Batch from '../models/batch';
+import type { IShipmentCreateParameters } from '../../types/Shipment';
+import type { DeepPartial } from '../../types/utils';
 import type EasyPostClient from '../easypost';
+import Batch from '../models/batch';
+import baseService from './base_service';
 
 export const DEFAULT_LABEL_FORMAT = 'pdf';
 
+type ShipmentReferenceInput = { id?: string | null } & DeepPartial<IShipmentCreateParameters>;
+
 type BatchCreateParameters = Record<string, unknown> & {
-  shipments?: Array<string | Record<string, unknown>> | null;
+  shipments?: Array<string | ShipmentReferenceInput> | null;
 };
 type BatchListResponse = { batches: Batch[]; has_more: boolean };
 
