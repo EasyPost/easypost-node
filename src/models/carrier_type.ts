@@ -6,6 +6,6 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class CarrierType extends EasyPostObject {
-  static fields;
-  static type;
+  declare fields?: Record<string, unknown> | null;
+  declare type?: string | null;
 }
