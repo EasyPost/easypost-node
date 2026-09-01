@@ -29,13 +29,15 @@
     "docs": "jsdoc src/models src/services src/errors src/utils -d docs",
     "format": "prettier --write .",
     "formatCheck": "prettier --check .",
-    "lint": "eslint --ext .js,.ts .",
-    "lintFix": "eslint --ext .js,.ts --fix .",
+    "lint": "eslint --ext .js,.ts --ignore-pattern 'examples/**' .",
+    "lintFix": "eslint --ext .js,.ts --ignore-pattern 'examples/**' --fix .",
     "prepublishOnly": "npm run clean && npm run build && npm run test && npm run lint && npm run formatCheck",
     "scan": "npx audit-ci -m --config ./audit-ci.jsonc",
     "test": "cross-env NODE_ENV=test vitest run",
     "test:node-compatibility": "cross-env NODE_ENV=test node ./test/node_compatibility",
-    "typescript": "npx tsc",
+    "typescript": "npm run typescript:declarations && npm run typescript:source",
+    "typescript:declarations": "npx tsc -p tsconfig.json",
+    "typescript:source": "npx tsc -p tsconfig.build.json",
     "watch": "vite build --watch"
   },
   "dependencies": {

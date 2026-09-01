@@ -1,0 +1,15 @@
+.golangci.yml
+.mypy_cache
+.nyc_output
+cassettes
+composer.json
+composer.lock
+coverage
+dist/
+/docs
+examples
+official/fixtures/
+package-lock.json
+style_guides/
+vendor/
+venv/

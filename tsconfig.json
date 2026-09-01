@@ -1,11 +1,7 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "es5",
-    "module": "nodenext",
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "noEmit": true
   },
   "include": ["types"]
 }
