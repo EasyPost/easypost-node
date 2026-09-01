@@ -76,9 +76,7 @@ export default (easypostClient: EasyPostClient) =>
       const url = 'beta/setup_intents';
 
       // Preserve legacy null payload behavior for cassette matching in tests.
-      const emptyPayload = null as unknown as Record<string, unknown>;
-
-      const response = await easypostClient._post(url, emptyPayload);
+      const response = await easypostClient._post(url, null);
 
       return response.body;
     }
