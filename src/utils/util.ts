@@ -6,6 +6,17 @@ import FilteringError from '../errors/general/filtering_error';
 import InvalidParameterError from '../errors/general/invalid_parameter_error';
 import SignatureVerificationError from '../errors/general/signature_verification_error';
 
+type SmartRate = {
+  rate: string;
+  time_in_transit: Record<string, number>;
+};
+
+type Rate = {
+  rate: string;
+  carrier: string;
+  service: string;
+};
+
 /**
  * Utility class of various publicly-available helper functions.
  * @public
@@ -22,7 +33,11 @@ export default class Utils {
    * @throws {FilteringError} - If no applicable rates are found
    * @throws {InvalidParameterError} - If the deliveryAccuracy value is invalid
    */
-  getLowestSmartRate(smartrates, deliveryDays, deliveryAccuracy) {
+  getLowestSmartRate(
+    smartrates: SmartRate[],
+    deliveryDays: number | string,
+    deliveryAccuracy: string,
+  ): SmartRate {
     const validDeliveryAccuracyValues = new Set([
       'percentile_50',
       'percentile_75',
@@ -32,13 +47,13 @@ export default class Utils {
       'percentile_97',
       'percentile_99',
     ]);
-    let lowestSmartRate = null;
+    let lowestSmartRate: SmartRate | null = null;
     const lowercaseDeliveryAccuracy = deliveryAccuracy.toLowerCase();
 
     if (!validDeliveryAccuracyValues.has(lowercaseDeliveryAccuracy)) {
       throw new InvalidParameterError({
-        message: `Invalid deliveryAccuracy value, must be one of: ${new Array(
-          ...validDeliveryAccuracyValues,
+        message: `Invalid deliveryAccuracy value, must be one of: ${Array.from(
+          validDeliveryAccuracyValues,
         ).join(', ')}`,
       });
     }
@@ -46,7 +61,7 @@ export default class Utils {
     for (let i = 0; i < smartrates.length; i += 1) {
       const rate = smartrates[i];
 
-      if (rate.time_in_transit[lowercaseDeliveryAccuracy] > parseInt(deliveryDays, 10)) {
+      if (rate.time_in_transit[lowercaseDeliveryAccuracy] > parseInt(String(deliveryDays), 10)) {
         // eslint-disable-next-line no-continue
         continue;
       } else if (
@@ -73,7 +88,11 @@ export default class Utils {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  getLowestRate(rates, carriers = null, services = null) {
+  getLowestRate(
+    rates: Rate[],
+    carriers: string[] | null = null,
+    services: string[] | null = null,
+  ): Rate {
     if (carriers) {
       const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
       // eslint-disable-next-line no-param-reassign
@@ -111,8 +130,12 @@ export default class Utils {
    * @returns {object} - The JSON-parsed webhook event body if the signature could be verified
    * @throws {SignatureVerificationError} - If the signature could not be verified
    */
-  validateWebhook(eventBody, headers, webhookSecret) {
-    let webhook = {};
+  validateWebhook(
+    eventBody: Buffer | string,
+    headers: Record<string, string | undefined>,
+    webhookSecret: string,
+  ): Record<string, unknown> {
+    let webhook: Record<string, unknown> = {};
     const easypostHmacSignature =
       headers['X-Hmac-Signature'] ?? headers['x-hmac-signature'] ?? null;
 

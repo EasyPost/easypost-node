@@ -1,7 +1,6 @@
 import util from 'util';
 import { v4 as uuid } from 'uuid';
 
-import pkg from '../package.json';
 import Constants from './constants';
 import ErrorHandler from './errors/error_handler';
 import MissingParameterError from './errors/general/missing_parameter_error';
@@ -39,6 +38,56 @@ import UserService from './services/user_service';
 import WebhookService from './services/webhook_service';
 import Utils from './utils/util';
 
+const pkgVersion = process.env.npm_package_version ?? 'unknown';
+
+/* eslint-disable no-unused-vars */
+type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete';
+type RequestHeaders = Record<string, string>;
+type HttpClient = typeof fetch;
+
+interface CompatibilityRequest {
+  method: string;
+  url: string;
+  _data: unknown;
+  set(headersToSet?: RequestHeaders): CompatibilityRequest;
+  auth(key: string): CompatibilityRequest;
+  query(queryParams?: Record<string, unknown>): CompatibilityRequest;
+  send(body?: unknown): CompatibilityRequest;
+}
+
+interface HttpMiddleware {
+  (httpClient: HttpClient): HttpClient;
+}
+
+interface RequestMiddleware {
+  (request: CompatibilityRequest): CompatibilityRequest | undefined;
+}
+/* eslint-enable no-unused-vars */
+
+type ClientOptions = {
+  apiKey?: string;
+  useProxy?: boolean;
+  timeout?: number;
+  baseUrl?: string;
+  httpMiddleware?: HttpMiddleware;
+  requestMiddleware?: RequestMiddleware;
+  httpClient?: HttpClient;
+};
+
+type HookValue = {
+  method: string;
+  path: string;
+  requestBody: unknown;
+  headers: RequestHeaders;
+  requestTimestamp: number;
+  requestUUID: string;
+  httpStatus?: number;
+  responseBody?: unknown;
+  responseTimestamp?: number;
+};
+
+type HookHandler = any;
+
 /**
  * The client used to access services of the EasyPost API.
  * This client is configured to use the latest production version of the EasyPost API.
@@ -46,7 +95,25 @@ import Utils from './utils/util';
  * @param {Object} [options] Additional options to use for the underlying HTTP client (e.g. middleware, proxy configuration).
  */
 export default class EasyPostClient {
-  constructor(key, options = {}) {
+  static MS_SECOND: number;
+  static DEFAULT_TIMEOUT: number;
+  static DEFAULT_BASE_URL: string;
+  static DEFAULT_HEADERS: RequestHeaders;
+  static METHODS: Record<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE', HttpMethod>;
+  static SERVICES: Record<string, any>;
+
+  [key: string]: any;
+  key?: string;
+  useProxy?: boolean;
+  timeout: number;
+  baseUrl: string;
+  httpClient: HttpClient;
+  requestMiddleware?: RequestMiddleware;
+  requestHooks: HookHandler[];
+  responseHooks: HookHandler[];
+  Utils: Utils;
+
+  constructor(key?: string, options: ClientOptions = {}) {
     const { useProxy, timeout, baseUrl, httpMiddleware, requestMiddleware, httpClient } = options;
 
     if (!key && !useProxy) {
@@ -59,7 +126,13 @@ export default class EasyPostClient {
     this.timeout = timeout || EasyPostClient.DEFAULT_TIMEOUT;
     this.baseUrl = baseUrl || EasyPostClient.DEFAULT_BASE_URL;
     this.httpClient =
-      httpClient || (typeof fetch === 'function' ? (...args) => fetch(...args) : undefined);
+      httpClient ||
+      (typeof fetch === 'function'
+        ? (input: RequestInfo | URL, init?: RequestInit) => fetch(input, init)
+        : ((async () => {
+            throw new Error('No global fetch implementation found. Node 18+ is required.');
+          }) as HttpClient));
+    this.useProxy = useProxy;
     this.requestMiddleware = requestMiddleware;
     this.requestHooks = [];
     this.responseHooks = [];
@@ -80,20 +153,20 @@ export default class EasyPostClient {
    * Add a request hook function.
    * @param {(config: object) => void} hook
    */
-  addRequestHook(hook) {
+  addRequestHook(hook: HookHandler): void {
     this.requestHooks = [...this.requestHooks, hook];
   }
   /**
    * Remove a request hook function.
    * @param {(config: object) => void} hook
    */
-  removeRequestHook(hook) {
+  removeRequestHook(hook: HookHandler): void {
     this.requestHooks = this.requestHooks.filter((h) => h !== hook);
   }
   /**
    * Clear all request hooks.
    */
-  clearRequestHooks() {
+  clearRequestHooks(): void {
     this.requestHooks = [];
   }
 
@@ -101,20 +174,20 @@ export default class EasyPostClient {
    * Add a response hook function.
    * @param {(config: object) => void} hook
    */
-  addResponseHook(hook) {
+  addResponseHook(hook: HookHandler): void {
     this.responseHooks = [...this.responseHooks, hook];
   }
   /**
    * Remove a response hook function.
    * @param {(config: object) => void} hook
    */
-  removeResponseHook(hook) {
+  removeResponseHook(hook: HookHandler): void {
     this.responseHooks = this.responseHooks.filter((h) => h !== hook);
   }
   /**
    * Clear all response hooks.
    */
-  clearResponseHooks() {
+  clearResponseHooks(): void {
     this.responseHooks = [];
   }
 
@@ -129,7 +202,11 @@ export default class EasyPostClient {
    * @param {Object} [params] - The parameters to send with the request.
    * @returns {Promise<Object>} The response from the API call.
    */
-  async makeApiCall(method, endpoint, params = {}) {
+  async makeApiCall(
+    method: string,
+    endpoint: string,
+    params: Record<string, unknown> = {},
+  ): Promise<unknown> {
     const response = await this._request(endpoint, method, params);
 
     return response.body;
@@ -141,7 +218,7 @@ export default class EasyPostClient {
    * @param {Object} [options] The options to override.
    * @returns {EasyPostClient} A new `EasyPostClient` instance.
    */
-  static copyClient(client, options = {}) {
+  static copyClient(client: EasyPostClient, options: ClientOptions = {}): EasyPostClient {
     const { apiKey, useProxy, timeout, baseUrl, httpMiddleware, requestMiddleware, httpClient } =
       options;
     const nextHttpClient =
@@ -161,7 +238,7 @@ export default class EasyPostClient {
    * @param {string} method - The method passed in by callers.
    * @returns {string} lowercase method suitable for fetch.
    */
-  static _normalizeMethod(method = EasyPostClient.METHODS.GET) {
+  static _normalizeMethod(method: string = EasyPostClient.METHODS.GET): string {
     return method.toLowerCase();
   }
 
@@ -169,7 +246,7 @@ export default class EasyPostClient {
    * Executes a fetch request with timeout support.
    * @private
    */
-  async _fetchWithTimeout(url, init) {
+  async _fetchWithTimeout(url: string, init: RequestInit): Promise<any> {
     if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
       return this.httpClient(url, {
         ...init,
@@ -194,7 +271,7 @@ export default class EasyPostClient {
    * Parse an HTTP response body.
    * @private
    */
-  async _parseResponseBody(response) {
+  async _parseResponseBody(response: Response): Promise<unknown> {
     const text = await response.text();
     if (!text) {
       return {};
@@ -211,7 +288,7 @@ export default class EasyPostClient {
    * Encodes a string to base64 in both Node and edge runtimes.
    * @private
    */
-  static _toBase64(value) {
+  static _toBase64(value: string): string {
     if (typeof Buffer !== 'undefined') {
       return Buffer.from(value).toString('base64');
     }
@@ -224,7 +301,7 @@ export default class EasyPostClient {
    * @param {Object} [additionalHeaders] Additional headers to combine or override with the default headers.
    * @returns {Object} The headers to use for the request.
    */
-  static _buildHeaders(additionalHeaders = {}) {
+  static _buildHeaders(additionalHeaders: RequestHeaders = {}): RequestHeaders {
     return {
       ...EasyPostClient.DEFAULT_HEADERS,
       'User-Agent': EasyPostClient._buildUserAgent(),
@@ -237,7 +314,7 @@ export default class EasyPostClient {
    * do not expose Node globals/modules.
    * @returns {string} The default User-Agent header value.
    */
-  static _buildUserAgent() {
+  static _buildUserAgent(): string {
     let nodeVersion = 'unknown';
     let osName = 'unknown';
     let osVersion = 'unknown';
@@ -252,14 +329,14 @@ export default class EasyPostClient {
         osVersion;
     }
 
-    return `EasyPost/v2 NodejsClient/${pkg.version} Nodejs/${nodeVersion} OS/${osName} OSVersion/${osVersion} OSArch/${osArch}`;
+    return `EasyPost/v2 NodejsClient/${pkgVersion} Nodejs/${nodeVersion} OS/${osName} OSVersion/${osVersion} OSArch/${osArch}`;
   }
 
   /**
    * Attach services to an {@link EasyPostClient} instance.
    * @param {Map} services - A map of {@link BaseService}-based service classes to construct and attach to the client.
    */
-  _attachServices(services) {
+  _attachServices(services: Record<string, any>): void {
     Object.keys(services).forEach((s) => {
       this[s] = services[s](this);
     });
@@ -270,7 +347,7 @@ export default class EasyPostClient {
    * @param {string} path - The path to build.
    * @returns {string} The full path to use for the HTTP request.
    */
-  _buildPath(path = '') {
+  _buildPath(path = ''): string {
     if (path.indexOf('http') === 0) {
       return path;
     }
@@ -290,7 +367,7 @@ export default class EasyPostClient {
    * @param {Object} response - the response from the HTTP request
    * @returns {Object} - the value to be passed to the responseHooks
    */
-  _createResponseHooksValue(baseHooksValue, response) {
+  _createResponseHooksValue(baseHooksValue: HookValue, response: any): HookValue {
     return {
       ...baseHooksValue,
       httpStatus: response.status,
@@ -309,7 +386,12 @@ export default class EasyPostClient {
    * @returns {*} The response from the HTTP request.
    * @throws {ApiError} If the request fails.
    */
-  async _request(path = '', method = EasyPostClient.METHODS.GET, params = {}, headers = {}) {
+  async _request(
+    path = '',
+    method: string = EasyPostClient.METHODS.GET,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     const urlPath = this._buildPath(path);
     const normalizedMethod = EasyPostClient._normalizeMethod(method);
     const requestHeaders = EasyPostClient._buildHeaders(headers);
@@ -322,7 +404,7 @@ export default class EasyPostClient {
     if (params !== undefined) {
       if (isQueryMethod) {
         Object.entries(params).forEach(([key, value]) => {
-          url.searchParams.append(key, value);
+          url.searchParams.append(key, String(value));
         });
       } else {
         requestBody = params;
@@ -343,7 +425,7 @@ export default class EasyPostClient {
       },
       query: (queryParams = {}) => {
         Object.entries(queryParams).forEach(([key, value]) => {
-          url.searchParams.append(key, value);
+          url.searchParams.append(key, String(value));
         });
         compatibilityRequest.url = url.toString();
         return compatibilityRequest;
@@ -386,7 +468,7 @@ export default class EasyPostClient {
       middlewareResponse = middlewareRequest.send(params);
     }
 
-    const baseHooksValue = {
+    const baseHooksValue: HookValue = {
       method,
       path: middlewareRequest.url || url.toString(),
       requestBody: middlewareRequest._data,
@@ -446,16 +528,21 @@ export default class EasyPostClient {
 
       return response;
     } catch (error) {
-      if (error.statusCode && error.body) {
-        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, error);
+      const handledError = error as any;
+
+      if (handledError.statusCode && handledError.body) {
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, handledError);
         this.responseHooks.forEach((fn) => fn(responseHooksValue));
-        throw ErrorHandler.handleApiError(error);
-      } else if (error.response && error.response.body) {
-        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, error.response);
+        throw ErrorHandler.handleApiError(handledError);
+      } else if (handledError.response && handledError.response.body) {
+        const responseHooksValue = this._createResponseHooksValue(
+          baseHooksValue,
+          handledError.response,
+        );
         this.responseHooks.forEach((fn) => fn(responseHooksValue));
-        throw ErrorHandler.handleApiError(error.response);
+        throw ErrorHandler.handleApiError(handledError.response);
       } else {
-        throw error;
+        throw handledError;
       }
     }
   }
@@ -467,7 +554,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _get(path, params = {}, headers = {}) {
+  _get(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.GET, params, headers);
   }
 
@@ -478,7 +569,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _post(path, params = {}, headers = {}) {
+  _post(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.POST, params, headers);
   }
 
@@ -489,7 +584,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _put(path, params = {}, headers = {}) {
+  _put(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.PUT, params, headers);
   }
 
@@ -500,7 +599,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _patch(path, params = {}, headers = {}) {
+  _patch(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.PATCH, params, headers);
   }
 
@@ -511,7 +614,11 @@ export default class EasyPostClient {
    * @param {Object} [headers] - Additional headers to send with the request.
    * @returns {*} The response from the HTTP request.
    */
-  _delete(path, params = {}, headers = {}) {
+  _delete(
+    path: string,
+    params: Record<string, unknown> = {},
+    headers: RequestHeaders = {},
+  ): Promise<any> {
     return this._request(path, EasyPostClient.METHODS.DELETE, params, headers);
   }
 }
