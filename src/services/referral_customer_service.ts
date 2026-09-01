@@ -1,9 +1,29 @@
 import util from 'util';
 
+import type { IPaymentMethod } from '../../types/PaymentMethod/PaymentMethod';
 import Constants from '../constants';
 import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
+import User from '../models/user';
 import baseService from './base_service';
+
+type ReferralCreateParameters = Record<string, unknown> & {
+  reference?: string | null;
+  parent_id?: string | null;
+  name?: string | null;
+  email?: string | null;
+  phone_number?: string | null;
+  balance?: string | null;
+  recharge_amount?: string | null;
+  secondary_recharge_amount?: string | null;
+  recharge_threshold?: string | null;
+  children?: Record<string, unknown>[] | null;
+  api_keys?: Record<string, unknown>[] | null;
+};
+type MandateData = Record<string, unknown>;
+type ReferralCustomerListResponse = { referral_customers: User[]; has_more: boolean };
+type ReferralScopedClient = Pick<EasyPostClient, '_post'>;
+type EasyPostHttpClient = Pick<EasyPostClient, '_get' | '_put'>;
 
 /**
  * Get an instance of the EasyPostClient using the referral user's API key.
@@ -12,7 +32,7 @@ import baseService from './base_service';
  * @param {string} referralApiKey - The referral user's API key.
  * @returns {EasyPostClient} - An instance of the EasyPostClient.
  */
-function _getReferralClient(client, referralApiKey) {
+function _getReferralClient(client: EasyPostClient, referralApiKey: string): EasyPostClient {
   return EasyPostClient.copyClient(client, {
     apiKey: referralApiKey,
   });
@@ -24,12 +44,13 @@ function _getReferralClient(client, referralApiKey) {
  * @param {EasyPostClient} easypostClient - The EasyPostClient to use.
  * @returns {string} - The Stripe API key.
  */
-async function _getEasyPostStripeKey(easypostClient) {
+async function _getEasyPostStripeKey(easypostClient: EasyPostHttpClient): Promise<string> {
   const url = 'partners/stripe_public_key';
 
   const response = await easypostClient._get(url);
 
-  return response.body.public_key;
+  const body = response.body as { public_key: string };
+  return body.public_key;
 }
 
 /**
@@ -42,7 +63,13 @@ async function _getEasyPostStripeKey(easypostClient) {
  * @param {string} cvc - Credit card CVC.
  * @returns {Promise<string>} - Stripe credit card token.
  */
-async function _sendCardDetailsToStripe(stripeKey, number, expirationMonth, expirationYear, cvc) {
+async function _sendCardDetailsToStripe(
+  stripeKey: string,
+  number: string,
+  expirationMonth: string,
+  expirationYear: string,
+  cvc: string,
+): Promise<string> {
   const searchParams = new URLSearchParams({
     'card[number]': number,
     'card[exp_month]': expirationMonth,
@@ -66,10 +93,13 @@ async function _sendCardDetailsToStripe(stripeKey, number, expirationMonth, expi
 
     const body = await response.json();
 
-    return body.id;
+    return body.id as string;
   } catch (error) {
     throw new ExternalApiError({
       message: util.format(Constants.EXTERNAL_API_CALL_FAILED, 'Stripe'),
+      code: undefined,
+      statusCode: undefined,
+      errors: undefined,
     });
   }
 }
@@ -83,12 +113,17 @@ async function _sendCardDetailsToStripe(stripeKey, number, expirationMonth, expi
  * @param {string} priority - Whether to add the card as the 'primary' or 'secondary' card.
  * @returns {Object} - Response body (EasyPost payment method object).
  */
-async function _sendCardDetailsToEasyPost(client, referralApiKey, stripeCreditCardToken, priority) {
+async function _sendCardDetailsToEasyPost(
+  client: EasyPostClient,
+  referralApiKey: string,
+  stripeCreditCardToken: string,
+  priority: string,
+): Promise<IPaymentMethod> {
   const _client = _getReferralClient(client, referralApiKey);
   const url = 'credit_cards';
   const params = { credit_card: { stripe_object_id: stripeCreditCardToken, priority } };
 
-  const response = await _client._post(url, params);
+  const response = await (_client as ReferralScopedClient)._post(url, params);
 
   return response.body;
 }
@@ -105,7 +140,7 @@ export default (easypostClient) =>
      * @param {Object} params - The referral customer's information.
      * @returns {User} - The newly created referral customer.
      */
-    static async create(params) {
+    static async create(params: ReferralCreateParameters): Promise<User> {
       const url = 'referral_customers';
 
       const wrappedParams = {
@@ -122,7 +157,7 @@ export default (easypostClient) =>
      * @param {string} email - The new email address.
      * @returns {boolean} - Returns true if the referral was updated successfully, false otherwise.
      */
-    static async updateEmail(referralUserId, email) {
+    static async updateEmail(referralUserId: string, email: string): Promise<boolean> {
       const url = `referral_customers/${referralUserId}`;
       const wrappedParams = { user: { email } };
 
@@ -143,13 +178,13 @@ export default (easypostClient) =>
      * @returns {Object} - An object representing the newly-added credit card.
      */
     static async addCreditCard(
-      referralApiKey,
-      number,
-      expirationMonth,
-      expirationYear,
-      cvc,
-      priority = 'primary',
-    ) {
+      referralApiKey: string,
+      number: string,
+      expirationMonth: string,
+      expirationYear: string,
+      cvc: string,
+      priority: string = 'primary',
+    ): Promise<IPaymentMethod> {
       const stripeKey = await _getEasyPostStripeKey(easypostClient); // will throw if there's an error
 
       const stripeCreditCardId = await _sendCardDetailsToStripe(
@@ -175,7 +210,11 @@ export default (easypostClient) =>
      * This function requires the ReferralCustomer User's API key.
      * @returns {object} - A JSON object representing the credit card.
      */
-    static async addCreditCardFromStripe(referralApiKey, paymentMethodId, priority = 'primary') {
+    static async addCreditCardFromStripe(
+      referralApiKey: string,
+      paymentMethodId: string,
+      priority: string = 'primary',
+    ): Promise<IPaymentMethod> {
       const _client = _getReferralClient(easypostClient, referralApiKey);
       const params = {
         credit_card: {
@@ -185,7 +224,7 @@ export default (easypostClient) =>
       };
       const url = 'credit_cards';
 
-      const response = await _client._post(url, params);
+      const response = await (_client as ReferralScopedClient)._post(url, params);
 
       return this._convertToEasyPostObject(response.body, params);
     }
@@ -196,11 +235,11 @@ export default (easypostClient) =>
      * @returns {object} - A JSON object representing the bank account.
      */
     static async addBankAccountFromStripe(
-      referralApiKey,
-      financialConnectionsId,
-      mandateData,
-      priority = 'primary',
-    ) {
+      referralApiKey: string,
+      financialConnectionsId: string,
+      mandateData: MandateData,
+      priority: string = 'primary',
+    ): Promise<IPaymentMethod> {
       const _client = _getReferralClient(easypostClient, referralApiKey);
       const params = {
         financial_connections_id: financialConnectionsId,
@@ -210,7 +249,7 @@ export default (easypostClient) =>
 
       const url = 'bank_accounts';
 
-      const response = await _client._post(url, params);
+      const response = await (_client as ReferralScopedClient)._post(url, params);
 
       return this._convertToEasyPostObject(response.body, params);
     }
@@ -221,7 +260,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the referral customers by.
      * @returns {Object} - An object containing a list of {@link User referral customers} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<ReferralCustomerListResponse> {
       const url = 'referral_customers';
 
       return this._all(url, params);
@@ -233,7 +272,10 @@ export default (easypostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(referralCustomers, pageSize = null) {
+    static async getNextPage(
+      referralCustomers: Record<string, unknown>,
+      pageSize: number | null = null,
+    ): Promise<ReferralCustomerListResponse> {
       const url = 'referral_customers';
       return this._getNextPage(url, 'referral_customers', referralCustomers, pageSize);
     }

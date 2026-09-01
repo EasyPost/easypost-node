@@ -1,4 +1,19 @@
 import baseService from './base_service';
+import EndShipper from '../models/end_shipper';
+
+type EndShipperCreateParameters = Record<string, unknown> & {
+  name?: string | null;
+  company?: string | null;
+  street1?: string | null;
+  street2?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zip?: string | null;
+  country?: string | null;
+  phone?: string | null;
+  email?: string | null;
+};
+type EndShipperListResponse = { end_shippers: EndShipper[]; has_more: boolean };
 
 export default (easypostClient) =>
   /**
@@ -12,7 +27,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the end shipper to be created.
      * @returns {EndShipper} - The created end shipper.
      */
-    static async create(params) {
+    static async create(params: EndShipperCreateParameters): Promise<EndShipper> {
       const url = 'end_shippers';
       const wrappedParams = { address: params };
 
@@ -26,7 +41,7 @@ export default (easypostClient) =>
      * @param {Object} params - Parameters for the end shipper to be updated.
      * @returns {EndShipper} - The updated end shipper.
      */
-    static async update(id, params) {
+    static async update(id: string, params: EndShipperCreateParameters): Promise<EndShipper> {
       const url = `end_shippers/${id}`;
       const wrappedParams = { address: params };
 
@@ -45,7 +60,7 @@ export default (easypostClient) =>
      * @param {string} id - The ID of the end shipper to retrieve.
      * @returns {EndShipper} - The retrieved end shipper.
      */
-    static async retrieve(id) {
+    static async retrieve(id: string): Promise<EndShipper> {
       const url = `end_shippers/${id}`;
 
       return this._retrieve(url);
@@ -57,7 +72,7 @@ export default (easypostClient) =>
      * @param {Object} [params] - Parameters to filter the list of end shippers.
      * @returns {Object} - An object containing a list of {@link EndShipper end shippers} and pagination information.
      */
-    static async all(params = {}) {
+    static async all(params: Record<string, unknown> = {}): Promise<EndShipperListResponse> {
       const url = 'end_shippers';
 
       return this._all(url, params);

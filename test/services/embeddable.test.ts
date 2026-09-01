@@ -1,11 +1,11 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
-describe('CustomerPortal Service', function () {
+describe('Embeddable Service', function () {
   const getPolly = setupPolly.setupPollyTests();
   let client;
 
@@ -18,16 +18,14 @@ describe('CustomerPortal Service', function () {
     setupPolly.setupCassette(server);
   });
 
-  it('creates a portal session', async function () {
+  it('creates an embeddable session', async function () {
     const users = await client.User.allChildren({ page_size: Fixture.pageSize() });
 
-    const accountLink = await client.CustomerPortal.createAccountLink({
-      session_type: 'account_onboarding',
+    const accountLink = await client.Embeddable.createSession({
+      origin_host: 'https://example.com',
       user_id: users.children[0].id,
-      refresh_url: 'https://example.com/refresh',
-      return_url: 'https://example.com/return',
     });
 
-    expect(accountLink.object).to.equal('CustomerPortalAccountLink');
+    expect(accountLink.object).to.equal('EmbeddablesSession');
   });
 });

@@ -1,5 +1,9 @@
 import baseService from './base_service';
 
+type BetaPaymentMethodResponse = Record<string, unknown>;
+type BetaRefundResponse = Record<string, unknown>;
+type BetaClientSecretResponse = Record<string, unknown>;
+
 export default (easypostClient) =>
   class BetaReferralCustomerService extends baseService(easypostClient) {
     /**
@@ -9,7 +13,11 @@ export default (easypostClient) =>
      * @param {string} [priority] - Which priority to set the payment method to ('primary' or 'secondary').
      * @returns {Object} - A JSON object representing the payment method.
      */
-    static async addPaymentMethod(stripeCustomerId, paymentMethodReference, priority = 'primary') {
+    static async addPaymentMethod(
+      stripeCustomerId: string,
+      paymentMethodReference: string,
+      priority: string = 'primary',
+    ): Promise<BetaPaymentMethodResponse> {
       const params = {
         payment_method: {
           stripe_customer_id: stripeCustomerId,
@@ -30,7 +38,7 @@ export default (easypostClient) =>
      * @param {number} refundAmount - Amount to be refunded by cents.
      * @returns {Object} - A JSON object representing the refund.
      */
-    static async refundByAmount(refundAmount) {
+    static async refundByAmount(refundAmount: number): Promise<BetaRefundResponse> {
       const params = {
         refund_amount: refundAmount,
       };
@@ -47,7 +55,7 @@ export default (easypostClient) =>
      * @param {string} paymentLogId - ID of the payment log.
      * @returns {object} - Returns BetaPaymentRefund object.
      */
-    static async refundByPaymentLog(paymentLogId) {
+    static async refundByPaymentLog(paymentLogId: string): Promise<BetaRefundResponse> {
       const params = {
         payment_log_id: paymentLogId,
       };
@@ -63,7 +71,7 @@ export default (easypostClient) =>
      * Creates a client secret to use with Stripe when adding a credit card.
      * @returns {object} - A JSON object representing the client secret.
      */
-    static async createCreditCardClientSecret() {
+    static async createCreditCardClientSecret(): Promise<BetaClientSecretResponse> {
       const url = 'beta/setup_intents';
 
       const response = await easypostClient._post(url, null);
@@ -75,7 +83,9 @@ export default (easypostClient) =>
      * Creates a client secret to use with Stripe when adding a credit card.
      * @returns {object} - A JSON object representing the client secret.
      */
-    static async createBankAccountClientSecret(returnUrl) {
+    static async createBankAccountClientSecret(
+      returnUrl: string | null,
+    ): Promise<BetaClientSecretResponse> {
       const params = returnUrl ? { return_url: returnUrl } : null;
 
       const url = 'beta/financial_connections_sessions';

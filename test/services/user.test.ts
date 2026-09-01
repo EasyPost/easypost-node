@@ -1,12 +1,15 @@
 /* eslint-disable no-param-reassign */
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import Brand from '../../src/models/brand';
 import User from '../../src/models/user';
+import type UserServiceFactory from '../../src/services/user_service';
 import * as setupPolly from '../helpers/setup_polly';
 import Fixture from '../helpers/fixture';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
+
+type UserUpdateInput = Parameters<ReturnType<typeof UserServiceFactory>['update']>[1];
 
 /* eslint-disable func-names */
 describe('User Service', function () {
@@ -54,7 +57,7 @@ describe('User Service', function () {
     const testName = 'Test User';
 
     return client.User.retrieveMe().then(async (user) => {
-      const params = {};
+      const params: UserUpdateInput = {};
       params.name = testName;
       const updatedUser = await client.User.update(user.id, params);
 

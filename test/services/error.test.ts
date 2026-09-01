@@ -1,4 +1,4 @@
-import { assert, expect } from 'chai';
+import { assert, expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import ForbiddenError from '../../src/errors/api/forbidden_error';
@@ -15,8 +15,11 @@ import TimeoutError from '../../src/errors/api/timeout_error';
 import UnauthorizedError from '../../src/errors/api/unauthorized_error';
 import UnknownApiError from '../../src/errors/api/unknown_api_error';
 import ErrorHandler from '../../src/errors/error_handler';
+import type ClaimServiceFactory from '../../src/services/claim_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type ClaimTestCreateInput = Parameters<ReturnType<typeof ClaimServiceFactory>['create']>[0];
 
 describe('Error Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -41,7 +44,7 @@ describe('Error Service', function () {
   });
 
   it('pulls out error properties of an API error when using the alternative format', async function () {
-    const claimData = Fixture.basicClaim();
+    const claimData = Fixture.basicClaim() as ClaimTestCreateInput;
     claimData.tracking_code = '123'; // Intentionally pass a bad tracking code
     await client.Claim.create(claimData).catch((error) => {
       expect(error.statusCode).to.equal(404);
@@ -171,9 +174,10 @@ describe('Error Service', function () {
         ErrorHandler.handleApiError(fakeErrorResponse);
       } catch (error) {
         expect(error).to.be.an.instanceOf(value);
-        expect(error.message).to.be.equal('API did not return error details.');
-        expect(error.code).to.be.equal('NO RESPONSE CODE');
-        expect(error.errors).to.be.an('array').that.is.empty;
+        const knownError = error as { message?: string; code?: string; errors?: unknown[] };
+        expect(knownError.message).to.be.equal('API did not return error details.');
+        expect(knownError.code).to.be.equal('NO RESPONSE CODE');
+        expect(knownError.errors).to.be.an('array').that.is.empty;
       }
     });
   });

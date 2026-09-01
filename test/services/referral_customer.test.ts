@@ -1,10 +1,27 @@
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPost from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import User from '../../src/models/user';
+import type ReferralCustomerServiceFactory from '../../src/services/referral_customer_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type ReferralCustomerCreateInput = Parameters<
+  ReturnType<typeof ReferralCustomerServiceFactory>['create']
+>[0];
+type ReferralCustomerAddCardStripeParams = Parameters<
+  ReturnType<typeof ReferralCustomerServiceFactory>['addCreditCardFromStripe']
+>;
+type ReferralCustomerAddBankStripeParams = Parameters<
+  ReturnType<typeof ReferralCustomerServiceFactory>['addBankAccountFromStripe']
+>;
+type ReferralCustomerBillingInput = {
+  payment_method_id: ReferralCustomerAddCardStripeParams[1];
+  priority: ReferralCustomerAddCardStripeParams[2];
+  financial_connections_id: ReferralCustomerAddBankStripeParams[1];
+  mandate_data: ReferralCustomerAddBankStripeParams[2];
+};
 
 describe('ReferralCustomer Service', function () {
   const getPolly = setupPolly.setupPollyTests();
@@ -24,7 +41,7 @@ describe('ReferralCustomer Service', function () {
   });
 
   it('creates a referral user', async function () {
-    const referralUser = Fixture.referralUser();
+    const referralUser = Fixture.referralUser() as ReferralCustomerCreateInput;
 
     const referral = await client.ReferralCustomer.create({
       name: referralUser.name,
@@ -94,7 +111,7 @@ describe('ReferralCustomer Service', function () {
   });
 
   it('raises an error when adding a credit card from Stripe fails', async function () {
-    const billing = Fixture.billing();
+    const billing = Fixture.billing() as ReferralCustomerBillingInput;
 
     await client.ReferralCustomer.addCreditCardFromStripe(
       referralUserProdApiKey,
@@ -108,7 +125,7 @@ describe('ReferralCustomer Service', function () {
   });
 
   it('raises an error when adding a bank account from Stripe fails', async function () {
-    const billing = Fixture.billing();
+    const billing = Fixture.billing() as ReferralCustomerBillingInput;
 
     await client.ReferralCustomer.addBankAccountFromStripe(
       referralUserProdApiKey,

@@ -1,6 +1,18 @@
 import { v4 as uuid } from 'uuid';
 
+import type {
+  IFedExAccountValidationResponse,
+  IFedExRequestPinResponse,
+} from '../../types/FedExRegistration/FedExRegistration';
 import baseService from './base_service';
+
+type FedExValidationMap = Record<string, unknown> & { name?: string | null };
+type FedExParams = Record<string, unknown> & {
+  address_validation?: FedExValidationMap;
+  pin_validation?: FedExValidationMap;
+  invoice_validation?: FedExValidationMap;
+  easypost_details?: Record<string, unknown>;
+};
 
 export default (easypostClient) =>
   /**
@@ -14,7 +26,10 @@ export default (easypostClient) =>
      * @param {Object} params - Map of parameters.
      * @returns {Object}
      */
-    static async registerAddress(fedexAccountNumber, params) {
+    static async registerAddress(
+      fedexAccountNumber: string,
+      params: FedExParams,
+    ): Promise<IFedExAccountValidationResponse> {
       const wrappedParams = this._wrapAddressValidation(params);
       const endpoint = `fedex_registrations/${fedexAccountNumber}/address`;
 
@@ -33,7 +48,11 @@ export default (easypostClient) =>
      * @param {Object} params - Map of parameters.
      * @returns {Object}
      */
-    static async requestPin(fedexAccountNumber, pinMethodOption, params) {
+    static async requestPin(
+      fedexAccountNumber: string,
+      pinMethodOption: string,
+      params: FedExParams,
+    ): Promise<IFedExRequestPinResponse> {
       const wrappedParams = this._wrapPinValidation(params);
       wrappedParams.pin_method = {
         option: pinMethodOption,
@@ -54,7 +73,10 @@ export default (easypostClient) =>
      * @param {Object} params - Map of parameters.
      * @returns {Object}
      */
-    static async validatePin(fedexAccountNumber, params) {
+    static async validatePin(
+      fedexAccountNumber: string,
+      params: FedExParams,
+    ): Promise<IFedExAccountValidationResponse> {
       const wrappedParams = this._wrapPinValidation(params);
       const endpoint = `fedex_registrations/${fedexAccountNumber}/pin/validate`;
 
@@ -72,7 +94,10 @@ export default (easypostClient) =>
      * @param {Object} params - Map of parameters.
      * @returns {Object}
      */
-    static async submitInvoice(fedexAccountNumber, params) {
+    static async submitInvoice(
+      fedexAccountNumber: string,
+      params: FedExParams,
+    ): Promise<IFedExAccountValidationResponse> {
       const wrappedParams = this._wrapInvoiceValidation(params);
       const endpoint = `fedex_registrations/${fedexAccountNumber}/invoice`;
 
@@ -91,8 +116,8 @@ export default (easypostClient) =>
      * @param {Object} params - The original parameters map.
      * @returns {Object} - A new map with properly wrapped address_validation and easypost_details.
      */
-    static _wrapAddressValidation(params) {
-      const wrappedParams = {};
+    static _wrapAddressValidation(params: FedExParams): Record<string, unknown> {
+      const wrappedParams: Record<string, unknown> = {};
 
       if (params.address_validation) {
         const addressValidation = { ...params.address_validation };
@@ -114,8 +139,8 @@ export default (easypostClient) =>
      * @param {Object} params - The original parameters map.
      * @returns {Object} - A new map with properly wrapped pin_validation and easypost_details.
      */
-    static _wrapPinValidation(params) {
-      const wrappedParams = {};
+    static _wrapPinValidation(params: FedExParams): Record<string, unknown> {
+      const wrappedParams: Record<string, unknown> = {};
 
       if (params.pin_validation) {
         const pinValidation = { ...params.pin_validation };
@@ -137,8 +162,8 @@ export default (easypostClient) =>
      * @param {Object} params - The original parameters map.
      * @returns {Object} - A new map with properly wrapped invoice_validation and easypost_details.
      */
-    static _wrapInvoiceValidation(params) {
-      const wrappedParams = {};
+    static _wrapInvoiceValidation(params: FedExParams): Record<string, unknown> {
+      const wrappedParams: Record<string, unknown> = {};
 
       if (params.invoice_validation) {
         const invoiceValidation = { ...params.invoice_validation };
@@ -160,7 +185,7 @@ export default (easypostClient) =>
      * @private
      * @param {Object} map - The map to ensure the "name" field in.
      */
-    static _ensureNameField(map) {
+    static _ensureNameField(map: FedExValidationMap): void {
       if (!map.name || map.name === null) {
         const uuidValue = uuid().replace(/-/g, '');
         map.name = uuidValue;

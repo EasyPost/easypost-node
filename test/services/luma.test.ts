@@ -1,8 +1,11 @@
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
+import type LumaServiceFactory from '../../src/services/luma_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type LumaTestGetPromiseInput = Parameters<ReturnType<typeof LumaServiceFactory>['getPromise']>[0];
 
 /* eslint-disable func-names */
 describe('Luma Service', function () {
@@ -19,7 +22,7 @@ describe('Luma Service', function () {
   });
 
   it('gets service recommendations from Luma based on your ruleset', async function () {
-    const basicShipment = Fixture.basicShipment();
+    const basicShipment = Fixture.basicShipment() as LumaTestGetPromiseInput;
     basicShipment.ruleset_name = Fixture.lumaRulesetName();
     basicShipment.planned_ship_date = Fixture.lumaPlannedShipDate();
 

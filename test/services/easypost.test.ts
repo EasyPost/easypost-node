@@ -1,9 +1,12 @@
-import { expect } from 'chai';
+import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
 import MissingParameterError from '../../src/errors/general/missing_parameter_error';
+import type AddressServiceFactory from '../../src/services/address_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
+
+type AddressTestCreateInput = Parameters<ReturnType<typeof AddressServiceFactory>['create']>[0];
 
 /* eslint-disable func-names */
 describe('EasyPost', function () {
@@ -35,7 +38,7 @@ describe('EasyPost', function () {
     client.addRequestHook(requestHook);
     client.addResponseHook(responseHook);
 
-    await client.Address.create(Fixture.caAddress1());
+    await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
 
     expect(requestConfig).to.be.an('object');
     expect(requestConfig.method).to.equal(EasyPostClient.METHODS.POST);
@@ -76,7 +79,7 @@ describe('EasyPost', function () {
     client.addResponseHook(responseHook1);
     client.addResponseHook(responseHook2);
 
-    await client.Address.create(Fixture.caAddress1());
+    await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
 
     expect(requestConfig1).to.be.an('object');
     expect(requestConfig2).to.be.an('object');
@@ -93,7 +96,7 @@ describe('EasyPost', function () {
     client.addRequestHook(requestHook);
     client.addResponseHook(responseHook);
 
-    await client.Address.create(Fixture.caAddress1());
+    await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
 
     expect(requestConfig).to.be.an('object');
     expect(responseConfig).to.be.an('object');
@@ -104,7 +107,7 @@ describe('EasyPost', function () {
     requestConfig = null;
     responseConfig = null;
 
-    await client.Address.create(Fixture.caAddress1());
+    await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
 
     expect(requestConfig).to.be.null;
     expect(responseConfig).to.be.null;
@@ -125,7 +128,7 @@ describe('EasyPost', function () {
     client.addResponseHook(responseHook1);
     client.addResponseHook(responseHook2);
 
-    await client.Address.create(Fixture.caAddress1());
+    await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
 
     expect(requestConfig1).to.be.an('object');
     expect(requestConfig2).to.be.an('object');
@@ -140,7 +143,7 @@ describe('EasyPost', function () {
     responseConfig1 = null;
     responseConfig2 = null;
 
-    await client.Address.create(Fixture.caAddress1());
+    await client.Address.create(Fixture.caAddress1() as AddressTestCreateInput);
 
     expect(requestConfig1).to.be.null;
     expect(requestConfig2).to.be.null;
