@@ -6,13 +6,12 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Brand extends EasyPostObject {
-  static ad_href;
-  static ad;
-  static background_color;
-  static color;
-  static logo_href;
-  static logo;
-  static name;
-  static theme;
-  static user_id;
+  declare ad_href?: string | null;
+  declare ad?: string | null;
+  declare background_color?: string | null;
+  declare color?: string | null;
+  declare logo_href?: string | null;
+  declare logo?: string | null;
+  declare theme?: 'theme1' | 'theme2' | null;
+  declare user_id?: string | null;
 }

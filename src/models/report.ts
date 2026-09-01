@@ -6,11 +6,11 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Report extends EasyPostObject {
-  static end_date;
-  static include_children;
-  static send_email;
-  static start_date;
-  static status;
-  static url_expires_at;
-  static url;
+  declare end_date?: string | null;
+  declare include_children?: boolean | null;
+  declare send_email?: boolean | null;
+  declare start_date?: string | null;
+  declare status?: 'new' | 'available' | 'failed' | null;
+  declare url_expires_at?: string | null;
+  declare url?: string | null;
 }
