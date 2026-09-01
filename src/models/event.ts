@@ -6,10 +6,10 @@ import EasyPostObject from './easypost_object';
  * @extends EasyPostObject
  */
 export default class Event extends EasyPostObject {
-  static completed_urls;
-  static description;
-  static pending_urls;
-  static previous_attributes;
-  static result;
-  static status;
+  declare completed_urls?: string[] | null;
+  declare description?: string | null;
+  declare pending_urls?: string[] | null;
+  declare previous_attributes?: Record<string, unknown> | null;
+  declare result?: Record<string, unknown> | null;
+  declare status?: 'completed' | 'failed' | 'in_queue' | 'retrying' | 'pending' | null;
 }
