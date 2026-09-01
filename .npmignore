@@ -10,10 +10,7 @@
 !/prop_types.js
 !/README.md
 !/src/**/*
-!/types/**/*
 !/UPGRADE_GUIDE.md
 
 # Here we exclude files that we pulled in from above that should be removed
 .DS_Store
-types/.eslintrc
-types/demo

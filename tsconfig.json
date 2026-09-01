@@ -1,7 +1,15 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": true
+    "allowJs": true,
+    "checkJs": false,
+    "noImplicitAny": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": "./src",
+    "outDir": "./dist/types",
+    "noEmit": false
   },
-  "include": ["types"]
+  "include": ["src/**/*.js", "src/**/*.ts"],
+  "exclude": ["dist/**", "docs/**", "coverage/**", "node_modules/**"]
 }
