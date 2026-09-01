@@ -16,6 +16,10 @@ Use the following guide to assist in the upgrade process of the `easypost-node` 
 - [Response Objects Are Now Plain JSON Objects](#90-response-objects-are-now-plain-json-objects)
 - [HTTP Transport Migrated to Fetch](#90-http-transport-migrated-to-fetch)
 
+### 9.0 Low Impact Changes
+
+- [Type Declarations Are Source-Generated](#90-type-declarations-are-source-generated)
+
 ### 9.0 Response Objects Are Now Plain JSON Objects
 
 Likelihood of Impact: **High**
@@ -66,6 +70,13 @@ const client = new EasyPostClient('api_key', {
 // Updated method name
 await client.makeApiCall('delete', '/trackers/trk_123');
 ```
+
+### 9.0 Type Declarations Are Source-Generated
+
+Likelihood of Impact: **Low**
+
+Type declarations are generated from source and published from `dist/types`.
+Package-root imports are unchanged. If you were importing internal files from the old root `types/` folder, migrate to package-root imports.
 
 ## Upgrading from 7.x to 8.0
 

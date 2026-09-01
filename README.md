@@ -244,6 +244,9 @@ just update-examples-submodule
 
 Starting with `v5.3.0`, this project has Typescript definitions included.
 
+Current definitions are generated from source and published with the package at `dist/types`.
+No consumer configuration changes are required when importing `@easypost/api` from the package root.
+
 #### Typescript Exclusions
 
 - We do not provide a DefinitelyTyped version of these definitions at this time
