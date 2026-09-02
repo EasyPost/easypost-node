@@ -1,9 +1,9 @@
 import Constants from '../constants';
+import type EasyPostClient from '../easypost';
 import InvalidObjectError from '../errors/general/invalid_object_error';
 import baseService from './base_service';
-import type EasyPostClient from '../easypost';
 
-type PaymentMethodObject = {
+export type PaymentMethodObject = Record<string, unknown> & {
   id: string;
   object: string;
 };

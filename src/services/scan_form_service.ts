@@ -1,10 +1,10 @@
-import type { IShipmentCreateParameters } from '../../types/Shipment';
-import type { DeepPartial } from '../../types/utils';
 import type EasyPostClient from '../easypost';
 import ScanForm from '../models/scan_form';
 import baseService from './base_service';
 
-type ShipmentReferenceInput = { id?: string | null } & DeepPartial<IShipmentCreateParameters>;
+type ShipmentReferenceInput = Record<string, unknown> & {
+  id?: string | null;
+};
 
 type ScanFormCreateParameters = {
   shipments?: Array<string | ShipmentReferenceInput> | null;

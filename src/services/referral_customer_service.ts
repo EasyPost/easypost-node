@@ -1,11 +1,11 @@
 import util from 'util';
 
-import type { IPaymentMethod } from '../../types/PaymentMethod/PaymentMethod';
 import Constants from '../constants';
 import EasyPostClient from '../easypost';
 import ExternalApiError from '../errors/api/external_api_error';
 import User from '../models/user';
 import baseService from './base_service';
+import type { PaymentMethodObject } from './billing_service';
 
 type ReferralCreateParameters = Record<string, unknown> & {
   reference?: string | null;
@@ -118,7 +118,7 @@ async function _sendCardDetailsToEasyPost(
   referralApiKey: string,
   stripeCreditCardToken: string,
   priority: string,
-): Promise<IPaymentMethod> {
+): Promise<PaymentMethodObject> {
   const _client = _getReferralClient(client, referralApiKey);
   const url = 'credit_cards';
   const params = { credit_card: { stripe_object_id: stripeCreditCardToken, priority } };
@@ -184,7 +184,7 @@ export default (easypostClient: EasyPostClient) =>
       expirationYear: string,
       cvc: string,
       priority: string = 'primary',
-    ): Promise<IPaymentMethod> {
+    ): Promise<PaymentMethodObject> {
       const stripeKey = await _getEasyPostStripeKey(easypostClient); // will throw if there's an error
 
       const stripeCreditCardId = await _sendCardDetailsToStripe(
@@ -214,7 +214,7 @@ export default (easypostClient: EasyPostClient) =>
       referralApiKey: string,
       paymentMethodId: string,
       priority: string = 'primary',
-    ): Promise<IPaymentMethod> {
+    ): Promise<PaymentMethodObject> {
       const _client = _getReferralClient(easypostClient, referralApiKey);
       const params = {
         credit_card: {
@@ -239,7 +239,7 @@ export default (easypostClient: EasyPostClient) =>
       financialConnectionsId: string,
       mandateData: MandateData,
       priority: string = 'primary',
-    ): Promise<IPaymentMethod> {
+    ): Promise<PaymentMethodObject> {
       const _client = _getReferralClient(easypostClient, referralApiKey);
       const params = {
         financial_connections_id: financialConnectionsId,
