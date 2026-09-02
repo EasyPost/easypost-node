@@ -7,11 +7,6 @@
   },
 
   "rules": {
-    "import/no-extraneous-dependencies": 0,
-
-    // @easypost/eslint-config-easypost-base assumes all tests are jest. so turn these rules off
-    "jest/consistent-test-it": 0,
-    "jest/valid-expect": 0,
     "global-require": "off"
   },
 
