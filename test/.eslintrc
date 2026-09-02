@@ -1,19 +1,36 @@
 {
-  "extends": ["eslint:recommended", "prettier", "plugin:vitest-globals/recommended"],
+  "extends": ["eslint:recommended", "prettier"],
 
   "env": {
     "node": true,
-    "vitest-globals/env": true
+    "es2021": true,
   },
 
   "rules": {
-    "global-require": "off"
+    "global-require": "off",
   },
 
   "globals": {
-    "expect": true
+    "afterAll": true,
+    "afterEach": true,
+    "beforeAll": true,
+    "beforeEach": true,
+    "describe": true,
+    "expect": true,
+    "it": true,
+    "vi": true,
   },
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        "no-undef": "off",
+        "no-unused-vars": "off",
+      },
+    },
+  ],
   "parserOptions": {
-    "ecmaVersion": 13
-  }
+    "ecmaVersion": 13,
+  },
 }

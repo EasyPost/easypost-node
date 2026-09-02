@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2022",
     "module": "nodenext",
     "strict": true,
-    "ignoreDeprecations": "5.0",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
