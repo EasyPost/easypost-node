@@ -1,4 +1,4 @@
-import EasyPostClient from '../..';
+import EasyPostClient from '../../src/easypost';
 
 const client = new EasyPostClient('api-key', {
   requestMiddleware: (request: any) => request,

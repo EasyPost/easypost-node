@@ -1,8 +1,8 @@
-import baseService from './base_service';
-import Parcel from '../models/parcel';
 import type EasyPostClient from '../easypost';
+import Parcel from '../models/parcel';
+import baseService from './base_service';
 
-type ParcelCreateParameters = Record<string, unknown> & {
+export type ParcelCreateParameters = Record<string, unknown> & {
   length?: number | null;
   width?: number | null;
   height?: number | null;
