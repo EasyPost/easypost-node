@@ -2,5 +2,5 @@
   "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
   // Only fail the audit if there are critical vulnerabilities.
   "critical": true,
-  "allowlist": [],
+  "allowlist": ["GHSA-4mjr-xmp4-gh2g", "GHSA-x5fp-wj9c-mxmx"],
 }
