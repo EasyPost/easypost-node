@@ -1,9 +1,9 @@
 # CHANGELOG
 
-## v9.0.0 (Unreleased)
+## v9.0.0-rc.1 (2026-09-08)
 
 - Breaking: Node 18+ is now required (built-in `fetch`)
-- Breaking: API resource responses are now plain JSON-compatible objects rather than model class instances
+- Breaking: API resource responses are now plain JSON-compatible objects rather than model class instances (better serializer and SSR compatibility)
 - Breaking: HTTP transport migrated from `superagent` to fetch-compatible transport
   - `superagent` runtime dependency removed
   - Breaking: `superagentMiddleware` renamed to `httpMiddleware`
@@ -11,9 +11,10 @@
   - Breaking: `makeApiCall` now accepts `delete` (the `del` alias was removed)
   - `requestMiddleware` compatibility preserved using a fetch-era compatibility request object
   - Default `User-Agent` retains structured runtime metadata fields (`Nodejs/`, `OS/`, `OSVersion/`, `OSArch/`) via runtime-safe detection
-- TypeScript declarations are now generated from source and published from `dist/types`.
-- Internal root `types/` declaration sources and demo fixtures were removed from the repository.
-- Calling `retrieveStatelessRates` now returns the entire response and not only the `rates` key, allowing errors and other useful information to be exposed. Note that you will now need to reference the `rates` key to get the returned rates
+- Breaking: Project migrated from JavaScript to TypeScript. Type declarations are now generated from source and published from `dist/types`. Although efforts were made to retain existing types, some required or accidental type changes may still exist, so verify compatibility in your codebase.
+  - Breaking: For consistency with other EasyPost client libraries, parameters and model properties are now generally typed as optional.
+  - Breaking: Internal root `types/` declaration sources and demo fixtures were removed from the repository.
+- Breaking: `retrieveStatelessRates` now returns the full response rather than only the `rates` key. Read rates from `response.rates`.
 
 ## v8.9.0 (2026-06-25)
 

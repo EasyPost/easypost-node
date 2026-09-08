@@ -209,6 +209,7 @@ No consumer configuration changes are required when importing `@easypost/api` fr
 - Predefined packages (see [Carrier Metadata](https://docs.easypost.com/docs/carrier-metadata) in our docs for more details)
 - Carrier service levels (see [Carrier Metadata](https://docs.easypost.com/docs/carrier-metadata) in our docs for more details)
 - Carrier list (see [Carrier Types](https://docs.easypost.com/docs/carrier-types) in our docs for more details)
+- We do not require parameters or properties comprehensively in this library. See our documentation for more details on what is required per request
 
 ### Testing
 
