@@ -15,6 +15,5 @@ export default class CustomsInfo extends EasyPostObject {
   declare eel_pfc?: string | null;
   declare non_delivery_option?: 'abandon' | 'return' | null;
   declare restriction_comments?: string | null;
-  declare restriction_type?:
-    'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection' | null;
+  declare restriction_type?: 'none' | 'other' | 'quarantine' | 'sanitary_phytosanitary_inspection' | null;
 }

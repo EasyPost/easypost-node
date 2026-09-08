@@ -14,10 +14,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param {Array} type - List of types in string
      * @returns {Object[]} - List of carrier metadata
      */
-    static async retrieve(
-      carriers: string[] | null = null,
-      types: string[] | null = null,
-    ): Promise<CarrierMetadata[]> {
+    static async retrieve(carriers: string[] | null = null, types: string[] | null = null): Promise<CarrierMetadata[]> {
       const url = 'metadata/carriers';
       const params = {
         ...(carriers && carriers.length > 0 && { carriers: carriers.join(',') }),

@@ -8,9 +8,7 @@ import type ReferralCustomerServiceFactory from '../../src/services/referral_cus
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
-type ReferralCustomerCreateInput = Parameters<
-  ReturnType<typeof ReferralCustomerServiceFactory>['create']
->[0];
+type ReferralCustomerCreateInput = Parameters<ReturnType<typeof ReferralCustomerServiceFactory>['create']>[0];
 type ReferralCustomerAddCardStripeParams = Parameters<
   ReturnType<typeof ReferralCustomerServiceFactory>['addCreditCardFromStripe']
 >;
@@ -119,9 +117,7 @@ describe('ReferralCustomer Service', function () {
       billing.payment_method_id,
       billing.priority,
     ).catch((error: any) => {
-      expect(error.message).to.equal(
-        'Stripe::PaymentMethod does not exist for the specified reference_id',
-      );
+      expect(error.message).to.equal('Stripe::PaymentMethod does not exist for the specified reference_id');
     });
   });
 

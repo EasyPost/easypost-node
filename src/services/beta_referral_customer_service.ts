@@ -86,9 +86,7 @@ export default (easypostClient: EasyPostClient) =>
      * Creates a client secret to use with Stripe when adding a credit card.
      * @returns {object} - A JSON object representing the client secret.
      */
-    static async createBankAccountClientSecret(
-      returnUrl: string | null,
-    ): Promise<BetaClientSecretResponse> {
+    static async createBankAccountClientSecret(returnUrl: string | null): Promise<BetaClientSecretResponse> {
       const url = 'beta/financial_connections_sessions';
       if (returnUrl) {
         const response = await easypostClient._post(url, { return_url: returnUrl });

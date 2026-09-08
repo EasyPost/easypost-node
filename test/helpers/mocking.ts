@@ -9,8 +9,7 @@ export class MockRequestMatchRule {
 
   constructor(method: string, urlRegexPattern: string | RegExp) {
     this.method = method;
-    this.urlRegexPattern =
-      urlRegexPattern instanceof RegExp ? urlRegexPattern : new RegExp(urlRegexPattern);
+    this.urlRegexPattern = urlRegexPattern instanceof RegExp ? urlRegexPattern : new RegExp(urlRegexPattern);
   }
 }
 
@@ -79,10 +78,7 @@ export class MockMiddleware {
     // For each mock request, check if the method and URL match.
     for (let i = 0; i < this.mockRequests.length; i += 1) {
       const mockRequest = this.mockRequests[i];
-      if (
-        mockRequest.matchRule.method === request.method &&
-        request.url.match(mockRequest.matchRule.urlRegexPattern)
-      ) {
+      if (mockRequest.matchRule.method === request.method && request.url.match(mockRequest.matchRule.urlRegexPattern)) {
         return mockRequest;
       }
     }

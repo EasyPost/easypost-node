@@ -101,11 +101,10 @@ describe('Webhook Service', function () {
       'X-Hmac-Signature': Fixture.webhookHmacSignature(),
     };
 
-    const webhookBody = client.Utils.validateWebhook(
-      Fixture.eventBody(),
-      headers,
-      Fixture.webhookSecret(),
-    ) as { description: string; result: { weight: number } };
+    const webhookBody = client.Utils.validateWebhook(Fixture.eventBody(), headers, Fixture.webhookSecret()) as {
+      description: string;
+      result: { weight: number };
+    };
 
     expect(webhookBody.description).to.equal('tracker.updated');
     expect(webhookBody.result.weight).to.equal(614.4); // Ensure we convert floats properly
@@ -127,8 +126,7 @@ describe('Webhook Service', function () {
 
   it('throws an error when a webhook signature is invalid', function () {
     const webhookSecret = 'sécret';
-    const expectedHmacSignature =
-      'hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115aaaa'; // ending differs
+    const expectedHmacSignature = 'hmac-sha256-hex=e93977c8ccb20363d51a62b3fe1fc402b7829be1152da9e88cf9e8d07115aaaa'; // ending differs
     const headers = {
       'X-Hmac-Signature': expectedHmacSignature,
     };

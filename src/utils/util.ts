@@ -33,11 +33,7 @@ export default class Utils {
    * @throws {FilteringError} - If no applicable rates are found
    * @throws {InvalidParameterError} - If the deliveryAccuracy value is invalid
    */
-  getLowestSmartRate(
-    smartrates: SmartRate[],
-    deliveryDays: number | string,
-    deliveryAccuracy: string,
-  ): SmartRate {
+  getLowestSmartRate(smartrates: SmartRate[], deliveryDays: number | string, deliveryAccuracy: string): SmartRate {
     const validDeliveryAccuracyValues = new Set([
       'percentile_50',
       'percentile_75',
@@ -52,9 +48,9 @@ export default class Utils {
 
     if (!validDeliveryAccuracyValues.has(lowercaseDeliveryAccuracy)) {
       throw new InvalidParameterError({
-        message: `Invalid deliveryAccuracy value, must be one of: ${Array.from(
-          validDeliveryAccuracyValues,
-        ).join(', ')}`,
+        message: `Invalid deliveryAccuracy value, must be one of: ${Array.from(validDeliveryAccuracyValues).join(
+          ', ',
+        )}`,
       });
     }
 
@@ -64,10 +60,7 @@ export default class Utils {
       if (rate.time_in_transit[lowercaseDeliveryAccuracy] > parseInt(String(deliveryDays), 10)) {
         // eslint-disable-next-line no-continue
         continue;
-      } else if (
-        lowestSmartRate === null ||
-        parseFloat(rate.rate) < parseFloat(lowestSmartRate.rate)
-      ) {
+      } else if (lowestSmartRate === null || parseFloat(rate.rate) < parseFloat(lowestSmartRate.rate)) {
         lowestSmartRate = rate;
       }
     }
@@ -88,11 +81,7 @@ export default class Utils {
    * @returns {Rate} - The lowest rate
    * @throws {FilteringError} - If no applicable rates are found
    */
-  getLowestRate(
-    rates: Rate[],
-    carriers: string[] | null = null,
-    services: string[] | null = null,
-  ): Rate {
+  getLowestRate(rates: Rate[], carriers: string[] | null = null, services: string[] | null = null): Rate {
     if (carriers) {
       const carriersLower = carriers.map((carrier) => carrier.toLowerCase());
       // eslint-disable-next-line no-param-reassign
@@ -136,8 +125,7 @@ export default class Utils {
     webhookSecret: string,
   ): Record<string, unknown> {
     let webhook: Record<string, unknown> = {};
-    const easypostHmacSignature =
-      headers['X-Hmac-Signature'] ?? headers['x-hmac-signature'] ?? null;
+    const easypostHmacSignature = headers['X-Hmac-Signature'] ?? headers['x-hmac-signature'] ?? null;
 
     if (easypostHmacSignature != null) {
       const normalizedSecret = webhookSecret.normalize('NFKD');
@@ -156,12 +144,7 @@ export default class Utils {
       const digest = `hmac-sha256-hex=${expectedSignature}`;
 
       try {
-        if (
-          crypto.timingSafeEqual(
-            Buffer.from(easypostHmacSignature, 'utf8'),
-            Buffer.from(digest, 'utf8'),
-          )
-        ) {
+        if (crypto.timingSafeEqual(Buffer.from(easypostHmacSignature, 'utf8'), Buffer.from(digest, 'utf8'))) {
           webhook = JSON.parse(correctedEventBody);
         } else {
           throw new SignatureVerificationError({ message: Constants.WEBHOOK_DOES_NOT_MATCH });

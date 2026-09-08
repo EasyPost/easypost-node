@@ -233,10 +233,8 @@ export default class EasyPostClient {
    * @returns {EasyPostClient} A new `EasyPostClient` instance.
    */
   static copyClient(client: EasyPostClient, options: ClientOptions = {}): EasyPostClient {
-    const { apiKey, useProxy, timeout, baseUrl, httpMiddleware, requestMiddleware, httpClient } =
-      options;
-    const nextHttpClient =
-      httpClient || (httpMiddleware ? httpMiddleware(client.httpClient) : client.httpClient);
+    const { apiKey, useProxy, timeout, baseUrl, httpMiddleware, requestMiddleware, httpClient } = options;
+    const nextHttpClient = httpClient || (httpMiddleware ? httpMiddleware(client.httpClient) : client.httpClient);
 
     return new EasyPostClient(apiKey || client.key, {
       useProxy: useProxy || client.useProxy,
@@ -338,9 +336,7 @@ export default class EasyPostClient {
       nodeVersion = process.versions && process.versions.node ? process.versions.node : nodeVersion;
       osName = process.platform || osName;
       osArch = process.arch || osArch;
-      osVersion =
-        (process.env && (process.env.OS_VERSION || process.env.OSTYPE || process.env.OS)) ||
-        osVersion;
+      osVersion = (process.env && (process.env.OS_VERSION || process.env.OSTYPE || process.env.OS)) || osVersion;
     }
 
     return `EasyPost/v2 NodejsClient/${pkgVersion} Nodejs/${nodeVersion} OS/${osName} OSVersion/${osVersion} OSArch/${osArch}`;
@@ -366,8 +362,7 @@ export default class EasyPostClient {
       return path;
     }
 
-    const normalizedPath =
-      this.baseUrl.endsWith('/') && path.startsWith('/') ? path.slice(1) : path;
+    const normalizedPath = this.baseUrl.endsWith('/') && path.startsWith('/') ? path.slice(1) : path;
     let completePath = this.baseUrl + normalizedPath;
     completePath = path.includes('beta') ? completePath.replace('/v2', '') : completePath;
 
@@ -411,8 +406,7 @@ export default class EasyPostClient {
     const requestHeaders = EasyPostClient._buildHeaders(headers);
     const url = new URL(urlPath);
     const isQueryMethod =
-      normalizedMethod === EasyPostClient.METHODS.GET ||
-      normalizedMethod === EasyPostClient.METHODS.DELETE;
+      normalizedMethod === EasyPostClient.METHODS.GET || normalizedMethod === EasyPostClient.METHODS.DELETE;
     let requestBody: RequestBody | undefined;
 
     if (params !== undefined) {
@@ -515,8 +509,7 @@ export default class EasyPostClient {
           method: normalizedMethod.toUpperCase(),
           headers: requestHeaders,
           body:
-            normalizedMethod === EasyPostClient.METHODS.GET ||
-            normalizedMethod === EasyPostClient.METHODS.DELETE
+            normalizedMethod === EasyPostClient.METHODS.GET || normalizedMethod === EasyPostClient.METHODS.DELETE
               ? undefined
               : JSON.stringify(middlewareRequest._data),
         });
@@ -552,10 +545,7 @@ export default class EasyPostClient {
         this.responseHooks.forEach((fn) => fn(responseHooksValue));
         throw ErrorHandler.handleApiError(handledError);
       } else if (handledError.response && handledError.response.body) {
-        const responseHooksValue = this._createResponseHooksValue(
-          baseHooksValue,
-          handledError.response,
-        );
+        const responseHooksValue = this._createResponseHooksValue(baseHooksValue, handledError.response);
         this.responseHooks.forEach((fn) => fn(responseHooksValue));
         throw ErrorHandler.handleApiError(handledError.response);
       } else {

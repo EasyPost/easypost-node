@@ -17,9 +17,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param {Object} params - Map of parameters for the API call
      * @returns {Object} - Stateless rates response
      */
-    static async retrieveStatelessRates(
-      params: Record<string, unknown>,
-    ): Promise<BetaRateRetrieveResponse> {
+    static async retrieveStatelessRates(params: Record<string, unknown>): Promise<BetaRateRetrieveResponse> {
       const url = 'beta/rates';
       const wrappedParams = {
         shipment: params,

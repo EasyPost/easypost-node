@@ -25,10 +25,7 @@ describe('CarrierMetadataService', function () {
   });
 
   it('retrieves carrier metadata based on the filters provided', async function () {
-    const carrierMetadata = await client.CarrierMetadata.retrieve(
-      ['usps'],
-      ['service_levels', 'predefined_packages'],
-    );
+    const carrierMetadata = await client.CarrierMetadata.retrieve(['usps'], ['service_levels', 'predefined_packages']);
 
     expect(carrierMetadata.some((carrier: any) => carrier.name === 'usps')).to.be.true;
     expect(carrierMetadata).to.have.lengthOf(1);

@@ -85,10 +85,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param {string} fileFormat - The format of the label to generate. Defaults to 'pdf'.
      * @returns {Batch} - The updated batch.
      */
-    static async generateLabel(
-      id: string,
-      fileFormat: string = DEFAULT_LABEL_FORMAT,
-    ): Promise<Batch> {
+    static async generateLabel(id: string, fileFormat: string = DEFAULT_LABEL_FORMAT): Promise<Batch> {
       const url = `batches/${id}/label`;
       const wrappedParams = { file_format: fileFormat };
 

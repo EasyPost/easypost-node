@@ -10,9 +10,7 @@ import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
 type AddressTestCreateInput = Parameters<ReturnType<typeof AddressServiceFactory>['create']>[0];
-type AddressTestCreateAndVerifyInput = Parameters<
-  ReturnType<typeof AddressServiceFactory>['createAndVerify']
->[0];
+type AddressTestCreateAndVerifyInput = Parameters<ReturnType<typeof AddressServiceFactory>['createAndVerify']>[0];
 
 /* eslint-disable func-names */
 describe('Address Service', function () {

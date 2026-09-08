@@ -150,9 +150,7 @@ export default (easypostClient: any) =>
         }
 
         Object.keys(response as Record<string, unknown>).forEach((key) => {
-          plainObject[key] = this._toPlainEasyPostObject(
-            (response as Record<string, unknown>)[key],
-          );
+          plainObject[key] = this._toPlainEasyPostObject((response as Record<string, unknown>)[key]);
         });
 
         return plainObject;
@@ -180,10 +178,7 @@ export default (easypostClient: any) =>
 
       if (isObjectRecord(response)) {
         let classObject: any;
-        if (
-          typeof response.object === 'string' &&
-          (RESOURCES as Record<string, any>)[response.object] !== undefined
-        ) {
+        if (typeof response.object === 'string' && (RESOURCES as Record<string, any>)[response.object] !== undefined) {
           classObject = new (RESOURCES as Record<string, any>)[response.object]();
         } else if (
           typeof response.id === 'string' &&
@@ -192,9 +187,7 @@ export default (easypostClient: any) =>
           ] !== undefined
         ) {
           const className = response.id.substring(0, response.id.indexOf('_'));
-          classObject = new (EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP as Record<string, any>)[
-            className
-          ]();
+          classObject = new (EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP as Record<string, any>)[className]();
         } else {
           classObject = new EasyPostObject();
         }

@@ -23,11 +23,9 @@ export default class Constants {
   static INVALID_WEBHOOK_SIGNATURE = 'Webhook does not contain a valid HMAC signature.';
   static MISSING_REQUIRED_PARAMETER = 'Missing required parameter: %s.';
   static NO_OBJECT_FOUND = 'No %s found.';
-  static NO_PAYMENT_METHODS =
-    'No payment methods are set up. Please add a payment method and try again.';
+  static NO_PAYMENT_METHODS = 'No payment methods are set up. Please add a payment method and try again.';
   static API_DID_NOT_RETURN_ERROR_DETAILS = 'API did not return error details.';
-  static WEBHOOK_DOES_NOT_MATCH =
-    'Webhook received did not originate from EasyPost or had a webhook secret mismatch.';
+  static WEBHOOK_DOES_NOT_MATCH = 'Webhook received did not originate from EasyPost or had a webhook secret mismatch.';
   static END_OF_PAGINATION = 'There are no more pages to retrieve.';
   static ERROR_DESERIALIZATION = 'Error deserializing JSON response';
   static Utils = new Utils();

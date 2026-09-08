@@ -14,17 +14,11 @@ import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
 type AddressTestCreateInput = Parameters<ReturnType<typeof AddressServiceFactory>['create']>[0];
-type EndShipperTestCreateInput = Parameters<
-  ReturnType<typeof EndShipperServiceFactory>['create']
->[0];
+type EndShipperTestCreateInput = Parameters<ReturnType<typeof EndShipperServiceFactory>['create']>[0];
 type ParcelTestCreateInput = Parameters<ReturnType<typeof ParcelServiceFactory>['create']>[0];
 type ShipmentTestCreateInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['create']>[0];
-type ShipmentTestCreateAndBuyLumaInput = Parameters<
-  ReturnType<typeof ShipmentServiceFactory>['createAndBuyLuma']
->[0];
-type ShipmentTestGenerateFormInput = Parameters<
-  ReturnType<typeof ShipmentServiceFactory>['generateForm']
->[2];
+type ShipmentTestCreateAndBuyLumaInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['createAndBuyLuma']>[0];
+type ShipmentTestGenerateFormInput = Parameters<ReturnType<typeof ShipmentServiceFactory>['generateForm']>[2];
 
 /* eslint-disable func-names */
 describe('Shipment Service', function () {
@@ -41,9 +35,7 @@ describe('Shipment Service', function () {
   });
 
   it('creates a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.fullShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.fullShipment() as ShipmentTestCreateInput);
 
     expect(shipment).to.be.an.instanceOf(Shipment);
     expect(shipment.id).to.match(/^shp_/);
@@ -101,9 +93,7 @@ describe('Shipment Service', function () {
   });
 
   it('retrieves a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.fullShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.fullShipment() as ShipmentTestCreateInput);
 
     const retrievedShipment = await client.Shipment.retrieve(shipment.id);
 
@@ -142,9 +132,7 @@ describe('Shipment Service', function () {
   });
 
   it('buys a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.fullShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.fullShipment() as ShipmentTestCreateInput);
 
     const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
 
@@ -152,9 +140,7 @@ describe('Shipment Service', function () {
   });
 
   it('regenerates rates for a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.fullShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.fullShipment() as ShipmentTestCreateInput);
 
     const rates = await client.Shipment.regenerateRates(shipment.id);
 
@@ -167,9 +153,7 @@ describe('Shipment Service', function () {
   });
 
   it('converts the label format of a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.fullShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.fullShipment() as ShipmentTestCreateInput);
 
     const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate());
 
@@ -195,9 +179,7 @@ describe('Shipment Service', function () {
     // Refunding a test shipment must happen within seconds of the shipment being created as test shipments naturally
     // follow a flow of created -> delivered to cycle through tracking events in test mode - as such anything older
     // than a few seconds in test mode may not be refundable.
-    const shipment = await client.Shipment.create(
-      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
 
     const refundedShipment = await client.Shipment.refund(shipment.id);
 
@@ -205,9 +187,7 @@ describe('Shipment Service', function () {
   });
 
   it('retrieves smartRates of a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
 
     expect(shipment.rates).to.exist;
 
@@ -223,9 +203,7 @@ describe('Shipment Service', function () {
   });
 
   it('gets the lowest rate', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.fullShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.fullShipment() as ShipmentTestCreateInput);
 
     // Test lowest rate with no filters
     const lowestRate = shipment.lowestRate();
@@ -246,9 +224,7 @@ describe('Shipment Service', function () {
   });
 
   it('gets the lowest smartrate', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
 
     // Test lowest smartrate with valid filters
     const lowestSmartRate = await client.Shipment.lowestSmartRate(shipment.id, 3, 'percentile_90');
@@ -258,9 +234,7 @@ describe('Shipment Service', function () {
   });
 
   it('raises an error for lowestSmartRate when no rates are found due to deliveryDays', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
     try {
@@ -273,9 +247,7 @@ describe('Shipment Service', function () {
   });
 
   it('raises an error for lowestSmartRate when no rates are found due to deliveryAccuracy', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
     try {
@@ -289,9 +261,7 @@ describe('Shipment Service', function () {
   });
 
   it('gets the lowest smartrate from a list of smartRates', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
     const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with valid filters
@@ -302,9 +272,7 @@ describe('Shipment Service', function () {
   });
 
   it('raises an error for getLowestSmartRate when no rates are found due to deliveryDays', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
     const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with invalid filters (should error due to strict deliveryDays)
@@ -314,9 +282,7 @@ describe('Shipment Service', function () {
   });
 
   it('raises an error for getLowestSmartRate when no rates are found due to deliveryAccuracy', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
     const smartRates = await client.Shipment.getSmartRates(shipment.id);
 
     // Test lowest smartrate with invalid filters (should error due to invalid deliveryAccuracy)
@@ -329,9 +295,7 @@ describe('Shipment Service', function () {
   });
 
   it('generates a form for a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
 
     const formType = 'return_packing_slip';
 
@@ -350,36 +314,23 @@ describe('Shipment Service', function () {
   });
 
   it('buys a shipment with insuranceAmount', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
     const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate(), 100);
 
     expect(boughtShipment.insurance).to.equal('100.00');
   });
 
   it('buys a shipment with end_shipper_id', async function () {
-    const endShipper = await client.EndShipper.create(
-      Fixture.caAddress1() as EndShipperTestCreateInput,
-    );
+    const endShipper = await client.EndShipper.create(Fixture.caAddress1() as EndShipperTestCreateInput);
 
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
-    const boughtShipment = await client.Shipment.buy(
-      shipment.id,
-      shipment.lowestRate(),
-      null,
-      endShipper.id,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
+    const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRate(), null, endShipper.id);
 
     expect(boughtShipment.postage_label).to.exist;
   });
 
   it('retrieve estimated delivery dates for each of the Rates of a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
     const estimatedDeliveryDates = await client.Shipment.retrieveEstimatedDeliveryDate(
       shipment.id,
       Fixture.plannedShipDate(),
@@ -393,13 +344,8 @@ describe('Shipment Service', function () {
   });
 
   it('retrieve recommended ship dates for each of the Rates of a shipment', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
-    const recommendedShipDates = await client.Shipment.recommendShipDate(
-      shipment.id,
-      Fixture.plannedDeliveryDate(),
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
+    const recommendedShipDates = await client.Shipment.recommendShipDate(shipment.id, Fixture.plannedDeliveryDate());
 
     for (const entry of recommendedShipDates) {
       expect(entry.rate).to.be.instanceOf(Rate);
@@ -420,9 +366,7 @@ describe('Shipment Service', function () {
   });
 
   it('buys a Shipment with Luma', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.basicShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.basicShipment() as ShipmentTestCreateInput);
 
     const boughtShipment = await client.Shipment.buyLuma(shipment.id, {
       ruleset_name: Fixture.lumaRulesetName(),

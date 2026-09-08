@@ -79,10 +79,7 @@ describe('Batch Service', function () {
 
     if (
       !fs.existsSync(
-        resolve(
-          __dirname,
-          '../cassettes/Batch-Service_3950244400/creates-a-scanform-for-a-batch_397052124',
-        ),
+        resolve(__dirname, '../cassettes/Batch-Service_3950244400/creates-a-scanform-for-a-batch_397052124'),
       )
     ) {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the batch to process buying the shipment
@@ -95,9 +92,7 @@ describe('Batch Service', function () {
   });
 
   it('adds and removes shipments from a batch', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
     const batch = await client.Batch.create({});
 
     const addShipmentsResponse = await client.Batch.addShipments(batch.id, [shipment.id]);
@@ -116,10 +111,7 @@ describe('Batch Service', function () {
 
     if (
       !fs.existsSync(
-        resolve(
-          __dirname,
-          '../cassettes/Batch-Service_3950244400/generates-a-label-for-a-batch_2376202846',
-        ),
+        resolve(__dirname, '../cassettes/Batch-Service_3950244400/generates-a-label-for-a-batch_2376202846'),
       )
     ) {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the batch to process buying the shipment

@@ -130,9 +130,7 @@ describe('Error Service', function () {
     })
       .to.throw(NotFoundError)
       .and.satisfy((error: any) => {
-        expect(error.message).to.be.equal(
-          'Bad format 1, Bad format 2, Bad format 3, Bad format 4, Bad format 5',
-        );
+        expect(error.message).to.be.equal('Bad format 1, Bad format 2, Bad format 3, Bad format 4, Bad format 5');
         expect(error.code).to.be.equal('NO RESPONSE CODE');
         expect(error.errors).to.be.an('array').that.is.empty;
         return true;

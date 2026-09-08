@@ -52,10 +52,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param {Object} params - Parameters for the carrier account to be updated.
      * @returns {CarrierAccount} - The updated carrier account.
      */
-    static async update(
-      id: string,
-      params: CarrierAccountCreateParameters,
-    ): Promise<CarrierAccount> {
+    static async update(id: string, params: CarrierAccountCreateParameters): Promise<CarrierAccount> {
       const wrappedParams = { carrier_account: params };
 
       try {

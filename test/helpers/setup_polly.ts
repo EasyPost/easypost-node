@@ -86,9 +86,7 @@ const scrubbers = {
 };
 
 function scrubHeaders(recording: PollyRecording) {
-  recording.request.headers = recording.request.headers.filter(
-    ({ name }) => !headerScrubbers.includes(name),
-  );
+  recording.request.headers = recording.request.headers.filter(({ name }) => !headerScrubbers.includes(name));
 }
 
 /**
