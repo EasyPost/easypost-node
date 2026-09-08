@@ -2,8 +2,8 @@
 
 Use the following guide to assist in the upgrade process of the `easypost-node` library between major versions.
 
-- [Upgrading from 7.x to 8.0](#upgrading-from-7x-to-80)
 - [Upgrading from 8.x to 9.0](#upgrading-from-8x-to-90)
+- [Upgrading from 7.x to 8.0](#upgrading-from-7x-to-80)
 - [Upgrading from 6.x to 7.0](#upgrading-from-6x-to-70)
 - [Upgrading from 5.x to 6.0](#upgrading-from-5x-to-60)
 - [Upgrading from 4.x to 5.0](#upgrading-from-4x-to-50)
@@ -16,9 +16,25 @@ Use the following guide to assist in the upgrade process of the `easypost-node` 
 - [Response Objects Are Now Plain JSON Objects](#90-response-objects-are-now-plain-json-objects)
 - [HTTP Transport Migrated to Fetch](#90-http-transport-migrated-to-fetch)
 
+### 9.0 Medium Impact Changes
+
+- [Type Optionality Was Relaxed](#90-type-optionality-was-relaxed)
+- [retrieveStatelessRates Returns the Full Response](#90-retrievestatelessrates-returns-the-full-response)
+
 ### 9.0 Low Impact Changes
 
 - [Type Declarations Are Source-Generated](#90-type-declarations-are-source-generated)
+
+### 9.0 Migration Checklist
+
+Use this checklist before shipping your upgrade:
+
+- Ensure runtime is Node 18+.
+- Replace `superagentMiddleware` with `httpMiddleware`.
+- Replace `agent` with `httpClient`.
+- Replace `makeApiCall('del', ...)` with `makeApiCall('delete', ...)`.
+- If you use `retrieveStatelessRates`, read rates from `response.rates`.
+- If you import from internal `types/` paths, migrate to package-root imports.
 
 ### 9.0 Response Objects Are Now Plain JSON Objects
 
@@ -26,7 +42,7 @@ Likelihood of Impact: **High**
 
 API responses are now returned as plain JSON-compatible objects instead of model class instances.
 
-Instance helper methods such as `shipment.lowestRate()` remain available on returned objects:
+Helper methods such as `shipment.lowestRate()` remain available on returned objects where applicable:
 
 ```javascript
 const shipment = await client.Shipment.create({ ... });
@@ -34,6 +50,7 @@ const boughtShipment = await client.Shipment.buy(shipment.id, shipment.lowestRat
 ```
 
 This change improves compatibility with serializers and SSR frameworks that require plain objects.
+Compatibility note: helper methods and `instanceof` model checks are preserved for returned objects.
 
 ### 9.0 HTTP Transport Migrated to Fetch
 
@@ -52,7 +69,7 @@ What changed:
 - Node 18+ is now required (built-in `fetch`).
 - `superagentMiddleware` has been removed and replaced by `httpMiddleware`.
 - `agent` has been renamed to `httpClient`.
-- `makeApiCall` now uses `delete` only (the `del` alias was removed).
+- `makeApiCall` now accepts `delete` only (the `del` alias was removed).
 - Middleware relying on superagent-only request internals (private properties or plugin APIs) must be updated.
 - The default `User-Agent` retains the prior structured format (`Nodejs/`, `OS/`, `OSVersion/`, `OSArch/`) while collecting values in a runtime-safe way.
 
@@ -71,12 +88,39 @@ const client = new EasyPostClient('api_key', {
 await client.makeApiCall('delete', '/trackers/trk_123');
 ```
 
+### 9.0 Type Optionality Was Relaxed
+
+Likelihood of Impact: **Medium**
+
+For consistency with other EasyPost client libraries, many request parameters and model properties are now typed as optional.
+
+If your project depended on stricter compile-time requiredness from previous declarations, add local validation or runtime guards where needed.
+
+### 9.0 retrieveStatelessRates Returns the Full Response
+
+Likelihood of Impact: **Medium**
+
+`retrieveStatelessRates` now returns the full API response, not only the `rates` value.
+
+Before:
+
+```javascript
+const rates = await client.BetaRate.retrieveStatelessRates(params);
+```
+
+After:
+
+```javascript
+const response = await client.BetaRate.retrieveStatelessRates(params);
+const rates = response.rates;
+```
+
 ### 9.0 Type Declarations Are Source-Generated
 
 Likelihood of Impact: **Low**
 
 Type declarations are generated from source and published from `dist/types`.
-Package-root imports are unchanged. If you were importing internal files from the old root `types/` folder, migrate to package-root imports.
+Package-root imports are unchanged. If you were importing internal files from the root `types/` folder, migrate to package-root imports.
 
 ## Upgrading from 7.x to 8.0
 
