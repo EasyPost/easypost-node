@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": false,
     "noImplicitAny": true,
     "declaration": true,
     "emitDeclarationOnly": true,
@@ -10,6 +8,6 @@
     "outDir": "./dist/types",
     "noEmit": false
   },
-  "include": ["src/**/*.js", "src/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["dist/**", "docs/**", "coverage/**", "node_modules/**"]
 }

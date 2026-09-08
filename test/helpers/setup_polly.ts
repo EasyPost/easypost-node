@@ -2,6 +2,43 @@ import FetchAdapter from '@pollyjs/adapter-fetch';
 import { Polly } from '@pollyjs/core';
 import FSPersister from '@pollyjs/persister-fs';
 import { resolve } from 'path';
+import { afterEach, beforeEach } from 'vitest';
+
+type PollyRequest = {
+  hasHeader(name: string): boolean;
+  setHeader(name: string, value: string | number): void;
+  hostname?: string;
+  body?: unknown;
+};
+
+type PollyHeader = { name: string };
+
+type PollyRecording = {
+  request: {
+    headers: PollyHeader[];
+  };
+  response: {
+    content: {
+      text?: string;
+      encoding?: string;
+    };
+  };
+};
+
+type PollyServer = {
+  any(): {
+    on(event: string, handler: (...args: unknown[]) => void): void;
+  };
+};
+
+type VitestTaskContext = {
+  task?: {
+    suite?: {
+      name?: string;
+    };
+    name: string;
+  };
+};
 
 Polly.register(FSPersister);
 Polly.register(FetchAdapter);
@@ -36,7 +73,7 @@ normalizeNavigatorOnlineForNode();
 
 const redactedString = '<REDACTED>';
 const redactedObject = {};
-const redactedArray = [];
+const redactedArray: unknown[] = [];
 const scrubbers = {
   client_ip: redactedString,
   credentials: redactedObject,
@@ -48,7 +85,7 @@ const scrubbers = {
   test_credentials: redactedObject,
 };
 
-function scrubHeaders(recording) {
+function scrubHeaders(recording: PollyRecording) {
   recording.request.headers = recording.request.headers.filter(
     ({ name }) => !headerScrubbers.includes(name),
   );
@@ -56,57 +93,55 @@ function scrubHeaders(recording) {
 
 /**
  * Scrub individual element data of a cassette.
- * @param {*} data
- * @param {*} scrubberEntry
  */
-function scrubData(data, scrubberEntry) {
+function scrubData(data: unknown, scrubberEntry: [string, unknown]): unknown {
   const [key, replacement] = scrubberEntry;
 
-  // Root-level list scrubbing
   if (Array.isArray(data)) {
-    data.map((item, index) => {
-      if (item[key]) {
-        data[index][key] = replacement;
-      }
-    });
-  } else if (typeof data === 'object' && data !== null) {
-    // Root-level key scrubbing
-    if (data[key]) {
-      data[key] = replacement;
-    } else {
-      // Nested scrubbing
-      Object.keys(data).forEach((item) => {
-        const element = data[item];
-        if (Array.isArray(element)) {
-          element.map((nestedItem, nestedIndex) => {
-            data[item][nestedIndex] = scrubData(nestedItem, scrubberEntry);
-          });
-        } else if (typeof element === 'object' && element !== null) {
-          data[item] = scrubData(element, scrubberEntry);
-        }
-      });
+    return data.map((item) => scrubData(item, scrubberEntry));
+  }
+
+  if (typeof data === 'object' && data !== null) {
+    const input = data as Record<string, unknown>;
+    const output: Record<string, unknown> = { ...input };
+
+    if (Object.prototype.hasOwnProperty.call(output, key)) {
+      output[key] = replacement;
     }
+
+    for (const item of Object.keys(output)) {
+      const element = output[item];
+      if (Array.isArray(element)) {
+        output[item] = element.map((nestedItem) => scrubData(nestedItem, scrubberEntry));
+      } else if (typeof element === 'object' && element !== null) {
+        output[item] = scrubData(element, scrubberEntry);
+      }
+    }
+
+    return output;
   }
 
   return data;
 }
 
 // Scrub sensitive data from response bodies prior to recording the cassette.
-function scrubResponseBodies(recording) {
-  let response = recording.response.content.text;
+function scrubResponseBodies(recording: PollyRecording) {
+  const response = recording.response.content.text;
 
-  if (response) {
-    const responseBody = JSON.parse(response);
-
-    Object.entries(scrubbers).forEach((scrubberEntry) => {
-      response = scrubData(responseBody, scrubberEntry);
-    });
+  if (!response) {
+    return;
   }
 
-  recording.response.content.text = JSON.stringify(response);
+  let responseBody = JSON.parse(response) as unknown;
+
+  for (const scrubberEntry of Object.entries(scrubbers)) {
+    responseBody = scrubData(responseBody, scrubberEntry);
+  }
+
+  recording.response.content.text = JSON.stringify(responseBody);
 }
 
-function isJsonString(value) {
+function isJsonString(value: unknown) {
   if (typeof value !== 'string') {
     return false;
   }
@@ -124,7 +159,7 @@ function isJsonString(value) {
   }
 }
 
-function normalizeLegacyReplayEncoding(recording) {
+function normalizeLegacyReplayEncoding(recording: PollyRecording) {
   const content = recording?.response?.content;
 
   // Some legacy cassettes store plain JSON text but still mark `encoding: base64`.
@@ -134,25 +169,29 @@ function normalizeLegacyReplayEncoding(recording) {
   }
 }
 
-function setupCassette(server) {
-  server.any().on('beforePersist', (_, recording) => {
+function setupCassette(server: PollyServer) {
+  server.any().on('beforePersist', (_, rec) => {
     // TODO: Add support to scrub CC details from the request URL and `queryParams`
+    const recording = rec as PollyRecording;
 
     scrubHeaders(recording);
     try {
       scrubResponseBodies(recording);
     } catch (err) {
-      throw new Error(`Error scrubbing cassette: ${err.message}`);
+      const message = err instanceof Error ? err.message : String(err);
+      throw new Error(`Error scrubbing cassette: ${message}`);
     }
   });
 
-  server.any().on('beforeReplay', (_, recording) => {
-    normalizeLegacyReplayEncoding(recording);
+  server.any().on('beforeReplay', (_, rec) => {
+    normalizeLegacyReplayEncoding(rec as PollyRecording);
   });
 }
 
-function setupLegacyRequestIdentityCompatibility(server) {
-  server.any().on('request', (req) => {
+function setupLegacyRequestIdentityCompatibility(server: PollyServer) {
+  server.any().on('request', (reqArg) => {
+    const req = reqArg as PollyRequest;
+
     // Keep request identifiers compatible with pre-fetch cassettes.
     if (!req.hasHeader('accept-encoding')) {
       req.setHeader('accept-encoding', legacyIdentityHeaders['accept-encoding']);
@@ -168,15 +207,15 @@ function setupLegacyRequestIdentityCompatibility(server) {
   });
 }
 
-// New setup function for Vitest
+// New setup function for Vitest.
 function setupPollyTests() {
-  /** @type {Polly} */
-  let polly;
+  let polly: Polly;
   const recordingsDir = resolve(__dirname, '../cassettes');
 
-  beforeEach((context) => {
+  beforeEach((context: VitestTaskContext) => {
     const suiteName = context.task?.suite?.name || 'unknown-suite';
-    const recordingName = `${suiteName}/${context.task.name}`;
+    const taskName = context.task?.name || 'unknown-task';
+    const recordingName = `${suiteName}/${taskName}`;
 
     polly = new Polly(recordingName, {
       adapters: ['fetch'],
@@ -196,7 +235,7 @@ function setupPollyTests() {
       expiryStrategy: 'warn',
     });
 
-    setupLegacyRequestIdentityCompatibility(polly.server);
+    setupLegacyRequestIdentityCompatibility(polly.server as unknown as PollyServer);
   });
 
   afterEach(async () => {

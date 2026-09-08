@@ -14,51 +14,7 @@ NOTE: This library is intended to be used in a backend Node service and not in a
 npm install --save @easypost/api
 ```
 
-**NOTE:** If you are using @easypost/api prior to v5 and a version of Node less than 6.9, you will need to install and include a polyfill, such as `babel-polyfill`, and include it in your project:
-
-```bash
-npm install --save babel-polyfill
-```
-
-```javascript
-// Require the polyfill if necessary:
-require('babel-polyfill');
-
-// Require the EasyPost library:
-const EasyPost = require('@easypost/api');
-```
-
 You can alternatively download the various built assets from this project's [releases page](https://github.com/EasyPost/easypost-node/releases).
-
-### Compatibility
-
-#### v4 and Earlier
-
-- `require('@easypost/api/easypost.8-lts.js')` (Node 8.9+)
-- `require('@easypost/api/easypost.6-lts.js')` (Node 6.9+)
-- `require('@easypost/api/easypost.legacy.js')` (Node 0.10+)
-
-#### v5
-
-If using @easypost/api v5, you can require the base project which is built on Node v10 - v16
-
-#### v6
-
-If using @easypost/api v6, you can require the base project which is built on Node v12+
-
-### Note on ES6 Usage
-
-You can import specific versions of the compiled code if you're using later versions of Node and using @easypost/api prior to v5.
-
-```javascript
-// Imports the un-transformed es6
-import '@easypost/api/src/easypost';
-
-// Use the following to import mininally transformed versions
-import '@easypost/api/easypost.6-lts';
-import '@easypost/api/easypost.8-lts';
-import '@easypost/api/easypost.legacy.js'; // (v0.10)
-```
 
 ## Usage
 

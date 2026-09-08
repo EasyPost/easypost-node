@@ -1,38 +1,57 @@
+type MockRequestLike = {
+  method: string;
+  url: string;
+};
+
 export class MockRequestMatchRule {
-  constructor(method, urlRegexPattern) {
+  method: string;
+  urlRegexPattern: RegExp;
+
+  constructor(method: string, urlRegexPattern: string | RegExp) {
     this.method = method;
-    this.urlRegexPattern = urlRegexPattern;
+    this.urlRegexPattern =
+      urlRegexPattern instanceof RegExp ? urlRegexPattern : new RegExp(urlRegexPattern);
   }
 }
 
 export class MockRequestResponseInfo {
-  constructor(statusCode, responseData) {
+  statusCode: number;
+  body: unknown;
+
+  constructor(statusCode: number, responseData: unknown) {
     this.statusCode = statusCode;
     this.body = responseData;
   }
 }
 
 export class MockRequest {
-  constructor(matchRule, responseInfo) {
+  matchRule: MockRequestMatchRule;
+  responseInfo: MockRequestResponseInfo;
+
+  constructor(matchRule: MockRequestMatchRule, responseInfo: MockRequestResponseInfo) {
     this.matchRule = matchRule;
     this.responseInfo = responseInfo;
   }
 }
 
 export class MockMiddleware {
-  constructor(request, mockRequests) {
+  request: MockRequestLike;
+  mockRequests: MockRequest[];
+  body: unknown;
+
+  constructor(request: MockRequestLike, mockRequests: MockRequest[]) {
     this.request = request;
     this.mockRequests = mockRequests;
     this.body = {};
   }
 
   // eslint-disable-next-line class-methods-use-this,no-unused-vars
-  auth(key) {
+  auth(_key: string) {
     // do nothing
   }
 
   // eslint-disable-next-line class-methods-use-this,no-unused-vars,consistent-return
-  send(body) {
+  send(_body: unknown): any {
     // we don't need to do anything with the body
     const mockRequest = this._findMatchingMockRequest(this.request);
     if (mockRequest) {
@@ -43,7 +62,7 @@ export class MockMiddleware {
   }
 
   // eslint-disable-next-line no-unused-vars
-  query(params) {
+  query(_params: unknown): any {
     // we don't need to do anything with the params
     const mockRequest = this._findMatchingMockRequest(this.request);
     if (mockRequest) {
@@ -56,8 +75,8 @@ export class MockMiddleware {
   /**
    * @private
    */
-  _findMatchingMockRequest(request) {
-    // for each mock request, check if the method and url match
+  _findMatchingMockRequest(request: MockRequestLike): MockRequest | null {
+    // For each mock request, check if the method and URL match.
     for (let i = 0; i < this.mockRequests.length; i += 1) {
       const mockRequest = this.mockRequests[i];
       if (

@@ -7,7 +7,6 @@
 !/dist/**/*
 !/LICENSE
 !/package.json
-!/prop_types.js
 !/README.md
 !/src/**/*
 !/UPGRADE_GUIDE.md

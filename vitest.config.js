@@ -5,11 +5,11 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     testTimeout: 10000,
-    include: ['test/services/**/*.{js,ts}'],
+    include: ['test/services/**/*.ts'],
     coverage: {
       provider: 'istanbul',
       reporter: ['text', 'lcov', 'html'],
-      include: ['src/**/*.{js,ts}'],
+      include: ['src/**/*.ts'],
       thresholds: {
         lines: 87,
       },

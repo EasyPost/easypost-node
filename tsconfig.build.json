@@ -1,13 +1,10 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": false,
     "noImplicitAny": true,
-    "declaration": true,
     "noEmit": true,
-    "types": ["vitest/globals", "node"]
+    "types": ["node"]
   },
-  "include": ["src/**/*.js", "src/**/*.ts", "test/**/*.js", "test/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["dist/**", "docs/**", "coverage/**", "node_modules/**"]
 }

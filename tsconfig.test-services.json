@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": false,
     "noImplicitAny": true,
     "noEmit": true,
     "skipLibCheck": true,
