@@ -13,6 +13,7 @@
   - Default `User-Agent` retains structured runtime metadata fields (`Nodejs/`, `OS/`, `OSVersion/`, `OSArch/`) via runtime-safe detection
 - TypeScript declarations are now generated from source and published from `dist/types`.
 - Internal root `types/` declaration sources and demo fixtures were removed from the repository.
+- Calling `retrieveStatelessRates` now returns the entire response and not only the `rates` key, allowing errors and other useful information to be exposed. Note that you will now need to reference the `rates` key to get the returned rates
 
 ## v8.9.0 (2026-06-25)
 
