@@ -15,7 +15,7 @@ jobs:
       - uses: extractions/setup-just@v4
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: 26
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just install build test
   # node-compatibility checks that the build version of the app can be imported
   # and used on older versions of node
@@ -23,13 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 19.x, 20.x, 21.x, 22.x, 23.x, 24.x, 25.x, 26.x]
+        node-version: [18.x, 20.x, 22.x, 24.x, 26.x]
     steps:
       - uses: actions/checkout@v7
       - uses: extractions/setup-just@v4
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: 26
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just install build
       - uses: actions/setup-node@v7
         with:
@@ -43,7 +43,7 @@ jobs:
       - uses: extractions/setup-just@v4
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: 26
       - run: just install typescript
   lint:
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
       - uses: extractions/setup-just@v4
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: 26
       - run: just install build lint
   coverage:
     runs-on: ubuntu-latest
@@ -61,7 +61,7 @@ jobs:
       - uses: extractions/setup-just@v4
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: 26
       - run: just install build
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just coverage
       - name: Coverage
@@ -77,7 +77,7 @@ jobs:
       - uses: extractions/setup-just@v4
       - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: 26
       - name: Install Dependencies
         run: just install
       - name: Generate Docs

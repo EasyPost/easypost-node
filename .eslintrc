@@ -6,7 +6,6 @@
   },
   "rules": {
     "no-console": "off",
-    "import/no-unresolved": "off",
     "no-param-reassign": "off",
     "filenames/match-regex": "off",
     "lines-between-class-members": "off",
