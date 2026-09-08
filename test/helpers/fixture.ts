@@ -7,10 +7,7 @@ export default class Fixture {
   static readFixtureData(): FixtureData {
     const currentDir = process.cwd();
     const fixtures = JSON.parse(
-      fs.readFileSync(
-        `${currentDir}/examples/official/fixtures/client-library-fixtures.json`,
-        'utf8',
-      ),
+      fs.readFileSync(`${currentDir}/examples/official/fixtures/client-library-fixtures.json`, 'utf8'),
     ) as FixtureData;
 
     return fixtures;
@@ -158,9 +155,7 @@ export default class Fixture {
 
   static eventBody(): Buffer {
     const currentDir = process.cwd();
-    const eventBody = JSON.parse(
-      fs.readFileSync(`${currentDir}/examples/official/fixtures/event-body.json`, 'utf8'),
-    );
+    const eventBody = JSON.parse(fs.readFileSync(`${currentDir}/examples/official/fixtures/event-body.json`, 'utf8'));
 
     return Buffer.from(JSON.stringify(eventBody), 'utf8');
   }

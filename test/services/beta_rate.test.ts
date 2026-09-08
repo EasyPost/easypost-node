@@ -7,9 +7,7 @@ import type BetaRateServiceFactory from '../../src/services/beta_rate_service';
 import Fixture from '../helpers/fixture';
 import * as setupPolly from '../helpers/setup_polly';
 
-type BetaRateRetrieveInput = Parameters<
-  ReturnType<typeof BetaRateServiceFactory>['retrieveStatelessRates']
->[0];
+type BetaRateRetrieveInput = Parameters<ReturnType<typeof BetaRateServiceFactory>['retrieveStatelessRates']>[0];
 
 /* eslint-disable func-names */
 describe('BetaRateService', function () {
@@ -53,11 +51,7 @@ describe('BetaRateService', function () {
     );
 
     expect(() => {
-      client.Utils.getLowestRate(
-        statelessRateResponse.rates,
-        ['invalid_carrier'],
-        ['invalid_service'],
-      );
+      client.Utils.getLowestRate(statelessRateResponse.rates, ['invalid_carrier'], ['invalid_service']);
     }).to.throw(FilteringError, 'No rates found.');
   });
 });

@@ -4,12 +4,7 @@ import { expect } from 'vitest';
 import EasyPostClient from '../../src/easypost';
 import EndOfPaginationError from '../../src/errors/general/end_of_pagination_error';
 import * as setupPolly from '../helpers/setup_polly';
-import {
-  MockMiddleware,
-  MockRequest,
-  MockRequestMatchRule,
-  MockRequestResponseInfo,
-} from '../helpers/mocking';
+import { MockMiddleware, MockRequest, MockRequestMatchRule, MockRequestResponseInfo } from '../helpers/mocking';
 
 describe('Base Service', function () {
   const getPolly = setupPolly.setupPollyTests();

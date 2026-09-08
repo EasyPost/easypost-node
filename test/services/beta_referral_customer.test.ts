@@ -29,9 +29,7 @@ describe('BetaReferralCustomerService', function () {
     await client.BetaReferralCustomer.refundByAmount(2000).catch((error: any) => {
       expect(error.statusCode).to.equal(422);
       expect(error.code).to.equal('TRANSACTION.AMOUNT_INVALID');
-      expect(error.message).to.equal(
-        'Refund amount is invalid. Please use a valid amount or escalate to finance.',
-      );
+      expect(error.message).to.equal('Refund amount is invalid. Please use a valid amount or escalate to finance.');
     });
   });
 

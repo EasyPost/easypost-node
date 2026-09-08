@@ -23,10 +23,7 @@ describe('EasyPost', function () {
   });
 
   it('throws an error when no API key is provided', async function () {
-    expect(() => new EasyPostClient()).to.throw(
-      MissingParameterError,
-      'Missing required parameter: API Key.',
-    );
+    expect(() => new EasyPostClient()).to.throw(MissingParameterError, 'Missing required parameter: API Key.');
   });
 
   it('will log the appropriate values when a request and response hooks are provided', async function () {
@@ -59,9 +56,7 @@ describe('EasyPost', function () {
     expect(responseConfig.headers).to.be.an('object');
     expect(responseConfig.headers['content-type']).to.contain('application/json');
     expect(responseConfig.responseTimestamp).to.be.a('number');
-    expect(responseConfig.responseTimestamp).to.be.greaterThanOrEqual(
-      responseConfig.requestTimestamp,
-    );
+    expect(responseConfig.responseTimestamp).to.be.greaterThanOrEqual(responseConfig.requestTimestamp);
   });
 
   it('will add more than one request and response hook', async function () {

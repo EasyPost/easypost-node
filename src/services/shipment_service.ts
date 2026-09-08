@@ -27,12 +27,7 @@ type ShipmentCreateParameters = Record<string, unknown> & {
   from_address?: AddressCreateParameters | Address | string | null;
   parcel?: ParcelCreateParameters | Parcel | string | null;
   carrier_accounts?: string[] | null;
-  customs_info?:
-    | CustomsInfo
-    | CustomsInfo[]
-    | CustomsInfoCreateParameters
-    | CustomsInfoCreateParameters[]
-    | null;
+  customs_info?: CustomsInfo | CustomsInfo[] | CustomsInfoCreateParameters | CustomsInfoCreateParameters[] | null;
   tax_identifiers?: Array<ShipmentTaxIdentifier | null | undefined> | null;
   options?: Record<string, unknown> | null;
   line_items?: ShipmentLineItem[] | null;
@@ -252,11 +247,7 @@ export default (easypostClient: EasyPostClient) =>
       deliveryAccuracy: string,
     ): Promise<ReturnType<typeof Constants.Utils.getLowestSmartRate>> {
       const smartRates = (await this.getSmartRates(id)) as SmartRate[];
-      return Constants.Utils.getLowestSmartRate(
-        smartRates,
-        deliveryDays,
-        deliveryAccuracy.toLowerCase(),
-      );
+      return Constants.Utils.getLowestSmartRate(smartRates, deliveryDays, deliveryAccuracy.toLowerCase());
     }
 
     /**
@@ -277,10 +268,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(
-      shipments: ShipmentCollection,
-      pageSize?: number,
-    ): Promise<ShipmentListResponse> {
+    static async getNextPage(shipments: ShipmentCollection, pageSize?: number): Promise<ShipmentListResponse> {
       const url = 'shipments';
 
       return this._getNextPage(url, 'shipments', shipments, pageSize);
@@ -329,10 +317,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param desiredDeliveryDate - The desired delivery date for the shipment.
      * @returns {Array} - An array of the recommended ship date and rates.
      */
-    static async recommendShipDate(
-      id: string,
-      desiredDeliveryDate: string,
-    ): Promise<ShipmentSmartRateResponse> {
+    static async recommendShipDate(id: string, desiredDeliveryDate: string): Promise<ShipmentSmartRateResponse> {
       const url = `shipments/${id}/smartrate/precision_shipping`;
 
       const wrappedParams = {

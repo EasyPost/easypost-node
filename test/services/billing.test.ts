@@ -2,12 +2,7 @@
 import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
-import {
-  MockMiddleware,
-  MockRequest,
-  MockRequestMatchRule,
-  MockRequestResponseInfo,
-} from '../helpers/mocking';
+import { MockMiddleware, MockRequest, MockRequestMatchRule, MockRequestResponseInfo } from '../helpers/mocking';
 
 const middleware = (request: any) => {
   return new MockMiddleware(request, [

@@ -27,9 +27,7 @@ describe('ScanForm Service', function () {
   });
 
   it('creates a scanform', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
 
     const scanform = await client.ScanForm.create({
       shipments: [shipment],
@@ -40,9 +38,7 @@ describe('ScanForm Service', function () {
   });
 
   it('retrieves a scanform', async function () {
-    const shipment = await client.Shipment.create(
-      Fixture.oneCallBuyShipment() as ShipmentTestCreateInput,
-    );
+    const shipment = await client.Shipment.create(Fixture.oneCallBuyShipment() as ShipmentTestCreateInput);
 
     const scanform = await client.ScanForm.create({
       shipments: [shipment],

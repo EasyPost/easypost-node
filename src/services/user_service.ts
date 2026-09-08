@@ -187,8 +187,7 @@ export default (easypostClient: EasyPostClient) =>
         throw new EndOfPaginationError();
       }
 
-      const firstObjectParams =
-        (collectionArray[0]?._params as Record<string, unknown> | undefined) ?? {};
+      const firstObjectParams = (collectionArray[0]?._params as Record<string, unknown> | undefined) ?? {};
       const defaultParams = collection._params ?? firstObjectParams;
 
       const params = {
@@ -199,11 +198,7 @@ export default (easypostClient: EasyPostClient) =>
 
       const response = (await this._all(url, params)) as Record<string, unknown>;
       const responseCollection = response[key] as Array<Record<string, unknown>> | undefined;
-      if (
-        response == undefined ||
-        responseCollection == undefined ||
-        responseCollection.length == 0
-      ) {
+      if (response == undefined || responseCollection == undefined || responseCollection.length == 0) {
         throw new EndOfPaginationError();
       }
 

@@ -1,12 +1,7 @@
 import { expect } from 'vitest';
 
 import EasyPostClient from '../../src/easypost';
-import {
-  MockMiddleware,
-  MockRequest,
-  MockRequestMatchRule,
-  MockRequestResponseInfo,
-} from '../helpers/mocking';
+import { MockMiddleware, MockRequest, MockRequestMatchRule, MockRequestResponseInfo } from '../helpers/mocking';
 
 /* eslint-disable func-names */
 describe('FedExRegistrationService', function () {
@@ -39,10 +34,7 @@ describe('FedExRegistrationService', function () {
     const middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
-          new MockRequestMatchRule(
-            'POST',
-            `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/address`,
-          ),
+          new MockRequestMatchRule('POST', `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/address`),
           new MockRequestResponseInfo(200, mockResponse),
         ),
       ]);
@@ -77,10 +69,7 @@ describe('FedExRegistrationService', function () {
     const middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
-          new MockRequestMatchRule(
-            'POST',
-            `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/pin`,
-          ),
+          new MockRequestMatchRule('POST', `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/pin`),
           new MockRequestResponseInfo(200, mockResponse),
         ),
       ]);
@@ -124,10 +113,7 @@ describe('FedExRegistrationService', function () {
     const middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
-          new MockRequestMatchRule(
-            'POST',
-            `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/pin\\/validate`,
-          ),
+          new MockRequestMatchRule('POST', `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/pin\\/validate`),
           new MockRequestResponseInfo(200, mockResponse),
         ),
       ]);
@@ -178,10 +164,7 @@ describe('FedExRegistrationService', function () {
     const middleware = (request: any) => {
       return new MockMiddleware(request, [
         new MockRequest(
-          new MockRequestMatchRule(
-            'POST',
-            `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/invoice`,
-          ),
+          new MockRequestMatchRule('POST', `v2\\/fedex_registrations\\/${fedexAccountNumber}\\/invoice`),
           new MockRequestResponseInfo(200, mockResponse),
         ),
       ]);

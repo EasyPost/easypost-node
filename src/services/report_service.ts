@@ -64,10 +64,7 @@ export default (easypostClient: EasyPostClient) =>
      * @param {Number} pageSize The number of records to return on each page
      * @returns {EasyPostObject|Promise<never>} The retrieved {@link EasyPostObject}-based class instance, or a `Promise` that rejects with an error.
      */
-    static async getNextPage(
-      reports: ReportCollection,
-      pageSize: number | null = null,
-    ): Promise<ReportListResponse> {
+    static async getNextPage(reports: ReportCollection, pageSize: number | null = null): Promise<ReportListResponse> {
       const firstReport = reports.reports?.[0] as { _params?: { type?: string } } | undefined;
       const url = `reports/${firstReport?._params?.type || ''}`;
       return this._getNextPage(url, 'reports', reports, pageSize);

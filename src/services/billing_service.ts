@@ -78,10 +78,7 @@ export default (easypostClient: EasyPostClient) =>
      */
     static async _getPaymentInfo(priority: string): Promise<[string, string]> {
       const paymentMethods = await this.retrievePaymentMethods();
-      const paymentMethodMap: Record<
-        string,
-        'primary_payment_method' | 'secondary_payment_method'
-      > = {
+      const paymentMethodMap: Record<string, 'primary_payment_method' | 'secondary_payment_method'> = {
         primary: 'primary_payment_method',
         secondary: 'secondary_payment_method',
       };

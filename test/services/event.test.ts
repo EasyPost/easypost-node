@@ -83,10 +83,7 @@ describe('Event Service', function () {
 
     if (
       !fs.existsSync(
-        resolve(
-          __dirname,
-          '../cassettes/Event-Service_3026743340/retrieves-all-payloads-for-an-event_3292460230',
-        ),
+        resolve(__dirname, '../cassettes/Event-Service_3026743340/retrieves-all-payloads-for-an-event_3292460230'),
       )
     ) {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the event to be created
@@ -121,10 +118,7 @@ describe('Event Service', function () {
 
     if (
       !fs.existsSync(
-        resolve(
-          __dirname,
-          '../cassettes/Event-Service_3026743340/retrieves-a-payload-for-an-event_1410906611',
-        ),
+        resolve(__dirname, '../cassettes/Event-Service_3026743340/retrieves-a-payload-for-an-event_1410906611'),
       )
     ) {
       await new Promise((res) => setTimeout(res, 5000)); // Wait enough time for the event to be created
