@@ -27,10 +27,6 @@ init-examples-submodule:
     git submodule init
     git submodule update
 
-# Install the styleguide (Unix only)
-install-styleguide: init-examples-submodule
-    sh examples/symlink_directory_files.sh examples/style_guides/node .
-
 # Install project dependencies (Unix only)
 install: init-examples-submodule
     npm install
