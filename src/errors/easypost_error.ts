@@ -7,7 +7,7 @@
  * @param {string} [message] - The message to be displayed when the error is logged.
  */
 export default class EasyPostError extends Error {
-  constructor({ message } = {}) {
+  constructor({ message }: { message?: string } = {}) {
     super(message);
   }
 }

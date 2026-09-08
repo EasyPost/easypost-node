@@ -1,7 +1,8 @@
 import type EasyPostClient from '../easypost';
 import baseService from './base_service';
+import type { PaymentMethodObject } from './billing_service';
 
-type BetaPaymentMethodResponse = Record<string, unknown>;
+type BetaPaymentMethodResponse = PaymentMethodObject;
 type BetaRefundResponse = Record<string, unknown>;
 type BetaClientSecretResponse = Record<string, unknown>;
 

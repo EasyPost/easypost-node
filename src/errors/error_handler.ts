@@ -15,6 +15,22 @@ import UnauthorizedError from './api/unauthorized_error';
 import UnknownApiError from './api/unknown_api_error';
 import EasyPostError from './easypost_error';
 
+type ApiErrorBody = {
+  error?: {
+    code?: string;
+    message?: unknown;
+    errors?: unknown[];
+  };
+};
+
+type ApiErrorResponse = {
+  status?: number;
+  statusCode?: number;
+  headers?: Record<string, string>;
+  body?: ApiErrorBody;
+  [key: string]: unknown;
+};
+
 export default class ErrorHandler {
   /**
    * Recursively traverses a JSON object or array and extracts error messages
@@ -23,7 +39,7 @@ export default class ErrorHandler {
    * @param {object|array|string} errorMessage - The JSON object or array to traverse.
    * @param {array} messagesList - The array to which extracted error messages will be added.
    */
-  static traverseJsonElement(errorMessage, messagesList) {
+  static traverseJsonElement(errorMessage: unknown, messagesList: string[]): void {
     if (errorMessage instanceof Object) {
       for (const value of Object.values(errorMessage)) {
         this.traverseJsonElement(value, messagesList);
@@ -33,7 +49,7 @@ export default class ErrorHandler {
         this.traverseJsonElement(value, messagesList);
       }
     } else {
-      messagesList.push(errorMessage.toString());
+      messagesList.push(String(errorMessage));
     }
   }
   /**
@@ -41,9 +57,9 @@ export default class ErrorHandler {
    * @param {*} error - The errored HTTP response.
    * @returns {ApiError} The `ApiError`-based error corresponding to the HTTP status code.
    */
-  static handleApiError(error) {
-    const { statusCode } = error;
-    const { code, message, errors } = error.body.error;
+  static handleApiError(error: ApiErrorResponse): Error {
+    const statusCode = error.statusCode ?? error.status;
+    const { code, message, errors } = error.body?.error ?? {};
     const errorParams = {
       message,
       code,
@@ -52,10 +68,10 @@ export default class ErrorHandler {
     };
 
     try {
-      const messages = [];
+      const messages: string[] = [];
       this.traverseJsonElement(errorParams.message, messages);
       errorParams.message = messages.join(', ');
-    } catch (e) {
+    } catch (_error) {
       const errorParams = {
         message: Constants.ERROR_DESERIALIZATION,
         code: 'ERROR_DESERIALIZATION_ERROR',
@@ -63,7 +79,7 @@ export default class ErrorHandler {
       return new EasyPostError(errorParams);
     }
 
-    if (statusCode >= 300 && statusCode < 400) {
+    if (typeof statusCode === 'number' && statusCode >= 300 && statusCode < 400) {
       return new RedirectError(errorParams);
     }
 

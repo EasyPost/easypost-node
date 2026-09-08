@@ -1,26 +1,13 @@
-import type { ICustomsInfoCreateParameters } from '../../types/Customs/CustomsInfo/CustomsInfoCreateParameters';
-import type { DeepPartial } from '../../types/utils';
 import Constants from '../constants';
 import type EasyPostClient from '../easypost';
 import Address from '../models/address';
 import CustomsInfo from '../models/customs_info';
 import Parcel from '../models/parcel';
 import Shipment from '../models/shipment';
+import type { AddressCreateParameters } from './address_service';
 import baseService from './base_service';
-
-type AddressCreateInput = Record<string, unknown> & {
-  verify?: boolean | string | string[] | null;
-  verify_strict?: boolean | string | string[] | null;
-  verify_carrier?: string | null;
-};
-
-type ParcelCreateInput = Record<string, unknown> & {
-  length?: number | null;
-  width?: number | null;
-  height?: number | null;
-  weight?: number | null;
-  predefined_package?: string | null;
-};
+import type { CustomsInfoCreateParameters } from './customs_info_service';
+import type { ParcelCreateParameters } from './parcel_service';
 
 type ShipmentTaxIdentifier = Record<string, unknown> & {
   entity?: string | null;
@@ -34,16 +21,18 @@ type ShipmentLineItem = Record<string, unknown> & {
   item_description?: string | null;
 };
 
-type CustomsInfoReferenceInput = DeepPartial<ICustomsInfoCreateParameters>;
-
 type ShipmentCreateParameters = Record<string, unknown> & {
   reference?: string | null;
-  to_address?: AddressCreateInput | Address | string | null;
-  from_address?: AddressCreateInput | Address | string | null;
-  parcel?: ParcelCreateInput | Parcel | string | null;
+  to_address?: AddressCreateParameters | Address | string | null;
+  from_address?: AddressCreateParameters | Address | string | null;
+  parcel?: ParcelCreateParameters | Parcel | string | null;
   carrier_accounts?: string[] | null;
   customs_info?:
-    CustomsInfo | CustomsInfo[] | CustomsInfoReferenceInput | CustomsInfoReferenceInput[] | null;
+    | CustomsInfo
+    | CustomsInfo[]
+    | CustomsInfoCreateParameters
+    | CustomsInfoCreateParameters[]
+    | null;
   tax_identifiers?: Array<ShipmentTaxIdentifier | null | undefined> | null;
   options?: Record<string, unknown> | null;
   line_items?: ShipmentLineItem[] | null;

@@ -1,5 +1,12 @@
 import EasyPostError from '../easypost_error';
 
+type ApiErrorParams = {
+  message?: unknown;
+  code?: string;
+  statusCode?: number;
+  errors?: unknown[];
+};
+
 /**
  * The ApiError class is used to represent errors that occurred while communicating with the EasyPost API.
  * This class should not be instantiated directly.
@@ -12,11 +19,16 @@ import EasyPostError from '../easypost_error';
  * @property {EasyPostError[]} [errors] - An array of sub-errors returned by the EasyPost API.
  */
 export default class ApiError extends EasyPostError {
-  constructor({ message, code, statusCode, errors } = {}) {
-    super({ message });
+  code?: string;
+  errors?: unknown[];
+  statusCode?: number;
+
+  constructor({ message, code, statusCode, errors }: ApiErrorParams = {}) {
+    const normalizedMessage = typeof message === 'string' ? message : String(message ?? '');
+    super({ message: normalizedMessage });
     this.code = code;
     this.errors = errors;
-    this.message = message;
+    this.message = normalizedMessage;
     this.statusCode = statusCode;
   }
 }

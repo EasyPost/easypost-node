@@ -1,8 +1,8 @@
-import baseService from './base_service';
-import Address from '../models/address';
 import type EasyPostClient from '../easypost';
+import Address from '../models/address';
+import baseService from './base_service';
 
-type AddressCreateParameters = Record<string, unknown> & {
+export type AddressCreateParameters = Record<string, unknown> & {
   name?: string | null;
   company?: string | null;
   street1?: string | null;
