@@ -26,34 +26,38 @@ describe('BetaRateService', function () {
   });
 
   it('retrieves a list of stateless rates', async function () {
-    const statelessRates = await client.BetaRate.retrieveStatelessRates(
+    const statelessRateResponse = await client.BetaRate.retrieveStatelessRates(
       Fixture.basicShipment() as BetaRateRetrieveInput,
     );
 
-    statelessRates.forEach((rate: any) => {
+    statelessRateResponse.rates.forEach((rate: any) => {
       expect(rate).to.be.an.instanceOf(Rate);
       expect(rate).to.not.have.property('id');
     });
   });
 
   it('retrieve the lowest rate', async function () {
-    const statelessRates = await client.BetaRate.retrieveStatelessRates(
+    const statelessRateResponse = await client.BetaRate.retrieveStatelessRates(
       Fixture.basicShipment() as BetaRateRetrieveInput,
     );
 
-    const lowestStatelessRate = client.Utils.getLowestRate(statelessRates);
+    const lowestStatelessRate = client.Utils.getLowestRate(statelessRateResponse.rates);
 
     expect(lowestStatelessRate.service).to.be.equal('GroundAdvantage');
     expect(lowestStatelessRate.rate).to.be.equal('6.98');
   });
 
   it('retrieve invalid lowest rate', async function () {
-    const statelessRates = await client.BetaRate.retrieveStatelessRates(
+    const statelessRateResponse = await client.BetaRate.retrieveStatelessRates(
       Fixture.basicShipment() as BetaRateRetrieveInput,
     );
 
     expect(() => {
-      client.Utils.getLowestRate(statelessRates, ['invalid_carrier'], ['invalid_service']);
+      client.Utils.getLowestRate(
+        statelessRateResponse.rates,
+        ['invalid_carrier'],
+        ['invalid_service'],
+      );
     }).to.throw(FilteringError, 'No rates found.');
   });
 });
