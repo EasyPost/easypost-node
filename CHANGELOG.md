@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+- Sends card details in the request body instead of the URL query string when `ReferralCustomer.addCreditCard` creates a Stripe token
+
 ## v9.0.0-rc.1 (2026-09-08)
 
 - Breaking: Node 18+ is now required (built-in `fetch`)
