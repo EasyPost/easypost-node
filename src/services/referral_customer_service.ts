@@ -70,13 +70,15 @@ async function _sendCardDetailsToStripe(
   expirationYear: string,
   cvc: string,
 ): Promise<string> {
-  const searchParams = new URLSearchParams({
+  // Card details must travel in the form-encoded request body, never in the URL,
+  // so they cannot end up in access logs, proxy logs, or Referer headers.
+  const formBody = new URLSearchParams({
     'card[number]': number,
     'card[exp_month]': expirationMonth,
     'card[exp_year]': expirationYear,
     'card[cvc]': cvc,
   });
-  const url = `https://api.stripe.com/v1/tokens?${searchParams.toString()}`;
+  const url = 'https://api.stripe.com/v1/tokens';
 
   try {
     const response = await fetch(url, {
@@ -85,6 +87,7 @@ async function _sendCardDetailsToStripe(
         Authorization: `Bearer ${stripeKey}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
+      body: formBody.toString(),
     });
 
     if (!response.ok) {
