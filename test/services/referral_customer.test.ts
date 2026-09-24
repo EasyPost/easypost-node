@@ -94,21 +94,6 @@ describe('ReferralCustomer Service', function () {
     );
   });
 
-  it('add a referral user credit card', async function () {
-    const creditCardDetails = Fixture.creditCardDetails();
-
-    const paymentMethod = await client.ReferralCustomer.addCreditCard(
-      referralUserProdApiKey,
-      creditCardDetails.number,
-      creditCardDetails.expiration_month,
-      creditCardDetails.expiration_year,
-      creditCardDetails.cvc,
-    );
-
-    expect(paymentMethod.id).to.match(/^pm_/);
-    expect(paymentMethod.last4).to.equal('6170');
-  });
-
   it('raises an error when adding a credit card from Stripe fails', async function () {
     const billing = Fixture.billing() as ReferralCustomerBillingInput;
 
@@ -134,5 +119,12 @@ describe('ReferralCustomer Service', function () {
         'account_holder_name must be present when creating a Financial Connections payment method',
       );
     });
+  });
+
+  it('retrieves EasyPost Stripe API key', async function () {
+    const publicKey = await client.ReferralCustomer.retrieveEasyPostStripeApiKey();
+
+    expect(publicKey).to.be.a('string');
+    expect(publicKey).to.match(/^pk_/);
   });
 });

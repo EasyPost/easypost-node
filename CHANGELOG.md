@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Next Release
+
+- Removes the deprecated, unusable `addCreditCard` function
+  - Stripe has disabled the ability to pass plain credit card details over the wire and now requires using [Stripe.js/Elements/Checkout](https://support.stripe.com/questions/card-tokenization-restrictions-using-publishable-keys). Follow the [Decentralized (EasyPost-Manage Billing) Guide](https://docs.easypost.com/guides/get-started-with-forge/easypost-managed-billing-guide#referralcustomer-billing-management) for more details on the new flow to use.
+  - Makes `referralCustomer.retrieveEasyPostStripeApiKey` public to help facilitate adding credit cards using Stripe.js
+
 ## v9.0.0-rc.1 (2026-09-08)
 
 - Breaking: Node 18+ is now required (built-in `fetch`)
