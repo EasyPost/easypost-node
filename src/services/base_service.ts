@@ -24,7 +24,6 @@ import Refund from '../models/refund';
 import Report from '../models/report';
 import ScanForm from '../models/scan_form';
 import Shipment from '../models/shipment';
-import Surcharge from '../models/surcharge';
 import Tracker from '../models/tracker';
 import User from '../models/user';
 import Webhook from '../models/webhook';
@@ -70,7 +69,7 @@ const EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP = {
 /**
  * A map of EasyPost services available to the client.
  */
-const RESOURCES = {
+const SERVICES = {
   Address,
   ApiKey,
   Batch,
@@ -95,7 +94,6 @@ const RESOURCES = {
   Report,
   ScanForm,
   Shipment,
-  Surcharge,
   Tracker,
   User,
   Webhook,
@@ -180,8 +178,8 @@ export default (easypostClient: any) =>
 
       if (isObjectRecord(response)) {
         let classObject: any;
-        if (typeof response.object === 'string' && (RESOURCES as Record<string, any>)[response.object] !== undefined) {
-          classObject = new (RESOURCES as Record<string, any>)[response.object]();
+        if (typeof response.object === 'string' && (SERVICES as Record<string, any>)[response.object] !== undefined) {
+          classObject = new (SERVICES as Record<string, any>)[response.object]();
         } else if (
           typeof response.id === 'string' &&
           (EASYPOST_OBJECT_ID_PREFIX_TO_CLASS_NAME_MAP as Record<string, any>)[
