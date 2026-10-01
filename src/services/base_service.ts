@@ -24,6 +24,7 @@ import Refund from '../models/refund';
 import Report from '../models/report';
 import ScanForm from '../models/scan_form';
 import Shipment from '../models/shipment';
+import Surcharge from '../models/surcharge';
 import Tracker from '../models/tracker';
 import User from '../models/user';
 import Webhook from '../models/webhook';
@@ -94,6 +95,7 @@ const RESOURCES = {
   Report,
   ScanForm,
   Shipment,
+  Surcharge,
   Tracker,
   User,
   Webhook,
