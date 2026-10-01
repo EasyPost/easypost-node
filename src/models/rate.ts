@@ -1,4 +1,5 @@
 import EasyPostObject from './easypost_object';
+import Surcharge from './surcharge';
 
 /**
  * A {@link https://docs.easypost.com/docs/shipments/rates Rate} represents pricing information for shipping a specific {@link Parcel} with a specific carrier and service level.
@@ -21,4 +22,5 @@ export default class Rate extends EasyPostObject {
   declare retail_rate?: string | null;
   declare service: string;
   declare shipment_id?: string | null;
+  declare surcharges?: Surcharge[] | null;
 }
