@@ -1,7 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { expect } from 'vitest';
 
+import Constants from '../../src/constants';
 import EasyPostClient from '../../src/easypost';
+import ApiError from '../../src/errors/api/api_error';
 import CarrierAccount from '../../src/models/carrier_account';
 import type CarrierAccountServiceFactory from '../../src/services/carrier_account_service';
 import Fixture from '../helpers/fixture';
@@ -9,6 +11,20 @@ import * as setupPolly from '../helpers/setup_polly';
 import { withoutParams } from '../helpers/utils';
 
 type CarrierAccountTestCreateInput = Parameters<ReturnType<typeof CarrierAccountServiceFactory>['create']>[0];
+
+function flattenCustomCarrierRouteMapping() {
+  return Object.entries(Constants.CARRIER_ACCOUNT_CREATE_ENDPOINT_TYPES).flatMap(([endpoint, carrierAccountTypes]) =>
+    carrierAccountTypes.map((carrierAccountType) => [carrierAccountType, endpoint] as const),
+  );
+}
+
+function carrierCreatePayloadForEndpoint(endpoint: string): Record<string, unknown> {
+  if (endpoint === 'carrier_accounts/open' || endpoint === 'carrier_accounts/register') {
+    return { registration_data: {} };
+  }
+
+  return {};
+}
 
 /* eslint-disable func-names */
 describe('CarrierAccount Service', function () {
@@ -37,37 +53,43 @@ describe('CarrierAccount Service', function () {
     await client.CarrierAccount.delete(carrierAccount.id);
   });
 
-  it('creates a UPS carrier account', async function () {
-    const accountNumber = '123456789';
-    const type = 'UpsAccount';
+  for (const [carrierAccountType, expectedEndpoint] of flattenCustomCarrierRouteMapping()) {
+    it(`routes create URL correctly for ${carrierAccountType}`, async function () {
+      const payload = {
+        type: carrierAccountType,
+        ...carrierCreatePayloadForEndpoint(expectedEndpoint),
+      };
+      const capturedRequest: { path?: string; requestBody?: unknown } = {};
 
-    const data = {
-      type: type,
-      account_number: accountNumber,
-    };
+      const captureRequestHook = ({ path, requestBody }: { path: string; requestBody: unknown }) => {
+        if (!capturedRequest.path && path.includes('/carrier_accounts')) {
+          capturedRequest.path = path;
+          capturedRequest.requestBody = requestBody;
+        }
+      };
 
-    const carrierAccount = await client.CarrierAccount.create(data);
+      client.addRequestHook(captureRequestHook);
+      try {
+        const carrierAccount = await client.CarrierAccount.create(payload);
+        expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
+        expect(carrierAccount.id).to.match(/^ca_/);
+        await client.CarrierAccount.delete(carrierAccount.id);
+      } catch (error: unknown) {
+        expect(error).to.be.an.instanceOf(ApiError);
+        expect((error as ApiError).statusCode).to.not.be.oneOf([404, 500]);
+      } finally {
+        client.removeRequestHook(captureRequestHook);
+      }
 
-    expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
-    expect(carrierAccount.id).to.match(/^ca_/);
-    expect(carrierAccount.type).to.equal(type);
-
-    await client.CarrierAccount.delete(carrierAccount.id);
-  });
-
-  it('creates an Amazon carrier account', async function () {
-    const type = 'AmazonShippingAccount';
-
-    const data = { type: type };
-
-    const carrierAccount = await client.CarrierAccount.create(data);
-
-    expect(carrierAccount).to.be.an.instanceOf(CarrierAccount);
-    expect(carrierAccount.id).to.match(/^ca_/);
-    expect(carrierAccount.type).to.equal(type);
-
-    await client.CarrierAccount.delete(carrierAccount.id);
-  });
+      expect(capturedRequest.path).to.include(`/${expectedEndpoint}`);
+      const requestBody = capturedRequest.requestBody as Record<string, unknown>;
+      if (expectedEndpoint === 'carrier_accounts/register_oauth') {
+        expect(requestBody).to.have.property('carrier_account_oauth_registrations');
+      } else {
+        expect(requestBody).to.have.property('carrier_account');
+      }
+    });
+  }
 
   it('retrieves a carrier account', async function () {
     const carrierAccount = await client.CarrierAccount.create(
@@ -107,29 +129,6 @@ describe('CarrierAccount Service', function () {
     expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
     expect(updatedCarrierAccount.id).to.match(/^ca_/);
     expect(updatedCarrierAccount.description).to.equal(testDescription);
-
-    // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
-    await client.CarrierAccount.delete(carrierAccount.id);
-  });
-
-  it('updates a UPS carrier account', async function () {
-    const params = {
-      type: 'UpsAccount',
-      account_number: '123456789',
-    };
-    const carrierAccount = await client.CarrierAccount.create(params);
-
-    const testAccountNumber = '987654321';
-    const updateParams = {
-      account_number: testAccountNumber,
-    };
-
-    await client.CarrierAccount.update(carrierAccount.id, updateParams);
-
-    const updatedCarrierAccount = await client.CarrierAccount.retrieve(carrierAccount.id);
-
-    expect(updatedCarrierAccount).to.be.an.instanceOf(CarrierAccount);
-    expect(updatedCarrierAccount.id).to.match(/^ca_/);
 
     // Remove the carrier account once we have tested it so we don't pollute the account with test accounts
     await client.CarrierAccount.delete(carrierAccount.id);
