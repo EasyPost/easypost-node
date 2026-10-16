@@ -4,17 +4,24 @@ import Utils from './utils/util';
  * A class containing constants used throughout the EasyPost Node.js client library.
  */
 export default class Constants {
-  static get CARRIER_ACCOUNTS_WITH_CUSTOM_CREATE_WORKFLOWS() {
-    return ['FedexAccount', 'FedexSmartpostAccount'];
-  }
-  static get CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH() {
-    return [
-      'AmazonShippingAccount',
-      'UpsAccount',
-      'UpsMailInnovationsAccount',
-      'UpsSurepostAccount',
-      'UspsShipAccount',
-    ];
+  static get CARRIER_ACCOUNT_CREATE_ENDPOINT_TYPES() {
+    return {
+      'carrier_accounts/open': [
+        'FedexDefaultAccount',
+        'GofoWalletAccount',
+        'UpsDapAccount',
+        'UniUniWalletAccount',
+        'VehoWalletAccount',
+      ],
+      'carrier_accounts/register': ['FedexAccount', 'FedexSmartpostAccount'],
+      'carrier_accounts/register_oauth': [
+        'AmazonShippingAccount',
+        'UpsAccount',
+        'UpsMailInnovationsAccount',
+        'UpsSurepostAccount',
+        'UspsShipAccount',
+      ],
+    };
   }
   static EXTERNAL_API_CALL_FAILED = 'Communication with %s failed, please try again later';
   static INVALID_API_KEY_TYPE = 'Invalid API key type.';

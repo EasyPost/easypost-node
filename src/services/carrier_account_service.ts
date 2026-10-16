@@ -89,10 +89,10 @@ export default (easypostClient: EasyPostClient) =>
      * @returns {string} - The endpoint to be used for the carrier account creation request.
      */
     static _selectCarrierAccountCreationEndpoint(carrierAccountType: string): string {
-      if (Constants.CARRIER_ACCOUNTS_WITH_CUSTOM_CREATE_WORKFLOWS.includes(carrierAccountType)) {
-        return 'carrier_accounts/register';
-      } else if (Constants.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.includes(carrierAccountType)) {
-        return 'carrier_accounts/register_oauth';
+      for (const [endpoint, carrierAccountTypes] of Object.entries(Constants.CARRIER_ACCOUNT_CREATE_ENDPOINT_TYPES)) {
+        if (carrierAccountTypes.includes(carrierAccountType)) {
+          return endpoint;
+        }
       }
 
       return 'carrier_accounts';
@@ -109,7 +109,8 @@ export default (easypostClient: EasyPostClient) =>
       carrierAccountType: string,
       params: Record<string, unknown>,
     ): Record<string, unknown> {
-      if (Constants.CARRIER_ACCOUNT_TYPES_WITH_CUSTOM_OAUTH.includes(carrierAccountType)) {
+      const endpoint = this._selectCarrierAccountCreationEndpoint(carrierAccountType);
+      if (endpoint === 'carrier_accounts/register_oauth') {
         return { carrier_account_oauth_registrations: params };
       }
 
