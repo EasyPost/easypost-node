@@ -5,13 +5,12 @@ on:
     types: [published]
   workflow_dispatch: ~
 
-permissions:
-  id-token: write # Required for OIDC
-  contents: read
-
 jobs:
   release:
     runs-on: ubuntu-24.04
+    permissions:
+      id-token: write # Required for OIDC (npm trusted publishing)
+      contents: write # AButler/upload-release-assets attaches dist/* to the release
     steps:
       - uses: actions/checkout@v7
       - uses: extractions/setup-just@v3
