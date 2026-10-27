@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## Next Release
+## v9.0.0 (2026-10-27)
+
+See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-8x-to-90) for more details.
+
+Includes all of the changes made in v9.0.0-rc.1 below plus the following:
 
 - Adds `surcharges` property and model to `Rate` object
 - Removes the deprecated, unusable `addCreditCard` function
