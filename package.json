@@ -16,7 +16,7 @@
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/easypost/easypost-node.git"
+    "url": "https://github.com/EasyPost/easypost-node"
   },
   "license": "MIT",
   "engines": {
