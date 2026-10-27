@@ -9,7 +9,7 @@ on:
 jobs:
   # build checks that the app can build and runs tests on the latest node version
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: extractions/setup-just@v4
@@ -20,7 +20,7 @@ jobs:
   # node-compatibility checks that the build version of the app can be imported
   # and used on older versions of node
   node-compatibility:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x, 24.x, 26.x]
@@ -37,7 +37,7 @@ jobs:
       - run: EASYPOST_TEST_API_KEY=123 EASYPOST_PROD_API_KEY=123 just test-node-compatibility
   # typescript checks that TypeScript declarations and compatibility tests compile without errors
   typescript:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: extractions/setup-just@v4
@@ -46,7 +46,7 @@ jobs:
           node-version: 26
       - run: just install typescript
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: extractions/setup-just@v4
@@ -55,7 +55,7 @@ jobs:
           node-version: 26
       - run: just install build lint
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: extractions/setup-just@v4
@@ -71,7 +71,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
   docs:
     if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: extractions/setup-just@v4
