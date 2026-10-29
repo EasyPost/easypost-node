@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v9.1.0 (2026-10-29)
+
+- Adds `manufacturer_product_id` and `standardized_product_id` to the `CustomsItem` model
+
 ## v9.0.0 (2026-10-27)
 
 See our [Upgrade Guide](UPGRADE_GUIDE.md#upgrading-from-8x-to-90) for more details.

@@ -48,7 +48,7 @@ export default (easypostClient: EasyPostClient) =>
    */
   class ShipmentService extends baseService(easypostClient) {
     /**
-  static async createAndBuyLuma(params: ShipmentCreateParameters): Promise<unknown> {
+     * Create a {@link Shipment shipment}.
      * See {@link https://docs.easypost.com/docs/shipments#create-a-shipment EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a shipment with.
      * @returns {Shipment} - The created shipment.
