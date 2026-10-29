@@ -14,6 +14,7 @@ type ShipmentTaxIdentifier = Record<string, unknown> & {
   tax_id?: string | null;
   tax_id_type?: string | null;
   issuing_country?: string | null;
+  address?: AddressCreateParameters | Address | string | null;
 };
 
 type ShipmentLineItem = Record<string, unknown> & {
