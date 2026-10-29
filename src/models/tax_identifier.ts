@@ -5,9 +5,9 @@ import Address from './address';
  * @public
  */
 export default class TaxIdentifier {
+  declare address?: Address | null;
   declare entity?: string | null;
+  declare issuing_country?: string | null;
   declare tax_id?: string | null;
   declare tax_id_type?: string | null;
-  declare issuing_country?: string | null;
-  declare address?: Address | null;
 }

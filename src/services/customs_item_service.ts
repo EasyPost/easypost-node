@@ -4,10 +4,10 @@ import type EasyPostClient from '../easypost';
 
 export type CustomsItemCreateParameters = Record<string, unknown> & {
   description?: string | null;
-  quantity?: number | null;
-  value?: number | null;
-  weight?: number | null;
-  hs_tariff_number?: string | null;
+  quantity?: number | string | null;
+  value?: number | string | null;
+  weight?: number | string | null;
+  hs_tariff_number?: string | number | null;
   code?: string | null;
   origin_country?: string | null;
   currency?: string | null;
