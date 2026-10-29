@@ -14,6 +14,7 @@ type ShipmentTaxIdentifier = Record<string, unknown> & {
   tax_id?: string | null;
   tax_id_type?: string | null;
   issuing_country?: string | null;
+  address?: AddressCreateParameters | Address | null;
 };
 
 type ShipmentLineItem = Record<string, unknown> & {
@@ -48,7 +49,7 @@ export default (easypostClient: EasyPostClient) =>
    */
   class ShipmentService extends baseService(easypostClient) {
     /**
-  static async createAndBuyLuma(params: ShipmentCreateParameters): Promise<unknown> {
+     * Create a {@link Shipment shipment}.
      * See {@link https://docs.easypost.com/docs/shipments#create-a-shipment EasyPost API Documentation} for more information.
      * @param {Object} params - The parameters to create a shipment with.
      * @returns {Shipment} - The created shipment.

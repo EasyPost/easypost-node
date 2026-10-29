@@ -1,8 +1,10 @@
 import type EasyPostClient from '../easypost';
 import CustomsInfo from '../models/customs_info';
+import CustomsItem from '../models/customs_item';
 import baseService from './base_service';
+import type { CustomsItemCreateParameters } from './customs_item_service';
 
-export type CustomsItemInput = Record<string, unknown>;
+export type CustomsItemInput = CustomsItemCreateParameters | CustomsItem;
 
 export type CustomsInfoCreateParameters = Record<string, unknown> & {
   eel_pfc?: string | null;

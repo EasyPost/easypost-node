@@ -2,7 +2,7 @@ import baseService from './base_service';
 import CustomsItem from '../models/customs_item';
 import type EasyPostClient from '../easypost';
 
-type CustomsItemCreateParameters = Record<string, unknown> & {
+export type CustomsItemCreateParameters = Record<string, unknown> & {
   description?: string | null;
   quantity?: number | null;
   value?: number | null;
@@ -11,6 +11,8 @@ type CustomsItemCreateParameters = Record<string, unknown> & {
   code?: string | null;
   origin_country?: string | null;
   currency?: string | null;
+  manufacturer_product_id?: string | null;
+  standardized_product_id?: string | null;
 };
 
 export default (easypostClient: EasyPostClient) =>

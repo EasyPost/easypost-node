@@ -8,6 +8,7 @@ import Parcel from './parcel';
 import PostageLabel from './postage_label';
 import Rate from './rate';
 import ScanForm from './scan_form';
+import TaxIdentifier from './tax_identifier';
 import Tracker from './tracker';
 
 /**
@@ -37,6 +38,7 @@ export default class Shipment extends EasyPostObject {
   declare scan_form?: ScanForm | null;
   declare selected_rate?: Rate | null;
   declare status?: string | null;
+  declare tax_identifiers?: TaxIdentifier[] | null;
   declare to_address?: Address | null;
   declare tracker?: Tracker | null;
   declare tracking_code?: string | null;
