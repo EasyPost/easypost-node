@@ -13,6 +13,8 @@ jobs:
       contents: write # AButler/upload-release-assets attaches dist/* to the release
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: extractions/setup-just@v3
       - uses: actions/setup-node@v7
         with:
