@@ -2,7 +2,7 @@
 
 ## v9.1.0 (2026-10-29)
 
-- Adds `manufacturer_product_id` and `standardized_product_id` to the `CustomsItem` model and create parameters
+- Adds `manufacturer_product_id` and `standardized_product_id` to the `CustomsItem` model and create parameters, including customs items nested in `CustomsInfo` create parameters
 - Adds `TaxIdentifier` model with `address`, `tax_identifiers` to the `Shipment` model, and `address` to the shipment tax identifier create parameters
 
 ## v9.0.0 (2026-10-27)
