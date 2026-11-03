@@ -5,5 +5,5 @@
  */
 export default class DeliveryEvidence {
   declare type?: string | null;
-  declare image?: string | null;
+  declare image: string;
 }
