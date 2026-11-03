@@ -28,6 +28,7 @@ describe('Tracker Service', function () {
     expect(tracker).to.be.an.instanceOf(Tracker);
     expect(tracker.id).to.match(/^trk_/);
     expect(tracker.status).to.equal('pre_transit');
+    expect(tracker.delivery_evidence).to.deep.equal([]);
   });
 
   it('retrieves a tracker', async function () {
