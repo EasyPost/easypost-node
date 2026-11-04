@@ -1,3 +1,4 @@
+import DeliveryEvidence from './delivery_evidence';
 import EasyPostObject from './easypost_object';
 
 /**
@@ -8,6 +9,7 @@ import EasyPostObject from './easypost_object';
 export default class Tracker extends EasyPostObject {
   declare carrier_detail?: Record<string, unknown> | null;
   declare carrier?: string | null;
+  declare delivery_evidence?: DeliveryEvidence[] | null;
   declare est_delivery_date?: string | null;
   declare fees?: Record<string, unknown>[] | null;
   declare finalized?: boolean | null;
